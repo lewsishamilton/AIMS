@@ -87,7 +87,7 @@ export const AboutSection: React.FC = () => {
   };
 
   return (
-    <section className="relative py-20 lg:py-28 bg-white overflow-hidden">
+    <section className="relative py-20 lg:py-28 bg-white overflow-hidden tracking-[0.015em]">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Left Arrow (Looping enabled) */}
         <button
@@ -139,11 +139,11 @@ export const AboutSection: React.FC = () => {
 
                   {/* Text Column */}
                   <div className="flex flex-col justify-center">
-                    <span className="text-xs font-extrabold uppercase tracking-[2px] mb-3 select-none text-dark">
+                    <span className="text-xs font-semibold uppercase tracking-[2px] mb-3 select-none text-dark">
                       {slide.kicker}
                     </span>
 
-                    <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-extrabold leading-[1.15] tracking-tight text-[#1f3351] mb-5">
+                    <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.01em] text-[#1f3351] mb-5">
                       {slide.title}
                     </h2>
 

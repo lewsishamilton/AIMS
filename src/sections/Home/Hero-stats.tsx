@@ -56,7 +56,7 @@ const StatCounter: React.FC<{ target: number }> = ({ target }) => {
   return (
     <div
       ref={elementRef}
-      className="font-['Manrope',sans-serif] text-2xl sm:text-3xl font-extrabold leading-none text-[#1f3351]"
+      className="font-['DM_Sans',sans-serif] text-2xl sm:text-3xl font-black leading-none text-[#1f3351]"
     >
       {count}+
     </div>
