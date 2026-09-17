@@ -8,7 +8,8 @@ import poshInternalPdf from "./assets/POSH internal committee.pdf"
 import pharmacovigilancePdf from "./assets/pharmacvigilance committee.pdf"
 import disciplinaryPdf from "./assets/Disciplinary committee.pdf"
 import meuPdf from "./assets/MEU.pdf"
-
+import FacultyPage from "./pages/FacultyPage"
+import DepartmentFacultyPage from "./pages/DepartmentFacultyPage"
 import PdfViewerSection from "./layouts/PdfViewer"
 import { Route,Routes } from "react-router-dom"
 
@@ -95,6 +96,11 @@ function App() {
             />
           }
         />
+
+        <Route path="/faculty" element={<FacultyPage/>}/>
+        <Route path="/faculty/:departmentId" element={<DepartmentFacultyPage/>}/>
+        <Route path="/Faculty" element={<FacultyPage/>}/>
+        <Route path="/Faculty/:departmentId" element={<DepartmentFacultyPage/>}/>
       </Routes>
       <Footer/>
    </>

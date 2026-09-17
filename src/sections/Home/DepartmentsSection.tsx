@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import preclinicalImg from "../../assets/preclinical.jpg";
 import paraclinicalImg from "../../assets/paraclinical.jpg";
 import clinicalImg from "../../assets/clinical.jpg";
@@ -28,9 +29,10 @@ const DepartmentsSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {DEPARTMENTS.map((dept) => (
-            <div
+            <Link
+              to={`/faculty?category=${encodeURIComponent(dept.name)}`}
               key={dept.name}
-              className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] group cursor-pointer"
+              className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] group cursor-pointer block"
             >
               <img
                 src={dept.image}
@@ -41,7 +43,7 @@ const DepartmentsSection = () => {
               <h3 className="absolute bottom-5 inset-x-0 text-center font-['Manrope',sans-serif] text-2xl font-semibold text-white">
                 {dept.name}
               </h3>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

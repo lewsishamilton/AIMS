@@ -20,13 +20,12 @@ export const PdfViewerSection: React.FC<PdfViewerProps> = ({
 }) => {
   const resolvedPdfUrl = pdf || pdfUrl || "";
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(Boolean(resolvedPdfUrl));
 
   useEffect(() => {
     let isCancelled = false;
 
     if (!resolvedPdfUrl) {
-      setIsLoading(false);
       return;
     }
 

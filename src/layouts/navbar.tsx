@@ -80,6 +80,7 @@ const Navbar = () => {
                         { name: "Nursing & Allied Sciences", path: "#" },
                     ],
                 },
+                { name: "Faculty", path: "/faculty" },
                 { name: "Admissions Process", path: "#" },
                 { name: "Academic Calendar", path: "#" },
             ],
@@ -350,13 +351,25 @@ const Navbar = () => {
                             <div className="pl-2 flex flex-col gap-2">
                                 {link.dropdown?.map((item, itemIdx) => (
                                     <div key={itemIdx} className="flex flex-col gap-1">
-                                        <span
-                                            className={`text-xs font-semibold ${
-                                                isWhiteTheme ? "text-gray-800" : "text-white/90"
-                                            }`}
-                                        >
-                                            {item.name}
-                                        </span>
+                                        {item.path && item.path !== "#" ? (
+                                            <Link
+                                                to={item.path}
+                                                onClick={() => setIsMenuOpen(false)}
+                                                className={`text-xs font-semibold py-0.5 transition-colors ${
+                                                    isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"
+                                                }`}
+                                            >
+                                                {item.name}
+                                            </Link>
+                                        ) : (
+                                            <span
+                                                className={`text-xs font-semibold ${
+                                                    isWhiteTheme ? "text-gray-800" : "text-white/90"
+                                                }`}
+                                            >
+                                                {item.name}
+                                            </span>
+                                        )}
                                         {item.subItems && (
                                             <div
                                                 className={`pl-3 border-l flex flex-col gap-1 ${
