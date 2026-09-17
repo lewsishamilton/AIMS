@@ -60,8 +60,6 @@ export const AboutSection: React.FC = () => {
   const [enableTransition, setEnableTransition] = useState(true);
   const [isSliding, setIsSliding] = useState(false);
 
-  const activeDot = trackIndex === 1 || trackIndex === 3 ? (trackIndex === 3 ? 1 : 0) : trackIndex === 2 ? 1 : 0;
-
   const handleNext = () => {
     if (isSliding) return;
     setIsSliding(true);
@@ -86,13 +84,6 @@ export const AboutSection: React.FC = () => {
       setEnableTransition(false);
       setTrackIndex(2);
     }
-  };
-
-  const goToDot = (index: number) => {
-    if (isSliding) return;
-    setIsSliding(true);
-    setEnableTransition(true);
-    setTrackIndex(index + 1);
   };
 
   return (
@@ -137,7 +128,6 @@ export const AboutSection: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
                   {/* Image Column */}
                   <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-                    <div className="absolute -right-3 -bottom-3 sm:-right-4 sm:-bottom-4 w-32 h-32 border-2 border-[#8bd7cf] rounded-3xl -z-0 pointer-events-none" />
                     <div className="relative z-10 overflow-hidden rounded-[26px] shadow-[0_15px_45px_rgba(8,44,76,0.12)] border border-[#dce8ee] bg-white">
                       <img
                         src={slide.image}
@@ -149,7 +139,9 @@ export const AboutSection: React.FC = () => {
 
                   {/* Text Column */}
                   <div className="flex flex-col justify-center">
-                    <span className="text-xs font-extrabold uppercase tracking-[2px] text-[#0d9488] mb-3 select-none">
+                    <span className={`text-xs font-extrabold uppercase tracking-[2px] mb-3 select-none ${
+                      slide.kicker === ORIGINAL_SLIDES[0].kicker ? "text-dark" : "text-[#0d9488]"
+                    }`}>
                       {slide.kicker}
                     </span>
 
@@ -178,21 +170,6 @@ export const AboutSection: React.FC = () => {
 
                     {/* Indicators & Mobile Buttons */}
                     <div className="flex items-center justify-between pt-2">
-                      <div className="flex gap-2">
-                        {ORIGINAL_SLIDES.map((_, dotIdx) => (
-                          <button
-                            key={dotIdx}
-                            onClick={() => goToDot(dotIdx)}
-                            aria-label={`Go to slide ${dotIdx + 1}`}
-                            className={`h-2.5 rounded-full transition-all duration-300 ${
-                              activeDot === dotIdx
-                                ? "w-8 bg-[#1f3351]"
-                                : "w-2.5 bg-[#dce8ee] hover:bg-gray-300"
-                            }`}
-                          />
-                        ))}
-                      </div>
-
                       <div className="flex md:hidden gap-2">
                         <button
                           onClick={handlePrev}
