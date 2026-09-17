@@ -1,4 +1,5 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import logoWhite from "../assets/logo-white.png";
 
@@ -15,6 +16,7 @@ interface NavLinkItem {
 }
 
 const Navbar = () => {
+    const { pathname } = useLocation();
     const leftLinks: NavLinkItem[] = [
         {
             name: "DISCOVER AIMS",
@@ -34,12 +36,13 @@ const Navbar = () => {
                     name: "Committees",
                     path: "#",
                     subItems: [
-                        { name: "Scientific Committee", path: "#" },
-                        { name: "Anti Ragging Committee", path: "#" },
-                        { name: "Ethics Committee", path: "#" },
-                        { name: "POSH Internal Committee", path: "#" },
-                        { name: "Pharmacvigilance Committee", path: "#" },
-                        { name: "Disciplinary Committee", path: "#" },
+                        { name: "Medical Educational Unit", path:"/committess/meu"},
+                        { name: "Scientific Committee", path: "/committess/scientific" },
+                        { name: "Anti Ragging Committee", path: "/committess/anti-ragging" },
+                        { name: "Ethics Committee", path: "/committess/ethics" },
+                        { name: "POSH Internal Committee", path: "/committess/posh-internal" },
+                        { name: "Pharmacvigilance Committee", path: "/committess/pharmacovigilance" },
+                        { name: "Disciplinary Committee", path: "/committess/disciplinary" },
                     ],
                 },
                 {
@@ -121,6 +124,7 @@ const Navbar = () => {
 
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const isWhiteTheme = pathname !== "/" || isScrolled;
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -149,7 +153,7 @@ const Navbar = () => {
     const ChevronRight = () => (
         <svg
             className={`w-3.5 h-3.5 ml-auto transition-all duration-200 ${
-                isScrolled
+                isWhiteTheme
                     ? "text-gray-400 group-hover/sub:text-gray-900 group-hover/sub:translate-x-0.5"
                     : "text-white/45 group-hover/sub:text-white group-hover/sub:translate-x-0.5"
             }`}
@@ -163,29 +167,29 @@ const Navbar = () => {
     );
 
     // Uniform glass style applied to both Level 1 and Level 2
-    const dropdownCardClass = isScrolled
+    const dropdownCardClass = isWhiteTheme
         ? "bg-white/95 backdrop-blur-2xl rounded-2xl p-1.5 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.05)]"
         : "bg-black/40 backdrop-blur-2xl rounded-2xl p-1.5 border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.3)] text-white";
 
-    const dropdownItemClass = isScrolled
+    const dropdownItemClass = isWhiteTheme
         ? "text-gray-700 hover:text-black hover:bg-gray-100/80 rounded-xl"
         : "text-white/85 hover:text-white hover:bg-white/20 rounded-xl";
 
     const renderDesktopNavItem = (link: NavLinkItem, idx: number) => {
-        const activeHoverPill = isScrolled
+        const activeHoverPill = isWhiteTheme
             ? "text-gray-800 hover:text-black group-hover:bg-gray-100/90"
             : "text-white/90 hover:text-white group-hover:bg-white/15 group-hover:backdrop-blur-xl group-hover:border-white/25 group-hover:shadow-[0_4px_20px_rgba(0,0,0,0.15),inset_0_1px_0_0_rgba(255,255,255,0.35)]";
 
         return (
             <div key={idx} className="relative group inline-flex items-center">
                 {/* Menu Button */}
-                <a
-                    href={link.path}
+                <Link
+                    to={link.path}
                     className={`relative z-10 flex items-center gap-2 px-3.5 py-1.5 rounded-full font-semibold tracking-wider text-xs lg:text-sm border border-transparent transition-all duration-300 ease-out ${activeHoverPill}`}
                 >
                     <span>{link.name}</span>
                     <ChevronDown />
-                </a>
+                </Link>
 
                 {/* Level 1 Dropdown */}
                 {link.dropdown && (
@@ -193,26 +197,26 @@ const Navbar = () => {
                         <div className={dropdownCardClass}>
                             {link.dropdown.map((item, itemIdx) => (
                                 <div key={itemIdx} className="relative group/sub">
-                                    <a
-                                        href={item.path}
+                                    <Link
+                                        to={item.path}
                                         className={`flex items-center justify-between px-3.5 py-2.5 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
                                     >
                                         <span>{item.name}</span>
                                         {item.subItems && <ChevronRight />}
-                                    </a>
+                                    </Link>
 
                                     {/* Level 2 Sub-Dropdown (Identical Styling) */}
                                     {item.subItems && (
                                         <div className="absolute left-[calc(100%+4px)] -top-1.5 hidden group-hover/sub:block w-max min-w-56 z-50 animate-macLiquidSubDropdown origin-top-left before:absolute before:top-0 before:-left-3 before:w-4 before:h-full">
                                             <div className={dropdownCardClass}>
                                                 {item.subItems.map((sub, subIdx) => (
-                                                    <a
+                                                    <Link
                                                         key={subIdx}
-                                                        href={sub.path}
+                                                        to={sub.path}
                                                         className={`block whitespace-nowrap px-3.5 py-2 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
                                                     >
                                                         {sub.name}
-                                                    </a>
+                                                    </Link>
                                                 ))}
                                             </div>
                                         </div>
@@ -262,7 +266,7 @@ const Navbar = () => {
 
             <nav
                 className={`fixed top-0 left-0 w-full px-6 md:px-12 lg:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
-                    isScrolled
+                    isWhiteTheme
                         ? "bg-white/95 backdrop-blur-md shadow-sm text-gray-900"
                         : "bg-transparent text-white"
                 }`}
@@ -274,13 +278,13 @@ const Navbar = () => {
                     </div>
 
                     {/* Center Logo */}
-                    <a href="/" className="flex items-center justify-center mx-6 py-2">
+                    <Link to="/" className="flex items-center justify-center mx-6 py-2">
                         <img
-                            src={isScrolled ? logo : logoWhite}
+                            src={isWhiteTheme ? logo : logoWhite}
                             alt="Arundathi Institute of Medical Sciences & Hospital"
                             className="h-10 md:h-11 w-auto object-contain transition-all duration-300 drop-shadow-sm hover:scale-105"
                         />
-                    </a>
+                    </Link>
 
                     {/* Right Desktop Links */}
                     <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
@@ -292,7 +296,7 @@ const Navbar = () => {
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className={`p-2 rounded-full focus:outline-none transition-all duration-200 ${
-                                isScrolled
+                                isWhiteTheme
                                     ? "text-gray-900 hover:bg-gray-100"
                                     : "text-white bg-black/25 backdrop-blur-md border border-white/20 hover:bg-black/40"
                             }`}
@@ -312,7 +316,7 @@ const Navbar = () => {
                     className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 md:hidden overflow-y-auto ${
                         isMenuOpen ? "translate-x-0" : "-translate-x-full"
                     } ${
-                        isScrolled
+                        isWhiteTheme
                             ? "bg-white text-gray-900 shadow-2xl"
                             : "bg-black/80 backdrop-blur-2xl text-white border-r border-white/10"
                     }`}
@@ -320,7 +324,7 @@ const Navbar = () => {
                     <button
                         aria-label="Close menu"
                         className={`absolute top-6 right-6 p-2 rounded-full ${
-                            isScrolled
+                            isWhiteTheme
                                 ? "text-gray-800 hover:bg-gray-100"
                                 : "text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20"
                         }`}
@@ -336,7 +340,7 @@ const Navbar = () => {
                         <div key={idx} className="w-full flex flex-col gap-2">
                             <span
                                 className={`font-bold border-b pb-1 ${
-                                    isScrolled
+                                    isWhiteTheme
                                         ? "text-gray-900 border-gray-200"
                                         : "text-white border-white/20"
                                 }`}
@@ -348,7 +352,7 @@ const Navbar = () => {
                                     <div key={itemIdx} className="flex flex-col gap-1">
                                         <span
                                             className={`text-xs font-semibold ${
-                                                isScrolled ? "text-gray-800" : "text-white/90"
+                                                isWhiteTheme ? "text-gray-800" : "text-white/90"
                                             }`}
                                         >
                                             {item.name}
@@ -356,22 +360,22 @@ const Navbar = () => {
                                         {item.subItems && (
                                             <div
                                                 className={`pl-3 border-l flex flex-col gap-1 ${
-                                                    isScrolled ? "border-gray-200" : "border-white/20"
+                                                    isWhiteTheme ? "border-gray-200" : "border-white/20"
                                                 }`}
                                             >
                                                 {item.subItems.map((sub, subIdx) => (
-                                                    <a
+                                                    <Link
                                                         key={subIdx}
-                                                        href={sub.path}
+                                                        to={sub.path}
                                                         onClick={() => setIsMenuOpen(false)}
                                                         className={`text-xs font-normal py-0.5 transition-colors ${
-                                                            isScrolled
+                                                            isWhiteTheme
                                                                 ? "text-gray-600 hover:text-black"
                                                                 : "text-white/70 hover:text-white"
                                                         }`}
                                                     >
                                                         {sub.name}
-                                                    </a>
+                                                    </Link>
                                                 ))}
                                             </div>
                                         )}
