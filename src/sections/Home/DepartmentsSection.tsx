@@ -19,10 +19,10 @@ const DEPARTMENTS = [
 
 const DepartmentsSection = () => {
   return (
-    <section className="relative pb-20 lg:pb-28 pt-0 lg:pt-0 bg-white overflow-hidden tracking-[0.015em]">
+    <section className="relative pb-20 lg:pb-28 pt-0 lg:pt-0 bg-white dark:bg-[#070d18] transition-colors duration-300 overflow-hidden tracking-[0.015em]">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         <div className="text-center mb-12">
-          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351]">
+          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351] dark:text-white">
             Our Departments
           </h2>
         </div>
@@ -32,7 +32,7 @@ const DepartmentsSection = () => {
             <Link
               to={`/departments?category=${encodeURIComponent(dept.name)}`}
               key={dept.name}
-              className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] group cursor-pointer block"
+              className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] dark:border-white/15 dark:shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.15)] group cursor-pointer block transition-all duration-300 hover:shadow-xl dark:hover:border-white/30"
             >
               <img
                 src={dept.image}

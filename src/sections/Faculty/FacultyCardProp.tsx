@@ -42,7 +42,7 @@ export const FacultyCard: React.FC<FacultyCardProps> = ({
 
   return (
     <div
-      className={`group relative h-[375px] w-full cursor-pointer overflow-hidden rounded-[20px] bg-[#1f3351] font-sans border border-[#dce8ee]/30 transition-all duration-300 hover:shadow-lg ${className}`}
+      className={`group relative h-[375px] w-full cursor-pointer overflow-hidden rounded-[20px] bg-[#1f3351] font-sans border border-[#dce8ee]/30 dark:border-white/15 dark:shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.15)] transition-all duration-300 hover:shadow-lg dark:hover:border-white/30 ${className}`}
     >
       {/* Photo or Clean Medical Fallback */}
       {hasPhoto ? (
@@ -76,7 +76,7 @@ export const FacultyCard: React.FC<FacultyCardProps> = ({
           {designation}
         </p>
         {regCode && (
-          <p className="mt-[2px] text-[11px] font-normal text-[#94a3b8]">
+          <p className="mt-[2px] text-[11px] font-normal text-[#94a3b8] dark:text-slate-300">
             Reg. No: {regCode}
           </p>
         )}
@@ -85,7 +85,7 @@ export const FacultyCard: React.FC<FacultyCardProps> = ({
       {/* View Profile Button */}
       <a
         href={profileUrl}
-        className="absolute bottom-[-60px] left-1/2 z-[3] w-[130px] -translate-x-1/2 rounded-[8px] border border-[#fbfaf5]/70 px-2 py-[10px] text-center text-[13px] font-semibold text-[#fbfaf5] opacity-0 transition-all duration-700 ease-in-out hover:bg-[#fbfaf5]/15 group-hover:bottom-[70px] group-hover:opacity-100"
+        className="absolute bottom-[-60px] left-1/2 z-[3] w-[130px] -translate-x-1/2 rounded-[8px] border border-[#fbfaf5]/70 dark:border-white/30 dark:bg-white/10 dark:backdrop-blur-md px-2 py-[10px] text-center text-[13px] font-semibold text-[#fbfaf5] opacity-0 transition-all duration-700 ease-in-out hover:bg-[#fbfaf5]/15 dark:hover:bg-white/20 group-hover:bottom-[70px] group-hover:opacity-100"
       >
         View profile
       </a>

@@ -87,13 +87,13 @@ export const AboutSection: React.FC = () => {
   };
 
   return (
-    <section className="relative pt-20 lg:pt-28 pb-12 lg:pb-16 bg-white overflow-hidden tracking-[0.015em]">
+    <section className="relative pt-20 lg:pt-28 pb-12 lg:pb-16 bg-white dark:bg-[#070d18] transition-colors duration-300 overflow-hidden tracking-[0.015em]">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Left Arrow (Looping enabled) */}
         <button
           onClick={handlePrev}
           aria-label="Previous slide"
-          className="hidden md:flex absolute left-2 lg:left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 items-center justify-center rounded-full bg-white text-[#1f3351] border border-[#dce8ee] shadow-[0_12px_30px_rgba(8,44,76,0.14)] hover:bg-[#1f3351] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+          className="hidden md:flex absolute left-2 lg:left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 items-center justify-center rounded-full bg-white dark:bg-black/40 dark:backdrop-blur-xl text-[#1f3351] dark:text-white border border-[#dce8ee] dark:border-white/20 shadow-[0_12px_30px_rgba(8,44,76,0.14)] dark:shadow-[0_12px_30px_rgba(0,0,0,0.4)] hover:bg-[#1f3351] hover:text-white dark:hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
         >
           <span className="text-2xl leading-none -ml-0.5">‹</span>
         </button>
@@ -102,7 +102,7 @@ export const AboutSection: React.FC = () => {
         <button
           onClick={handleNext}
           aria-label="Next slide"
-          className="hidden md:flex absolute right-2 lg:right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 items-center justify-center rounded-full bg-white text-[#1f3351] border border-[#dce8ee] shadow-[0_12px_30px_rgba(8,44,76,0.14)] hover:bg-[#1f3351] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+          className="hidden md:flex absolute right-2 lg:right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 items-center justify-center rounded-full bg-white dark:bg-black/40 dark:backdrop-blur-xl text-[#1f3351] dark:text-white border border-[#dce8ee] dark:border-white/20 shadow-[0_12px_30px_rgba(8,44,76,0.14)] dark:shadow-[0_12px_30px_rgba(0,0,0,0.4)] hover:bg-[#1f3351] hover:text-white dark:hover:bg-white/20 hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
         >
           <span className="text-2xl leading-none -mr-0.5">›</span>
         </button>
@@ -128,7 +128,7 @@ export const AboutSection: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
                   {/* Image Column */}
                   <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-                    <div className="relative z-10 overflow-hidden rounded-[26px] border border-[#dce8ee] bg-white">
+                    <div className="relative z-10 overflow-hidden rounded-[26px] border border-[#dce8ee] dark:border-white/15 dark:shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.15)] bg-white dark:bg-black/30">
                       <img
                         src={slide.image}
                         alt={slide.imageAlt}
@@ -139,15 +139,15 @@ export const AboutSection: React.FC = () => {
 
                   {/* Text Column */}
                   <div className="flex flex-col justify-center">
-                    <span className="text-xs font-semibold uppercase tracking-[2px] mb-3 select-none text-dark">
+                    <span className="text-xs font-semibold uppercase tracking-[2px] mb-3 select-none text-dark dark:text-slate-300">
                       {slide.kicker}
                     </span>
 
-                    <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.01em] text-[#1f3351] mb-5">
+                    <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.01em] text-[#1f3351] dark:text-white mb-5">
                       {slide.title}
                     </h2>
 
-                    <div className="space-y-4 text-base leading-relaxed text-[#62748a] mb-7">
+                    <div className="space-y-4 text-base leading-relaxed text-[#62748a] dark:text-slate-300 mb-7">
                       {slide.paragraphs.map((paragraph, pIdx) => (
                         <p key={pIdx}>{paragraph}</p>
                       ))}
@@ -156,10 +156,10 @@ export const AboutSection: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-8">
                       {slide.ticks.map((tick, tIdx) => (
                         <div key={tIdx} className="flex items-center gap-2.5">
-                          <span className="flex-shrink-0 flex items-center justify-center w-5 h-5 rounded-full bg-dark text-white text-xs font-bold">
+                          <span className="flex-shrink-0 flex items-center justify-center w-5 h-5 rounded-full bg-dark text-white dark:bg-white/20 dark:backdrop-blur-md dark:border dark:border-white/25 text-xs font-bold">
                             ✓
                           </span>
-                          <strong className="text-sm font-bold text-[#1f3351]">
+                          <strong className="text-sm font-bold text-[#1f3351] dark:text-white">
                             {tick}
                           </strong>
                         </div>
@@ -172,14 +172,14 @@ export const AboutSection: React.FC = () => {
                         <button
                           onClick={handlePrev}
                           aria-label="Previous slide mobile"
-                          className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-[#dce8ee] text-[#1f3351] text-lg active:scale-95"
+                          className="w-9 h-9 flex items-center justify-center rounded-full bg-white dark:bg-black/40 dark:backdrop-blur-md border border-[#dce8ee] dark:border-white/20 text-[#1f3351] dark:text-white text-lg active:scale-95"
                         >
                           ‹
                         </button>
                         <button
                           onClick={handleNext}
                           aria-label="Next slide mobile"
-                          className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-[#dce8ee] text-[#1f3351] text-lg active:scale-95"
+                          className="w-9 h-9 flex items-center justify-center rounded-full bg-white dark:bg-black/40 dark:backdrop-blur-md border border-[#dce8ee] dark:border-white/20 text-[#1f3351] dark:text-white text-lg active:scale-95"
                         >
                           ›
                         </button>

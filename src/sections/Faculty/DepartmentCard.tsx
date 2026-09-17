@@ -10,7 +10,7 @@ export const DepartmentCard: React.FC<DepartmentCardProps> = ({ department }) =>
   return (
     <Link
       to={`/departments/${department.id}`}
-      className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] group cursor-pointer block h-[260px] sm:h-[280px]"
+      className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] dark:border-white/15 dark:shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.15)] group cursor-pointer block h-[260px] sm:h-[280px] transition-all duration-300 hover:shadow-xl dark:hover:border-white/30"
     >
       {/* Background Image */}
       <img

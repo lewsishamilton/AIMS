@@ -12,10 +12,11 @@ import FacultyPage from "./pages/FacultyPage"
 import DepartmentFacultyPage from "./pages/DepartmentFacultyPage"
 import PdfViewerSection from "./layouts/PdfViewer"
 import { Route,Routes } from "react-router-dom"
+import { ThemeProvider } from "./context/ThemeContext"
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <Navbar/>
       <Routes>
         <Route path="/" element={<HeroPage/>}/>
@@ -107,7 +108,7 @@ function App() {
         <Route path="/Faculty/:departmentId" element={<DepartmentFacultyPage/>}/>
       </Routes>
       <Footer/>
-   </>
+    </ThemeProvider>
   )
 }
 

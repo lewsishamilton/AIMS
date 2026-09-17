@@ -47,7 +47,7 @@ export const PdfViewerSection: React.FC<PdfViewerProps> = ({
 
           canvas.height = viewport.height;
           canvas.width = viewport.width;
-          canvas.className = "w-full h-auto mb-6 last:mb-0 rounded-[14px] shadow-sm block";
+          canvas.className = "w-full h-auto mb-6 last:mb-0 rounded-[14px] shadow-sm dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] block dark:border dark:border-white/10";
 
           if (context) {
             await page.render({
@@ -78,27 +78,27 @@ export const PdfViewerSection: React.FC<PdfViewerProps> = ({
   }, [resolvedPdfUrl]);
 
   return (
-    <section className="relative py-16 lg:py-24 bg-[#fbfaf5] overflow-hidden tracking-[0.015em]">
+    <section className="relative pt-28 lg:pt-36 pb-20 bg-[#fbfaf5] dark:bg-[#070d18] transition-colors duration-300 min-h-screen overflow-hidden tracking-[0.015em]">
       <div className="relative z-10 w-full max-w-[1100px] mx-auto px-4 sm:px-10 lg:px-16">
         
         {/* Main Heading & Subtitle */}
         <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
-          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-tight text-[#1f3351]">
+          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-tight text-[#1f3351] dark:text-white">
             {title}
           </h2>
           {subtitle && (
-            <p className="text-base sm:text-lg leading-relaxed text-[#62748a] mt-3">
+            <p className="text-base sm:text-lg leading-relaxed text-[#62748a] dark:text-slate-300 mt-3">
               {subtitle}
             </p>
           )}
         </div>
 
-        {/* Pure Canvas Container (Transparent) */}
-        <div className="relative w-full bg-transparent p-0">
+        {/* Pure Canvas Container with Glass styling */}
+        <div className="relative w-full p-2 sm:p-6 rounded-[24px] bg-white/60 dark:bg-black/40 backdrop-blur-2xl border border-[#dce8ee] dark:border-white/15 dark:shadow-[0_20px_50px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.15)]">
           {isLoading && (
             <div className="flex flex-col items-center justify-center min-h-[400px]">
-              <div className="w-10 h-10 border-4 border-[#dce8ee] border-t-[#1f3351] rounded-full animate-spin mb-3" />
-              <p className="text-xs font-bold text-[#62748a] uppercase tracking-wider">
+              <div className="w-10 h-10 border-4 border-[#dce8ee] border-t-[#1f3351] dark:border-white/15 dark:border-t-white rounded-full animate-spin mb-3" />
+              <p className="text-xs font-bold text-[#62748a] dark:text-slate-400 uppercase tracking-wider">
                 Loading Document...
               </p>
             </div>

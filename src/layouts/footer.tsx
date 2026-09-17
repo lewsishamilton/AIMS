@@ -15,7 +15,7 @@ export default function Footer() {
                     font-weight: 600;
                 }
             `}</style>
-      <footer className="bg-[#0d2346] py-12 px-4 sm:px-6 lg:px-8 tracking-[0.015em]">
+      <footer className="bg-[#0d2346] dark:bg-[#040813] border-t border-transparent dark:border-white/10 transition-colors duration-300 py-12 px-4 sm:px-6 lg:px-8 tracking-[0.015em]">
         <div className="w-full max-w-7xl mx-auto">
           <div className="flex flex-wrap justify-between gap-y-10 lg:gap-x-8">
 
