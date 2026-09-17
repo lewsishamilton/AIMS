@@ -18,7 +18,7 @@ const DEPARTMENTS = [
 
 const DepartmentsSection = () => {
   return (
-    <section className="relative pb-20 lg:pb-28 pt-8 lg:pt-12 bg-white overflow-hidden tracking-[0.015em]">
+    <section className="relative pb-20 lg:pb-28 pt-0 lg:pt-0 bg-white overflow-hidden tracking-[0.015em]">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         <div className="text-center mb-12">
           <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351]">
