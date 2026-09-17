@@ -168,7 +168,7 @@ const Navbar = () => {
 
     // Uniform glass style applied to both Level 1 and Level 2
     const dropdownCardClass = isWhiteTheme
-        ? "bg-white/95 backdrop-blur-2xl rounded-2xl p-1.5 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.05)]"
+        ? "bg-white/98 backdrop-blur-2xl rounded-2xl p-1.5 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.05)]"
         : "bg-black/40 backdrop-blur-2xl rounded-2xl p-1.5 border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.3)] text-white";
 
     const dropdownItemClass = isWhiteTheme
@@ -267,7 +267,7 @@ const Navbar = () => {
             <nav
                 className={`fixed top-0 left-0 w-full px-6 md:px-12 lg:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
                     isWhiteTheme
-                        ? "bg-white/95 backdrop-blur-md shadow-sm text-gray-900"
+                        ? "bg-white/98 backdrop-blur-md shadow-sm text-gray-900"
                         : "bg-transparent text-white"
                 }`}
             >
@@ -282,7 +282,7 @@ const Navbar = () => {
                         <img
                             src={isWhiteTheme ? logo : logoWhite}
                             alt="Arundathi Institute of Medical Sciences & Hospital"
-                            className="h-10 md:h-11 w-auto object-contain transition-all duration-300 drop-shadow-sm hover:scale-105"
+                            className="h-10 md:h-11 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
                         />
                     </Link>
 
