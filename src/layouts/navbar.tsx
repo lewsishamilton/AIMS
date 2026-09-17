@@ -20,14 +20,48 @@ const Navbar = () => {
             name: "DISCOVER AIMS",
             path: "#",
             dropdown: [
-                { name: "Campus & Infrastructure", path: "#" },
-                { name: "Administration", path: "#" },
                 {
-                    name: "About Overview",
+                    name: "The AIMS Story",
                     path: "#",
                     subItems: [
-                        { name: "Leadership & Vision", path: "#" },
-                        { name: "Accreditations", path: "#" },
+                        { name: "Overview", path: "#" },
+                        { name: "Vision", path: "#" },
+                        { name: "Mission", path: "#" },
+                        { name: "Awards", path: "#" },
+                        { name: "Achivements", path: "#" },
+                    ],
+                },
+                
+                {
+                    name: "Committees",
+                    path: "#",
+                    subItems: [
+                        { name: "Scientific Committee", path: "#" },
+                        { name: "Anti Ragging Committee", path: "#" },
+                        { name: "Ethics Committee", path: "#" },
+                        { name: "POSH Internal Committee", path: "#" },
+                        { name: "Pharmacvigilance Committee", path: "#" },
+                        { name: "Disciplinary Committee", path: "#" },
+                    ],
+                },
+                {
+                    name: "Media Center",
+                    path: "#",
+                    subItems: [
+                        { name: "AIMS in the News", path: "#" },
+                        { name: "Events", path: "#" },
+                        { name: "Media Gallary", path: "#" },
+                        { name: "Media Content", path: "#" },
+                    ],
+                },
+                {
+                    name: "Clinical Quality",
+                    path: "#",
+                    subItems: [
+                        { name: "Accreditation", path: "#" },
+                        { name: "excellence", path: "#" },
+                        { name: "Patient Safety", path: "#" },
+                        { name: "Measuring Outcomes", path: "#" },
                     ],
                 },
             ],
@@ -171,13 +205,13 @@ const Navbar = () => {
 
                                     {/* Level 2 Sub-Dropdown (Identical Styling) */}
                                     {item.subItems && (
-                                        <div className="absolute left-[calc(100%+4px)] -top-1.5 hidden group-hover/sub:block w-56 z-50 animate-macLiquidSubDropdown origin-top-left before:absolute before:top-0 before:-left-3 before:w-4 before:h-full">
+                                        <div className="absolute left-[calc(100%+4px)] -top-1.5 hidden group-hover/sub:block w-max min-w-56 z-50 animate-macLiquidSubDropdown origin-top-left before:absolute before:top-0 before:-left-3 before:w-4 before:h-full">
                                             <div className={dropdownCardClass}>
                                                 {item.subItems.map((sub, subIdx) => (
                                                     <a
                                                         key={subIdx}
                                                         href={sub.path}
-                                                        className={`block px-3.5 py-2 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
+                                                        className={`block whitespace-nowrap px-3.5 py-2 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
                                                     >
                                                         {sub.name}
                                                     </a>
