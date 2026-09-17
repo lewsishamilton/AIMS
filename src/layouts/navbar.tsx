@@ -25,13 +25,11 @@ const Navbar = () => {
                     path: "#",
                     subItems: [
                         { name: "Overview", path: "#" },
-                        { name: "Vision", path: "#" },
-                        { name: "Mission", path: "#" },
-                        { name: "Awards", path: "#" },
-                        { name: "Achivements", path: "#" },
+                        { name: "Vision & Mission", path: "#" },
+                        { name: "Awards & Achivements", path: "#" },
                     ],
                 },
-                
+                { name: "Leadership", path: "#" },
                 {
                     name: "Committees",
                     path: "#",
@@ -55,7 +53,7 @@ const Navbar = () => {
                     ],
                 },
                 {
-                    name: "Clinical Quality",
+                    name: "Clinical Quality & Outcomes",
                     path: "#",
                     subItems: [
                         { name: "Accreditation", path: "#" },
