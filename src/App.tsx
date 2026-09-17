@@ -24,6 +24,7 @@ function App() {
           element={
             <PdfViewerSection
               title="Medical Educational Unit"
+              subtitle="Enhancing the quality of medical education through innovative teaching methodologies, curriculum development, faculty training, student-centered learning and continuous assessment to foster academic excellence and professional growth"
               pdfUrl={meuPdf}
             />
           }
@@ -34,66 +35,66 @@ function App() {
           element={
             <PdfViewerSection
               title="Scientific Committee"
-              subtitle="Research, Innovation and Scientific Excellence"
+              subtitle="Fostering a culture of scientific inquiry, research and innovation by encouraging academic collaboration, supporting research methodology, promoting evidence-based practices and advancing knowledge in medical and pharmaceutical sciences"
               pdfUrl={scintificPdf}
             />
           }
         />
 
-          <Route
-            path="/committess/anti-ragging"
-            element={
-              <PdfViewerSection
-                title="Anti Ragging Committee"
-                subtitle="Ensuring a Safe and Respectful Campus"
-                pdfUrl={antiRaggingPdf}
-              />
-            }
-          />
+        <Route
+          path="/committess/anti-ragging"
+          element={
+            <PdfViewerSection
+              title="Anti Ragging Committee"
+              subtitle="Ensuring a safe, inclusive and respectful academic environment through awareness programmes, preventive measures, student counselling and effective monitoring while promoting dignity, equality, mutual respect and a campus culture free from ragging"
+              pdfUrl={antiRaggingPdf}
+            />
+          }
+        />
 
-          <Route
-            path="/committess/ethics"
-            element={
-              <PdfViewerSection
-                title="Ethics Committee"
-                subtitle="Upholding Integrity and Ethical Standards"
-                pdfUrl={ethicsPdf}
-              />
-            }
-          />
+        <Route
+          path="/committess/ethics"
+          element={
+            <PdfViewerSection
+              title="Ethics Committee"
+              subtitle="Upholding ethical principles in medical education, research and healthcare by protecting the rights, safety and dignity of individuals, promoting responsible scientific conduct, ensuring informed consent and encouraging integrity in professional practice"
+              pdfUrl={ethicsPdf}
+            />
+          }
+        />
 
-          <Route
-            path="/committess/posh-internal"
-            element={
-              <PdfViewerSection
-                title="POSH Internal Committee"
-                subtitle="Promoting a Safe and Inclusive Workplace"
-                pdfUrl={poshInternalPdf}
-              />
-            }
-          />
+        <Route
+          path="/committess/posh-internal"
+          element={
+            <PdfViewerSection
+              title="POSH Internal Committee"
+              subtitle="Promoting a safe, inclusive and dignified educational and working environment through awareness initiatives, prevention of sexual harassment, confidential complaint handling and appropriate redressal mechanisms while safeguarding the rights and well-being of every individual"
+              pdfUrl={poshInternalPdf}
+            />
+          }
+        />
 
-          <Route
-            path="/committess/pharmacovigilance"
-            element={
-              <PdfViewerSection
-                title="Pharmacovigilance Committee"
-                subtitle="Ensuring Medication Safety and Patient Care"
-                pdfUrl={pharmacovigilancePdf}
-              />
-            }
-          />
+        <Route
+          path="/committess/pharmacovigilance"
+          element={
+            <PdfViewerSection
+              title="Pharmacovigilance Committee"
+              subtitle="Strengthening patient safety and the responsible use of medicines through adverse drug reaction reporting, drug safety monitoring, identification and assessment of medication-related risks, rational drug use and continuous improvement in pharmaceutical care"
+              pdfUrl={pharmacovigilancePdf}
+            />
+          }
+        />
 
-          <Route
-            path="/committess/disciplinary"
-            element={
-              <PdfViewerSection
-                title="Disciplinary Committee"
-                subtitle="Maintaining Discipline and Professional Conduct"
-                pdfUrl={disciplinaryPdf}
-              />
-            }
-          />
+        <Route
+          path="/committess/disciplinary"
+          element={
+            <PdfViewerSection
+              title="Disciplinary Committee"
+              subtitle="Promoting academic integrity, professional responsibility and adherence to institutional rules through fair disciplinary procedures, awareness of student responsibilities, ethical conduct and constructive guidance to maintain a harmonious, respectful and well-disciplined campus community"
+              pdfUrl={disciplinaryPdf}
+            />
+          }
+        />
       </Routes>
       <Footer/>
    </>
