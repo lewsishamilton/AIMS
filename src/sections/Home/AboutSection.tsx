@@ -87,8 +87,8 @@ export const AboutSection: React.FC = () => {
   };
 
   return (
-    <section className="relative py-20 lg:py-28 bg-[#f7fafc] overflow-hidden">
-      <div className="relative w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
+    <section className="relative py-20 lg:py-28 bg-white overflow-hidden">
+      <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Left Arrow (Looping enabled) */}
         <button
           onClick={handlePrev}
@@ -125,23 +125,21 @@ export const AboutSection: React.FC = () => {
                 key={`${slide.kicker}-${idx}`}
                 className="w-1/4 flex-shrink-0 px-2 sm:px-4"
               >
-                <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
                   {/* Image Column */}
                   <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-                    <div className="relative z-10 overflow-hidden rounded-[26px] shadow-[0_15px_45px_rgba(8,44,76,0.12)] border border-[#dce8ee] bg-white">
+                    <div className="relative z-10 overflow-hidden rounded-[26px] border border-[#dce8ee] bg-white">
                       <img
                         src={slide.image}
                         alt={slide.imageAlt}
-                        className="w-full h-[320px] sm:h-[400px] lg:h-[460px] object-cover"
+                        className="w-full h-[240px] sm:h-[300px] lg:h-[400px] object-cover"
                       />
                     </div>
                   </div>
 
                   {/* Text Column */}
                   <div className="flex flex-col justify-center">
-                    <span className={`text-xs font-extrabold uppercase tracking-[2px] mb-3 select-none ${
-                      slide.kicker === ORIGINAL_SLIDES[0].kicker ? "text-dark" : "text-[#0d9488]"
-                    }`}>
+                    <span className="text-xs font-extrabold uppercase tracking-[2px] mb-3 select-none text-dark">
                       {slide.kicker}
                     </span>
 
@@ -158,7 +156,7 @@ export const AboutSection: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-8">
                       {slide.ticks.map((tick, tIdx) => (
                         <div key={tIdx} className="flex items-center gap-2.5">
-                          <span className="flex-shrink-0 flex items-center justify-center w-5 h-5 rounded-full bg-[#e9f7f4] text-[#0d9488] text-xs font-bold">
+                          <span className="flex-shrink-0 flex items-center justify-center w-5 h-5 rounded-full bg-dark text-white text-xs font-bold">
                             ✓
                           </span>
                           <strong className="text-sm font-bold text-[#1f3351]">
