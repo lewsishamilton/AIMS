@@ -80,7 +80,7 @@ const Navbar = () => {
                         { name: "Nursing & Allied Sciences", path: "#" },
                     ],
                 },
-                { name: "Faculty", path: "/faculty" },
+                { name: "Departments", path: "/departments" },
                 { name: "Admissions Process", path: "#" },
                 { name: "Academic Calendar", path: "#" },
             ],
@@ -279,7 +279,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Center Logo */}
-                    <Link to="/" className="flex items-center justify-center mx-6 py-2">
+                    <Link to="/#" className="flex items-center justify-center mx-6 py-2">
                         <img
                             src={isWhiteTheme ? logo : logoWhite}
                             alt="Arundathi Institute of Medical Sciences & Hospital"

@@ -52,10 +52,10 @@ export const FacultyPage: React.FC = () => {
         {/* Main Heading & Subtitle matching institutional layout */}
         <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
           <h1 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351]">
-            Our Faculty & Departments
+            Departments & Faculty
           </h1>
           <p className="text-base sm:text-lg leading-relaxed text-[#62748a] mt-3">
-            Explore the academic faculty across Pre-Clinical, Para-Clinical, and Clinical departments at Arundathi Institute of Medical Sciences.
+            Explore the academic departments and faculty across Pre-Clinical, Para-Clinical, and Clinical disciplines at Arundathi Institute of Medical Sciences.
           </p>
         </div>
 

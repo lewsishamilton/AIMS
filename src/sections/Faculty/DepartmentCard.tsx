@@ -9,7 +9,7 @@ interface DepartmentCardProps {
 export const DepartmentCard: React.FC<DepartmentCardProps> = ({ department }) => {
   return (
     <Link
-      to={`/faculty/${department.id}`}
+      to={`/departments/${department.id}`}
       className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] group cursor-pointer block h-[260px] sm:h-[280px]"
     >
       {/* Background Image */}

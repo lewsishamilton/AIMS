@@ -97,6 +97,10 @@ function App() {
           }
         />
 
+        <Route path="/departments" element={<FacultyPage/>}/>
+        <Route path="/departments/:departmentId" element={<DepartmentFacultyPage/>}/>
+        <Route path="/Departments" element={<FacultyPage/>}/>
+        <Route path="/Departments/:departmentId" element={<DepartmentFacultyPage/>}/>
         <Route path="/faculty" element={<FacultyPage/>}/>
         <Route path="/faculty/:departmentId" element={<DepartmentFacultyPage/>}/>
         <Route path="/Faculty" element={<FacultyPage/>}/>

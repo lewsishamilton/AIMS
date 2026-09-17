@@ -30,7 +30,7 @@ const DepartmentsSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {DEPARTMENTS.map((dept) => (
             <Link
-              to={`/faculty?category=${encodeURIComponent(dept.name)}`}
+              to={`/departments?category=${encodeURIComponent(dept.name)}`}
               key={dept.name}
               className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] group cursor-pointer block"
             >
