@@ -1,7 +1,9 @@
+import logoWhite from "../assets/logo-white.png";
+
 export default function Footer() {
-    return (
-        <>
-            <style>{`
+  return (
+    <>
+      <style>{`
                 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Manrope:wght@200..800&display=swap");
             
                 * {
@@ -13,67 +15,185 @@ export default function Footer() {
                     font-weight: 600;
                 }
             `}</style>
-            <footer className='bg-black py-12 px-4 sm:px-6 lg:px-8 tracking-[0.015em]'>
-                <div className='w-full max-w-7xl mx-auto'>
-            
-                    <div className="flex flex-wrap justify-between gap-y-12 lg:gap-x-8">
-            
-                        <div className="w-full md:w-[45%] lg:w-[35%] flex flex-col items-center md:items-start text-center md:text-left">
-                            <a href="https://prebuiltui.com">
-                                <svg width="157" height="40" viewBox="0 0 157 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M47.904 28.28q-1.54 0-2.744-.644a5.1 5.1 0 0 1-1.904-1.82q-.672-1.148-.672-2.604v-3.864q0-1.456.7-2.604a4.9 4.9 0 0 1 1.904-1.792q1.204-.672 2.716-.672 1.82 0 3.276.952a6.44 6.44 0 0 1 2.324 2.52q.868 1.567.868 3.556 0 1.96-.868 3.556a6.5 6.5 0 0 1-2.324 2.492q-1.456.924-3.276.924m-7.196 5.32V14.56h3.08v3.612l-.532 3.276.532 3.248V33.6zm6.692-8.232q1.12 0 1.96-.504a3.6 3.6 0 0 0 1.344-1.456q.504-.924.504-2.128t-.504-2.128a3.43 3.43 0 0 0-1.344-1.428q-.84-.532-1.96-.532t-1.988.532a3.43 3.43 0 0 0-1.344 1.428q-.476.924-.476 2.128t.476 2.128a3.6 3.6 0 0 0 1.344 1.456q.868.504 1.988.504M56.95 28V14.56h3.08V28zm3.08-7.476-1.064-.532q0-2.548 1.12-4.116 1.148-1.596 3.444-1.596 1.008 0 1.82.364.812.365 1.512 1.176l-2.016 2.072a2.1 2.1 0 0 0-.812-.56 3 3 0 0 0-1.036-.168q-1.287 0-2.128.812-.84.811-.84 2.548m14.156 7.756q-2.016 0-3.64-.896a7 7 0 0 1-2.548-2.52q-.924-1.596-.924-3.584t.924-3.556a6.87 6.87 0 0 1 2.492-2.52q1.596-.924 3.528-.924 1.876 0 3.304.868a6.05 6.05 0 0 1 2.268 2.38q.84 1.512.84 3.444 0 .336-.056.7a7 7 0 0 1-.112.756H69.23v-2.52h9.436l-1.148 1.008q-.056-1.232-.476-2.072a3 3 0 0 0-1.204-1.288q-.756-.448-1.876-.448-1.176 0-2.044.504a3.43 3.43 0 0 0-1.344 1.428q-.476.896-.476 2.156t.504 2.212 1.428 1.484q.924.504 2.128.504 1.037 0 1.904-.364a4 4 0 0 0 1.512-1.064l1.96 1.988a6.3 6.3 0 0 1-2.38 1.736 7.6 7.6 0 0 1-2.968.588m15.91 0q-1.54 0-2.745-.644a5.1 5.1 0 0 1-1.904-1.82q-.672-1.148-.672-2.604v-3.864q0-1.456.7-2.604a4.9 4.9 0 0 1 1.904-1.792q1.204-.672 2.716-.672 1.82 0 3.276.952a6.44 6.44 0 0 1 2.324 2.52q.869 1.567.868 3.556 0 1.96-.868 3.556a6.5 6.5 0 0 1-2.324 2.492q-1.455.924-3.276.924M82.898 28V7.84h3.08v10.024l-.532 3.248.532 3.276V28zm6.692-2.632q1.12 0 1.96-.504a3.6 3.6 0 0 0 1.344-1.456q.504-.924.504-2.128t-.504-2.128a3.43 3.43 0 0 0-1.344-1.428q-.84-.532-1.96-.532t-1.988.532a3.43 3.43 0 0 0-1.344 1.428q-.476.924-.476 2.128.001 1.204.476 2.128a3.6 3.6 0 0 0 1.344 1.456q.87.504 1.988.504m15.067 2.912q-1.708 0-3.052-.756a5.5 5.5 0 0 1-2.072-2.072q-.728-1.344-.728-3.08V14.56h3.08v7.672q0 .98.308 1.68.336.672.952 1.036.643.364 1.512.364 1.344 0 2.044-.784.728-.812.728-2.296V14.56h3.08v7.812q0 1.764-.756 3.108a5.3 5.3 0 0 1-2.044 2.072q-1.317.728-3.052.728m8.976-.28V14.56h3.08V28zm1.54-15.904q-.783 0-1.316-.532-.504-.532-.504-1.316t.504-1.316a1.8 1.8 0 0 1 1.316-.532q.813 0 1.316.532t.504 1.316q0 .784-.504 1.316t-1.316.532M120.169 28V7.84h3.08V28zm8.552 0V8.96h3.08V28zm-3.22-10.64v-2.8h9.52v2.8zm17.274 10.92q-1.708 0-3.052-.756a5.5 5.5 0 0 1-2.072-2.072q-.728-1.344-.728-3.08V14.56h3.08v7.672q0 .98.308 1.68.336.672.952 1.036.643.364 1.512.364 1.344 0 2.044-.784.728-.812.728-2.296V14.56h3.08v7.812q0 1.764-.756 3.108a5.3 5.3 0 0 1-2.044 2.072q-1.317.728-3.052.728m8.977-.28V14.56h3.08V28zm1.54-15.904q-.785 0-1.316-.532-.504-.532-.504-1.316t.504-1.316a1.8 1.8 0 0 1 1.316-.532q.812 0 1.316.532t.504 1.316-.504 1.316-1.316.532" fill="white" />
-                                    <path d="m8.75 11.3 6.75 3.884 6.75-3.885M8.75 34.58v-7.755L2 22.939m27 0-6.75 3.885v7.754M2.405 15.408 15.5 22.954l13.095-7.546M15.5 38V22.939M29 28.915V16.962a2.98 2.98 0 0 0-1.5-2.585L17 8.4a3.01 3.01 0 0 0-3 0L3.5 14.377A3 3 0 0 0 2 16.962v11.953A2.98 2.98 0 0 0 3.5 31.5L14 37.477a3.01 3.01 0 0 0 3 0L27.5 31.5a3 3 0 0 0 1.5-2.585" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </a>
-                            <div className='w-full max-w-52 h-px mt-8 bg-linear-to-r from-black via-white/25 to-black'></div>
-                            <p className='text-sm text-white/60 mt-6 max-w-sm leading-relaxed'>
-                                AIMS is a growing collection of beautifully designed, production-ready Tailwind CSS UI components.
-                            </p>
-                        </div>
-            
-                        <div className="w-full md:w-[45%] lg:w-[15%] flex flex-col items-center md:items-start text-center md:text-left">
-                            <h3 className='text-sm text-white font-medium'>Important Links</h3>
-                            <div className="flex flex-col gap-2 mt-6">
-                                <a href="#" className='text-sm text-white/60 hover:text-white transition-colors'>Home</a>
-                                <a href="#" className='text-sm text-white/60 hover:text-white transition-colors'>About</a>
-                                <a href="#" className='text-sm text-white/60 hover:text-white transition-colors'>Portfolio</a>
-                                <a href="#" className='text-sm text-white/60 hover:text-white transition-colors'>Contact</a>
-                                <a href="#" className='text-sm text-white/60 hover:text-white transition-colors'>FAQ</a>
-                            </div>
-                        </div>
-            
-                        <div className="w-full md:w-[45%] lg:w-[15%] flex flex-col items-center md:items-start text-center md:text-left">
-                            <h3 className='text-sm text-white font-medium'>Social Links</h3>
-                            <div className="flex flex-col gap-2 mt-6">
-                                <a href="#" className='text-sm text-white/60 hover:text-white transition-colors'>Twitter</a>
-                                <a href="#" className='text-sm text-white/60 hover:text-white transition-colors'>Instagram</a>
-                                <a href="#" className='text-sm text-white/60 hover:text-white transition-colors'>Youtube</a>
-                                <a href="#" className='text-sm text-white/60 hover:text-white transition-colors'>Linkedin</a>
-                            </div>
-                        </div>
-            
-                        <div className="w-full md:w-[45%] lg:w-[25%] flex flex-col items-center md:items-start text-center md:text-left">
-                            <h3 className='text-sm text-white font-medium'>Subscribe for operation</h3>
-                            <div className="flex items-center border gap-2 border-white/20 h-13 max-w-80 w-full rounded-full overflow-hidden mt-4">
-                                <input type="email" placeholder="Enter your email.." className="w-full h-full pl-6 outline-none text-sm bg-transparent text-white placeholder-white/60 placeholder:text-xs" required />
-                                <button type="submit" className="bg-linear-to-b from-[#5623D8] to-[#7B53E2] active:scale-95 transition w-56 h-10 rounded-full text-sm text-white cursor-pointer mr-1.5">Subscribe</button>
-                            </div>
-                        </div>
-            
-                    </div>
-            
-                    <div className='w-full h-px mt-16 mb-4 bg-linear-to-r from-black via-white/25 to-black'></div>
-            
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                        <p className='text-xs text-white/60'>© 2025 PrebuiltUI</p>
-                        <div className="flex items-center gap-6">
-                            <a href='#' className='text-xs text-white/60 hover:text-white transition-colors'>Terms & Conditions</a>
-                            <div className='w-px h-4 bg-white/20'></div>
-                            <a href='#' className='text-xs text-white/60 hover:text-white transition-colors'>Privacy Policy</a>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        </>
-    );
-};
+      <footer className="bg-[#0d2346] py-12 px-4 sm:px-6 lg:px-8 tracking-[0.015em]">
+        <div className="w-full max-w-7xl mx-auto">
+          <div className="flex flex-wrap justify-between gap-y-10 lg:gap-x-8">
+
+            <div className="w-full md:w-[45%] lg:w-[35%] flex flex-col items-center md:items-start text-center md:text-left">
+              <a
+                href="/"
+                className="flex items-center justify-center md:justify-start"
+              >
+                <img
+                  src={logoWhite}
+                  alt="Arundathi Institute of Medical Sciences & Hospital"
+                  className="h-13 md:h-16 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
+                />
+              </a>
+
+              <h3 className="text-sm text-white font-medium mt-5">
+                Contact Us
+              </h3>
+              <div className="flex flex-col gap-3 mt-4 max-w-sm items-center md:items-start text-center md:text-left">
+                <a
+                  href="https://maps.google.com/?q=Beside+MLRIT,+Dundigal,+Gandi+Maisamma,+Medchal-Malkajgiri+District,+Telangana+500043"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-3 text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  <svg
+                    className="w-4 h-4 mt-0.5 text-white/70 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M10 0C5.86 0 2.5 3.36 2.5 7.5c0 6.25 7.5 12.5 7.5 12.5s7.5-6.25 7.5-12.5C17.5 3.36 14.14 0 10 0zm0 10.5a3 3 0 110-6 3 3 0 010 6z" />
+                  </svg>
+                  <span>
+                    Beside MLRIT, Dundigal, Gandi Maisamma,
+                    Medchal-Malkajgiri Dist. Telangana 500043
+                  </span>
+                </a>
+                <a
+                  href="tel:+918055667888"
+                  className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  <svg
+                    className="w-4 h-4 text-white/70 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M2 3.5A1.5 1.5 0 013.5 2h2.1a1 1 0 01.98.8l.9 4.5a1 1 0 01-.6 1.14l-2.08.83a13.1 13.1 0 005.9 5.9l.83-2.08a1 1 0 011.14-.6l4.5.9a1 1 0 01.8.98v2.1a1.5 1.5 0 01-1.5 1.5h-1C9.2 19 2 11.65 2 5v-1.5z" />
+                  </svg>
+                  <span>+91 80556 67888</span>
+                </a>
+                <a
+                  href="mailto:arundathihospital@gmail.com"
+                  className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  <svg
+                    className="w-4 h-4 text-white/70 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                    <path d="M18 8.118l-8 4-8-4v6a2 2 0 002 2h12a2 2 0 002-2v-6z" />
+                  </svg>
+                  <span>arundathihospital@gmail.com</span>
+                </a>
+              </div>
+
+              <div className="flex items-center gap-4 mt-6">
+                <a
+                  href="https://www.facebook.com/people/Aims-MedCollege/100092051179931/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  aria-label="Facebook"
+                >
+                  <svg className="w-4 h-4 text-white/70" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.instagram.com/arundathihospital/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  aria-label="Instagram"
+                >
+                  <svg className="w-4 h-4 text-white/70" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.youtube.com/@arundathihospital"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  aria-label="YouTube"
+                >
+                  <svg className="w-4 h-4 text-white/70" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.linkedin.com/company/arundathi-institute-of-medical-sciences/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors"
+                  aria-label="LinkedIn"
+                >
+                  <svg className="w-4 h-4 text-white/70" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+
+            <div className="w-full md:w-[45%] lg:w-[18%] flex flex-col items-center pt-0 md:pt-21 lg:-ml-6">
+              <h3 className="text-sm text-white font-medium lg:-ml-4">Quick Links</h3>
+              <div className="grid grid-cols-2 gap-x-14 gap-y-3 mt-4">
+                {[
+                  { label: "Home", href: "/" },
+                  { label: "About Us", href: "/about" },
+                  { label: "Admissions", href: "/admissions" },
+                  { label: "Hospital", href: "/hospital" },
+                  { label: "Contact Us", href: "/contact" },
+                  { label: "Gallery", href: "/gallery" },
+                ].map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    className="text-sm text-white/60 hover:text-white transition-colors duration-200 whitespace-nowrap"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="w-full md:w-[48%] lg:w-[28%] flex flex-col items-center md:items-start">
+              <h3 className="text-sm text-white font-medium mb-4">
+                Find Us on Map
+              </h3>
+              <div className="w-full min-h-64 rounded-[26px] overflow-hidden border border-white/10">
+                <iframe
+                  src="https://maps.google.com/maps?q=Arundathi%20Institute%20of%20medical%20acience&t=m&z=16&output=embed&iwloc=near"
+                  title="Arundathi Institute of Medical Sciences"
+                  aria-label="Map showing Arundathi Institute of Medical Sciences"
+                  loading="lazy"
+                  className="w-full h-64 rounded-[26px] border-0"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+
+          </div>
+
+          <div className="w-full h-px mt-12 mb-4 bg-linear-to-r from-black via-white/25 to-black"></div>
+
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-xs text-white/60">
+              &copy; 2026 Arundathi Institute of Medical Sciences & Hospital
+            </p>
+            <div className="flex items-center gap-6">
+              <a
+                href="#"
+                className="text-xs text-white/60 hover:text-white transition-colors"
+              >
+                Terms & Conditions
+              </a>
+              <div className="w-px h-4 bg-white/20"></div>
+              <a
+                href="#"
+                className="text-xs text-white/60 hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </>
+  );
+}
