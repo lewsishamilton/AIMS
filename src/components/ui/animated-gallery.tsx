@@ -58,7 +58,7 @@ export const ContainerScroll = ({
   const scrollRef = React.useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: scrollRef,
-    offset: ["start start", "end end"],
+    offset: ["start 50%", "end end"],
   })
   return (
     <ContainerScrollContext.Provider value={{ scrollYProgress }}>
@@ -105,8 +105,8 @@ export const GalleryContainer = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & HTMLMotionProps<"div">) => {
   const { scrollYProgress } = useContainerScrollContext()
-  const rotateX = useTransform(scrollYProgress, [0, 0.5], [75, 0])
-  const scale = useTransform(scrollYProgress, [0.5, 0.9], [1.2, 1])
+  const rotateX = useTransform(scrollYProgress, [0, 0.3], [75, 0])
+  const scale = useTransform(scrollYProgress, [0.3, 0.85], [1.08, 1])
 
   return (
     <motion.div
@@ -119,6 +119,7 @@ export const GalleryContainer = ({
         scale,
         transformStyle: "preserve-3d",
         perspective: "1000px",
+        transformOrigin: "center top",
         ...style,
       }}
       {...props}
@@ -136,7 +137,7 @@ export const GalleryCol = ({
   ...props
 }: HTMLMotionProps<"div"> & { yRange?: string[] }) => {
   const { scrollYProgress } = useContainerScrollContext()
-  const y = useTransform(scrollYProgress, [0.5, 1], yRange)
+  const y = useTransform(scrollYProgress, [0.3, 1], yRange)
 
   return (
     <motion.div

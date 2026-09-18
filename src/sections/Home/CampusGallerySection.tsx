@@ -12,7 +12,8 @@ import { IMAGES_1, IMAGES_2, IMAGES_3 } from "../../assets/stockImages"
 export const CampusGallerySection: React.FC = () => {
   return (
     <div className="relative bg-white">
-      <ContainerStagger className="relative z-20 -mb-8 place-self-center px-6 pt-12 text-center">
+      {/* Heading placed cleanly above the scroll container */}
+      <ContainerStagger className="relative z-20 place-self-center px-6 pt-12 pb-4 text-center">
         <ContainerAnimated>
           <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351]">
             Campus & Infrastructure
@@ -35,7 +36,7 @@ export const CampusGallerySection: React.FC = () => {
         }}
       />
 
-      <ContainerScroll className="relative h-[300vh]">
+      <ContainerScroll className="relative h-[250vh]">
         <ContainerSticky className="h-svh flex flex-col justify-center pt-8 pb-4">
           <GalleryContainer className="max-w-[1020px] w-full mx-auto px-3 sm:px-6">
             <GalleryCol yRange={["-10%", "2%"]} className="-mt-2">
