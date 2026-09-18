@@ -200,7 +200,7 @@ const Navbar = () => {
                                 <div key={itemIdx} className="relative group/sub">
                                     <Link
                                         to={item.path}
-                                        className={`flex items-center justify-between px-3.5 py-2.5 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
+                                        className={`flex items-center justify-between px-3.5 py-2.5 text-[14px] font-medium transition-all duration-150 ${dropdownItemClass}`}
                                     >
                                         <span>{item.name}</span>
                                         {item.subItems && <ChevronRight />}
@@ -214,7 +214,7 @@ const Navbar = () => {
                                                     <Link
                                                         key={subIdx}
                                                         to={sub.path}
-                                                        className={`block whitespace-nowrap px-3.5 py-2 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
+                                                        className={`block whitespace-nowrap px-3.5 py-2 text-[14px] font-medium transition-all duration-150 ${dropdownItemClass}`}
                                                     >
                                                         {sub.name}
                                                     </Link>
@@ -355,7 +355,7 @@ const Navbar = () => {
                                             <Link
                                                 to={item.path}
                                                 onClick={() => setIsMenuOpen(false)}
-                                                className={`text-xs font-semibold py-0.5 transition-colors ${
+                                                className={`text-[14px] font-semibold py-0.5 transition-colors ${
                                                     isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"
                                                 }`}
                                             >
@@ -363,7 +363,7 @@ const Navbar = () => {
                                             </Link>
                                         ) : (
                                             <span
-                                                className={`text-xs font-semibold ${
+                                                className={`text-[14px] font-semibold ${
                                                     isWhiteTheme ? "text-gray-800" : "text-white/90"
                                                 }`}
                                             >
@@ -381,7 +381,7 @@ const Navbar = () => {
                                                         key={subIdx}
                                                         to={sub.path}
                                                         onClick={() => setIsMenuOpen(false)}
-                                                        className={`text-xs font-normal py-0.5 transition-colors ${
+                                                        className={`text-[14px] font-normal py-0.5 transition-colors ${
                                                             isWhiteTheme
                                                                 ? "text-gray-600 hover:text-black"
                                                                 : "text-white/70 hover:text-white"

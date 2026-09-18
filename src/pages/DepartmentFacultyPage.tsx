@@ -223,21 +223,13 @@ export const DepartmentFacultyPage: React.FC = () => {
 
             {/* Departmental Faculty Hierarchy Section */}
             <div className="rounded-[26px] border border-[#dce8ee] bg-white p-6 sm:p-8">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-                <div>
-                  <h3 className="font-['Manrope',sans-serif] text-xl sm:text-2xl font-semibold text-[#1f3351]">
-                    Departmental Faculty
-                  </h3>
-                  <p className="text-sm text-[#62748a] mt-1">
-                    As per NMC norms, department has full fledged faculty under Professor (HOD), Associate Professor, Assistant Professors, and Tutors.
-                  </p>
-                </div>
-                <button
-                  onClick={() => setActiveTab("faculty")}
-                  className="px-5 py-2 rounded-full text-xs font-semibold bg-[#1f3351] text-white hover:bg-[#15243b] transition-colors w-fit cursor-pointer"
-                >
-                  View Faculty Directory ({totalFacultyCount}) →
-                </button>
+              <div className="mb-6">
+                <h3 className="font-['Manrope',sans-serif] text-xl sm:text-2xl font-semibold text-[#1f3351]">
+                  Departmental Faculty
+                </h3>
+                <p className="text-sm text-[#62748a] mt-1">
+                  As per NMC norms, department has full fledged faculty under Professor (HOD), Associate Professor, Assistant Professors, and Tutors.
+                </p>
               </div>
 
               {/* Directly render the faculty hierarchy cards */}
