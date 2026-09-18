@@ -11,10 +11,10 @@ function HeroPage() {
     <>
       <Hero />
       <AboutSection />
+      <FounderSection />
       <DepartmentsSection />
       <FacilitiesSection />
       <CampusGallerySection />
-      <FounderSection />
       <PatientsSpeaksSection />
     </>
   );

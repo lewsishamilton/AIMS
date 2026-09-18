@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { cn } from "../../lib/utils";
 
-// Stock images for campus facilities
-import indoorStadiumImg from "../../assets/stockImages/aims-campus-15.jpeg";
-import transportationImg from "../../assets/stockImages/aims-campus-03.jpeg";
-import messImg from "../../assets/stockImages/aims-campus-05.jpeg";
-import gymImg from "../../assets/stockImages/aims-campus-21.jpeg";
-import hostelImg from "../../assets/stockImages/aims-campus-02.jpeg";
-import tableTennisImg from "../../assets/stockImages/aims-campus-35.jpeg";
+// Images for campus facilities from assets/facilities folder
+import indoorStadiumImg from "../../assets/facilities/indoor_stadium.jpeg";
+import transportationImg from "../../assets/facilities/transport.jpeg";
+import messImg from "../../assets/facilities/mess.jpeg";
+import gymImg from "../../assets/facilities/gym.jpeg";
+import hostelImg from "../../assets/facilities/hostel.jpeg";
+import tableTennisImg from "../../assets/facilities/table_tennis.jpeg";
 
 export interface FacilityItem {
   id: string;
@@ -137,11 +137,19 @@ export const FacilitiesSection: React.FC = () => {
                     )}
                   />
 
-                  {/* Reduced Gradient Overlay for Text Readability without Heavy Darkness */}
+                  {/* Active / Hovered Gradient: Exactly h-[48%] with rich, high-contrast opacity */}
                   <div
                     className={cn(
-                      "absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent transition-opacity duration-500",
-                      isActive ? "opacity-90" : "opacity-45"
+                      "absolute bottom-0 inset-x-0 h-[48%] bg-gradient-to-t from-[#0b172a] via-[#0b172a]/92 via-50% to-transparent transition-all duration-700 pointer-events-none",
+                      isActive ? "opacity-100" : "opacity-0"
+                    )}
+                  />
+
+                  {/* Inactive / Not-Hovered Gradient: Taller height (h-[75%]) for vertical labels */}
+                  <div
+                    className={cn(
+                      "absolute bottom-0 inset-x-0 h-[75%] bg-gradient-to-t from-[#0b172a]/95 via-[#0b172a]/55 via-50% to-transparent transition-all duration-700 pointer-events-none",
+                      isActive ? "opacity-0" : "opacity-100"
                     )}
                   />
                 </div>
