@@ -1,5 +1,4 @@
 import React from "react";
-import FacilitiesSection from "../sections/Home/FacilitiesSection";
 
 // Import real campus images from stock assets
 import img01 from "../assets/stockImages/aims-campus-07.jpeg";
