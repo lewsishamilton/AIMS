@@ -123,6 +123,13 @@ export const PatientsSpeaksSection: React.FC = () => {
 
       {/* Section Header */}
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20 text-center mb-10 sm:mb-12">
+        <div className="inline-flex items-center justify-center gap-3 mb-3">
+          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+          <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+            TESTIMONIALS
+          </span>
+          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+        </div>
         <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351]">
           Patients Speaks
         </h2>

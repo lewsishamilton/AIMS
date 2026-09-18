@@ -139,9 +139,14 @@ export const AboutSection: React.FC = () => {
 
                   {/* Text Column */}
                   <div className="flex flex-col justify-center">
-                    <span className="text-xs font-semibold uppercase tracking-[2px] mb-3 select-none text-dark">
-                      {slide.kicker}
-                    </span>
+                    {/* Kicker with Academics-style lines design */}
+                    <div className="inline-flex items-center gap-3 mb-3.5">
+                      <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+                      <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase select-none">
+                        {slide.kicker}
+                      </span>
+                      <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+                    </div>
 
                     <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.01em] text-[#1f3351] mb-5">
                       {slide.title}
