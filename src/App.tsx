@@ -10,15 +10,16 @@ import disciplinaryPdf from "./assets/Disciplinary committee.pdf"
 import meuPdf from "./assets/MEU.pdf"
 import FacultyPage from "./pages/FacultyPage"
 import DepartmentFacultyPage from "./pages/DepartmentFacultyPage"
+import MediaGalleryPage from "./pages/MediaGalleryPage"
 import PdfViewerSection from "./layouts/PdfViewer"
-import { Route,Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 
 function App() {
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Routes>
-        <Route path="/" element={<HeroPage/>}/>
+        <Route path="/" element={<HeroPage />} />
 
         <Route
           path="/committess/meu"
@@ -97,17 +98,20 @@ function App() {
           }
         />
 
-        <Route path="/departments" element={<FacultyPage/>}/>
-        <Route path="/departments/:departmentId" element={<DepartmentFacultyPage/>}/>
-        <Route path="/Departments" element={<FacultyPage/>}/>
-        <Route path="/Departments/:departmentId" element={<DepartmentFacultyPage/>}/>
-        <Route path="/faculty" element={<FacultyPage/>}/>
-        <Route path="/faculty/:departmentId" element={<DepartmentFacultyPage/>}/>
-        <Route path="/Faculty" element={<FacultyPage/>}/>
-        <Route path="/Faculty/:departmentId" element={<DepartmentFacultyPage/>}/>
+        <Route path="/departments" element={<FacultyPage />} />
+        <Route path="/departments/:departmentId" element={<DepartmentFacultyPage />} />
+        <Route path="/Departments" element={<FacultyPage />} />
+        <Route path="/Departments/:departmentId" element={<DepartmentFacultyPage />} />
+        <Route path="/faculty" element={<FacultyPage />} />
+        <Route path="/faculty/:departmentId" element={<DepartmentFacultyPage />} />
+        <Route path="/Faculty" element={<FacultyPage />} />
+        <Route path="/Faculty/:departmentId" element={<DepartmentFacultyPage />} />
+        <Route path="/media-gallery" element={<MediaGalleryPage />} />
+        <Route path="/gallery" element={<MediaGalleryPage />} />
+        <Route path="/media-gallary" element={<MediaGalleryPage />} />
       </Routes>
-      <Footer/>
-   </>
+      <Footer />
+    </>
   )
 }
 

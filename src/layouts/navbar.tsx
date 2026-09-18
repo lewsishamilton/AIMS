@@ -36,7 +36,7 @@ const Navbar = () => {
                     name: "Committees",
                     path: "#",
                     subItems: [
-                        { name: "Medical Educational Unit", path:"/committess/meu"},
+                        { name: "Medical Educational Unit", path: "/committess/meu" },
                         { name: "Scientific Committee", path: "/committess/scientific" },
                         { name: "Anti Ragging Committee", path: "/committess/anti-ragging" },
                         { name: "Ethics Committee", path: "/committess/ethics" },
@@ -51,7 +51,7 @@ const Navbar = () => {
                     subItems: [
                         { name: "AIMS in the News", path: "#" },
                         { name: "Events", path: "#" },
-                        { name: "Media Gallary", path: "#" },
+                        { name: "Media Gallery", path: "/media-gallery" },
                         { name: "Media Content", path: "#" },
                     ],
                 },
@@ -153,11 +153,10 @@ const Navbar = () => {
 
     const ChevronRight = () => (
         <svg
-            className={`w-3.5 h-3.5 ml-auto transition-all duration-200 ${
-                isWhiteTheme
+            className={`w-3.5 h-3.5 ml-auto transition-all duration-200 ${isWhiteTheme
                     ? "text-gray-400 group-hover/sub:text-gray-900 group-hover/sub:translate-x-0.5"
                     : "text-white/45 group-hover/sub:text-white group-hover/sub:translate-x-0.5"
-            }`}
+                }`}
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -266,11 +265,10 @@ const Navbar = () => {
             `}</style>
 
             <nav
-                className={`fixed top-0 left-0 w-full px-6 md:px-12 lg:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
-                    isWhiteTheme
+                className={`fixed top-0 left-0 w-full px-6 md:px-12 lg:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${isWhiteTheme
                         ? "bg-white/98 backdrop-blur-md shadow-sm text-gray-900"
                         : "bg-transparent text-white"
-                }`}
+                    }`}
             >
                 <div className="max-w-7xl mx-auto flex items-center justify-between sm:justify-center">
                     {/* Left Desktop Links */}
@@ -296,11 +294,10 @@ const Navbar = () => {
                     <div className="flex md:hidden py-3">
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className={`p-2 rounded-full focus:outline-none transition-all duration-200 ${
-                                isWhiteTheme
+                            className={`p-2 rounded-full focus:outline-none transition-all duration-200 ${isWhiteTheme
                                     ? "text-gray-900 hover:bg-gray-100"
                                     : "text-white bg-black/25 backdrop-blur-md border border-white/20 hover:bg-black/40"
-                            }`}
+                                }`}
                             aria-label="Toggle Menu"
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -314,21 +311,18 @@ const Navbar = () => {
 
                 {/* Mobile Drawer */}
                 <div
-                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 md:hidden overflow-y-auto ${
-                        isMenuOpen ? "translate-x-0" : "-translate-x-full"
-                    } ${
-                        isWhiteTheme
+                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 md:hidden overflow-y-auto ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
+                        } ${isWhiteTheme
                             ? "bg-white text-gray-900 shadow-2xl"
                             : "bg-black/80 backdrop-blur-2xl text-white border-r border-white/10"
-                    }`}
+                        }`}
                 >
                     <button
                         aria-label="Close menu"
-                        className={`absolute top-6 right-6 p-2 rounded-full ${
-                            isWhiteTheme
+                        className={`absolute top-6 right-6 p-2 rounded-full ${isWhiteTheme
                                 ? "text-gray-800 hover:bg-gray-100"
                                 : "text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20"
-                        }`}
+                            }`}
                         onClick={() => setIsMenuOpen(false)}
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -340,11 +334,10 @@ const Navbar = () => {
                     {[...leftLinks, ...rightLinks].map((link, idx) => (
                         <div key={idx} className="w-full flex flex-col gap-2">
                             <span
-                                className={`font-bold border-b pb-1 ${
-                                    isWhiteTheme
+                                className={`font-bold border-b pb-1 ${isWhiteTheme
                                         ? "text-gray-900 border-gray-200"
                                         : "text-white border-white/20"
-                                }`}
+                                    }`}
                             >
                                 {link.name}
                             </span>
@@ -355,37 +348,33 @@ const Navbar = () => {
                                             <Link
                                                 to={item.path}
                                                 onClick={() => setIsMenuOpen(false)}
-                                                className={`text-[14px] font-semibold py-0.5 transition-colors ${
-                                                    isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"
-                                                }`}
+                                                className={`text-[14px] font-semibold py-0.5 transition-colors ${isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"
+                                                    }`}
                                             >
                                                 {item.name}
                                             </Link>
                                         ) : (
                                             <span
-                                                className={`text-[14px] font-semibold ${
-                                                    isWhiteTheme ? "text-gray-800" : "text-white/90"
-                                                }`}
+                                                className={`text-[14px] font-semibold ${isWhiteTheme ? "text-gray-800" : "text-white/90"
+                                                    }`}
                                             >
                                                 {item.name}
                                             </span>
                                         )}
                                         {item.subItems && (
                                             <div
-                                                className={`pl-3 border-l flex flex-col gap-1 ${
-                                                    isWhiteTheme ? "border-gray-200" : "border-white/20"
-                                                }`}
+                                                className={`pl-3 border-l flex flex-col gap-1 ${isWhiteTheme ? "border-gray-200" : "border-white/20"
+                                                    }`}
                                             >
                                                 {item.subItems.map((sub, subIdx) => (
                                                     <Link
                                                         key={subIdx}
                                                         to={sub.path}
                                                         onClick={() => setIsMenuOpen(false)}
-                                                        className={`text-[14px] font-normal py-0.5 transition-colors ${
-                                                            isWhiteTheme
+                                                        className={`text-[14px] font-normal py-0.5 transition-colors ${isWhiteTheme
                                                                 ? "text-gray-600 hover:text-black"
                                                                 : "text-white/70 hover:text-white"
-                                                        }`}
+                                                            }`}
                                                     >
                                                         {sub.name}
                                                     </Link>
