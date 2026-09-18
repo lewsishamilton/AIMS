@@ -80,7 +80,7 @@ export const PdfViewerSection: React.FC<PdfViewerProps> = ({
   return (
     <section className="relative py-16 lg:py-24 bg-[#fbfaf5] overflow-hidden tracking-[0.015em]">
       <div className="relative z-10 w-full max-w-[1100px] mx-auto px-4 sm:px-10 lg:px-16">
-        
+
         {/* Main Heading & Subtitle */}
         <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-14">
           <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-tight text-[#1f3351]">

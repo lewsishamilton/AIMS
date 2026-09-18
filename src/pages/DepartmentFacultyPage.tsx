@@ -180,21 +180,19 @@ export const DepartmentFacultyPage: React.FC = () => {
           <div className="flex items-center gap-2 sm:gap-3 mb-10 flex-wrap">
             <button
               onClick={() => setActiveTab("overview")}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                activeTab === "overview"
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${activeTab === "overview"
                   ? "bg-[#1f3351] text-white shadow-sm"
                   : "bg-white text-[#62748a] hover:text-[#1f3351] border border-[#dce8ee]"
-              }`}
+                }`}
             >
               Overview & Facilities
             </button>
             <button
               onClick={() => setActiveTab("faculty")}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                activeTab === "faculty"
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${activeTab === "faculty"
                   ? "bg-[#1f3351] text-white shadow-sm"
                   : "bg-white text-[#62748a] hover:text-[#1f3351] border border-[#dce8ee]"
-              }`}
+                }`}
             >
               Departmental Faculty ({totalFacultyCount})
             </button>

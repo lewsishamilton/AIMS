@@ -158,7 +158,7 @@ export default function Footer() {
               </h3>
               <div className="w-full min-h-64 rounded-[26px] overflow-hidden border border-white/10">
                 <iframe
-                  src="https://maps.google.com/maps?q=Arundathi%20Institute%20of%20medical%20acience&t=m&z=16&output=embed&iwloc=near"
+                  src="https://maps.google.com/maps?q=Arundathi%20Institute%20of%20medical%20acience&t=k&z=16&output=embed&iwloc=near"
                   title="Arundathi Institute of Medical Sciences"
                   aria-label="Map showing Arundathi Institute of Medical Sciences"
                   loading="lazy"

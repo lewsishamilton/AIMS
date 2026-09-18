@@ -60,26 +60,38 @@ const DepartmentsSection = () => {
           </p>
         </div>
 
-        {/* Department Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7">
+        {/* Department Cards - Expanding Accordion Animation */}
+        <div className="flex flex-col md:flex-row items-stretch gap-5 lg:gap-6 w-full h-auto md:h-[400px]">
           {DEPARTMENTS.map((dept) => (
             <Link
               to={`/departments?category=${encodeURIComponent(dept.name)}`}
               key={dept.name}
-              className="group relative h-[250px] sm:h-[275px] lg:h-[300px] rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_32px_rgba(15,23,42,0.18)] hover:-translate-y-1.5 transition-all duration-500 block"
+              className="relative group flex-grow transition-all duration-500 w-full md:w-56 h-[260px] sm:h-[280px] md:h-full md:hover:w-full rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_36px_rgba(15,23,42,0.22)] block cursor-pointer"
             >
-              {/* Background Image with hover upward float and subtle zoom */}
+              {/* Background Image with subtle scale on hover */}
               <div className="w-full h-full overflow-hidden">
                 <img
                   src={dept.image}
                   alt={dept.imageAlt}
-                  className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 group-hover:-translate-y-2"
+                  className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                 />
               </div>
 
-              {/* Gradient Overlays */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0b172a] via-[#0b172a]/60 to-transparent group-hover:from-[#0b172a] group-hover:via-[#0b172a]/75 transition-all duration-300" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-transparent" />
+              {/* Smooth Eased Blue Scrim Gradient - Perfectly blended with zero hard lines */}
+              <div
+                className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(10, 28, 52, 0.94) 0%, rgba(12, 35, 65, 0.86) 18%, rgba(15, 48, 88, 0.62) 34%, rgba(18, 62, 112, 0.38) 50%, rgba(20, 72, 130, 0.18) 65%, rgba(20, 72, 130, 0.06) 80%, rgba(20, 72, 130, 0.01) 92%, transparent 100%)",
+                }}
+              />
+              <div
+                className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(8, 22, 42, 0.96) 0%, rgba(10, 32, 60, 0.90) 20%, rgba(14, 46, 86, 0.70) 38%, rgba(18, 64, 118, 0.44) 55%, rgba(20, 72, 130, 0.22) 70%, rgba(20, 72, 130, 0.08) 84%, transparent 100%)",
+                }}
+              />
 
               {/* Top Tag / Category Pill */}
               <div className="absolute top-4 left-4 sm:top-5 sm:left-5 z-10">
@@ -89,14 +101,14 @@ const DepartmentsSection = () => {
               </div>
 
               {/* Bottom Content */}
-              <div className="absolute bottom-5 left-5 right-5 z-10 flex flex-col items-start transition-all duration-300">
-                {/* Heading shifts slightly upward on hover */}
-                <h3 className="font-['Manrope',sans-serif] text-xl sm:text-2xl font-bold text-white mb-1.5 tracking-tight transition-transform duration-300 ease-out group-hover:-translate-y-1">
+              <div className="absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6 z-10 flex flex-col items-start transition-all duration-300">
+                {/* Heading */}
+                <h3 className="font-['Manrope',sans-serif] text-xl sm:text-2xl font-bold text-white mb-1.5 tracking-tight transition-transform duration-300 ease-out group-hover:-translate-y-0.5">
                   {dept.name}
                 </h3>
 
-                {/* 2-line Brief Description reveals on hover */}
-                <p className="text-white/85 text-xs sm:text-[13px] leading-snug line-clamp-2 max-h-0 opacity-0 -translate-y-1 group-hover:max-h-16 group-hover:opacity-100 group-hover:translate-y-0 group-hover:mb-2 transition-all duration-300 ease-out overflow-hidden pointer-events-none">
+                {/* Brief Description - smoothly expands on hover */}
+                <p className="text-white/85 text-xs sm:text-[13px] leading-relaxed line-clamp-2 max-h-16 opacity-100 md:max-h-0 md:opacity-0 md:group-hover:max-h-16 md:group-hover:opacity-100 mb-2 md:mb-0 md:group-hover:mb-2.5 transition-all duration-500 ease-out overflow-hidden pointer-events-none">
                   {dept.description}
                 </p>
 

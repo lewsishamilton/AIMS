@@ -111,11 +111,10 @@ export const AboutSection: React.FC = () => {
         <div className="overflow-hidden w-full">
           <div
             onTransitionEnd={handleTransitionEnd}
-            className={`flex w-[400%] ${
-              enableTransition
+            className={`flex w-[400%] ${enableTransition
                 ? "transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
                 : "transition-none"
-            }`}
+              }`}
             style={{
               transform: `translateX(-${trackIndex * 25}%)`,
             }}

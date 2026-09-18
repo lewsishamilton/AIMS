@@ -13,8 +13,8 @@ export const FacultyPage: React.FC = () => {
 
   const selectedCategory: "All" | DepartmentCategory =
     categoryParam === "Pre-Clinical" ||
-    categoryParam === "Para-Clinical" ||
-    categoryParam === "Clinical"
+      categoryParam === "Para-Clinical" ||
+      categoryParam === "Clinical"
       ? categoryParam
       : "All";
 
@@ -68,11 +68,10 @@ export const FacultyPage: React.FC = () => {
               <button
                 key={cat}
                 onClick={() => handleCategorySelect(cat)}
-                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                  isActive
-                    ? "bg-[#1f3351] text-white shadow-sm"
-                    : "bg-white text-[#62748a] hover:text-[#1f3351] border border-[#dce8ee]"
-                }`}
+                className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${isActive
+                  ? "bg-[#1f3351] text-white shadow-sm"
+                  : "bg-white text-[#62748a] hover:text-[#1f3351] border border-[#dce8ee]"
+                  }`}
               >
                 {cat} ({count})
               </button>
