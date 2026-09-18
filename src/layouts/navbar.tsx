@@ -80,7 +80,15 @@ const Navbar = () => {
                         { name: "Nursing & Allied Sciences", path: "#" },
                     ],
                 },
-                { name: "Departments", path: "/departments" },
+                {
+                    name: "Departments",
+                    path: "/departments",
+                    subItems: [
+                        { name: "Pre-Clinical", path: "/departments?category=Pre-Clinical" },
+                        { name: "Para-Clinical", path: "/departments?category=Para-Clinical" },
+                        { name: "Clinical", path: "/departments?category=Clinical" },
+                    ],
+                },
                 { name: "Admissions Process", path: "#" },
                 { name: "Academic Calendar", path: "#" },
             ],

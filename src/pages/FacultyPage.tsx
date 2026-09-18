@@ -11,11 +11,14 @@ export const FacultyPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryParam = searchParams.get("category");
 
+  const normalizedCat = categoryParam?.toLowerCase().replace(/[^a-z]/g, "");
   const selectedCategory: "All" | DepartmentCategory =
-    categoryParam === "Pre-Clinical" ||
-      categoryParam === "Para-Clinical" ||
-      categoryParam === "Clinical"
-      ? categoryParam
+    normalizedCat === "preclinical"
+      ? "Pre-Clinical"
+      : normalizedCat === "paraclinical"
+      ? "Para-Clinical"
+      : normalizedCat === "clinical"
+      ? "Clinical"
       : "All";
 
   // Scroll to top when category or page changes
