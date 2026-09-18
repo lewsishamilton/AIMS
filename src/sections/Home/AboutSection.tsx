@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import aboutImg from "../../assets/about.png";
 import hospitalImg from "../../assets/aims-hospital.jpg";
 
@@ -59,6 +59,15 @@ export const AboutSection: React.FC = () => {
   const [trackIndex, setTrackIndex] = useState(1);
   const [enableTransition, setEnableTransition] = useState(true);
   const [isSliding, setIsSliding] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  // Drag & Swipe states
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const startXRef = useRef(0);
+  const dragOffsetRef = useRef(0);
+  const touchStartYRef = useRef(0);
+  const isHorizontalSwipeRef = useRef<boolean | null>(null);
 
   const handleNext = () => {
     if (isSliding) return;
@@ -74,6 +83,114 @@ export const AboutSection: React.FC = () => {
     setTrackIndex((prev) => prev - 1);
   };
 
+  const goToSlide = (slideIdx: number) => {
+    if (isSliding || isDragging) return;
+    const targetTrack = slideIdx === 0 ? 1 : 2;
+    if (targetTrack === trackIndex) return;
+    setIsSliding(true);
+    setEnableTransition(true);
+    setTrackIndex(targetTrack);
+  };
+
+  const finishDrag = (offset: number) => {
+    setIsDragging(false);
+    const threshold = 60; // px needed to trigger slide
+
+    if (offset < -threshold) {
+      handleNext();
+    } else if (offset > threshold) {
+      handlePrev();
+    } else {
+      setEnableTransition(true);
+      setIsSliding(false);
+    }
+    setDragOffset(0);
+    dragOffsetRef.current = 0;
+  };
+
+  // Mouse Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (isSliding) return;
+    setIsDragging(true);
+    startXRef.current = e.clientX;
+    dragOffsetRef.current = 0;
+    setDragOffset(0);
+  };
+
+  useEffect(() => {
+    if (!isDragging) return;
+
+    const handleWindowMouseMove = (e: MouseEvent) => {
+      const delta = e.clientX - startXRef.current;
+      dragOffsetRef.current = delta;
+      setDragOffset(delta);
+    };
+
+    const handleWindowMouseUp = () => {
+      finishDrag(dragOffsetRef.current);
+    };
+
+    window.addEventListener("mousemove", handleWindowMouseMove);
+    window.addEventListener("mouseup", handleWindowMouseUp);
+
+    return () => {
+      window.removeEventListener("mousemove", handleWindowMouseMove);
+      window.removeEventListener("mouseup", handleWindowMouseUp);
+    };
+  }, [isDragging, isSliding]);
+
+  // Touch Swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (isSliding) return;
+    const touch = e.touches[0];
+    startXRef.current = touch.clientX;
+    touchStartYRef.current = touch.clientY;
+    dragOffsetRef.current = 0;
+    isHorizontalSwipeRef.current = null;
+    setIsDragging(true);
+    setDragOffset(0);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - startXRef.current;
+    const deltaY = touch.clientY - touchStartYRef.current;
+
+    if (isHorizontalSwipeRef.current === null) {
+      if (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8) {
+        isHorizontalSwipeRef.current = Math.abs(deltaX) >= Math.abs(deltaY);
+      }
+    }
+
+    if (isHorizontalSwipeRef.current) {
+      dragOffsetRef.current = deltaX;
+      setDragOffset(deltaX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (isHorizontalSwipeRef.current) {
+      finishDrag(dragOffsetRef.current);
+    } else {
+      setIsDragging(false);
+      setDragOffset(0);
+      dragOffsetRef.current = 0;
+    }
+    isHorizontalSwipeRef.current = null;
+  };
+
+  // Auto-slide every 3 seconds (pauses on hover or while dragging)
+  useEffect(() => {
+    if (isPaused || isDragging) return;
+
+    const interval = setInterval(() => {
+      handleNext();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [trackIndex, isSliding, isPaused, isDragging]);
+
   // Silently reset the edge clones without animation
   const handleTransitionEnd = () => {
     setIsSliding(false);
@@ -86,37 +203,36 @@ export const AboutSection: React.FC = () => {
     }
   };
 
+  const activeDot = trackIndex === 1 || trackIndex === 3 ? 0 : 1;
+
   return (
-    <section className="relative pt-20 lg:pt-28 pb-12 lg:pb-16 bg-white overflow-hidden tracking-[0.015em]">
+    <section
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      className="relative pt-20 lg:pt-28 pb-12 lg:pb-16 bg-white overflow-hidden tracking-[0.015em]"
+    >
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
-        {/* Left Arrow (Looping enabled) */}
-        <button
-          onClick={handlePrev}
-          aria-label="Previous slide"
-          className="hidden md:flex absolute left-2 lg:left-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 items-center justify-center rounded-full bg-white text-[#1f3351] border border-[#dce8ee] shadow-[0_12px_30px_rgba(8,44,76,0.14)] hover:bg-[#1f3351] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
+        {/* Sliding & Draggable Viewport */}
+        <div
+          onMouseDown={handleMouseDown}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className={`overflow-hidden w-full select-none ${
+            isDragging ? "cursor-grabbing" : "cursor-grab"
+          }`}
         >
-          <span className="text-2xl leading-none -ml-0.5">‹</span>
-        </button>
-
-        {/* Right Arrow (Looping enabled) */}
-        <button
-          onClick={handleNext}
-          aria-label="Next slide"
-          className="hidden md:flex absolute right-2 lg:right-3 top-1/2 -translate-y-1/2 z-30 w-12 h-12 items-center justify-center rounded-full bg-white text-[#1f3351] border border-[#dce8ee] shadow-[0_12px_30px_rgba(8,44,76,0.14)] hover:bg-[#1f3351] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200 cursor-pointer"
-        >
-          <span className="text-2xl leading-none -mr-0.5">›</span>
-        </button>
-
-        {/* Sliding Viewport */}
-        <div className="overflow-hidden w-full">
           <div
             onTransitionEnd={handleTransitionEnd}
-            className={`flex w-[400%] ${enableTransition
+            className={`flex w-[400%] ${
+              enableTransition && !isDragging
                 ? "transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
                 : "transition-none"
-              }`}
+            }`}
             style={{
-              transform: `translateX(-${trackIndex * 25}%)`,
+              transform: isDragging
+                ? `translateX(calc(-${trackIndex * 25}% + ${dragOffset}px))`
+                : `translateX(-${trackIndex * 25}%)`,
             }}
           >
             {TRACK_SLIDES.map((slide, idx) => (
@@ -127,11 +243,12 @@ export const AboutSection: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
                   {/* Image Column */}
                   <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-                    <div className="relative z-10 overflow-hidden rounded-[26px] border border-[#dce8ee] bg-white">
+                    <div className="relative z-10 overflow-hidden rounded-[26px] border border-[#dce8ee] bg-white pointer-events-none">
                       <img
                         src={slide.image}
                         alt={slide.imageAlt}
-                        className="w-full h-[240px] sm:h-[300px] lg:h-[400px] object-cover"
+                        draggable={false}
+                        className="w-full h-[240px] sm:h-[300px] lg:h-[400px] object-cover pointer-events-none select-none"
                       />
                     </div>
                   </div>
@@ -157,7 +274,7 @@ export const AboutSection: React.FC = () => {
                       ))}
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-2">
                       {slide.ticks.map((tick, tIdx) => (
                         <div key={tIdx} className="flex items-center gap-2.5">
                           <span className="flex-shrink-0 flex items-center justify-center w-5 h-5 rounded-full bg-dark text-white text-xs font-bold">
@@ -169,31 +286,30 @@ export const AboutSection: React.FC = () => {
                         </div>
                       ))}
                     </div>
-
-                    {/* Indicators & Mobile Buttons */}
-                    <div className="flex items-center justify-between pt-2">
-                      <div className="flex md:hidden gap-2">
-                        <button
-                          onClick={handlePrev}
-                          aria-label="Previous slide mobile"
-                          className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-[#dce8ee] text-[#1f3351] text-lg active:scale-95"
-                        >
-                          ‹
-                        </button>
-                        <button
-                          onClick={handleNext}
-                          aria-label="Next slide mobile"
-                          className="w-9 h-9 flex items-center justify-center rounded-full bg-white border border-[#dce8ee] text-[#1f3351] text-lg active:scale-95"
-                        >
-                          ›
-                        </button>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Animated Slider Movement Dots Indicator */}
+        <div className="flex items-center justify-center gap-2.5 mt-8 sm:mt-10">
+          {ORIGINAL_SLIDES.map((slide, i) => {
+            const isActive = activeDot === i;
+            return (
+              <button
+                key={slide.kicker}
+                onClick={() => goToSlide(i)}
+                aria-label={`Go to ${slide.kicker}`}
+                className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
+                  isActive
+                    ? "w-8 sm:w-10 bg-[#1f3351] shadow-xs"
+                    : "w-2.5 bg-[#cbd5e1] hover:bg-[#94a3b8]"
+                }`}
+              />
+            );
+          })}
         </div>
       </div>
     </section>
