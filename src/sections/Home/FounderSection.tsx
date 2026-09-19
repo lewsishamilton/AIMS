@@ -9,7 +9,7 @@ const MAIN_QUOTE =
 
 const FounderSection: React.FC = () => {
   return (
-    <section className="relative bg-white overflow-hidden py-16 sm:py-24 lg:py-28 tracking-[0.015em]">
+    <section id="founder" className="relative scroll-mt-20 bg-white overflow-hidden py-16 sm:py-24 lg:py-28 tracking-[0.015em]">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Section Header (Centered) */}
         <motion.div
@@ -74,10 +74,10 @@ const FounderSection: React.FC = () => {
               </blockquote>
             </div>
 
-            {/* Read More Button (Navigates to another page) */}
+            {/* Read More Button (Navigates to founder page) */}
             <div className="mt-5 flex justify-start">
               <Link
-                to="/about"
+                to="/founder"
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1f3351] text-white text-xs sm:text-sm font-semibold hover:bg-[#152338] shadow-sm hover:shadow-md active:scale-95 transition-all duration-200 cursor-pointer group"
               >
                 <span>Read More</span>

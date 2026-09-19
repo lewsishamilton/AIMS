@@ -11,6 +11,10 @@ import meuPdf from "./assets/MEU.pdf"
 import FacultyPage from "./pages/FacultyPage"
 import DepartmentFacultyPage from "./pages/DepartmentFacultyPage"
 import MediaGalleryPage from "./pages/MediaGalleryPage"
+
+import AboutHospitalPage from "./pages/AboutHospitalPage"
+import AboutInstitutionPage from "./pages/AboutInstitutionPage"
+import FounderPage from "./pages/FounderPage"
 import PdfViewerSection from "./layouts/PdfViewer"
 import { Route, Routes } from "react-router-dom"
 
@@ -109,6 +113,12 @@ function App() {
         <Route path="/media-gallery" element={<MediaGalleryPage />} />
         <Route path="/gallery" element={<MediaGalleryPage />} />
         <Route path="/media-gallary" element={<MediaGalleryPage />} />
+
+        <Route path="/about-hospital" element={<AboutHospitalPage />} />
+        <Route path="/about-institution" element={<AboutInstitutionPage />} />
+        <Route path="/founder" element={<FounderPage />} />
+        <Route path="/Founder" element={<FounderPage />} />
+        <Route path="/founderpage" element={<FounderPage />} />
       </Routes>
       <Footer />
     </>

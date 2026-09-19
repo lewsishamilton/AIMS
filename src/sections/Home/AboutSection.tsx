@@ -218,17 +218,15 @@ export const AboutSection: React.FC = () => {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className={`overflow-hidden w-full select-none ${
-            isDragging ? "cursor-grabbing" : "cursor-grab"
-          }`}
+          className={`overflow-hidden w-full select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"
+            }`}
         >
           <div
             onTransitionEnd={handleTransitionEnd}
-            className={`flex w-[400%] ${
-              enableTransition && !isDragging
+            className={`flex w-[400%] ${enableTransition && !isDragging
                 ? "transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
                 : "transition-none"
-            }`}
+              }`}
             style={{
               transform: isDragging
                 ? `translateX(calc(-${trackIndex * 25}% + ${dragOffset}px))`
@@ -302,11 +300,10 @@ export const AboutSection: React.FC = () => {
                 key={slide.kicker}
                 onClick={() => goToSlide(i)}
                 aria-label={`Go to ${slide.kicker}`}
-                className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
-                  isActive
+                className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${isActive
                     ? "w-8 sm:w-10 bg-[#1f3351] shadow-xs"
                     : "w-2.5 bg-[#cbd5e1] hover:bg-[#94a3b8]"
-                }`}
+                  }`}
               />
             );
           })}

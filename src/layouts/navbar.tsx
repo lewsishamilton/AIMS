@@ -26,12 +26,20 @@ const Navbar = () => {
                     name: "The AIMS Story",
                     path: "#",
                     subItems: [
-                        { name: "Overview", path: "#" },
-                        { name: "Vision & Mission", path: "#" },
+
+                        { name: "About Hospital", path: "/about-hospital" },
+                        { name: "About Institution", path: "/about-institution" },
                         { name: "Awards & Achivements", path: "#" },
                     ],
                 },
-                { name: "Leadership", path: "#" },
+                {
+                    name: "Leadership",
+                    path: "/founder",
+                    subItems: [
+                        { name: "Founder", path: "/founder" },
+                        { name: "Management", path: "/committess/scientific" },
+                    ]
+                },
                 {
                     name: "Committees",
                     path: "#",
@@ -162,8 +170,8 @@ const Navbar = () => {
     const ChevronRight = () => (
         <svg
             className={`w-3.5 h-3.5 ml-auto transition-all duration-200 ${isWhiteTheme
-                    ? "text-gray-400 group-hover/sub:text-gray-900 group-hover/sub:translate-x-0.5"
-                    : "text-white/45 group-hover/sub:text-white group-hover/sub:translate-x-0.5"
+                ? "text-gray-400 group-hover/sub:text-gray-900 group-hover/sub:translate-x-0.5"
+                : "text-white/45 group-hover/sub:text-white group-hover/sub:translate-x-0.5"
                 }`}
             fill="none"
             stroke="currentColor"
@@ -274,8 +282,8 @@ const Navbar = () => {
 
             <nav
                 className={`fixed top-0 left-0 w-full px-6 md:px-12 lg:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${isWhiteTheme
-                        ? "bg-white/98 backdrop-blur-md shadow-sm text-gray-900"
-                        : "bg-transparent text-white"
+                    ? "bg-white/98 backdrop-blur-md shadow-sm text-gray-900"
+                    : "bg-transparent text-white"
                     }`}
             >
                 <div className="max-w-7xl mx-auto flex items-center justify-between sm:justify-center">
@@ -285,11 +293,11 @@ const Navbar = () => {
                     </div>
 
                     {/* Center Logo */}
-                    <Link to="/#" className="flex items-center justify-center mx-6 py-2">
+                    <Link to="/#" className="flex items-center justify-center mx-6 py-1.5">
                         <img
                             src={isWhiteTheme ? logo : logoWhite}
                             alt="Arundathi Institute of Medical Sciences & Hospital"
-                            className="h-10 md:h-11 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
+                            className="h-[50px] md:h-[55px] w-auto object-contain transition-all duration-300 drop-shadow-sm"
                         />
                     </Link>
 
@@ -303,8 +311,8 @@ const Navbar = () => {
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
                             className={`p-2 rounded-full focus:outline-none transition-all duration-200 ${isWhiteTheme
-                                    ? "text-gray-900 hover:bg-gray-100"
-                                    : "text-white bg-black/25 backdrop-blur-md border border-white/20 hover:bg-black/40"
+                                ? "text-gray-900 hover:bg-gray-100"
+                                : "text-white bg-black/25 backdrop-blur-md border border-white/20 hover:bg-black/40"
                                 }`}
                             aria-label="Toggle Menu"
                         >
@@ -328,8 +336,8 @@ const Navbar = () => {
                     <button
                         aria-label="Close menu"
                         className={`absolute top-6 right-6 p-2 rounded-full ${isWhiteTheme
-                                ? "text-gray-800 hover:bg-gray-100"
-                                : "text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20"
+                            ? "text-gray-800 hover:bg-gray-100"
+                            : "text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20"
                             }`}
                         onClick={() => setIsMenuOpen(false)}
                     >
@@ -343,8 +351,8 @@ const Navbar = () => {
                         <div key={idx} className="w-full flex flex-col gap-2">
                             <span
                                 className={`font-bold border-b pb-1 ${isWhiteTheme
-                                        ? "text-gray-900 border-gray-200"
-                                        : "text-white border-white/20"
+                                    ? "text-gray-900 border-gray-200"
+                                    : "text-white border-white/20"
                                     }`}
                             >
                                 {link.name}
@@ -380,8 +388,8 @@ const Navbar = () => {
                                                         to={sub.path}
                                                         onClick={() => setIsMenuOpen(false)}
                                                         className={`text-[14px] font-normal py-0.5 transition-colors ${isWhiteTheme
-                                                                ? "text-gray-600 hover:text-black"
-                                                                : "text-white/70 hover:text-white"
+                                                            ? "text-gray-600 hover:text-black"
+                                                            : "text-white/70 hover:text-white"
                                                             }`}
                                                     >
                                                         {sub.name}
