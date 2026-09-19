@@ -5,6 +5,7 @@ import FacilitiesSection from "../sections/Home/FacilitiesSection";
 import CampusGallerySection from "../sections/Home/CampusGallerySection";
 import FounderSection from "../sections/Home/FounderSection";
 import PatientsSpeaksSection from "../sections/Home/PatientsSpeaksSection";
+import ContactSection from "../sections/Home/ContactSection";
 
 function HeroPage() {
   return (
@@ -16,6 +17,7 @@ function HeroPage() {
       <FacilitiesSection />
       <CampusGallerySection />
       <PatientsSpeaksSection />
+      <ContactSection />
     </>
   );
 }

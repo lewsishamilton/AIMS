@@ -15,6 +15,8 @@ import MediaGalleryPage from "./pages/MediaGalleryPage"
 import AboutHospitalPage from "./pages/AboutHospitalPage"
 import AboutInstitutionPage from "./pages/AboutInstitutionPage"
 import FounderPage from "./pages/FounderPage"
+import ManagementPage from "./pages/ManagementPage"
+import ContactPage from "./pages/ContactPage"
 import PdfViewerSection from "./layouts/PdfViewer"
 import { Route, Routes } from "react-router-dom"
 
@@ -119,6 +121,11 @@ function App() {
         <Route path="/founder" element={<FounderPage />} />
         <Route path="/Founder" element={<FounderPage />} />
         <Route path="/founderpage" element={<FounderPage />} />
+        <Route path="/management" element={<ManagementPage />} />
+        <Route path="/Management" element={<ManagementPage />} />
+        <Route path="/leadership/management" element={<ManagementPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/Contact" element={<ContactPage />} />
       </Routes>
       <Footer />
     </>

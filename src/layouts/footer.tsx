@@ -135,11 +135,11 @@ export default function Footer() {
               <div className="grid grid-cols-2 gap-x-14 gap-y-3 mt-4">
                 {[
                   { label: "Home", href: "/" },
-                  { label: "About Us", href: "/about" },
-                  { label: "Admissions", href: "/admissions" },
-                  { label: "Hospital", href: "/hospital" },
-                  { label: "Contact Us", href: "/contact" },
-                  { label: "Gallery", href: "/gallery" },
+                  { label: "Management", href: "/management" },
+                  { label: "About Institution", href: "/about-institution" },
+                  { label: "About Hospital", href: "/about-hospital" },
+                  { label: "Faculty & Depts", href: "/departments" },
+                  { label: "Media Gallery", href: "/media-gallery" },
                 ].map((link) => (
                   <a
                     key={link.label}

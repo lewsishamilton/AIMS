@@ -37,7 +37,7 @@ const Navbar = () => {
                     path: "/founder",
                     subItems: [
                         { name: "Founder", path: "/founder" },
-                        { name: "Management", path: "/committess/scientific" },
+                        { name: "Management", path: "/management" },
                     ]
                 },
                 {
@@ -58,19 +58,15 @@ const Navbar = () => {
                     path: "#",
                     subItems: [
                         { name: "AIMS in the News", path: "#" },
-                        { name: "Events", path: "#" },
                         { name: "Media Gallery", path: "/media-gallery" },
-                        { name: "Media Content", path: "#" },
                     ],
                 },
                 {
-                    name: "Clinical Quality & Outcomes",
+                    name: "Accreditations and Approvals",
                     path: "#",
                     subItems: [
                         { name: "Accreditation", path: "#" },
                         { name: "excellence", path: "#" },
-                        { name: "Patient Safety", path: "#" },
-                        { name: "Measuring Outcomes", path: "#" },
                     ],
                 },
             ],
