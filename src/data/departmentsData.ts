@@ -1,4 +1,25 @@
 import type { Department } from "./types";
+import anatomyImg from "../assets/Departments/Anatomy.jpeg";
+import physiologyImg from "../assets/Departments/physiology.PNG";
+import biochemistryImg from "../assets/Departments/Biochemistry.png";
+import pharmacologyImg from "../assets/Departments/pharmacology.png";
+import pathologyImg from "../assets/Departments/pathology.PNG";
+import microbiologyImg from "../assets/Departments/microbiology.png";
+import forensicMedicineImg from "../assets/Departments/forensic_medicine.PNG";
+import communityMedicineImg from "../assets/Departments/community_medicine.PNG";
+import generalMedicineImg from "../assets/Departments/general_medicine.png";
+import paediatricsImg from "../assets/Departments/paediatrics.PNG";
+import dermatologyImg from "../assets/Departments/dermatology.png";
+import psychiatryImg from "../assets/Departments/psychiatry.PNG";
+import generalSurgeryImg from "../assets/Departments/general_Surgery.png";
+import orthopaedicsImg from "../assets/Departments/orthopaaedics.png";
+import entImg from "../assets/Departments/ENT.PNG";
+import ophthalmologyImg from "../assets/Departments/ophthalmology.PNG";
+import obstetricsGynaecologyImg from "../assets/Departments/gynacology.jpeg";
+import anaesthesiologyImg from "../assets/Departments/anaesthisiology.PNG";
+import radiologyImg from "../assets/Departments/radiology.PNG";
+import respiratoryMedicineImg from "../assets/Departments/respiratory medicine.jpeg";
+import dentistryImg from "../assets/Departments/denistry.PNG";
 
 export const DEPARTMENT_METADATA: Record<
   string,
@@ -8,7 +29,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Anatomy",
     "category": "Pre-Clinical",
     "description": "Gross anatomy, osteology, microscopic anatomy, neuroanatomy, and embryology.",
-    "bgImage": "https://images.unsplash.com/photo-1530497610245-94d3c16cda28?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": anatomyImg,
     "gradient": "from-blue-950/90 via-slate-900/80 to-blue-900/70",
     "details": {
       "sections": [
@@ -79,7 +100,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Physiology",
     "category": "Pre-Clinical",
     "description": "Cellular functions, cardiovascular hemodynamics, and organ systems physiology.",
-    "bgImage": "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": physiologyImg,
     "gradient": "from-emerald-950/90 via-slate-900/80 to-teal-900/70",
     "details": {
       "sections": [
@@ -135,7 +156,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Biochemistry",
     "category": "Pre-Clinical",
     "description": "Clinical chemistry, molecular genetics, metabolic pathways, and central clinical laboratory.",
-    "bgImage": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": biochemistryImg,
     "gradient": "from-indigo-950/90 via-slate-900/80 to-purple-900/70",
     "details": {
       "sections": [
@@ -203,7 +224,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Pharmacology",
     "category": "Para-Clinical",
     "description": "Pharmacokinetics, therapeutics, clinical trials, and pharmacovigilance.",
-    "bgImage": "https://images.unsplash.com/photo-1471864190281-a93a3070b6de?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": pharmacologyImg,
     "gradient": "from-cyan-950/90 via-slate-900/80 to-blue-900/70",
     "details": {
       "sections": [
@@ -283,7 +304,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Pathology",
     "category": "Para-Clinical",
     "description": "Histopathology, cytopathology, hematology, and clinical laboratory investigations.",
-    "bgImage": "https://images.unsplash.com/photo-1579154204601-01588f351e67?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": pathologyImg,
     "gradient": "from-rose-950/90 via-slate-900/80 to-red-900/70",
     "details": {
       "sections": [
@@ -333,7 +354,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Microbiology",
     "category": "Para-Clinical",
     "description": "Bacteriology, virology, mycology, parasitology, and hospital infection control.",
-    "bgImage": "https://images.unsplash.com/photo-1582719471384-894fbb16e074?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": microbiologyImg,
     "gradient": "from-teal-950/90 via-slate-900/80 to-emerald-900/70",
     "details": {
       "sections": [
@@ -382,7 +403,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Forensic Medicine",
     "category": "Para-Clinical",
     "description": "Medical jurisprudence, clinical forensic medicine, and toxicology investigations.",
-    "bgImage": "https://images.unsplash.com/photo-1582719508461-905c673771fd?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": forensicMedicineImg,
     "gradient": "from-slate-950/90 via-gray-900/80 to-zinc-900/70",
     "details": {
       "sections": [
@@ -435,7 +456,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Community Medicine",
     "category": "Para-Clinical",
     "description": "Epidemiology, public health administration, preventive healthcare, and biostatistics.",
-    "bgImage": "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": communityMedicineImg,
     "gradient": "from-sky-950/90 via-slate-900/80 to-cyan-900/70",
     "details": {
       "sections": [
@@ -510,7 +531,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "General Medicine",
     "category": "Clinical",
     "description": "Comprehensive adult patient care, critical care, infectious disease, and acute medicine.",
-    "bgImage": "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": generalMedicineImg,
     "gradient": "from-blue-950/90 via-slate-900/80 to-indigo-900/70",
     "details": {
       "sections": [
@@ -571,7 +592,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Paediatrics",
     "category": "Clinical",
     "description": "Neonatology, child health, pediatric intensive care, and immunization programs.",
-    "bgImage": "https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": paediatricsImg,
     "gradient": "from-amber-950/90 via-slate-900/80 to-orange-900/70",
     "details": {
       "sections": [
@@ -633,7 +654,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Dermatology",
     "category": "Clinical",
     "description": "Clinical dermatology, dermatosurgery, venereology, and leprosy care.",
-    "bgImage": "https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": dermatologyImg,
     "gradient": "from-violet-950/90 via-slate-900/80 to-fuchsia-900/70",
     "details": {
       "sections": [
@@ -682,7 +703,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Psychiatry",
     "category": "Clinical",
     "description": "Behavioral health, psychiatric assessment, clinical psychology, and de-addiction.",
-    "bgImage": "https://images.unsplash.com/photo-1527613426441-4da17471b66d?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": psychiatryImg,
     "gradient": "from-indigo-950/90 via-slate-900/80 to-purple-900/70",
     "details": {
       "sections": [
@@ -737,7 +758,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "General Surgery",
     "category": "Clinical",
     "description": "Advanced minimally invasive laparoscopic surgery, surgical oncology, and trauma care.",
-    "bgImage": "https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": generalSurgeryImg,
     "gradient": "from-slate-950/90 via-blue-950/80 to-cyan-900/70",
     "details": {
       "sections": [
@@ -786,7 +807,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Orthopaedics",
     "category": "Clinical",
     "description": "Trauma surgery, joint replacements, arthroscopy, spine care, and sports medicine.",
-    "bgImage": "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": orthopaedicsImg,
     "gradient": "from-cyan-950/90 via-slate-900/80 to-sky-900/70",
     "details": {
       "sections": [
@@ -841,7 +862,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "ENT / Otorhinolaryngology",
     "category": "Clinical",
     "description": "Otology, rhinology, head & neck surgery, audiology, and endoscopic sinus procedures.",
-    "bgImage": "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": entImg,
     "gradient": "from-emerald-950/90 via-slate-900/80 to-teal-900/70",
     "details": {
       "sections": [
@@ -886,7 +907,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Ophthalmology",
     "category": "Clinical",
     "description": "Cataract surgery, glaucoma, retina diagnostics, corneal care, and refractive procedures.",
-    "bgImage": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": ophthalmologyImg,
     "gradient": "from-blue-950/90 via-sky-900/80 to-indigo-900/70",
     "details": {
       "sections": [
@@ -948,7 +969,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Obstetrics & Gynaecology",
     "category": "Clinical",
     "description": "Maternal-fetal medicine, high-risk obstetrics, gynaecologic endoscopy, and reproductive health.",
-    "bgImage": "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": obstetricsGynaecologyImg,
     "gradient": "from-pink-950/90 via-slate-900/80 to-rose-900/70",
     "details": {
       "sections": [
@@ -1005,7 +1026,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Anaesthesiology",
     "category": "Clinical",
     "description": "Perioperative anesthesia care, critical care resuscitation, and acute/chronic pain medicine.",
-    "bgImage": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": anaesthesiologyImg,
     "gradient": "from-teal-950/90 via-slate-900/80 to-cyan-900/70",
     "details": {
       "sections": [
@@ -1051,7 +1072,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Radiology",
     "category": "Clinical",
     "description": "Diagnostic ultrasound, computed tomography (CT), MRI neuroimaging, and interventional radiology.",
-    "bgImage": "https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": radiologyImg,
     "gradient": "from-slate-950/90 via-blue-950/80 to-violet-900/70",
     "details": {
       "sections": [
@@ -1094,7 +1115,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Respiratory Medicine",
     "category": "Clinical",
     "description": "Pulmonology, asthma & COPD management, bronchoscopy, and sleep medicine.",
-    "bgImage": "https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": respiratoryMedicineImg,
     "gradient": "from-sky-950/90 via-slate-900/80 to-blue-900/70",
     "details": {
       "sections": [
@@ -1162,7 +1183,7 @@ export const DEPARTMENT_METADATA: Record<
     "name": "Dentistry",
     "category": "Clinical",
     "description": "Oral & maxillofacial care, restorative dentistry, orthodontic diagnosis, and periodontal therapy.",
-    "bgImage": "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=1000&auto=format&fit=crop",
+    "bgImage": dentistryImg,
     "gradient": "from-cyan-950/90 via-slate-900/80 to-emerald-900/70",
     "details": {
       "sections": [
