@@ -1,0 +1,91 @@
+/* Animated Statement Section — Thinner & Vertically/Horizontally Centered */
+.statement-section-slim {
+  width: 100%;
+  position: relative;
+  background-color: var(--text-primary);
+  color: #ffffff;
+  padding: clamp(3.5rem, 5.8vw, 5.2rem) var(--section-padding-x);
+  min-height: 360px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+  user-select: none;
+}
+
+/* Centered Kinetic Stage */
+.statement-centered-stage {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  text-align: center;
+}
+
+.statement-line-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  will-change: transform;
+}
+
+.statement-mask-centered {
+  overflow: hidden;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.2rem 1.5rem;
+}
+
+.statement-text-centered {
+  font-family: var(--font-display);
+  font-size: var(--statement-size);
+  line-height: 0.95;
+  letter-spacing: 0.015em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin: 0;
+  text-align: center;
+  will-change: transform, opacity;
+  white-space: nowrap;
+}
+
+.statement-text-accent {
+  color: #e3dede;
+}
+
+/* Minimal Bottom Indicator */
+.statement-bottom-indicator {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  opacity: 0.6;
+}
+
+.indicator-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .statement-section-slim {
+    padding: 3rem var(--section-padding-x);
+    min-height: 290px;
+  }
+  .statement-bottom-indicator {
+    margin-top: 1.5rem;
+  }
+}

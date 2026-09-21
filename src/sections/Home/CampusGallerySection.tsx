@@ -43,8 +43,8 @@ export const CampusGallerySection: React.FC = () => {
         }}
       />
 
-      <ContainerScroll className="relative h-[250vh]">
-        <ContainerSticky className="h-svh flex flex-col justify-center pt-8 pb-4">
+      <ContainerScroll className="relative min-h-[250vh]">
+        <ContainerSticky className="min-h-[100svh] h-auto flex flex-col justify-center pt-6 pb-4 overflow-visible">
           <GalleryContainer className="max-w-[1020px] w-full mx-auto px-3 sm:px-6">
             <GalleryCol yRange={["-10%", "2%"]} className="-mt-2">
               {IMAGES_1.map((imageUrl, index) => (

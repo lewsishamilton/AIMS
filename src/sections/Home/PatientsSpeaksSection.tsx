@@ -72,7 +72,7 @@ export const PatientsSpeaksSection: React.FC = () => {
   }, [activeVideoId]);
 
   return (
-    <section className="relative py-20 lg:py-28 bg-white overflow-hidden tracking-[0.015em] border-t border-[#dce8ee]">
+    <section className="relative pt-6 sm:pt-10 pb-20 lg:pb-28 bg-white overflow-hidden tracking-[0.015em]">
       <style>{`
         @keyframes marquee-scroll-left {
           0% {

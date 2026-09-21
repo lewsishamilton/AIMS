@@ -1,0 +1,237 @@
+/* ==========================================================================
+   AIMS CHRONICLES — CORE DESIGN SYSTEM & STYLING TOKENS
+   Inspired by Chronicles Editorial, Bold, Kinetic Architecture
+   ========================================================================== */
+
+.aims-news-page {
+  /* Color Palette */
+  --bg-primary: #f7f2f2;
+  --bg-secondary: #ece7e7;
+  --bg-card: #ffffff;
+  --bg-placeholder: #eae5e5;
+  --bg-placeholder-subtle: #f2eded;
+  
+  --text-primary: #1c1c1c;
+  --text-secondary: #5a5554;
+  --text-muted: #8e8886;
+  --text-inverted: #f7f2f2;
+  
+  --border-subtle: rgba(28, 28, 28, 0.1);
+  --border-strong: rgba(28, 28, 28, 0.22);
+  --border-dark: #1c1c1c;
+  
+  /* Typography */
+  --font-serif-display: 'Bodoni Moda', 'Prata', 'Didot', 'Didot LT STD', 'Bodoni MT', serif;
+  --font-display: 'Anton', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Responsive Fluid Scales */
+  --hero-title-size: clamp(3.2rem, 9.8vw, 11rem);
+  --statement-size: clamp(2.4rem, 6.5vw, 6.8rem);
+  --section-title-size: clamp(2.2rem, 5.2vw, 4.8rem);
+  --card-title-size: clamp(1.4rem, 2.2vw, 2.1rem);
+  
+  /* Spacing */
+  --section-padding-x: clamp(1.25rem, 4vw, 3.5rem);
+  --section-padding-y: clamp(4rem, 8vw, 8.5rem);
+  
+  /* Transitions & Easing */
+  --ease-editorial: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-smooth: cubic-bezier(0.44, 0, 0.56, 1);
+  --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-medium: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  width: 100%;
+  position: relative;
+  overflow-x: clip;
+  line-height: 1.45;
+}
+
+/* Headings within News Page */
+.aims-news-page h1, 
+.aims-news-page h2, 
+.aims-news-page h3, 
+.aims-news-page h4, 
+.aims-news-page .display-font {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+  line-height: 0.95;
+}
+
+.aims-news-page .serif-font, 
+.aims-news-page .display-serif {
+  font-family: var(--font-serif-display);
+  font-weight: 500;
+  font-style: normal;
+  text-transform: uppercase;
+  font-optical-sizing: auto;
+  letter-spacing: 0.02em;
+}
+
+.aims-news-page p, 
+.aims-news-page span, 
+.aims-news-page a, 
+.aims-news-page button, 
+.aims-news-page input {
+  font-family: var(--font-sans);
+}
+
+.aims-news-page a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.aims-news-page button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+}
+
+/* Container */
+.aims-news-page .site-main {
+  width: 100%;
+  position: relative;
+}
+
+/* Shared Editorial Badges & Pills */
+.aims-news-page .badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border-subtle);
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.aims-news-page .badge-pill:hover {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.aims-news-page .badge-pill-dark {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+.aims-news-page .badge-pill-dark:hover {
+  background-color: transparent;
+  color: var(--text-primary);
+}
+
+/* Editorial Horizontal Divider */
+.aims-news-page .editorial-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-subtle);
+  margin: 0;
+  border: none;
+}
+
+/* Empty Frame Box */
+.aims-news-page .empty-frame-box {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: var(--bg-placeholder);
+  border-radius: 18px;
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-medium);
+  background-image: 
+    radial-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to right, rgba(28,28,28,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28,28,28,0.02) 1px, transparent 1px);
+  background-size: 24px 24px, 48px 48px, 48px 48px;
+}
+
+.aims-news-page .empty-frame-box:hover {
+  border-color: var(--border-strong);
+  background-color: #e5e0df;
+}
+
+/* Corner Crosshairs */
+.aims-news-page .crosshair-tl, 
+.aims-news-page .crosshair-tr, 
+.aims-news-page .crosshair-bl, 
+.aims-news-page .crosshair-br {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+.aims-news-page .crosshair-tl {
+  top: 14px;
+  left: 14px;
+  border-top: 1.5px solid var(--text-muted);
+  border-left: 1.5px solid var(--text-muted);
+}
+.aims-news-page .crosshair-tr {
+  top: 14px;
+  right: 14px;
+  border-top: 1.5px solid var(--text-muted);
+  border-right: 1.5px solid var(--text-muted);
+}
+.aims-news-page .crosshair-bl {
+  bottom: 14px;
+  left: 14px;
+  border-bottom: 1.5px solid var(--text-muted);
+  border-left: 1.5px solid var(--text-muted);
+}
+.aims-news-page .crosshair-br {
+  bottom: 14px;
+  right: 14px;
+  border-bottom: 1.5px solid var(--text-muted);
+  border-right: 1.5px solid var(--text-muted);
+}
+
+.aims-news-page .frame-center-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 1rem;
+}
+
+.aims-news-page .frame-center-tag {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  border: 1px dashed var(--border-subtle);
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.aims-news-page .frame-aspect-tag {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}

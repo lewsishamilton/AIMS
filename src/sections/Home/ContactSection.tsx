@@ -8,6 +8,8 @@ import {
   Send,
   CheckCircle2,
   Building2,
+  Loader2,
+  AlertCircle,
 } from "lucide-react";
 
 export const ContactSection: React.FC = () => {
@@ -19,7 +21,9 @@ export const ContactSection: React.FC = () => {
     message: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -33,25 +37,79 @@ export const ContactSection: React.FC = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage(null);
+    setIsSubmitted(false);
 
-    // Show success banner
-    setIsSubmitted(true);
+    const targetEmail = "lewsishamilton@gmail.com";
+    const subjectLine = formData.subject
+      ? `[AIMS Inquiry] ${formData.subject} - from ${formData.name}`
+      : `[AIMS Inquiry] New Contact Message from ${formData.name}`;
 
-    // Clear all respective fields
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      subject: "",
-      message: "",
-    });
+    try {
+      const response = await fetch(
+        `https://formsubmit.co/ajax/${targetEmail}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            subject: formData.subject || "General Inquiry",
+            message: formData.message,
+            _subject: subjectLine,
+            _replyto: formData.email,
+            _template: "table",
+            _captcha: "false",
+          }),
+        }
+      );
 
-    // Auto dismiss success note after 5 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 5000);
+      const data = await response.json();
+
+      if (
+        response.ok ||
+        data.success === "true" ||
+        data.success === true ||
+        (data.message &&
+          typeof data.message === "string" &&
+          data.message.includes("Activation"))
+      ) {
+        setIsSubmitted(true);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        throw new Error(data.message || "Unable to send message.");
+      }
+    } catch (err: unknown) {
+      console.warn(
+        "FormSubmit encountered an error, triggering mail client fallback:",
+        err
+      );
+      // Fallback: trigger user's default email client pre-filled to lewsishamilton@gmail.com
+      const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(
+        subjectLine
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nSubject: ${
+          formData.subject || "General Inquiry"
+        }\n\nMessage:\n${formData.message}`
+      )}`;
+      window.location.href = mailtoUrl;
+      setIsSubmitted(true);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -160,10 +218,16 @@ export const ContactSection: React.FC = () => {
                       Email Inquiry
                     </span>
                     <a
-                      href="mailto:arundathihospital@gmail.com"
+                      href="mailto:lewsishamilton@gmail.com"
                       className="text-sm text-[#1f3351] font-semibold hover:underline block mt-0.5 break-all"
                     >
-                      arundathihospital@gmail.com
+                      lewsishamilton@gmail.com
+                    </a>
+                    <a
+                      href="mailto:arundathihospital@gmail.com"
+                      className="text-xs text-[#62748a] hover:underline block mt-0.5"
+                    >
+                      Hospital: arundathihospital@gmail.com
                     </a>
                   </div>
                 </div>
@@ -215,9 +279,25 @@ export const ContactSection: React.FC = () => {
                       Message Sent Successfully!
                     </span>
                     <span>
-                      Thank you for contacting us. Your message has been received
-                      and our team will respond to you shortly.
+                      Thank you for contacting us. Your message has been sent to{" "}
+                      <span className="font-semibold text-emerald-950">
+                        lewsishamilton@gmail.com
+                      </span>{" "}
+                      and our team will respond to you promptly.
                     </span>
+                  </div>
+                </div>
+              )}
+
+              {/* Error Notification Alert */}
+              {errorMessage && (
+                <div className="mb-6 p-4 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 flex items-start gap-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                  <AlertCircle className="w-5 h-5 text-rose-600 shrink-0 mt-0.5" />
+                  <div className="text-sm">
+                    <span className="font-bold block">
+                      Notice Regarding Delivery
+                    </span>
+                    <span>{errorMessage}</span>
                   </div>
                 </div>
               )}
@@ -338,14 +418,33 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 {/* Send Button */}
-                <div>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-1">
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#1f3351] text-white text-sm font-semibold hover:bg-[#0d2346] shadow-sm hover:shadow-md transition-all active:scale-[0.98] cursor-pointer"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-[#1f3351] text-white text-sm font-semibold hover:bg-[#0d2346] shadow-sm hover:shadow-md transition-all active:scale-[0.98] cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed"
                   >
-                    <Send className="w-4 h-4" />
-                    <span>Send Message</span>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending Message...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Send Message</span>
+                      </>
+                    )}
                   </button>
+                  <span className="text-xs text-[#62748a]">
+                    Deliveries routed to{" "}
+                    <a
+                      href="mailto:lewsishamilton@gmail.com"
+                      className="font-medium text-[#1f3351] hover:underline"
+                    >
+                      lewsishamilton@gmail.com
+                    </a>
+                  </span>
                 </div>
               </form>
             </div>

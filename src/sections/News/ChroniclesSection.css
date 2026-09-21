@@ -1,0 +1,94 @@
+/* Chronicles Section — Card-Over-Card Vertical Scroll Transition */
+.chronicles-vertical-section {
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-primary);
+  padding: 4.5rem clamp(0.75rem, 2vw, 2rem) 4rem;
+  overflow: visible;
+}
+
+/* Header */
+.chronicles-top-header {
+  max-width: 1760px;
+  margin: 0 auto 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: relative;
+  z-index: 20;
+}
+
+.section-pre-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.chronicles-heading-flex {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1.8rem;
+}
+
+.heading-copy {
+  max-width: 780px;
+}
+
+.section-main-heading {
+  font-family: var(--font-display);
+  font-size: var(--section-title-size);
+  color: var(--text-primary);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+.section-sub-description {
+  margin-top: 0.7rem;
+  font-size: clamp(0.92rem, 1.05vw, 1.05rem);
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* CARD-OVER-CARD STACKING CONTAINER */
+.chronicles-card-stack-stream {
+  width: 100%;
+  max-width: 1760px;
+  margin: 0 auto;
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+/* Individual Card Sticky Slot */
+.chronicle-card-sticky-slot {
+  position: sticky;
+  width: 100%;
+  margin-bottom: clamp(180px, 26vh, 280px);
+  will-change: transform;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Last Card in the Stack */
+.chronicle-card-sticky-slot:last-child {
+  margin-bottom: 2.5rem;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .chronicles-vertical-section {
+    padding: 3.5rem clamp(0.5rem, 1.5vw, 1rem) 3rem;
+  }
+  .chronicle-card-sticky-slot {
+    margin-bottom: clamp(120px, 18vh, 180px);
+  }
+}

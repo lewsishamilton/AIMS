@@ -140,6 +140,7 @@ export default function Footer() {
                   { label: "About Hospital", href: "/about-hospital" },
                   { label: "Faculty & Depts", href: "/departments" },
                   { label: "Media Gallery", href: "/media-gallery" },
+                  { label: "AIMS in the News", href: "/aims-in-the-news" },
                 ].map((link) => (
                   <a
                     key={link.label}

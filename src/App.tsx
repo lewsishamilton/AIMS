@@ -17,6 +17,7 @@ import AboutInstitutionPage from "./pages/AboutInstitutionPage"
 import FounderPage from "./pages/FounderPage"
 import ManagementPage from "./pages/ManagementPage"
 import ContactPage from "./pages/ContactPage"
+import AimsInNewsPage from "./pages/AimsInNewsPage"
 import PdfViewerSection from "./layouts/PdfViewer"
 import { Route, Routes } from "react-router-dom"
 
@@ -115,6 +116,9 @@ function App() {
         <Route path="/media-gallery" element={<MediaGalleryPage />} />
         <Route path="/gallery" element={<MediaGalleryPage />} />
         <Route path="/media-gallary" element={<MediaGalleryPage />} />
+        <Route path="/aims-in-the-news" element={<AimsInNewsPage />} />
+        <Route path="/aims-in-news" element={<AimsInNewsPage />} />
+        <Route path="/news" element={<AimsInNewsPage />} />
 
         <Route path="/about-hospital" element={<AboutHospitalPage />} />
         <Route path="/about-institution" element={<AboutInstitutionPage />} />

@@ -57,7 +57,7 @@ const Navbar = () => {
                     name: "Media Center",
                     path: "#",
                     subItems: [
-                        { name: "AIMS in the News", path: "#" },
+                        { name: "AIMS in the News", path: "/aims-in-the-news" },
                         { name: "Media Gallery", path: "/media-gallery" },
                     ],
                 },

@@ -1,0 +1,321 @@
+/* ==========================================================================
+   AIMS CHRONICLES — EDITORIAL ARCHIVE CARD STYLING
+   ========================================================================== */
+
+.chronicle-compact-card {
+  width: 100%;
+  max-width: 1760px;
+  margin: 0 auto;
+  background-color: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid var(--border-subtle);
+  padding: clamp(2rem, 2.8vw, 2.8rem) clamp(2rem, 3vw, 3.5rem);
+  box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.04), 0 16px 38px rgba(0, 0, 0, 0.06);
+  transition: transform var(--transition-medium), border-color var(--transition-medium), box-shadow var(--transition-medium);
+  position: relative;
+  overflow: hidden;
+}
+
+.chronicle-compact-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.06), 0 22px 45px rgba(0, 0, 0, 0.08);
+}
+
+.chronicle-compact-card.is-active-card {
+  border-color: var(--text-primary);
+}
+
+/* Inner Horizontal Grid */
+.compact-card-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 460px);
+  gap: clamp(2rem, 3.5vw, 4.2rem);
+  align-items: center;
+  width: 100%;
+}
+
+/* LEFT COLUMN */
+.compact-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+/* Header Row: Big Number & Category Badge */
+.compact-header-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+}
+
+.compact-chapter-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 3.8vw, 3.6rem);
+  color: var(--text-primary);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+}
+
+.compact-category-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.compact-category-pill {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  color: #333333;
+}
+
+.compact-archive-edition {
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #555555;
+  margin-left: auto;
+}
+
+/* Title Wrap */
+.compact-title-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.compact-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  color: var(--text-primary);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  transition: transform var(--transition-fast);
+}
+
+.chronicle-compact-card:hover .compact-card-title {
+  transform: translateX(3px);
+}
+
+/* Editorial Body Container */
+.compact-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+/* Primary Lead Chronicle Paragraph */
+.compact-card-description.primary-lead {
+  font-family: var(--font-sans);
+  font-size: clamp(0.98rem, 1.08vw, 1.1rem);
+  line-height: 1.72;
+  color: #1c1c1c;
+  font-weight: 500;
+  max-width: 900px;
+  display: block;
+  overflow: visible;
+}
+
+/* Supporting Editorial Paragraphs */
+.compact-card-supporting-text {
+  font-family: var(--font-sans);
+  font-size: clamp(0.92rem, 1vw, 1.02rem);
+  line-height: 1.7;
+  color: #2F2F2F;
+  font-weight: 400;
+  max-width: 900px;
+  display: block;
+  overflow: visible;
+  letter-spacing: -0.005em;
+}
+
+/* Meta Footer: Tags & Chapter Counter */
+.compact-meta-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.1rem;
+  margin-top: 0.4rem;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.compact-tags-list {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.compact-tag-pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #333333;
+  background-color: var(--bg-primary);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+}
+
+/* RIGHT COLUMN */
+.compact-card-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.compact-image-frame-box {
+  width: 100%;
+  max-width: 330px;
+  aspect-ratio: 4 / 3;
+  background-color: #ffffff;
+  border-radius: 14px;
+  border: 1px solid rgba(28, 28, 28, 0.12);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  transition: all var(--transition-medium);
+}
+
+.chronicle-compact-card:hover .compact-image-frame-box {
+  border-color: rgba(28, 28, 28, 0.28);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.compact-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform var(--transition-medium);
+}
+
+.chronicle-compact-card:hover .compact-card-img {
+  transform: scale(1.03);
+}
+
+.compact-coord-watermark {
+  display: none;
+}
+
+.compact-image-frame-box .crosshair-tl,
+.compact-image-frame-box .crosshair-tr,
+.compact-image-frame-box .crosshair-bl,
+.compact-image-frame-box .crosshair-br {
+  display: none;
+}
+
+.compact-frame-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  padding: 1rem;
+}
+
+.compact-icon-badge {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.compact-frame-label {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+}
+
+/* Specific fitting for wide newspaper clipping (Chronicle 06) so it is NOT cropped at sides */
+#chronicle-06 .compact-card-right {
+  justify-content: flex-end;
+  width: 100%;
+}
+
+#chronicle-06 .compact-image-frame-box {
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 1032 / 504; /* Matches exact 2.05 aspect ratio of chronicle-6.png */
+  background-color: #ffffff;
+}
+
+#chronicle-06 .compact-card-img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+#chronicle-06.chronicle-compact-card:hover .compact-card-img {
+  transform: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .compact-card-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .compact-card-right {
+    justify-content: center;
+  }
+  .compact-image-frame-box {
+    max-width: 360px;
+    width: 100%;
+  }
+  #chronicle-06 .compact-image-frame-box {
+    max-width: 520px;
+    width: 100%;
+    aspect-ratio: 1032 / 504;
+  }
+  .compact-archive-edition {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .chronicle-compact-card {
+    padding: 1.8rem 1.4rem;
+    border-radius: 20px;
+  }
+  .compact-chapter-num {
+    font-size: 2.4rem;
+  }
+  .compact-card-title {
+    font-size: 1.8rem;
+  }
+  .compact-card-description.primary-lead,
+  .compact-card-supporting-text {
+    font-size: 0.94rem;
+    line-height: 1.62;
+  }
+  #chronicle-06 .compact-image-frame-box {
+    max-width: 100%;
+    aspect-ratio: 1032 / 504;
+  }
+}
