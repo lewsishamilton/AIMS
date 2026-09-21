@@ -71,6 +71,7 @@ const Navbar = () => {
                         { name: "Centres of Excellence", path: "/about/centres-of-excellence" },
                     ],
                 },
+                { name: "Campus Life", path: "/facilities/campus-life" },
             ],
         },
         {
@@ -87,6 +88,19 @@ const Navbar = () => {
                     ],
                 },
                 {
+                    name: "Admissions",
+                    path: "/admissions",
+                    subItems: [
+                        { name: "Admissions Overview", path: "/admissions" },
+                        { name: "Admission Criteria", path: "/admissions/criteria" },
+                        { name: "Seat Matrix", path: "/admissions/seat-matrix" },
+                        { name: "Fee Structure", path: "/admissions/fee-structure" },
+                        { name: "Application Forms", path: "/admissions/forms" },
+                        { name: "Admitted List", path: "/admissions/admitted-list" },
+                        { name: "Regulations", path: "/admissions/regulations" },
+                    ],
+                },
+                {
                     name: "Departments",
                     path: "/departments",
                     subItems: [
@@ -95,21 +109,9 @@ const Navbar = () => {
                         { name: "Clinical", path: "/departments?category=Clinical" },
                     ],
                 },
+                { name: "Academic Facilities", path: "/facilities/academic" },
                 { name: "Academic Calendar", path: "/academics/calendar" },
                 { name: "Research & Publications", path: "/academics/research" },
-            ],
-        },
-        {
-            name: "ADMISSIONS",
-            path: "/admissions",
-            dropdown: [
-                { name: "Admissions Overview", path: "/admissions" },
-                { name: "Admission Criteria", path: "/admissions/criteria" },
-                { name: "Seat Matrix", path: "/admissions/seat-matrix" },
-                { name: "Fee Structure", path: "/admissions/fee-structure" },
-                { name: "Application Forms", path: "/admissions/forms" },
-                { name: "Admitted List", path: "/admissions/admitted-list" },
-                { name: "Regulations", path: "/admissions/regulations" },
             ],
         },
     ];
@@ -129,16 +131,8 @@ const Navbar = () => {
                 },
                 { name: "Emergency & Trauma", path: "/services/emergency-trauma" },
                 { name: "Diagnostics & Imaging", path: "/services/diagnostics" },
-                { name: "Machines & Equipment", path: "/machines-equipment" },
-            ],
-        },
-        {
-            name: "FACILITIES",
-            path: "/facilities/hospital",
-            dropdown: [
                 { name: "Hospital Facilities", path: "/facilities/hospital" },
-                { name: "Academic Facilities", path: "/facilities/academic" },
-                { name: "Campus Life", path: "/facilities/campus-life" },
+                { name: "Machines & Equipment", path: "/machines-equipment" },
             ],
         },
         {
@@ -303,9 +297,9 @@ const Navbar = () => {
                             : "bg-transparent border-b border-transparent"
                     }`}
                 />
-                <div className="max-w-7xl mx-auto flex items-center justify-between xl:justify-center relative">
+                <div className="max-w-7xl mx-auto flex items-center justify-between md:justify-center relative">
                     {/* Left Desktop Links */}
-                    <div className="hidden xl:flex items-center gap-2 2xl:gap-3 h-16">
+                    <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
                         {leftLinks.map((link, i) => renderDesktopNavItem(link, i))}
                     </div>
 
@@ -314,17 +308,17 @@ const Navbar = () => {
                         <img
                             src={isWhiteTheme ? logo : logoWhite}
                             alt="Arundathi Institute of Medical Sciences & Hospital"
-                            className="h-10 xl:h-11 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
+                            className="h-10 md:h-11 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
                         />
                     </Link>
 
                     {/* Right Desktop Links */}
-                    <div className="hidden xl:flex items-center gap-2 2xl:gap-3 h-16">
+                    <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
                         {rightLinks.map((link, i) => renderDesktopNavItem(link, i, true))}
                     </div>
 
                     {/* Theme Toggle (Desktop - positioned to the right) */}
-                    <div className="hidden xl:flex items-center absolute -right-8 2xl:-right-16 top-1/2 -translate-y-1/2">
+                    <div className="hidden md:flex items-center absolute -right-4 md:-right-8 lg:-right-12 xl:-right-16 top-1/2 -translate-y-1/2">
                         <button
                             onClick={toggleTheme}
                             aria-label="Toggle Glass Theme"
@@ -356,7 +350,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Controls: Theme Toggle & Menu Button */}
-                    <div className="flex xl:hidden items-center gap-2.5 py-3">
+                    <div className="flex md:hidden items-center gap-2.5 py-3">
                         <button
                             onClick={toggleTheme}
                             aria-label="Toggle Glass Theme"
@@ -407,7 +401,7 @@ const Navbar = () => {
 
                 {/* Mobile Drawer */}
                 <div
-                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 xl:hidden overflow-y-auto ${
+                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 md:hidden overflow-y-auto ${
                         isMenuOpen ? "translate-x-0" : "-translate-x-full"
                     } ${
                         theme === "dark"
