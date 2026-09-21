@@ -9,7 +9,7 @@ import ContactSection from "../sections/Home/ContactSection";
 
 function HeroPage() {
   return (
-    <>
+    <div className="relative w-full overflow-x-clip">
       <Hero />
       <AboutSection />
       <FounderSection />
@@ -18,7 +18,7 @@ function HeroPage() {
       <CampusGallerySection />
       <PatientsSpeaksSection />
       <ContactSection />
-    </>
+    </div>
   );
 }
 

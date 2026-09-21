@@ -82,7 +82,7 @@ export const ContainerSticky = ({
   return (
     <div
       className={cn(
-        "sticky left-0 top-0 min-h-[30rem] w-full overflow-visible",
+        "sticky left-0 top-0 min-h-[30rem] w-full overflow-x-clip overflow-y-visible",
         className
       )}
       style={{

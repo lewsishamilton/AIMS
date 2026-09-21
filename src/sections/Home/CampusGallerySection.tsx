@@ -11,7 +11,7 @@ import { IMAGES_1, IMAGES_2, IMAGES_3 } from "../../assets/stockImages"
 
 export const CampusGallerySection: React.FC = () => {
   return (
-    <div className="relative bg-white dark:bg-transparent transition-colors duration-300">
+    <div className="relative bg-white dark:bg-transparent transition-colors duration-300 overflow-x-clip">
       {/* Heading placed cleanly above the scroll container */}
       <ContainerStagger className="relative z-20 place-self-center px-6 pt-12 pb-4 text-center">
         <ContainerAnimated>
@@ -35,7 +35,7 @@ export const CampusGallerySection: React.FC = () => {
       </ContainerStagger>
 
       <div
-        className="pointer-events-none absolute z-10 h-[70vh] w-full"
+        className="pointer-events-none absolute inset-x-0 z-10 h-[70vh] overflow-hidden"
         style={{
           background:
             "linear-gradient(to right, rgba(31,51,81,0.08), rgba(98,116,138,0.08), rgba(31,51,81,0.05))",
@@ -43,8 +43,8 @@ export const CampusGallerySection: React.FC = () => {
         }}
       />
 
-      <ContainerScroll className="relative min-h-[250vh]">
-        <ContainerSticky className="min-h-[100svh] h-auto flex flex-col justify-center pt-6 pb-4 overflow-visible">
+      <ContainerScroll className="relative min-h-[250vh] overflow-x-clip">
+        <ContainerSticky className="min-h-[100svh] h-auto flex flex-col justify-center pt-6 pb-4 overflow-x-clip overflow-y-visible">
           <GalleryContainer className="max-w-[1020px] w-full mx-auto px-3 sm:px-6">
             <GalleryCol yRange={["-10%", "2%"]} className="-mt-2">
               {IMAGES_1.map((imageUrl, index) => (
