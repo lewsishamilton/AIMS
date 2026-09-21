@@ -2,15 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronRight } from "lucide-react";
-import { sectionFor } from "./sectionTheme";
+import { ACCENT, sectionFor } from "./sectionTheme";
 
 /**
  * The universal page masthead.
  *
  * One design for every interior page: a dark band carrying a breadcrumb, the
  * page title and a drawn motif, rather than a photograph chosen for atmosphere.
- * Each area of the site gets its own accent and glyph (see `sectionTheme.ts`),
- * so pages read as siblings while still telling you where you are.
+ * Each area of the site gets its own glyph (see `sectionTheme.ts`) so you can
+ * tell where you are, but the palette is the site's single teal accent
+ * throughout — the band should not change colour from page to page.
  *
  * Deliberately dark in both themes — in light mode the navbar above it is
  * solid white, so the band gives the title contrast and separates the header
@@ -30,7 +31,7 @@ const PageHero: React.FC<{
   subtitle?: string;
   pathname: string;
 }> = ({ eyebrow, title, subtitle, pathname }) => {
-  const { name, accent, Icon } = sectionFor(pathname);
+  const { name, Icon } = sectionFor(pathname);
   const reduceMotion = useReducedMotion();
 
   return (
@@ -40,8 +41,8 @@ const PageHero: React.FC<{
         aria-hidden="true"
         className="absolute inset-0"
         style={{
-          background: `radial-gradient(58% 120% at 86% 8%, ${accent}33, transparent 68%),
-                       radial-gradient(48% 95% at 2% 100%, ${accent}1f, transparent 70%)`,
+          background: `radial-gradient(58% 120% at 86% 8%, ${ACCENT}33, transparent 68%),
+                       radial-gradient(48% 95% at 2% 100%, ${ACCENT}1f, transparent 70%)`,
         }}
       />
 
@@ -65,12 +66,12 @@ const PageHero: React.FC<{
         viewBox="0 0 1440 200"
         preserveAspectRatio="none"
         className="pointer-events-none absolute inset-x-0 bottom-0 h-16 w-full sm:h-20 lg:h-24"
-        style={{ filter: `drop-shadow(0 0 10px ${accent}66)` }}
+        style={{ filter: `drop-shadow(0 0 10px ${ACCENT}66)` }}
       >
         <motion.path
           d={ECG_PATH}
           fill="none"
-          stroke={accent}
+          stroke={ACCENT}
           strokeWidth={2.5}
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -92,7 +93,7 @@ const PageHero: React.FC<{
         <Icon
           strokeWidth={0.9}
           className="h-52 w-52 lg:h-64 lg:w-64"
-          style={{ color: accent, opacity: 0.13 }}
+          style={{ color: ACCENT, opacity: 0.13 }}
         />
       </motion.div>
 
@@ -114,17 +115,12 @@ const PageHero: React.FC<{
             <span className="text-white/75">{name}</span>
           </nav>
 
-          <div className="mb-4 flex items-center gap-3">
-            <span
-              className="h-[2px] w-9 flex-shrink-0 rounded-full"
-              style={{ backgroundColor: accent }}
-            />
-            <span
-              className="text-[11px] font-bold uppercase tracking-[0.2em] sm:text-xs"
-              style={{ color: accent }}
-            >
+          <div className="mb-4 inline-flex items-center gap-3">
+            <span className="h-[1.5px] w-8 flex-shrink-0 bg-white/20 sm:w-10" />
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal-400 sm:text-[13px]">
               {eyebrow ?? name}
             </span>
+            <span className="h-[1.5px] w-8 flex-shrink-0 bg-white/20 sm:w-10" />
           </div>
 
           <h1 className="max-w-4xl font-['Manrope',sans-serif] text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-[50px]">
@@ -144,7 +140,7 @@ const PageHero: React.FC<{
         aria-hidden="true"
         className="absolute inset-x-0 bottom-0 h-px"
         style={{
-          background: `linear-gradient(to right, transparent, ${accent}88, transparent)`,
+          background: `linear-gradient(to right, transparent, ${ACCENT}88, transparent)`,
         }}
       />
     </header>

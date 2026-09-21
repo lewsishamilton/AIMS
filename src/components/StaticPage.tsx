@@ -8,7 +8,7 @@ import type { PageMedia } from "../data/pageImages";
 import { DEFAULT_MEDIA } from "../data/pageImages";
 import OpdSchedule from "./OpdSchedule";
 import PageHero from "./PageHero";
-import { sectionFor } from "./sectionTheme";
+import { ACCENT, sectionFor } from "./sectionTheme";
 import { groupSections } from "./ContentBlocks";
 
 export interface PageCard {
@@ -79,12 +79,14 @@ const Frame: React.FC<{
   </div>
 );
 
+/** The site-wide kicker: a rule either side of small, wide-tracked caps. */
 const Eyebrow: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <div className="inline-flex items-center gap-3">
-    <span className="h-[1.5px] w-8 bg-[#cbd5e1] dark:bg-white/25" />
-    <span className="text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#4b6382] dark:text-teal-400">
+    <span className="h-[1.5px] w-8 flex-shrink-0 bg-[#cbd5e1] sm:w-10 dark:bg-white/20" />
+    <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#4b6382] sm:text-[13px] dark:text-teal-400">
       {children}
     </span>
+    <span className="h-[1.5px] w-8 flex-shrink-0 bg-[#cbd5e1] sm:w-10 dark:bg-white/20" />
   </div>
 );
 
@@ -363,13 +365,13 @@ const ImageCard: React.FC<{
 
 /* ─────────────────────── Related pages ─────────────────────── */
 
-/** Each tile previews the accent and glyph of the masthead it leads to. */
+/** Each tile previews the glyph of the masthead it leads to. */
 const QuickLinkTiles: React.FC<{ links: { name: string; path: string }[] }> = ({
   links,
 }) => (
   <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
     {links.map((l, i) => {
-      const { accent, Icon } = sectionFor(l.path);
+      const { Icon } = sectionFor(l.path);
       return (
         <Reveal key={l.path} delay={(i % 4) * 0.07}>
           <Link
@@ -380,19 +382,16 @@ const QuickLinkTiles: React.FC<{ links: { name: string; path: string }[] }> = ({
               aria-hidden="true"
               className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-80"
               style={{
-                background: `radial-gradient(70% 120% at 85% 5%, ${accent}38, transparent 70%)`,
+                background: `radial-gradient(70% 120% at 85% 5%, ${ACCENT}38, transparent 70%)`,
               }}
             />
             <Icon
               aria-hidden="true"
               strokeWidth={1}
               className="pointer-events-none absolute -right-3 -top-3 h-24 w-24 transition-transform duration-500 group-hover:scale-110"
-              style={{ color: accent, opacity: 0.18 }}
+              style={{ color: ACCENT, opacity: 0.18 }}
             />
-            <span
-              className="relative mb-2 block h-[2px] w-7 rounded-full"
-              style={{ backgroundColor: accent }}
-            />
+            <span className="relative mb-2 block h-[1.5px] w-8 bg-white/25" />
             <span className="relative flex items-end justify-between gap-2">
               <span className="font-['Manrope',sans-serif] text-sm font-bold leading-snug text-white sm:text-[15px]">
                 {l.name}

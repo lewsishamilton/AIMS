@@ -10,35 +10,36 @@ import {
 } from "lucide-react";
 
 /**
- * Each area of the site has an accent and a glyph. The masthead and the
- * related-page tiles both draw on this, so a link previews the colour and mark
- * of the page it leads to.
+ * Each area of the site has a name and a glyph. The masthead and the
+ * related-page tiles both draw on this, so a link previews the mark of the page
+ * it leads to.
  *
  * Kept out of the component file so both can import it without breaking Fast
  * Refresh.
  */
+
+/** The site's single accent — teal, as used by every kicker across the site. */
+export const ACCENT = "#2dd4bf";
+
 export interface SectionTheme {
   /** Area of the site, shown in the breadcrumb. */
   name: string;
-  /** Accent for the rule, eyebrow, glow and glyph. */
-  accent: string;
   Icon: LucideIcon;
 }
 
 const SECTIONS: { prefix: string; theme: SectionTheme }[] = [
-  { prefix: "/admissions", theme: { name: "Admissions", accent: "#38bdf8", Icon: GraduationCap } },
-  { prefix: "/academics", theme: { name: "Academics", accent: "#818cf8", Icon: BookOpen } },
-  { prefix: "/services", theme: { name: "Medical Services", accent: "#2dd4bf", Icon: Stethoscope } },
-  { prefix: "/patient-care", theme: { name: "Patient Care", accent: "#fb7185", Icon: HeartPulse } },
-  { prefix: "/facilities", theme: { name: "Facilities", accent: "#fbbf24", Icon: Building2 } },
-  { prefix: "/about", theme: { name: "Discover AIMS", accent: "#a78bfa", Icon: ShieldCheck } },
-  { prefix: "/approvals", theme: { name: "Approvals & Excellence", accent: "#a78bfa", Icon: ShieldCheck } },
-  { prefix: "/committess", theme: { name: "Committees", accent: "#a78bfa", Icon: Scale } },
+  { prefix: "/admissions", theme: { name: "Admissions", Icon: GraduationCap } },
+  { prefix: "/academics", theme: { name: "Academics", Icon: BookOpen } },
+  { prefix: "/services", theme: { name: "Medical Services", Icon: Stethoscope } },
+  { prefix: "/patient-care", theme: { name: "Patient Care", Icon: HeartPulse } },
+  { prefix: "/facilities", theme: { name: "Facilities", Icon: Building2 } },
+  { prefix: "/about", theme: { name: "Discover AIMS", Icon: ShieldCheck } },
+  { prefix: "/approvals", theme: { name: "Approvals & Excellence", Icon: ShieldCheck } },
+  { prefix: "/committess", theme: { name: "Committees", Icon: Scale } },
 ];
 
 export const DEFAULT_THEME: SectionTheme = {
   name: "Arundathi Institute",
-  accent: "#2dd4bf",
   Icon: Stethoscope,
 };
 
