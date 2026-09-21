@@ -63,9 +63,9 @@ const Navbar = () => {
                 },
                 {
                     name: "Accreditations and Approvals",
-                    path: "#",
+                    path: "/accreditations",
                     subItems: [
-                        { name: "Accreditation", path: "#" },
+                        { name: "Accreditation", path: "/accreditations" },
                         { name: "excellence", path: "#" },
                     ],
                 },

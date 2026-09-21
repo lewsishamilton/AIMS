@@ -19,6 +19,7 @@ import ManagementPage from "./pages/ManagementPage"
 import ContactPage from "./pages/ContactPage"
 import AimsInNewsPage from "./pages/AimsInNewsPage"
 import MachinesPage from "./pages/MachinesPage"
+import AccreditationsPage from "./pages/AccreditationsPage"
 import PdfViewerSection from "./layouts/PdfViewer"
 import { Route, Routes } from "react-router-dom"
 import ScrollToTop from "./ScrollToTop"
@@ -118,6 +119,7 @@ function App() {
         <Route path="/Faculty/:departmentId" element={<DepartmentFacultyPage />} />
         <Route path="/machines-equipment" element={<MachinesPage />} />
         <Route path="/machines" element={<MachinesPage />} />
+        <Route path="/accreditations" element={<AccreditationsPage />} />
         <Route path="/media-gallery" element={<MediaGalleryPage />} />
         <Route path="/gallery" element={<MediaGalleryPage />} />
         <Route path="/media-gallary" element={<MediaGalleryPage />} />
