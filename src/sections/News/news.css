@@ -246,7 +246,7 @@
 html.dark .aims-news-page {
   --bg-primary: #070e1c;
   --bg-secondary: rgba(9, 19, 35, 0.55);
-  --bg-card: rgba(11, 22, 40, 0.62);
+  --bg-card: #0c1729;
   --bg-placeholder: rgba(148, 197, 205, 0.045);
   --bg-placeholder-subtle: rgba(148, 197, 205, 0.025);
 
@@ -262,7 +262,13 @@ html.dark .aims-news-page {
   --accent: #2dd4bf;
   --accent-soft: rgba(45, 212, 191, 0.12);
 
-  background-color: transparent;
+  /* Flat night base: opaque, so neither the body gradient nor the ambient
+     .min-h-screen glow from index.css shows through this page. */
+  background-color: #070e1c;
+}
+
+html.dark .aims-news-page.min-h-screen::before {
+  display: none;
 }
 
 /* Let the ambient page glow read through the editorial bands */
@@ -285,10 +291,6 @@ html.dark .aims-news-page .badge-pill {
   backdrop-filter: blur(8px);
 }
 
-html.dark .pulse-circle {
-  box-shadow: 0 0 10px 1px rgba(34, 197, 94, 0.7);
-}
-
 html.dark .hero-coord-badge:hover {
   color: var(--accent);
   border-color: var(--border-strong);
@@ -302,7 +304,6 @@ html.dark .aims-news-page .hero-main-title {
 
 html.dark .aims-news-page .hero-main-title .hero-title-aims {
   color: #f4fbff;
-  text-shadow: 0 0 60px rgba(45, 212, 191, 0.28);
 }
 
 html.dark .aims-news-page .hero-main-title .hero-title-chronicles {
@@ -319,7 +320,6 @@ html.dark .aims-news-page .hero-main-title .hero-title-chronicles {
 
 html.dark .rotating-word-item {
   color: var(--accent);
-  text-shadow: 0 0 45px rgba(45, 212, 191, 0.25);
 }
 
 /* Inverted chips read as teal accents rather than glaring white */
@@ -352,12 +352,8 @@ html.dark .scroll-circle-arrow {
    instead, or --text-primary would paint it white. */
 html.dark .statement-section-slim {
   background-color: rgba(6, 14, 27, 0.72);
-  background-image:
-    radial-gradient(ellipse 70% 120% at 50% 0%, rgba(45, 212, 191, 0.16), transparent 65%),
-    radial-gradient(ellipse 60% 100% at 50% 100%, rgba(31, 51, 81, 0.5), transparent 70%);
+  background-image: none;
   backdrop-filter: blur(4px);
-  box-shadow: inset 0 1px 0 0 rgba(45, 212, 191, 0.16),
-              inset 0 -1px 0 0 rgba(45, 212, 191, 0.16);
 }
 
 html.dark .statement-text-accent {
@@ -376,7 +372,6 @@ html.dark .marquee-separator {
 
 /* ─── Chronicle cards (glass) ─── */
 html.dark .chronicle-compact-card {
-  backdrop-filter: blur(14px) saturate(120%);
   box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.35),
               0 22px 55px -12px rgba(0, 0, 0, 0.75),
               inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
@@ -385,14 +380,12 @@ html.dark .chronicle-compact-card {
 html.dark .chronicle-compact-card:hover {
   box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.35),
               0 28px 65px -12px rgba(0, 0, 0, 0.8),
-              0 0 40px -6px rgba(45, 212, 191, 0.2),
               inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 }
 
 html.dark .chronicle-compact-card.is-active-card {
   border-color: var(--border-strong);
   box-shadow: 0 28px 65px -12px rgba(0, 0, 0, 0.8),
-              0 0 50px -6px rgba(45, 212, 191, 0.26),
               inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 }
 
@@ -428,8 +421,7 @@ html.dark .aims-news-page #chronicle-06 .compact-image-frame-box {
 
 html.dark .chronicle-compact-card:hover .compact-image-frame-box {
   border-color: var(--border-strong);
-  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5),
-              0 0 26px -6px rgba(45, 212, 191, 0.24);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5);
 }
 
 html.dark .compact-card-img,
@@ -446,14 +438,12 @@ html.dark .gallery-frame-card-compact:hover .gallery-frame-img {
 /* ─── Bottom gallery ─── */
 html.dark .gallery-frame-card-compact {
   background: var(--bg-card);
-  backdrop-filter: blur(12px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
               inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
 }
 
 html.dark .gallery-frame-card-compact:hover {
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55),
-              0 0 30px -8px rgba(45, 212, 191, 0.22),
               inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
 }
 

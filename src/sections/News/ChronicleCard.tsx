@@ -170,7 +170,7 @@ export default function ChronicleCard({
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="relative max-w-5xl max-h-[92vh] bg-white dark:bg-[#0a1424] dark:ring-1 dark:ring-teal-400/20 dark:shadow-[0_30px_80px_-15px_rgba(0,0,0,0.9),0_0_50px_rgba(45,212,191,0.18)] rounded-2xl p-3 sm:p-5 shadow-2xl flex flex-col items-center cursor-default"
+              className="relative max-w-5xl max-h-[92vh] bg-white dark:bg-[#0a1424] dark:ring-1 dark:ring-teal-400/20 dark:shadow-[0_30px_80px_-15px_rgba(0,0,0,0.9)] rounded-2xl p-3 sm:p-5 shadow-2xl flex flex-col items-center cursor-default"
               onClick={(e) => e.stopPropagation()}
             >
               <button 
