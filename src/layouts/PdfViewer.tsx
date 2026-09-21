@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import * as pdfjsLib from "pdfjs-dist";
 import type { PDFDocumentProxy, PDFPageProxy } from "pdfjs-dist";
 import { FileText, Download, ExternalLink } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import PageHero from "../components/PageHero";
 
 // Worker configuration
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
@@ -22,6 +24,7 @@ export const PdfViewerSection: React.FC<PdfViewerProps> = ({
   pdfUrl,
 }) => {
   const resolvedPdfUrl = pdf || pdfUrl || "";
+  const { pathname } = useLocation();
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(Boolean(resolvedPdfUrl));
   const [pageCount, setPageCount] = useState<number>(0);
@@ -104,29 +107,11 @@ export const PdfViewerSection: React.FC<PdfViewerProps> = ({
   }, [resolvedPdfUrl]);
 
   return (
-    <section className="relative pt-28 lg:pt-36 pb-20 lg:pb-28 bg-[#fbfaf5] dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300">
+    <div className="min-h-screen bg-[#fbfaf5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
+      <PageHero eyebrow={kicker} title={title} subtitle={subtitle} pathname={pathname} />
+
+      <section className="relative overflow-hidden pb-20 pt-12 lg:pb-28 lg:pt-16">
       <div className="relative z-10 w-full max-w-[1100px] mx-auto px-4 sm:px-10 lg:px-16">
-
-        {/* Main Heading & Subtitle */}
-        <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-10 lg:mb-14">
-          {/* Flanked kicker */}
-          <div className="flex items-center justify-center gap-3 mb-3.5">
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
-              {kicker}
-            </span>
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-          </div>
-
-          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-tight text-[#1f3351] dark:text-white">
-            {title}
-          </h2>
-          {subtitle && (
-            <p className="text-base sm:text-lg leading-relaxed text-[#62748a] dark:text-slate-300 mt-4">
-              {subtitle}
-            </p>
-          )}
-        </div>
 
         {/* Document card */}
         <div className="relative rounded-[26px] border border-[#dce8ee] dark:border-white/15 bg-white dark:bg-white/[0.04] shadow-[0_16px_40px_rgba(8,44,76,0.10)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden">
@@ -204,7 +189,8 @@ export const PdfViewerSection: React.FC<PdfViewerProps> = ({
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </div>
   );
 };
 

@@ -5,8 +5,10 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ContentBlock } from "../data/types";
 import type { LucideIcon } from "lucide-react";
 import type { PageMedia } from "../data/pageImages";
-import { DEFAULT_MEDIA, PAGE_MEDIA } from "../data/pageImages";
+import { DEFAULT_MEDIA } from "../data/pageImages";
 import OpdSchedule from "./OpdSchedule";
+import PageHero from "./PageHero";
+import { sectionFor } from "./sectionTheme";
 import { groupSections } from "./ContentBlocks";
 
 export interface PageCard {
@@ -121,55 +123,6 @@ const Badges: React.FC<{ items: string[] }> = ({ items }) => (
       </span>
     ))}
   </div>
-);
-
-/* ─────────────────────────── Hero ─────────────────────────── */
-
-const PageHero: React.FC<{
-  eyebrow?: string;
-  title: string;
-  subtitle?: string;
-  image: string;
-}> = ({ eyebrow, title, subtitle, image }) => (
-  <header className="relative h-[62vh] min-h-[440px] w-full overflow-hidden lg:h-[70vh]">
-    <motion.img
-      src={image}
-      alt={title}
-      initial={{ scale: 1.14 }}
-      animate={{ scale: 1 }}
-      transition={{ duration: 1.8, ease: EASE }}
-      className="absolute inset-0 h-full w-full object-cover"
-    />
-
-    {/* Legibility scrim behind the title */}
-    <div className="absolute inset-0 bg-gradient-to-t from-[#081324] via-[#081324]/60 to-[#081324]/25" />
-    {/* Top scrim only matters in dark mode — in light mode the navbar is opaque */}
-    <div className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-transparent to-transparent dark:from-black/65" />
-    {/* Blends the hero into the dark page background; light mode keeps a crisp edge */}
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-transparent to-transparent dark:from-[#060b14]" />
-
-    <div className="relative z-10 mx-auto flex h-full w-full max-w-[1280px] flex-col justify-end px-4 pb-16 sm:px-8 lg:px-12 lg:pb-20">
-      <motion.div
-        initial={{ opacity: 0, y: 26 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: EASE, delay: 0.25 }}
-      >
-        {eyebrow && (
-          <span className="mb-4 inline-block rounded-full border border-white/25 bg-white/15 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md">
-            {eyebrow}
-          </span>
-        )}
-        <h1 className="max-w-4xl font-['Manrope',sans-serif] text-3xl font-bold leading-[1.12] tracking-tight text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.5)] sm:text-4xl lg:text-[52px]">
-          {title}
-        </h1>
-        {subtitle && (
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/85 drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)] sm:text-base lg:text-[17px]">
-            {subtitle}
-          </p>
-        )}
-      </motion.div>
-    </div>
-  </header>
 );
 
 /* ──────────────────────── Sections ──────────────────────── */
@@ -410,35 +363,42 @@ const ImageCard: React.FC<{
 
 /* ─────────────────────── Related pages ─────────────────────── */
 
-/** Each tile shows the page it leads to, so the picture means something. */
+/** Each tile previews the accent and glyph of the masthead it leads to. */
 const QuickLinkTiles: React.FC<{ links: { name: string; path: string }[] }> = ({
   links,
 }) => (
   <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
     {links.map((l, i) => {
-      const image = PAGE_MEDIA[l.path]?.hero;
+      const { accent, Icon } = sectionFor(l.path);
       return (
         <Reveal key={l.path} delay={(i % 4) * 0.07}>
           <Link
             to={l.path}
-            className="group relative block h-32 overflow-hidden rounded-[20px] border border-[#e4ecf2] bg-[#1f3351] shadow-[0_10px_28px_rgba(15,23,42,0.12)] sm:h-36 dark:border-white/10"
+            className="group relative flex h-32 flex-col justify-end overflow-hidden rounded-[20px] border border-[#e4ecf2] bg-[#13243c] p-5 transition-transform duration-500 hover:-translate-y-1 sm:h-36 dark:border-white/10 dark:bg-[#0b1626]"
           >
-            {image && (
-              <img
-                src={image}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                className="h-full w-full object-cover transition-transform duration-[1100ms] ease-out group-hover:scale-110"
-              />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0b172a] via-[#0b172a]/55 to-[#0b172a]/15 transition-colors duration-500 group-hover:via-[#0b172a]/40" />
-            <div className="absolute inset-x-4 bottom-4 flex items-end justify-between gap-2">
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-80"
+              style={{
+                background: `radial-gradient(70% 120% at 85% 5%, ${accent}38, transparent 70%)`,
+              }}
+            />
+            <Icon
+              aria-hidden="true"
+              strokeWidth={1}
+              className="pointer-events-none absolute -right-3 -top-3 h-24 w-24 transition-transform duration-500 group-hover:scale-110"
+              style={{ color: accent, opacity: 0.18 }}
+            />
+            <span
+              className="relative mb-2 block h-[2px] w-7 rounded-full"
+              style={{ backgroundColor: accent }}
+            />
+            <span className="relative flex items-end justify-between gap-2">
               <span className="font-['Manrope',sans-serif] text-sm font-bold leading-snug text-white sm:text-[15px]">
                 {l.name}
               </span>
-              <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-white transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-            </div>
+              <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-white/70 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
+            </span>
           </Link>
         </Reveal>
       );
@@ -491,14 +451,41 @@ const StaticPage: React.FC<StaticPageDef> = ({
   const sectionImage = (block: ContentBlock) =>
     block.title ? media.sectionImages?.[block.title] : undefined;
 
-  // Photo rows alternate sides, counting only the rows that actually have one.
+  const hasCards = !!cards && cards.length > 0;
+
+  // Work out the layout before rendering: which rows get a photograph, which
+  // side it sits on, and where each tile falls in the running numbering.
+  type Row =
+    | { kind: "split"; block: ContentBlock; image: string; flip: boolean }
+    | { kind: "prose"; block: ContentBlock }
+    | { kind: "tiles"; blocks: ContentBlock[]; startIndex: number };
+
+  const rows: Row[] = [];
   let photoRow = 0;
   let tileIndex = 0;
-  const hasCards = !!cards && cards.length > 0;
+  for (const group of groups) {
+    if (group.type === "full") {
+      const image = sectionImage(group.section);
+      if (image) {
+        rows.push({ kind: "split", block: group.section, image, flip: photoRow % 2 === 1 });
+        photoRow += 1;
+      } else {
+        rows.push({ kind: "prose", block: group.section });
+      }
+    } else {
+      rows.push({ kind: "tiles", blocks: group.sections, startIndex: tileIndex });
+      tileIndex += group.sections.length;
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#FAF9F5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
-      <PageHero eyebrow={eyebrow} title={title} subtitle={subtitle} image={media.hero} />
+      <PageHero
+        eyebrow={eyebrow}
+        title={title}
+        subtitle={subtitle}
+        pathname={pathname}
+      />
 
       <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 pb-20 sm:px-8 lg:px-12">
         {Widget && (
@@ -507,29 +494,28 @@ const StaticPage: React.FC<StaticPageDef> = ({
           </div>
         )}
 
-        {groups.length > 0 && (
+        {rows.length > 0 && (
           <div className="space-y-14 pt-12 sm:space-y-16 lg:space-y-20">
-            {groups.map((group, gIdx) => {
-              if (group.type === "full") {
-                const image = sectionImage(group.section);
-                if (!image) return <ProseSection key={`full-${gIdx}`} block={group.section} />;
+            {rows.map((row, i) => {
+              if (row.kind === "split") {
                 return (
                   <SplitSection
-                    key={`full-${gIdx}`}
-                    block={group.section}
-                    image={image}
-                    flip={photoRow++ % 2 === 1}
+                    key={i}
+                    block={row.block}
+                    image={row.image}
+                    flip={row.flip}
                   />
                 );
               }
-              const start = tileIndex;
-              tileIndex += group.sections.length;
+              if (row.kind === "prose") {
+                return <ProseSection key={i} block={row.block} />;
+              }
               return (
                 <TileGrid
-                  key={`grid-${gIdx}`}
-                  blocks={group.sections}
+                  key={i}
+                  blocks={row.blocks}
                   imageFor={sectionImage}
-                  startIndex={start}
+                  startIndex={row.startIndex}
                 />
               );
             })}
@@ -537,7 +523,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
         )}
 
         {hasCards && (
-          <div className={groups.length > 0 || Widget ? "mt-16 sm:mt-20" : "pt-12"}>
+          <div className={rows.length > 0 || Widget ? "mt-16 sm:mt-20" : "pt-12"}>
             {cardsTitle && (
               <SectionHeading
                 eyebrow={eyebrow ?? "AIMS"}

@@ -11,7 +11,8 @@ import { Droplets, Pill } from "lucide-react";
  *
  * A picture is only ever used where it shows what the text is about. Sections
  * and cards are mapped one at a time; anything unmapped renders in a no-photo
- * variant on purpose.
+ * variant on purpose. Page mastheads are drawn, not photographed — see
+ * `components/PageHero.tsx`.
  */
 
 type Mod = { default: string };
@@ -42,76 +43,52 @@ const machine = (file: string) => g(clgMods, `aims images machines/${file}`);
 export const IMG = {
   // ── Teaching spaces (real AIMS) ──
   dissectionHall: g(clgMods, "Anatomy/5.png"),
-  anatomyLabSkeleton: g(clgMods, "Anatomy/2.png"),
   anatomyMuseum: campus(51), // articulated skeleton, wall charts, students
   specimenMuseum: campus(50), // tall specimen cabinets
-  microscopyLab: campus(47),
   microscopyLab2: campus(45),
   practicalLab: campus(46),
-  wetLab: campus(49),
   computerLab: campus(52), // rows of monitors — the digital library
   physiologyLab: g(clgMods, "pysiology/2.png"),
-  examinationCouches: g(clgMods, "pysiology/3.png"),
   skillsLabMannequin: g(clgMods, "skills/2.png"),
   skillsLabCharts: g(clgMods, "skills/1.png"),
   meuLectureHall: g(clgMods, "MEU/2.png"),
   meuEntrance: g(clgMods, "MEU/3.png"),
-  libraryStacks: g(clgMods, "central library/2.jpg"),
   libraryShelves: g(clgMods, "central library/3.jpg"),
-  libraryReading: g(clgMods, "central library/1.jpg"),
 
   // ── Hospital (real AIMS) ──
   atrium: g(clgMods, "Lobby/1.png"),
   lobbyCorridor: g(clgMods, "Lobby/4.png"),
   opdWaiting: g(clgMods, "Lobby/5.png"), // patients seated in the waiting area
-  noticeBoards: g(clgMods, "Lobby/6.png"),
   hospitalPorch: g(clgMods, "Lobby/7.png"), // entrance canopy with an ambulance
-  receptionCounter: g(clgMods, "Lobby/8.png"),
-  campusLawn: g(clgMods, "Lobby/9.png"),
   otTeam: g(clgMods, "Operation Room/1.png"),
-  otTeamWide: g(clgMods, "Operation Room/2.png"),
   otEmpty: g(clgMods, "Operation Room/5.png"),
   microsurgery: g(clgMods, "Operation Room/6.png"),
   cathLabRoom: g(clgMods, "Blood Bank/1.png"), // misfiled: this is the cath lab
   bloodBankStorage: g(clgMods, "Blood Bank/2.png"),
-  bloodBankLaminar: g(clgMods, "Blood Bank/3.png"),
   centralLabBench: g(clgMods, "Central Lab/1.png"),
   labMicroscopist: g(clgMods, "Central Lab/3.png"),
 
   // ── Campus & administration (real AIMS) ──
-  campusBuilding: g(clgMods, "administration block/5.png"),
-  adminOffice: g(clgMods, "administration block/1.png"),
-  adminReception: g(clgMods, "administration block/2.png"),
-  examHallBenches: g(clgMods, "administration block/3.png"),
-  boardRoom: g(clgMods, "administration block/4.png"),
-  campusFront: campus(15), // cohort in white coats under the AIMS signage
-  campusFront2: campus(31),
   auditorium: campus(29), // full auditorium, seated audience
-  ceremonyStage: campus(30), // dais with floral arrangement
   examHall: campus(39),
-  whiteCoatHall: campus(40),
   posterExhibition: campus(36),
   posterExhibition2: campus(41),
   healthCamp: campus(48),
   houseVisit: campus(44), // doorstep survey, geotagged Dundigal
-  seminar: campus(12),
 
   // ── Equipment (real AIMS) ──
   cathLab: machine("cath lab.jpeg"),
   mri: machine("mri machine images.jpeg"),
   ctScan: machine("ct scan image.jpeg"),
   xray: machine("hospital digital x ray.jpeg"),
-  ultrasound: machine("usg scan image.jpeg"),
   bloodBags: machine("BLOOD BANK.jpeg"),
   pathLab: machine("PATHLAB.jpeg"),
-  biochemBench: machine("BIOCHEMISTRY LAB.jpeg"),
   heartLung: machine("HEART LUNG MACHINE WITH HEMOTHERM.jpeg"),
   balloonPump: machine("INTRA AORTIC BALLON PUMP.jpeg"),
   neuroMicroscope: machine("NEURO MICROSCOPE.jpeg"),
   eeg: machine("EEG MACHINE.jpeg"),
   phaco: machine("LEGION PHACO UNIT.jpeg"),
   thuliumLaser: machine("THULIUM LASER.jpeg"),
-  laparoscopy: machine("LAPROSCOPY WITH PHU.jpeg"),
   // Misfiled as "ADVANCED ENDOSCOPY" — the picture is a treadmill, i.e. TMT.
   treadmillTmt: machine("FULLY AUTOMATED CENTRAL LAB ADVANCED ENDOSCOPY.jpeg"),
 
@@ -139,8 +116,6 @@ export const IMG = {
 } as const;
 
 export interface PageMedia {
-  /** Full-bleed photograph behind the page title. Every page has one. */
-  hero: string;
   /** Photograph for a section, keyed by its `title`. Omit to render it as prose. */
   sectionImages?: Record<string, string>;
   /** Photograph for a card, keyed by its `name`. Omit for the no-photo card. */
@@ -149,20 +124,14 @@ export interface PageMedia {
   cardIcons?: Record<string, LucideIcon>;
 }
 
-/** Hero photography for every content-driven route, plus mapped sections and cards. */
+/**
+ * Only the pages that have something worth photographing appear here. A route
+ * that is absent maps nothing, which is the common case: its masthead is drawn,
+ * and its sections carry themselves typographically.
+ */
 export const PAGE_MEDIA: Record<string, PageMedia> = {
-  // ── Admissions ──
-  "/admissions": { hero: IMG.campusFront },
-  "/admissions/criteria": { hero: IMG.examHall },
-  "/admissions/seat-matrix": { hero: IMG.auditorium },
-  "/admissions/fee-structure": { hero: IMG.adminReception },
-  "/admissions/forms": { hero: IMG.adminOffice },
-  "/admissions/admitted-list": { hero: IMG.campusFront2 },
-  "/admissions/regulations": { hero: IMG.campusBuilding },
-
   // ── Academics ──
   "/academics/mbbs": {
-    hero: IMG.dissectionHall,
     sectionImages: {
       "Phase I — Pre-Clinical": IMG.anatomyMuseum,
       "Phase II — Para-Clinical": IMG.microscopyLab2,
@@ -172,7 +141,6 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     },
   },
   "/academics/nursing-allied-health": {
-    hero: IMG.skillsLabMannequin,
     sectionImages: { "Learning Inside a Working Hospital": IMG.atrium },
     cardImages: {
       "B.Sc. Nursing": IMG.skillsLabCharts,
@@ -181,7 +149,6 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     },
   },
   "/academics/paramedical-diplomas": {
-    hero: IMG.centralLabBench,
     sectionImages: { "Trained Where the Work Happens": IMG.labMicroscopist },
     cardImages: {
       "Medical Laboratory Technology": IMG.pathLab,
@@ -196,7 +163,6 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     cardIcons: { "Dialysis Technician": Droplets },
   },
   "/academics/calendar": {
-    hero: IMG.meuLectureHall,
     sectionImages: {
       "How the Year Is Structured": IMG.examHall,
       "Recurring Academic Events": IMG.posterExhibition,
@@ -204,7 +170,6 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     },
   },
   "/academics/research": {
-    hero: IMG.microscopyLab,
     sectionImages: {
       "Central Research Laboratory": IMG.practicalLab,
       "Medical Education Unit": IMG.meuEntrance,
@@ -213,14 +178,12 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
 
   // ── Discover & approvals ──
   "/about/awards": {
-    hero: IMG.ceremonyStage,
     sectionImages: {
       "Academic Achievement": IMG.posterExhibition2,
       "Service to the Community": IMG.houseVisit,
     },
   },
   "/about/centres-of-excellence": {
-    hero: IMG.otTeam,
     sectionImages: { "What Makes a Centre of Excellence Here": IMG.microsurgery },
     cardImages: {
       "Cardiac Sciences": IMG.cathLab,
@@ -231,12 +194,9 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     },
     cardIcons: { "Renal Sciences": Droplets },
   },
-  "/approvals/government": { hero: IMG.campusBuilding },
-  "/approvals/university-affiliation": { hero: IMG.campusFront },
 
   // ── Facilities ──
   "/facilities/hospital": {
-    hero: IMG.atrium,
     cardImages: {
       "Outpatient Department": IMG.opdWaiting,
       "Inpatient Department": IMG.lobbyCorridor,
@@ -250,7 +210,6 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     cardIcons: { Pharmacy: Pill },
   },
   "/facilities/academic": {
-    hero: IMG.libraryStacks,
     cardImages: {
       "Central Library": IMG.libraryShelves,
       "Digital Library": IMG.computerLab,
@@ -264,7 +223,6 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     },
   },
   "/facilities/campus-life": {
-    hero: IMG.stadium,
     cardImages: {
       Hostels: IMG.hostel,
       "Food Court & Mess": g(facilityMods, "mess.jpeg"),
@@ -275,16 +233,8 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     },
   },
 
-  // ── Patient care ──
-  "/patient-care/citizen-charter": { hero: IMG.receptionCounter },
-  "/patient-care/opd-timings": { hero: IMG.opdWaiting },
-  "/patient-care/admission-discharge": { hero: IMG.lobbyCorridor },
-  "/patient-care/insurance": { hero: IMG.adminReception },
-  "/patient-care/feedback": { hero: IMG.noticeBoards },
-
   // ── Medical services ──
   "/services/specialities": {
-    hero: IMG.whiteCoatHall,
     cardImages: {
       "General Medicine": IMG.generalMedicine,
       "Pulmonology / Respiratory Medicine": IMG.respiratory,
@@ -298,7 +248,6 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     },
   },
   "/services/super-specialities": {
-    hero: IMG.cathLabRoom,
     cardImages: {
       Cardiology: IMG.cathLab,
       "Cardio Thoracic & Vascular Surgery": IMG.heartLung,
@@ -311,14 +260,12 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     cardIcons: { "Nephrology & Dialysis": Droplets },
   },
   "/services/emergency-trauma": {
-    hero: IMG.hospitalPorch,
     sectionImages: {
       "Casualty Infrastructure": IMG.icuVentilator,
       "Emergency Support Services": IMG.bloodBankStorage,
     },
   },
   "/services/diagnostics": {
-    hero: IMG.mri,
     sectionImages: { "One Diagnostic Campus": IMG.centralLabBench },
     cardImages: {
       "Radiology & Imaging": IMG.mri,
@@ -331,5 +278,5 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
   },
 };
 
-/** Fallback for a route that somehow has no manifest entry. */
-export const DEFAULT_MEDIA: PageMedia = { hero: IMG.campusFront };
+/** Pages absent from the manifest map nothing, and render without photographs. */
+export const DEFAULT_MEDIA: PageMedia = {};
