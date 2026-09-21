@@ -116,10 +116,11 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   --font-sans: "DM Sans", sans-serif;
 }
 
-/* ─── Fluid Events Collage (MediaGalleryPage) ─── */
+/* ─── Diamond Events Collage (MediaGalleryPage) ─── */
 .collage-row {
   display: flex;
-  gap: 12px;
+  align-items: center;
+  gap: 10px;
   height: var(--row-h);
   width: var(--row-w, 100%);
   margin: 0 auto;
@@ -151,9 +152,10 @@ html.dark [class*="dark:bg-[#070f1e]"] {
 }
 @media (max-width: 767px) {
   .collage-row, .collage-row:hover { flex-wrap: wrap; height: auto; width: 100%; gap: 8px; }
-  .collage-item { flex: 1 1 calc(50% - 4px); height: auto; aspect-ratio: 4 / 3; align-self: auto !important; }
+  .collage-item { flex: 1 1 calc(50% - 4px); height: auto; aspect-ratio: 4 / 3; }
   .collage-row:hover .collage-item:not(:hover) { filter: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .collage-item, .collage-item img { transition: none; }
 }
+

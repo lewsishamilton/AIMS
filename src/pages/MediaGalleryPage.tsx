@@ -36,55 +36,54 @@ export interface EventItem {
   category: string;
   src: string;
   description: string;
-  /** flex weight (relative width), height fraction of the row, vertical anchor */
+  /** flex weight (relative width) and height fraction of the row */
   w?: number;
   h?: number;
-  align?: "start" | "center" | "end";
 }
 
-// Fluid collage: 3 rows, 4 photos each. Weights/heights/anchors give the scattered look;
-// hovering a photo grows it and the rest of its row reflows (see .collage-* in index.css).
+// Diamond collage: rows taper in width (see collageRowShape) so the block's outline
+// reads as a diamond instead of a filled rectangle.
 const collageRows: EventItem[][] = [
   [
-    { id: "ev-01", title: "Academic Poster Day & Student Life", category: "Student Life", src: img11, w: 1.1, h: 0.9, align: "end",
+    { id: "ev-01", title: "Academic Poster Day & Student Life", category: "Student Life", src: img11, w: 1.1, h: 0.96,
       description: "Medical students showcasing research posters and public health innovations during campus health week." },
-    { id: "ev-02", title: "Scholars Interactive Study Circle", category: "Academics", src: img05, w: 1.5, h: 1, align: "center",
+    { id: "ev-02", title: "Scholars Interactive Study Circle", category: "Academics", src: img05, w: 1.5, h: 1,
       description: "Collaborative study groups, peer learning, and research literature reviews in the central reference library." },
   ],
   [
-    { id: "ev-03", title: "Dean's Honors & Scholar Awards", category: "Ceremony", src: img06, w: 0.8, h: 0.82, align: "start",
+    { id: "ev-03", title: "Dean's Honors & Scholar Awards", category: "Ceremony", src: img06, w: 0.85, h: 0.94,
       description: "Celebrating institutional academic awards, clinical merit badges, and university honors." },
-    { id: "ev-04", title: "Campus Entrance & Main Promenade", category: "Campus", src: img01, w: 1.3, h: 0.94, align: "end",
+    { id: "ev-04", title: "Campus Entrance & Main Promenade", category: "Campus", src: img01, w: 1.15, h: 0.97,
       description: "Students, faculty, and visiting clinical delegates congregating at the architectural main gates." },
-    { id: "ev-05", title: "Hands-on Practical & Dissection Arena", category: "Clinical Lab", src: img04, w: 1.7, h: 1, align: "center",
+    { id: "ev-05", title: "Hands-on Practical & Dissection Arena", category: "Clinical Lab", src: img04, w: 1.4, h: 1,
       description: "Intensive clinical osteology and anatomical practical demonstration under senior surgeon mentorship." },
-    { id: "ev-06", title: "Campus Green Promenade Pathway", category: "Outreach", src: img08, w: 0.7, h: 0.85, align: "start",
+    { id: "ev-06", title: "Campus Green Promenade Pathway", category: "Outreach", src: img08, w: 0.85, h: 0.94,
       description: "Students walking through tree-lined pathways connecting clinical hospital wings and lecture halls." },
   ],
   [
-    { id: "ev-07", title: "Pine Grove Contemplation Walk", category: "Campus Life", src: img10, w: 1.2, h: 0.92, align: "end",
+    { id: "ev-07", title: "Pine Grove Contemplation Walk", category: "Campus Life", src: img10, w: 1.1, h: 0.97,
       description: "Peaceful moments between clinical rotations surrounded by campus pine trees and nature." },
-    { id: "ev-08", title: "Grand Portico Gateway", category: "Architecture", src: img02, w: 1, h: 0.8, align: "center",
+    { id: "ev-08", title: "Grand Portico Gateway", category: "Architecture", src: img02, w: 1, h: 0.9,
       description: "Morning light over the grand architectural arches and medical auditorium portico." },
-    { id: "ev-09", title: "Rural Outreach Care", category: "Community Camp", src: img12, w: 0.9, h: 0.86, align: "start",
+    { id: "ev-09", title: "Rural Outreach Care", category: "Community Camp", src: img12, w: 0.95, h: 0.94,
       description: "Field doctors and volunteers conducting community health surveys in local health camps." },
   ],
   [
-    { id: "ev-10", title: "Microscopy & Fluorescence Assay", category: "Research", src: img03, w: 1.6, h: 1, align: "center",
+    { id: "ev-10", title: "Microscopy & Fluorescence Assay", category: "Research", src: img03, w: 1.3, h: 1,
       description: "Deep molecular biology and advanced fluorescent microscopy diagnostic assays." },
-    { id: "ev-11", title: "Distinguished Medical Graduates", category: "Convocation", src: img07, w: 1.1, h: 0.9, align: "end",
+    { id: "ev-11", title: "Distinguished Medical Graduates", category: "Convocation", src: img07, w: 1, h: 0.95,
       description: "Graduating medical cohort gathered in formal suits and ceremonial regalia on convocation day." },
-    { id: "ev-12", title: "Collegiate Sports & Recreation Meet", category: "Sports Fest", src: img09, w: 1.3, h: 0.94, align: "start",
+    { id: "ev-12", title: "Collegiate Sports & Recreation Meet", category: "Sports Fest", src: img09, w: 1.1, h: 0.97,
       description: "Inter-departmental indoor tournament, team sportsmanship, and student recreation championship." },
   ],
 ];
 
-// Kite silhouette: short top, widest second row, tapering tail. [height, width] per row.
+// Diamond silhouette: narrow top, widening to a full-width peak, then tapering tail. [height, width] per row.
 const collageRowShape: [string, string][] = [
-  ["clamp(150px, 19vw, 210px)", "46%"],
+  ["clamp(150px, 19vw, 210px)", "58%"],
   ["clamp(200px, 28vw, 320px)", "100%"],
-  ["clamp(170px, 22vw, 250px)", "76%"],
-  ["clamp(150px, 19vw, 200px)", "50%"],
+  ["clamp(180px, 23vw, 260px)", "82%"],
+  ["clamp(160px, 20vw, 220px)", "62%"],
 ];
 
 const allCollageItems: EventItem[] = collageRows.flat();
@@ -306,7 +305,7 @@ export const MediaGalleryPage: React.FC = () => {
         setActiveGalleryList(allCollageItems);
         setSelectedEvent(item);
       }}
-      style={{ "--w": item.w ?? 1, "--h": item.h ?? 1, alignSelf: item.align ?? "center" } as React.CSSProperties}
+      style={{ "--w": item.w ?? 1, "--h": item.h ?? 1 } as React.CSSProperties}
       className="collage-item group cursor-pointer overflow-hidden rounded-[10px] sm:rounded-[14px] bg-white dark:bg-slate-900/60 border border-[#e2e8f0]/90 dark:border-white/15 shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_24px_50px_rgba(22,39,64,0.28)] dark:hover:shadow-[0_24px_50px_rgba(0,0,0,0.6)] select-none"
     >
       <img
@@ -424,9 +423,9 @@ export const MediaGalleryPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-[#FAF9F5] dark:bg-transparent min-h-screen pt-24 sm:pt-28 lg:pt-32 transition-colors duration-300">
+    <div className="w-full bg-[#FAF9F5] dark:bg-transparent min-h-screen pt-20 sm:pt-24 transition-colors duration-300">
       {/* Header matching reference screenshot styling with common home page palette */}
-      <div className="text-center max-w-4xl mx-auto pt-2 sm:pt-4 pb-6 sm:pb-8 lg:pb-10 px-4 relative z-30">
+      <div className="text-center max-w-4xl mx-auto pt-2 sm:pt-4 pb-0 px-4 relative z-30">
         <div className="inline-flex items-center justify-center gap-3 mb-2">
           <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
           <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
@@ -445,7 +444,7 @@ export const MediaGalleryPage: React.FC = () => {
       </div>
 
       {/* 3D Illusion Slider Section: infinite continuous loop */}
-      <section className="relative w-full bg-[#FAF9F5] dark:bg-transparent overflow-hidden pb-0">
+      <section className="relative w-full bg-[#FAF9F5] dark:bg-transparent overflow-hidden pb-0 -mt-10 sm:-mt-14 lg:-mt-16">
         {/* Top Solid Curved Overlay */}
         <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none w-full h-[58px] sm:h-[80px] lg:h-[100px] overflow-hidden">
           <svg
@@ -570,7 +569,7 @@ export const MediaGalleryPage: React.FC = () => {
       </section>
 
       {/* Events Section: Artistic Diamond Collage (Format of Attached Reference Photo) */}
-      <section className="relative pt-6 sm:pt-8 lg:pt-10 pb-14 sm:pb-18 lg:pb-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0]/80 dark:border-white/10 overflow-hidden">
+      <section className="relative pt-6 sm:pt-8 lg:pt-10 pb-6 sm:pb-8 lg:pb-10 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0]/80 dark:border-white/10 overflow-hidden">
         {/* Subtle Background Radial Pattern */}
         <div
           className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
@@ -582,7 +581,7 @@ export const MediaGalleryPage: React.FC = () => {
 
         <div className="relative z-10 w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
             <div className="inline-flex items-center justify-center gap-3 mb-3">
               <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
               <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
@@ -600,9 +599,8 @@ export const MediaGalleryPage: React.FC = () => {
             </p>
           </div>
 
-          {/* Organic Diamond Collage: Matches exact layout & random sizes from the attached photo */}
-          {/* Fluid Collage: hover a photo to grow it, the rest of the row reflows */}
-          <div className="flex flex-col gap-2 sm:gap-3 max-w-[1080px] mx-auto select-none">
+          {/* Diamond Collage: rows taper in width to form a diamond silhouette */}
+          <div className="flex flex-col gap-1.5 sm:gap-2 max-w-[1080px] mx-auto select-none">
             {collageRows.map((row, i) => (
               <div key={i} className="collage-row" style={{ "--row-h": collageRowShape[i][0], "--row-w": collageRowShape[i][1] } as React.CSSProperties}>
                 {row.map(renderPhotoCard)}
@@ -613,7 +611,7 @@ export const MediaGalleryPage: React.FC = () => {
       </section>
 
       {/* ─── Gallery Arena Section: Welcome to Gallery Arena of AIMS ─── */}
-      <section className="relative py-16 sm:py-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0] dark:border-white/10 overflow-hidden">
+      <section className="relative pt-8 sm:pt-10 pb-16 sm:pb-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0] dark:border-white/10 overflow-hidden">
         {/* Subtle background radial pattern */}
         <div
           className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
@@ -626,7 +624,7 @@ export const MediaGalleryPage: React.FC = () => {
         <div className="relative z-10 w-full">
           {/* Main Section Header */}
           <div className="w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+            <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
               <div className="inline-flex items-center justify-center gap-3 mb-3">
                 <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
                 <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
