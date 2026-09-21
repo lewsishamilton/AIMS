@@ -74,10 +74,10 @@ export const FacilitiesSection: React.FC = () => {
   const [activeId, setActiveId] = useState<string>("01");
 
   return (
-    <section className="relative py-14 sm:py-16 lg:py-20 bg-[#FAF9F5] overflow-hidden">
+    <section className="relative py-14 sm:py-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
       {/* Subtle Dot Grid Background */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-20"
+        className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
         style={{
           backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
           backgroundSize: "26px 26px",
@@ -88,18 +88,18 @@ export const FacilitiesSection: React.FC = () => {
         {/* Section Header matching Academics/Departments */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <div className="inline-flex items-center justify-center gap-3 mb-3">
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
               CAMPUS AMENITIES
             </span>
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
           </div>
 
-          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[42px] font-bold leading-tight tracking-tight text-[#162740] mb-3.5">
+          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[42px] font-bold leading-tight tracking-tight text-[#162740] dark:text-white mb-3.5">
             Our Facilities
           </h2>
 
-          <p className="text-[#596d86] text-base sm:text-[17px] leading-relaxed font-normal">
+          <p className="text-[#596d86] dark:text-slate-300 text-base sm:text-[17px] leading-relaxed font-normal">
             World-class infrastructure and lifestyle amenities designed to support a balanced and vibrant student life.
           </p>
         </div>
@@ -115,8 +115,8 @@ export const FacilitiesSection: React.FC = () => {
                 onMouseEnter={() => setActiveId(facility.id)}
                 onClick={() => setActiveId(facility.id)}
                 className={cn(
-                  "group relative cursor-pointer overflow-hidden rounded-[20px] sm:rounded-[24px] border border-[#e2e8f0]/80 bg-white min-w-0 min-h-0",
-                  "shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_32px_rgba(15,23,42,0.18)]",
+                  "group relative cursor-pointer overflow-hidden rounded-[20px] sm:rounded-[24px] border border-[#e2e8f0]/80 dark:border-white/15 bg-white dark:bg-slate-900/40 min-w-0 min-h-0",
+                  "shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_32px_rgba(15,23,42,0.18)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]",
                   "transition-[flex,filter] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
                   isActive
                     ? "flex-[3.5] lg:flex-[4] brightness-100"

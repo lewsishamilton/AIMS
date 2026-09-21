@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo.png";
 import logoWhite from "../assets/logo-white.png";
+import { useTheme } from "../context/ThemeContext";
 
 interface SubItem {
     name: string;
@@ -26,7 +27,6 @@ const Navbar = () => {
                     name: "The AIMS Story",
                     path: "#",
                     subItems: [
-
                         { name: "About Hospital", path: "/about-hospital" },
                         { name: "About Institution", path: "/about-institution" },
                         { name: "Awards & Achivements", path: "#" },
@@ -38,7 +38,7 @@ const Navbar = () => {
                     subItems: [
                         { name: "Founder", path: "/founder" },
                         { name: "Management", path: "/management" },
-                    ]
+                    ],
                 },
                 {
                     name: "Committees",
@@ -135,9 +135,10 @@ const Navbar = () => {
         },
     ];
 
+    const { theme, toggleTheme } = useTheme();
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-    const isWhiteTheme = pathname !== "/" || isScrolled;
+    const isWhiteTheme = theme === "dark" ? false : (pathname !== "/" || isScrolled);
 
     React.useEffect(() => {
         const handleScroll = () => {
@@ -165,10 +166,11 @@ const Navbar = () => {
 
     const ChevronRight = () => (
         <svg
-            className={`w-3.5 h-3.5 ml-auto transition-all duration-200 ${isWhiteTheme
-                ? "text-gray-400 group-hover/sub:text-gray-900 group-hover/sub:translate-x-0.5"
-                : "text-white/45 group-hover/sub:text-white group-hover/sub:translate-x-0.5"
-                }`}
+            className={`w-3.5 h-3.5 ml-auto transition-all duration-200 ${
+                isWhiteTheme
+                    ? "text-gray-400 group-hover/sub:text-gray-900 group-hover/sub:translate-x-0.5"
+                    : "text-white/45 group-hover/sub:text-white group-hover/sub:translate-x-0.5"
+            }`}
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -178,10 +180,10 @@ const Navbar = () => {
         </svg>
     );
 
-    // Uniform glass style applied to both Level 1 and Level 2
-    const dropdownCardClass = isWhiteTheme
-        ? "bg-white/98 backdrop-blur-2xl rounded-2xl p-1.5 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.05)]"
-        : "bg-black/40 backdrop-blur-2xl rounded-2xl p-1.5 border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.3)] text-white";
+    // Uniform glass style applied to both Level 1 and Level 2 background layers
+    const dropdownGlassBackground = isWhiteTheme
+        ? "bg-white/98 backdrop-blur-2xl rounded-2xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.12),0_0_0_1px_rgba(0,0,0,0.05)] border border-black/5"
+        : "bg-black/60 glass-dropdown-card backdrop-blur-2xl rounded-2xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.25)]";
 
     const dropdownItemClass = isWhiteTheme
         ? "text-gray-700 hover:text-black hover:bg-gray-100/80 rounded-xl"
@@ -205,27 +207,41 @@ const Navbar = () => {
 
                 {/* Level 1 Dropdown */}
                 {link.dropdown && (
-                    <div className="absolute left-0 top-[calc(100%+4px)] hidden group-hover:block w-64 z-50 animate-macLiquidDropdown origin-top before:absolute before:-top-3 before:left-0 before:w-full before:h-4">
-                        <div className={dropdownCardClass}>
+                    <div className="absolute left-0 top-[calc(100%+4px)] hidden group-hover:block w-64 z-50 before:absolute before:-top-3 before:left-0 before:w-full before:h-4">
+                        {/* Level 1 Independent Glass Background */}
+                        <div
+                            className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
+                            style={{ backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)" }}
+                        />
+
+                        {/* Level 1 Items (Non-nested backdrop container) */}
+                        <div className="p-1.5 relative text-white">
                             {link.dropdown.map((item, itemIdx) => (
                                 <div key={itemIdx} className="relative group/sub">
                                     <Link
                                         to={item.path}
-                                        className={`flex items-center justify-between px-3.5 py-2.5 text-[14px] font-medium transition-all duration-150 ${dropdownItemClass}`}
+                                        className={`flex items-center justify-between px-3.5 py-2.5 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
                                     >
                                         <span>{item.name}</span>
                                         {item.subItems && <ChevronRight />}
                                     </Link>
 
-                                    {/* Level 2 Sub-Dropdown (Identical Styling) */}
+                                    {/* Level 2 Sub-Dropdown (Independent Glass Background) */}
                                     {item.subItems && (
-                                        <div className="absolute left-[calc(100%+4px)] -top-1.5 hidden group-hover/sub:block w-max min-w-56 z-50 animate-macLiquidSubDropdown origin-top-left before:absolute before:top-0 before:-left-3 before:w-4 before:h-full">
-                                            <div className={dropdownCardClass}>
+                                        <div className="absolute left-[calc(100%+4px)] -top-1.5 hidden group-hover/sub:block w-max min-w-56 z-50 before:absolute before:top-0 before:-left-3 before:w-4 before:h-full">
+                                            {/* Level 2 Independent Glass Background (Not nested in Level 1 backdrop) */}
+                                            <div
+                                                className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
+                                                style={{ backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)" }}
+                                            />
+
+                                            {/* Level 2 Items */}
+                                            <div className="p-1.5 relative text-white">
                                                 {item.subItems.map((sub, subIdx) => (
                                                     <Link
                                                         key={subIdx}
                                                         to={sub.path}
-                                                        className={`block whitespace-nowrap px-3.5 py-2 text-[14px] font-medium transition-all duration-150 ${dropdownItemClass}`}
+                                                        className={`block whitespace-nowrap px-3.5 py-2 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
                                                     >
                                                         {sub.name}
                                                     </Link>
@@ -245,43 +261,29 @@ const Navbar = () => {
     return (
         <>
             <style>{`
-                @keyframes macLiquidDropdown {
-                    0% {
-                        opacity: 0;
-                        transform: translateY(-4px) scale(0.98);
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: translateY(0) scale(1);
-                    }
-                }
-
-                @keyframes macLiquidSubDropdown {
-                    0% {
-                        opacity: 0;
-                        transform: translateX(-4px) scale(0.98);
-                    }
-                    100% {
-                        opacity: 1;
-                        transform: translateX(0) scale(1);
-                    }
-                }
-
-                .animate-macLiquidDropdown {
-                    animation: macLiquidDropdown 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                }
-
-                .animate-macLiquidSubDropdown {
-                    animation: macLiquidSubDropdown 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                .glass-dropdown-card {
+                    backdrop-filter: blur(24px);
+                    -webkit-backdrop-filter: blur(24px);
                 }
             `}</style>
 
             <nav
-                className={`fixed top-0 left-0 w-full px-6 md:px-12 lg:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${isWhiteTheme
-                    ? "bg-white/98 backdrop-blur-md shadow-sm text-gray-900"
-                    : "bg-transparent text-white"
-                    }`}
+                className={`fixed top-0 left-0 w-full px-6 md:px-12 lg:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
+                    theme === "dark" ? "text-white" : isWhiteTheme ? "text-gray-900" : "text-white"
+                }`}
             >
+                {/* Navbar Bar Background Layer (Separated so child dropdowns can sample real background backdrop) */}
+                <div
+                    className={`absolute inset-0 -z-10 pointer-events-none transition-all duration-300 ${
+                        theme === "dark"
+                            ? isScrolled
+                                ? "bg-black/40 backdrop-blur-2xl border-b border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.35),inset_0_1px_1px_rgba(255,255,255,0.2)]"
+                                : "bg-transparent border-b border-transparent shadow-none"
+                            : isWhiteTheme
+                            ? "bg-white/98 backdrop-blur-md shadow-sm border-b border-transparent"
+                            : "bg-transparent border-b border-transparent"
+                    }`}
+                />
                 <div className="max-w-7xl mx-auto flex items-center justify-between sm:justify-center">
                     {/* Left Desktop Links */}
                     <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
@@ -289,27 +291,88 @@ const Navbar = () => {
                     </div>
 
                     {/* Center Logo */}
-                    <Link to="/#" className="flex items-center justify-center mx-6 py-1.5">
+                    <Link to="/#" className="flex items-center justify-center mx-6 py-2">
                         <img
                             src={isWhiteTheme ? logo : logoWhite}
                             alt="Arundathi Institute of Medical Sciences & Hospital"
-                            className="h-[50px] md:h-[55px] w-auto object-contain transition-all duration-300 drop-shadow-sm"
+                            className="h-10 md:h-11 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
                         />
                     </Link>
 
-                    {/* Right Desktop Links */}
+                    {/* Right Desktop Links & Theme Toggle */}
                     <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
                         {rightLinks.map(renderDesktopNavItem)}
+
+                        {/* Theme Toggle (Desktop) */}
+                        <button
+                            onClick={toggleTheme}
+                            aria-label="Toggle Glass Theme"
+                            title={theme === "dark" ? "Switch to Soft Light Theme" : "Switch to Glass Dark Theme"}
+                            className={`ml-3 flex items-center w-14 h-7 p-1 rounded-full transition-all duration-300 cursor-pointer ${
+                                theme === "dark"
+                                    ? "bg-black/50 backdrop-blur-xl border border-white/30 shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.25)]"
+                                    : "bg-black/10 hover:bg-black/15 border border-black/10 backdrop-blur-sm"
+                            }`}
+                        >
+                            <span
+                                className={`flex items-center justify-center w-5 h-5 rounded-full transition-all duration-300 transform shadow-sm ${
+                                    theme === "dark"
+                                        ? "translate-x-7 bg-white text-[#0a1120]"
+                                        : "translate-x-0 bg-white text-amber-500 shadow"
+                                }`}
+                            >
+                                {theme === "dark" ? (
+                                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                    </svg>
+                                ) : (
+                                    <svg className="w-3.2 h-3.2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                                    </svg>
+                                )}
+                            </span>
+                        </button>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="flex md:hidden py-3">
+                    {/* Mobile Controls: Theme Toggle & Menu Button */}
+                    <div className="flex md:hidden items-center gap-2.5 py-3">
+                        <button
+                            onClick={toggleTheme}
+                            aria-label="Toggle Glass Theme"
+                            className={`flex items-center w-12 h-6 p-0.5 rounded-full transition-all duration-300 cursor-pointer ${
+                                theme === "dark"
+                                    ? "bg-black/50 backdrop-blur-xl border border-white/30"
+                                    : "bg-black/10 border border-black/10"
+                            }`}
+                        >
+                            <span
+                                className={`flex items-center justify-center w-5 h-5 rounded-full transition-all duration-300 transform shadow-sm ${
+                                    theme === "dark"
+                                        ? "translate-x-6 bg-white text-[#0a1120]"
+                                        : "translate-x-0 bg-white text-amber-500"
+                                }`}
+                            >
+                                {theme === "dark" ? (
+                                    <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                    </svg>
+                                ) : (
+                                    <svg className="w-2.5 h-2.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                                    </svg>
+                                )}
+                            </span>
+                        </button>
+
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className={`p-2 rounded-full focus:outline-none transition-all duration-200 ${isWhiteTheme
-                                ? "text-gray-900 hover:bg-gray-100"
-                                : "text-white bg-black/25 backdrop-blur-md border border-white/20 hover:bg-black/40"
-                                }`}
+                            className={`p-2 rounded-full focus:outline-none transition-all duration-200 ${
+                                theme === "dark"
+                                    ? "text-white bg-black/25 backdrop-blur-md border border-white/20 hover:bg-black/40"
+                                    : isWhiteTheme
+                                    ? "text-gray-900 hover:bg-gray-100"
+                                    : "text-white bg-black/25 backdrop-blur-md border border-white/20 hover:bg-black/40"
+                            }`}
                             aria-label="Toggle Menu"
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -323,18 +386,25 @@ const Navbar = () => {
 
                 {/* Mobile Drawer */}
                 <div
-                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 md:hidden overflow-y-auto ${isMenuOpen ? "translate-x-0" : "-translate-x-full"
-                        } ${isWhiteTheme
+                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 md:hidden overflow-y-auto ${
+                        isMenuOpen ? "translate-x-0" : "-translate-x-full"
+                    } ${
+                        theme === "dark"
+                            ? "bg-[#070d18]/95 backdrop-blur-2xl text-white border-r border-white/10"
+                            : isWhiteTheme
                             ? "bg-white text-gray-900 shadow-2xl"
                             : "bg-black/80 backdrop-blur-2xl text-white border-r border-white/10"
-                        }`}
+                    }`}
                 >
                     <button
                         aria-label="Close menu"
-                        className={`absolute top-6 right-6 p-2 rounded-full ${isWhiteTheme
-                            ? "text-gray-800 hover:bg-gray-100"
-                            : "text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20"
-                            }`}
+                        className={`absolute top-6 right-6 p-2 rounded-full ${
+                            theme === "dark"
+                                ? "text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20"
+                                : isWhiteTheme
+                                ? "text-gray-800 hover:bg-gray-100"
+                                : "text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20"
+                        }`}
                         onClick={() => setIsMenuOpen(false)}
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
@@ -346,10 +416,11 @@ const Navbar = () => {
                     {[...leftLinks, ...rightLinks].map((link, idx) => (
                         <div key={idx} className="w-full flex flex-col gap-2">
                             <span
-                                className={`font-bold border-b pb-1 ${isWhiteTheme
-                                    ? "text-gray-900 border-gray-200"
-                                    : "text-white border-white/20"
-                                    }`}
+                                className={`font-bold border-b pb-1 ${
+                                    isWhiteTheme
+                                        ? "text-gray-900 border-gray-200"
+                                        : "text-white border-white/20"
+                                }`}
                             >
                                 {link.name}
                             </span>
@@ -360,33 +431,37 @@ const Navbar = () => {
                                             <Link
                                                 to={item.path}
                                                 onClick={() => setIsMenuOpen(false)}
-                                                className={`text-[14px] font-semibold py-0.5 transition-colors ${isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"
-                                                    }`}
+                                                className={`text-xs font-semibold py-0.5 transition-colors ${
+                                                    isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"
+                                                }`}
                                             >
                                                 {item.name}
                                             </Link>
                                         ) : (
                                             <span
-                                                className={`text-[14px] font-semibold ${isWhiteTheme ? "text-gray-800" : "text-white/90"
-                                                    }`}
+                                                className={`text-xs font-semibold ${
+                                                    isWhiteTheme ? "text-gray-800" : "text-white/90"
+                                                }`}
                                             >
                                                 {item.name}
                                             </span>
                                         )}
                                         {item.subItems && (
                                             <div
-                                                className={`pl-3 border-l flex flex-col gap-1 ${isWhiteTheme ? "border-gray-200" : "border-white/20"
-                                                    }`}
+                                                className={`pl-3 border-l flex flex-col gap-1 ${
+                                                    isWhiteTheme ? "border-gray-200" : "border-white/20"
+                                                }`}
                                             >
                                                 {item.subItems.map((sub, subIdx) => (
                                                     <Link
                                                         key={subIdx}
                                                         to={sub.path}
                                                         onClick={() => setIsMenuOpen(false)}
-                                                        className={`text-[14px] font-normal py-0.5 transition-colors ${isWhiteTheme
-                                                            ? "text-gray-600 hover:text-black"
-                                                            : "text-white/70 hover:text-white"
-                                                            }`}
+                                                        className={`text-xs font-normal py-0.5 transition-colors ${
+                                                            isWhiteTheme
+                                                                ? "text-gray-600 hover:text-black"
+                                                                : "text-white/70 hover:text-white"
+                                                        }`}
                                                     >
                                                         {sub.name}
                                                     </Link>

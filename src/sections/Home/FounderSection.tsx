@@ -9,7 +9,7 @@ const MAIN_QUOTE =
 
 const FounderSection: React.FC = () => {
   return (
-    <section id="founder" className="relative scroll-mt-20 bg-white overflow-hidden py-16 sm:py-24 lg:py-28 tracking-[0.015em]">
+    <section id="founder" className="relative scroll-mt-20 bg-white dark:bg-transparent overflow-hidden py-16 sm:py-24 lg:py-28 tracking-[0.015em] transition-colors duration-300">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Section Header (Centered) */}
         <motion.div
@@ -20,13 +20,13 @@ const FounderSection: React.FC = () => {
           className="text-center mb-10 sm:mb-14"
         >
           <div className="inline-flex items-center justify-center gap-3 mb-3">
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
               LEADERSHIP
             </span>
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
           </div>
-          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351]">
+          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351] dark:text-white">
             Our Founder
           </h2>
         </motion.div>
@@ -40,7 +40,7 @@ const FounderSection: React.FC = () => {
             viewport={{ once: true, amount: 0.25, margin: "0px 0px -120px 0px" }}
             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
           >
-            <div className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] bg-[#f7fafc] shadow-[0_14px_38px_rgba(8,44,76,0.10)] group">
+            <div className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] dark:border-white/15 bg-[#f7fafc] dark:bg-white/5 shadow-[0_14px_38px_rgba(8,44,76,0.10)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
               <img
                 src={founderImg}
                 alt="Marri Rajasekhar Reddy — Founder, AIMS"
@@ -67,9 +67,9 @@ const FounderSection: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 1, 0.5, 1] }}
             className="flex flex-col justify-center"
           >
-            {/* Main Quote Block with #F3F4F6 background */}
-            <div className="relative p-6 sm:p-7 rounded-[22px] bg-[#F3F4F6] border-l-[4px] border-[#1f3351] shadow-xs">
-              <blockquote className="font-['Manrope',sans-serif] text-base sm:text-lg lg:text-[19px] font-medium leading-[1.65] tracking-[0.005em] text-[#1f3351]">
+            {/* Main Quote Block */}
+            <div className="relative p-6 sm:p-7 rounded-[22px] bg-[#F3F4F6] dark:bg-white/[0.04] border-l-[4px] border-[#1f3351] dark:border-teal-400 dark:border-y dark:border-r dark:border-white/10 shadow-xs dark:shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
+              <blockquote className="font-['Manrope',sans-serif] text-base sm:text-lg lg:text-[19px] font-medium leading-[1.65] tracking-[0.005em] text-[#1f3351] dark:text-slate-100">
                 “{MAIN_QUOTE}”
               </blockquote>
             </div>
@@ -78,7 +78,7 @@ const FounderSection: React.FC = () => {
             <div className="mt-5 flex justify-start">
               <Link
                 to="/founder"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1f3351] text-white text-xs sm:text-sm font-semibold hover:bg-[#152338] shadow-sm hover:shadow-md active:scale-95 transition-all duration-200 cursor-pointer group"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1f3351] dark:bg-teal-500 hover:bg-[#152338] dark:hover:bg-teal-400 text-white text-xs sm:text-sm font-semibold shadow-sm hover:shadow-md active:scale-95 transition-all duration-200 cursor-pointer group"
               >
                 <span>Read More</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />

@@ -1,8 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Manrope:wght@200..800&family=Playwrite+US+Modern:wght@100..400&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 html {
   scroll-behavior: smooth;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+  background-color: #070d18;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(31, 51, 81, 0.4), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 100% 60%, rgba(13, 35, 70, 0.3), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 0% 80%, rgba(15, 23, 42, 0.35), transparent 60%);
+  background-attachment: fixed;
+  color: #f8fafc;
 }
 
 @theme {
@@ -11,4 +31,3 @@ html {
   --color-white: #fbfaf5;
   --font-sans: "DM Sans", sans-serif;
 }
-
