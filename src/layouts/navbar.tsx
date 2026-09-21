@@ -153,6 +153,44 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const isWhiteTheme = theme === "dark" ? false : (pathname !== "/" || isScrolled);
 
+    // Hover-intent state: a short grace delay before closing/switching so a brief
+    // diagonal move off the menu (e.g. reaching a nested flyout) doesn't slam it shut.
+    const [openMenuKey, setOpenMenuKey] = React.useState<string | null>(null);
+    const [openSubIdx, setOpenSubIdx] = React.useState<number | null>(null);
+    const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+    const subOpenTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+    const cancelClose = () => {
+        if (closeTimer.current) {
+            clearTimeout(closeTimer.current);
+            closeTimer.current = null;
+        }
+    };
+    const scheduleClose = () => {
+        cancelClose();
+        closeTimer.current = setTimeout(() => {
+            setOpenMenuKey(null);
+            setOpenSubIdx(null);
+        }, 250);
+    };
+    const openMenu = (key: string) => {
+        cancelClose();
+        setOpenMenuKey((prev) => {
+            if (prev !== key) setOpenSubIdx(null);
+            return key;
+        });
+    };
+    const requestSubOpen = (idx: number) => {
+        if (subOpenTimer.current) clearTimeout(subOpenTimer.current);
+        subOpenTimer.current = setTimeout(() => setOpenSubIdx(idx), 150);
+    };
+    const cancelSubOpen = () => {
+        if (subOpenTimer.current) {
+            clearTimeout(subOpenTimer.current);
+            subOpenTimer.current = null;
+        }
+    };
+
     React.useEffect(() => {
         const handleScroll = () => {
             const scrollPos = window.scrollY || document.documentElement.scrollTop;
@@ -207,8 +245,16 @@ const Navbar = () => {
             ? "text-gray-800 hover:text-black group-hover:bg-gray-100/90"
             : "text-white/90 hover:text-white group-hover:bg-white/15 group-hover:backdrop-blur-xl group-hover:border-white/25 group-hover:shadow-[0_4px_20px_rgba(0,0,0,0.15),inset_0_1px_0_0_rgba(255,255,255,0.35)]";
 
+        const menuKey = `${alignRight ? "r" : "l"}-${idx}`;
+        const isMenuOpenState = openMenuKey === menuKey;
+
         return (
-            <div key={idx} className="relative group inline-flex items-center">
+            <div
+                key={idx}
+                className="relative group inline-flex items-center"
+                onMouseEnter={() => openMenu(menuKey)}
+                onMouseLeave={scheduleClose}
+            >
                 {/* Menu Button */}
                 <Link
                     to={link.path}
@@ -220,7 +266,7 @@ const Navbar = () => {
 
                 {/* Level 1 Dropdown */}
                 {link.dropdown && (
-                    <div className={`absolute ${alignRight ? "right-0" : "left-0"} top-[calc(100%+4px)] hidden group-hover:block w-64 z-50 before:absolute before:-top-3 before:left-0 before:w-full before:h-4`}>
+                    <div className={`absolute ${alignRight ? "right-0" : "left-0"} top-[calc(100%+4px)] ${isMenuOpenState ? "block" : "hidden"} w-64 z-50 before:absolute before:-top-3 before:left-0 before:w-full before:h-4`}>
                         {/* Level 1 Independent Glass Background */}
                         <div
                             className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
@@ -230,7 +276,15 @@ const Navbar = () => {
                         {/* Level 1 Items (Non-nested backdrop container) */}
                         <div className="p-1.5 relative text-white">
                             {link.dropdown.map((item, itemIdx) => (
-                                <div key={itemIdx} className="relative group/sub">
+                                <div
+                                    key={itemIdx}
+                                    className="relative group/sub"
+                                    onMouseEnter={() => {
+                                        cancelClose();
+                                        requestSubOpen(itemIdx);
+                                    }}
+                                    onMouseLeave={cancelSubOpen}
+                                >
                                     <Link
                                         to={item.path}
                                         className={`flex items-center justify-between px-3.5 py-2.5 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
@@ -241,7 +295,7 @@ const Navbar = () => {
 
                                     {/* Level 2 Sub-Dropdown (Independent Glass Background) */}
                                     {item.subItems && (
-                                        <div className={`absolute ${alignRight ? "right-[calc(100%+4px)]" : "left-[calc(100%+4px)]"} -top-1.5 hidden group-hover/sub:block w-max min-w-56 z-50 before:absolute before:top-0 ${alignRight ? "-right-3" : "-left-3"} before:w-4 before:h-full`}>
+                                        <div className={`absolute left-[calc(100%+4px)] -top-1.5 ${openSubIdx === itemIdx ? "block" : "hidden"} w-max min-w-56 z-50 before:absolute before:top-0 before:-left-3 before:w-4 before:h-full`}>
                                             {/* Level 2 Independent Glass Background (Not nested in Level 1 backdrop) */}
                                             <div
                                                 className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
