@@ -67,6 +67,19 @@ export default function Footer() {
                   <span>+91 80556 67888</span>
                 </a>
                 <a
+                  href="tel:+918179432491"
+                  className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
+                >
+                  <svg
+                    className="w-4 h-4 text-white/70 shrink-0"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M2 3.5A1.5 1.5 0 013.5 2h2.1a1 1 0 01.98.8l.9 4.5a1 1 0 01-.6 1.14l-2.08.83a13.1 13.1 0 005.9 5.9l.83-2.08a1 1 0 011.14-.6l4.5.9a1 1 0 01.8.98v2.1a1.5 1.5 0 01-1.5 1.5h-1C9.2 19 2 11.65 2 5v-1.5z" />
+                  </svg>
+                  <span>Ambulance: +91 81794 32491</span>
+                </a>
+                <a
                   href="mailto:arundathihospital@gmail.com"
                   className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
                 >

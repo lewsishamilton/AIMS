@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import logo from "../../assets/logo.png";
 import logoWhite from "../../assets/logo-white.png";
@@ -11,6 +11,8 @@ import {
   CheckCircle2,
   Loader2,
   AlertCircle,
+  ChevronDown,
+  Check,
 } from "lucide-react";
 
 export const ContactSection: React.FC = () => {
@@ -25,6 +27,29 @@ export const ContactSection: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const subjectOptions = [
+    "General Inquiry",
+    "Academic Admissions (MBBS / PG)",
+    "Hospital & Patient Appointment",
+    "Allied Health Sciences / Nursing",
+    "Administrative Support",
+  ];
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -44,7 +69,7 @@ export const ContactSection: React.FC = () => {
     setErrorMessage(null);
     setIsSubmitted(false);
 
-    const targetEmail = "lewsishamilton@gmail.com";
+    const targetEmail = "arundathihospital@gmail.com";
     const subjectLine = formData.subject
       ? `[AIMS Inquiry] ${formData.subject} - from ${formData.name}`
       : `[AIMS Inquiry] New Contact Message from ${formData.name}`;
@@ -98,7 +123,7 @@ export const ContactSection: React.FC = () => {
         "FormSubmit encountered an error, triggering mail client fallback:",
         err
       );
-      // Fallback: trigger user's default email client pre-filled to lewsishamilton@gmail.com
+      // Fallback: trigger user's default email client pre-filled to arundathihospital@gmail.com
       const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(
         subjectLine
       )}&body=${encodeURIComponent(
@@ -146,18 +171,18 @@ export const ContactSection: React.FC = () => {
         </motion.div>
 
         {/* Two-Column Grid: Contact Information & Contact Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           {/* ─── Left Column: Official Contact Information ─── */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 flex flex-col gap-6"
+            className="lg:col-span-5 flex flex-col h-full"
           >
             {/* Main Info Card */}
-            <div className="rounded-[24px] border border-[#dce8ee] dark:border-white/10 bg-[#fbfaf5] dark:bg-white/[0.04] dark:backdrop-blur-xl p-7 sm:p-9 shadow-xs dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
-              <div className="mb-6 pb-5 border-b border-[#dce8ee] dark:border-white/10 flex items-center">
+            <div className="rounded-[24px] border border-[#dce8ee] dark:border-white/10 bg-[#fbfaf5] dark:bg-white/[0.04] dark:backdrop-blur-xl p-7 sm:p-9 shadow-xs dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] h-full flex flex-col justify-between">
+              <div className="mb-6 pb-5 border-b border-[#dce8ee] dark:border-white/10 flex items-center justify-center">
                 <img
                   src={logo}
                   alt="Arundathi Institute of Medical Sciences & Hospital"
@@ -170,7 +195,7 @@ export const ContactSection: React.FC = () => {
                 />
               </div>
 
-              <div className="space-y-6">
+              <div className="flex-1 flex flex-col justify-around gap-6">
                 {/* Location */}
                 <div className="flex items-start gap-4">
                   <div className="w-9 h-9 rounded-lg bg-white dark:bg-white/10 border border-[#dce8ee] dark:border-white/15 text-[#1f3351] dark:text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
@@ -202,8 +227,15 @@ export const ContactSection: React.FC = () => {
                     >
                       +91 80556 67888
                     </a>
-                    <span className="text-xs text-[#62748a] dark:text-slate-400">
-                      Emergency services available 24/7
+                    <a
+                      href="tel:+918179432491"
+                      className="text-sm text-[#1f3351] dark:text-teal-300 font-semibold hover:underline block mt-0.5"
+                    >
+                      <span className="text-xs font-medium text-[#4b6382] dark:text-teal-400 mr-1.5">Ambulance:</span>
+                      +91 81794 32491
+                    </a>
+                    <span className="text-xs text-[#62748a] dark:text-slate-400 block mt-0.5">
+                      Emergency &amp; Ambulance services available 24/7
                     </span>
                   </div>
                 </div>
@@ -218,16 +250,10 @@ export const ContactSection: React.FC = () => {
                       Email Inquiry
                     </span>
                     <a
-                      href="mailto:lewsishamilton@gmail.com"
+                      href="mailto:arundathihospital@gmail.com"
                       className="text-sm text-[#1f3351] dark:text-teal-300 font-semibold hover:underline block mt-0.5 break-all"
                     >
-                      lewsishamilton@gmail.com
-                    </a>
-                    <a
-                      href="mailto:arundathihospital@gmail.com"
-                      className="text-xs text-[#62748a] hover:underline block mt-0.5"
-                    >
-                      Hospital: arundathihospital@gmail.com
+                      arundathihospital@gmail.com
                     </a>
                   </div>
                 </div>
@@ -244,9 +270,6 @@ export const ContactSection: React.FC = () => {
                     <p className="text-sm text-[#1f3351] dark:text-slate-200 font-medium mt-0.5">
                       OPD: Mon - Sat: 8:00 AM - 8:00 PM
                     </p>
-                    <span className="text-xs text-[#62748a] dark:text-slate-400">
-                      Casualty &amp; Trauma: Open 24 Hours
-                    </span>
                   </div>
                 </div>
               </div>
@@ -259,9 +282,9 @@ export const ContactSection: React.FC = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7"
+            className="lg:col-span-7 flex flex-col h-full"
           >
-            <div className="rounded-[24px] border border-[#dce8ee] dark:border-white/10 bg-white dark:bg-white/[0.04] dark:backdrop-blur-xl p-7 sm:p-10 shadow-[0_10px_35px_rgba(13,35,70,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
+            <div className="rounded-[24px] border border-[#dce8ee] dark:border-white/10 bg-white dark:bg-white/[0.04] dark:backdrop-blur-xl p-7 sm:p-10 shadow-[0_10px_35px_rgba(13,35,70,0.04)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] h-full flex flex-col justify-between">
               <h3 className="font-['Manrope',sans-serif] text-xl sm:text-2xl font-bold text-[#1f3351] dark:text-white mb-2">
                 Send Us a Message
               </h3>
@@ -280,8 +303,8 @@ export const ContactSection: React.FC = () => {
                     </span>
                     <span>
                       Thank you for contacting us. Your message has been sent to{" "}
-                      <span className="font-semibold text-emerald-950">
-                        lewsishamilton@gmail.com
+                      <span className="font-semibold text-emerald-950 dark:text-emerald-200">
+                        arundathihospital@gmail.com
                       </span>{" "}
                       and our team will respond to you promptly.
                     </span>
@@ -365,35 +388,81 @@ export const ContactSection: React.FC = () => {
                     />
                   </div>
 
-                  <div>
+                  <div className="relative" ref={dropdownRef}>
                     <label
-                      htmlFor="subject"
+                      id="subject-label"
                       className="block text-xs font-bold uppercase tracking-wider text-[#1f3351] dark:text-slate-200 mb-1.5"
                     >
                       Inquiry Subject
                     </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl bg-[#f8fafc] dark:bg-[#0d1726] border border-[#dce8ee] dark:border-white/15 text-[#1f3351] dark:text-white text-sm focus:bg-white dark:focus:bg-[#0d1726] focus:border-[#1f3351] dark:focus:border-teal-400 focus:ring-2 focus:ring-[#1f3351]/10 outline-none transition-all cursor-pointer"
+                    <button
+                      type="button"
+                      onClick={() => setIsDropdownOpen((prev) => !prev)}
+                      aria-haspopup="listbox"
+                      aria-expanded={isDropdownOpen}
+                      className={`w-full px-4 py-3 rounded-xl bg-[#f8fafc] dark:bg-white/5 border border-[#dce8ee] dark:border-white/15 text-sm flex items-center justify-between transition-all outline-none text-left cursor-pointer ${
+                        isDropdownOpen
+                          ? "border-[#1f3351] dark:border-teal-400 ring-2 ring-[#1f3351]/10 bg-white dark:bg-white/10"
+                          : "hover:border-[#1f3351]/40 dark:hover:border-white/30"
+                      }`}
                     >
-                      <option value="">Select an option</option>
-                      <option value="General Inquiry">General Inquiry</option>
-                      <option value="Academic Admissions (MBBS / PG)">
-                        Academic Admissions (MBBS / PG)
-                      </option>
-                      <option value="Hospital & Patient Appointment">
-                        Hospital &amp; Patient Appointment
-                      </option>
-                      <option value="Allied Health Sciences / Nursing">
-                        Allied Health Sciences / Nursing
-                      </option>
-                      <option value="Administrative Support">
-                        Administrative Support
-                      </option>
-                    </select>
+                      <span
+                        className={
+                          formData.subject
+                            ? "text-[#1f3351] dark:text-white font-medium"
+                            : "text-[#94a3b8] dark:text-slate-400"
+                        }
+                      >
+                        {formData.subject || "Select an option"}
+                      </span>
+                      <ChevronDown
+                        className={`w-4 h-4 text-[#62748a] dark:text-slate-400 transition-transform duration-200 shrink-0 ${
+                          isDropdownOpen
+                            ? "rotate-180 text-[#1f3351] dark:text-teal-400"
+                            : ""
+                        }`}
+                      />
+                    </button>
+
+                    {/* Custom Rounded Dropdown Menu */}
+                    {isDropdownOpen && (
+                      <div
+                        role="listbox"
+                        aria-labelledby="subject-label"
+                        className="absolute z-50 left-0 right-0 mt-2 p-1.5 bg-white dark:bg-[#0f1d32] border border-[#dce8ee] dark:border-white/15 rounded-2xl shadow-xl backdrop-blur-md animate-in fade-in zoom-in-95 duration-150 overflow-hidden"
+                      >
+                        <div className="max-h-60 overflow-y-auto space-y-1">
+                          {subjectOptions.map((option) => {
+                            const isSelected = formData.subject === option;
+                            return (
+                              <button
+                                key={option}
+                                type="button"
+                                role="option"
+                                aria-selected={isSelected}
+                                onClick={() => {
+                                  setFormData((prev) => ({
+                                    ...prev,
+                                    subject: option,
+                                  }));
+                                  setIsDropdownOpen(false);
+                                }}
+                                className={`w-full px-3.5 py-2.5 rounded-xl text-sm font-medium flex items-center justify-between transition-colors text-left cursor-pointer ${
+                                  isSelected
+                                    ? "bg-[#1f3351] text-white dark:bg-teal-500/20 dark:text-teal-300"
+                                    : "text-[#1f3351] dark:text-slate-200 hover:bg-[#f1f5f9] dark:hover:bg-white/10"
+                                }`}
+                              >
+                                <span>{option}</span>
+                                {isSelected && (
+                                  <Check className="w-4 h-4 shrink-0 text-white dark:text-teal-300 ml-2" />
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
 
