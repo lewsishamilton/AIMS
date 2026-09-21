@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import type { ContentBlock } from "../data/types";
+import type { LucideIcon } from "lucide-react";
 import type { PageMedia } from "../data/pageImages";
 import { DEFAULT_MEDIA, PAGE_MEDIA } from "../data/pageImages";
 import OpdSchedule from "./OpdSchedule";
@@ -331,8 +332,9 @@ const TileGrid: React.FC<{
 const ImageCard: React.FC<{
   card: PageCard;
   image?: string;
+  icon?: LucideIcon;
   index: number;
-}> = ({ card, image, index }) => (
+}> = ({ card, image, icon: Icon, index }) => (
   <Reveal delay={(index % 3) * 0.09}>
     <article className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-[#e4ecf2] bg-white shadow-[0_10px_30px_rgba(15,23,42,0.07)] transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_26px_56px_rgba(15,23,42,0.17)] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] dark:backdrop-blur-xl">
       {image ? (
@@ -368,18 +370,27 @@ const ImageCard: React.FC<{
           </div>
         </div>
       ) : (
-        /* No photograph for this one — a coloured rule and the title carry it. */
-        <div className="border-b border-[#e4ecf2] bg-[#f7f9fb] px-6 pb-5 pt-6 sm:px-7 dark:border-white/10 dark:bg-white/[0.03]">
-          <span className="mb-3 block h-1 w-10 rounded-full bg-[#1f3351] dark:bg-teal-400" />
-          {card.badges && card.badges.length > 0 && <Badges items={card.badges} />}
-          <h3 className="font-['Manrope',sans-serif] text-xl font-bold leading-snug text-[#162740] dark:text-white sm:text-[22px]">
-            {card.name}
-          </h3>
-          {card.meta && (
-            <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-[#4b6382] dark:text-teal-400">
-              {card.meta}
-            </p>
+        /* No photograph exists for this one — a glyph panel stands in for it. */
+        <div className="relative overflow-hidden border-b border-[#e4ecf2] bg-gradient-to-br from-[#eef3f8] to-[#dce7f0] px-6 pb-5 pt-6 sm:px-7 dark:border-white/10 dark:from-white/[0.07] dark:to-white/[0.02]">
+          {Icon && (
+            <Icon
+              aria-hidden="true"
+              strokeWidth={1.25}
+              className="pointer-events-none absolute -right-4 -top-4 h-32 w-32 text-[#1f3351]/10 transition-transform duration-700 group-hover:scale-110 dark:text-teal-300/15"
+            />
           )}
+          <span className="relative mb-3 block h-1 w-10 rounded-full bg-[#1f3351] dark:bg-teal-400" />
+          <div className="relative">
+            {card.badges && card.badges.length > 0 && <Badges items={card.badges} />}
+            <h3 className="font-['Manrope',sans-serif] text-xl font-bold leading-snug text-[#162740] dark:text-white sm:text-[22px]">
+              {card.name}
+            </h3>
+            {card.meta && (
+              <p className="mt-1 text-[11px] font-semibold uppercase tracking-wider text-[#4b6382] dark:text-teal-400">
+                {card.meta}
+              </p>
+            )}
+          </div>
         </div>
       )}
 
@@ -545,6 +556,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
                   card={card}
                   index={i}
                   image={card.image ?? media.cardImages?.[card.name]}
+                  icon={media.cardIcons?.[card.name]}
                 />
               ))}
             </div>

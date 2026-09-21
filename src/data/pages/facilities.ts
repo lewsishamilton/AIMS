@@ -1,20 +1,5 @@
 import type { StaticPageDef } from "../../components/StaticPage";
 
-import bloodBankImg from "../../assets/clg-imgs/Blood Bank/1.png";
-import centralLabImg from "../../assets/clg-imgs/Central Lab/1.png";
-import operationRoomImg from "../../assets/clg-imgs/Operation Room/1.png";
-import lobbyImg from "../../assets/clg-imgs/Lobby/1.png";
-import libraryImg from "../../assets/clg-imgs/central library/1.jpg";
-import skillLabImg from "../../assets/clg-imgs/skills/1.png";
-import anatomyLabImg from "../../assets/clg-imgs/Anatomy/1.png";
-import physiologyLabImg from "../../assets/clg-imgs/pysiology/1.png";
-import adminBlockImg from "../../assets/clg-imgs/administration block/1.png";
-import hostelImg from "../../assets/facilities/hostel.jpeg";
-import messImg from "../../assets/facilities/mess.jpeg";
-import gymImg from "../../assets/facilities/gym.jpeg";
-import stadiumImg from "../../assets/facilities/indoor_stadium.jpeg";
-import tableTennisImg from "../../assets/facilities/table_tennis.jpeg";
-import transportImg from "../../assets/facilities/transport.jpeg";
 
 const FACILITY_LINKS = [
   { name: "Hospital Facilities", path: "/facilities/hospital" },
@@ -36,14 +21,12 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
       {
         name: "Outpatient Department",
         meta: "Monday–Saturday, 8:00 AM – 5:00 PM",
-        image: lobbyImg,
         description:
           "Consulting rooms for every clinical and super-speciality department, with registration, billing and pharmacy on the same floor. Wheelchairs and stretchers are available free of charge at the entrance.",
       },
       {
         name: "Inpatient Department",
         meta: "General wards · Private rooms",
-        image: operationRoomImg,
         description:
           "Wards and rooms across medical, surgical, paediatric, obstetric and super-speciality units, with central oxygen supply, central suction and nursing cover round the clock.",
       },
@@ -56,14 +39,12 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
       {
         name: "Blood Bank",
         meta: "Licensed · 24×7",
-        image: bloodBankImg,
         description:
           "Grouping, cross-matching, component separation and storage, supporting surgical, obstetric and trauma transfusion needs, with voluntary donation drives held on campus.",
       },
       {
         name: "Central Laboratory",
         meta: "Pathology · Biochemistry · Microbiology",
-        image: centralLabImg,
         description:
           "An integrated diagnostic laboratory handling several hundred investigations a day, with an emergency panel available round the clock for casualty and intensive care.",
       },
@@ -109,7 +90,6 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
       {
         name: "Central Library",
         meta: "Reference · Lending · Reading halls",
-        image: libraryImg,
         description:
           "A central medical library holding textbooks, reference works, journals and back volumes across every department, with reading halls for students and separate space for faculty.",
       },
@@ -122,7 +102,6 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
       {
         name: "Skill Laboratory",
         meta: "Simulation training",
-        image: skillLabImg,
         description:
           "Mannequin-based simulation for clinical skills — airway management, resuscitation, suturing, catheterisation and obstetric procedures — practised before students reach the bedside.",
       },
@@ -135,14 +114,12 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
       {
         name: "Pre-Clinical Laboratories",
         meta: "Anatomy · Physiology · Biochemistry",
-        image: anatomyLabImg,
         description:
           "Dissection halls with an adequate cadaver supply, histology and osteology facilities, and practical laboratories for physiology and biochemistry.",
       },
       {
         name: "Para-Clinical & Clinical Laboratories",
         meta: "Pathology · Pharmacology · Microbiology",
-        image: physiologyLabImg,
         description:
           "Departmental practical laboratories equipped for microscopy, staining, culture work and experimental pharmacology teaching.",
       },
@@ -161,7 +138,6 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
       {
         name: "Auditorium",
         meta: "Conferences · CME · Ceremonies",
-        image: adminBlockImg,
         description:
           "A full-size auditorium used for continuing medical education, guest lectures, academic conferences, orientation and institutional ceremonies.",
       },
@@ -183,42 +159,36 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
       {
         name: "Hostels",
         meta: "Separate boys' and girls' blocks",
-        image: hostelImg,
         description:
           "On-campus residential accommodation with separate blocks for men and women, wardens in residence, round-the-clock security and power backup, within walking distance of the hospital and college.",
       },
       {
         name: "Food Court & Mess",
         meta: "Hygienic · Nominal prices",
-        image: messImg,
         description:
           "A hostel mess and a campus food court serving meals through the day at nominal prices, with a hygienic cafeteria available to patients' attendants and visitors as well.",
       },
       {
         name: "Gymnasium & Fitness Centre",
         meta: "Open to students and staff",
-        image: gymImg,
         description:
           "An equipped fitness centre on campus — a practical necessity on a course where students keep long and irregular hours.",
       },
       {
         name: "Indoor Stadium",
         meta: "Indoor games",
-        image: stadiumImg,
         description:
           "An indoor sports facility used for badminton, basketball and campus tournaments, and for the annual sports meet.",
       },
       {
         name: "Sports & Games",
         meta: "Outdoor and indoor",
-        image: tableTennisImg,
         description:
           "Outdoor grounds and indoor facilities including table tennis and carrom, with inter-batch and inter-college competitions held through the year.",
       },
       {
         name: "Transportation",
         meta: "College bus service",
-        image: transportImg,
         description:
           "A fleet of college buses running on fixed routes across Hyderabad and the surrounding area for day scholars and staff, with timings aligned to teaching and clinical postings.",
       },
