@@ -296,7 +296,7 @@ const arenaSections: ArenaSectionData[] = [
   {
     id: "operation-room",
     title: "Operation Room",
-    category: "Arundathi Hospital",
+    category: "Surgical Complex",
     group: "hospital",
     description: "State-of-the-art modular surgical suites with laminar airflow and advanced surgical infrastructure.",
     direction: "ltr",
@@ -305,7 +305,7 @@ const arenaSections: ArenaSectionData[] = [
   {
     id: "blood-bank",
     title: "Blood Bank",
-    category: "Arundathi Hospital",
+    category: "Transfusion Services",
     group: "hospital",
     description: "24/7 licensed blood transfusion center with component separation and cryopreservation units.",
     direction: "rtl",
@@ -314,7 +314,7 @@ const arenaSections: ArenaSectionData[] = [
   {
     id: "central-lab",
     title: "Central Lab",
-    category: "Arundathi Hospital",
+    category: "Diagnostic Services",
     group: "hospital",
     description: "Fully automated central diagnostic laboratory operating 24/7 for inpatient and emergency investigations.",
     direction: "ltr",
@@ -323,7 +323,7 @@ const arenaSections: ArenaSectionData[] = [
   {
     id: "lobby",
     title: "Lobby",
-    category: "Arundathi Hospital",
+    category: "Patient Atrium",
     group: "hospital",
     description: "Welcoming, spacious patient reception, registration atrium, and visitor lounge at Arundathi Hospital.",
     direction: "rtl",
@@ -416,23 +416,17 @@ export const MediaGalleryPage: React.FC = () => {
     return (
       <div key={section.id} className="w-full overflow-hidden">
         {/* Row Header */}
-        <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 mb-3.5 sm:mb-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#1f3351] dark:bg-teal-400" />
-            <h3 className="font-['Manrope',sans-serif] text-lg sm:text-xl md:text-2xl font-bold text-[#162740] dark:text-white tracking-tight">
-              {section.title}
-            </h3>
-            <span className="text-[11px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#e8eef3] dark:bg-white/10 text-[#334e68] dark:text-slate-200">
-              {section.images.length} Photos
+        <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-5 text-center">
+          <div className="inline-flex items-center justify-center gap-2 mb-1.5">
+            <span className="w-5 sm:w-6 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+            <span className="text-[11px] sm:text-xs font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
+              {section.category}
             </span>
+            <span className="w-5 sm:w-6 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
           </div>
-
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] font-medium text-[#64748b] dark:text-slate-300 bg-white dark:bg-slate-800/80 px-3 py-1 rounded-full border border-[#e2e8f0] dark:border-white/15 shadow-2xs hidden sm:inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#4b6382] dark:bg-teal-400 animate-pulse" />
-              <span>Scroll: {isLtr ? "Left → Right" : "Right ← Left"}</span>
-            </span>
-          </div>
+          <h3 className="font-['Manrope',sans-serif] text-xl sm:text-2xl md:text-3xl font-bold text-[#162740] dark:text-white tracking-tight">
+            {section.title}
+          </h3>
         </div>
 
         {/* Infinite Scrolling Track */}
@@ -498,9 +492,9 @@ export const MediaGalleryPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-[#FAF9F5] dark:bg-transparent min-h-screen pt-10 sm:pt-14 transition-colors duration-300">
+    <div className="w-full bg-[#FAF9F5] dark:bg-transparent min-h-screen pt-24 sm:pt-28 lg:pt-32 transition-colors duration-300">
       {/* Header matching reference screenshot styling with common home page palette */}
-      <div className="text-center max-w-4xl mx-auto pt-2 sm:pt-4 pb-0 px-4 relative z-30">
+      <div className="text-center max-w-4xl mx-auto pt-2 sm:pt-4 pb-6 sm:pb-8 lg:pb-10 px-4 relative z-30">
         <div className="inline-flex items-center justify-center gap-3 mb-2">
           <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
           <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
@@ -518,9 +512,9 @@ export const MediaGalleryPage: React.FC = () => {
         </p>
       </div>
 
-      {/* 3D Illusion Slider Section: Gap reduced by 20%, infinite continuous loop */}
-      <section className="relative w-full bg-[#FAF9F5] dark:bg-transparent overflow-hidden -mt-6 sm:-mt-9 lg:-mt-11 pb-8 sm:pb-12 lg:pb-14">
-        {/* Top Solid Curved Overlay - Sits 20% closer */}
+      {/* 3D Illusion Slider Section: infinite continuous loop */}
+      <section className="relative w-full bg-[#FAF9F5] dark:bg-transparent overflow-hidden pb-0">
+        {/* Top Solid Curved Overlay */}
         <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none w-full h-[58px] sm:h-[80px] lg:h-[100px] overflow-hidden">
           <svg
             viewBox="0 0 804 50.167"
@@ -528,7 +522,7 @@ export const MediaGalleryPage: React.FC = () => {
             className="w-full h-full block"
           >
             <path
-              className="fill-[#FAF9F5] dark:fill-[#070d18] transition-colors duration-300"
+              className="fill-[#FAF9F5] dark:fill-[#060b14] transition-colors duration-300"
               d="M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z"
             />
           </svg>
@@ -582,15 +576,15 @@ export const MediaGalleryPage: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Solid Curved Overlay - 20% closer */}
-        <div className="absolute bottom-6 sm:bottom-9 lg:bottom-11 left-0 right-0 z-20 pointer-events-none w-full h-[58px] sm:h-[80px] lg:h-[100px] overflow-hidden">
+        {/* Bottom Solid Curved Overlay */}
+        <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none w-full h-[58px] sm:h-[80px] lg:h-[100px] overflow-hidden">
           <svg
             viewBox="0 0 804 50.167"
             preserveAspectRatio="none"
             className="w-full h-full block rotate-180"
           >
             <path
-              className="fill-[#FAF9F5] dark:fill-[#070d18] transition-colors duration-300"
+              className="fill-[#FAF9F5] dark:fill-[#060b14] transition-colors duration-300"
               d="M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z"
             />
           </svg>
@@ -598,7 +592,7 @@ export const MediaGalleryPage: React.FC = () => {
       </section>
 
       {/* Events Section: Artistic Diamond Collage (Format of Attached Reference Photo) */}
-      <section className="relative py-14 sm:py-18 lg:py-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0]/80 dark:border-white/10 overflow-hidden">
+      <section className="relative pt-6 sm:pt-8 lg:pt-10 pb-14 sm:pb-18 lg:pb-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0]/80 dark:border-white/10 overflow-hidden">
         {/* Subtle Background Radial Pattern */}
         <div
           className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
@@ -691,22 +685,24 @@ export const MediaGalleryPage: React.FC = () => {
 
         <div className="relative z-10 w-full">
           {/* Main Section Header */}
-          <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-20 px-4">
-            <div className="inline-flex items-center justify-center gap-3 mb-3">
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-              <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
-                CAMPUS &amp; CLINICAL FACILITIES
-              </span>
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+          <div className="w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+              <div className="inline-flex items-center justify-center gap-3 mb-3">
+                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+                <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
+                  CAMPUS &amp; CLINICAL FACILITIES
+                </span>
+                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+              </div>
+
+              <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[42px] font-black text-[#162740] dark:text-white tracking-tight leading-tight mb-3 uppercase">
+                Welcome to Gallery Arena of AIMS
+              </h2>
+
+              <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
+                Explore dynamic visual streams of our administrative, academic, laboratory, and super-speciality facilities.
+              </p>
             </div>
-
-            <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[46px] font-black text-[#162740] dark:text-white tracking-tight leading-tight mb-4 uppercase">
-              Welcome to Gallery Arena of AIMS
-            </h2>
-
-            <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
-              Explore dynamic visual streams of our administrative, academic, laboratory, and super-speciality facilities with auto-scrolling continuous views.
-            </p>
           </div>
 
           {/* Academic & Campus Sections (Alternating Left-to-Right and Right-to-Left) */}
@@ -735,13 +731,13 @@ export const MediaGalleryPage: React.FC = () => {
                 Modern surgical operation suites, blood bank, advanced pathology, 24/7 central diagnostic lab, and welcoming patient reception atrium.
               </p>
             </div>
+          </div>
 
-            {/* Hospital Sections (Alternating Left-to-Right and Right-to-Left) */}
-            <div className="space-y-12 sm:space-y-16">
-              {arenaSections
-                .filter((s) => s.group === "hospital")
-                .map((section) => renderArenaRow(section))}
-            </div>
+          {/* Hospital Sections (Alternating Left-to-Right and Right-to-Left) */}
+          <div className="space-y-12 sm:space-y-16">
+            {arenaSections
+              .filter((s) => s.group === "hospital")
+              .map((section) => renderArenaRow(section))}
           </div>
         </div>
       </section>
