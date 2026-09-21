@@ -311,6 +311,10 @@ html.dark .aims-news-page .hero-main-title .hero-title-chronicles {
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+  /* line-height here is smaller than font-size, so the background box the text
+     is clipped to cuts the glyph bottoms. Pad it out, negate with margin. */
+  padding-bottom: 0.16em;
+  margin-bottom: -0.16em;
 }
 
 html.dark .rotating-word-item {
