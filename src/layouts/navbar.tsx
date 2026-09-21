@@ -284,7 +284,7 @@ const Navbar = () => {
                             : "bg-transparent border-b border-transparent"
                     }`}
                 />
-                <div className="max-w-7xl mx-auto flex items-center justify-between sm:justify-center">
+                <div className="max-w-7xl mx-auto flex items-center justify-between md:justify-center relative">
                     {/* Left Desktop Links */}
                     <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
                         {leftLinks.map(renderDesktopNavItem)}
@@ -299,16 +299,18 @@ const Navbar = () => {
                         />
                     </Link>
 
-                    {/* Right Desktop Links & Theme Toggle */}
+                    {/* Right Desktop Links */}
                     <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
                         {rightLinks.map(renderDesktopNavItem)}
+                    </div>
 
-                        {/* Theme Toggle (Desktop) */}
+                    {/* Theme Toggle (Desktop - positioned to the right) */}
+                    <div className="hidden md:flex items-center absolute -right-4 md:-right-8 lg:-right-12 xl:-right-16 top-1/2 -translate-y-1/2">
                         <button
                             onClick={toggleTheme}
                             aria-label="Toggle Glass Theme"
                             title={theme === "dark" ? "Switch to Soft Light Theme" : "Switch to Glass Dark Theme"}
-                            className={`ml-3 flex items-center w-14 h-7 p-1 rounded-full transition-all duration-300 cursor-pointer ${
+                            className={`flex items-center w-14 h-7 p-1 rounded-full transition-all duration-300 cursor-pointer ${
                                 theme === "dark"
                                     ? "bg-black/50 backdrop-blur-xl border border-white/30 shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.25)]"
                                     : "bg-black/10 hover:bg-black/15 border border-black/10 backdrop-blur-sm"

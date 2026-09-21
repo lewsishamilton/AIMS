@@ -15,14 +15,94 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* ─── Global Background with Glowing Gradients in Dark Mode ─── */
 html.dark body {
-  background-color: #070d18;
+  background-color: #060b14;
   background-image: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(31, 51, 81, 0.4), transparent 70%),
-    radial-gradient(ellipse 60% 40% at 100% 60%, rgba(13, 35, 70, 0.3), transparent 60%),
-    radial-gradient(ellipse 60% 40% at 0% 80%, rgba(15, 23, 42, 0.35), transparent 60%);
+    /* Top luminous teal ambient glow */
+    radial-gradient(ellipse 85% 45% at 50% -5%, rgba(20, 184, 166, 0.16), transparent 60%),
+    /* Mid-right glowing sapphire/cyan accent */
+    radial-gradient(ellipse 65% 50% at 95% 30%, rgba(13, 148, 136, 0.12), transparent 55%),
+    /* Mid-left deep cosmic ocean glow */
+    radial-gradient(ellipse 70% 55% at 5% 55%, rgba(20, 184, 166, 0.10), transparent 60%),
+    /* Lower-right rich midnight blue glow */
+    radial-gradient(ellipse 80% 60% at 85% 75%, rgba(31, 51, 81, 0.45), transparent 65%),
+    /* Bottom ambient teal bloom */
+    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(45, 212, 191, 0.08), transparent 60%),
+    /* Deep celestial gradient foundation */
+    linear-gradient(180deg, #070e1c 0%, #050913 35%, #060b17 70%, #040812 100%);
   background-attachment: fixed;
   color: #f8fafc;
+}
+
+/* ─── Glowing Background Overlays for Big Pages ─── */
+html.dark .min-h-screen {
+  position: relative;
+}
+
+/* Subtle glowing backdrop for big page wrappers */
+html.dark .min-h-screen::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle 800px at 50% 0%, rgba(20, 184, 166, 0.07), transparent 70%),
+    radial-gradient(circle 900px at 100% 50%, rgba(13, 35, 70, 0.25), transparent 60%),
+    radial-gradient(circle 700px at 0% 80%, rgba(20, 184, 166, 0.05), transparent 60%);
+  z-index: 0;
+}
+
+/* Ensure content stays above the ambient gradient pseudo-element */
+html.dark .min-h-screen > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Glowing Shadows for Cards & Containers in Dark Mode ─── */
+html.dark [class*="dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"],
+html.dark [class*="dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]"],
+html.dark [class*="dark:shadow-[0_15px_35px_rgba(0,0,0,0.4)]"],
+html.dark [class*="dark:shadow-[0_16px_40px_rgba(0,0,0,0.5)]"],
+html.dark [class*="dark:shadow-[0_10px_30px_rgba(0,0,0,0.3)]"],
+html.dark [class*="dark:shadow-[0_25px_60px_rgba(0,0,0,0.65)]"] {
+  box-shadow: 
+    0 20px 50px -10px rgba(0, 0, 0, 0.7),
+    0 0 30px -4px rgba(20, 184, 166, 0.14),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Interactive Card Glowing Hover Shadows */
+html.dark [class*="dark:shadow-"]:hover,
+html.dark .group:hover [class*="dark:shadow-"],
+html.dark [class*="dark:hover:shadow-"]:hover {
+  box-shadow: 
+    0 25px 65px -10px rgba(0, 0, 0, 0.8),
+    0 0 42px 2px rgba(20, 184, 166, 0.24),
+    inset 0 1px 2px 0 rgba(255, 255, 255, 0.22) !important;
+}
+
+/* Glowing shadow for Hero Stats Bar in dark mode */
+html.dark [class*="dark:bg-black/40"] {
+  box-shadow: 
+    0 20px 50px -10px rgba(0, 0, 0, 0.6),
+    0 0 35px -5px rgba(20, 184, 166, 0.20),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Glowing shadow for Lightbox Modals in dark mode */
+html.dark [class*="animate-modal-scale"] {
+  box-shadow: 
+    0 30px 80px -15px rgba(0, 0, 0, 0.9),
+    0 0 50px 4px rgba(20, 184, 166, 0.28),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.20) !important;
+}
+
+/* Glowing Header Banners in Dark Mode */
+html.dark [class*="dark:bg-[#070f1e]"] {
+  background: 
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(20, 184, 166, 0.18), transparent 70%),
+    linear-gradient(180deg, #09152b 0%, #050b16 100%) !important;
 }
 
 @theme {
