@@ -115,6 +115,7 @@ const Navbar = () => {
                 },
                 { name: "Emergency & Trauma", path: "#" },
                 { name: "Diagnostics & Imaging", path: "#" },
+                { name: "Machines & Equipment", path: "/machines-equipment" },
             ],
         },
         {
