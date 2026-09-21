@@ -55,6 +55,32 @@ export default function FounderPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-transparent text-[#1f3351] dark:text-white tracking-[0.015em] pt-28 lg:pt-36 pb-24 transition-colors duration-300">
       <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-16">
+        {/* ─── Page Header (Centered, Above Photo) ─── */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center mb-10 sm:mb-14"
+        >
+          {/* Flanked Kicker from Home Page */}
+          <div className="flex items-center justify-center gap-3 mb-3.5">
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
+              LEADERSHIP
+            </span>
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+          </div>
+
+          {/* Name Heading */}
+          <h1 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1f3351] dark:text-white leading-[1.18] tracking-tight mb-2 text-center">
+            Marri Rajasekhar Reddy
+          </h1>
+
+          <p className="text-sm sm:text-base font-semibold text-[#4b6382] dark:text-teal-200 tracking-wide text-center">
+            Founder · Arundathi Institute of Medical Sciences & Hospital
+          </p>
+        </motion.div>
+
         {/* ─── Top Two-Column Section (Bigger Photo on Left, Content on Right) ─── */}
         <div className="grid grid-cols-1 lg:grid-cols-[420px_1fr] xl:grid-cols-[460px_1fr] gap-10 lg:gap-14 xl:gap-16 items-start mb-16 sm:mb-20">
           {/* Left: Founder Photo (Enlarged) */}
@@ -93,42 +119,8 @@ export default function FounderPage() {
             transition={{ duration: 0.6 }}
             className="flex flex-col justify-center"
           >
-            {/* Flanked Kicker from Home Page */}
-            <div className="inline-flex items-center gap-3 mb-3.5">
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-              <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
-                LEADERSHIP
-              </span>
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-            </div>
-
-            {/* Name Heading */}
-            <h1 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1f3351] dark:text-white leading-[1.18] tracking-tight mb-2">
-              Marri Rajasekhar Reddy
-            </h1>
-
-            <p className="text-sm sm:text-base font-semibold text-[#4b6382] dark:text-teal-200 mb-6 tracking-wide">
-              Founder · Arundathi Institute of Medical Sciences & Hospital
-            </p>
-
-            {/* Social Media Links - Round Icon-Only Buttons */}
-            <div className="flex items-center gap-3.5 sm:gap-4 mb-8">
-              {socialLinks.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={item.name}
-                  title={item.name}
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center bg-[#f8fafc] dark:bg-white/10 border-2 border-[#dce8ee] dark:border-white/15 text-[#1f3351] dark:text-white hover:bg-[#1f3351] dark:hover:bg-teal-500 hover:text-white dark:hover:text-white dark:hover:border-teal-400 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1 active:scale-95 group"
-                >
-                  {item.icon}
-                </a>
-              ))}
-            </div>
             {/* Main Quote Block */}
-            <div className="relative p-6 sm:p-7 rounded-[22px] bg-[#F3F4F6] dark:bg-white/[0.04] border-l-[4px] border-[#1f3351] dark:border-teal-400 dark:border-y dark:border-r dark:border-white/10 shadow-xs dark:shadow-[0_10px_30px_rgba(0,0,0,0.3)] my-6 sm:my-7">
+            <div className="relative p-6 sm:p-7 rounded-[22px] bg-[#F3F4F6] dark:bg-white/[0.04] border-l-[4px] border-[#1f3351] dark:border-teal-400 dark:border-y dark:border-r dark:border-white/10 shadow-xs dark:shadow-[0_10px_30px_rgba(0,0,0,0.3)] mb-6 sm:mb-7">
               <blockquote className="font-['Manrope',sans-serif] text-base sm:text-lg lg:text-[19px] font-medium leading-[1.65] tracking-[0.005em] text-[#1f3351] dark:text-slate-100">
                 “It’s the promise that I made to my mother, that drives me to resolutely work for turning the hospital into an effective tool for ultimately transforming the lives of people who otherwise are reeling under the burden of unaffordable healthcare.”
               </blockquote>
@@ -150,6 +142,23 @@ export default function FounderPage() {
               <p className="text-base sm:text-[17px] text-[#4b6382] dark:text-slate-300 font-normal leading-[1.8]">
                 Here we have assembled a team of highly skilled and compassionate healthcare who too share the noble dream of providing quality healthcare in affordable cost. They, with all their passion and dedication, are striving relentlessly to ensure a truly nurturing environment with sincere touch of personalized healthcare to help the patients in all possible manner.
               </p>
+            </div>
+
+            {/* Social Media Links - Round Icon-Only Buttons */}
+            <div className="flex items-center gap-3.5 sm:gap-4 mt-10">
+              {socialLinks.map((item) => (
+                <a
+                  key={item.name}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={item.name}
+                  title={item.name}
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center bg-[#f8fafc] dark:bg-white/10 border-2 border-[#dce8ee] dark:border-white/15 text-[#1f3351] dark:text-white hover:bg-[#1f3351] dark:hover:bg-teal-500 hover:text-white dark:hover:text-white dark:hover:border-teal-400 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1 active:scale-95 group"
+                >
+                  {item.icon}
+                </a>
+              ))}
             </div>
           </motion.div>
         </div>

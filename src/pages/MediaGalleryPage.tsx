@@ -519,13 +519,36 @@ export const MediaGalleryPage: React.FC = () => {
           <svg
             viewBox="0 0 804 50.167"
             preserveAspectRatio="none"
-            className="w-full h-full block"
+            className="w-full h-full block dark:hidden"
           >
             <path
-              className="fill-[#FAF9F5] dark:fill-[#060b14] transition-colors duration-300"
+              className="fill-[#FAF9F5]"
               d="M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z"
             />
           </svg>
+
+          {/* In dark mode: matches the page background seamlessly using fixed attachment and curve mask */}
+          <div
+            className="hidden dark:block w-full h-full"
+            style={{
+              backgroundColor: "#060b14",
+              backgroundImage: `
+                radial-gradient(ellipse 85% 45% at 50% -5%, rgba(20, 184, 166, 0.16), transparent 60%),
+                radial-gradient(ellipse 65% 50% at 95% 30%, rgba(13, 148, 136, 0.12), transparent 55%),
+                radial-gradient(ellipse 70% 55% at 5% 55%, rgba(20, 184, 166, 0.10), transparent 60%),
+                radial-gradient(ellipse 80% 60% at 85% 75%, rgba(31, 51, 81, 0.45), transparent 65%),
+                radial-gradient(ellipse 60% 40% at 50% 100%, rgba(45, 212, 191, 0.08), transparent 60%),
+                linear-gradient(180deg, #070e1c 0%, #050913 35%, #060b17 70%, #040812 100%)
+              `,
+              backgroundAttachment: "fixed",
+              maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 804 50.167' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z'/%3E%3C/svg%3E")`,
+              WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 804 50.167' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z'/%3E%3C/svg%3E")`,
+              maskSize: "100% 100%",
+              WebkitMaskSize: "100% 100%",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+            }}
+          />
         </div>
 
         {/* Flat Photos Slider with Never-Ending Infinite Loop */}
@@ -581,13 +604,36 @@ export const MediaGalleryPage: React.FC = () => {
           <svg
             viewBox="0 0 804 50.167"
             preserveAspectRatio="none"
-            className="w-full h-full block rotate-180"
+            className="w-full h-full block dark:hidden rotate-180"
           >
             <path
-              className="fill-[#FAF9F5] dark:fill-[#060b14] transition-colors duration-300"
+              className="fill-[#FAF9F5]"
               d="M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z"
             />
           </svg>
+
+          {/* In dark mode: matches the page background seamlessly using fixed attachment and curve mask */}
+          <div
+            className="hidden dark:block w-full h-full rotate-180"
+            style={{
+              backgroundColor: "#060b14",
+              backgroundImage: `
+                radial-gradient(ellipse 85% 45% at 50% -5%, rgba(20, 184, 166, 0.16), transparent 60%),
+                radial-gradient(ellipse 65% 50% at 95% 30%, rgba(13, 148, 136, 0.12), transparent 55%),
+                radial-gradient(ellipse 70% 55% at 5% 55%, rgba(20, 184, 166, 0.10), transparent 60%),
+                radial-gradient(ellipse 80% 60% at 85% 75%, rgba(31, 51, 81, 0.45), transparent 65%),
+                radial-gradient(ellipse 60% 40% at 50% 100%, rgba(45, 212, 191, 0.08), transparent 60%),
+                linear-gradient(180deg, #070e1c 0%, #050913 35%, #060b17 70%, #040812 100%)
+              `,
+              backgroundAttachment: "fixed",
+              maskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 804 50.167' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z'/%3E%3C/svg%3E")`,
+              WebkitMaskImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 804 50.167' preserveAspectRatio='none'%3E%3Cpath fill='%23000' d='M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z'/%3E%3C/svg%3E")`,
+              maskSize: "100% 100%",
+              WebkitMaskSize: "100% 100%",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+            }}
+          />
         </div>
       </section>
 
