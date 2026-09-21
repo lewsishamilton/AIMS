@@ -11,24 +11,24 @@ import { IMAGES_1, IMAGES_2, IMAGES_3 } from "../../assets/stockImages"
 
 export const CampusGallerySection: React.FC = () => {
   return (
-    <div className="relative bg-white">
+    <div className="relative bg-white dark:bg-transparent transition-colors duration-300">
       {/* Heading placed cleanly above the scroll container */}
       <ContainerStagger className="relative z-20 place-self-center px-6 pt-12 pb-4 text-center">
         <ContainerAnimated>
           <div className="inline-flex items-center justify-center gap-3 mb-3">
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
               MEDIA GALLERY
             </span>
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
           </div>
-          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351]">
+          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351] dark:text-white">
             Campus & Infrastructure
           </h2>
         </ContainerAnimated>
 
         <ContainerAnimated className="mt-4">
-          <p className="leading-normal tracking-tight text-[#62748a] max-w-xl mx-auto text-base sm:text-lg">
+          <p className="leading-normal tracking-tight text-[#62748a] dark:text-slate-300 max-w-xl mx-auto text-base sm:text-lg">
             A glimpse into the life, modern facilities, and learning environment at AIMS.
           </p>
         </ContainerAnimated>

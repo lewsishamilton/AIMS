@@ -20,7 +20,7 @@ const ShortCard: React.FC<ShortCardProps> = ({ short, onClick }) => {
   return (
     <div
       onClick={() => onClick(short.id)}
-      className="group relative w-[135px] sm:w-[155px] lg:w-[170px] aspect-[9/16] rounded-xl sm:rounded-2xl overflow-hidden border border-[#dce8ee]/80 bg-neutral-900 shadow-sm hover:shadow-[0_14px_30px_rgba(8,44,76,0.15)] cursor-pointer transition-all duration-300 hover:scale-[1.03] shrink-0 select-none"
+      className="group relative w-[135px] sm:w-[155px] lg:w-[170px] aspect-[9/16] rounded-xl sm:rounded-2xl overflow-hidden border border-[#dce8ee]/80 dark:border-white/15 bg-neutral-900 shadow-sm hover:shadow-[0_14px_30px_rgba(8,44,76,0.15)] dark:hover:shadow-[0_20px_40px_rgba(0,0,0,0.6)] cursor-pointer transition-all duration-300 hover:scale-[1.03] shrink-0 select-none"
     >
       {/* Thumbnail */}
       <img
@@ -72,7 +72,7 @@ export const PatientsSpeaksSection: React.FC = () => {
   }, [activeVideoId]);
 
   return (
-    <section className="relative pt-6 sm:pt-10 pb-20 lg:pb-28 bg-white overflow-hidden tracking-[0.015em]">
+    <section className="relative pt-6 sm:pt-10 pb-20 lg:pb-28 bg-white dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300">
       <style>{`
         @keyframes marquee-scroll-left {
           0% {
@@ -124,17 +124,17 @@ export const PatientsSpeaksSection: React.FC = () => {
       {/* Section Header */}
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20 text-center mb-10 sm:mb-12">
         <div className="inline-flex items-center justify-center gap-3 mb-3">
-          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-          <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+          <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
             TESTIMONIALS
           </span>
-          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
         </div>
-        <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351]">
+        <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351] dark:text-white">
           Patients Speaks
         </h2>
-        <p className="leading-normal tracking-tight text-[#62748a] max-w-2xl mx-auto text-base sm:text-lg mt-3">
-          Real recovery stories shared by our patients. All surgeries and operations are provided completely <span className="font-semibold text-[#1f3351]">free of cost</span> with compassion, dignity, and clinical excellence at Arundathi Hospital.
+        <p className="leading-normal tracking-tight text-[#62748a] dark:text-slate-300 max-w-2xl mx-auto text-base sm:text-lg mt-3">
+          Real recovery stories shared by our patients. All surgeries and operations are provided completely <span className="font-semibold text-[#1f3351] dark:text-teal-400">free of cost</span> with compassion, dignity, and clinical excellence at Arundathi Hospital.
         </p>
       </div>
 
@@ -181,7 +181,7 @@ export const PatientsSpeaksSection: React.FC = () => {
             <button
               onClick={() => setActiveVideoId(null)}
               aria-label="Close video"
-              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 hover:bg-white text-white hover:text-[#1f3351] border border-white/30 hover:border-transparent backdrop-blur-md flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg"
+              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 hover:bg-teal-500 text-white hover:border-teal-400 border border-white/30 backdrop-blur-md flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg"
             >
               <X className="w-5 h-5" />
             </button>

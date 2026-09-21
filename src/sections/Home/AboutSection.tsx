@@ -209,7 +209,7 @@ export const AboutSection: React.FC = () => {
     <section
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="relative pt-20 lg:pt-28 pb-12 lg:pb-16 bg-white overflow-hidden tracking-[0.015em]"
+      className="relative pt-20 lg:pt-28 pb-12 lg:pb-16 bg-white dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300"
     >
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Sliding & Draggable Viewport */}
@@ -224,8 +224,8 @@ export const AboutSection: React.FC = () => {
           <div
             onTransitionEnd={handleTransitionEnd}
             className={`flex w-[400%] ${enableTransition && !isDragging
-                ? "transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
-                : "transition-none"
+              ? "transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+              : "transition-none"
               }`}
             style={{
               transform: isDragging
@@ -241,7 +241,7 @@ export const AboutSection: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 lg:gap-14 items-center">
                   {/* Image Column */}
                   <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
-                    <div className="relative z-10 overflow-hidden rounded-[26px] border border-[#dce8ee] bg-white pointer-events-none">
+                    <div className="relative z-10 overflow-hidden rounded-[26px] border border-[#dce8ee] dark:border-white/15 bg-white dark:bg-white/5 shadow-md dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] pointer-events-none">
                       <img
                         src={slide.image}
                         alt={slide.imageAlt}
@@ -255,18 +255,18 @@ export const AboutSection: React.FC = () => {
                   <div className="flex flex-col justify-center">
                     {/* Kicker with Academics-style lines design */}
                     <div className="inline-flex items-center gap-3 mb-3.5">
-                      <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-                      <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase select-none">
+                      <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+                      <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase select-none">
                         {slide.kicker}
                       </span>
-                      <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+                      <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
                     </div>
 
-                    <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.01em] text-[#1f3351] mb-5">
+                    <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.01em] text-[#1f3351] dark:text-white mb-5">
                       {slide.title}
                     </h2>
 
-                    <div className="space-y-4 text-base leading-relaxed text-[#62748a] mb-7">
+                    <div className="space-y-4 text-base leading-relaxed text-[#62748a] dark:text-slate-300 mb-7">
                       {slide.paragraphs.map((paragraph, pIdx) => (
                         <p key={pIdx}>{paragraph}</p>
                       ))}
@@ -275,10 +275,10 @@ export const AboutSection: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-2">
                       {slide.ticks.map((tick, tIdx) => (
                         <div key={tIdx} className="flex items-center gap-2.5">
-                          <span className="flex-shrink-0 flex items-center justify-center w-5 h-5 rounded-full bg-dark text-white text-xs font-bold">
+                          <span className="flex-shrink-0 flex items-center justify-center w-5 h-5 rounded-full bg-dark dark:bg-teal-500 text-white text-xs font-bold">
                             ✓
                           </span>
-                          <strong className="text-sm font-bold text-[#1f3351]">
+                          <strong className="text-sm font-bold text-[#1f3351] dark:text-white">
                             {tick}
                           </strong>
                         </div>
@@ -301,8 +301,8 @@ export const AboutSection: React.FC = () => {
                 onClick={() => goToSlide(i)}
                 aria-label={`Go to ${slide.kicker}`}
                 className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${isActive
-                    ? "w-8 sm:w-10 bg-[#1f3351] shadow-xs"
-                    : "w-2.5 bg-[#cbd5e1] hover:bg-[#94a3b8]"
+                  ? "w-8 sm:w-10 bg-[#1f3351] dark:bg-teal-400 shadow-xs"
+                  : "w-2.5 bg-[#cbd5e1] dark:bg-white/20 hover:bg-[#94a3b8] dark:hover:bg-white/40"
                   }`}
               />
             );

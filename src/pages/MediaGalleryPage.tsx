@@ -377,7 +377,7 @@ export const MediaGalleryPage: React.FC = () => {
         setActiveGalleryList(allCollageItems);
         setSelectedEvent(item);
       }}
-      className={`group relative cursor-pointer overflow-hidden rounded-[6px] sm:rounded-[8px] bg-white border border-[#e2e8f0]/90 shadow-[0_2px_10px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_36px_rgba(22,39,64,0.18)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.025] hover:z-30 select-none ${item.className}`}
+      className={`group relative cursor-pointer overflow-hidden rounded-[6px] sm:rounded-[8px] bg-white dark:bg-slate-900/60 border border-[#e2e8f0]/90 dark:border-white/15 shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_16px_36px_rgba(22,39,64,0.18)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.025] hover:z-30 select-none ${item.className}`}
     >
       <img
         src={item.src}
@@ -418,18 +418,18 @@ export const MediaGalleryPage: React.FC = () => {
         {/* Row Header */}
         <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 mb-3.5 sm:mb-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#1f3351]" />
-            <h3 className="font-['Manrope',sans-serif] text-lg sm:text-xl md:text-2xl font-bold text-[#162740] tracking-tight">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#1f3351] dark:bg-teal-400" />
+            <h3 className="font-['Manrope',sans-serif] text-lg sm:text-xl md:text-2xl font-bold text-[#162740] dark:text-white tracking-tight">
               {section.title}
             </h3>
-            <span className="text-[11px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#e8eef3] text-[#334e68]">
+            <span className="text-[11px] sm:text-xs font-semibold px-2.5 py-0.5 rounded-full bg-[#e8eef3] dark:bg-white/10 text-[#334e68] dark:text-slate-200">
               {section.images.length} Photos
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-medium text-[#64748b] bg-white px-3 py-1 rounded-full border border-[#e2e8f0] shadow-2xs hidden sm:inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#4b6382] animate-pulse" />
+            <span className="text-[11px] font-medium text-[#64748b] dark:text-slate-300 bg-white dark:bg-slate-800/80 px-3 py-1 rounded-full border border-[#e2e8f0] dark:border-white/15 shadow-2xs hidden sm:inline-flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#4b6382] dark:bg-teal-400 animate-pulse" />
               <span>Scroll: {isLtr ? "Left → Right" : "Right ← Left"}</span>
             </span>
           </div>
@@ -440,9 +440,8 @@ export const MediaGalleryPage: React.FC = () => {
           <div
             className="flex w-max gap-3.5 sm:gap-4 lg:gap-5 py-2 hover:[animation-play-state:paused]"
             style={{
-              animation: `${isLtr ? "arenaMarqueeLtr" : "arenaMarqueeRtl"} ${
-                section.images.length * 6 > 30 ? section.images.length * 6 : 32
-              }s linear infinite`,
+              animation: `${isLtr ? "arenaMarqueeLtr" : "arenaMarqueeRtl"} ${section.images.length * 6 > 30 ? section.images.length * 6 : 32
+                }s linear infinite`,
             }}
           >
             {marqueeCards.map((imgSrc, idx) => {
@@ -462,7 +461,7 @@ export const MediaGalleryPage: React.FC = () => {
                     setActiveGalleryList(sectionEventItems);
                     setSelectedEvent(sectionEventItems[originalIndex]);
                   }}
-                  className="relative shrink-0 w-[260px] sm:w-[320px] md:w-[360px] h-[175px] sm:h-[210px] md:h-[235px] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-[#dce8ee] bg-white shadow-[0_3px_12px_rgba(8,44,76,0.06)] hover:shadow-[0_14px_30px_rgba(8,44,76,0.18)] transition-all duration-300 cursor-pointer group hover:-translate-y-1 select-none"
+                  className="relative shrink-0 w-[260px] sm:w-[320px] md:w-[360px] h-[175px] sm:h-[210px] md:h-[235px] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-[#dce8ee] dark:border-white/15 bg-white dark:bg-slate-900/60 shadow-[0_3px_12px_rgba(8,44,76,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_14px_30px_rgba(8,44,76,0.18)] transition-all duration-300 cursor-pointer group hover:-translate-y-1 select-none"
                 >
                   <img
                     src={imgSrc}
@@ -499,28 +498,28 @@ export const MediaGalleryPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full bg-[#FAF9F5] min-h-screen pt-10 sm:pt-14">
+    <div className="w-full bg-[#FAF9F5] dark:bg-transparent min-h-screen pt-10 sm:pt-14 transition-colors duration-300">
       {/* Header matching reference screenshot styling with common home page palette */}
       <div className="text-center max-w-4xl mx-auto pt-2 sm:pt-4 pb-0 px-4 relative z-30">
         <div className="inline-flex items-center justify-center gap-3 mb-2">
-          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-          <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+          <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
             MEDIA GALLERY
           </span>
-          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+          <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
         </div>
 
-        <h1 className="font-['Manrope',sans-serif] text-3xl sm:text-5xl lg:text-[56px] font-black uppercase tracking-tight text-[#162740] leading-[1.04] mb-2">
+        <h1 className="font-['Manrope',sans-serif] text-3xl sm:text-5xl lg:text-[56px] font-black uppercase tracking-tight text-[#162740] dark:text-white leading-[1.04] mb-2">
           EXPLORING AIMS CAMPUS
         </h1>
 
-        <p className="text-[#596d86] text-sm sm:text-base lg:text-lg font-normal leading-tight">
+        <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg font-normal leading-tight">
           Interactions, Campus Architecture &amp; Medical Excellence
         </p>
       </div>
 
       {/* 3D Illusion Slider Section: Gap reduced by 20%, infinite continuous loop */}
-      <section className="relative w-full bg-[#FAF9F5] overflow-hidden -mt-6 sm:-mt-9 lg:-mt-11 pb-8 sm:pb-12 lg:pb-14">
+      <section className="relative w-full bg-[#FAF9F5] dark:bg-transparent overflow-hidden -mt-6 sm:-mt-9 lg:-mt-11 pb-8 sm:pb-12 lg:pb-14">
         {/* Top Solid Curved Overlay - Sits 20% closer */}
         <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none w-full h-[58px] sm:h-[80px] lg:h-[100px] overflow-hidden">
           <svg
@@ -529,7 +528,7 @@ export const MediaGalleryPage: React.FC = () => {
             className="w-full h-full block"
           >
             <path
-              fill="#FAF9F5"
+              className="fill-[#FAF9F5] dark:fill-[#070d18] transition-colors duration-300"
               d="M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z"
             />
           </svg>
@@ -591,7 +590,7 @@ export const MediaGalleryPage: React.FC = () => {
             className="w-full h-full block rotate-180"
           >
             <path
-              fill="#FAF9F5"
+              className="fill-[#FAF9F5] dark:fill-[#070d18] transition-colors duration-300"
               d="M804,0v16.671c0,0-204.974,33.496-401.995,33.496C204.974,50.167,0,16.671,0,16.671V0H804z"
             />
           </svg>
@@ -599,10 +598,10 @@ export const MediaGalleryPage: React.FC = () => {
       </section>
 
       {/* Events Section: Artistic Diamond Collage (Format of Attached Reference Photo) */}
-      <section className="relative py-14 sm:py-18 lg:py-24 bg-[#FAF9F5] border-t border-[#e2e8f0]/80 overflow-hidden">
+      <section className="relative py-14 sm:py-18 lg:py-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0]/80 dark:border-white/10 overflow-hidden">
         {/* Subtle Background Radial Pattern */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-20"
+          className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
           style={{
             backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
             backgroundSize: "28px 28px",
@@ -613,18 +612,18 @@ export const MediaGalleryPage: React.FC = () => {
           {/* Section Header */}
           <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
             <div className="inline-flex items-center justify-center gap-3 mb-3">
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-              <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+              <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
                 CAMPUS HAPPENINGS
               </span>
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
             </div>
 
-            <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#162740] tracking-tight leading-tight mb-3.5">
+            <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#162740] dark:text-white tracking-tight leading-tight mb-3.5">
               Events
             </h2>
 
-            <p className="text-[#596d86] text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
+            <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
               A curated collage of academic symposiums, hands-on clinical workshops, annual convocations, and student life at AIMS.
             </p>
           </div>
@@ -680,10 +679,10 @@ export const MediaGalleryPage: React.FC = () => {
       </section>
 
       {/* ─── Gallery Arena Section: Welcome to Gallery Arena of AIMS ─── */}
-      <section className="relative py-16 sm:py-24 bg-[#FAF9F5] border-t border-[#e2e8f0] overflow-hidden">
+      <section className="relative py-16 sm:py-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0] dark:border-white/10 overflow-hidden">
         {/* Subtle background radial pattern */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-20"
+          className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
           style={{
             backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
             backgroundSize: "28px 28px",
@@ -694,18 +693,18 @@ export const MediaGalleryPage: React.FC = () => {
           {/* Main Section Header */}
           <div className="text-center max-w-4xl mx-auto mb-14 sm:mb-20 px-4">
             <div className="inline-flex items-center justify-center gap-3 mb-3">
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-              <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+              <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
                 CAMPUS &amp; CLINICAL FACILITIES
               </span>
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
             </div>
 
-            <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[46px] font-black text-[#162740] tracking-tight leading-tight mb-4 uppercase">
+            <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[46px] font-black text-[#162740] dark:text-white tracking-tight leading-tight mb-4 uppercase">
               Welcome to Gallery Arena of AIMS
             </h2>
 
-            <p className="text-[#596d86] text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
+            <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
               Explore dynamic visual streams of our administrative, academic, laboratory, and super-speciality facilities with auto-scrolling continuous views.
             </p>
           </div>
@@ -718,21 +717,21 @@ export const MediaGalleryPage: React.FC = () => {
           </div>
 
           {/* Arundathi Hospital Section Divider & Title */}
-          <div className="w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 my-16 sm:my-22 pt-14 border-t border-[#e2e8f0]">
+          <div className="w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 my-16 sm:my-22 pt-14 border-t border-[#e2e8f0] dark:border-white/10">
             <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
               <div className="inline-flex items-center justify-center gap-3 mb-3">
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-                <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+                <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
                   NABH ACCREDITED TEACHING HOSPITAL
                 </span>
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
               </div>
 
-              <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[42px] font-black text-[#162740] tracking-tight leading-tight mb-3 uppercase">
+              <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[42px] font-black text-[#162740] dark:text-white tracking-tight leading-tight mb-3 uppercase">
                 Arundathi Hospital
               </h2>
 
-              <p className="text-[#596d86] text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
+              <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
                 Modern surgical operation suites, blood bank, advanced pathology, 24/7 central diagnostic lab, and welcoming patient reception atrium.
               </p>
             </div>
@@ -761,7 +760,7 @@ export const MediaGalleryPage: React.FC = () => {
             <button
               onClick={() => setSelectedEvent(null)}
               aria-label="Close modal"
-              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer hover:rotate-90"
+              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-teal-500 text-white flex items-center justify-center border border-white/20 hover:border-teal-400 transition-all cursor-pointer hover:rotate-90"
             >
               <X className="w-5 h-5" />
             </button>
@@ -770,7 +769,7 @@ export const MediaGalleryPage: React.FC = () => {
             <button
               onClick={handlePrevEvent}
               aria-label="Previous photo"
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-white text-white hover:text-[#0b172a] flex items-center justify-center border border-white/20 transition-all cursor-pointer shadow-md"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-teal-500 text-white flex items-center justify-center border border-white/20 hover:border-teal-400 transition-all cursor-pointer shadow-md"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -778,7 +777,7 @@ export const MediaGalleryPage: React.FC = () => {
             <button
               onClick={handleNextEvent}
               aria-label="Next photo"
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-white text-white hover:text-[#0b172a] flex items-center justify-center border border-white/20 transition-all cursor-pointer shadow-md"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-teal-500 text-white flex items-center justify-center border border-white/20 hover:border-teal-400 transition-all cursor-pointer shadow-md"
             >
               <ChevronRight className="w-5 h-5" />
             </button>

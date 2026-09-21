@@ -48,9 +48,9 @@ export default function ManagementPage() {
   }) => {
     return (
       <div
-        className={`group relative overflow-hidden rounded-[22px] bg-[#0d2346] border border-[#dce8ee]/30 shadow-xs hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-end ${
+        className={`group relative overflow-hidden rounded-[22px] bg-[#0d2346] dark:bg-[#0b172c] border border-[#dce8ee]/30 dark:border-white/15 shadow-xs hover:shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-end ${
           isPresident
-            ? "max-w-xs sm:max-w-sm w-full mx-auto h-[380px] sm:h-[410px] ring-2 ring-[#1f3351]/20"
+            ? "max-w-xs sm:max-w-sm w-full mx-auto h-[380px] sm:h-[410px] ring-2 ring-[#1f3351]/20 dark:ring-white/20"
             : "w-full h-[350px] sm:h-[370px]"
         }`}
       >
@@ -62,7 +62,7 @@ export default function ManagementPage() {
             className="absolute inset-0 w-full h-full object-cover object-top"
           />
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0d2346] pb-16">
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0d2346] dark:bg-[#0b172c] pb-16">
             <div className="w-20 h-20 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white mb-2 shadow-inner">
               <span className="font-['Manrope',sans-serif] text-2xl font-bold tracking-wider">
                 {getInitials(member.name)}
@@ -80,7 +80,7 @@ export default function ManagementPage() {
             className={`px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-xs ${
               isPresident
                 ? "bg-white text-[#0d2346]"
-                : "bg-[#0d2346]/85 backdrop-blur-md text-white border border-white/20"
+                : "bg-[#0d2346]/85 dark:bg-black/60 backdrop-blur-md text-white border border-white/20"
             }`}
           >
             {member.role}
@@ -140,9 +140,9 @@ export default function ManagementPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fbfaf5] text-[#1f3351] tracking-[0.015em]">
+    <div className="min-h-screen bg-[#fbfaf5] dark:bg-transparent text-[#1f3351] dark:text-white tracking-[0.015em] transition-colors duration-300">
       {/* ─── Top Header Banner (Clean Institutional Navy) ─── */}
-      <div className="relative bg-[#0d2346] pt-32 pb-16 sm:pt-36 sm:pb-20 text-center text-white overflow-hidden">
+      <div className="relative bg-[#0d2346] dark:bg-[#070f1e] pt-32 pb-16 sm:pt-36 sm:pb-20 text-center text-white overflow-hidden border-b dark:border-white/10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#1f3351_0%,#0d2346_100%)] opacity-90 pointer-events-none" />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
@@ -166,8 +166,8 @@ export default function ManagementPage() {
             SECTION 1: MEMBERS OF THE EXECUTIVE COMMITTEE
            ========================================================================= */}
         <section className="mb-20">
-          <div className="text-center mb-10 pb-4 border-b border-[#dce8ee]">
-            <h2 className="font-['Manrope',sans-serif] text-2xl sm:text-3xl lg:text-[34px] font-bold text-[#1f3351] leading-tight">
+          <div className="text-center mb-10 pb-4 border-b border-[#dce8ee] dark:border-white/10">
+            <h2 className="font-['Manrope',sans-serif] text-2xl sm:text-3xl lg:text-[34px] font-bold text-[#1f3351] dark:text-white leading-tight">
               Members Of The Executive Committee
             </h2>
           </div>
@@ -203,9 +203,9 @@ export default function ManagementPage() {
         {/* =========================================================================
             SECTION 2: PRINCIPAL
            ========================================================================= */}
-        <section className="pt-8 border-t border-[#dce8ee]">
-          <div className="text-center mb-10 pb-4 border-b border-[#dce8ee]">
-            <h2 className="font-['Manrope',sans-serif] text-2xl sm:text-3xl lg:text-[34px] font-bold text-[#1f3351] leading-tight">
+        <section className="pt-8 border-t border-[#dce8ee] dark:border-white/10">
+          <div className="text-center mb-10 pb-4 border-b border-[#dce8ee] dark:border-white/10">
+            <h2 className="font-['Manrope',sans-serif] text-2xl sm:text-3xl lg:text-[34px] font-bold text-[#1f3351] dark:text-white leading-tight">
               Principal
             </h2>
           </div>

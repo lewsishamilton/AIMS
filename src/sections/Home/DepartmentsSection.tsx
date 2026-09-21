@@ -30,10 +30,10 @@ const DEPARTMENTS = [
 
 const DepartmentsSection = () => {
   return (
-    <section className="relative py-14 sm:py-16 lg:py-20 bg-[#FAF9F5] overflow-hidden">
+    <section className="relative py-14 sm:py-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
       {/* Subtle Dot Grid Background */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-20"
+        className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
         style={{
           backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
           backgroundSize: "26px 26px",
@@ -44,18 +44,18 @@ const DepartmentsSection = () => {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <div className="inline-flex items-center justify-center gap-3 mb-3">
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
-            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] uppercase">
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
               ACADEMICS
             </span>
-            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1]" />
+            <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
           </div>
 
-          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[42px] font-bold leading-tight tracking-tight text-[#162740] mb-3.5">
+          <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[42px] font-bold leading-tight tracking-tight text-[#162740] dark:text-white mb-3.5">
             Our Departments
           </h2>
 
-          <p className="text-[#596d86] text-base sm:text-[17px] leading-relaxed font-normal">
+          <p className="text-[#596d86] dark:text-slate-300 text-base sm:text-[17px] leading-relaxed font-normal">
             Three pillars of medical education, designed to build competence from theory to bedside.
           </p>
         </div>
@@ -66,7 +66,7 @@ const DepartmentsSection = () => {
             <Link
               to={`/departments?category=${encodeURIComponent(dept.name)}`}
               key={dept.name}
-              className="relative group flex-grow transition-all duration-500 w-full md:w-56 h-[260px] sm:h-[280px] md:h-full md:hover:w-full rounded-[24px] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_36px_rgba(15,23,42,0.22)] block cursor-pointer"
+              className="relative group flex-grow transition-all duration-500 w-full md:w-56 h-[260px] sm:h-[280px] md:h-full md:hover:w-full rounded-[24px] overflow-hidden border border-transparent dark:border-white/15 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_36px_rgba(15,23,42,0.22)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] block cursor-pointer"
             >
               {/* Background Image with subtle scale on hover */}
               <div className="w-full h-full overflow-hidden">
