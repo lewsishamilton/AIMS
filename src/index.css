@@ -58,7 +58,7 @@ html.dark .min-h-screen::before {
 }
 
 /* Ensure content stays above the ambient gradient pseudo-element */
-html.dark .min-h-screen > *:not(.fixed) {
+html.dark .min-h-screen > *:not(.fixed):not(.z-30) {
   position: relative;
   z-index: 1;
 }
