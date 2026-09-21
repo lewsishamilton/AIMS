@@ -209,7 +209,7 @@ export const AboutSection: React.FC = () => {
     <section
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="relative pt-20 lg:pt-28 pb-12 lg:pb-16 bg-white dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300"
+      className="relative pt-20 lg:pt-28 pb-6 sm:pb-8 bg-white dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300"
     >
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Sliding & Draggable Viewport */}
@@ -292,7 +292,7 @@ export const AboutSection: React.FC = () => {
         </div>
 
         {/* Animated Slider Movement Dots Indicator */}
-        <div className="flex items-center justify-center gap-2.5 mt-8 sm:mt-10">
+        <div className="flex items-center justify-center gap-2.5 mt-6 sm:mt-7">
           {ORIGINAL_SLIDES.map((slide, i) => {
             const isActive = activeDot === i;
             return (

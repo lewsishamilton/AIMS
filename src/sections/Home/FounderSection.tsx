@@ -9,7 +9,7 @@ const MAIN_QUOTE =
 
 const FounderSection: React.FC = () => {
   return (
-    <section id="founder" className="relative scroll-mt-20 bg-white dark:bg-transparent overflow-hidden py-16 sm:py-24 lg:py-28 tracking-[0.015em] transition-colors duration-300">
+    <section id="founder" className="relative scroll-mt-20 bg-white dark:bg-transparent overflow-hidden pt-6 sm:pt-10 lg:pt-12 pb-16 sm:pb-24 lg:pb-28 tracking-[0.015em] transition-colors duration-300">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Section Header (Centered) */}
         <motion.div
