@@ -58,7 +58,7 @@ html.dark .min-h-screen::before {
 }
 
 /* Ensure content stays above the ambient gradient pseudo-element */
-html.dark .min-h-screen > * {
+html.dark .min-h-screen > *:not(.fixed) {
   position: relative;
   z-index: 1;
 }
@@ -114,4 +114,46 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   --color-normal: #62748a;
   --color-white: #fbfaf5;
   --font-sans: "DM Sans", sans-serif;
+}
+
+/* ─── Fluid Events Collage (MediaGalleryPage) ─── */
+.collage-row {
+  display: flex;
+  gap: 12px;
+  height: var(--row-h);
+  width: var(--row-w, 100%);
+  margin: 0 auto;
+  transition: height 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.collage-row:hover {
+  height: calc(var(--row-h) * 1.35);
+}
+.collage-item {
+  --w: 1;
+  --h: 1;
+  position: relative;
+  flex: var(--w) 1 0px;
+  min-width: 0;
+  height: calc(var(--h) * 100%);
+  transition:
+    flex-grow 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    height 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.5s ease,
+    box-shadow 0.5s ease;
+}
+.collage-row:hover .collage-item:not(:hover) {
+  filter: saturate(0.5) brightness(0.78);
+}
+.collage-item:hover {
+  flex-grow: calc(var(--w) * 2.2 + 1.4);
+  height: 100%;
+  z-index: 20;
+}
+@media (max-width: 767px) {
+  .collage-row, .collage-row:hover { flex-wrap: wrap; height: auto; width: 100%; gap: 8px; }
+  .collage-item { flex: 1 1 calc(50% - 4px); height: auto; aspect-ratio: 4 / 3; align-self: auto !important; }
+  .collage-row:hover .collage-item:not(:hover) { filter: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .collage-item, .collage-item img { transition: none; }
 }

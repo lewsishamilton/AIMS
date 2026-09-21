@@ -20,10 +20,12 @@ import ContactPage from "./pages/ContactPage"
 import AimsInNewsPage from "./pages/AimsInNewsPage"
 import PdfViewerSection from "./layouts/PdfViewer"
 import { Route, Routes } from "react-router-dom"
+import ScrollToTop from "./ScrollToTop"
 
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<HeroPage />} />

@@ -36,129 +36,58 @@ export interface EventItem {
   category: string;
   src: string;
   description: string;
-  className: string;
+  /** flex weight (relative width), height fraction of the row, vertical anchor */
+  w?: number;
+  h?: number;
+  align?: "start" | "center" | "end";
 }
 
-// 12 Event pictures arranged in the attached reference photo format (Organic diamond collage with random sizes)
-const collageEvents: {
-  leftWing: EventItem[];
-  centerSpine: EventItem[];
-  rightWing: EventItem[];
-} = {
-  // Left Wing: Top portrait, wide mid storefront, twin bottom row, and lowest dark landscape
-  leftWing: [
-    {
-      id: "ev-01",
-      title: "Academic Poster Day & Student Life",
-      category: "Student Life",
-      src: img11,
-      className: "w-[190px] sm:w-[225px] aspect-[3/4]",
-      description: "Medical students showcasing research posters and public health innovations during campus health week.",
-    },
-    {
-      id: "ev-04",
-      title: "Campus Entrance & Main Promenade",
-      category: "Campus",
-      src: img01,
-      className: "w-[245px] sm:w-[285px] aspect-[16/10]",
-      description: "Students, faculty, and visiting clinical delegates congregating at the architectural main gates.",
-    },
-    {
-      id: "ev-08",
-      title: "Grand Portico Gateway",
-      category: "Architecture",
-      src: img02,
-      className: "w-[155px] sm:w-[185px] aspect-[16/11]",
-      description: "Morning light over the grand architectural arches and medical auditorium portico.",
-    },
-    {
-      id: "ev-09",
-      title: "Rural Outreach Care",
-      category: "Community Camp",
-      src: img12,
-      className: "w-[80px] sm:w-[92px] aspect-[3/4]",
-      description: "Field doctors and volunteers conducting community health surveys in local health camps.",
-    },
-    {
-      id: "ev-10",
-      title: "Microscopy & Fluorescence Assay",
-      category: "Research",
-      src: img03,
-      className: "w-[230px] sm:w-[265px] aspect-[16/9]",
-      description: "Deep molecular biology and advanced fluorescent microscopy diagnostic assays.",
-    },
+// Fluid collage: 3 rows, 4 photos each. Weights/heights/anchors give the scattered look;
+// hovering a photo grows it and the rest of its row reflows (see .collage-* in index.css).
+const collageRows: EventItem[][] = [
+  [
+    { id: "ev-01", title: "Academic Poster Day & Student Life", category: "Student Life", src: img11, w: 1.1, h: 0.9, align: "end",
+      description: "Medical students showcasing research posters and public health innovations during campus health week." },
+    { id: "ev-02", title: "Scholars Interactive Study Circle", category: "Academics", src: img05, w: 1.5, h: 1, align: "center",
+      description: "Collaborative study groups, peer learning, and research literature reviews in the central reference library." },
   ],
-
-  // Center Spine: The highest top point, commanding central focal photo, and bottom anchor point
-  centerSpine: [
-    {
-      id: "ev-02",
-      title: "Scholars Interactive Study Circle",
-      category: "Academics",
-      src: img05,
-      className: "w-[215px] sm:w-[250px] aspect-[4/5]",
-      description: "Collaborative study groups, peer learning, and research literature reviews in the central reference library.",
-    },
-    {
-      id: "ev-05",
-      title: "Hands-on Practical & Dissection Arena",
-      category: "Clinical Lab",
-      src: img04,
-      className: "w-[255px] sm:w-[295px] aspect-[4/5]",
-      description: "Intensive clinical osteology and anatomical practical demonstration under senior surgeon mentorship.",
-    },
-    {
-      id: "ev-11",
-      title: "Distinguished Medical Graduates",
-      category: "Convocation",
-      src: img07,
-      className: "w-[205px] sm:w-[240px] aspect-[3/4]",
-      description: "Graduating medical cohort gathered in formal suits and ceremonial regalia on convocation day.",
-    },
+  [
+    { id: "ev-03", title: "Dean's Honors & Scholar Awards", category: "Ceremony", src: img06, w: 0.8, h: 0.82, align: "start",
+      description: "Celebrating institutional academic awards, clinical merit badges, and university honors." },
+    { id: "ev-04", title: "Campus Entrance & Main Promenade", category: "Campus", src: img01, w: 1.3, h: 0.94, align: "end",
+      description: "Students, faculty, and visiting clinical delegates congregating at the architectural main gates." },
+    { id: "ev-05", title: "Hands-on Practical & Dissection Arena", category: "Clinical Lab", src: img04, w: 1.7, h: 1, align: "center",
+      description: "Intensive clinical osteology and anatomical practical demonstration under senior surgeon mentorship." },
+    { id: "ev-06", title: "Campus Green Promenade Pathway", category: "Outreach", src: img08, w: 0.7, h: 0.85, align: "start",
+      description: "Students walking through tree-lined pathways connecting clinical hospital wings and lecture halls." },
   ],
-
-  // Right Wing: Top portrait, side-by-side slim & medium photos, and lower recreation group photo
-  rightWing: [
-    {
-      id: "ev-03",
-      title: "Dean's Honors & Scholar Awards",
-      category: "Ceremony",
-      src: img06,
-      className: "w-[180px] sm:w-[215px] aspect-[3/4]",
-      description: "Celebrating institutional academic awards, clinical merit badges, and university honors.",
-    },
-    {
-      id: "ev-06",
-      title: "Campus Green Promenade Pathway",
-      category: "Outreach",
-      src: img08,
-      className: "w-[140px] sm:w-[165px] aspect-[3/5]",
-      description: "Students walking through tree-lined pathways connecting clinical hospital wings and lecture halls.",
-    },
-    {
-      id: "ev-07",
-      title: "Pine Grove Contemplation Walk",
-      category: "Campus Life",
-      src: img10,
-      className: "w-[112px] sm:w-[132px] aspect-[3/5]",
-      description: "Peaceful moments between clinical rotations surrounded by campus pine trees and nature.",
-    },
-    {
-      id: "ev-12",
-      title: "Collegiate Sports & Recreation Meet",
-      category: "Sports Fest",
-      src: img09,
-      className: "w-[225px] sm:w-[260px] aspect-[4/3]",
-      description: "Inter-departmental indoor tournament, team sportsmanship, and student recreation championship.",
-    },
+  [
+    { id: "ev-07", title: "Pine Grove Contemplation Walk", category: "Campus Life", src: img10, w: 1.2, h: 0.92, align: "end",
+      description: "Peaceful moments between clinical rotations surrounded by campus pine trees and nature." },
+    { id: "ev-08", title: "Grand Portico Gateway", category: "Architecture", src: img02, w: 1, h: 0.8, align: "center",
+      description: "Morning light over the grand architectural arches and medical auditorium portico." },
+    { id: "ev-09", title: "Rural Outreach Care", category: "Community Camp", src: img12, w: 0.9, h: 0.86, align: "start",
+      description: "Field doctors and volunteers conducting community health surveys in local health camps." },
   ],
-};
-
-const allCollageItems: EventItem[] = [
-  ...collageEvents.leftWing,
-  ...collageEvents.centerSpine,
-  ...collageEvents.rightWing,
+  [
+    { id: "ev-10", title: "Microscopy & Fluorescence Assay", category: "Research", src: img03, w: 1.6, h: 1, align: "center",
+      description: "Deep molecular biology and advanced fluorescent microscopy diagnostic assays." },
+    { id: "ev-11", title: "Distinguished Medical Graduates", category: "Convocation", src: img07, w: 1.1, h: 0.9, align: "end",
+      description: "Graduating medical cohort gathered in formal suits and ceremonial regalia on convocation day." },
+    { id: "ev-12", title: "Collegiate Sports & Recreation Meet", category: "Sports Fest", src: img09, w: 1.3, h: 0.94, align: "start",
+      description: "Inter-departmental indoor tournament, team sportsmanship, and student recreation championship." },
+  ],
 ];
+
+// Kite silhouette: short top, widest second row, tapering tail. [height, width] per row.
+const collageRowShape: [string, string][] = [
+  ["clamp(150px, 19vw, 210px)", "46%"],
+  ["clamp(200px, 28vw, 320px)", "100%"],
+  ["clamp(170px, 22vw, 250px)", "76%"],
+  ["clamp(150px, 19vw, 200px)", "50%"],
+];
+
+const allCollageItems: EventItem[] = collageRows.flat();
 
 // ─── Direct Imports from src/assets/clg-imgs (strictly authentic folder structures) ───
 // Administration Block (5 images)
@@ -377,17 +306,18 @@ export const MediaGalleryPage: React.FC = () => {
         setActiveGalleryList(allCollageItems);
         setSelectedEvent(item);
       }}
-      className={`group relative cursor-pointer overflow-hidden rounded-[6px] sm:rounded-[8px] bg-white dark:bg-slate-900/60 border border-[#e2e8f0]/90 dark:border-white/15 shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_16px_36px_rgba(22,39,64,0.18)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.025] hover:z-30 select-none ${item.className}`}
+      style={{ "--w": item.w ?? 1, "--h": item.h ?? 1, alignSelf: item.align ?? "center" } as React.CSSProperties}
+      className="collage-item group cursor-pointer overflow-hidden rounded-[10px] sm:rounded-[14px] bg-white dark:bg-slate-900/60 border border-[#e2e8f0]/90 dark:border-white/15 shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_24px_50px_rgba(22,39,64,0.28)] dark:hover:shadow-[0_24px_50px_rgba(0,0,0,0.6)] select-none"
     >
       <img
         src={item.src}
         alt={item.title}
         loading="lazy"
-        className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-106"
+        className="w-full h-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] scale-[1.08] group-hover:scale-100"
       />
 
       {/* Fluid Dark Gradient Overlay on Hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0b172a]/90 via-[#0b172a]/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out rounded-[6px] sm:rounded-[8px]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0b172a]/90 via-[#0b172a]/25 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out" />
 
       {/* Expand Icon */}
       <div className="absolute top-2 right-2 z-10 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 ease-out">
@@ -401,9 +331,12 @@ export const MediaGalleryPage: React.FC = () => {
         <span className="inline-flex items-center self-start px-1.5 py-0.5 rounded-full text-[8.5px] sm:text-[9.5px] font-semibold tracking-wider text-white uppercase bg-white/20 backdrop-blur-md border border-white/25">
           {item.category}
         </span>
-        <h3 className="font-['Manrope',sans-serif] text-[11px] sm:text-xs font-bold leading-tight text-white drop-shadow-sm line-clamp-1">
+        <h3 className="font-['Manrope',sans-serif] text-[11px] sm:text-sm font-bold leading-tight text-white drop-shadow-sm line-clamp-1">
           {item.title}
         </h3>
+        <p className="hidden md:block text-[11px] leading-snug text-white/80 line-clamp-2 max-w-[42ch] opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-150 ease-out">
+          {item.description}
+        </p>
       </div>
     </div>
   );
@@ -450,7 +383,6 @@ export const MediaGalleryPage: React.FC = () => {
                       category: section.category,
                       src,
                       description: section.description,
-                      className: "",
                     }));
                     setActiveGalleryList(sectionEventItems);
                     setSelectedEvent(sectionEventItems[originalIndex]);
@@ -669,51 +601,13 @@ export const MediaGalleryPage: React.FC = () => {
           </div>
 
           {/* Organic Diamond Collage: Matches exact layout & random sizes from the attached photo */}
-          <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-2.5 sm:gap-3 lg:gap-3.5 max-w-[1000px] mx-auto select-none">
-            {/* Left Wing Cluster */}
-            <div className="flex flex-col items-center md:items-end gap-2.5 sm:gap-3 shrink-0">
-              {/* Pos 1: Top-Left portrait */}
-              {renderPhotoCard(collageEvents.leftWing[0])}
-
-              {/* Pos 4: Mid-Left wide landscape */}
-              {renderPhotoCard(collageEvents.leftWing[1])}
-
-              {/* Pos 8 & Pos 9: Side-by-side archway landscape + white coat portrait */}
-              <div className="flex items-start gap-2.5 sm:gap-3 justify-end w-full max-w-[245px] sm:max-w-[285px]">
-                {renderPhotoCard(collageEvents.leftWing[2])}
-                {renderPhotoCard(collageEvents.leftWing[3])}
+          {/* Fluid Collage: hover a photo to grow it, the rest of the row reflows */}
+          <div className="flex flex-col gap-2 sm:gap-3 max-w-[1080px] mx-auto select-none">
+            {collageRows.map((row, i) => (
+              <div key={i} className="collage-row" style={{ "--row-h": collageRowShape[i][0], "--row-w": collageRowShape[i][1] } as React.CSSProperties}>
+                {row.map(renderPhotoCard)}
               </div>
-
-              {/* Pos 10: Bottom-Left landscape */}
-              {renderPhotoCard(collageEvents.leftWing[4])}
-            </div>
-
-            {/* Center Spine: Highest peak + Prominent Focal Hero + Bottom anchor */}
-            <div className="flex flex-col items-center gap-2.5 sm:gap-3 shrink-0">
-              {/* Pos 2: Top-Center portrait (starts at the highest elevation) */}
-              {renderPhotoCard(collageEvents.centerSpine[0])}
-
-              {/* Pos 5: True Center Focal Hero Portrait */}
-              {renderPhotoCard(collageEvents.centerSpine[1])}
-
-              {/* Pos 11: Bottom-Center portrait (lowest bottom anchor of the diamond) */}
-              {renderPhotoCard(collageEvents.centerSpine[2])}
-            </div>
-
-            {/* Right Wing Cluster */}
-            <div className="flex flex-col items-center md:items-start gap-2.5 sm:gap-3 shrink-0">
-              {/* Pos 3: Top-Right portrait */}
-              {renderPhotoCard(collageEvents.rightWing[0])}
-
-              {/* Pos 6 & Pos 7: Side-by-side promenade portrait + tall slim forest portrait */}
-              <div className="flex items-start gap-2.5 sm:gap-3 justify-start w-full max-w-[265px] sm:max-w-[310px]">
-                {renderPhotoCard(collageEvents.rightWing[1])}
-                {renderPhotoCard(collageEvents.rightWing[2])}
-              </div>
-
-              {/* Pos 12: Bottom-Right landscape */}
-              {renderPhotoCard(collageEvents.rightWing[3])}
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -791,11 +685,11 @@ export const MediaGalleryPage: React.FC = () => {
       {/* Lightbox Modal with Fluid Spring Scale-In Animation */}
       {selectedEvent && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 sm:p-6 transition-all duration-300"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#162740]/60 dark:bg-black/85 backdrop-blur-md p-4 sm:p-6 transition-all duration-300"
           onClick={() => setSelectedEvent(null)}
         >
           <div
-            className="relative max-w-4xl w-full bg-[#0b172a] rounded-lg sm:rounded-xl overflow-hidden shadow-2xl border border-white/15 animate-modal-scale"
+            className="relative max-w-5xl w-full max-h-[92vh] flex flex-col bg-white dark:bg-[#0b172a] rounded-lg sm:rounded-xl overflow-hidden shadow-2xl border border-[#e2e8f0] dark:border-white/15 animate-modal-scale"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -825,7 +719,7 @@ export const MediaGalleryPage: React.FC = () => {
             </button>
 
             {/* Image Stage */}
-            <div className="relative aspect-[4/3] sm:aspect-video w-full overflow-hidden bg-black flex items-center justify-center">
+            <div className="relative w-full h-[50vh] sm:h-[62vh] overflow-hidden bg-[#f1f5f9] dark:bg-black flex items-center justify-center">
               <img
                 src={selectedEvent.src}
                 alt={selectedEvent.title}
@@ -834,16 +728,16 @@ export const MediaGalleryPage: React.FC = () => {
             </div>
 
             {/* Details Footer */}
-            <div className="p-5 sm:p-7 bg-[#0b172a] text-white">
+            <div className="p-5 sm:p-7 bg-white dark:bg-[#0b172a] text-[#162740] dark:text-white">
               <div className="flex items-center gap-2 mb-2">
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-white/15 text-white/90 border border-white/20">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-[11px] font-semibold uppercase tracking-wider bg-[#162740]/8 text-[#4b6382] border border-[#162740]/15 dark:bg-white/15 dark:text-white/90 dark:border-white/20">
                   {selectedEvent.category}
                 </span>
               </div>
-              <h2 className="font-['Manrope',sans-serif] text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-white">
+              <h2 className="font-['Manrope',sans-serif] text-xl sm:text-2xl lg:text-3xl font-bold mb-2 text-[#162740] dark:text-white">
                 {selectedEvent.title}
               </h2>
-              <p className="text-white/80 text-xs sm:text-sm leading-relaxed max-w-3xl">
+              <p className="text-[#596d86] dark:text-white/80 text-xs sm:text-sm leading-relaxed max-w-3xl">
                 {selectedEvent.description}
               </p>
             </div>

@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Hero from "../sections/News/Hero";
 import AnimatedStatement from "../sections/News/AnimatedStatement";
 import Marquee from "../sections/News/Marquee";
@@ -7,10 +6,6 @@ import ImageGallery from "../sections/News/ImageGallery";
 import "../sections/News/news.css";
 
 export default function AimsInNewsPage() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
     <div className="aims-news-page pt-20 sm:pt-24 min-h-screen">
       <main className="site-main">
