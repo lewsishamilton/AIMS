@@ -148,10 +148,15 @@ export default function Footer() {
               <div className="grid grid-cols-2 gap-x-14 gap-y-3 mt-4">
                 {[
                   { label: "Home", href: "/" },
-                  { label: "Management", href: "/management" },
+                  { label: "Admissions", href: "/admissions" },
                   { label: "About Institution", href: "/about-institution" },
+                  { label: "MBBS Programme", href: "/academics/mbbs" },
                   { label: "About Hospital", href: "/about-hospital" },
+                  { label: "Specialities", href: "/services/specialities" },
                   { label: "Faculty & Depts", href: "/departments" },
+                  { label: "Emergency & Trauma", href: "/services/emergency-trauma" },
+                  { label: "Facilities", href: "/facilities/hospital" },
+                  { label: "Citizen Charter", href: "/patient-care/citizen-charter" },
                   { label: "Media Gallery", href: "/media-gallery" },
                   { label: "AIMS in the News", href: "/aims-in-the-news" },
                 ].map((link) => (

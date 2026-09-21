@@ -21,15 +21,15 @@ const Navbar = () => {
     const leftLinks: NavLinkItem[] = [
         {
             name: "DISCOVER AIMS",
-            path: "#",
+            path: "/about-institution",
             dropdown: [
                 {
                     name: "The AIMS Story",
-                    path: "#",
+                    path: "/about-institution",
                     subItems: [
                         { name: "About Hospital", path: "/about-hospital" },
                         { name: "About Institution", path: "/about-institution" },
-                        { name: "Awards & Achivements", path: "#" },
+                        { name: "Awards & Achievements", path: "/about/awards" },
                     ],
                 },
                 {
@@ -42,46 +42,48 @@ const Navbar = () => {
                 },
                 {
                     name: "Committees",
-                    path: "#",
+                    path: "/committess/meu",
                     subItems: [
                         { name: "Medical Educational Unit", path: "/committess/meu" },
                         { name: "Scientific Committee", path: "/committess/scientific" },
                         { name: "Anti Ragging Committee", path: "/committess/anti-ragging" },
                         { name: "Ethics Committee", path: "/committess/ethics" },
                         { name: "POSH Internal Committee", path: "/committess/posh-internal" },
-                        { name: "Pharmacvigilance Committee", path: "/committess/pharmacovigilance" },
+                        { name: "Pharmacovigilance Committee", path: "/committess/pharmacovigilance" },
                         { name: "Disciplinary Committee", path: "/committess/disciplinary" },
                     ],
                 },
                 {
                     name: "Media Center",
-                    path: "#",
+                    path: "/media-gallery",
                     subItems: [
                         { name: "AIMS in the News", path: "/aims-in-the-news" },
                         { name: "Media Gallery", path: "/media-gallery" },
                     ],
                 },
                 {
-                    name: "Accreditations and Approvals",
+                    name: "Approvals & Excellence",
                     path: "/accreditations",
                     subItems: [
-                        { name: "Accreditation", path: "/accreditations" },
-                        { name: "excellence", path: "#" },
+                        { name: "Accreditations", path: "/accreditations" },
+                        { name: "Government Approvals", path: "/approvals/government" },
+                        { name: "University Affiliation", path: "/approvals/university-affiliation" },
+                        { name: "Centres of Excellence", path: "/about/centres-of-excellence" },
                     ],
                 },
             ],
         },
         {
             name: "ACADEMICS",
-            path: "#",
+            path: "/departments",
             dropdown: [
                 {
                     name: "Programs Offered",
-                    path: "#",
+                    path: "/academics/mbbs",
                     subItems: [
-                        { name: "Undergraduate (MBBS)", path: "#" },
-                        { name: "Postgraduate (MD/MS)", path: "#" },
-                        { name: "Nursing & Allied Sciences", path: "#" },
+                        { name: "Undergraduate (MBBS)", path: "/academics/mbbs" },
+                        { name: "Nursing & Allied Health", path: "/academics/nursing-allied-health" },
+                        { name: "Paramedical Diplomas", path: "/academics/paramedical-diplomas" },
                     ],
                 },
                 {
@@ -93,8 +95,21 @@ const Navbar = () => {
                         { name: "Clinical", path: "/departments?category=Clinical" },
                     ],
                 },
-                { name: "Admissions Process", path: "#" },
-                { name: "Academic Calendar", path: "#" },
+                { name: "Academic Calendar", path: "/academics/calendar" },
+                { name: "Research & Publications", path: "/academics/research" },
+            ],
+        },
+        {
+            name: "ADMISSIONS",
+            path: "/admissions",
+            dropdown: [
+                { name: "Admissions Overview", path: "/admissions" },
+                { name: "Admission Criteria", path: "/admissions/criteria" },
+                { name: "Seat Matrix", path: "/admissions/seat-matrix" },
+                { name: "Fee Structure", path: "/admissions/fee-structure" },
+                { name: "Application Forms", path: "/admissions/forms" },
+                { name: "Admitted List", path: "/admissions/admitted-list" },
+                { name: "Regulations", path: "/admissions/regulations" },
             ],
         },
     ];
@@ -102,36 +117,39 @@ const Navbar = () => {
     const rightLinks: NavLinkItem[] = [
         {
             name: "MEDICAL SERVICES",
-            path: "#",
+            path: "/services/specialities",
             dropdown: [
                 {
-                    name: "Departments",
-                    path: "#",
+                    name: "Clinical Care",
+                    path: "/services/specialities",
                     subItems: [
-                        { name: "Cardiology", path: "#" },
-                        { name: "Neurology", path: "#" },
-                        { name: "General Surgery", path: "#" },
+                        { name: "Specialities", path: "/services/specialities" },
+                        { name: "Super Specialities", path: "/services/super-specialities" },
                     ],
                 },
-                { name: "Emergency & Trauma", path: "#" },
-                { name: "Diagnostics & Imaging", path: "#" },
+                { name: "Emergency & Trauma", path: "/services/emergency-trauma" },
+                { name: "Diagnostics & Imaging", path: "/services/diagnostics" },
                 { name: "Machines & Equipment", path: "/machines-equipment" },
             ],
         },
         {
-            name: "HEALTH LIBRARY",
-            path: "#",
+            name: "FACILITIES",
+            path: "/facilities/hospital",
             dropdown: [
-                {
-                    name: "Clinical Research",
-                    path: "#",
-                    subItems: [
-                        { name: "Medical Journals", path: "#" },
-                        { name: "Research Ethics", path: "#" },
-                    ],
-                },
-                { name: "Patient Education", path: "#" },
-                { name: "Health Bulletins", path: "#" },
+                { name: "Hospital Facilities", path: "/facilities/hospital" },
+                { name: "Academic Facilities", path: "/facilities/academic" },
+                { name: "Campus Life", path: "/facilities/campus-life" },
+            ],
+        },
+        {
+            name: "PATIENT CARE",
+            path: "/patient-care/citizen-charter",
+            dropdown: [
+                { name: "Citizen Charter", path: "/patient-care/citizen-charter" },
+                { name: "OPD Timings & Visiting", path: "/patient-care/opd-timings" },
+                { name: "Admission & Discharge", path: "/patient-care/admission-discharge" },
+                { name: "Insurance & TPA", path: "/patient-care/insurance" },
+                { name: "Feedback & Grievance", path: "/patient-care/feedback" },
             ],
         },
     ];
@@ -190,7 +208,7 @@ const Navbar = () => {
         ? "text-gray-700 hover:text-black hover:bg-gray-100/80 rounded-xl"
         : "text-white/85 hover:text-white hover:bg-white/20 rounded-xl";
 
-    const renderDesktopNavItem = (link: NavLinkItem, idx: number) => {
+    const renderDesktopNavItem = (link: NavLinkItem, idx: number, alignRight = false) => {
         const activeHoverPill = isWhiteTheme
             ? "text-gray-800 hover:text-black group-hover:bg-gray-100/90"
             : "text-white/90 hover:text-white group-hover:bg-white/15 group-hover:backdrop-blur-xl group-hover:border-white/25 group-hover:shadow-[0_4px_20px_rgba(0,0,0,0.15),inset_0_1px_0_0_rgba(255,255,255,0.35)]";
@@ -208,7 +226,7 @@ const Navbar = () => {
 
                 {/* Level 1 Dropdown */}
                 {link.dropdown && (
-                    <div className="absolute left-0 top-[calc(100%+4px)] hidden group-hover:block w-64 z-50 before:absolute before:-top-3 before:left-0 before:w-full before:h-4">
+                    <div className={`absolute ${alignRight ? "right-0" : "left-0"} top-[calc(100%+4px)] hidden group-hover:block w-64 z-50 before:absolute before:-top-3 before:left-0 before:w-full before:h-4`}>
                         {/* Level 1 Independent Glass Background */}
                         <div
                             className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
@@ -229,7 +247,7 @@ const Navbar = () => {
 
                                     {/* Level 2 Sub-Dropdown (Independent Glass Background) */}
                                     {item.subItems && (
-                                        <div className="absolute left-[calc(100%+4px)] -top-1.5 hidden group-hover/sub:block w-max min-w-56 z-50 before:absolute before:top-0 before:-left-3 before:w-4 before:h-full">
+                                        <div className={`absolute ${alignRight ? "right-[calc(100%+4px)]" : "left-[calc(100%+4px)]"} -top-1.5 hidden group-hover/sub:block w-max min-w-56 z-50 before:absolute before:top-0 ${alignRight ? "-right-3" : "-left-3"} before:w-4 before:h-full`}>
                                             {/* Level 2 Independent Glass Background (Not nested in Level 1 backdrop) */}
                                             <div
                                                 className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
@@ -285,10 +303,10 @@ const Navbar = () => {
                             : "bg-transparent border-b border-transparent"
                     }`}
                 />
-                <div className="max-w-7xl mx-auto flex items-center justify-between md:justify-center relative">
+                <div className="max-w-7xl mx-auto flex items-center justify-between xl:justify-center relative">
                     {/* Left Desktop Links */}
-                    <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
-                        {leftLinks.map(renderDesktopNavItem)}
+                    <div className="hidden xl:flex items-center gap-2 2xl:gap-3 h-16">
+                        {leftLinks.map((link, i) => renderDesktopNavItem(link, i))}
                     </div>
 
                     {/* Center Logo */}
@@ -296,17 +314,17 @@ const Navbar = () => {
                         <img
                             src={isWhiteTheme ? logo : logoWhite}
                             alt="Arundathi Institute of Medical Sciences & Hospital"
-                            className="h-10 md:h-11 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
+                            className="h-10 xl:h-11 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
                         />
                     </Link>
 
                     {/* Right Desktop Links */}
-                    <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
-                        {rightLinks.map(renderDesktopNavItem)}
+                    <div className="hidden xl:flex items-center gap-2 2xl:gap-3 h-16">
+                        {rightLinks.map((link, i) => renderDesktopNavItem(link, i, true))}
                     </div>
 
                     {/* Theme Toggle (Desktop - positioned to the right) */}
-                    <div className="hidden md:flex items-center absolute -right-4 md:-right-8 lg:-right-12 xl:-right-16 top-1/2 -translate-y-1/2">
+                    <div className="hidden xl:flex items-center absolute -right-8 2xl:-right-16 top-1/2 -translate-y-1/2">
                         <button
                             onClick={toggleTheme}
                             aria-label="Toggle Glass Theme"
@@ -338,7 +356,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Controls: Theme Toggle & Menu Button */}
-                    <div className="flex md:hidden items-center gap-2.5 py-3">
+                    <div className="flex xl:hidden items-center gap-2.5 py-3">
                         <button
                             onClick={toggleTheme}
                             aria-label="Toggle Glass Theme"
@@ -389,7 +407,7 @@ const Navbar = () => {
 
                 {/* Mobile Drawer */}
                 <div
-                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 md:hidden overflow-y-auto ${
+                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 xl:hidden overflow-y-auto ${
                         isMenuOpen ? "translate-x-0" : "-translate-x-full"
                     } ${
                         theme === "dark"

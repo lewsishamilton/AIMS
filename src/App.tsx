@@ -21,6 +21,8 @@ import AimsInNewsPage from "./pages/AimsInNewsPage"
 import MachinesPage from "./pages/MachinesPage"
 import AccreditationsPage from "./pages/AccreditationsPage"
 import PdfViewerSection from "./layouts/PdfViewer"
+import StaticPage from "./components/StaticPage"
+import { STATIC_PAGES } from "./data/pages"
 import { Route, Routes } from "react-router-dom"
 import ScrollToTop from "./ScrollToTop"
 
@@ -137,6 +139,11 @@ function App() {
         <Route path="/leadership/management" element={<ManagementPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/Contact" element={<ContactPage />} />
+
+        {/* Content-driven pages: academics, admissions, services, facilities, patient care */}
+        {Object.entries(STATIC_PAGES).map(([path, page]) => (
+          <Route key={path} path={path} element={<StaticPage {...page} />} />
+        ))}
       </Routes>
       <Footer />
     </>
