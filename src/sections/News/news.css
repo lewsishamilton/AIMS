@@ -235,3 +235,257 @@
   text-transform: uppercase;
   color: var(--text-muted);
 }
+
+/* ==========================================================================
+   DARK MODE — retokenised for the site's deep-teal night palette.
+   Sections go translucent so the global body gradient in index.css shows
+   through; only the handful of hardcoded colours in the sub-component CSS
+   need explicit overrides below.
+   ========================================================================== */
+
+html.dark .aims-news-page {
+  --bg-primary: #070e1c;
+  --bg-secondary: rgba(9, 19, 35, 0.55);
+  --bg-card: rgba(11, 22, 40, 0.62);
+  --bg-placeholder: rgba(148, 197, 205, 0.045);
+  --bg-placeholder-subtle: rgba(148, 197, 205, 0.025);
+
+  --text-primary: #eaf2f8;
+  --text-secondary: #a4bbd1;
+  --text-muted: #6d8499;
+  --text-inverted: #070e1c;
+
+  --border-subtle: rgba(45, 212, 191, 0.14);
+  --border-strong: rgba(45, 212, 191, 0.42);
+  --border-dark: rgba(45, 212, 191, 0.18);
+
+  --accent: #2dd4bf;
+  --accent-soft: rgba(45, 212, 191, 0.12);
+
+  background-color: transparent;
+}
+
+/* Let the ambient page glow read through the editorial bands */
+html.dark .hero-section,
+html.dark .chronicles-vertical-section {
+  background-color: transparent;
+}
+
+html.dark .editorial-marquee-wrapper,
+html.dark .image-gallery-section {
+  background-color: var(--bg-secondary);
+  backdrop-filter: blur(6px);
+}
+
+/* ─── Hero ─── */
+html.dark .hero-status-pill,
+html.dark .hero-feature-pill,
+html.dark .aims-news-page .badge-pill {
+  background-color: rgba(148, 197, 205, 0.06);
+  backdrop-filter: blur(8px);
+}
+
+html.dark .pulse-circle {
+  box-shadow: 0 0 10px 1px rgba(34, 197, 94, 0.7);
+}
+
+html.dark .hero-coord-badge:hover {
+  color: var(--accent);
+  border-color: var(--border-strong);
+  background-color: var(--accent-soft);
+}
+
+/* Title: solid AIMS + teal-gradient italic CHRONICLES */
+html.dark .aims-news-page .hero-main-title {
+  color: var(--text-primary);
+}
+
+html.dark .aims-news-page .hero-main-title .hero-title-aims {
+  color: #f4fbff;
+  text-shadow: 0 0 60px rgba(45, 212, 191, 0.28);
+}
+
+html.dark .aims-news-page .hero-main-title .hero-title-chronicles {
+  background-image: linear-gradient(100deg, #5eead4 0%, #2dd4bf 42%, #7dd3fc 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+html.dark .rotating-word-item {
+  color: var(--accent);
+  text-shadow: 0 0 45px rgba(45, 212, 191, 0.25);
+}
+
+/* Inverted chips read as teal accents rather than glaring white */
+html.dark .hero-meta-pill,
+html.dark .aims-news-page .badge-pill-dark {
+  background: var(--accent-soft);
+  border: 1px solid var(--border-strong);
+  color: var(--accent);
+}
+
+html.dark .hero-ch-pill {
+  background: rgba(148, 197, 205, 0.05);
+}
+
+html.dark .hero-ch-pill:hover,
+html.dark .aims-news-page .badge-pill:hover,
+html.dark .hero-scroll-trigger:hover .scroll-circle-arrow {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: #04121a;
+}
+
+html.dark .scroll-circle-arrow {
+  border-color: var(--border-strong);
+  color: var(--accent);
+}
+
+/* ─── Animated statement band ─── */
+/* Light mode inverts to a near-black panel; dark mode needs its own panel
+   instead, or --text-primary would paint it white. */
+html.dark .statement-section-slim {
+  background-color: rgba(6, 14, 27, 0.72);
+  background-image:
+    radial-gradient(ellipse 70% 120% at 50% 0%, rgba(45, 212, 191, 0.16), transparent 65%),
+    radial-gradient(ellipse 60% 100% at 50% 100%, rgba(31, 51, 81, 0.5), transparent 70%);
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 1px 0 0 rgba(45, 212, 191, 0.16),
+              inset 0 -1px 0 0 rgba(45, 212, 191, 0.16);
+}
+
+html.dark .statement-text-accent {
+  color: #5eead4;
+}
+
+/* ─── Marquee ─── */
+html.dark .marquee-text {
+  opacity: 0.75;
+}
+
+html.dark .marquee-separator {
+  color: var(--accent);
+  opacity: 0.45;
+}
+
+/* ─── Chronicle cards (glass) ─── */
+html.dark .chronicle-compact-card {
+  backdrop-filter: blur(14px) saturate(120%);
+  box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.35),
+              0 22px 55px -12px rgba(0, 0, 0, 0.75),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.06);
+}
+
+html.dark .chronicle-compact-card:hover {
+  box-shadow: 0 -6px 25px rgba(0, 0, 0, 0.35),
+              0 28px 65px -12px rgba(0, 0, 0, 0.8),
+              0 0 40px -6px rgba(45, 212, 191, 0.2),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+html.dark .chronicle-compact-card.is-active-card {
+  border-color: var(--border-strong);
+  box-shadow: 0 28px 65px -12px rgba(0, 0, 0, 0.8),
+              0 0 50px -6px rgba(45, 212, 191, 0.26),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+}
+
+html.dark .compact-chapter-num {
+  color: var(--accent);
+}
+
+html.dark .compact-category-pill,
+html.dark .compact-tag-pill {
+  background-color: rgba(148, 197, 205, 0.06);
+  color: var(--text-secondary);
+}
+
+html.dark .compact-archive-edition {
+  color: var(--text-muted);
+}
+
+html.dark .compact-card-description.primary-lead {
+  color: #dce7f1;
+}
+
+html.dark .compact-card-supporting-text {
+  color: var(--text-secondary);
+}
+
+/* Clipping frames: dark mount, and take the glare off white newsprint */
+html.dark .compact-image-frame-box,
+html.dark .aims-news-page #chronicle-06 .compact-image-frame-box {
+  background-color: rgba(6, 14, 27, 0.65);
+  border-color: var(--border-subtle);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.45);
+}
+
+html.dark .chronicle-compact-card:hover .compact-image-frame-box {
+  border-color: var(--border-strong);
+  box-shadow: 0 6px 22px rgba(0, 0, 0, 0.5),
+              0 0 26px -6px rgba(45, 212, 191, 0.24);
+}
+
+html.dark .compact-card-img,
+html.dark .gallery-frame-img {
+  filter: brightness(0.88) contrast(1.03);
+  transition: transform var(--transition-medium), filter var(--transition-medium);
+}
+
+html.dark .chronicle-compact-card:hover .compact-card-img,
+html.dark .gallery-frame-card-compact:hover .gallery-frame-img {
+  filter: brightness(1) contrast(1);
+}
+
+/* ─── Bottom gallery ─── */
+html.dark .gallery-frame-card-compact {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+}
+
+html.dark .gallery-frame-card-compact:hover {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55),
+              0 0 30px -8px rgba(45, 212, 191, 0.22),
+              inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+}
+
+html.dark .compact-gallery-box.has-image {
+  background-color: #04101c;
+}
+
+html.dark .gallery-icon-pill {
+  background: rgba(148, 197, 205, 0.07);
+}
+
+html.dark .gallery-frame-card-compact:hover .gallery-caption-arrow {
+  color: var(--accent);
+}
+
+/* ─── Blueprint placeholder frames ─── */
+html.dark .aims-news-page .empty-frame-box {
+  background-image:
+    radial-gradient(var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to right, rgba(148, 197, 205, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 197, 205, 0.04) 1px, transparent 1px);
+}
+
+html.dark .aims-news-page .empty-frame-box:hover {
+  background-color: rgba(148, 197, 205, 0.07);
+  border-color: var(--border-strong);
+}
+
+html.dark .aims-news-page .frame-center-tag {
+  background: rgba(148, 197, 205, 0.05);
+}
+
+html.dark .aims-news-page .crosshair-tl,
+html.dark .aims-news-page .crosshair-tr,
+html.dark .aims-news-page .crosshair-bl,
+html.dark .aims-news-page .crosshair-br {
+  border-color: var(--accent);
+  opacity: 0.55;
+}

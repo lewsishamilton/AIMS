@@ -129,8 +129,8 @@ export default function ChronicleCard({
                   className="compact-card-img"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/15 opacity-0 group-hover/frame:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="bg-white/95 text-[#1c1c1c] text-[11px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                <div className="absolute inset-0 bg-black/15 dark:bg-black/40 opacity-0 group-hover/frame:opacity-100 transition-opacity flex items-center justify-center">
+                  <span className="bg-white/95 text-[#1c1c1c] dark:bg-[#0b1628]/95 dark:text-[#5eead4] dark:ring-1 dark:ring-teal-400/30 text-[11px] font-bold tracking-wider uppercase px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
                     <ZoomIn size={13} /> View Full Clipping
                   </span>
                 </div>
@@ -170,11 +170,11 @@ export default function ChronicleCard({
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="relative max-w-5xl max-h-[92vh] bg-white rounded-2xl p-3 sm:p-5 shadow-2xl flex flex-col items-center cursor-default"
+              className="relative max-w-5xl max-h-[92vh] bg-white dark:bg-[#0a1424] dark:ring-1 dark:ring-teal-400/20 dark:shadow-[0_30px_80px_-15px_rgba(0,0,0,0.9),0_0_50px_rgba(45,212,191,0.18)] rounded-2xl p-3 sm:p-5 shadow-2xl flex flex-col items-center cursor-default"
               onClick={(e) => e.stopPropagation()}
             >
               <button 
-                className="absolute top-3 right-3 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 flex items-center justify-center shadow-md z-10 transition-all cursor-pointer"
+                className="absolute top-3 right-3 w-9 h-9 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-white/10 dark:hover:bg-teal-400/25 dark:text-teal-200 flex items-center justify-center shadow-md z-10 transition-all cursor-pointer"
                 onClick={() => setIsModalOpen(false)}
                 aria-label="Close"
               >
@@ -190,10 +190,10 @@ export default function ChronicleCard({
               </div>
 
               <div className="mt-3 text-center">
-                <span className="text-xs font-bold text-[#1f3351] uppercase tracking-wider block">
+                <span className="text-xs font-bold text-[#1f3351] dark:text-[#5eead4] uppercase tracking-wider block">
                   Chronicle {number} // {category}
                 </span>
-                <p className="text-xs text-[#62748a] mt-0.5 max-w-xl">
+                <p className="text-xs text-[#62748a] dark:text-[#a4bbd1] mt-0.5 max-w-xl">
                   {title}
                 </p>
               </div>
