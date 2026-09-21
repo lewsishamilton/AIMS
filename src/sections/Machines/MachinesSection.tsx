@@ -219,16 +219,6 @@ export const MachinesSection: React.FC<MachinesSectionProps> = ({
                 <p className="text-base sm:text-[17px] text-[#4b6382] dark:text-slate-200 leading-relaxed font-normal">
                   {selectedMachine.description}
                 </p>
-
-                <div className="mt-6 pt-5 border-t border-[#edf2f7] dark:border-white/10 flex justify-end">
-                  <button
-                    type="button"
-                    onClick={() => setSelectedMachine(null)}
-                    className="px-5 py-2.5 rounded-full bg-[#1f3351] dark:bg-white/15 hover:bg-[#152338] dark:hover:bg-white/25 text-white text-xs sm:text-sm font-semibold tracking-wide shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
-                  >
-                    Close Preview
-                  </button>
-                </div>
               </div>
             </motion.div>
           </div>
