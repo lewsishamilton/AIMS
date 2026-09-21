@@ -1,9 +1,11 @@
 /**
  * Media manifest for the content-driven pages.
  *
- * Every static page gets a hero photograph, a pool of supporting photographs
- * (used for section splits, the gallery strip and any card without a picture of
- * its own) and optional per-card overrides keyed by the card's `name`.
+ * Every page gets a hero photograph. Beyond that a picture is only ever used
+ * where it actually shows what the text is about, so sections and cards are
+ * mapped one by one, by title and by name. Anything left unmapped renders in a
+ * no-photo variant on purpose — a page of dates, fees or rules is better served
+ * by typography than by a stock corridor.
  *
  * Keeping this out of `data/pages/*` means the copy files stay about copy and
  * all the art direction lives in one reviewable place.
@@ -15,6 +17,7 @@ const campusMods = import.meta.glob<Mod>("../assets/stockImages/aims-campus-*.jp
 const clgMods = import.meta.glob<Mod>("../assets/clg-imgs/**/*.{png,PNG,jpg,jpeg}", { eager: true });
 const deptMods = import.meta.glob<Mod>("../assets/Departments/*.{png,PNG,jpg,jpeg,JPEG}", { eager: true });
 const facilityMods = import.meta.glob<Mod>("../assets/facilities/*.jpeg", { eager: true });
+const aiMods = import.meta.glob<Mod>("../assets/ai-downloaded/*.jpg", { eager: true });
 
 const FALLBACK_KEY = "../assets/stockImages/aims-campus-07.jpeg";
 
@@ -109,6 +112,11 @@ export const IMG = {
   communityMedicine: g(deptMods, "community_medicine.PNG"),
   microbiology: g(deptMods, "microbiology.png"),
 
+  // Stock, for gaps AIMS has no photograph of (see assets/ai-downloaded/README.md)
+  icuVentilator: g(aiMods, "ai-downloaded/icu-ventilator.jpg"),
+  physiotherapy: g(aiMods, "ai-downloaded/physiotherapy.jpg"),
+  reconstructiveSurgery: g(aiMods, "ai-downloaded/reconstructive-surgery.jpg"),
+
   // Campus life
   hostel: g(facilityMods, "hostel.jpeg"),
   mess: g(facilityMods, "mess.jpeg"),
@@ -119,50 +127,57 @@ export const IMG = {
 } as const;
 
 export interface PageMedia {
-  /** Full-bleed photograph behind the page title. */
+  /** Full-bleed photograph behind the page title. Every page has one. */
   hero: string;
-  /** Supporting photographs for section splits, the gallery strip and card fallbacks. */
-  pool: string[];
-  /** Photograph for a specific card, keyed by the card's `name`. */
+  /** Photograph for a section, keyed by its `title`. Omit to render it as prose. */
+  sectionImages?: Record<string, string>;
+  /** Photograph for a card, keyed by its `name`. Omit to render the no-photo card. */
   cardImages?: Record<string, string>;
 }
 
-const ADMISSIONS_POOL = [IMG.entrance, IMG.adminBlock, IMG.students, IMG.library, IMG.auditorium, IMG.campusGreen];
-const SERVICES_POOL = [IMG.lobby, IMG.operationRoom, IMG.centralLab, IMG.cathLab, IMG.mri, IMG.bloodBank];
-const PATIENT_POOL = [IMG.lobbyWide, IMG.reception, IMG.operationRoomAlt, IMG.centralLab, IMG.bloodBank, IMG.lobby];
-const DISCOVER_POOL = [IMG.entrance, IMG.auditorium, IMG.posterDay, IMG.convocation, IMG.adminBlockAlt, IMG.campusAerial];
-const FACILITIES_POOL = [IMG.lobby, IMG.centralLibrary, IMG.skillsLab, IMG.hostel, IMG.stadium, IMG.operationRoom];
-
-/** Hero + supporting photography for every content-driven route. */
+/**
+ * Hero photography for every content-driven route, plus the handful of sections
+ * and cards where a picture genuinely shows the subject.
+ *
+ * Deliberately unmapped: nephrology and dialysis (no genuine haemodialysis
+ * photograph exists in the library), pharmacy, ambulance and museums.
+ */
 export const PAGE_MEDIA: Record<string, PageMedia> = {
-  // ── Admissions ──────────────────────────────────────────────
-  "/admissions": { hero: IMG.entrance, pool: ADMISSIONS_POOL },
-  "/admissions/criteria": { hero: IMG.adminBlock, pool: [IMG.students, IMG.library, IMG.entrance, IMG.lecture, IMG.auditorium, IMG.campusGreen] },
-  "/admissions/seat-matrix": { hero: IMG.auditorium, pool: [IMG.lecture, IMG.students, IMG.adminBlockAlt, IMG.campusGreen, IMG.library, IMG.entrance] },
-  "/admissions/fee-structure": { hero: IMG.adminBlockAlt, pool: [IMG.adminBlock, IMG.entrance, IMG.corridor, IMG.students, IMG.library, IMG.campusGreen] },
-  "/admissions/forms": { hero: IMG.corridor, pool: ADMISSIONS_POOL },
-  "/admissions/admitted-list": { hero: IMG.convocation, pool: [IMG.students, IMG.auditorium, IMG.posterDay, IMG.entrance, IMG.campusGreen, IMG.library] },
-  "/admissions/regulations": { hero: IMG.campusAerial, pool: ADMISSIONS_POOL },
+  // ── Admissions ── information pages; hero only.
+  "/admissions": { hero: IMG.entrance },
+  "/admissions/criteria": { hero: IMG.adminBlock },
+  "/admissions/seat-matrix": { hero: IMG.auditorium },
+  "/admissions/fee-structure": { hero: IMG.adminBlockAlt },
+  "/admissions/forms": { hero: IMG.corridor },
+  "/admissions/admitted-list": { hero: IMG.convocation },
+  "/admissions/regulations": { hero: IMG.campusAerial },
 
-  // ── Academics ───────────────────────────────────────────────
-  "/academics/mbbs": { hero: IMG.dissectionLab, pool: [IMG.anatomyLab, IMG.physiologyLab, IMG.biochemLab, IMG.skillsLab, IMG.lobby, IMG.library] },
+  // ── Academics ──
+  "/academics/mbbs": {
+    hero: IMG.dissectionLab,
+    sectionImages: {
+      "Phase I — Pre-Clinical": IMG.anatomyLab,
+      "Phase II — Para-Clinical": IMG.pathologySuite,
+      "Phase III — Clinical": IMG.lobby,
+      "Teaching & Clinical Learning": IMG.skillsLab,
+    },
+  },
   "/academics/nursing-allied-health": {
     hero: IMG.skillsLab,
-    pool: [IMG.skillsLabAlt, IMG.centralLab, IMG.physiologyLab, IMG.lobby, IMG.library, IMG.students],
+    sectionImages: { "Learning Inside a Working Hospital": IMG.lobbyWide },
     cardImages: {
       "B.Sc. Nursing": IMG.skillsLab,
       "B.Sc. Medical Laboratory Technology": IMG.pathLab,
-      "Bachelor of Physiotherapy": IMG.physiologyLab,
+      "Bachelor of Physiotherapy": IMG.physiotherapy,
     },
   },
   "/academics/paramedical-diplomas": {
     hero: IMG.centralLab,
-    pool: [IMG.pathLab, IMG.centralLabAlt, IMG.operationRoom, IMG.cathLab, IMG.ctScan, IMG.skillsLab],
+    sectionImages: { "Trained Where the Work Happens": IMG.centralLabAlt },
     cardImages: {
       "Medical Laboratory Technology": IMG.pathLab,
       "Cath Lab Technician": IMG.cathLab,
       "Medical Sterilization Management & Operation Theatre Technician": IMG.operationRoom,
-      "Dialysis Technician": IMG.centralLabAlt,
       "Ophthalmic Technician": IMG.phaco,
       "Anaesthesia Technician": IMG.anaesthesiology,
       "Medical Imaging Technology": IMG.ctScan,
@@ -170,42 +185,60 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
       "Cardiology Technician": IMG.balloonPump,
     },
   },
-  "/academics/calendar": { hero: IMG.lecture, pool: [IMG.auditorium, IMG.library, IMG.students, IMG.posterDay, IMG.campusGreen, IMG.practical] },
-  "/academics/research": { hero: IMG.microscopy, pool: [IMG.posterDay, IMG.biochemLab, IMG.pathologySuite, IMG.bookStacks, IMG.ruralOutreach, IMG.centralLibraryAlt] },
+  "/academics/calendar": { hero: IMG.lecture },
+  "/academics/research": {
+    hero: IMG.microscopy,
+    sectionImages: {
+      "Central Research Laboratory": IMG.biochemLab,
+      "Medical Education Unit": IMG.meu,
+    },
+  },
 
-  // ── Discover & approvals ────────────────────────────────────
-  "/about/awards": { hero: IMG.convocation, pool: [IMG.posterDay, IMG.auditorium, IMG.entrance, IMG.students, IMG.ruralOutreach, IMG.campusAerial] },
+  // ── Discover & approvals ── records and citations; hero only.
+  "/about/awards": { hero: IMG.convocation },
   "/about/centres-of-excellence": {
     hero: IMG.operationRoom,
-    pool: [IMG.cathLab, IMG.neuroMicroscope, IMG.centralLab, IMG.endoscopy, IMG.operationRoomAlt, IMG.gynaecology],
+    sectionImages: { "What Makes a Centre of Excellence Here": IMG.operationRoomAlt },
     cardImages: {
       "Cardiac Sciences": IMG.cathLab,
       Neurosciences: IMG.neuroMicroscope,
-      "Renal Sciences": IMG.centralLabAlt,
       "Gastrointestinal Sciences": IMG.endoscopy,
-      "Trauma & Critical Care": IMG.operationRoomAlt,
+      "Trauma & Critical Care": IMG.icuVentilator,
       "Mother & Child": IMG.gynaecology,
     },
   },
-  "/approvals/government": { hero: IMG.adminBlock, pool: DISCOVER_POOL },
-  "/approvals/university-affiliation": { hero: IMG.auditorium, pool: [IMG.entrance, IMG.library, IMG.convocation, IMG.adminBlockAlt, IMG.lecture, IMG.campusGreen] },
+  "/approvals/government": { hero: IMG.adminBlock },
+  "/approvals/university-affiliation": { hero: IMG.auditorium },
 
-  // ── Facilities ──────────────────────────────────────────────
-  "/facilities/hospital": { hero: IMG.lobbyWide, pool: [IMG.operationRoom, IMG.centralLab, IMG.bloodBank, IMG.mri, IMG.lobby, IMG.reception] },
-  "/facilities/academic": { hero: IMG.centralLibrary, pool: [IMG.dissectionLab, IMG.skillsLab, IMG.physiologyLab, IMG.auditorium, IMG.microscopy, IMG.meu] },
-  "/facilities/campus-life": { hero: IMG.stadium, pool: [IMG.hostel, IMG.mess, IMG.gym, IMG.tableTennis, IMG.transport, IMG.campusGreen] },
+  // ── Facilities ── the cards carry their own photographs; these fill the gaps.
+  "/facilities/hospital": {
+    hero: IMG.lobbyWide,
+    cardImages: {
+      "Critical Care": IMG.icuVentilator,
+      Radiology: IMG.mri,
+      "Cath Lab, Endoscopy & Dialysis": IMG.cathLab,
+    },
+  },
+  "/facilities/academic": {
+    hero: IMG.centralLibrary,
+    cardImages: {
+      "Digital Library": IMG.centralLibraryAlt,
+      "Lecture Halls": IMG.auditorium,
+      "Central Research Laboratory": IMG.microscopy,
+    },
+  },
+  "/facilities/campus-life": { hero: IMG.stadium },
 
-  // ── Patient care ────────────────────────────────────────────
-  "/patient-care/citizen-charter": { hero: IMG.lobbyWide, pool: PATIENT_POOL },
-  "/patient-care/opd-timings": { hero: IMG.lobby, pool: [IMG.reception, IMG.generalMedicine, IMG.paediatrics, IMG.lobbyWide, IMG.corridor, IMG.centralLab] },
-  "/patient-care/admission-discharge": { hero: IMG.reception, pool: [IMG.lobby, IMG.operationRoomAlt, IMG.lobbyWide, IMG.centralLab, IMG.bloodBank, IMG.corridor] },
-  "/patient-care/insurance": { hero: IMG.adminBlockAlt, pool: PATIENT_POOL },
-  "/patient-care/feedback": { hero: IMG.corridor, pool: [IMG.lobby, IMG.reception, IMG.lobbyWide, IMG.adminBlock, IMG.campusGreen, IMG.entrance] },
+  // ── Patient care ── timings, charters and procedures; hero only.
+  "/patient-care/citizen-charter": { hero: IMG.lobbyWide },
+  "/patient-care/opd-timings": { hero: IMG.lobby },
+  "/patient-care/admission-discharge": { hero: IMG.reception },
+  "/patient-care/insurance": { hero: IMG.adminBlockAlt },
+  "/patient-care/feedback": { hero: IMG.corridor },
 
-  // ── Medical services ────────────────────────────────────────
+  // ── Medical services ──
   "/services/specialities": {
     hero: IMG.generalMedicine,
-    pool: SERVICES_POOL,
     cardImages: {
       "General Medicine": IMG.generalMedicine,
       "Pulmonology / Respiratory Medicine": IMG.respiratory,
@@ -220,22 +253,26 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
   },
   "/services/super-specialities": {
     hero: IMG.cathLab,
-    pool: SERVICES_POOL,
     cardImages: {
       Cardiology: IMG.cathLab,
       "Cardio Thoracic & Vascular Surgery": IMG.heartLung,
-      "Nephrology & Dialysis": IMG.centralLabAlt,
       Urology: IMG.thuliumLaser,
       Neurology: IMG.eeg,
       Neurosurgery: IMG.neuroMicroscope,
       "Medical Gastroenterology": IMG.endoscopy,
-      "Plastic & Cosmetic Surgery": IMG.laparoscopy,
+      "Plastic & Cosmetic Surgery": IMG.reconstructiveSurgery,
     },
   },
-  "/services/emergency-trauma": { hero: IMG.operationRoomAlt, pool: [IMG.operationRoom, IMG.bloodBankOt, IMG.ctScan, IMG.centralLab, IMG.lobby, IMG.xray] },
+  "/services/emergency-trauma": {
+    hero: IMG.operationRoomAlt,
+    sectionImages: {
+      "Casualty Infrastructure": IMG.icuVentilator,
+      "Emergency Support Services": IMG.bloodBankOt,
+    },
+  },
   "/services/diagnostics": {
     hero: IMG.mri,
-    pool: [IMG.ctScan, IMG.xray, IMG.ultrasound, IMG.centralLab, IMG.pathLab, IMG.bloodBank],
+    sectionImages: { "One Diagnostic Campus": IMG.centralLab },
     cardImages: {
       "Radiology & Imaging": IMG.mri,
       "Central Laboratory": IMG.centralLab,
@@ -247,5 +284,5 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
   },
 };
 
-/** Every route falls back to this if the manifest ever misses one. */
-export const DEFAULT_MEDIA: PageMedia = { hero: IMG.entrance, pool: FACILITIES_POOL };
+/** Fallback for a route that somehow has no manifest entry. */
+export const DEFAULT_MEDIA: PageMedia = { hero: IMG.entrance };
