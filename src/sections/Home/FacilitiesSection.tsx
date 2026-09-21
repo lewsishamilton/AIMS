@@ -74,7 +74,7 @@ export const FacilitiesSection: React.FC = () => {
   const [activeId, setActiveId] = useState<string>("01");
 
   return (
-    <section className="relative py-14 sm:py-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
+    <section className="relative pt-0 sm:pt-1 pb-14 sm:pb-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
       {/* Subtle Dot Grid Background */}
       <div
         className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"

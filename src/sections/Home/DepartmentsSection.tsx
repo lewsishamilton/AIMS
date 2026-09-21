@@ -30,7 +30,7 @@ const DEPARTMENTS = [
 
 const DepartmentsSection = () => {
   return (
-    <section className="relative py-14 sm:py-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
+    <section className="relative pt-6 sm:pt-8 lg:pt-10 pb-0 sm:pb-1 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
       {/* Subtle Dot Grid Background */}
       <div
         className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"

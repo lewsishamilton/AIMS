@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
+import logo from "../../assets/logo.png";
+import logoWhite from "../../assets/logo-white.png";
 import {
   Phone,
   Mail,
@@ -7,7 +9,6 @@ import {
   Clock,
   Send,
   CheckCircle2,
-  Building2,
   Loader2,
   AlertCircle,
 } from "lucide-react";
@@ -115,7 +116,7 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-20 bg-white dark:bg-transparent py-16 sm:py-24 lg:py-28 tracking-[0.015em] border-t border-[#dce8ee] dark:border-white/10 transition-colors duration-300"
+      className="relative scroll-mt-20 bg-white dark:bg-transparent pt-6 sm:pt-8 pb-16 sm:pb-24 lg:pb-28 tracking-[0.015em] transition-colors duration-300"
     >
       <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}
@@ -156,18 +157,17 @@ export const ContactSection: React.FC = () => {
           >
             {/* Main Info Card */}
             <div className="rounded-[24px] border border-[#dce8ee] dark:border-white/10 bg-[#fbfaf5] dark:bg-white/[0.04] dark:backdrop-blur-xl p-7 sm:p-9 shadow-xs dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-[#dce8ee] dark:border-white/10">
-                <div className="w-10 h-10 rounded-xl bg-[#1f3351] dark:bg-teal-500 text-white flex items-center justify-center shrink-0 shadow-xs">
-                  <Building2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-['Manrope',sans-serif] text-lg sm:text-xl font-bold text-[#1f3351] dark:text-white">
-                    Arundathi Institute
-                  </h3>
-                  <p className="text-xs text-[#62748a] dark:text-slate-300">
-                    Medical Sciences &amp; Hospital
-                  </p>
-                </div>
+              <div className="mb-6 pb-5 border-b border-[#dce8ee] dark:border-white/10 flex items-center">
+                <img
+                  src={logo}
+                  alt="Arundathi Institute of Medical Sciences & Hospital"
+                  className="h-12 sm:h-14 w-auto object-contain dark:hidden drop-shadow-xs"
+                />
+                <img
+                  src={logoWhite}
+                  alt="Arundathi Institute of Medical Sciences & Hospital"
+                  className="h-12 sm:h-14 w-auto object-contain hidden dark:block drop-shadow-xs"
+                />
               </div>
 
               <div className="space-y-6">
@@ -418,7 +418,7 @@ export const ContactSection: React.FC = () => {
                 </div>
 
                 {/* Send Button */}
-                <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-1">
+                <div className="pt-1">
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -436,15 +436,6 @@ export const ContactSection: React.FC = () => {
                       </>
                     )}
                   </button>
-                  <span className="text-xs text-[#62748a]">
-                    Deliveries routed to{" "}
-                    <a
-                      href="mailto:lewsishamilton@gmail.com"
-                      className="font-medium text-[#1f3351] hover:underline"
-                    >
-                      lewsishamilton@gmail.com
-                    </a>
-                  </span>
                 </div>
               </form>
             </div>
