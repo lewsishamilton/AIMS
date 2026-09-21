@@ -8,7 +8,7 @@ interface StatItem {
 const STATS_DATA: StatItem[] = [
   { value: 100, label: "doctors" },
   { value: 350, label: "beds" },
-  { value: 850, label: "operations" },
+  { value: 8500, label: "operations" },
   { value: 3500, label: "library books" },
   { value: 25, label: "acre campus" },
 ];
