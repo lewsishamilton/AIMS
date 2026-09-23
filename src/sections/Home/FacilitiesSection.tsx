@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { cn } from "../../lib/utils";
 
@@ -17,6 +18,8 @@ export interface FacilityItem {
   description: string;
   image: string;
   imageAlt: string;
+  /** Page that "Explore Facility" opens, where the facility has one. */
+  path?: string;
 }
 
 const FACILITIES: FacilityItem[] = [
@@ -35,6 +38,7 @@ const FACILITIES: FacilityItem[] = [
     description: "Dedicated fleet of comfortable buses operating on extensive routes across the city for safe daily transit.",
     image: transportationImg,
     imageAlt: "Campus Transportation at AIMS",
+    path: "/facilities/transport",
   },
   {
     id: "03",
@@ -70,8 +74,12 @@ const FACILITIES: FacilityItem[] = [
   },
 ];
 
+const EXPLORE_CLASS =
+  "mt-0.5 inline-flex w-fit items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide text-white group-hover:text-white/95 transition-all duration-300";
+
 export const FacilitiesSection: React.FC = () => {
   const [activeId, setActiveId] = useState<string>("01");
+  const navigate = useNavigate();
 
   return (
     <section className="relative pt-0 sm:pt-1 pb-14 sm:pb-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
@@ -113,7 +121,8 @@ export const FacilitiesSection: React.FC = () => {
               <div
                 key={facility.id}
                 onMouseEnter={() => setActiveId(facility.id)}
-                onClick={() => setActiveId(facility.id)}
+                // First tap opens a card (touch has no hover); clicking an open card follows its link.
+                onClick={() => (isActive && facility.path ? navigate(facility.path) : setActiveId(facility.id))}
                 className={cn(
                   "group relative cursor-pointer overflow-hidden rounded-[20px] sm:rounded-[24px] border border-[#e2e8f0]/80 dark:border-white/15 bg-white dark:bg-slate-900/40 min-w-0 min-h-0",
                   "shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_32px_rgba(15,23,42,0.18)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]",
@@ -183,10 +192,17 @@ export const FacilitiesSection: React.FC = () => {
                     </p>
 
                     {/* Explore Link Button */}
-                    <div className="mt-0.5 inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wide text-white group-hover:text-white/95 transition-all duration-300">
-                      <span>Explore Facility</span>
-                      <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1.5" />
-                    </div>
+                    {facility.path ? (
+                      <Link to={facility.path} className={EXPLORE_CLASS}>
+                        <span>Explore Facility</span>
+                        <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1.5" />
+                      </Link>
+                    ) : (
+                      <div className={EXPLORE_CLASS}>
+                        <span>Explore Facility</span>
+                        <ArrowRight className="w-4 h-4 transition-transform duration-300 ease-out group-hover:translate-x-1.5" />
+                      </div>
+                    )}
                   </div>
 
                   {/* Inactive Content: Vertical Text (Desktop) / Short Label (Mobile) */}
