@@ -11,6 +11,7 @@ import meuPdf from "./assets/MEU.pdf"
 import FacultyPage from "./pages/FacultyPage"
 import DepartmentFacultyPage from "./pages/DepartmentFacultyPage"
 import MediaGalleryPage from "./pages/MediaGalleryPage"
+import AwardsPage from "./pages/AwardsPage"
 
 import AboutHospitalPage from "./pages/AboutHospitalPage"
 import AboutInstitutionPage from "./pages/AboutInstitutionPage"
@@ -144,6 +145,7 @@ function App() {
         <Route path="/leadership/management" element={<ManagementPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/Contact" element={<ContactPage />} />
+        <Route path="/about/awards" element={<AwardsPage />} />
 
         {/* Content-driven pages: academics, admissions, services, facilities, patient care */}
         {Object.entries(STATIC_PAGES).map(([path, page]) => (

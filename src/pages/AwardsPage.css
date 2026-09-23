@@ -1,0 +1,1904 @@
+.awards-page {
+  /* Institutional Color Tokens */
+  --aw-color-primary-navy: #1F3351;
+  --aw-color-heading: #1F3351;
+  --aw-color-site-bg: #FBFAF5;
+  --aw-color-primary-deep: #0b2540;
+  --aw-color-blue-accent: #1F5A85;
+  --aw-color-blue-mid: #2E6F95;
+  --aw-color-blue-light: #418bb6;
+  --aw-color-blue-soft: #EAF4FA;
+  --aw-color-blue-tint: #F3F8FC;
+  --aw-color-bg-alt: #f5f2e8;
+  --aw-color-white: #FFFFFF;
+  
+  /* Gold/Prestige Accents */
+  --aw-color-gold: #c29541;
+  --aw-color-gold-light: #fdf8eb;
+  --aw-color-gold-border: #e6cb95;
+  
+  /* Text & Border Shades */
+  --aw-text-main: #142535;
+  --aw-text-secondary: #62748a;
+  --aw-text-muted: #62748a;
+  --aw-text-small: #62748a;
+  --aw-border-light: #d8e5f0;
+  --aw-border-subtle: #e8f0f6;
+  
+  /* Shadows & Radius */
+  --aw-shadow-sm: 0 2px 8px rgba(31, 51, 81, 0.05);
+  --aw-shadow-md: 0 6px 20px rgba(31, 51, 81, 0.08);
+  --aw-shadow-lg: 0 12px 32px rgba(31, 51, 81, 0.12);
+  --aw-radius-sm: 6px;
+  --aw-radius-md: 10px;
+  --aw-radius-lg: 14px;
+  
+  /* Typography - STRICTLY INTER THROUGHOUT ENTIRE APPLICATION */
+  --aw-font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.awards-page *, .awards-page *::before, .awards-page *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.awards-page {
+  font-family: var(--aw-font-primary);
+  color: var(--aw-text-main);
+  background-color: var(--aw-color-site-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+.awards-page h1, .awards-page h2, .awards-page h3, .awards-page h4, .awards-page h5, .awards-page h6 {
+  color: var(--aw-color-primary-navy);
+}
+
+.awards-page small, .awards-page .small {
+  color: var(--aw-text-secondary);
+}
+
+.awards-page img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.awards-page button {
+  font-family: var(--aw-font-primary);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.awards-page a {
+  font-family: var(--aw-font-primary);
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Base Container */
+.awards-page .section-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .awards-page .section-container {
+    padding: 0 16px;
+  }
+}
+
+/* ==========================================================================
+   AIMS AWARDS & ACHIEVEMENTS - INSTITUTIONAL INTER TYPOGRAPHY & DESIGN SYSTEM
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. HERO ARCHIVE (NO NAVBAR, NO ARCHIVE TEXT, NO KNRUHS)
+   -------------------------------------------------------------------------- */
+.awards-page.aims-awards-app {
+  background-color: var(--aw-color-site-bg);
+  min-height: 100vh;
+}
+
+.awards-page .page-hero-container {
+  background: var(--aw-color-site-bg);
+  padding: 140px 20px 38px;
+  border-bottom: 1px solid var(--aw-border-light);
+  text-align: center;
+}
+
+.awards-page .hero-kicker {
+  margin-bottom: 14px;
+}
+
+.awards-page .hero-inner-wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* ALL HEADINGS CAPITALIZE EVERY WORD (First letter of every word capital, rest small) & COLOR #1F3351 */
+.awards-page h1,
+.awards-page h2,
+.awards-page h3,
+.awards-page h4,
+.awards-page h5,
+.awards-page h6,
+.awards-page .hero-main-title,
+.awards-page .domain-heading-title,
+.awards-page .dept-main-title,
+.awards-page .ns-main-heading,
+.awards-page .national-block-title,
+.awards-page .annual-title,
+.awards-page .sports-meet-heading,
+.awards-page .card-achievement-title,
+.awards-page .faculty-person-name,
+.awards-page .wing-typography-title,
+.awards-page .featured-title,
+.awards-page .collab-card-title,
+.awards-page .dept-achievement-heading,
+.awards-page .ext-tourn-heading,
+.awards-page .rigor-card-title,
+.awards-page .section-heading-title,
+.awards-page .ns-award-category-title,
+.awards-page .national-awardee-name,
+.awards-page .pub-title {
+  color: var(--aw-color-primary-navy) !important;
+  text-transform: capitalize !important;
+}
+
+.awards-page .main-domain-btn {
+  text-transform: capitalize !important;
+}
+
+.awards-page .hero-main-title {
+  color: var(--aw-color-primary-navy) !important;
+  font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.awards-page .hero-institution-sub {
+  margin-bottom: 20px;
+}
+
+.awards-page .hero-inst-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--aw-color-blue-accent);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.awards-page .hero-inst-tagline {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--aw-text-secondary);
+  margin-bottom: 6px;
+}
+
+.awards-page .hero-affiliation-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--aw-text-muted);
+}
+
+.awards-page .hero-intro-lead {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--aw-text-secondary);
+  max-width: 780px;
+  margin: 16px auto 0;
+}
+
+/* --------------------------------------------------------------------------
+   2. STICKY MAIN INDEX: 5 MAJOR DOMAINS ONLY
+   -------------------------------------------------------------------------- */
+.awards-page .quick-nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(251, 250, 245, 0.96);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--aw-border-light);
+  box-shadow: 0 2px 10px rgba(31, 51, 81, 0.05);
+}
+
+.awards-page .quick-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.awards-page .quick-nav-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--aw-color-primary-navy);
+  flex-shrink: 0;
+}
+
+.awards-page .nav-compass-icon {
+  color: var(--aw-color-blue-accent);
+}
+
+.awards-page .quick-nav-domains-track {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.awards-page .main-domain-btn {
+  padding: 7px 18px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--aw-color-primary-navy);
+  background: var(--aw-color-blue-tint);
+  border: 1px solid var(--aw-border-light);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.awards-page .main-domain-btn:hover {
+  background: var(--aw-color-blue-soft);
+  border-color: var(--aw-color-blue-accent);
+}
+
+.awards-page .main-domain-btn.domain-btn-active {
+  background: #1F3351;
+  color: #ffffff;
+  border-color: var(--aw-color-primary-navy);
+}
+
+/* --------------------------------------------------------------------------
+   3. MAJOR DOMAIN HEADERS
+   -------------------------------------------------------------------------- */
+.awards-page .major-domain-container {
+  padding-top: 30px;
+}
+
+.awards-page .major-domain-section {
+  padding: 60px 0;
+  border-bottom: 1px solid var(--aw-border-light);
+  background-color: transparent;
+}
+
+.awards-page .domain-section-header {
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.awards-page .domain-heading-title {
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 900;
+  color: var(--aw-color-primary-navy) !important;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.awards-page .domain-accent-bar {
+  display: none !important;
+}
+
+.awards-page .domain-heading-subtitle {
+  font-size: 0.96rem;
+  color: #62748a !important;
+  max-width: 680px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   4. FIXED DEPARTMENT SECTION SIZE (ANATOMY AS EXACT REFERENCE SIZE)
+   -------------------------------------------------------------------------- */
+.awards-page .fixed-department-section {
+  padding: 42px 0;
+  border-bottom: 1px solid var(--aw-border-light);
+}
+
+.awards-page .dept-bg-white {
+  background-color: transparent;
+}
+
+.awards-page .dept-bg-tint {
+  background-color: rgba(240, 235, 222, 0.35);
+}
+
+.awards-page .dept-header-wrap {
+  margin-bottom: 18px;
+}
+
+.awards-page .dept-main-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--aw-color-primary-navy);
+  letter-spacing: 0.02em;
+  margin-bottom: 6px;
+}
+
+.awards-page .dept-accent-line {
+  display: none;
+}
+
+/* FIXED CARD DIMENSIONS ACROSS ALL DEPARTMENTS */
+.awards-page .dept-fixed-card-container {
+  background: var(--aw-color-white);
+  border-radius: var(--aw-radius-md);
+  border: 1px solid var(--aw-border-light);
+  box-shadow: var(--aw-shadow-sm);
+  overflow: hidden;
+  height: 380px; /* STRICT FIXED HEIGHT MATCHING ANATOMY REFERENCE */
+}
+
+.awards-page .dept-slide-layout {
+  display: grid;
+  grid-template-columns: 46% 54%;
+  height: 100%;
+  padding: 10px;
+  gap: 16px;
+}
+
+/* FIXED IMAGE PANE (FILLET ALL CORNERS INCL RIGHT SIDES, NO BLACK BACKGROUND, FILLS PANE) */
+.awards-page .dept-image-pane {
+  position: relative;
+  height: 100%;
+  background-color: #f8fafc;
+  overflow: hidden;
+  border-radius: 12px; /* FILLETED ON ALL SIDES INCLUDING RIGHT SIDES */
+}
+
+.awards-page .dept-fixed-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  display: block;
+  border-radius: 12px;
+  background-color: transparent;
+}
+
+.awards-page .dept-floating-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(18, 59, 99, 0.92);
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-left: 3px solid var(--aw-color-gold);
+  z-index: 2;
+}
+
+/* OPPOSITE SIDE ARROW CONTROLS (NO OVERLAP, NO DOTS) */
+.awards-page .dept-arrow-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(18, 59, 99, 0.88);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s ease;
+  z-index: 10;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.awards-page .dept-arrow-btn:hover {
+  background: #1F3351;
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.awards-page .dept-arrow-left {
+  left: 12px;
+}
+
+.awards-page .dept-arrow-right {
+  right: 12px;
+}
+
+/* FIXED CONTENT PANE (NO READ MORE, CONTROLLED SPACING) */
+.awards-page .dept-content-pane {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.awards-page .dept-content-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.awards-page .dept-category-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--aw-color-blue-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.awards-page .dept-slide-counter {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--aw-text-muted);
+  background: var(--aw-color-blue-soft);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.awards-page .dept-achievement-heading {
+  font-size: 1.18rem;
+  font-weight: 800;
+  color: var(--aw-color-primary-navy);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.awards-page .dept-meta-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 0.85rem;
+  color: var(--aw-text-secondary);
+  margin-bottom: 6px;
+}
+
+.awards-page .dept-collab-item {
+  color: var(--aw-color-blue-accent);
+}
+
+.awards-page .dept-meta-icon {
+  color: var(--aw-color-blue-accent);
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.awards-page .dept-description-box {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin: 6px 0 12px;
+  padding-right: 6px;
+  scrollbar-width: thin;
+}
+
+.awards-page .dept-description-box::-webkit-scrollbar {
+  width: 4px;
+}
+
+.awards-page .dept-description-box::-webkit-scrollbar-thumb {
+  background: var(--aw-border-light);
+  border-radius: 4px;
+}
+
+.awards-page .dept-desc-text {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--aw-text-secondary);
+}
+
+.awards-page .dept-recognition-bar {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--aw-color-blue-soft);
+  padding: 10px 14px;
+  border-radius: var(--aw-radius-sm);
+  border-left: 3px solid var(--aw-color-blue-accent);
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.awards-page .dept-rec-icon {
+  color: var(--aw-color-blue-accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.awards-page .dept-rec-lead {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--aw-color-primary-navy);
+}
+
+.awards-page .dept-rec-text {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--aw-color-primary-navy);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   5. PROFESSIONAL IMAGE PLACEHOLDER
+   -------------------------------------------------------------------------- */
+.awards-page .institutional-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f0f5fa 0%, #e6eff7 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.awards-page .placeholder-inner-frame {
+  border: 1.5px dashed #cbd5e1;
+  border-radius: var(--aw-radius-sm);
+  padding: 20px 16px;
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.awards-page .placeholder-icon-wrap {
+  color: #1F5A85;
+  margin-bottom: 8px;
+}
+
+.awards-page .placeholder-inst-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #1F3351;
+  letter-spacing: 0.08em;
+  line-height: 1.3;
+}
+
+.awards-page .placeholder-accent-line {
+  width: 30px;
+  height: 2px;
+  background: #c29541;
+  margin: 8px 0;
+  border-radius: 1px;
+}
+
+.awards-page .placeholder-category-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1F3351;
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+
+.awards-page .placeholder-sub-note {
+  font-size: 0.75rem;
+  color: #62748a;
+}
+
+/* --------------------------------------------------------------------------
+   6. FACULTY ACHIEVEMENTS DOMAIN (WITH PROPER FACE ALIGNMENT & ROUNDED CORNERS)
+   -------------------------------------------------------------------------- */
+.awards-page .faculty-domain {
+  background-color: transparent;
+}
+
+.awards-page .faculty-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 22px;
+  margin-bottom: 50px;
+}
+
+@media (min-width: 1024px) {
+  .awards-page .faculty-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .awards-page .faculty-cards-grid > .faculty-card-center {
+    grid-column: 2;
+  }
+}
+
+.awards-page .faculty-award-card {
+  background: var(--aw-color-white);
+  border: 1px solid var(--aw-border-light);
+  border-radius: 12px; /* ROUNDED CORNERS AS SPECIFIED */
+  overflow: hidden;
+  box-shadow: var(--aw-shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.awards-page .faculty-award-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--aw-shadow-md);
+}
+
+.awards-page .faculty-card-photo-wrapper {
+  position: relative;
+  height: 250px;
+  background-color: #f1f5f9;
+  overflow: hidden;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.awards-page .faculty-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+}
+
+.awards-page .faculty-badge-pill {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: #1F3351;
+  color: #ffd88a;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-left: 3px solid var(--aw-color-gold);
+}
+
+.awards-page .faculty-card-details {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.awards-page .faculty-person-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--aw-color-primary-navy);
+  margin-bottom: 3px;
+}
+
+.awards-page .faculty-dept-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--aw-color-blue-accent);
+  margin-bottom: 8px;
+}
+
+.awards-page .faculty-desc-text {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--aw-text-secondary);
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+
+.awards-page .faculty-significance-bar {
+  background: var(--aw-color-blue-tint);
+  border-left: 3px solid var(--aw-color-primary-navy);
+  padding: 8px 12px;
+  border-radius: var(--aw-radius-sm);
+  font-size: 0.78rem;
+  color: var(--aw-color-primary-navy);
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   7. NARI SHAKTI PURASKAR (INSIDE FACULTY ACHIEVEMENTS)
+   -------------------------------------------------------------------------- */
+.awards-page .nari-shakti-subdomain-block {
+  background: linear-gradient(180deg, #fbf7ee 0%, #ffffff 100%);
+  border: 1.5px solid var(--aw-color-gold-border);
+  border-radius: 12px;
+  padding: 36px 28px;
+  margin-bottom: 40px;
+}
+
+.awards-page .ns-hero-banner {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 28px;
+}
+
+.awards-page .ns-tagline-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #8c6214;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.awards-page .ns-sparkle-icon {
+  color: var(--aw-color-gold);
+}
+
+.awards-page .ns-main-heading {
+  font-size: 1.9rem;
+  font-weight: 900;
+  color: #3b2806;
+  margin-bottom: 8px;
+}
+
+.awards-page .ns-accent-gold-line {
+  width: 50px;
+  height: 2.5px;
+  background: var(--aw-color-gold);
+  margin: 0 auto 12px;
+  border-radius: 2px;
+}
+
+.awards-page .ns-institutional-quote {
+  background: #ffffff;
+  padding: 12px 18px;
+  border-radius: var(--aw-radius-sm);
+  border: 1px solid var(--aw-color-gold-border);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #523b10;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.awards-page .ns-quote-icon {
+  color: var(--aw-color-gold);
+  flex-shrink: 0;
+}
+
+.awards-page .ns-event-summary {
+  font-size: 0.9rem;
+  color: #4f422e;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.awards-page .ns-presided-note {
+  font-size: 0.8rem;
+  color: #7a633c;
+}
+
+.awards-page .ns-content-split {
+  display: grid;
+  grid-template-columns: 38% 62%;
+  gap: 24px;
+  align-items: start;
+}
+
+.awards-page .ns-images-vertical-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.awards-page .ns-stacked-photo-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--aw-color-gold-border);
+  box-shadow: var(--aw-shadow-sm);
+  background-color: #f8fafc;
+}
+
+.awards-page .ns-first-image-wrap {
+  height: 220px;
+}
+
+.awards-page .ns-second-image-full-wrap {
+  height: 480px;
+  border: 1.5px solid var(--aw-color-gold-border);
+  box-shadow: var(--aw-shadow-md);
+}
+
+.awards-page .ns-featured-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  border-radius: 12px;
+}
+
+.awards-page .ns-second-full-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 10%;
+  display: block;
+  border-radius: 12px;
+}
+
+.awards-page .ns-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.awards-page .ns-award-category-card {
+  background: var(--aw-color-white);
+  border: 1px solid var(--aw-color-gold-border);
+  border-radius: var(--aw-radius-sm);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.awards-page .ns-award-category-card.ns-ojaswi-card {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: 100%;
+  max-width: 360px;
+}
+
+.awards-page .ns-arundathi-card {
+  border: 1.5px solid #d4af37;
+  background: linear-gradient(180deg, #fffdf8 0%, #ffffff 100%);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.12);
+}
+
+.awards-page .ns-award-distinction-badge {
+  background: #fdf5e2;
+  border-left: 3px solid var(--aw-color-gold);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #634608;
+  margin: 10px 0 12px;
+  line-height: 1.4;
+}
+
+.awards-page .ns-award-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.awards-page .ns-award-sparkle {
+  color: var(--aw-color-gold);
+  font-size: 0.9rem;
+}
+
+.awards-page .ns-award-category-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #3b2806;
+}
+
+.awards-page .ns-award-category-desc {
+  font-size: 0.78rem;
+  color: #63543d;
+  line-height: 1.4;
+  margin-bottom: 10px;
+}
+
+.awards-page .ns-awardees-list {
+  margin-top: auto;
+  background: #fdfaf4;
+  padding: 8px 10px;
+  border-radius: 4px;
+  border-left: 2px solid var(--aw-color-gold);
+}
+
+.awards-page .ns-awardee-badges {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.awards-page .ns-awardee-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #33240a;
+}
+
+.awards-page .ns-check-icon {
+  color: var(--aw-color-gold);
+  flex-shrink: 0;
+}
+
+.awards-page .ns-awardee-name {
+  font-weight: 700;
+}
+
+.awards-page .ns-awardee-dept {
+  font-size: 0.74rem;
+  color: #7a633c;
+}
+
+/* --------------------------------------------------------------------------
+   8. NATIONAL AWARDS (INSIDE FACULTY ACHIEVEMENTS)
+   -------------------------------------------------------------------------- */
+.awards-page .national-awards-subdomain-block {
+  background: var(--aw-color-blue-tint);
+  border: 1px solid var(--aw-border-light);
+  border-radius: 12px;
+  padding: 30px 24px;
+}
+
+.awards-page .national-sub-header {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.awards-page .national-badge-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1F3351;
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.awards-page .national-block-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--aw-color-primary-navy);
+  margin-bottom: 4px;
+}
+
+.awards-page .national-block-desc {
+  font-size: 0.88rem;
+  color: var(--aw-text-muted);
+}
+
+.awards-page .national-awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.awards-page .national-award-card {
+  background: var(--aw-color-white);
+  border-radius: 12px;
+  border: 1px solid var(--aw-border-light);
+  overflow: hidden;
+  box-shadow: var(--aw-shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.awards-page .national-card-media {
+  height: 240px;
+  background-color: #f1f5f9;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  overflow: hidden;
+}
+
+.awards-page .national-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.awards-page .national-card-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.awards-page .national-award-domain-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--aw-color-blue-accent);
+  margin-bottom: 2px;
+}
+
+.awards-page .national-awardee-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--aw-color-primary-navy);
+}
+
+.awards-page .national-awardee-prog {
+  font-size: 0.8rem;
+  color: var(--aw-text-muted);
+  margin-bottom: 10px;
+}
+
+.awards-page .national-award-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #fdfaf2;
+  border: 1px solid var(--aw-color-gold-border);
+  padding: 8px 12px;
+  border-radius: var(--aw-radius-sm);
+  margin-bottom: 10px;
+}
+
+.awards-page .medal-icon {
+  color: var(--aw-color-gold);
+  flex-shrink: 0;
+}
+
+.awards-page .national-award-title-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #543e11;
+}
+
+.awards-page .national-award-desc {
+  font-size: 0.85rem;
+  color: var(--aw-text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. STUDENT ACHIEVEMENTS DOMAIN
+   -------------------------------------------------------------------------- */
+.awards-page .student-domain {
+  background-color: transparent;
+}
+
+.awards-page .student-research-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.awards-page .student-rigor-card {
+  background: var(--aw-color-white);
+  border: 1px solid var(--aw-border-light);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--aw-shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.awards-page .student-rigor-card-centered {
+  grid-column: 2;
+  width: 100%;
+}
+
+.awards-page .rigor-card-header {
+  padding: 10px 16px;
+  background: var(--aw-color-blue-tint);
+  border-bottom: 1px solid var(--aw-border-light);
+}
+
+.awards-page .rigor-tag-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--aw-color-primary-navy);
+}
+
+.awards-page .rigor-card-media {
+  height: 240px;
+  background-color: #f8fafc;
+  overflow: hidden;
+}
+
+.awards-page .rigor-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  background-color: transparent;
+}
+
+.awards-page .rigor-card-body {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.awards-page .rigor-card-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--aw-color-primary-navy);
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.awards-page .rigor-scholars-box {
+  background: var(--aw-color-blue-soft);
+  padding: 8px 12px;
+  border-radius: var(--aw-radius-sm);
+  margin-bottom: 10px;
+}
+
+.awards-page .scholars-lead {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--aw-color-primary-navy);
+}
+
+.awards-page .scholars-names {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--aw-color-blue-accent);
+  margin: 0;
+}
+
+.awards-page .rigor-desc-text {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--aw-text-secondary);
+}
+
+/* ACADEMIC TOPPERS IN STUDENT DOMAIN */
+.awards-page .annual-day-block {
+  background: linear-gradient(135deg, #f5f9fc 0%, #ffffff 100%);
+  border: 1px solid var(--aw-border-light);
+  border-radius: 12px;
+  padding: 30px 24px;
+}
+
+.awards-page .annual-day-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 22px;
+}
+
+.awards-page .annual-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #1F3351;
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.awards-page .annual-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--aw-color-primary-navy);
+  margin-bottom: 8px;
+}
+
+.awards-page .annual-subline {
+  font-size: 0.98rem;
+  font-style: italic;
+  color: var(--aw-text-secondary);
+  margin-top: 4px;
+  margin-bottom: 22px;
+  line-height: 1.55;
+  max-width: 820px;
+}
+
+/* STAGE PHOTOS WITHOUT DUPLICATE NAMES UNDERNEATH */
+/* 8 TOPPERS IMAGES IN 4x2 GRID (NO STANDALONE NAME BOXES) */
+.awards-page .toppers-eight-images-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.awards-page .topper-grid-cell {
+  background: #f1f5f9;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--aw-border-light);
+  height: 180px;
+  box-shadow: var(--aw-shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.awards-page .topper-grid-cell:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--aw-shadow-md);
+}
+
+.awards-page .topper-grid-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  border-radius: 10px;
+}
+
+/* --------------------------------------------------------------------------
+   10. SPORTS DOMAIN (TWO SIDE-BY-SIDE IMAGES)
+   -------------------------------------------------------------------------- */
+.awards-page .sports-domain {
+  background-color: transparent;
+}
+
+.awards-page .sports-single-hero-card {
+  background: var(--aw-color-white);
+  border-radius: 12px;
+  border: 1px solid var(--aw-border-light);
+  overflow: hidden;
+  box-shadow: var(--aw-shadow-sm);
+}
+
+/* THREE SIDE-BY-SIDE SPORTS IMAGES */
+.awards-page .sports-dual-images-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  position: relative;
+  height: 320px;
+  background: var(--aw-color-blue-tint);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.awards-page .sports-dual-pane {
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.awards-page .sports-dual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  background-color: transparent;
+}
+
+.sports-pane-1 .sports-dual-img,
+.awards-page .sports-left-pane .sports-dual-img {
+  object-position: center 75%;
+}
+
+.sports-pane-2 .sports-dual-img,
+.awards-page .sports-right-pane .sports-dual-img {
+  object-position: center 30%;
+}
+
+.awards-page .sports-pane-3 .sports-dual-img {
+  object-position: center 35%;
+}
+
+.awards-page .sports-badge-pill {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: #1F3351;
+  color: #ffffff;
+  padding: 5px 14px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  border-left: 3px solid var(--aw-color-gold);
+  z-index: 2;
+}
+
+.awards-page .sports-single-content-pane {
+  padding: 28px 30px;
+}
+
+.awards-page .sports-venue-lead {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--aw-color-blue-accent);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.awards-page .sports-meet-heading {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--aw-color-primary-navy);
+  margin-bottom: 8px;
+}
+
+.awards-page .sports-summary-desc {
+  font-size: 0.92rem;
+  color: var(--aw-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+  max-width: 800px;
+}
+
+.awards-page .sports-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+}
+
+.awards-page .sports-subcolumn {
+  background: var(--aw-color-blue-tint);
+  border: 1px solid var(--aw-border-light);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.awards-page .sports-subcol-title {
+  padding: 12px 16px;
+  background: var(--aw-color-blue-soft);
+  border-bottom: 1px solid var(--aw-border-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.awards-page .sports-subcol-title h4 {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--aw-color-primary-navy);
+}
+
+.awards-page .col-icon {
+  color: var(--aw-color-blue-accent);
+}
+
+.awards-page .sports-events-compact-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.awards-page .sports-compact-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--aw-border-subtle);
+  font-size: 0.82rem;
+}
+
+.awards-page .sports-compact-row:last-child {
+  border-bottom: none;
+}
+
+.awards-page .sports-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--aw-color-primary-navy);
+}
+
+.awards-page .sports-activity-icon {
+  color: var(--aw-color-blue-mid);
+}
+
+.awards-page .sports-row-winner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.awards-page .sports-winner-text {
+  color: var(--aw-text-secondary);
+}
+
+.awards-page .sports-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  line-height: 1.2;
+}
+
+.awards-page .sports-chip-medal {
+  font-size: 0.88rem;
+  line-height: 1;
+}
+
+.awards-page .chip-gold {
+  background: linear-gradient(180deg, #fff9e6 0%, #fef2d0 100%);
+  color: #7d5b0c;
+  border: 1px solid #ebd08c;
+}
+
+.awards-page .chip-silver {
+  background: linear-gradient(180deg, #f7f9fa 0%, #edf1f5 100%);
+  color: #3b4c5e;
+  border: 1px solid #c9d5e0;
+}
+
+.awards-page .chip-bronze {
+  background: linear-gradient(180deg, #fdf4f0 0%, #f8e5de 100%);
+  color: #8c4722;
+  border: 1px solid #e8bcab;
+}
+
+.awards-page .external-medals-stack {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.awards-page .external-medal-tile {
+  background: var(--aw-color-white);
+  border: 1px solid var(--aw-border-light);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.awards-page .ext-medal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #1F3351;
+  color: #ffd88a;
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.awards-page .ext-tourn-heading {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--aw-color-primary-navy);
+  margin-bottom: 3px;
+}
+
+.awards-page .ext-meta-line {
+  font-size: 0.8rem;
+  color: var(--aw-text-secondary);
+  margin: 1px 0;
+}
+
+/* --------------------------------------------------------------------------
+   11. WINGS DOMAIN (TYPOGRAPHY ONLY, 1 IMAGE PER WING, REDUCED TEXT)
+   -------------------------------------------------------------------------- */
+.awards-page .wings-domain {
+  background-color: transparent;
+}
+
+.awards-page .wings-clean-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.awards-page .wing-card-clean {
+  background: var(--aw-color-white);
+  border: 1px solid var(--aw-border-light);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--aw-shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+/* EXACTLY ONE IMAGE PER WING */
+.awards-page .wing-single-media {
+  height: 240px;
+  background-color: #f8fafc;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  overflow: hidden;
+}
+
+.awards-page .wing-single-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  background-color: transparent;
+  display: block;
+}
+
+.awards-page .wing-card-clean[data-wing="wing-fine-arts"] .wing-single-img {
+  object-position: center 30%;
+}
+
+.awards-page .wing-card-clean[data-wing="wing-digital"] .wing-single-img {
+  object-position: center center;
+}
+
+.awards-page .wing-content-clean {
+  padding: 20px 22px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+/* TYPOGRAPHY ONLY (NO LOGOS) */
+.awards-page .wing-typography-title {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: var(--aw-color-primary-navy);
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+
+.awards-page .wing-motto-text {
+  font-size: 0.78rem;
+  font-style: italic;
+  color: var(--aw-color-blue-accent);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.awards-page .wing-short-desc {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--aw-text-secondary);
+  margin-bottom: 12px;
+  flex-grow: 1;
+}
+
+.awards-page .wing-key-activity {
+  background: var(--aw-color-blue-tint);
+  border-left: 3px solid var(--aw-color-blue-accent);
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: auto;
+}
+
+.awards-page .activity-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--aw-color-primary-navy);
+  margin-bottom: 2px;
+}
+
+.awards-page .activity-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--aw-color-primary-navy);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   12. RESPONSIVE MEDIA QUERIES
+   -------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .awards-page .dept-fixed-card-container {
+    height: auto; /* ALLOW NATURAL MOBILE STACKING WHILE MAINTAINING WIDTH */
+    max-height: none;
+  }
+
+  .awards-page .dept-slide-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .awards-page .dept-image-pane {
+    height: 250px;
+  }
+
+  .awards-page .ns-content-split {
+    grid-template-columns: 1fr;
+  }
+
+  .awards-page .ns-stacked-photo-wrap {
+    height: 220px;
+  }
+
+  .awards-page .toppers-eight-images-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .awards-page .student-research-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .awards-page .student-rigor-card-centered {
+    grid-column: 1 / -1;
+    max-width: 480px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .awards-page .sports-dual-images-row {
+    grid-template-columns: repeat(3, 1fr);
+    height: 250px;
+  }
+}
+
+@media (max-width: 640px) {
+  .awards-page .page-hero-container {
+    padding: 116px 14px 26px;
+  }
+
+  .awards-page .hero-main-title {
+    font-size: 2rem;
+  }
+
+  .awards-page .dept-content-pane {
+    padding: 18px 16px;
+  }
+
+  .awards-page .dept-achievement-heading {
+    font-size: 1.08rem;
+  }
+
+  .awards-page .ns-categories-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .awards-page .ns-award-category-card.ns-ojaswi-card {
+    grid-column: auto;
+    max-width: 100%;
+  }
+
+  .awards-page .student-research-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .awards-page .student-rigor-card-centered {
+    grid-column: auto;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .awards-page .sports-dual-images-row {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .awards-page .sports-dual-pane {
+    height: 190px;
+  }
+
+  .awards-page .toppers-eight-images-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .awards-page .topper-grid-cell {
+    height: 125px;
+  }
+}
+
+/* ==========================================================================
+   GLOBAL COLOR OVERRIDES FOR HEADINGS & SMALL TEXT AS REQUESTED
+   - Every heading: #1F3351
+   - Website background: #FBFAF5
+   - All small text: #62748a
+   ========================================================================== */
+.awards-page h1,
+.awards-page h2,
+.awards-page h3,
+.awards-page h4,
+.awards-page h5,
+.awards-page h6,
+.awards-page .hero-main-title,
+.awards-page .domain-heading-title,
+.awards-page .dept-main-title,
+.awards-page .ns-main-heading,
+.awards-page .national-block-title,
+.awards-page .annual-title,
+.awards-page .sports-meet-heading,
+.awards-page .card-achievement-title,
+.awards-page .faculty-person-name,
+.awards-page .wing-typography-title,
+.awards-page .featured-title,
+.awards-page .collab-card-title,
+.awards-page .dept-achievement-heading,
+.awards-page .ext-tourn-heading,
+.awards-page .rigor-card-title,
+.awards-page .section-heading-title,
+.awards-page .ns-award-category-title,
+.awards-page .national-awardee-name,
+.awards-page .pub-title {
+  color: var(--aw-color-primary-navy) !important;
+}
+
+.awards-page small,
+.awards-page .small,
+.awards-page .domain-heading-subtitle,
+.awards-page .hero-inst-tagline,
+.awards-page .hero-inst-name,
+.awards-page .hero-affiliation-strip,
+.awards-page .hero-intro-lead,
+.awards-page .hero-scope-meta,
+.awards-page .dept-counter-tag,
+.awards-page .dept-meta-item,
+.awards-page .dept-meta-badge,
+.awards-page .dept-meta-val,
+.awards-page .dept-meta-lbl,
+.awards-page .dept-achievement-desc,
+.awards-page .slide-indicator-num,
+.awards-page .rigor-card-meta,
+.awards-page .rigor-desc-text,
+.awards-page .scholars-lead,
+.awards-page .sports-meet-subtitle,
+.awards-page .winner-entry-desc,
+.awards-page .sports-date-meta,
+.awards-page .sports-event-meta,
+.awards-page .wing-motto-text,
+.awards-page .wing-activity-tag,
+.awards-page .wing-detail-li,
+.awards-page .wing-short-desc,
+.awards-page .activity-label,
+.awards-page .activity-text,
+.awards-page .collab-meta,
+.awards-page .collab-desc,
+.awards-page .national-award-year,
+.awards-page .national-awardee-prog,
+.awards-page .national-award-desc,
+.awards-page .faculty-designation,
+.awards-page .faculty-role-meta,
+.awards-page .faculty-award-desc,
+.awards-page .topper-rank-label,
+.awards-page .topper-medal-label,
+.awards-page .topper-sub-text,
+.awards-page .ns-subtitle,
+.awards-page .ns-period-badge,
+.awards-page .ns-awardee-name,
+.awards-page .ns-honor-summary,
+.awards-page .ns-citation-quote,
+.awards-page .ns-award-category-desc,
+.awards-page .ns-award-distinction-badge,
+.awards-page .pub-authors,
+.awards-page .pub-journal {
+  color: var(--aw-text-secondary) !important;
+}
+
+
+/* ==========================================================================
+   DARK MODE
+   Mirrors the rest of the site's dark palette (teal accent, slate text,
+   #0c1626 card surfaces) rather than introducing new colors. Badge/pill
+   chips (navy backgrounds with white or gold text) are pinned to literal
+   colors above and deliberately stay the same in both themes.
+   ========================================================================== */
+html.dark .awards-page {
+  --aw-color-primary-navy: #f1f5f9;
+  --aw-color-site-bg: transparent;
+  --aw-color-blue-accent: #2dd4bf;
+  --aw-color-blue-mid: #5eead4;
+  --aw-color-blue-light: #99f6e4;
+  --aw-color-blue-soft: rgba(45, 212, 191, 0.1);
+  --aw-color-blue-tint: rgba(255, 255, 255, 0.04);
+  --aw-color-white: #0c1626;
+  --aw-color-gold: #e8c876;
+  --aw-color-gold-border: rgba(232, 200, 118, 0.35);
+  --aw-text-main: #e2e8f0;
+  --aw-text-secondary: #94a3b8;
+  --aw-text-muted: #94a3b8;
+  --aw-border-light: rgba(255, 255, 255, 0.1);
+  --aw-border-subtle: rgba(255, 255, 255, 0.06);
+  --aw-shadow-sm: 0 4px 18px rgba(0, 0, 0, 0.3);
+  --aw-shadow-md: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+html.dark .awards-page.aims-awards-app {
+  background-color: transparent;
+}
+
+html.dark .awards-page .quick-nav-bar {
+  background: rgba(6, 11, 20, 0.85);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+/* No alternating light/"smoked" tint bands between department sections —
+   every section sits on the same plain dark background. */
+html.dark .awards-page .dept-bg-tint {
+  background-color: transparent;
+}
+
+/* The certificate-style placeholder stays on its own light card in both
+   themes, like a physical plaque — it does not follow the page's theme. */
+
+/* Media wells behind photos: dark neutral instead of light slate */
+html.dark .awards-page .dept-image-pane,
+html.dark .awards-page .faculty-card-photo-wrapper,
+html.dark .awards-page .ns-stacked-photo-wrap,
+html.dark .awards-page .national-card-media,
+html.dark .awards-page .rigor-card-media,
+html.dark .awards-page .sports-dual-pane,
+html.dark .awards-page .wing-single-media,
+html.dark .awards-page .topper-grid-cell {
+  background-color: #0c1626;
+}
+
+/* Nari Shakti Puraskar — gold prestige block re-tuned for a dark card */
+html.dark .awards-page .nari-shakti-subdomain-block {
+  background: linear-gradient(180deg, rgba(232, 200, 118, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+}
+
+html.dark .awards-page .ns-tagline-wrap {
+  color: #e8c876;
+}
+
+html.dark .awards-page .ns-institutional-quote {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(232, 200, 118, 0.3);
+  color: #e9d9ad;
+}
+
+html.dark .awards-page .ns-event-summary {
+  color: #b9c2cf;
+}
+
+html.dark .awards-page .ns-presided-note {
+  color: #8b95a3;
+}
+
+html.dark .awards-page .ns-arundathi-card {
+  border-color: rgba(232, 200, 118, 0.5);
+  background: linear-gradient(180deg, rgba(232, 200, 118, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+html.dark .awards-page .ns-award-distinction-badge {
+  background: rgba(232, 200, 118, 0.1);
+  color: #e9d9ad;
+}
+
+html.dark .awards-page .ns-awardees-list {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+html.dark .awards-page .ns-awardee-chip {
+  color: #cbd5e1;
+}
+
+/* National award gold callout */
+html.dark .awards-page .national-award-box {
+  background: rgba(232, 200, 118, 0.08);
+}
+
+html.dark .awards-page .national-award-title-text {
+  color: #e9d9ad;
+}
+
+/* Academic Toppers Felicitation — same light-gradient-card bug as Nari Shakti */
+html.dark .awards-page .annual-day-block {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
+}

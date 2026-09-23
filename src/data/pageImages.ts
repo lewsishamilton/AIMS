@@ -177,12 +177,6 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
   },
 
   // ── Discover & approvals ──
-  "/about/awards": {
-    sectionImages: {
-      "Academic Achievement": IMG.posterExhibition2,
-      "Service to the Community": IMG.houseVisit,
-    },
-  },
   "/about/centres-of-excellence": {
     sectionImages: { "What Makes a Centre of Excellence Here": IMG.microsurgery },
     cardImages: {
