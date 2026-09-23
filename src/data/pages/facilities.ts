@@ -5,6 +5,7 @@ const FACILITY_LINKS = [
   { name: "Hospital Facilities", path: "/facilities/hospital" },
   { name: "Academic Facilities", path: "/facilities/academic" },
   { name: "Campus Life", path: "/facilities/campus-life" },
+  { name: "Bus Routes & Tracker", path: "/facilities/transport" },
   { name: "Machines & Equipment", path: "/machines-equipment" },
 ];
 
@@ -191,6 +192,7 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
         meta: "College bus service",
         description:
           "A fleet of college buses running on fixed routes across Hyderabad and the surrounding area for day scholars and staff, with timings aligned to teaching and clinical postings.",
+        link: { label: "View bus routes & tracker", path: "/facilities/transport" },
       },
     ],
     quickLinks: linksExcept("/facilities/campus-life"),

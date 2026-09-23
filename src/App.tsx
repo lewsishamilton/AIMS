@@ -28,6 +28,10 @@ import { STATIC_PAGES } from "./data/pages"
 import { PAGE_MEDIA, DEFAULT_MEDIA } from "./data/pageImages"
 import { Route, Routes } from "react-router-dom"
 import ScrollToTop from "./ScrollToTop"
+import { lazy, Suspense } from "react"
+
+// Map libraries are heavy; load them only when someone opens the bus routes page.
+const TransportPage = lazy(() => import("./pages/TransportPage"))
 
 function App() {
   return (
@@ -146,6 +150,7 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/Contact" element={<ContactPage />} />
         <Route path="/about/awards" element={<AwardsPage />} />
+        <Route path="/facilities/transport" element={<Suspense fallback={<div className="min-h-screen" />}><TransportPage /></Suspense>} />
 
         {/* Content-driven pages: academics, admissions, services, facilities, patient care */}
         {Object.entries(STATIC_PAGES).map(([path, page]) => (

@@ -19,6 +19,8 @@ export interface PageCard {
   badges?: string[];
   image?: string;
   meta?: string;
+  /** Optional call to action at the foot of the card. */
+  link?: { label: string; path: string };
 }
 
 export interface StaticPageDef {
@@ -358,6 +360,15 @@ const ImageCard: React.FC<{
             </p>
           )}
           {card.bullets && card.bullets.length > 0 && <Bullets items={card.bullets} />}
+          {card.link && (
+            <Link
+              to={card.link.path}
+              className="group/link mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-[#1f3351] hover:text-[#0d9488] dark:text-teal-300 dark:hover:text-teal-200"
+            >
+              {card.link.label}
+              <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+            </Link>
+          )}
         </div>
       )}
     </article>

@@ -72,6 +72,7 @@ const Navbar = () => {
                     ],
                 },
                 { name: "Campus Life", path: "/facilities/campus-life" },
+                { name: "Bus Routes & Tracker", path: "/facilities/transport" },
             ],
         },
         {
