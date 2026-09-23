@@ -159,3 +159,52 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   .collage-item, .collage-item img { transition: none; }
 }
 
+/* ─── Virtual Tour Navbar Button (Project Signature Dark Blue #0d2346 with Soft Glory Light Effect) ─── */
+@keyframes soft-glory-shine {
+  0% {
+    transform: translateX(-160%) skewX(-20deg);
+  }
+  30%, 100% {
+    transform: translateX(240%) skewX(-20deg);
+  }
+}
+
+.virtual-tour-btn {
+  position: relative;
+  overflow: hidden;
+  background-color: #0d2346;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 2px 8px rgba(13, 35, 70, 0.35), 0 0 10px rgba(13, 35, 70, 0.25);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.virtual-tour-btn:hover {
+  background-color: #132f5d;
+  border-color: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 4px 14px rgba(13, 35, 70, 0.45), 0 0 14px rgba(56, 189, 248, 0.22);
+  transform: translateY(-1px);
+}
+
+.virtual-tour-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: 0;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.03) 20%,
+    rgba(255, 255, 255, 0.22) 50%,
+    rgba(255, 255, 255, 0.03) 80%,
+    transparent 100%
+  );
+  transform: translateX(-160%) skewX(-20deg);
+  animation: soft-glory-shine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  pointer-events: none;
+}
+
+

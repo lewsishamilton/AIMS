@@ -20,6 +20,7 @@ import ContactPage from "./pages/ContactPage"
 import AimsInNewsPage from "./pages/AimsInNewsPage"
 import MachinesPage from "./pages/MachinesPage"
 import AccreditationsPage from "./pages/AccreditationsPage"
+import VirtualTourPage from "./pages/VirtualTourPage"
 import PdfViewerSection from "./layouts/PdfViewer"
 import StaticPage from "./components/StaticPage"
 import { STATIC_PAGES } from "./data/pages"
@@ -129,6 +130,9 @@ function App() {
         <Route path="/aims-in-the-news" element={<AimsInNewsPage />} />
         <Route path="/aims-in-news" element={<AimsInNewsPage />} />
         <Route path="/news" element={<AimsInNewsPage />} />
+        <Route path="/virtual-tour" element={<VirtualTourPage />} />
+        <Route path="/virtualtour" element={<VirtualTourPage />} />
+        <Route path="/Virtual-Tour" element={<VirtualTourPage />} />
 
         <Route path="/about-hospital" element={<AboutHospitalPage />} />
         <Route path="/about-institution" element={<AboutInstitutionPage />} />

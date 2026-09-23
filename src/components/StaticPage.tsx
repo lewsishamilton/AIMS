@@ -7,6 +7,7 @@ import type { LucideIcon } from "lucide-react";
 import type { PageMedia } from "../data/pageImages";
 import { DEFAULT_MEDIA } from "../data/pageImages";
 import OpdSchedule from "./OpdSchedule";
+import CampusVirtualTour from "./CampusVirtualTour";
 import PageHero from "./PageHero";
 import { ACCENT, sectionFor } from "./sectionTheme";
 import { groupSections } from "./ContentBlocks";
@@ -430,6 +431,11 @@ const PAGE_WIDGETS: Record<string, React.FC | undefined> = {
   "/patient-care/opd-timings": OpdSchedule,
 };
 
+/** Purpose-built blocks rendered below main content or cards. */
+const PAGE_BOTTOM_WIDGETS: Record<string, React.FC | undefined> = {
+  "/facilities/campus-life": CampusVirtualTour,
+};
+
 const StaticPage: React.FC<StaticPageDef> = ({
   eyebrow,
   title,
@@ -444,7 +450,9 @@ const StaticPage: React.FC<StaticPageDef> = ({
   media = DEFAULT_MEDIA,
 }) => {
   const { pathname } = useLocation();
-  const Widget = PAGE_WIDGETS[pathname];
+  const normalizedPath = pathname.replace(/\/+$/, "") || "/";
+  const Widget = PAGE_WIDGETS[normalizedPath] || PAGE_WIDGETS[pathname];
+  const BottomWidget = PAGE_BOTTOM_WIDGETS[normalizedPath] || PAGE_BOTTOM_WIDGETS[pathname];
 
   const groups = sections && sections.length > 0 ? groupSections(sections) : [];
   const sectionImage = (block: ContentBlock) =>
@@ -545,6 +553,12 @@ const StaticPage: React.FC<StaticPageDef> = ({
                 />
               ))}
             </div>
+          </div>
+        )}
+
+        {BottomWidget && (
+          <div className="mt-16 sm:mt-20">
+            <BottomWidget />
           </div>
         )}
 

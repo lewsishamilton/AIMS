@@ -371,8 +371,16 @@ const Navbar = () => {
                         {rightLinks.map((link, i) => renderDesktopNavItem(link, i, true))}
                     </div>
 
-                    {/* Theme Toggle (Desktop - positioned to the right) */}
-                    <div className="hidden md:flex items-center absolute -right-4 md:-right-8 lg:-right-12 xl:-right-16 top-1/2 -translate-y-1/2">
+                    {/* Virtual Tour Button & Theme Toggle (Desktop - positioned to the right) */}
+                    <div className="hidden md:flex items-center gap-3 absolute -right-4 md:-right-8 lg:-right-12 xl:-right-24 top-1/2 -translate-y-1/2">
+                        <Link
+                            to="/virtual-tour"
+                            title="Explore Campus & Hospital in 360°"
+                            className="virtual-tour-btn flex items-center justify-center px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide"
+                        >
+                            <span className="relative z-10 whitespace-nowrap">Virtual Tour</span>
+                        </Link>
+
                         <button
                             onClick={toggleTheme}
                             aria-label="Toggle Glass Theme"
@@ -403,8 +411,16 @@ const Navbar = () => {
                         </button>
                     </div>
 
-                    {/* Mobile Controls: Theme Toggle & Menu Button */}
-                    <div className="flex md:hidden items-center gap-2.5 py-3">
+                    {/* Mobile Controls: Virtual Tour, Theme Toggle & Menu Button */}
+                    <div className="flex md:hidden items-center gap-2 py-3">
+                        <Link
+                            to="/virtual-tour"
+                            title="Virtual Tour"
+                            className="virtual-tour-btn flex items-center justify-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide"
+                        >
+                            <span className="relative z-10">Tour</span>
+                        </Link>
+
                         <button
                             onClick={toggleTheme}
                             aria-label="Toggle Glass Theme"
