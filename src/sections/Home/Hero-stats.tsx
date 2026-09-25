@@ -56,7 +56,7 @@ const StatCounter: React.FC<{ target: number }> = ({ target }) => {
   return (
     <div
       ref={elementRef}
-      className="font-['DM_Sans',sans-serif] text-2xl sm:text-3xl font-black leading-none text-[#1f3351] dark:text-white"
+      className="font-['DM_Sans',sans-serif] text-base xs:text-lg sm:text-2xl lg:text-3xl font-black leading-none text-[#1f3351] dark:text-white"
     >
       {count}+
     </div>
@@ -65,20 +65,28 @@ const StatCounter: React.FC<{ target: number }> = ({ target }) => {
 
 export const HeroStats: React.FC = () => {
   return (
-    <section className="w-[min(1050px,94%)] mx-auto">
-      <div className="bg-white/95 backdrop-blur-md dark:bg-black/40 dark:backdrop-blur-2xl rounded-full px-6 py-2.5 sm:py-3 shadow-[0_18px_50px_rgba(8,44,76,0.18)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.2)] border border-white/60 dark:border-white/20 transition-all duration-300">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 items-center divide-y lg:divide-y-0 lg:divide-x divide-[#dce8ee] dark:divide-white/15">
-          {STATS_DATA.map((item) => (
-            <div
-              key={item.label}
-              className="flex flex-col items-center justify-center py-1.5 px-3 text-center"
-            >
-              <StatCounter target={item.value} />
-              <span className="text-[11px] font-semibold text-[#62748a] dark:text-slate-300 uppercase tracking-wider mt-1">
-                {item.label}
-              </span>
-            </div>
-          ))}
+    <section className="w-[min(1050px,96%)] mx-auto">
+      <div className="bg-white/95 backdrop-blur-md dark:bg-black/40 dark:backdrop-blur-2xl rounded-full px-2 py-2 sm:px-6 sm:py-2.5 lg:py-3 shadow-[0_14px_40px_rgba(8,44,76,0.18)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.2)] border border-[#0d2346]/20 dark:border-white/20 transition-all duration-300">
+        <div className="grid grid-cols-5 items-center">
+          {STATS_DATA.map((item, index) => {
+            const isLast = index === STATS_DATA.length - 1;
+
+            return (
+              <div
+                key={item.label}
+                className={`flex flex-col items-center justify-center py-1 sm:py-1.5 px-0.5 sm:px-2 lg:px-4 text-center transition-colors duration-200 ${
+                  isLast
+                    ? "border-r-0"
+                    : "border-r-[1.5px] sm:border-r-2 border-[#0d2346] dark:border-blue-400/50"
+                }`}
+              >
+                <StatCounter target={item.value} />
+                <span className="text-[7.5px] min-[380px]:text-[8.5px] sm:text-[10px] lg:text-[11px] font-bold text-[#1f3351]/80 dark:text-slate-300 uppercase tracking-tight sm:tracking-wider mt-0.5 sm:mt-1 text-center leading-tight">
+                  {item.label}
+                </span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

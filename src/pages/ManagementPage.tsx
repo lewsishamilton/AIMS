@@ -140,7 +140,7 @@ export default function ManagementPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#fbfaf5] dark:bg-transparent text-[#1f3351] dark:text-white tracking-[0.015em] transition-colors duration-300">
+    <div className="atmos-page min-h-screen bg-[#fbfaf5] dark:bg-transparent text-[#1f3351] dark:text-white tracking-[0.015em] transition-colors duration-300">
       {/* ─── Top Header Banner (Clean Institutional Navy) ─── */}
       <div className="relative bg-[#0d2346] dark:bg-[#070f1e] pt-32 pb-16 sm:pt-36 sm:pb-20 text-center text-white overflow-hidden border-b dark:border-white/10">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#1f3351_0%,#0d2346_100%)] opacity-90 pointer-events-none" />

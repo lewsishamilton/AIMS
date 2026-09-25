@@ -28,7 +28,7 @@ const TransportPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
+    <div className="atmos-page min-h-screen bg-[#FAF9F5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
       <PageHero
         eyebrow="Campus Transport"
         title="College Bus Routes"

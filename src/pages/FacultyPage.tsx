@@ -50,7 +50,7 @@ export const FacultyPage: React.FC = () => {
   ];
 
   return (
-    <section className="relative pt-24 lg:pt-32 pb-20 bg-[#fbfaf5] dark:bg-transparent overflow-hidden tracking-[0.015em] min-h-screen transition-colors duration-300">
+    <section className="atmos-page relative pt-24 lg:pt-32 pb-20 bg-[#fbfaf5] dark:bg-transparent overflow-hidden tracking-[0.015em] min-h-screen transition-colors duration-300">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Main Heading & Subtitle matching institutional layout */}
         <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">

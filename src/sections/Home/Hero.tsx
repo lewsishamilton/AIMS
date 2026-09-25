@@ -26,7 +26,7 @@ const Hero = () => {
             <div className="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-[#0d2346]/95 via-[#0d2346]/40 to-transparent dark:from-[#070d18]/95 dark:via-[#070d18]/50 z-10 pointer-events-none" />
 
             {/* Hard-locked to the absolute bottom border */}
-            <div className="relative z-20 w-full pb-12 mb-0">
+            <div className="relative z-20 w-full pb-6 sm:pb-10 lg:pb-12 mb-0">
                 <HeroStats />
             </div>
         </section>

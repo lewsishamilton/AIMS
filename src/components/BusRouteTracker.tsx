@@ -1,5 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import * as maplibregl from "maplibre-gl";
+import {
+  Map as MapLibreMap,
+  LngLatBounds,
+  NavigationControl,
+  setWorkerUrl,
+  type ExpressionSpecification,
+} from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
 import { along, bearing, length, lineString, nearestPointOnLine, point } from "@turf/turf";
@@ -11,7 +17,7 @@ import GEOMETRY from "../data/busRouteGeometry.json";
 import type { BusRoute } from "../data/busRoutesData";
 
 // MapLibre derives its worker URL at runtime, which bundlers can't see; hand it a bundled one.
-maplibregl.setWorkerUrl(workerUrl);
+setWorkerUrl(workerUrl);
 
 type CameraMode = "follow" | "free" | "overview";
 
@@ -35,7 +41,7 @@ const LINE = {
 };
 
 /** A paint value that varies with each stop's passed/current/upcoming state. */
-const byStatus = ([upcoming, passed, current]: (string | number)[]): maplibregl.ExpressionSpecification => [
+const byStatus = ([upcoming, passed, current]: (string | number)[]): ExpressionSpecification => [
   "match", ["feature-state", "status"], "passed", passed, "current", current, upcoming,
 ];
 const FIT_PADDING = 50;
@@ -65,7 +71,7 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
     let prev = 0;
     const stopKm = route.stops.map((s) => (prev = Math.max(prev, nearestPointOnLine(line, STOP_COORDS[s]).properties.location)));
     stopKm[stopKm.length - 1] = totalKm;
-    const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
+    const bounds = coords.reduce((b, c) => b.extend(c), new LngLatBounds(coords[0], coords[0]));
     return { line, totalKm, stopKm, bounds };
   }, [route]);
 
@@ -85,8 +91,12 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
       point(along(line, Math.max(0, km - backKm)).geometry.coordinates),
       point(along(line, Math.min(totalKm, km + aheadKm)).geometry.coordinates)
     );
-  const heading = headingOver(0.03, 0.03);
-  const viewHeading = headingOver(0.1 * speed, 0.4 * speed);
+  // Dynamically scale lookahead and lookbehind with speed so high speeds (2x, 5x, 10x)
+  // smoothly track the true trajectory of the road without twitching or shaking at micro road vertices
+  const lookBack = Math.max(0.04, 0.02 * Math.sqrt(speed));
+  const lookAhead = Math.max(0.05, 0.035 * Math.sqrt(speed));
+  const heading = headingOver(lookBack, lookAhead);
+  const viewHeading = headingOver(0.08 * Math.sqrt(speed), 0.35 * Math.sqrt(speed));
   const currentStop = stopKm.reduce((cur, d, i) => (km + 1e-6 >= d ? i : cur), 0);
 
   // Playback clock.
@@ -113,13 +123,13 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
 
   // Map setup, once per mount.
   const containerRef = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<maplibregl.Map | null>(null);
+  const mapRef = useRef<MapLibreMap | null>(null);
   const busRef = useRef<ReturnType<typeof createBusLayer> | null>(null);
   const userMovingRef = useRef(false);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const map = new maplibregl.Map({
+    const map = new MapLibreMap({
       container: containerRef.current!,
       style: MAP_STYLES[theme],
       bounds,
@@ -127,9 +137,9 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
       attributionControl: { compact: true },
       cooperativeGestures: true,
     });
-    map.addControl(new maplibregl.NavigationControl(), "top-right");
+    map.addControl(new NavigationControl(), "top-right");
     mapRef.current = map;
-    const bus = createBusLayer();
+    const bus = createBusLayer("bus-3d-model", speed);
     busRef.current = bus;
 
     // Hand the camera back to the user while they drag or rotate.
@@ -206,7 +216,11 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
         },
         paint: { "text-color": colors.label, "text-halo-color": colors.halo, "text-halo-width": 1.6 },
       }, "stop-numbers");
+
+      // Add 3D bus model layer and immediately set initial position and speed scale
       map.addLayer(bus.layer);
+      bus.setPosition(position, heading);
+      bus.setSpeed(speed);
       setLoaded(true);
     });
 
@@ -214,12 +228,19 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
     map.on("mouseenter", "stop-dots", () => (map.getCanvas().style.cursor = "pointer"));
     map.on("mouseleave", "stop-dots", () => (map.getCanvas().style.cursor = ""));
 
-    return () => map.remove();
+    return () => {
+      map.remove();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Sync bus 3D model size dynamically when speed changes (1x, 2x, 5x, 10x)
+  useEffect(() => {
+    busRef.current?.setSpeed(speed);
+  }, [speed]);
+
   // Travelled trail and bus.
-  function trailGradient(p: number): maplibregl.ExpressionSpecification {
+  function trailGradient(p: number): ExpressionSpecification {
     const colors = LINE[theme];
     return ["step", ["line-progress"], colors.progress, Math.max(p, 1e-6), colors.base];
   }

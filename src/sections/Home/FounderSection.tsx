@@ -11,7 +11,7 @@ const FounderSection: React.FC = () => {
   return (
     <section
       id="founder"
-      className="relative scroll-mt-20 bg-white dark:bg-transparent overflow-hidden min-h-[80vh] lg:min-h-[85vh] flex flex-col justify-center pt-8 sm:pt-12 pb-12 sm:pb-14 lg:pb-16 tracking-[0.015em] transition-colors duration-300"
+      className="atmos-spotlight relative scroll-mt-20 bg-white dark:bg-transparent overflow-hidden min-h-[80vh] lg:min-h-[85vh] flex flex-col justify-center pt-8 sm:pt-12 pb-12 sm:pb-14 lg:pb-16 tracking-[0.015em] transition-colors duration-300"
     >
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Section Header (Centered) */}
@@ -30,7 +30,7 @@ const FounderSection: React.FC = () => {
             <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
           </div>
           <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-semibold leading-[1.15] tracking-[0.02em] text-[#1f3351] dark:text-white">
-            Our Founder
+            Founder
           </h2>
         </motion.div>
 

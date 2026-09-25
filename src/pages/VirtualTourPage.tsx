@@ -141,7 +141,7 @@ const SECTION_ICONS: Record<string, React.ElementType> = {
 
 const VirtualTourPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#FAF9F5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
+    <div className="atmos-page min-h-screen bg-[#FAF9F5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
       {/* Page Hero matching site-wide style */}
       <PageHero
         eyebrow="Interactive Experience"

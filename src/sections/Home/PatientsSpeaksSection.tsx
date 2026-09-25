@@ -72,7 +72,7 @@ export const PatientsSpeaksSection: React.FC = () => {
   }, [activeVideoId]);
 
   return (
-    <section className="relative pt-10 sm:pt-14 pb-6 sm:pb-8 bg-white dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300">
+    <section className="atmos-center relative pt-10 sm:pt-14 pb-6 sm:pb-8 bg-white dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300">
       <style>{`
         @keyframes marquee-scroll-left {
           0% {

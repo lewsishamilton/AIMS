@@ -497,7 +497,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
   }
 
   return (
-    <div className="min-h-screen bg-[#FAF9F5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
+    <div className="atmos-page min-h-screen bg-[#FAF9F5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
       <PageHero
         eyebrow={eyebrow}
         title={title}

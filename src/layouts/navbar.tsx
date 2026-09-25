@@ -153,6 +153,7 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const isWhiteTheme = theme === "dark" ? false : (pathname !== "/" || isScrolled);
+    const isNavTransparent = theme === "dark" ? !isScrolled : !isWhiteTheme;
 
     // Hover-intent state: a short grace delay before closing/switching so a brief
     // diagonal move off the menu (e.g. reaching a nested flyout) doesn't slam it shut.
@@ -240,6 +241,52 @@ const Navbar = () => {
     const dropdownItemClass = isWhiteTheme
         ? "text-gray-700 hover:text-black hover:bg-gray-100/80 rounded-xl"
         : "text-white/85 hover:text-white hover:bg-white/20 rounded-xl";
+
+    const renderThemeToggle = (isMobile = false) => {
+        const isDark = theme === "dark";
+        // Button style dynamically adjusts to match transparent vs opaque navbar states
+        const buttonClass = isDark
+            ? isScrolled
+                ? "bg-white/10 hover:bg-white/20 text-amber-300 border border-white/20 backdrop-blur-xl shadow-[0_2px_10px_rgba(0,0,0,0.3)] hover:shadow-[0_0_15px_rgba(251,191,36,0.35)]"
+                : "bg-transparent hover:bg-white/15 text-amber-300 border border-white/20 hover:border-white/35 backdrop-blur-sm shadow-none hover:shadow-[0_0_12px_rgba(251,191,36,0.25)]"
+            : isWhiteTheme
+            ? "bg-gray-100/90 hover:bg-gray-200/90 text-gray-700 hover:text-gray-900 border border-gray-200/80 shadow-xs hover:shadow-sm"
+            : "bg-transparent hover:bg-white/15 text-white/90 hover:text-white border border-white/25 hover:border-white/40 backdrop-blur-sm shadow-none hover:shadow-[0_0_12px_rgba(255,255,255,0.2)]";
+
+        return (
+            <button
+                type="button"
+                onClick={toggleTheme}
+                aria-label={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+                className={`group relative flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer active:scale-90 ${
+                    isMobile ? "w-8 h-8" : "w-9 h-9"
+                } ${buttonClass}`}
+            >
+                {isDark ? (
+                    <svg
+                        className={`${isMobile ? "w-4 h-4" : "w-[18px] h-[18px]"} transition-transform duration-500 group-hover:rotate-45`}
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                    >
+                        <path
+                            fillRule="evenodd"
+                            d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                            clipRule="evenodd"
+                        />
+                    </svg>
+                ) : (
+                    <svg
+                        className={`${isMobile ? "w-4 h-4" : "w-[18px] h-[18px]"} transition-transform duration-500 group-hover:-rotate-12`}
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                    >
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                    </svg>
+                )}
+            </button>
+        );
+    };
 
     const renderDesktopNavItem = (link: NavLinkItem, idx: number, alignRight = false) => {
         const activeHoverPill = isWhiteTheme
@@ -377,39 +424,12 @@ const Navbar = () => {
                         <Link
                             to="/virtual-tour"
                             title="Explore Campus & Hospital in 360°"
-                            className="virtual-tour-btn flex items-center justify-center px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide"
+                            className={`virtual-tour-btn ${isNavTransparent ? "is-glass" : ""} flex items-center justify-center px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide`}
                         >
                             <span className="relative z-10 whitespace-nowrap">Virtual Tour</span>
                         </Link>
 
-                        <button
-                            onClick={toggleTheme}
-                            aria-label="Toggle Glass Theme"
-                            title={theme === "dark" ? "Switch to Soft Light Theme" : "Switch to Glass Dark Theme"}
-                            className={`flex items-center w-14 h-7 p-1 rounded-full transition-all duration-300 cursor-pointer ${
-                                theme === "dark"
-                                    ? "bg-black/50 backdrop-blur-xl border border-white/30 shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.25)]"
-                                    : "bg-black/10 hover:bg-black/15 border border-black/10 backdrop-blur-sm"
-                            }`}
-                        >
-                            <span
-                                className={`flex items-center justify-center w-5 h-5 rounded-full transition-all duration-300 transform shadow-sm ${
-                                    theme === "dark"
-                                        ? "translate-x-7 bg-white text-[#0a1120]"
-                                        : "translate-x-0 bg-white text-amber-500 shadow"
-                                }`}
-                            >
-                                {theme === "dark" ? (
-                                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                                    </svg>
-                                ) : (
-                                    <svg className="w-3.2 h-3.2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                                    </svg>
-                                )}
-                            </span>
-                        </button>
+                        {renderThemeToggle(false)}
                     </div>
 
                     {/* Mobile Controls: Virtual Tour, Theme Toggle & Menu Button */}
@@ -417,38 +437,12 @@ const Navbar = () => {
                         <Link
                             to="/virtual-tour"
                             title="Virtual Tour"
-                            className="virtual-tour-btn flex items-center justify-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide"
+                            className={`virtual-tour-btn ${isNavTransparent ? "is-glass" : ""} flex items-center justify-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide`}
                         >
                             <span className="relative z-10">Tour</span>
                         </Link>
 
-                        <button
-                            onClick={toggleTheme}
-                            aria-label="Toggle Glass Theme"
-                            className={`flex items-center w-12 h-6 p-0.5 rounded-full transition-all duration-300 cursor-pointer ${
-                                theme === "dark"
-                                    ? "bg-black/50 backdrop-blur-xl border border-white/30"
-                                    : "bg-black/10 border border-black/10"
-                            }`}
-                        >
-                            <span
-                                className={`flex items-center justify-center w-5 h-5 rounded-full transition-all duration-300 transform shadow-sm ${
-                                    theme === "dark"
-                                        ? "translate-x-6 bg-white text-[#0a1120]"
-                                        : "translate-x-0 bg-white text-amber-500"
-                                }`}
-                            >
-                                {theme === "dark" ? (
-                                    <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                                    </svg>
-                                ) : (
-                                    <svg className="w-2.5 h-2.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                                    </svg>
-                                )}
-                            </span>
-                        </button>
+                        {renderThemeToggle(true)}
 
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}

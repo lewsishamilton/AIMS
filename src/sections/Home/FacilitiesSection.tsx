@@ -82,10 +82,10 @@ export const FacilitiesSection: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative pt-0 sm:pt-1 pb-14 sm:pb-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
+    <section className="atmos-dots relative pt-0 sm:pt-1 pb-14 sm:pb-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
       {/* Subtle Dot Grid Background */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
+        className="atmos-dots-fade absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
         style={{
           backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
           backgroundSize: "26px 26px",

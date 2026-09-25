@@ -36,7 +36,7 @@ export const DepartmentFacultyPage: React.FC = () => {
   // If invalid department, show simple not found
   if (!department) {
     return (
-      <div className="min-h-screen bg-[#fbfaf5] dark:bg-transparent font-['Inter',sans-serif] pt-32 pb-20 px-6 text-center transition-colors duration-300">
+      <div className="atmos-page min-h-screen bg-[#fbfaf5] dark:bg-transparent font-['Inter',sans-serif] pt-32 pb-20 px-6 text-center transition-colors duration-300">
         <div className="max-w-md mx-auto bg-white dark:bg-white/[0.04] dark:backdrop-blur-xl rounded-2xl p-8 border border-[#dce8ee] dark:border-white/10 shadow-sm dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
           <h2 className="font-['Manrope',sans-serif] text-2xl font-semibold text-[#1f3351] dark:text-white mb-2">
             Department Not Found
@@ -56,7 +56,7 @@ export const DepartmentFacultyPage: React.FC = () => {
   }
 
   return (
-    <section className="relative pt-24 lg:pt-32 pb-20 bg-[#fbfaf5] dark:bg-transparent overflow-hidden tracking-[0.015em] min-h-screen transition-colors duration-300">
+    <section className="atmos-page relative pt-24 lg:pt-32 pb-20 bg-[#fbfaf5] dark:bg-transparent overflow-hidden tracking-[0.015em] min-h-screen transition-colors duration-300">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Back Link */}
         <div className="mb-6">

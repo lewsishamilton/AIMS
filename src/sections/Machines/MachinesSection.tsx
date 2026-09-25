@@ -40,13 +40,13 @@ export const MachinesSection: React.FC<MachinesSectionProps> = ({
   return (
     <section
       id="machines-equipment"
-      className={`relative ${
+      className={`atmos-dots relative ${
         isStandalonePage ? "py-2 sm:py-4" : "py-12 sm:py-16 lg:py-20"
       } bg-white dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300 ${className}`}
     >
       {/* Subtle Dot Grid Background matching AIMS sections */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-25 dark:opacity-10"
+        className="atmos-dots-fade absolute inset-0 pointer-events-none opacity-25 dark:opacity-10"
         style={{
           backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
           backgroundSize: "28px 28px",

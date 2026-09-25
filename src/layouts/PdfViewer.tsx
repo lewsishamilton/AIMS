@@ -107,7 +107,7 @@ export const PdfViewerSection: React.FC<PdfViewerProps> = ({
   }, [resolvedPdfUrl]);
 
   return (
-    <div className="min-h-screen bg-[#fbfaf5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
+    <div className="atmos-page min-h-screen bg-[#fbfaf5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
       <PageHero eyebrow={kicker} title={title} subtitle={subtitle} pathname={pathname} />
 
       <section className="relative overflow-hidden pb-20 pt-12 lg:pb-28 lg:pt-16">

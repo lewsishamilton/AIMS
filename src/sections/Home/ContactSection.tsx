@@ -141,7 +141,7 @@ export const ContactSection: React.FC = () => {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-20 bg-white dark:bg-transparent pt-6 sm:pt-8 pb-16 sm:pb-24 lg:pb-28 tracking-[0.015em] transition-colors duration-300"
+      className="atmos-cta relative scroll-mt-20 bg-white dark:bg-transparent pt-6 sm:pt-8 pb-16 sm:pb-24 lg:pb-28 tracking-[0.015em] transition-colors duration-300"
     >
       <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}

@@ -209,7 +209,7 @@ export const AboutSection: React.FC = () => {
     <section
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
-      className="relative pt-20 lg:pt-28 pb-6 sm:pb-8 bg-white dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300"
+      className="atmos-soft relative pt-20 lg:pt-28 pb-6 sm:pb-8 bg-white dark:bg-transparent overflow-hidden tracking-[0.015em] transition-colors duration-300"
     >
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
         {/* Sliding & Draggable Viewport */}

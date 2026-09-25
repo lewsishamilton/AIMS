@@ -569,10 +569,10 @@ export const MediaGalleryPage: React.FC = () => {
       </section>
 
       {/* Events Section: Artistic Diamond Collage (Format of Attached Reference Photo) */}
-      <section className="relative pt-6 sm:pt-8 lg:pt-10 pb-6 sm:pb-8 lg:pb-10 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0]/80 dark:border-white/10 overflow-hidden">
+      <section className="atmos-dots relative pt-6 sm:pt-8 lg:pt-10 pb-6 sm:pb-8 lg:pb-10 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0]/80 dark:border-white/10 overflow-hidden">
         {/* Subtle Background Radial Pattern */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
+          className="atmos-dots-fade absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
           style={{
             backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
             backgroundSize: "28px 28px",
@@ -611,10 +611,10 @@ export const MediaGalleryPage: React.FC = () => {
       </section>
 
       {/* ─── Gallery Arena Section: Welcome to Gallery Arena of AIMS ─── */}
-      <section className="relative pt-8 sm:pt-10 pb-16 sm:pb-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0] dark:border-white/10 overflow-hidden">
+      <section className="atmos-dots relative pt-8 sm:pt-10 pb-16 sm:pb-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0] dark:border-white/10 overflow-hidden">
         {/* Subtle background radial pattern */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
+          className="atmos-dots-fade absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
           style={{
             backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
             backgroundSize: "28px 28px",

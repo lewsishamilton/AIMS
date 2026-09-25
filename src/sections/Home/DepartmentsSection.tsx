@@ -30,10 +30,10 @@ const DEPARTMENTS = [
 
 const DepartmentsSection = () => {
   return (
-    <section className="relative pt-6 sm:pt-8 lg:pt-10 pb-0 sm:pb-1 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
+    <section className="atmos-dots relative pt-6 sm:pt-8 lg:pt-10 pb-0 sm:pb-1 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
       {/* Subtle Dot Grid Background */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
+        className="atmos-dots-fade absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
         style={{
           backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
           backgroundSize: "26px 26px",

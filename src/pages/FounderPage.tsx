@@ -53,7 +53,7 @@ export default function FounderPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-transparent text-[#1f3351] dark:text-white tracking-[0.015em] pt-28 lg:pt-36 pb-24 transition-colors duration-300">
+    <div className="atmos-page min-h-screen bg-white dark:bg-transparent text-[#1f3351] dark:text-white tracking-[0.015em] pt-28 lg:pt-36 pb-24 transition-colors duration-300">
       <div className="w-full max-w-[1280px] mx-auto px-4 sm:px-10 lg:px-16">
         {/* ─── Page Header (Centered, Above Photo) ─── */}
         <motion.div
