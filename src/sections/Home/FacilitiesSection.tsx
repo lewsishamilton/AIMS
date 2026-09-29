@@ -113,14 +113,14 @@ export const FacilitiesSection: React.FC = () => {
         </div>
 
         {/* Elastic Accordion Gallery - All 6 facilities in one line */}
-        <div className="flex h-[440px] w-full flex-col gap-2.5 sm:gap-3 md:h-[440px] lg:h-[475px] md:flex-row md:gap-3 lg:gap-3.5">
+        <div className="flex h-[560px] w-full flex-col gap-2.5 sm:gap-3 md:h-[440px] lg:h-[475px] md:flex-row md:gap-3 lg:gap-3.5">
           {FACILITIES.map((facility) => {
             const isActive = activeId === facility.id;
 
             return (
               <div
                 key={facility.id}
-                onMouseEnter={() => setActiveId(facility.id)}
+                onPointerEnter={(e) => e.pointerType === "mouse" && setActiveId(facility.id)}
                 // First tap opens a card (touch has no hover); clicking an open card follows its link.
                 onClick={() => (isActive && facility.path ? navigate(facility.path) : setActiveId(facility.id))}
                 className={cn(
@@ -209,7 +209,7 @@ export const FacilitiesSection: React.FC = () => {
                   <div
                     className={cn(
                       "absolute transition-all duration-500",
-                      "bottom-6 left-1/2 -translate-x-1/2 md:bottom-8",
+                      "top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 md:top-auto md:bottom-8 md:translate-y-0",
                       isActive
                         ? "opacity-0 scale-50 pointer-events-none"
                         : "opacity-100 delay-200"

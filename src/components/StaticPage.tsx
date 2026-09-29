@@ -405,7 +405,7 @@ const QuickLinkTiles: React.FC<{ links: { name: string; path: string }[] }> = ({
             />
             <span className="relative mb-2 block h-[1.5px] w-8 bg-white/25" />
             <span className="relative flex items-end justify-between gap-2">
-              <span className="font-['Manrope',sans-serif] text-sm font-bold leading-snug text-white sm:text-[15px]">
+              <span className="min-w-0 break-words font-['Manrope',sans-serif] text-sm font-bold leading-snug text-white sm:text-[15px]">
                 {l.name}
               </span>
               <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-white/70 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />

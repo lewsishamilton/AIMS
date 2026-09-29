@@ -50,7 +50,7 @@ export const CampusGallerySection: React.FC = () => {
               {IMAGES_1.map((imageUrl, index) => (
                 <img
                   key={index}
-                  className="aspect-video block h-auto max-h-[150px] sm:max-h-[165px] lg:max-h-[180px] xl:max-h-[195px] w-full rounded-md object-cover shadow"
+                  className="block h-[calc((75svh-24px)/4)] lg:aspect-video lg:h-auto lg:max-h-[180px] xl:max-h-[195px] w-full rounded-md object-cover shadow"
                   src={imageUrl}
                   alt={`AIMS academic facility ${index + 1}`}
                   loading="eager"
@@ -62,7 +62,7 @@ export const CampusGallerySection: React.FC = () => {
               {IMAGES_2.map((imageUrl, index) => (
                 <img
                   key={index}
-                  className="aspect-video block h-auto max-h-[150px] sm:max-h-[165px] lg:max-h-[180px] xl:max-h-[195px] w-full rounded-md object-cover shadow"
+                  className="block h-[calc((75svh-24px)/4)] lg:aspect-video lg:h-auto lg:max-h-[180px] xl:max-h-[195px] w-full rounded-md object-cover shadow"
                   src={imageUrl}
                   alt={`AIMS medical community ${index + 1}`}
                   loading="eager"
@@ -74,7 +74,7 @@ export const CampusGallerySection: React.FC = () => {
               {IMAGES_3.map((imageUrl, index) => (
                 <img
                   key={index}
-                  className="aspect-video block h-auto max-h-[150px] sm:max-h-[165px] lg:max-h-[180px] xl:max-h-[195px] w-full rounded-md object-cover shadow"
+                  className="block h-[calc((75svh-24px)/4)] lg:aspect-video lg:h-auto lg:max-h-[180px] xl:max-h-[195px] w-full rounded-md object-cover shadow"
                   src={imageUrl}
                   alt={`AIMS campus and research ${index + 1}`}
                   loading="eager"

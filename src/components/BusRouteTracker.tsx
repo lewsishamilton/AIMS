@@ -331,7 +331,7 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
             {route.stops.length} stops · approx. {Math.round(totalKm)} km by road
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-2 sm:flex">
+        <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-2 sm:flex">
           {[
             { role: "Route Incharge", ...route.incharge },
             { role: "Driver", ...route.driver },

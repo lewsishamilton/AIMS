@@ -143,9 +143,9 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="w-full md:w-[45%] lg:w-[18%] flex flex-col items-center pt-0 md:pt-21 lg:-ml-6">
+            <div className="w-full md:w-[45%] lg:w-[24%] xl:w-[18%] flex flex-col items-center pt-0 md:pt-21 lg:-ml-6">
               <h3 className="text-sm text-white font-medium lg:-ml-4">Quick Links</h3>
-              <div className="grid grid-cols-2 gap-x-14 gap-y-3 mt-4">
+              <div className="grid grid-cols-2 gap-x-6 min-[375px]:gap-x-14 gap-y-3 mt-4">
                 {[
                   { label: "Home", href: "/" },
                   { label: "Admissions", href: "/admissions" },
@@ -163,7 +163,7 @@ export default function Footer() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-sm text-white/60 hover:text-white transition-colors duration-200 whitespace-nowrap"
+                    className="text-sm text-white/60 hover:text-white transition-colors duration-200 min-[360px]:whitespace-nowrap"
                   >
                     {link.label}
                   </a>

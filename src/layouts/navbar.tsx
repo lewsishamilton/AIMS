@@ -399,9 +399,9 @@ const Navbar = () => {
                             : "bg-transparent border-b border-transparent"
                     }`}
                 />
-                <div className="max-w-7xl mx-auto flex items-center justify-between md:justify-center relative">
+                <div className="max-w-7xl mx-auto flex items-center justify-between xl:justify-center relative">
                     {/* Left Desktop Links */}
-                    <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
+                    <div className="hidden xl:flex items-center gap-2 lg:gap-3 h-16">
                         {leftLinks.map((link, i) => renderDesktopNavItem(link, i))}
                     </div>
 
@@ -415,12 +415,12 @@ const Navbar = () => {
                     </Link>
 
                     {/* Right Desktop Links */}
-                    <div className="hidden md:flex items-center gap-2 lg:gap-3 h-16">
+                    <div className="hidden xl:flex items-center gap-2 lg:gap-3 h-16">
                         {rightLinks.map((link, i) => renderDesktopNavItem(link, i, true))}
                     </div>
 
                     {/* Virtual Tour Button & Theme Toggle (Desktop - positioned to the right) */}
-                    <div className="hidden md:flex items-center gap-3 absolute -right-4 md:-right-8 lg:-right-12 xl:-right-24 top-1/2 -translate-y-1/2">
+                    <div className="hidden xl:flex items-center gap-3 absolute -right-4 md:-right-8 lg:-right-12 2xl:-right-24 top-1/2 -translate-y-1/2">
                         <Link
                             to="/virtual-tour"
                             title="Explore Campus & Hospital in 360°"
@@ -433,7 +433,7 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Controls: Virtual Tour, Theme Toggle & Menu Button */}
-                    <div className="flex md:hidden items-center gap-2 py-3">
+                    <div className="flex xl:hidden items-center gap-2 py-3">
                         <Link
                             to="/virtual-tour"
                             title="Virtual Tour"
@@ -466,7 +466,7 @@ const Navbar = () => {
 
                 {/* Mobile Drawer */}
                 <div
-                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 md:hidden overflow-y-auto ${
+                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 xl:hidden overflow-y-auto ${
                         isMenuOpen ? "translate-x-0" : "-translate-x-full"
                     } ${
                         theme === "dark"
