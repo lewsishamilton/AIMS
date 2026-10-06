@@ -12,7 +12,7 @@ import { along, bearing, length, lineString, nearestPointOnLine, point } from "@
 import { Compass, Locate, Map as MapIcon, Pause, Phone, Play, RotateCcw } from "lucide-react";
 import { createBusLayer } from "../lib/busLayer";
 import { useTheme } from "../context/ThemeContext";
-import { STOP_COORDS } from "../data/busStopCoords";
+import { STOP_COORDS, toLngLat } from "../data/busStopCoords";
 import GEOMETRY from "../data/busRouteGeometry.json";
 import type { BusRoute } from "../data/busRoutesData";
 
@@ -69,7 +69,7 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
     const line = lineString(coords);
     const totalKm = length(line);
     let prev = 0;
-    const stopKm = route.stops.map((s) => (prev = Math.max(prev, nearestPointOnLine(line, STOP_COORDS[s]).properties.location)));
+    const stopKm = route.stops.map((s) => (prev = Math.max(prev, nearestPointOnLine(line, toLngLat(STOP_COORDS[s])).properties.location)));
     stopKm[stopKm.length - 1] = totalKm;
     const bounds = coords.reduce((b, c) => b.extend(c), new LngLatBounds(coords[0], coords[0]));
     return { line, totalKm, stopKm, bounds };
@@ -161,7 +161,7 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
             type: "Feature",
             id: i,
             properties: { name, no: String(i + 1) },
-            geometry: { type: "Point", coordinates: STOP_COORDS[name] },
+            geometry: { type: "Point", coordinates: toLngLat(STOP_COORDS[name]) },
           })),
         },
       });

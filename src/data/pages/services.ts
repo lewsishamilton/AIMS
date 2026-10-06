@@ -13,7 +13,7 @@ const linksExcept = (path: string) =>
 
 export const SERVICE_PAGES: Record<string, StaticPageDef> = {
   "/services/specialities": {
-    eyebrow: "Medical Services",
+    eyebrow: "Hospital",
     title: "Specialities",
     subtitle:
       "Marri Arundhathi Multi-Specialty Hospital runs full-fledged clinical departments staffed by consultants, senior residents and round-the-clock resident doctors, supported by shared operation theatres, intensive care and diagnostics.",
@@ -127,7 +127,7 @@ export const SERVICE_PAGES: Record<string, StaticPageDef> = {
   },
 
   "/services/super-specialities": {
-    eyebrow: "Medical Services",
+    eyebrow: "Hospital",
     title: "Super Specialities",
     subtitle:
       "Tertiary-level units backed by a Philips cardiac catheterisation lab, a Siemens 1.5 Tesla MRI, a 50-slice CT scanner and dedicated super-speciality operation theatres.",
@@ -230,7 +230,7 @@ export const SERVICE_PAGES: Record<string, StaticPageDef> = {
   },
 
   "/services/emergency-trauma": {
-    eyebrow: "Medical Services",
+    eyebrow: "Hospital",
     title: "Emergency & Trauma",
     subtitle:
       "A 25-bed casualty running 24 hours a day, seven days a week, with central oxygen supply, central suction and immediate access to imaging, blood bank and operation theatres.",
@@ -299,7 +299,7 @@ export const SERVICE_PAGES: Record<string, StaticPageDef> = {
   },
 
   "/services/diagnostics": {
-    eyebrow: "Medical Services",
+    eyebrow: "Hospital",
     title: "Diagnostics & Imaging",
     subtitle:
       "Radiology, central laboratory and blood bank services operating round the clock for inpatients, outpatients and referrals — the same diagnostic backbone that supports undergraduate teaching at the institute.",

@@ -30,7 +30,7 @@ export interface SectionTheme {
 const SECTIONS: { prefix: string; theme: SectionTheme }[] = [
   { prefix: "/admissions", theme: { name: "Admissions", Icon: GraduationCap } },
   { prefix: "/academics", theme: { name: "Academics", Icon: BookOpen } },
-  { prefix: "/services", theme: { name: "Medical Services", Icon: Stethoscope } },
+  { prefix: "/services", theme: { name: "Hospital", Icon: Stethoscope } },
   { prefix: "/patient-care", theme: { name: "Patient Care", Icon: HeartPulse } },
   { prefix: "/facilities", theme: { name: "Facilities", Icon: Building2 } },
   { prefix: "/about", theme: { name: "Discover AIMS", Icon: ShieldCheck } },

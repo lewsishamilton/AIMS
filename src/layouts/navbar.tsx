@@ -119,7 +119,7 @@ const Navbar = () => {
 
     const rightLinks: NavLinkItem[] = [
         {
-            name: "MEDICAL SERVICES",
+            name: "HOSPITAL",
             path: "/services/specialities",
             dropdown: [
                 {
