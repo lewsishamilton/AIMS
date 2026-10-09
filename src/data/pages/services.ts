@@ -3,7 +3,7 @@ import type { StaticPageDef } from "../../components/StaticPage";
 const SPECIALITY_LINKS = [
   { name: "Specialities", path: "/services/specialities" },
   { name: "Super Specialities", path: "/services/super-specialities" },
-  { name: "Emergency & Trauma", path: "/services/emergency-trauma" },
+  { name: "Emergency Care", path: "/services/emergency-trauma" },
   { name: "Diagnostics & Imaging", path: "/services/diagnostics" },
   { name: "Machines & Equipment", path: "/machines-equipment" },
 ];
@@ -231,7 +231,7 @@ export const SERVICE_PAGES: Record<string, StaticPageDef> = {
 
   "/services/emergency-trauma": {
     eyebrow: "Hospital",
-    title: "Emergency & Trauma",
+    title: "Emergency Care",
     subtitle:
       "A 25-bed casualty running 24 hours a day, seven days a week, with central oxygen supply, central suction and immediate access to imaging, blood bank and operation theatres.",
     sections: [

@@ -154,7 +154,7 @@ export default function Footer() {
                   { label: "About Hospital", href: "/about-hospital" },
                   { label: "Specialities", href: "/services/specialities" },
                   { label: "Faculty & Depts", href: "/departments" },
-                  { label: "Emergency & Trauma", href: "/services/emergency-trauma" },
+                  { label: "Emergency Care", href: "/services/emergency-trauma" },
                   { label: "Facilities", href: "/facilities/hospital" },
                   { label: "Citizen Charter", href: "/patient-care/citizen-charter" },
                   { label: "Media Gallery", href: "/media-gallery" },

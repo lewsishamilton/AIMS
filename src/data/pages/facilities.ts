@@ -77,7 +77,7 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
     quickLinks: linksExcept("/facilities/hospital"),
     cta: {
       text: "Emergency and casualty services run 24 hours a day, every day of the year.",
-      label: "Emergency & Trauma",
+      label: "Emergency Care",
       path: "/services/emergency-trauma",
     },
   },

@@ -130,7 +130,16 @@ const Navbar = () => {
                         { name: "Super Specialities", path: "/services/super-specialities" },
                     ],
                 },
-                { name: "Emergency & Trauma", path: "/services/emergency-trauma" },
+                {
+                    name: "Departments",
+                    path: "/departments",
+                    subItems: [
+                        { name: "Pre-Clinical", path: "/departments?category=Pre-Clinical" },
+                        { name: "Para-Clinical", path: "/departments?category=Para-Clinical" },
+                        { name: "Clinical", path: "/departments?category=Clinical" },
+                    ],
+                },
+                { name: "Emergency Care", path: "/services/emergency-trauma" },
                 { name: "Diagnostics & Imaging", path: "/services/diagnostics" },
                 { name: "Hospital Facilities", path: "/facilities/hospital" },
                 { name: "Machines & Equipment", path: "/machines-equipment" },
