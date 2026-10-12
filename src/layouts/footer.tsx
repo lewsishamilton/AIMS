@@ -1,5 +1,43 @@
 import logoWhite from "../assets/logo-white.png";
 
+// Mirrors the navbar's order: Discover → Academics/Admissions → Hospital/Patient Care.
+const footerColumns = [
+  {
+    title: "Institution",
+    links: [
+      { label: "About Institution", href: "/about-institution" },
+      { label: "About Hospital", href: "/about-hospital" },
+      { label: "Founder", href: "/founder" },
+      { label: "Management", href: "/management" },
+      { label: "Awards", href: "/about/awards" },
+      { label: "Media Gallery", href: "/media-gallery" },
+      { label: "AIMS in the News", href: "/aims-in-the-news" },
+    ],
+  },
+  {
+    title: "Academics",
+    links: [
+      { label: "MBBS Programme", href: "/academics/mbbs" },
+      { label: "Admissions", href: "/admissions" },
+      { label: "Fee Structure", href: "/admissions/fee-structure" },
+      { label: "Departments", href: "/departments" },
+      { label: "Academic Calendar", href: "/academics/calendar" },
+      { label: "Bus Routes", href: "/facilities/transport" },
+    ],
+  },
+  {
+    title: "Patient Care",
+    links: [
+      { label: "Specialities", href: "/services/specialities" },
+      { label: "Emergency Care", href: "/services/emergency-trauma" },
+      { label: "Diagnostics", href: "/services/diagnostics" },
+      { label: "OPD Timings", href: "/patient-care/opd-timings" },
+      { label: "Citizen Charter", href: "/patient-care/citizen-charter" },
+      { label: "Contact Us", href: "/contact" },
+    ],
+  },
+];
+
 export default function Footer() {
   return (
     <>
@@ -17,9 +55,9 @@ export default function Footer() {
             `}</style>
       <footer className="atmos-footer bg-[#0d2346] dark:bg-[#040810] py-12 px-4 sm:px-6 lg:px-8 tracking-[0.015em] border-t dark:border-white/10 transition-colors duration-300">
         <div className="w-full max-w-7xl mx-auto">
-          <div className="flex flex-wrap justify-between gap-y-10 lg:gap-x-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-x-8 gap-y-10">
 
-            <div className="w-full md:w-[45%] lg:w-[35%] flex flex-col items-center md:items-start text-center md:text-left">
+            <div className="col-span-2 md:col-span-3 lg:col-span-3 flex flex-col items-center md:items-start text-center md:text-left">
               <a
                 href="/"
                 className="flex items-center justify-center md:justify-start"
@@ -143,45 +181,35 @@ export default function Footer() {
               </div>
             </div>
 
-            <div className="w-full md:w-[45%] lg:w-[24%] xl:w-[18%] flex flex-col items-center pt-0 md:pt-21 lg:-ml-6">
-              <h3 className="text-sm text-white font-medium lg:-ml-4">Quick Links</h3>
-              <div className="grid grid-cols-2 gap-x-6 min-[375px]:gap-x-14 gap-y-3 mt-4">
-                {[
-                  { label: "Home", href: "/" },
-                  { label: "Admissions", href: "/admissions" },
-                  { label: "About Institution", href: "/about-institution" },
-                  { label: "MBBS Programme", href: "/academics/mbbs" },
-                  { label: "About Hospital", href: "/about-hospital" },
-                  { label: "Specialities", href: "/services/specialities" },
-                  { label: "Faculty & Depts", href: "/departments" },
-                  { label: "Emergency Care", href: "/services/emergency-trauma" },
-                  { label: "Facilities", href: "/facilities/hospital" },
-                  { label: "Citizen Charter", href: "/patient-care/citizen-charter" },
-                  { label: "Media Gallery", href: "/media-gallery" },
-                  { label: "AIMS in the News", href: "/aims-in-the-news" },
-                ].map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className="text-sm text-white/60 hover:text-white transition-colors duration-200 min-[360px]:whitespace-nowrap"
-                  >
-                    {link.label}
-                  </a>
-                ))}
+            {footerColumns.map((col) => (
+              <div key={col.title} className="lg:col-span-2 flex flex-col items-start">
+                <h3 className="text-sm text-white font-medium">{col.title}</h3>
+                <ul className="flex flex-col gap-2.5 mt-4">
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      <a
+                        href={link.href}
+                        className="text-sm text-white/60 hover:text-white transition-colors duration-200"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
+            ))}
 
-            <div className="w-full md:w-[48%] lg:w-[28%] flex flex-col items-center md:items-start">
+            <div className="col-span-2 md:col-span-3 lg:col-span-3 flex flex-col items-center md:items-start">
               <h3 className="text-sm text-white font-medium mb-4">
                 Find Us on Map
               </h3>
-              <div className="w-full min-h-64 rounded-[26px] overflow-hidden border border-white/10">
+              <div className="w-full rounded-[26px] overflow-hidden border border-white/10">
                 <iframe
                   src="https://maps.google.com/maps?q=Arundathi%20Institute%20of%20medical%20acience&t=k&z=16&output=embed&iwloc=near"
                   title="Arundathi Institute of Medical Sciences"
                   aria-label="Map showing Arundathi Institute of Medical Sciences"
                   loading="lazy"
-                  className="w-full h-64 rounded-[26px] border-0"
+                  className="w-full h-56 rounded-[26px] border-0"
                   allowFullScreen
                 />
               </div>

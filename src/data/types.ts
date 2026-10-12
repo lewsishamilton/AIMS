@@ -11,6 +11,7 @@ export type HierarchyRank = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
 export interface FacultyMember {
   id: string;
+  serialNumber?: number;
   rawName: string;
   name: string;
   regCode?: string;
@@ -19,6 +20,7 @@ export interface FacultyMember {
   roleBadge: string;
   rank: HierarchyRank;
   tier: HierarchyTier;
+  rawDepartment?: string;
   departmentId: string;
   departmentName: string;
   category: DepartmentCategory;

@@ -244,8 +244,8 @@ const Navbar = () => {
         : "bg-black/60 glass-dropdown-card backdrop-blur-2xl rounded-2xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.25)]";
 
     const dropdownItemClass = isWhiteTheme
-        ? "text-gray-700 hover:text-black hover:bg-gray-100/80 rounded-xl"
-        : "text-white/85 hover:text-white hover:bg-white/20 rounded-xl";
+        ? "text-gray-700 hover:text-black hover:bg-gray-100/80 rounded-lg"
+        : "text-white/85 hover:text-white hover:bg-white/15 rounded-lg";
 
     const renderThemeToggle = (isMobile = false) => {
         const isDark = theme === "dark";
@@ -311,7 +311,7 @@ const Navbar = () => {
                 {/* Menu Button */}
                 <Link
                     to={link.path}
-                    className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap px-2.5 2xl:px-3.5 py-1.5 rounded-full font-semibold tracking-wide text-sm 2xl:text-[15px] border border-transparent transition-all duration-300 ease-out ${activeHoverPill}`}
+                    className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap px-2.5 2xl:px-3.5 py-1.5 rounded-full font-semibold tracking-wide text-[13px] 2xl:text-sm border border-transparent transition-all duration-300 ease-out ${activeHoverPill}`}
                 >
                     <span>{link.name}</span>
                     <ChevronDown />
@@ -319,7 +319,7 @@ const Navbar = () => {
 
                 {/* Level 1 Dropdown */}
                 {link.dropdown && (
-                    <div className={`absolute ${alignRight ? "right-0" : "left-0"} top-[calc(100%+4px)] ${isMenuOpenState ? "block" : "hidden"} w-64 z-50 before:absolute before:-top-3 before:left-0 before:w-full before:h-4`}>
+                    <div className={`absolute ${alignRight ? "right-0" : "left-0"} top-[calc(100%+4px)] ${isMenuOpenState ? "block" : "hidden"} w-56 z-50 before:absolute before:-top-3 before:left-0 before:w-full before:h-4`}>
                         {/* Level 1 Independent Glass Background */}
                         <div
                             className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
@@ -327,7 +327,7 @@ const Navbar = () => {
                         />
 
                         {/* Level 1 Items (Non-nested backdrop container) */}
-                        <div className="p-1.5 relative text-white">
+                        <div className="p-1 relative text-white">
                             {link.dropdown.map((item, itemIdx) => (
                                 <div
                                     key={itemIdx}
@@ -340,7 +340,7 @@ const Navbar = () => {
                                 >
                                     <Link
                                         to={item.path}
-                                        className={`flex items-center justify-between px-3.5 py-2.5 text-[13px] font-medium transition-all duration-150 ${dropdownItemClass}`}
+                                        className={`flex items-center justify-between px-3 py-1.5 text-[13.5px] font-semibold transition-all duration-150 ${dropdownItemClass}`}
                                     >
                                         <span>{item.name}</span>
                                         {item.subItems && <ChevronRight />}
@@ -348,7 +348,7 @@ const Navbar = () => {
 
                                     {/* Level 2 Sub-Dropdown (Independent Glass Background) */}
                                     {item.subItems && (
-                                        <div className={`absolute left-[calc(100%+4px)] -top-1.5 ${openSubIdx === itemIdx ? "block" : "hidden"} w-max min-w-56 z-50 before:absolute before:top-0 before:-left-3 before:w-4 before:h-full`}>
+                                        <div className={`absolute left-[calc(100%+4px)] -top-1 ${openSubIdx === itemIdx ? "block" : "hidden"} w-max min-w-52 z-50 before:absolute before:top-0 before:-left-3 before:w-4 before:h-full`}>
                                             {/* Level 2 Independent Glass Background (Not nested in Level 1 backdrop) */}
                                             <div
                                                 className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
@@ -356,12 +356,12 @@ const Navbar = () => {
                                             />
 
                                             {/* Level 2 Items */}
-                                            <div className="p-1.5 relative text-white">
+                                            <div className="p-1 relative text-white">
                                                 {item.subItems.map((sub, subIdx) => (
                                                     <Link
                                                         key={subIdx}
                                                         to={sub.path}
-                                                        className={`block whitespace-nowrap px-3.5 py-2 text-[13px] font-medium transition-all duration-150 ${dropdownItemClass}`}
+                                                        className={`block whitespace-nowrap px-3 py-1.5 text-[13.5px] font-semibold transition-all duration-150 ${dropdownItemClass}`}
                                                     >
                                                         {sub.name}
                                                     </Link>
