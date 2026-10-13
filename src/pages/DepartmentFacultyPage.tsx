@@ -160,6 +160,7 @@ export const DepartmentFacultyPage: React.FC = () => {
                           key={faculty.id}
                           name={faculty.name}
                           designation={faculty.designation}
+                          departmentName={faculty.departmentName || department.name}
                           photoUrl={faculty.photoUrl}
                           profileUrl={faculty.profileUrl}
                           regCode={faculty.regCode}
@@ -198,6 +199,7 @@ export const DepartmentFacultyPage: React.FC = () => {
                       key={faculty.id}
                       name={faculty.name}
                       designation={faculty.designation}
+                      departmentName={faculty.departmentName || department.name}
                       photoUrl={faculty.photoUrl}
                       profileUrl={faculty.profileUrl}
                       regCode={faculty.regCode}
