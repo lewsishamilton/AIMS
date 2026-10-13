@@ -162,7 +162,6 @@ export const DepartmentFacultyPage: React.FC = () => {
                           designation={faculty.designation}
                           photoUrl={faculty.photoUrl}
                           profileUrl={faculty.profileUrl}
-                          linkedinUrl={faculty.linkedinUrl}
                           regCode={faculty.regCode}
                         />
                       ))}
@@ -201,7 +200,6 @@ export const DepartmentFacultyPage: React.FC = () => {
                       designation={faculty.designation}
                       photoUrl={faculty.photoUrl}
                       profileUrl={faculty.profileUrl}
-                      linkedinUrl={faculty.linkedinUrl}
                       regCode={faculty.regCode}
                     />
                   ))}

@@ -5,7 +5,6 @@ export interface FacultyCardProps {
   designation: string;
   photoUrl?: string;
   profileUrl?: string;
-  linkedinUrl?: string;
   departmentName?: string;
   roleBadge?: string;
   tier?: string;
@@ -19,7 +18,6 @@ export const FacultyCard: React.FC<FacultyCardProps> = ({
   designation,
   photoUrl,
   profileUrl = "#",
-  linkedinUrl = "https://www.linkedin.com/",
   regCode,
   className = "",
 }) => {
@@ -88,17 +86,6 @@ export const FacultyCard: React.FC<FacultyCardProps> = ({
         className="absolute bottom-[-60px] left-1/2 z-[3] w-[130px] -translate-x-1/2 rounded-[8px] border border-[#fbfaf5]/70 dark:border-teal-400/80 px-2 py-[10px] text-center text-[13px] font-semibold text-[#fbfaf5] dark:text-white opacity-0 transition-all duration-700 ease-in-out hover:bg-[#fbfaf5]/15 dark:hover:bg-teal-500 dark:hover:border-teal-400 group-hover:bottom-[70px] group-hover:opacity-100"
       >
         View profile
-      </a>
-
-      {/* LinkedIn Icon matching original */}
-      <a
-        href={linkedinUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label={`Open LinkedIn profile of ${name}`}
-        className="absolute bottom-[15px] right-[15px] z-[4] flex h-[29px] w-[29px] items-center justify-center rounded-full border-2 border-[#0a66c2] bg-[#0a66c2] text-white no-underline group-hover:border-white group-hover:bg-white group-hover:text-[#1f3351] transition-colors"
-      >
-        <span className="text-[15px] font-bold leading-none">in</span>
       </a>
     </div>
   );
