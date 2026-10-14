@@ -36,7 +36,7 @@ export default function AboutHospitalPage() {
 
             {/* Heading */}
             <h1 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#1f3351] dark:text-white leading-[1.18] tracking-tight mb-6">
-              About Arundathi Hospital
+              About Arundath Hospital
             </h1>
 
             {/* Paragraph 1 with Drop Cap */}
