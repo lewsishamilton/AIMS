@@ -2,6 +2,7 @@ import laxmanReddyImg from "../assets/Management/M.LaxmanReddy.jpeg";
 import anushreyaReddyImg from "../assets/Management/M.Anushreya Reddy.jpeg";
 import mamathaReddyImg from "../assets/Management/M.Mamatha Reddy.jpeg";
 import dhirenReddyImg from "../assets/Management/M.Dhiren Reddy.jpeg";
+import devanandImg from "../assets/Management/Dr.B.Devanand.jpeg";
 
 export interface ManagementMember {
   id: string;
@@ -52,15 +53,15 @@ export const EXECUTIVE_MEMBERS: ManagementMember[] = [
     photoUrl: mamathaReddyImg,
   },
   {
-    id: "p-indumathi",
-    name: "P. Indumathi",
-    role: "Member",
+    id: "dr-b-devanand",
+    name: "Dr. B. Devanand",
+    role: "Dean",
     category: "executive",
     hierarchyTier: "Executive Members",
     hierarchyRank: 6,
     departmentOrWing: "Executive Committee",
-    badges: ["Executive Member"],
-    photoUrl: "",
+    badges: ["Dean"],
+    photoUrl: devanandImg,
   },
   {
     id: "m-dhiren-reddy",

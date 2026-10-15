@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Phone, Copy, Check } from "lucide-react";
 import {
   EXECUTIVE_MEMBERS,
@@ -7,6 +8,7 @@ import {
 } from "../data/managementData";
 
 export default function ManagementPage() {
+  const navigate = useNavigate();
   const [copiedNumber, setCopiedNumber] = useState<string | null>(null);
 
   const handleCopy = (text: string) => {
@@ -43,9 +45,46 @@ export default function ManagementPage() {
     member: ManagementMember;
     isPresident?: boolean;
   }) => {
+    const isDean = member.id === "dr-b-devanand";
+    const [showProfileBtn, setShowProfileBtn] = useState(false);
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+      if (!isDean || !showProfileBtn) return;
+      const handleClickOutside = (e: MouseEvent) => {
+        if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
+          setShowProfileBtn(false);
+        }
+      };
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isDean, showProfileBtn]);
+
+    const handleCardClick = () => {
+      if (isDean) {
+        setShowProfileBtn((prev) => !prev);
+      }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (isDean && (e.key === "Enter" || e.key === " ")) {
+        e.preventDefault();
+        setShowProfileBtn((prev) => !prev);
+      }
+    };
+
     return (
       <div
+        ref={isDean ? cardRef : undefined}
+        onClick={handleCardClick}
+        onKeyDown={handleKeyDown}
+        tabIndex={isDean ? 0 : undefined}
+        role={isDean ? "button" : undefined}
+        aria-label={isDean ? "Dr. B. Devanand, Dean - Click to reveal profile options" : undefined}
+        aria-expanded={isDean ? showProfileBtn : undefined}
         className={`group relative overflow-hidden rounded-[22px] bg-[#0d2346] dark:bg-[#0b172c] border border-[#dce8ee]/30 dark:border-white/15 shadow-xs hover:shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-end ${
+          isDean ? "cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/40" : ""
+        } ${
           isPresident
             ? "max-w-xs sm:max-w-sm w-full mx-auto h-[380px] sm:h-[410px] ring-2 ring-[#1f3351]/20 dark:ring-white/20"
             : "w-full h-[350px] sm:h-[370px]"
@@ -56,7 +95,9 @@ export default function ManagementPage() {
           <img
             src={member.photoUrl}
             alt={member.name}
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            className={`absolute inset-0 w-full h-full object-cover ${
+              member.id === "dr-b-devanand" ? "object-center" : "object-top"
+            }`}
           />
         ) : (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0d2346] dark:bg-[#0b172c] pb-16">
@@ -72,7 +113,11 @@ export default function ManagementPage() {
         )}
 
         {/* Role badge top-left overlay */}
-        <div className="absolute top-3.5 left-3.5 z-10">
+        <div
+          className={`absolute top-3.5 left-3.5 z-10 transition-opacity duration-200 ${
+            isDean ? (showProfileBtn ? "opacity-0 pointer-events-none" : "group-hover:opacity-0") : ""
+          }`}
+        >
           <span
             className={`px-3 py-1 rounded-full text-xs font-bold tracking-wide shadow-xs ${
               isPresident
@@ -86,7 +131,9 @@ export default function ManagementPage() {
 
         {/* Smooth photographic scrim gradient (zero harsh bar lines, continuous progressive fade) */}
         <div
-          className="absolute inset-x-0 bottom-0 h-44 sm:h-48 pointer-events-none z-[2]"
+          className={`absolute inset-x-0 bottom-0 h-44 sm:h-48 pointer-events-none z-[2] transition-opacity duration-200 ${
+            isDean ? (showProfileBtn ? "opacity-0" : "group-hover:opacity-0") : ""
+          }`}
           style={{
             background:
               "linear-gradient(to top, rgba(13, 35, 70, 0.96) 0%, rgba(13, 35, 70, 0.85) 20%, rgba(13, 35, 70, 0.6) 45%, rgba(13, 35, 70, 0.3) 70%, rgba(13, 35, 70, 0.08) 88%, rgba(13, 35, 70, 0) 100%)",
@@ -94,7 +141,11 @@ export default function ManagementPage() {
         />
 
         {/* Member Details over dark blue gradient */}
-        <div className="relative z-10 p-5 sm:p-6 text-white flex flex-col justify-end">
+        <div
+          className={`relative z-10 p-5 sm:p-6 text-white flex flex-col justify-end transition-opacity duration-200 ${
+            isDean ? (showProfileBtn ? "opacity-0 pointer-events-none" : "group-hover:opacity-0") : ""
+          }`}
+        >
           <h3 className="font-['Manrope',sans-serif] text-lg sm:text-xl font-bold text-white leading-snug drop-shadow-xs">
             {member.name}
           </h3>
@@ -132,6 +183,60 @@ export default function ManagementPage() {
             </div>
           )}
         </div>
+
+        {/* Dean Centered Hover / Click Overlay (Exact FacultyCard Style) */}
+        {isDean && (
+          <>
+            {/* Dark Blue Gradient Overlay */}
+            <div
+              className={`absolute inset-0 transition-opacity duration-200 z-[3] pointer-events-none backdrop-blur-[1px] ${
+                showProfileBtn
+                  ? "opacity-100"
+                  : "opacity-0 group-hover:opacity-100"
+              }`}
+              style={{
+                background:
+                  "linear-gradient(180deg, rgba(13, 35, 70, 0.90) 0%, rgba(8, 23, 46, 0.93) 50%, rgba(4, 12, 24, 0.96) 100%)",
+              }}
+            />
+
+            {/* Centered Details: Bold Name, Designation, Department, View profile */}
+            <div
+              className={`absolute inset-0 z-[4] flex flex-col items-center justify-center px-5 py-6 text-center transition-opacity duration-200 ${
+                showProfileBtn
+                  ? "opacity-100 pointer-events-auto"
+                  : "opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto"
+              }`}
+            >
+              {/* Name in bold on center */}
+              <h3 className="font-['Manrope',sans-serif] text-[18px] sm:text-[20px] font-bold text-white leading-tight">
+                {member.name}
+              </h3>
+
+              {/* Below it: Designation */}
+              <p className="mt-1.5 text-[13px] sm:text-[13.5px] font-normal text-white/75 dark:text-slate-300 leading-snug max-w-[90%]">
+                {member.role}
+              </p>
+
+              {/* Below it: Department / Institution */}
+              <p className="mt-2.5 text-[13px] sm:text-[13.5px] font-semibold text-white/90 leading-relaxed max-w-[92%] px-2">
+                Arundathi Institute of Medical Sciences
+              </p>
+
+              {/* View profile button matching exact FacultyCard design */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate("/leadership/dean");
+                }}
+                className="mt-5 inline-flex items-center justify-center px-6 py-2 rounded-[8px] border border-white/35 hover:border-white hover:bg-white/10 active:scale-95 text-white text-[13px] font-semibold tracking-wide transition-colors duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/80"
+              >
+                View profile
+              </button>
+            </div>
+          </>
+        )}
       </div>
     );
   };

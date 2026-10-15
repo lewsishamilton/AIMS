@@ -17,6 +17,7 @@ import AboutHospitalPage from "./pages/AboutHospitalPage"
 import AboutInstitutionPage from "./pages/AboutInstitutionPage"
 import FounderPage from "./pages/FounderPage"
 import ManagementPage from "./pages/ManagementPage"
+import DeanProfilePage from "./pages/DeanProfilePage"
 import ContactPage from "./pages/ContactPage"
 import AimsInNewsPage from "./pages/AimsInNewsPage"
 import MachinesPage from "./pages/MachinesPage"
@@ -147,6 +148,9 @@ function App() {
         <Route path="/management" element={<ManagementPage />} />
         <Route path="/Management" element={<ManagementPage />} />
         <Route path="/leadership/management" element={<ManagementPage />} />
+        <Route path="/dean" element={<DeanProfilePage />} />
+        <Route path="/Dean" element={<DeanProfilePage />} />
+        <Route path="/leadership/dean" element={<DeanProfilePage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/Contact" element={<ContactPage />} />
         <Route path="/about/awards" element={<AwardsPage />} />
