@@ -283,15 +283,6 @@ export const ApplicationForms: React.FC = () => {
                   </div>
 
                   <div className="space-y-1.5">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="inline-flex items-center rounded-full bg-[#1f3351]/10 px-2.5 py-0.5 text-[11px] font-bold text-[#1f3351] dark:bg-teal-400/20 dark:text-teal-300">
-                        {form.badge}
-                      </span>
-                      <span className="text-[11px] font-medium text-[#64748b] dark:text-slate-400">
-                        • {form.pages} • {form.fileSize} • PDF
-                      </span>
-                    </div>
-
                     <h3 className="font-['Manrope',sans-serif] text-base sm:text-lg font-bold text-[#1f3351] dark:text-white group-hover:text-[#142338] dark:group-hover:text-teal-200 transition-colors">
                       {form.title}
                     </h3>
