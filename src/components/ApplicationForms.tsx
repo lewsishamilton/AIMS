@@ -205,7 +205,7 @@ export const ApplicationForms: React.FC = () => {
             <Landmark className="h-5 w-5" />
           </span>
           <div>
-            <h2 className="font-['Manrope',sans-serif] text-lg font-bold text-[#1f3351] dark:text-white underline underline-offset-4 decoration-[#1f3351]/40 dark:decoration-teal-400/40">
+            <h2 className="font-['Manrope',sans-serif] text-lg font-bold text-[#1f3351] dark:text-white">
               Student Fee Payment Bank Details
             </h2>
             <p className="text-xs text-[#596d86] dark:text-slate-400 mt-0.5">
