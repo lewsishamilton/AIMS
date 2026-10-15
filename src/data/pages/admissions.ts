@@ -215,47 +215,11 @@ export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
 
   "/admissions/forms": {
     eyebrow: "Admissions",
-    title: "Application Forms",
+    title: "Application Forms & Proformas",
     subtitle:
-      "Application and declaration forms used during admission, verification and the academic year, available from the admissions office.",
-    sections: [
-      {
-        title: "Forms Issued by the Institute",
-        bullets: [
-          "MBBS Management (B-Category) application form",
-          "MBBS NRI (C-Category) application form and sponsor declaration",
-          "Nursing, allied health and paramedical diploma application forms",
-          "Anti-ragging affidavit for the student and the parent or guardian",
-          "Hostel admission and mess registration form",
-          "Transport registration form for the college bus service",
-          "Bonafide, conduct and transfer certificate request forms",
-        ],
-        layout: "full",
-      },
-      {
-        title: "How to Obtain a Form",
-        content:
-          "Application and declaration forms are issued by the admissions office on campus and are also supplied to candidates at the time of counselling and reporting. Call ahead to confirm which forms apply to your category before travelling to the campus.",
-        layout: "half",
-      },
-      {
-        title: "Submitting a Completed Form",
-        content:
-          "Completed forms are submitted in person at the administrative office along with the supporting documents listed in the admission criteria. Keep a copy of every form and an official receipt for every payment.",
-        layout: "half",
-      },
-      {
-        title: "Admissions Desk",
-        content: ADMISSIONS_DESK,
-        layout: "full",
-      },
-    ],
-    quickLinks: linksExcept("/admissions/forms"),
-    cta: {
-      text: "Check the eligibility conditions and the document checklist before collecting an application form.",
-      label: "Admission Criteria",
-      path: "/admissions/criteria",
-    },
+      "Official downloadable application forms, affidavit bonds, and certificate checklists required for MBBS admission verification and reporting at Arundathi Institute of Medical Sciences.",
+    sections: [],
+    quickLinks: [],
   },
 
   "/admissions/admitted-list": {
