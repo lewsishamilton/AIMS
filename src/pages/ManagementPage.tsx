@@ -45,12 +45,12 @@ export default function ManagementPage() {
     member: ManagementMember;
     isPresident?: boolean;
   }) => {
-    const isDean = member.id === "dr-b-devanand";
+    const hasProfile = !!member.profile;
     const [showProfileBtn, setShowProfileBtn] = useState(false);
     const cardRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-      if (!isDean || !showProfileBtn) return;
+      if (!hasProfile || !showProfileBtn) return;
       const handleClickOutside = (e: MouseEvent) => {
         if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
           setShowProfileBtn(false);
@@ -58,16 +58,16 @@ export default function ManagementPage() {
       };
       document.addEventListener("mousedown", handleClickOutside);
       return () => document.removeEventListener("mousedown", handleClickOutside);
-    }, [isDean, showProfileBtn]);
+    }, [hasProfile, showProfileBtn]);
 
     const handleCardClick = () => {
-      if (isDean) {
+      if (hasProfile) {
         setShowProfileBtn((prev) => !prev);
       }
     };
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
-      if (isDean && (e.key === "Enter" || e.key === " ")) {
+      if (hasProfile && (e.key === "Enter" || e.key === " ")) {
         e.preventDefault();
         setShowProfileBtn((prev) => !prev);
       }
@@ -75,15 +75,15 @@ export default function ManagementPage() {
 
     return (
       <div
-        ref={isDean ? cardRef : undefined}
+        ref={hasProfile ? cardRef : undefined}
         onClick={handleCardClick}
         onKeyDown={handleKeyDown}
-        tabIndex={isDean ? 0 : undefined}
-        role={isDean ? "button" : undefined}
-        aria-label={isDean ? "Dr. B. Devanand, Dean - Click to reveal profile options" : undefined}
-        aria-expanded={isDean ? showProfileBtn : undefined}
+        tabIndex={hasProfile ? 0 : undefined}
+        role={hasProfile ? "button" : undefined}
+        aria-label={hasProfile ? `${member.name}, ${member.role} - Click to reveal profile options` : undefined}
+        aria-expanded={hasProfile ? showProfileBtn : undefined}
         className={`group relative overflow-hidden rounded-[22px] bg-[#0d2346] dark:bg-[#0b172c] border border-[#dce8ee]/30 dark:border-white/15 shadow-xs hover:shadow-xl dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1 flex flex-col justify-end ${
-          isDean ? "cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/40" : ""
+          hasProfile ? "cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/40" : ""
         } ${
           isPresident
             ? "max-w-xs sm:max-w-sm w-full mx-auto h-[380px] sm:h-[410px] ring-2 ring-[#1f3351]/20 dark:ring-white/20"
@@ -115,7 +115,7 @@ export default function ManagementPage() {
         {/* Role badge top-left overlay */}
         <div
           className={`absolute top-3.5 left-3.5 z-10 transition-opacity duration-200 ${
-            isDean ? (showProfileBtn ? "opacity-0 pointer-events-none" : "group-hover:opacity-0") : ""
+            hasProfile ? (showProfileBtn ? "opacity-0 pointer-events-none" : "group-hover:opacity-0") : ""
           }`}
         >
           <span
@@ -132,7 +132,7 @@ export default function ManagementPage() {
         {/* Smooth photographic scrim gradient (zero harsh bar lines, continuous progressive fade) */}
         <div
           className={`absolute inset-x-0 bottom-0 h-44 sm:h-48 pointer-events-none z-[2] transition-opacity duration-200 ${
-            isDean ? (showProfileBtn ? "opacity-0" : "group-hover:opacity-0") : ""
+            hasProfile ? (showProfileBtn ? "opacity-0" : "group-hover:opacity-0") : ""
           }`}
           style={{
             background:
@@ -143,7 +143,7 @@ export default function ManagementPage() {
         {/* Member Details over dark blue gradient */}
         <div
           className={`relative z-10 p-5 sm:p-6 text-white flex flex-col justify-end transition-opacity duration-200 ${
-            isDean ? (showProfileBtn ? "opacity-0 pointer-events-none" : "group-hover:opacity-0") : ""
+            hasProfile ? (showProfileBtn ? "opacity-0 pointer-events-none" : "group-hover:opacity-0") : ""
           }`}
         >
           <h3 className="font-['Manrope',sans-serif] text-lg sm:text-xl font-bold text-white leading-snug drop-shadow-xs">
@@ -184,8 +184,8 @@ export default function ManagementPage() {
           )}
         </div>
 
-        {/* Dean Centered Hover / Click Overlay (Exact FacultyCard Style) */}
-        {isDean && (
+        {/* Profile Centered Hover / Click Overlay (Exact FacultyCard Style) */}
+        {hasProfile && (
           <>
             {/* Dark Blue Gradient Overlay */}
             <div
@@ -228,7 +228,7 @@ export default function ManagementPage() {
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate("/leadership/dean");
+                  navigate(`/leadership/${member.id}`);
                 }}
                 className="mt-5 inline-flex items-center justify-center px-6 py-2 rounded-[8px] border border-white/35 hover:border-white hover:bg-white/10 active:scale-95 text-white text-[13px] font-semibold tracking-wide transition-colors duration-150 cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/80"
               >
