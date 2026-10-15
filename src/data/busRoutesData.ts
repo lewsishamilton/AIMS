@@ -1,7 +1,7 @@
 /**
  * College bus routes. Stop names are keys into `STOP_COORDS`
  * (busStopCoords.ts); road geometry is precomputed into busRouteGeometry.json
- * by scripts/build-bus-routes.mjs — re-run it after editing stops.
+ * by scripts/build-bus-routes.ts — re-run it after editing stops.
  */
 
 export interface Contact {
@@ -12,6 +12,8 @@ export interface Contact {
 export interface BusRoute {
   no: number;
   stops: string[];
+  /** Stops the bus picks up from on its way rather than driving to the pin; shown where the road passes nearest. */
+  passBy?: string[];
   incharge: Contact;
   driver: Contact;
 }
@@ -38,6 +40,7 @@ export const BUS_ROUTES: BusRoute[] = [
   {
     no: 4,
     stops: ["Attapur", "Attapur Ring Road", "Rethibowli", "Mehdipatnam", "NMDC", "Mahavir", "Lakdikapul", "Khairatabad", "Panjagutta", "Ameerpet", "Mythrivanam", "SR Nagar", "Erragadda", "Bharath Nagar", "JNTU", "HMT Hills", "Pragathi Nagar", "Gandimaisamma", "AIMS"],
+    passBy: ["Rethibowli"],
     incharge: { name: "Mr. B. Varija", phone: "9603367599" },
     driver: { name: "Md. Maqbul", phone: "9177410056" },
   },
@@ -61,7 +64,8 @@ export const BUS_ROUTES: BusRoute[] = [
   },
   {
     no: 8,
-    stops: ["Sagar Ring Road", "IS Sadan", "Govt Press", "Malakpet", "Chaderghat", "Kachiguda", "YMCA", "Narayanaguda X Roads", "Chikkadpally", "RTC X Roads", "Indira Park", "Lower Tank Bund", "Ranigunj", "Paradise", "Tadbund", "Bowenpally", "Dairy Farm", "Suchitra", "Pet Basheerabad", "Dhulapally", "Kompally", "Gundlapochampally", "AIMS"],
+    stops: ["Sagar Ring Road", "IS Sadan", "Govt Press", "Malakpet", "Chaderghat", "Kachiguda", "YMCA", "Narayanaguda X Roads", "Chikkadpally", "RTC X Roads", "Indira Park", "Lower Tank Bund", "Ranigunj", "Paradise", "Tadbund", "Bowenpally", "Dairy Farm", "Suchitra", "Pet Basheerabad", "Kompally", "Gundlapochampally", "Dhulapally", "AIMS"],
+    passBy: ["Kompally", "Dhulapally"],
     incharge: { name: "Mrs. Zohanna", phone: "7842793307" },
     driver: { name: "Shankar Naik", phone: "9603710075" },
   },
@@ -80,6 +84,7 @@ export const BUS_ROUTES: BusRoute[] = [
   {
     no: 11,
     stops: ["BHEL Old LIG", "BHEL New MIG", "BHEL Kaman", "Madinaguda", "Allwyn X Roads", "Miyapur", "Miyapur X Roads", "Bollaram", "Bachupally", "Gandimaisamma", "AIMS"],
+    passBy: ["Bollaram", "Bachupally"],
     incharge: { name: "Mr. M. Thirupalaiah", phone: "9959910282" },
     driver: { name: "Srishialam", phone: "8247598910" },
   },
@@ -164,6 +169,7 @@ export const BUS_ROUTES: BusRoute[] = [
   {
     no: 25,
     stops: ["New Bowenpally", "Ferozguda", "Balanagar BBR Hospital", "HAL", "IDPL", "Ganesh Nagar (Sha Theatre)", "Jeedimetla", "Suraram", "Gandimaisamma", "AIMS"],
+    passBy: ["Ferozguda"],
     incharge: { name: "Mrs. Usharani", phone: "9063226274" },
     driver: { name: "Mallesh", phone: "7382817336" },
   },
@@ -175,7 +181,8 @@ export const BUS_ROUTES: BusRoute[] = [
   },
   {
     no: 27,
-    stops: ["Lothkunta", "Alwal", "Suchitra", "Pet Basheerabad", "Dhulapally", "Kompally", "Gundlapochampally", "AIMS"],
+    stops: ["Lothkunta", "Alwal", "Suchitra", "Pet Basheerabad", "Kompally", "Gundlapochampally", "Dhulapally", "AIMS"],
+    passBy: ["Kompally", "Dhulapally"],
     incharge: { name: "Mrs. Nirisha", phone: "8019191471" },
     driver: { name: "Chandram", phone: "9000494401" },
   },

@@ -8,7 +8,7 @@ import {
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import workerUrl from "maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url";
-import { along, bearing, length, lineString, nearestPointOnLine, point } from "@turf/turf";
+import { along, bearing, length, lineSliceAlong, lineString, nearestPointOnLine, point } from "@turf/turf";
 import { Compass, Locate, Map as MapIcon, Pause, Phone, Play, RotateCcw } from "lucide-react";
 import { createBusLayer } from "../lib/busLayer";
 import { useTheme } from "../context/ThemeContext";
@@ -64,15 +64,26 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
   const { theme } = useTheme();
 
   // Route geometry and the distance of each stop along it.
-  const { line, totalKm, stopKm, bounds } = useMemo(() => {
+  const { line, totalKm, stopKm, stopPos, bounds } = useMemo(() => {
     const coords = (GEOMETRY as unknown as Record<string, [number, number][]>)[route.no];
     const line = lineString(coords);
     const totalKm = length(line);
+    // km along the line nearest stop `s`, searching only between `from` and `to`.
+    const at = (s: string, from = 0, to = totalKm) =>
+      to - from < 0.01 ? from : from + nearestPointOnLine(lineSliceAlong(line, from, to), toLngLat(STOP_COORDS[s])).properties.location;
     let prev = 0;
-    const stopKm = route.stops.map((s) => (prev = Math.max(prev, nearestPointOnLine(line, toLngLat(STOP_COORDS[s])).properties.location)));
+    const stopKm = route.stops.map((s) => (route.passBy?.includes(s) ? NaN : (prev = Math.max(prev, at(s)))));
     stopKm[stopKm.length - 1] = totalKm;
+    // Pass-by stops go on the road between the stops listed either side of them.
+    prev = 0;
+    stopKm.forEach((d, i) => {
+      if (!isNaN(d)) return void (prev = d);
+      prev = stopKm[i] = at(route.stops[i], prev, stopKm.slice(i + 1).find((x) => !isNaN(x)));
+    });
+    // Each route draws its stops where its own line reaches them, so a shared stop sits on every route's road.
+    const stopPos = stopKm.map((d) => along(line, d).geometry.coordinates);
     const bounds = coords.reduce((b, c) => b.extend(c), new LngLatBounds(coords[0], coords[0]));
-    return { line, totalKm, stopKm, bounds };
+    return { line, totalKm, stopKm, stopPos, bounds };
   }, [route]);
 
   const [progress, setProgress] = useState(0);
@@ -161,7 +172,7 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
             type: "Feature",
             id: i,
             properties: { name, no: String(i + 1) },
-            geometry: { type: "Point", coordinates: toLngLat(STOP_COORDS[name]) },
+            geometry: { type: "Point", coordinates: stopPos[i] },
           })),
         },
       });
