@@ -54,15 +54,6 @@ export default function DeanProfilePage() {
               Dean · Arundathi Institute of Medical Sciences (AIMS)
             </p>
 
-            {/* Welcome & Dean's Message Card */}
-            <div className="relative p-6 sm:p-7 rounded-[22px] bg-white dark:bg-white/[0.04] border-l-[4px] border-[#0d2346] dark:border-teal-400 border-y border-r border-[#dce8ee] dark:border-white/10 shadow-xs mb-8">
-              <h3 className="font-['Manrope',sans-serif] text-lg sm:text-xl font-bold text-[#0d2346] dark:text-white mb-2">
-                Dean&apos;s Message
-              </h3>
-              <h4 className="font-['Manrope',sans-serif] text-base sm:text-lg font-semibold text-[#1f3351]/90 dark:text-slate-200">
-                Welcome to Arundathi Institute of Medical Sciences (AIMS)
-              </h4>
-            </div>
 
             {/* Complete Message Content from Dean's Document */}
             <div className="space-y-5 text-base sm:text-[17px] text-[#4b6382] dark:text-slate-300 font-normal leading-[1.8]">
