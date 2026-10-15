@@ -6,6 +6,7 @@ const ADMISSION_LINKS = [
   { name: "Seat Matrix", path: "/admissions/seat-matrix" },
   { name: "Fee Structure", path: "/admissions/fee-structure" },
   { name: "Application Forms", path: "/admissions/forms" },
+  { name: "Admitted List", path: "/admissions/admitted-list" },
   { name: "Regulations", path: "/admissions/regulations" },
 ];
 
