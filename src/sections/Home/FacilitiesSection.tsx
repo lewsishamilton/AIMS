@@ -82,7 +82,7 @@ export const FacilitiesSection: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="atmos-dots relative pt-0 sm:pt-1 pb-14 sm:pb-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
+    <section className="atmos-dots relative pt-6 md:pt-1 pb-14 sm:pb-16 lg:py-20 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
       {/* Subtle Dot Grid Background */}
       <div
         className="atmos-dots-fade absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
@@ -94,7 +94,7 @@ export const FacilitiesSection: React.FC = () => {
 
       <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header matching Academics/Departments */}
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+        <div className="m-reveal text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <div className="inline-flex items-center justify-center gap-3 mb-3">
             <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
             <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
@@ -124,7 +124,7 @@ export const FacilitiesSection: React.FC = () => {
                 // First tap opens a card (touch has no hover); clicking an open card follows its link.
                 onClick={() => (isActive && facility.path ? navigate(facility.path) : setActiveId(facility.id))}
                 className={cn(
-                  "group relative cursor-pointer overflow-hidden rounded-[20px] sm:rounded-[24px] border border-[#e2e8f0]/80 dark:border-white/15 bg-white dark:bg-slate-900/40 min-w-0 min-h-0",
+                  "m-reveal group relative cursor-pointer overflow-hidden rounded-[20px] sm:rounded-[24px] border border-[#e2e8f0]/80 dark:border-white/15 bg-white dark:bg-slate-900/40 min-w-0 min-h-0",
                   "shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_14px_32px_rgba(15,23,42,0.18)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]",
                   "transition-[flex,filter] duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
                   isActive
@@ -175,7 +175,7 @@ export const FacilitiesSection: React.FC = () => {
                     )}
                   >
                     {/* Category Tag */}
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 max-md:hidden">
                       <span className="inline-flex items-center px-3 py-1 rounded-full text-[10px] sm:text-[11px] font-semibold tracking-wider text-white uppercase bg-white/20 backdrop-blur-md border border-white/25 shadow-xs">
                         {facility.tag}
                       </span>
@@ -187,7 +187,7 @@ export const FacilitiesSection: React.FC = () => {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-white/90 text-xs sm:text-sm leading-relaxed max-w-md line-clamp-2 drop-shadow-xs">
+                    <p className="max-md:hidden text-white/90 text-xs sm:text-sm leading-relaxed max-w-md line-clamp-2 drop-shadow-xs">
                       {facility.description}
                     </p>
 

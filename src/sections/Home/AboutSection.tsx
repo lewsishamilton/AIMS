@@ -60,6 +60,8 @@ export const AboutSection: React.FC = () => {
   const [enableTransition, setEnableTransition] = useState(true);
   const [isSliding, setIsSliding] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  // Phones only: text is collapsed behind "Read more" (the toggle is md:hidden, so desktop never sets this).
+  const [expanded, setExpanded] = useState(false);
 
   // Drag & Swipe states
   const [isDragging, setIsDragging] = useState(false);
@@ -182,14 +184,14 @@ export const AboutSection: React.FC = () => {
 
   // Auto-slide every 3 seconds (pauses on hover or while dragging)
   useEffect(() => {
-    if (isPaused || isDragging) return;
+    if (isPaused || isDragging || expanded) return;
 
     const interval = setInterval(() => {
       handleNext();
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [trackIndex, isSliding, isPaused, isDragging]);
+  }, [trackIndex, isSliding, isPaused, isDragging, expanded]);
 
   // Silently reset the edge clones without animation
   const handleTransitionEnd = () => {
@@ -218,7 +220,7 @@ export const AboutSection: React.FC = () => {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          className={`overflow-hidden w-full select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"
+          className={`m-reveal overflow-hidden w-full select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"
             }`}
         >
           <div
@@ -266,13 +268,30 @@ export const AboutSection: React.FC = () => {
                       {slide.title}
                     </h2>
 
-                    <div className="space-y-4 text-base leading-relaxed text-[#62748a] dark:text-slate-300 mb-7">
+                    <div className="space-y-4 text-base leading-relaxed text-[#62748a] dark:text-slate-300 mb-7 max-md:mb-2">
                       {slide.paragraphs.map((paragraph, pIdx) => (
-                        <p key={pIdx}>{paragraph}</p>
+                        <p
+                          key={pIdx}
+                          className={expanded ? (pIdx > 0 ? "m-rise" : "") : pIdx === 0 ? "max-md:line-clamp-3" : "max-md:hidden"}
+                        >
+                          {paragraph}
+                        </p>
                       ))}
                     </div>
+                    <button
+                      type="button"
+                      onClick={() => setExpanded((v) => !v)}
+                      onTouchStart={(e) => e.stopPropagation()}
+                      aria-expanded={expanded}
+                      className="md:hidden self-start mb-5 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold bg-[#1f3351] text-white shadow-[0_6px_16px_rgba(31,51,81,0.25)] active:scale-95 transition-transform dark:bg-teal-500 dark:text-[#04121f]"
+                    >
+                      {expanded ? "Read less" : "Read more"}
+                      <svg className={`w-4 h-4 transition-transform duration-300 ${expanded ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </button>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-2">
+                    <div className={`grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-2 ${expanded ? "m-rise" : "max-md:hidden"}`}>
                       {slide.ticks.map((tick, tIdx) => (
                         <div key={tIdx} className="flex items-center gap-2.5">
                           <span className="flex-shrink-0 flex items-center justify-center w-5 h-5 rounded-full bg-dark dark:bg-teal-500 text-white text-xs font-bold">

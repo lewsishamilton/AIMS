@@ -154,11 +154,6 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   height: 100%;
   z-index: 20;
 }
-@media (max-width: 767px) {
-  .collage-row, .collage-row:hover { flex-wrap: wrap; height: auto; width: 100%; gap: 8px; }
-  .collage-item { flex: 1 1 calc(50% - 4px); height: auto; aspect-ratio: 4 / 3; }
-  .collage-row:hover .collage-item:not(:hover) { filter: none; }
-}
 @media (prefers-reduced-motion: reduce) {
   .collage-item, .collage-item img { transition: none; }
 }
@@ -250,4 +245,27 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   transform: translateX(-160%) skewX(-20deg);
   animation: soft-glory-shine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   pointer-events: none;
+}
+
+/* ─── Phone-only motion (landing page + menu). Gated to <768px so desktop never sees it. ─── */
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  /* One-shot entrance on load (hero) */
+  .m-rise { animation: m-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: var(--d, 0s); }
+  /* Scroll reveal: HomePage sets data-in when the element scrolls into view.
+     Animation (not transition) so cards keep their own transition-property. */
+  .m-reveal:not([data-in]) { opacity: 0; }
+  .m-reveal[data-in] { animation: m-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  /* Menu drawer: links cascade in when the drawer opens */
+  .m-drawer-open .m-stagger > * { animation: m-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .m-drawer-open .m-stagger > *:nth-child(2) { animation-delay: 0.05s; }
+  .m-drawer-open .m-stagger > *:nth-child(3) { animation-delay: 0.1s; }
+  .m-drawer-open .m-stagger > *:nth-child(4) { animation-delay: 0.15s; }
+  .m-drawer-open .m-stagger > *:nth-child(5) { animation-delay: 0.2s; }
+  .m-drawer-open .m-stagger > *:nth-child(6) { animation-delay: 0.25s; }
+}
+@keyframes m-rise {
+  from { opacity: 0; transform: translateY(24px); }
+}
+@keyframes m-reveal {
+  from { opacity: 0; transform: translateY(48px) scale(0.96); }
 }

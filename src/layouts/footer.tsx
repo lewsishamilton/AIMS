@@ -55,7 +55,7 @@ export default function Footer() {
             `}</style>
       <footer className="atmos-footer bg-[#0d2346] dark:bg-[#040810] py-12 px-4 sm:px-6 lg:px-8 tracking-[0.015em] border-t dark:border-white/10 transition-colors duration-300">
         <div className="w-full max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-x-8 gap-y-10">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-12 gap-x-8 gap-y-10 max-md:gap-x-6 max-md:gap-y-9">
 
             <div className="col-span-2 md:col-span-3 lg:col-span-3 flex flex-col items-center md:items-start text-center md:text-left">
               <a
@@ -181,10 +181,11 @@ export default function Footer() {
               </div>
             </div>
 
-            {footerColumns.map((col) => (
-              <div key={col.title} className="lg:col-span-2 flex flex-col items-start">
+            {footerColumns.map((col, i) => (
+              // Phones: the odd third column spans the row and splits its links in two, so no half-empty row.
+              <div key={col.title} className={`lg:col-span-2 flex flex-col items-start ${i === 2 ? "max-md:col-span-2" : ""}`}>
                 <h3 className="text-sm text-white font-medium">{col.title}</h3>
-                <ul className="flex flex-col gap-2.5 mt-4">
+                <ul className={`flex flex-col gap-2.5 mt-4 ${i === 2 ? "max-md:grid max-md:grid-cols-2 max-md:gap-x-6 max-md:w-full" : ""}`}>
                   {col.links.map((link) => (
                     <li key={link.label}>
                       <a
@@ -199,17 +200,17 @@ export default function Footer() {
               </div>
             ))}
 
-            <div className="col-span-2 md:col-span-3 lg:col-span-3 flex flex-col items-center md:items-start">
+            <div className="col-span-2 md:col-span-3 lg:col-span-3 flex flex-col items-center md:items-start max-md:items-start">
               <h3 className="text-sm text-white font-medium mb-4">
                 Find Us on Map
               </h3>
-              <div className="w-full rounded-[26px] overflow-hidden border border-white/10">
+              <div className="w-full rounded-[26px] max-md:rounded-2xl overflow-hidden border border-white/10 max-md:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
                 <iframe
                   src="https://maps.google.com/maps?q=Arundathi%20Institute%20of%20medical%20acience&t=k&z=16&output=embed&iwloc=near"
                   title="Arundathi Institute of Medical Sciences"
                   aria-label="Map showing Arundathi Institute of Medical Sciences"
                   loading="lazy"
-                  className="w-full h-56 rounded-[26px] border-0"
+                  className="w-full h-56 max-md:h-auto max-md:aspect-[4/3] rounded-[26px] max-md:rounded-2xl border-0 max-md:block"
                   allowFullScreen
                 />
               </div>

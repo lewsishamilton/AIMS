@@ -161,6 +161,7 @@ const Navbar = () => {
     const { theme, toggleTheme } = useTheme();
     const [isScrolled, setIsScrolled] = React.useState(false);
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [openDrawerIdx, setOpenDrawerIdx] = React.useState<number | null>(null);
     const isWhiteTheme = theme === "dark" ? false : (pathname !== "/" || isScrolled);
     const isNavTransparent = theme === "dark" ? !isScrolled : !isWhiteTheme;
 
@@ -484,8 +485,8 @@ const Navbar = () => {
 
                 {/* Mobile Drawer */}
                 <div
-                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-8 pt-20 gap-6 text-sm font-semibold tracking-wide transition-transform duration-300 xl:hidden overflow-y-auto ${
-                        isMenuOpen ? "translate-x-0" : "-translate-x-full"
+                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-6 sm:px-8 pt-20 pb-10 text-sm font-semibold tracking-wide transition-transform duration-300 xl:hidden overflow-y-auto overscroll-contain ${
+                        isMenuOpen ? "translate-x-0 m-drawer-open" : "-translate-x-full"
                     } ${
                         theme === "dark"
                             ? "bg-[#070d18]/95 backdrop-blur-2xl text-white border-r border-white/10"
@@ -511,66 +512,64 @@ const Navbar = () => {
                         </svg>
                     </button>
 
-                    {navLinks.map((link, idx) => (
-                        <div key={idx} className="w-full flex flex-col gap-2">
-                            <span
-                                className={`font-bold border-b pb-1 ${
-                                    isWhiteTheme
-                                        ? "text-gray-900 border-gray-200"
-                                        : "text-white border-white/20"
-                                }`}
-                            >
-                                {link.name}
-                            </span>
-                            <div className="pl-2 flex flex-col gap-2">
-                                {link.dropdown?.map((item, itemIdx) => (
-                                    <div key={itemIdx} className="flex flex-col gap-1">
-                                        {item.path && item.path !== "#" ? (
-                                            <Link
-                                                to={item.path}
-                                                onClick={() => setIsMenuOpen(false)}
-                                                className={`text-xs font-semibold py-0.5 transition-colors ${
-                                                    isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"
-                                                }`}
-                                            >
-                                                {item.name}
-                                            </Link>
-                                        ) : (
-                                            <span
-                                                className={`text-xs font-semibold ${
-                                                    isWhiteTheme ? "text-gray-800" : "text-white/90"
-                                                }`}
-                                            >
-                                                {item.name}
-                                            </span>
-                                        )}
-                                        {item.subItems && (
-                                            <div
-                                                className={`pl-3 border-l flex flex-col gap-1 ${
-                                                    isWhiteTheme ? "border-gray-200" : "border-white/20"
-                                                }`}
-                                            >
-                                                {item.subItems.map((sub, subIdx) => (
-                                                    <Link
-                                                        key={subIdx}
-                                                        to={sub.path}
-                                                        onClick={() => setIsMenuOpen(false)}
-                                                        className={`text-xs font-normal py-0.5 transition-colors ${
-                                                            isWhiteTheme
-                                                                ? "text-gray-600 hover:text-black"
-                                                                : "text-white/70 hover:text-white"
-                                                        }`}
-                                                    >
-                                                        {sub.name}
-                                                    </Link>
+                    <div className="m-stagger w-full flex flex-col">
+                        {navLinks.map((link, idx) => {
+                            const isOpen = openDrawerIdx === idx;
+                            const subLinkClass = `block py-1.5 text-[13px] transition-colors ${
+                                isWhiteTheme ? "text-gray-600 hover:text-black" : "text-white/70 hover:text-white"
+                            }`;
+                            return (
+                                <div key={idx} className={`w-full border-b ${isWhiteTheme ? "border-gray-200" : "border-white/15"}`}>
+                                    <button
+                                        type="button"
+                                        aria-expanded={isOpen}
+                                        onClick={() => setOpenDrawerIdx(isOpen ? null : idx)}
+                                        className="w-full flex items-center justify-between py-4 font-bold tracking-wide text-left"
+                                    >
+                                        <span>{link.name}</span>
+                                        <svg
+                                            className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                                            fill="none"
+                                            stroke="currentColor"
+                                            strokeWidth="2.5"
+                                            viewBox="0 0 24 24"
+                                        >
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                        </svg>
+                                    </button>
+                                    {/* grid-rows 0fr→1fr gives a smooth height animation without measuring */}
+                                    <div className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}>
+                                        <div className="overflow-hidden" inert={!isOpen}>
+                                            <div className="pl-2 pb-4 flex flex-col">
+                                                {link.dropdown?.map((item, itemIdx) => (
+                                                    <div key={itemIdx} className="flex flex-col">
+                                                        <Link
+                                                            to={item.path}
+                                                            onClick={() => setIsMenuOpen(false)}
+                                                            className={`py-1.5 text-sm font-semibold transition-colors ${
+                                                                isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"
+                                                            }`}
+                                                        >
+                                                            {item.name}
+                                                        </Link>
+                                                        {item.subItems && (
+                                                            <div className={`ml-1 pl-3 mb-1 border-l ${isWhiteTheme ? "border-gray-200" : "border-white/20"}`}>
+                                                                {item.subItems.map((sub, subIdx) => (
+                                                                    <Link key={subIdx} to={sub.path} onClick={() => setIsMenuOpen(false)} className={subLinkClass}>
+                                                                        {sub.name}
+                                                                    </Link>
+                                                                ))}
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 ))}
                                             </div>
-                                        )}
+                                        </div>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    ))}
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             </nav>
         </>

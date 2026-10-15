@@ -30,7 +30,7 @@ const DEPARTMENTS = [
 
 const DepartmentsSection = () => {
   return (
-    <section className="atmos-dots relative pt-6 sm:pt-8 lg:pt-10 pb-0 sm:pb-1 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
+    <section className="atmos-dots relative pt-6 sm:pt-8 lg:pt-10 pb-6 md:pb-1 bg-[#FAF9F5] dark:bg-transparent overflow-hidden transition-colors duration-300">
       {/* Subtle Dot Grid Background */}
       <div
         className="atmos-dots-fade absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
@@ -42,7 +42,7 @@ const DepartmentsSection = () => {
 
       <div className="relative z-10 w-full max-w-[1280px] mx-auto px-4 sm:px-8 lg:px-12">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+        <div className="m-reveal text-center max-w-2xl mx-auto mb-10 sm:mb-12">
           <div className="inline-flex items-center justify-center gap-3 mb-3">
             <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
             <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
@@ -66,7 +66,7 @@ const DepartmentsSection = () => {
             <Link
               to={`/departments?category=${encodeURIComponent(dept.name)}`}
               key={dept.name}
-              className="relative group flex-grow transition-all duration-500 w-full md:w-56 h-[260px] sm:h-[280px] md:h-full md:hover:w-full rounded-[24px] overflow-hidden border border-transparent dark:border-white/15 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_36px_rgba(15,23,42,0.22)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] block cursor-pointer"
+              className="m-reveal relative group flex-grow transition-all duration-500 w-full md:w-56 h-[260px] sm:h-[280px] md:h-full md:hover:w-full rounded-[24px] overflow-hidden border border-transparent dark:border-white/15 shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_16px_36px_rgba(15,23,42,0.22)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] block cursor-pointer"
             >
               {/* Background Image with subtle scale on hover */}
               <div className="w-full h-full overflow-hidden">

@@ -444,9 +444,9 @@ export const MediaGalleryPage: React.FC = () => {
       </div>
 
       {/* 3D Illusion Slider Section: infinite continuous loop */}
-      <section className="relative w-full bg-[#FAF9F5] dark:bg-transparent overflow-hidden pb-0 -mt-10 sm:-mt-14 lg:-mt-16">
+      <section className="relative w-full bg-[#FAF9F5] dark:bg-transparent overflow-hidden pb-0 mt-3 sm:-mt-14 lg:-mt-16">
         {/* Top Solid Curved Overlay */}
-        <div className="absolute top-0 left-0 right-0 z-20 pointer-events-none w-full h-[58px] sm:h-[80px] lg:h-[100px] overflow-hidden">
+        <div className="absolute -top-px sm:top-0 left-0 right-0 z-20 pointer-events-none w-full h-[36px] sm:h-[80px] lg:h-[100px] overflow-hidden">
           <svg
             viewBox="0 0 804 50.167"
             preserveAspectRatio="none"
@@ -503,10 +503,10 @@ export const MediaGalleryPage: React.FC = () => {
                 className="
                   relative
                   shrink-0
-                  w-[calc(100vw-32px)]
+                  w-[min(42vw,190px)]
                   sm:w-[440px]
                   lg:w-[480px]
-                  h-[calc((100vw-32px)*1.26)]
+                  h-[min(52vw,236px)]
                   sm:h-[510px]
                   lg:h-[560px]
                   overflow-hidden
@@ -531,7 +531,7 @@ export const MediaGalleryPage: React.FC = () => {
         </div>
 
         {/* Bottom Solid Curved Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none w-full h-[58px] sm:h-[80px] lg:h-[100px] overflow-hidden">
+        <div className="absolute -bottom-px sm:bottom-0 left-0 right-0 z-20 pointer-events-none w-full h-[36px] sm:h-[80px] lg:h-[100px] overflow-hidden">
           <svg
             viewBox="0 0 804 50.167"
             preserveAspectRatio="none"
@@ -600,12 +600,36 @@ export const MediaGalleryPage: React.FC = () => {
           </div>
 
           {/* Diamond Collage: rows taper in width to form a diamond silhouette */}
-          <div className="flex flex-col gap-1.5 sm:gap-2 max-w-[1080px] mx-auto select-none">
+          <div className="max-md:hidden flex flex-col gap-1.5 sm:gap-2 max-w-[1080px] mx-auto select-none">
             {collageRows.map((row, i) => (
               <div key={i} className="collage-row" style={{ "--row-h": collageRowShape[i][0], "--row-w": collageRowShape[i][1] } as React.CSSProperties}>
                 {row.map(renderPhotoCard)}
               </div>
             ))}
+          </div>
+
+          {/* Phones: the same diamond collage as desktop, laid out at desktop width with desktop row heights
+              (the clamp() maximums), scaled to 60% and pannable in any direction. Starts centred. */}
+          <div
+            ref={(el) => {
+              if (el && !el.dataset.centred) {
+                el.dataset.centred = "1";
+                el.scrollLeft = (el.scrollWidth - el.clientWidth) / 2;
+              }
+            }}
+            className="md:hidden -mx-4 h-[62svh] overflow-auto select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            <div className="w-[1080px] [zoom:0.6] p-4 flex flex-col gap-2">
+              {collageRows.map((row, i) => (
+                <div
+                  key={i}
+                  className="collage-row"
+                  style={{ "--row-h": collageRowShape[i][0].replace(/^clamp\([^,]+,[^,]+,\s*([^)]+)\)$/, "$1"), "--row-w": collageRowShape[i][1] } as React.CSSProperties}
+                >
+                  {row.map(renderPhotoCard)}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

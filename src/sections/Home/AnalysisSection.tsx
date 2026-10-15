@@ -42,7 +42,7 @@ const now = new Date()
 const MONTHS = (now.getFullYear() - 2022) * 12 + now.getMonth() - 7 + 1 // Aug 2022 .. this month
 const monthLabel = (i: number) => {
   const d = new Date(2022, 7 + i)
-  return `${d.toLocaleString("en-US", { month: "short" })} '${String(d.getFullYear()).slice(2)}`
+  return `${d.toLocaleString("en-US", { month: "short" })} ${String(d.getFullYear()).slice(2)}`
 }
 const TREND = Array.from({ length: Math.max(MONTHS, MONTHLY_OP.length) }, (_, i) => ({
   label: monthLabel(i),
@@ -67,10 +67,11 @@ if (import.meta.env.DEV && GRAND_TOTAL !== 575793) console.error(`[AnalysisSecti
 if (import.meta.env.DEV && OP_YEAR !== 383634) console.error(`[AnalysisSection] OP ${OP_YEAR} != dashboard 3,83,634`)
 
 const KPIS = [
-  { value: OP_ALL, label: `OP patients, Aug '22 – ${TREND_END.label}` },
-  { value: GRAND_TOTAL, label: "OP & IP services" },
-  { value: DEPTS.length, label: "Departments" },
-  { value: 929, label: "OPD consultations today" },
+  { value: OP_ALL, label: "OP patients", sub: `Aug 22 – ${TREND_END.label}`, plus: true },
+  { value: GRAND_TOTAL, label: "OP & IP services", plus: true },
+  // The chart lists 22 rows, but the institution has 21 departments.
+  { value: 21, label: "Departments", plus: false },
+  { value: 929, label: "OPD consultations today", plus: true },
 ]
 
 // OP / IP hues: validated colorblind-safe on both the light and the navy dark surface.
@@ -284,14 +285,17 @@ export const AnalysisSection: React.FC = () => {
       <div className="max-w-[1020px] w-full mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
           {KPIS.map((k) => (
-            <div key={k.label} className="rounded-xl border border-[#0d2346]/10 dark:border-white/15 bg-white dark:bg-white/5 px-4 py-4 shadow-[0_8px_24px_rgba(8,44,76,0.08)] text-center">
-              <div className="font-['DM_Sans',sans-serif] text-2xl sm:text-3xl font-black text-[#1f3351] dark:text-white tabular-nums">{fmt(k.value)}</div>
-              <div className="mt-1 text-xs sm:text-sm font-semibold uppercase tracking-wider text-[#62748a] dark:text-slate-400">{k.label}</div>
+            <div key={k.label} className="m-reveal rounded-xl border border-[#0d2346]/10 dark:border-white/15 bg-white dark:bg-white/5 px-4 py-4 shadow-[0_8px_24px_rgba(8,44,76,0.08)] text-center">
+              <div className="font-['DM_Sans',sans-serif] text-2xl sm:text-3xl font-black text-[#1f3351] dark:text-white tabular-nums">{fmt(k.value)}{k.plus && "+"}</div>
+              <div className="mt-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider leading-snug text-[#62748a] dark:text-slate-400">
+                {k.label}
+                {"sub" in k && <span className="block mt-0.5 normal-case tracking-normal font-medium text-[#94a3b8] dark:text-slate-500">{k.sub}</span>}
+              </div>
             </div>
           ))}
         </div>
 
-        <div className="rounded-2xl border border-[#0d2346]/10 dark:border-white/15 bg-white dark:bg-white/5 shadow-[0_14px_40px_rgba(8,44,76,0.10)] p-4 sm:p-6">
+        <div className="m-reveal rounded-2xl border border-[#0d2346]/10 dark:border-white/15 bg-white dark:bg-white/5 shadow-[0_14px_40px_rgba(8,44,76,0.10)] p-4 sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
             <div role="tablist" aria-label="Data view" className="inline-flex flex-wrap gap-1 rounded-full bg-[#f1f5f9] dark:bg-white/10 p-1">
               {TABS.map((t) => (

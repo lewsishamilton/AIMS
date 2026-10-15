@@ -3,7 +3,7 @@ import HeroStats from "./Hero-stats";
 
 const Hero = () => {
     return (
-        <section className="relative w-full h-screen min-h-[650px] flex flex-col justify-end overflow-hidden font-['Inter',sans-serif]">
+        <section className="relative w-full h-screen min-h-[650px] max-md:h-[100svh] max-md:min-h-0 flex flex-col justify-end overflow-hidden font-['Inter',sans-serif]">
             {/* Background Video */}
             <video
                 autoPlay

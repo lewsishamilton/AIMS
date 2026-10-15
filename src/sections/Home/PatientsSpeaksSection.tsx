@@ -122,7 +122,7 @@ export const PatientsSpeaksSection: React.FC = () => {
       `}</style>
 
       {/* Section Header */}
-      <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20 text-center mb-10 sm:mb-12">
+      <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20 text-center mb-10 m-reveal sm:mb-12">
         <div className="inline-flex items-center justify-center gap-3 mb-3">
           <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
           <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
@@ -141,7 +141,7 @@ export const PatientsSpeaksSection: React.FC = () => {
       {/* Dual Counter-Scrolling Marquee Container */}
       <div className="relative w-full overflow-hidden space-y-6 sm:space-y-8">
         {/* Row 1: Right-to-Left Scroll */}
-        <div className="overflow-hidden flex py-1">
+        <div className="m-reveal overflow-hidden flex py-1">
           <div className="marquee-track-left">
             {[...ROW_1_SHORTS, ...ROW_1_SHORTS].map((short, idx) => (
               <ShortCard
@@ -154,7 +154,7 @@ export const PatientsSpeaksSection: React.FC = () => {
         </div>
 
         {/* Row 2: Left-to-Right Counter Scroll */}
-        <div className="overflow-hidden flex py-1">
+        <div className="m-reveal overflow-hidden flex py-1">
           <div className="marquee-track-right">
             {[...ROW_2_SHORTS, ...ROW_2_SHORTS].map((short, idx) => (
               <ShortCard
