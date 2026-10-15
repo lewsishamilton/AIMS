@@ -10,6 +10,7 @@ import disciplinaryPdf from "./assets/Disciplinary committee.pdf"
 import meuPdf from "./assets/MEU.pdf"
 import FacultyPage from "./pages/FacultyPage"
 import DepartmentFacultyPage from "./pages/DepartmentFacultyPage"
+import DepartmentsPage from "./pages/DepartmentsPage"
 import MediaGalleryPage from "./pages/MediaGalleryPage"
 import AwardsPage from "./pages/AwardsPage"
 
@@ -119,9 +120,9 @@ function App() {
           }
         />
 
-        <Route path="/departments" element={<FacultyPage />} />
+        <Route path="/departments" element={<DepartmentsPage />} />
         <Route path="/departments/:departmentId" element={<DepartmentFacultyPage />} />
-        <Route path="/Departments" element={<FacultyPage />} />
+        <Route path="/Departments" element={<DepartmentsPage />} />
         <Route path="/Departments/:departmentId" element={<DepartmentFacultyPage />} />
         <Route path="/faculty" element={<FacultyPage />} />
         <Route path="/faculty/:departmentId" element={<DepartmentFacultyPage />} />

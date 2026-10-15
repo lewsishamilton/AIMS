@@ -81,6 +81,16 @@ const Navbar = () => {
                         { name: "Clinical", path: "/departments?category=Clinical" },
                     ],
                 },
+                {
+                    name: "Faculty",
+                    path: "/faculty",
+                    subItems: [
+                        { name: "All Faculty", path: "/faculty" },
+                        { name: "Pre-Clinical Faculty", path: "/faculty?category=Pre-Clinical" },
+                        { name: "Para-Clinical Faculty", path: "/faculty?category=Para-Clinical" },
+                        { name: "Clinical Faculty", path: "/faculty?category=Clinical" },
+                    ],
+                },
                 { name: "Academic Facilities", path: "/facilities/academic" },
                 { name: "Academic Calendar", path: "/academics/calendar" },
                 { name: "Research & Publications", path: "/academics/research" },

@@ -56,3 +56,15 @@ export function getCategoryCounts(): Record<"All" | DepartmentCategory, number> 
     Clinical: DEPARTMENTS.filter((d) => d.category === "Clinical").length,
   };
 }
+
+export function getDepartmentHod(departmentId: string): FacultyMember | undefined {
+  const members = getFacultyByDepartment(departmentId);
+  if (members.length === 0) return undefined;
+  const explicitHod = members.find(
+    (f) =>
+      f.rank === 1 ||
+      f.roleBadge?.toLowerCase().includes("hod") ||
+      f.designation?.toLowerCase().includes("head")
+  );
+  return explicitHod || members[0];
+}

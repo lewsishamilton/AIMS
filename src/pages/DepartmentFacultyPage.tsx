@@ -1,58 +1,14 @@
 import React, { useState, useMemo } from "react";
 import { useParams, Link } from "react-router-dom";
-import FacultyCard from "../sections/Faculty/FacultyCardProp";
 import {
   getDepartmentById,
-  getDepartmentHierarchyGroups,
+  getFacultyByDepartment,
+  getDepartmentHod,
 } from "../data/facultyData";
 import { groupSections, renderContentBlock } from "../components/ContentBlocks";
-import type { FacultyMember } from "../data/facultyData";
-
-/**
- * Phones: a centre-snapping swipe deck — the focused card grows, its neighbours
- * shrink and fade, and a pill dot tracks position (scroll-driven, see index.css).
- * sm and up: the regular card grid.
- */
-const FacultyDeck: React.FC<{
-  members: FacultyMember[];
-  departmentName?: string;
-  className?: string;
-}> = ({ members, departmentName, className = "" }) => (
-  <div
-    className={`faculty-deck-scope ${className} sm:mx-0`}
-    style={{ "--scope": members.map((_, i) => `--fd-${i}`).join(", ") } as React.CSSProperties}
-  >
-    <div className="faculty-deck flex snap-x snap-mandatory gap-4 overflow-x-auto px-[12%] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 md:grid-cols-3 lg:grid-cols-4">
-      {members.map((faculty, i) => (
-        <div
-          key={faculty.id}
-          className="w-full shrink-0 snap-center"
-          style={{ "--tl": `--fd-${i}` } as React.CSSProperties}
-        >
-          <FacultyCard
-            name={faculty.name}
-            designation={faculty.designation}
-            departmentName={faculty.departmentName || departmentName}
-            photoUrl={faculty.photoUrl}
-            profileUrl={faculty.profileUrl}
-            regCode={faculty.regCode}
-          />
-        </div>
-      ))}
-    </div>
-    {members.length > 1 && (
-      <div aria-hidden="true" className="faculty-deck-dots mt-4 hidden items-center justify-center gap-1.5">
-        {members.map((faculty, i) => (
-          <span
-            key={faculty.id}
-            className="h-1.5 w-1.5 rounded-full bg-[#1f3351] dark:bg-teal-400"
-            style={{ "--tl": `--fd-${i}` } as React.CSSProperties}
-          />
-        ))}
-      </div>
-    )}
-  </div>
-);
+import HodProfileCard from "../sections/Faculty/HodProfileCard";
+import FacultyRosterTable from "../sections/Faculty/FacultyRosterTable";
+import { Users, ArrowLeft } from "lucide-react";
 
 export const DepartmentFacultyPage: React.FC = () => {
   const { departmentId } = useParams<{ departmentId: string }>();
@@ -62,14 +18,17 @@ export const DepartmentFacultyPage: React.FC = () => {
     return getDepartmentById(departmentId);
   }, [departmentId]);
 
-  const hierarchyGroups = useMemo(() => {
+  const allFaculty = useMemo(() => {
     if (!department) return [];
-    return getDepartmentHierarchyGroups(department.id);
+    return getFacultyByDepartment(department.id);
   }, [department]);
 
-  const totalFacultyCount = useMemo(() => {
-    return hierarchyGroups.reduce((acc, g) => acc + g.members.length, 0);
-  }, [hierarchyGroups]);
+  const hod = useMemo(() => {
+    if (!department) return undefined;
+    return getDepartmentHod(department.id);
+  }, [department]);
+
+  const totalFacultyCount = allFaculty.length;
 
   const [activeTab, setActiveTab] = useState<"overview" | "faculty">("overview");
 
@@ -105,23 +64,31 @@ export const DepartmentFacultyPage: React.FC = () => {
   return (
     <section className="atmos-page relative pt-24 lg:pt-32 pb-20 bg-[#fbfaf5] dark:bg-transparent overflow-hidden tracking-[0.015em] min-h-screen transition-colors duration-300">
       <div className="relative z-10 w-full max-w-[1340px] mx-auto px-4 sm:px-14 lg:px-20">
-        {/* Back Link */}
-        <div className="mb-6">
+        {/* Navigation Breadcrumb / Back Link */}
+        <div className="mb-6 flex flex-wrap items-center gap-4 text-xs sm:text-sm font-semibold">
           <Link
             to="/departments"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#1f3351] dark:text-teal-400 hover:underline"
+            className="inline-flex items-center gap-1.5 text-[#1f3351] hover:text-[#0f172a] dark:text-white dark:hover:text-slate-200"
           >
-            ← Back to Departments
+            <ArrowLeft className="h-3.5 w-3.5" />
+            <span>Departments</span>
+          </Link>
+          <span className="text-[#94a3b8]">&bull;</span>
+          <Link
+            to="/faculty"
+            className="text-[#64748b] hover:text-[#1f3351] dark:text-slate-300 dark:hover:text-white"
+          >
+            Faculty Directory
           </Link>
         </div>
 
         {/* Header matching site typography and styling */}
         <div className="mb-8">
           <div className="flex flex-wrap items-center gap-2 mb-2">
-            <span className="px-3 py-1 rounded-full text-xs font-medium bg-white dark:bg-white/10 text-[#1f3351] dark:text-slate-200 border border-[#dce8ee] dark:border-white/15">
+            <span className="px-3 py-1 rounded-full text-xs font-bold bg-[#1f3351]/10 text-[#1f3351] dark:bg-white/10 dark:text-white border border-[#1f3351]/15 dark:border-white/15">
               {department.category}
             </span>
-            <span className="px-3 py-1 rounded-full text-xs font-medium bg-white dark:bg-white/10 text-[#62748a] dark:text-slate-300 border border-[#dce8ee] dark:border-white/15">
+            <span className="px-3 py-1 rounded-full text-xs font-medium bg-white dark:bg-white/10 text-[#1f3351] dark:text-slate-200 border border-[#dce8ee] dark:border-white/15">
               {totalFacultyCount} {totalFacultyCount === 1 ? "Faculty Member" : "Faculty Members"}
             </span>
           </div>
@@ -138,19 +105,21 @@ export const DepartmentFacultyPage: React.FC = () => {
           <div className="flex items-center gap-2 sm:gap-3 mb-10 flex-wrap">
             <button
               onClick={() => setActiveTab("overview")}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${activeTab === "overview"
-                ? "bg-[#1f3351] dark:bg-teal-500 hover:dark:bg-teal-400 text-white shadow-sm"
-                : "bg-white dark:bg-white/5 text-[#62748a] dark:text-slate-300 hover:text-[#1f3351] dark:hover:text-teal-300 dark:hover:border-teal-400/50 border border-[#dce8ee] dark:border-white/15"
-                }`}
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                activeTab === "overview"
+                  ? "bg-[#1f3351] text-white shadow-sm dark:bg-white dark:text-[#0b172a]"
+                  : "bg-white dark:bg-white/5 text-[#1f3351] dark:text-slate-200 hover:bg-[#f8fafc] dark:hover:text-white dark:hover:border-white/30 border border-[#cbd5e1] dark:border-white/15"
+              }`}
             >
               Overview & Facilities
             </button>
             <button
               onClick={() => setActiveTab("faculty")}
-              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${activeTab === "faculty"
-                ? "bg-[#1f3351] dark:bg-teal-500 hover:dark:bg-teal-400 text-white shadow-sm"
-                : "bg-white dark:bg-white/5 text-[#62748a] dark:text-slate-300 hover:text-[#1f3351] dark:hover:text-teal-300 dark:hover:border-teal-400/50 border border-[#dce8ee] dark:border-white/15"
-                }`}
+              className={`px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                activeTab === "faculty"
+                  ? "bg-[#1f3351] text-white shadow-sm dark:bg-white dark:text-[#0b172a]"
+                  : "bg-white dark:bg-white/5 text-[#1f3351] dark:text-slate-200 hover:bg-[#f8fafc] dark:hover:text-white dark:hover:border-white/30 border border-[#cbd5e1] dark:border-white/15"
+              }`}
             >
               Departmental Faculty ({totalFacultyCount})
             </button>
@@ -178,66 +147,82 @@ export const DepartmentFacultyPage: React.FC = () => {
             })}
 
             {/* Departmental Faculty Hierarchy Section */}
-            <div className="rounded-[26px] border border-[#dce8ee] dark:border-white/10 bg-white dark:bg-white/[0.04] dark:backdrop-blur-xl p-6 sm:p-8 shadow-xs dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
-              <div className="mb-6">
-                <h3 className="font-['Manrope',sans-serif] text-xl sm:text-2xl font-semibold text-[#1f3351] dark:text-white">
-                  Departmental Faculty
-                </h3>
+            <div className="rounded-[26px] border border-[#dce8ee] dark:border-white/10 bg-white dark:bg-white/[0.04] dark:backdrop-blur-xl p-6 sm:p-8 shadow-xs dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] space-y-6">
+              <div className="border-b border-[#e4ecf2] pb-5 dark:border-white/10">
+                <div className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-[#1f3351] dark:text-white" />
+                  <h3 className="font-['Manrope',sans-serif] text-xl sm:text-2xl font-semibold text-[#1f3351] dark:text-white">
+                    Departmental Faculty & Staff
+                  </h3>
+                </div>
                 <p className="text-sm text-[#62748a] dark:text-slate-300 mt-1">
-                  As per NMC norms, department has full fledged faculty under Professor (HOD), Associate Professor, Assistant Professors, and Tutors.
+                  Full fledged medical and academic faculty adhering strictly to National Medical Commission (NMC) staffing regulations.
                 </p>
               </div>
 
-              {/* Directly render the faculty hierarchy cards */}
-              <div className="space-y-10 pt-4 border-t border-[#dce8ee] dark:border-white/10">
-                {hierarchyGroups.map((group) => (
-                  <div key={group.tier}>
-                    <div className="flex items-baseline justify-between pb-3 mb-6 border-b border-[#dce8ee] dark:border-white/10">
-                      <h4 className="font-['Manrope',sans-serif] text-lg font-semibold text-[#1f3351] dark:text-white">
-                        {group.tier}
-                      </h4>
-                      <span className="text-xs font-medium text-[#62748a] dark:text-slate-400">
-                        {group.members.length} {group.members.length === 1 ? "Member" : "Members"}
-                      </span>
-                    </div>
+              {/* 1. HOD PROFILE WITH IMAGE */}
+              {hod && (
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#64748b] dark:text-slate-400 mb-3">
+                    Head of Department
+                  </h4>
+                  <HodProfileCard
+                    hod={hod}
+                    departmentName={department.name}
+                    category={department.category}
+                  />
+                </div>
+              )}
 
-                    <FacultyDeck
-                      members={group.members}
-                      departmentName={department?.name}
-                      className="-mx-6"
-                    />
-                  </div>
-                ))}
+              {/* 2. FACULTY ROWS (LIKE STUDENT LIST, NO PHOTOS) */}
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-wider text-[#64748b] dark:text-slate-400 mb-3">
+                  All Department Faculty ({allFaculty.length})
+                </h4>
+                <div className="overflow-hidden rounded-xl border border-[#e4ecf2] dark:border-white/10">
+                  <FacultyRosterTable
+                    members={allFaculty}
+                    highlightHodId={hod?.id}
+                  />
+                </div>
               </div>
             </div>
           </div>
         ) : (
-          /* PURE FACULTY DIRECTORY VIEW */
-          <div className="space-y-12">
-            {hierarchyGroups.map((group) => (
-              <div key={group.tier}>
-                {/* Clean Section Header */}
-                <div className="flex items-baseline justify-between pb-3 mb-6 border-b border-[#dce8ee] dark:border-white/10">
-                  <div>
-                    <h2 className="font-['Manrope',sans-serif] text-xl sm:text-2xl font-semibold text-[#1f3351] dark:text-white">
-                      {group.tier}
-                    </h2>
-                    <p className="text-xs text-[#62748a] dark:text-slate-400 mt-0.5">
-                      {group.tierMeta.description}
-                    </p>
-                  </div>
-                  <span className="text-xs font-medium text-[#62748a] dark:text-slate-400 whitespace-nowrap ml-4">
-                    {group.members.length} {group.members.length === 1 ? "Member" : "Members"}
-                  </span>
-                </div>
-
-                <FacultyDeck
-                  members={group.members}
-                  departmentName={department?.name}
-                  className="-mx-4"
+          /* PURE FACULTY DIRECTORY VIEW FOR DEPARTMENT */
+          <div className="rounded-[26px] border border-[#dce8ee] dark:border-white/10 bg-white dark:bg-white/[0.04] dark:backdrop-blur-xl p-6 sm:p-8 shadow-xs dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] space-y-8">
+            {/* 1. HOD Profile with Image */}
+            {hod && (
+              <div>
+                <h3 className="text-xs font-bold uppercase tracking-wider text-[#64748b] dark:text-slate-400 mb-3">
+                  Department Leadership
+                </h3>
+                <HodProfileCard
+                  hod={hod}
+                  departmentName={department.name}
+                  category={department.category}
                 />
               </div>
-            ))}
+            )}
+
+            {/* 2. Faculty Data Rows (By Tier or Complete Roster) */}
+            <div className="space-y-6">
+              <div className="flex items-center justify-between border-b border-[#e4ecf2] pb-3 dark:border-white/10">
+                <h3 className="font-['Manrope',sans-serif] text-lg font-bold text-[#162740] dark:text-white">
+                  Faculty Roster & Cadres
+                </h3>
+                <span className="text-xs font-semibold text-[#64748b] dark:text-slate-400">
+                  {allFaculty.length} Total Members
+                </span>
+              </div>
+
+              <div className="overflow-hidden rounded-xl border border-[#e4ecf2] dark:border-white/10">
+                <FacultyRosterTable
+                  members={allFaculty}
+                  highlightHodId={hod?.id}
+                />
+              </div>
+            </div>
           </div>
         )}
       </div>
