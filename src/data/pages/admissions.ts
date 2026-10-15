@@ -155,7 +155,7 @@ export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
     subtitle:
       "Category-wise distribution of annual intake seats and admission criteria for the MBBS programme.",
     sections: [],
-    quickLinks: linksExcept("/admissions/seat-matrix"),
+    quickLinks: [],
   },
 
   "/admissions/fee-structure": {

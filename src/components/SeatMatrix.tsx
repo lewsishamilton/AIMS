@@ -16,8 +16,8 @@ export const SeatMatrix: React.FC = () => {
         className="space-y-5"
       >
         <div className="flex items-center gap-3">
-          <span className="h-8 w-1.5 rounded-full bg-amber-500" />
-          <h2 className="font-['Manrope',sans-serif] text-2xl font-bold tracking-tight text-[#162740] dark:text-white sm:text-3xl">
+          <span className="h-8 w-1.5 rounded-full bg-[#1f3351] dark:bg-teal-400" />
+          <h2 className="font-['Manrope',sans-serif] text-2xl font-bold tracking-tight text-[#1f3351] dark:text-white sm:text-3xl">
             General Information
           </h2>
         </div>
@@ -26,7 +26,7 @@ export const SeatMatrix: React.FC = () => {
         <div className="overflow-hidden rounded-2xl border border-[#cbd5e1] bg-white shadow-sm dark:border-white/10 dark:bg-white/[0.03]">
           <table className="w-full text-left text-sm sm:text-base border-collapse">
             <thead>
-              <tr className="border-b border-[#cbd5e1] bg-[#f8fafc] text-xs sm:text-sm font-bold uppercase tracking-wider text-[#334155] dark:border-white/10 dark:bg-white/[0.05] dark:text-slate-200">
+              <tr className="border-b border-[#cbd5e1] bg-[#f8fafc] text-xs sm:text-sm font-bold uppercase tracking-wider text-[#1f3351] dark:border-white/10 dark:bg-white/[0.05] dark:text-teal-300">
                 <th scope="col" className="border-r border-[#cbd5e1] px-6 py-4 sm:px-8 w-1/3 dark:border-white/10">
                   Category
                 </th>
@@ -37,7 +37,7 @@ export const SeatMatrix: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-[#cbd5e1] dark:divide-white/10">
               <tr className="transition-colors hover:bg-slate-50 dark:hover:bg-white/[0.02]">
-                <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#162740] sm:px-8 dark:border-white/10 dark:text-white">
+                <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#1f3351] sm:px-8 dark:border-white/10 dark:text-white">
                   A-Category
                 </td>
                 <td className="px-6 py-4 font-medium text-[#334155] sm:px-8 dark:text-slate-200">
@@ -45,7 +45,7 @@ export const SeatMatrix: React.FC = () => {
                 </td>
               </tr>
               <tr className="transition-colors hover:bg-slate-50 dark:hover:bg-white/[0.02]">
-                <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#162740] sm:px-8 dark:border-white/10 dark:text-white">
+                <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#1f3351] sm:px-8 dark:border-white/10 dark:text-white">
                   B-Category
                 </td>
                 <td className="px-6 py-4 font-medium text-[#334155] sm:px-8 dark:text-slate-200">
@@ -53,7 +53,7 @@ export const SeatMatrix: React.FC = () => {
                 </td>
               </tr>
               <tr className="transition-colors hover:bg-slate-50 dark:hover:bg-white/[0.02]">
-                <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#162740] sm:px-8 dark:border-white/10 dark:text-white">
+                <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#1f3351] sm:px-8 dark:border-white/10 dark:text-white">
                   C-Category
                 </td>
                 <td className="px-6 py-4 font-medium text-[#334155] sm:px-8 dark:text-slate-200">
@@ -66,7 +66,7 @@ export const SeatMatrix: React.FC = () => {
                 <td className="border-r border-[#cbd5e1] px-6 py-3.5 text-xs font-bold uppercase tracking-wider text-[#475569] sm:px-8 dark:border-white/10 dark:text-slate-300">
                   Total
                 </td>
-                <td className="px-6 py-3.5 font-['Manrope',sans-serif] text-sm sm:text-base font-bold text-[#162740] sm:px-8 dark:text-white">
+                <td className="px-6 py-3.5 font-['Manrope',sans-serif] text-sm sm:text-base font-bold text-[#1f3351] sm:px-8 dark:text-white">
                   100% of sanctioned intake (150 seats)
                 </td>
               </tr>
@@ -84,16 +84,16 @@ export const SeatMatrix: React.FC = () => {
         className="space-y-4"
       >
         <div className="flex items-center gap-3">
-          <span className="h-8 w-1.5 rounded-full bg-amber-500" />
-          <h2 className="font-['Manrope',sans-serif] text-2xl font-bold tracking-tight text-[#162740] dark:text-white sm:text-3xl">
+          <span className="h-8 w-1.5 rounded-full bg-[#1f3351] dark:bg-teal-400" />
+          <h2 className="font-['Manrope',sans-serif] text-2xl font-bold tracking-tight text-[#1f3351] dark:text-white sm:text-3xl">
             Admission Criteria
           </h2>
         </div>
 
         <div className="rounded-2xl border border-[#cbd5e1] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/[0.03] sm:p-7">
           <div className="flex items-start gap-3.5">
-            <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-emerald-500 dark:text-teal-400" />
-            <p className="font-['Manrope',sans-serif] text-base sm:text-lg font-medium leading-relaxed text-[#1e293b] dark:text-slate-100">
+            <CheckCircle2 className="mt-1 h-5 w-5 flex-shrink-0 text-[#1f3351] dark:text-teal-400" />
+            <p className="font-['Manrope',sans-serif] text-base sm:text-lg font-medium leading-relaxed text-[#1f3351] dark:text-slate-100">
               As per regulations of NMC &amp; KNR University of Health Sciences, T.S., Warangal.
             </p>
           </div>
