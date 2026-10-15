@@ -308,43 +308,8 @@ export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
     eyebrow: "Admissions",
     title: "Admitted List",
     subtitle:
-      "The list of candidates admitted to the MBBS programme is published for each academic year after counselling, verification and ratification by the university.",
-    sections: [
-      {
-        title: "Publication of the Admitted List",
-        content: [
-          "After each counselling phase closes and reported candidates complete document verification, the institute publishes the list of admitted students for the academic year. The list is displayed on the institute notice board and submitted to Kaloji Narayana Rao University of Health Sciences for ratification and student registration.",
-          "The admitted list records the candidate's name, NEET roll number or rank as applicable, admission category and date of admission, in the format prescribed by the university and the National Medical Commission.",
-        ],
-        layout: "full",
-      },
-      {
-        title: "After Your Name Appears",
-        bullets: [
-          "Complete university registration through the institute",
-          "Submit original certificates for record as required",
-          "Attend the orientation and foundation course for the incoming batch",
-          "Sign the anti-ragging undertaking along with your parent or guardian",
-        ],
-        layout: "half",
-      },
-      {
-        title: "Corrections & Queries",
-        bullets: [
-          "Report any spelling or category discrepancy to the administrative office immediately",
-          "Discrepancies must be corrected before university ratification",
-          "Carry your allotment order and NEET scorecard when raising a query",
-        ],
-        layout: "half",
-      },
-      {
-        title: "Requesting the Current List",
-        content:
-          "The admitted list for the running academic year is available from the administrative office. " +
-          ADMISSIONS_DESK,
-        layout: "full",
-      },
-    ],
+      "Batch-wise student registration and admission roster across academic years ratified by Kaloji Narayana Rao University of Health Sciences (KNRUHS) and approved by the National Medical Commission (NMC).",
+    sections: [],
     quickLinks: linksExcept("/admissions/admitted-list"),
   },
 

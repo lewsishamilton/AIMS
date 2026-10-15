@@ -31,11 +31,8 @@ export default function ManagementPage() {
 
   // Hierarchy segmentation
   const president = EXECUTIVE_MEMBERS.find((m) => m.hierarchyTier === "President");
-  const officers = EXECUTIVE_MEMBERS.filter(
-    (m) => m.hierarchyTier === "Key Executive Officers"
-  );
-  const committeeMembers = EXECUTIVE_MEMBERS.filter(
-    (m) => m.hierarchyTier === "Executive Members"
+  const executiveProfiles = EXECUTIVE_MEMBERS.filter(
+    (m) => m.hierarchyTier !== "President"
   );
 
   // Seamless ID Card Component with bottom gradient for text readability
@@ -181,19 +178,10 @@ export default function ManagementPage() {
             </div>
           )}
 
-          {/* 2. EXECUTIVE OFFICERS (Vice-President, Secretary, Treasurer, Joint Secretary) */}
+          {/* 2. EXECUTIVE OFFICERS AND MEMBERS */}
           <div className="mb-12">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-3.5 sm:gap-x-4">
-              {officers.map((officer) => (
-                <MemberCard key={officer.id} member={officer} />
-              ))}
-            </div>
-          </div>
-
-          {/* 3. EXECUTIVE MEMBERS (P. Indumathi, M. Dhiren Reddy) */}
-          <div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-3.5 sm:gap-x-4 max-w-xl mx-auto">
-              {committeeMembers.map((member) => (
+              {executiveProfiles.map((member) => (
                 <MemberCard key={member.id} member={member} />
               ))}
             </div>

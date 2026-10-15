@@ -18,7 +18,7 @@ interface NavLinkItem {
 
 const Navbar = () => {
     const { pathname } = useLocation();
-    const leftLinks: NavLinkItem[] = [
+    const navLinks: NavLinkItem[] = [
         {
             name: "DISCOVER AIMS",
             path: "/about-institution",
@@ -53,14 +53,7 @@ const Navbar = () => {
                         { name: "Disciplinary Committee", path: "/committess/disciplinary" },
                     ],
                 },
-                {
-                    name: "Media Center",
-                    path: "/media-gallery",
-                    subItems: [
-                        { name: "AIMS in the News", path: "/aims-in-the-news" },
-                        { name: "Media Gallery", path: "/media-gallery" },
-                    ],
-                },
+                { name: "Media Gallery", path: "/media-gallery" },
                 {
                     name: "Approvals & Excellence",
                     path: "/accreditations",
@@ -78,6 +71,24 @@ const Navbar = () => {
         {
             name: "ACADEMICS",
             path: "/departments",
+            dropdown: [
+                {
+                    name: "Departments",
+                    path: "/departments",
+                    subItems: [
+                        { name: "Pre-Clinical", path: "/departments?category=Pre-Clinical" },
+                        { name: "Para-Clinical", path: "/departments?category=Para-Clinical" },
+                        { name: "Clinical", path: "/departments?category=Clinical" },
+                    ],
+                },
+                { name: "Academic Facilities", path: "/facilities/academic" },
+                { name: "Academic Calendar", path: "/academics/calendar" },
+                { name: "Research & Publications", path: "/academics/research" },
+            ],
+        },
+        {
+            name: "ADMISSIONS",
+            path: "/admissions",
             dropdown: [
                 {
                     name: "Programs Offered",
@@ -101,25 +112,10 @@ const Navbar = () => {
                         { name: "Regulations", path: "/admissions/regulations" },
                     ],
                 },
-                {
-                    name: "Departments",
-                    path: "/departments",
-                    subItems: [
-                        { name: "Pre-Clinical", path: "/departments?category=Pre-Clinical" },
-                        { name: "Para-Clinical", path: "/departments?category=Para-Clinical" },
-                        { name: "Clinical", path: "/departments?category=Clinical" },
-                    ],
-                },
-                { name: "Academic Facilities", path: "/facilities/academic" },
-                { name: "Academic Calendar", path: "/academics/calendar" },
-                { name: "Research & Publications", path: "/academics/research" },
             ],
         },
-    ];
-
-    const rightLinks: NavLinkItem[] = [
         {
-            name: "MEDICAL SERVICES",
+            name: "INFRASTRUCTURE",
             path: "/services/specialities",
             dropdown: [
                 {
@@ -130,7 +126,16 @@ const Navbar = () => {
                         { name: "Super Specialities", path: "/services/super-specialities" },
                     ],
                 },
-                { name: "Emergency & Trauma", path: "/services/emergency-trauma" },
+                {
+                    name: "Departments",
+                    path: "/departments",
+                    subItems: [
+                        { name: "Pre-Clinical", path: "/departments?category=Pre-Clinical" },
+                        { name: "Para-Clinical", path: "/departments?category=Para-Clinical" },
+                        { name: "Clinical", path: "/departments?category=Clinical" },
+                    ],
+                },
+                { name: "Emergency Care", path: "/services/emergency-trauma" },
                 { name: "Diagnostics & Imaging", path: "/services/diagnostics" },
                 { name: "Hospital Facilities", path: "/facilities/hospital" },
                 { name: "Machines & Equipment", path: "/machines-equipment" },
@@ -239,8 +244,8 @@ const Navbar = () => {
         : "bg-black/60 glass-dropdown-card backdrop-blur-2xl rounded-2xl border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.25)]";
 
     const dropdownItemClass = isWhiteTheme
-        ? "text-gray-700 hover:text-black hover:bg-gray-100/80 rounded-xl"
-        : "text-white/85 hover:text-white hover:bg-white/20 rounded-xl";
+        ? "text-gray-700 hover:text-black hover:bg-gray-100/80 rounded-lg"
+        : "text-white/85 hover:text-white hover:bg-white/15 rounded-lg";
 
     const renderThemeToggle = (isMobile = false) => {
         const isDark = theme === "dark";
@@ -306,7 +311,7 @@ const Navbar = () => {
                 {/* Menu Button */}
                 <Link
                     to={link.path}
-                    className={`relative z-10 flex items-center gap-2 px-3.5 py-1.5 rounded-full font-semibold tracking-wider text-xs lg:text-sm border border-transparent transition-all duration-300 ease-out ${activeHoverPill}`}
+                    className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap px-2.5 2xl:px-3.5 py-1.5 rounded-full font-semibold tracking-wide text-[13px] 2xl:text-sm border border-transparent transition-all duration-300 ease-out ${activeHoverPill}`}
                 >
                     <span>{link.name}</span>
                     <ChevronDown />
@@ -314,7 +319,7 @@ const Navbar = () => {
 
                 {/* Level 1 Dropdown */}
                 {link.dropdown && (
-                    <div className={`absolute ${alignRight ? "right-0" : "left-0"} top-[calc(100%+4px)] ${isMenuOpenState ? "block" : "hidden"} w-64 z-50 before:absolute before:-top-3 before:left-0 before:w-full before:h-4`}>
+                    <div className={`absolute ${alignRight ? "right-0" : "left-0"} top-[calc(100%+4px)] ${isMenuOpenState ? "block" : "hidden"} w-56 z-50 before:absolute before:-top-3 before:left-0 before:w-full before:h-4`}>
                         {/* Level 1 Independent Glass Background */}
                         <div
                             className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
@@ -322,7 +327,7 @@ const Navbar = () => {
                         />
 
                         {/* Level 1 Items (Non-nested backdrop container) */}
-                        <div className="p-1.5 relative text-white">
+                        <div className="p-1 relative text-white">
                             {link.dropdown.map((item, itemIdx) => (
                                 <div
                                     key={itemIdx}
@@ -335,7 +340,7 @@ const Navbar = () => {
                                 >
                                     <Link
                                         to={item.path}
-                                        className={`flex items-center justify-between px-3.5 py-2.5 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
+                                        className={`flex items-center justify-between px-3 py-1.5 text-[13.5px] font-semibold transition-all duration-150 ${dropdownItemClass}`}
                                     >
                                         <span>{item.name}</span>
                                         {item.subItems && <ChevronRight />}
@@ -343,7 +348,7 @@ const Navbar = () => {
 
                                     {/* Level 2 Sub-Dropdown (Independent Glass Background) */}
                                     {item.subItems && (
-                                        <div className={`absolute left-[calc(100%+4px)] -top-1.5 ${openSubIdx === itemIdx ? "block" : "hidden"} w-max min-w-56 z-50 before:absolute before:top-0 before:-left-3 before:w-4 before:h-full`}>
+                                        <div className={`absolute left-[calc(100%+4px)] -top-1 ${openSubIdx === itemIdx ? "block" : "hidden"} w-max min-w-52 z-50 before:absolute before:top-0 before:-left-3 before:w-4 before:h-full`}>
                                             {/* Level 2 Independent Glass Background (Not nested in Level 1 backdrop) */}
                                             <div
                                                 className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
@@ -351,12 +356,12 @@ const Navbar = () => {
                                             />
 
                                             {/* Level 2 Items */}
-                                            <div className="p-1.5 relative text-white">
+                                            <div className="p-1 relative text-white">
                                                 {item.subItems.map((sub, subIdx) => (
                                                     <Link
                                                         key={subIdx}
                                                         to={sub.path}
-                                                        className={`block whitespace-nowrap px-3.5 py-2 text-xs font-medium transition-all duration-150 ${dropdownItemClass}`}
+                                                        className={`block whitespace-nowrap px-3 py-1.5 text-[13.5px] font-semibold transition-all duration-150 ${dropdownItemClass}`}
                                                     >
                                                         {sub.name}
                                                     </Link>
@@ -383,7 +388,7 @@ const Navbar = () => {
             `}</style>
 
             <nav
-                className={`fixed top-0 left-0 w-full px-6 md:px-12 lg:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
+                className={`fixed top-0 left-0 w-full px-6 md:px-12 xl:px-8 2xl:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
                     theme === "dark" ? "text-white" : isWhiteTheme ? "text-gray-900" : "text-white"
                 }`}
             >
@@ -399,14 +404,9 @@ const Navbar = () => {
                             : "bg-transparent border-b border-transparent"
                     }`}
                 />
-                <div className="max-w-7xl mx-auto flex items-center justify-between xl:justify-center relative">
-                    {/* Left Desktop Links */}
-                    <div className="hidden xl:flex items-center gap-2 lg:gap-3 h-16">
-                        {leftLinks.map((link, i) => renderDesktopNavItem(link, i))}
-                    </div>
-
-                    {/* Center Logo */}
-                    <Link to="/#" className="flex items-center justify-center mx-6 py-2">
+                <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-4 relative">
+                    {/* Logo */}
+                    <Link to="/#" className="flex items-center shrink-0 py-2">
                         <img
                             src={isWhiteTheme ? logo : logoWhite}
                             alt="Arundathi Institute of Medical Sciences & Hospital"
@@ -414,13 +414,20 @@ const Navbar = () => {
                         />
                     </Link>
 
-                    {/* Right Desktop Links */}
-                    <div className="hidden xl:flex items-center gap-2 lg:gap-3 h-16">
-                        {rightLinks.map((link, i) => renderDesktopNavItem(link, i, true))}
+                    {/* Desktop Links */}
+                    <div className="hidden xl:flex items-center gap-1 2xl:gap-3 h-16">
+                        {navLinks.map((link, i) => renderDesktopNavItem(link, i, i >= navLinks.length - 2))}
                     </div>
 
-                    {/* Virtual Tour Button & Theme Toggle (Desktop - positioned to the right) */}
-                    <div className="hidden xl:flex items-center gap-3 absolute -right-4 md:-right-8 lg:-right-12 2xl:-right-24 top-1/2 -translate-y-1/2">
+                    {/* News, Virtual Tour & Theme Toggle (Desktop) */}
+                    <div className="hidden xl:flex items-center gap-3 shrink-0">
+                        <Link
+                            to="/aims-in-the-news"
+                            title="AIMS in the News"
+                            className={`virtual-tour-btn ${isNavTransparent ? "is-glass" : ""} flex items-center justify-center px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide`}
+                        >
+                            <span className="relative z-10 whitespace-nowrap">AIMS in News</span>
+                        </Link>
                         <Link
                             to="/virtual-tour"
                             title="Explore Campus & Hospital in 360°"
@@ -434,6 +441,13 @@ const Navbar = () => {
 
                     {/* Mobile Controls: Virtual Tour, Theme Toggle & Menu Button */}
                     <div className="flex xl:hidden items-center gap-2 py-3">
+                        <Link
+                            to="/aims-in-the-news"
+                            title="AIMS in the News"
+                            className={`virtual-tour-btn ${isNavTransparent ? "is-glass" : ""} flex items-center justify-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide`}
+                        >
+                            <span className="relative z-10">News</span>
+                        </Link>
                         <Link
                             to="/virtual-tour"
                             title="Virtual Tour"
@@ -493,7 +507,7 @@ const Navbar = () => {
                         </svg>
                     </button>
 
-                    {[...leftLinks, ...rightLinks].map((link, idx) => (
+                    {navLinks.map((link, idx) => (
                         <div key={idx} className="w-full flex flex-col gap-2">
                             <span
                                 className={`font-bold border-b pb-1 ${

@@ -2,14 +2,14 @@
 // Run after editing stops or coordinates:  node scripts/build-bus-routes.ts
 import fs from "node:fs";
 import { BUS_ROUTES } from "../src/data/busRoutesData.ts";
-import { STOP_COORDS } from "../src/data/busStopCoords.ts";
+import { STOP_COORDS, toLngLat } from "../src/data/busStopCoords.ts";
 
 const missing = BUS_ROUTES.flatMap((r) => r.stops.filter((s) => !STOP_COORDS[s]));
 if (missing.length) throw new Error(`No coordinates for: ${[...new Set(missing)].join(", ")}`);
 
 const out: Record<number, [number, number][]> = {};
 for (const r of BUS_ROUTES) {
-  const coords = r.stops.map((s) => STOP_COORDS[s].join(",")).join(";");
+  const coords = r.stops.map((s) => toLngLat(STOP_COORDS[s]).join(",")).join(";");
   const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`);
   if (!res.ok) throw new Error(`Route ${r.no}: OSRM ${res.status}`);
   const json = await res.json();

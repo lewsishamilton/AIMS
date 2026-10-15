@@ -13,13 +13,15 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<Theme>(() => {
     if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("aims-theme");
-      if (saved === "light" || saved === "dark") return saved;
-      if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        return "dark";
+      // Clear legacy storage key that may have auto-persisted "dark" default
+      const legacy = localStorage.getItem("aims-theme");
+      if (legacy) {
+        localStorage.removeItem("aims-theme");
       }
+      const saved = localStorage.getItem("aims-theme-preference");
+      if (saved === "light" || saved === "dark") return saved;
     }
-    return "dark"; // Default to dark mode
+    return "light"; // Default to light view even if system default is dark mode
   });
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } else {
       root.classList.remove("dark");
     }
-    localStorage.setItem("aims-theme", theme);
+    localStorage.setItem("aims-theme-preference", theme);
   }, [theme]);
 
   const toggleTheme = () => {

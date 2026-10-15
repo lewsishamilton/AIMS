@@ -7,6 +7,7 @@ import type { LucideIcon } from "lucide-react";
 import type { PageMedia } from "../data/pageImages";
 import { DEFAULT_MEDIA } from "../data/pageImages";
 import OpdSchedule from "./OpdSchedule";
+import AdmittedStudentsList from "./AdmittedStudentsList";
 import CampusVirtualTour from "./CampusVirtualTour";
 import PageHero from "./PageHero";
 import { ACCENT, sectionFor } from "./sectionTheme";
@@ -440,6 +441,7 @@ const SectionHeading: React.FC<{
 /** Purpose-built blocks that replace prose on pages whose subject is structured. */
 const PAGE_WIDGETS: Record<string, React.FC | undefined> = {
   "/patient-care/opd-timings": OpdSchedule,
+  "/admissions/admitted-list": AdmittedStudentsList,
 };
 
 /** Purpose-built blocks rendered below main content or cards. */

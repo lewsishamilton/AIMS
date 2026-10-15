@@ -116,6 +116,10 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   --font-sans: "DM Sans", sans-serif;
 }
 
+.atmos-footer {
+  transform: none;
+}
+
 /* ─── Diamond Events Collage (MediaGalleryPage) ─── */
 .collage-row {
   display: flex;
@@ -221,5 +225,3 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   animation: soft-glory-shine 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   pointer-events: none;
 }
-
-
