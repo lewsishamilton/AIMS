@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "motion/react";
 import {
   Download,
@@ -9,6 +9,9 @@ import {
   Clock,
   CreditCard,
   Info,
+  Landmark,
+  Copy,
+  Check,
 } from "lucide-react";
 
 interface DownloadableForm {
@@ -124,6 +127,14 @@ const FORMS_DATA: DownloadableForm[] = [
 ];
 
 export const ApplicationForms: React.FC = () => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <div className="mx-auto w-full max-w-5xl space-y-8">
       {/* Reporting Guidelines Notice */}
@@ -177,6 +188,97 @@ export const ApplicationForms: React.FC = () => {
             <div>
               <p className="text-xs font-semibold text-[#1f3351] dark:text-slate-200">Stamp Paper Bonds</p>
               <p className="text-xs text-[#596d86] dark:text-slate-400 mt-0.5">Non-Judicial with Notary</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Student Fee Payment Bank Details */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="rounded-2xl border border-[#cbd5e1] bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/[0.03]"
+      >
+        <div className="flex items-center gap-3 pb-4 border-b border-[#e2e8f0] dark:border-white/10">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#1f3351] text-white dark:bg-teal-500/20 dark:text-teal-300">
+            <Landmark className="h-5 w-5" />
+          </span>
+          <div>
+            <h2 className="font-['Manrope',sans-serif] text-lg font-bold text-[#1f3351] dark:text-white underline underline-offset-4 decoration-[#1f3351]/40 dark:decoration-teal-400/40">
+              Student Fee Payment Bank Details
+            </h2>
+            <p className="text-xs text-[#596d86] dark:text-slate-400 mt-0.5">
+              Official institutional bank account details for student fee transactions and demand drafts.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="p-4 rounded-xl bg-[#f8fafc] dark:bg-white/[0.02] border border-[#e2e8f0] dark:border-white/5 space-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748b] dark:text-slate-400">
+              Account Name
+            </span>
+            <p className="font-['Manrope',sans-serif] text-sm sm:text-base font-bold text-[#1f3351] dark:text-white">
+              ARUNDATHI INSTITUTE OF MEDICAL SCIENCES
+            </p>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#f8fafc] dark:bg-white/[0.02] border border-[#e2e8f0] dark:border-white/5 space-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748b] dark:text-slate-400">
+              Name of the Bank
+            </span>
+            <p className="font-['Manrope',sans-serif] text-sm sm:text-base font-bold text-[#1f3351] dark:text-white">
+              KOTAK MAHINDRA BANK
+            </p>
+          </div>
+
+          <div className="p-4 rounded-xl bg-[#f8fafc] dark:bg-white/[0.02] border border-[#e2e8f0] dark:border-white/5 space-y-1">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748b] dark:text-slate-400">
+              Account Number
+            </span>
+            <div className="flex items-center justify-between gap-2">
+              <span className="font-mono text-base sm:text-lg font-bold tracking-wider text-[#1f3351] dark:text-teal-300">
+                5946024240
+              </span>
+              <button
+                type="button"
+                onClick={() => handleCopy("5946024240")}
+                className="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-semibold rounded-lg border border-[#cbd5e1] bg-white hover:bg-slate-50 text-[#1f3351] dark:border-white/15 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10 transition-colors"
+                title="Copy Account Number"
+              >
+                {copied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5" />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div className="p-4 rounded-xl bg-[#f8fafc] dark:bg-white/[0.02] border border-[#e2e8f0] dark:border-white/5 space-y-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748b] dark:text-slate-400">
+                Bank Branch
+              </span>
+              <p className="font-['Manrope',sans-serif] text-sm sm:text-base font-bold text-[#1f3351] dark:text-white">
+                Bowenpally
+              </p>
+            </div>
+
+            <div className="p-4 rounded-xl bg-[#f8fafc] dark:bg-white/[0.02] border border-[#e2e8f0] dark:border-white/5 space-y-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#64748b] dark:text-slate-400">
+                Type of Account
+              </span>
+              <p className="font-['Manrope',sans-serif] text-sm sm:text-base font-bold text-[#1f3351] dark:text-white">
+                Overdraft [OD]
+              </p>
             </div>
           </div>
         </div>
