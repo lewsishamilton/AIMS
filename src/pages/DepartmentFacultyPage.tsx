@@ -6,6 +6,53 @@ import {
   getDepartmentHierarchyGroups,
 } from "../data/facultyData";
 import { groupSections, renderContentBlock } from "../components/ContentBlocks";
+import type { FacultyMember } from "../data/facultyData";
+
+/**
+ * Phones: a centre-snapping swipe deck — the focused card grows, its neighbours
+ * shrink and fade, and a pill dot tracks position (scroll-driven, see index.css).
+ * sm and up: the regular card grid.
+ */
+const FacultyDeck: React.FC<{
+  members: FacultyMember[];
+  departmentName?: string;
+  className?: string;
+}> = ({ members, departmentName, className = "" }) => (
+  <div
+    className={`faculty-deck-scope ${className} sm:mx-0`}
+    style={{ "--scope": members.map((_, i) => `--fd-${i}`).join(", ") } as React.CSSProperties}
+  >
+    <div className="faculty-deck flex snap-x snap-mandatory gap-4 overflow-x-auto px-[12%] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:px-0 md:grid-cols-3 lg:grid-cols-4">
+      {members.map((faculty, i) => (
+        <div
+          key={faculty.id}
+          className="w-full shrink-0 snap-center"
+          style={{ "--tl": `--fd-${i}` } as React.CSSProperties}
+        >
+          <FacultyCard
+            name={faculty.name}
+            designation={faculty.designation}
+            departmentName={faculty.departmentName || departmentName}
+            photoUrl={faculty.photoUrl}
+            profileUrl={faculty.profileUrl}
+            regCode={faculty.regCode}
+          />
+        </div>
+      ))}
+    </div>
+    {members.length > 1 && (
+      <div aria-hidden="true" className="faculty-deck-dots mt-4 hidden items-center justify-center gap-1.5">
+        {members.map((faculty, i) => (
+          <span
+            key={faculty.id}
+            className="h-1.5 w-1.5 rounded-full bg-[#1f3351] dark:bg-teal-400"
+            style={{ "--tl": `--fd-${i}` } as React.CSSProperties}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+);
 
 export const DepartmentFacultyPage: React.FC = () => {
   const { departmentId } = useParams<{ departmentId: string }>();
@@ -154,19 +201,11 @@ export const DepartmentFacultyPage: React.FC = () => {
                       </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                      {group.members.map((faculty) => (
-                        <FacultyCard
-                          key={faculty.id}
-                          name={faculty.name}
-                          designation={faculty.designation}
-                          departmentName={faculty.departmentName || department.name}
-                          photoUrl={faculty.photoUrl}
-                          profileUrl={faculty.profileUrl}
-                          regCode={faculty.regCode}
-                        />
-                      ))}
-                    </div>
+                    <FacultyDeck
+                      members={group.members}
+                      departmentName={department?.name}
+                      className="-mx-6"
+                    />
                   </div>
                 ))}
               </div>
@@ -192,20 +231,11 @@ export const DepartmentFacultyPage: React.FC = () => {
                   </span>
                 </div>
 
-                {/* Grid of Faculty Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {group.members.map((faculty) => (
-                    <FacultyCard
-                      key={faculty.id}
-                      name={faculty.name}
-                      designation={faculty.designation}
-                      departmentName={faculty.departmentName || department.name}
-                      photoUrl={faculty.photoUrl}
-                      profileUrl={faculty.profileUrl}
-                      regCode={faculty.regCode}
-                    />
-                  ))}
-                </div>
+                <FacultyDeck
+                  members={group.members}
+                  departmentName={department?.name}
+                  className="-mx-4"
+                />
               </div>
             ))}
           </div>

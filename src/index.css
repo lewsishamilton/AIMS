@@ -163,6 +163,32 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   .collage-item, .collage-item img { transition: none; }
 }
 
+/* ─── Faculty Swipe Deck (DepartmentFacultyPage, phones only) ─── */
+/* Each card is its own view timeline: centred = 50% progress. Without support it's a plain snap carousel. */
+@media (max-width: 639px) {
+  @supports (animation-timeline: view()) {
+    .faculty-deck-scope { timeline-scope: var(--scope); }
+    .faculty-deck > * {
+      view-timeline: var(--tl) inline;
+      animation: faculty-focus linear both;
+      animation-timeline: var(--tl);
+    }
+    .faculty-deck-dots { display: flex; }
+    .faculty-deck-dots > span {
+      animation: faculty-dot linear both;
+      animation-timeline: var(--tl);
+    }
+  }
+}
+@keyframes faculty-focus {
+  0%, 100% { scale: 0.86; opacity: 0.45; }
+  50% { scale: 1; opacity: 1; }
+}
+@keyframes faculty-dot {
+  0%, 30%, 70%, 100% { width: 6px; opacity: 0.3; }
+  50% { width: 20px; opacity: 1; }
+}
+
 /* ─── Virtual Tour Navbar Button (Project Signature Dark Blue #0d2346 with Soft Glory Light Effect) ─── */
 @keyframes soft-glory-shine {
   0% {
