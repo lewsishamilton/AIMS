@@ -8,6 +8,8 @@ import type { PageMedia } from "../data/pageImages";
 import { DEFAULT_MEDIA } from "../data/pageImages";
 import OpdSchedule from "./OpdSchedule";
 import AdmittedStudentsList from "./AdmittedStudentsList";
+import SeatMatrix from "./SeatMatrix";
+import ApplicationForms from "./ApplicationForms";
 import CampusVirtualTour from "./CampusVirtualTour";
 import PageHero from "./PageHero";
 import { ACCENT, sectionFor } from "./sectionTheme";
@@ -442,6 +444,8 @@ const SectionHeading: React.FC<{
 const PAGE_WIDGETS: Record<string, React.FC | undefined> = {
   "/patient-care/opd-timings": OpdSchedule,
   "/admissions/admitted-list": AdmittedStudentsList,
+  "/admissions/seat-matrix": SeatMatrix,
+  "/admissions/forms": ApplicationForms,
 };
 
 /** Purpose-built blocks rendered below main content or cards. */

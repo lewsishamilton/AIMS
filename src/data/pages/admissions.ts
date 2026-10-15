@@ -153,55 +153,9 @@ export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
     eyebrow: "Admissions",
     title: "Seat Matrix",
     subtitle:
-      "The MBBS programme at AIMS is sanctioned an annual intake of 150 seats, distributed across the Convener, Management and NRI categories.",
-    sections: [
-      {
-        title: "Sanctioned Intake",
-        badges: ["150 MBBS Seats", "NMC Approved"],
-        content:
-          "Arundathi Institute of Medical Sciences is permitted an annual MBBS intake of 150 students under the Letter of Permission issued by the National Medical Commission, with academic affiliation to Kaloji Narayana Rao University of Health Sciences, Warangal.",
-        layout: "full",
-      },
-      {
-        title: "Convener Quota (A-Category)",
-        subtitle: "50% of sanctioned seats",
-        content:
-          "Allotted purely on NEET-UG merit through counselling conducted by KNRUHS, subject to the reservation and local-area rules of the Government of Telangana.",
-        layout: "half",
-      },
-      {
-        title: "Management Quota (B-Category)",
-        subtitle: "35% of sanctioned seats",
-        content:
-          "Filled by the institute from among NEET-qualified candidates, following the procedure and fee notified by the competent authority for the admission year.",
-        layout: "half",
-      },
-      {
-        title: "NRI Quota (C-Category)",
-        subtitle: "15% of sanctioned seats",
-        content:
-          "Reserved for NRI candidates and candidates sponsored by an NRI blood relative, against the declarations and supporting documents prescribed for the category.",
-        layout: "half",
-      },
-      {
-        title: "Nursing, Allied Health & Diplomas",
-        content:
-          "Intake for B.Sc. Nursing, B.Sc. Medical Laboratory Technology, Bachelor of Physiotherapy and the paramedical diploma programmes is notified separately each academic year by the institute.",
-        layout: "half",
-      },
-      {
-        title: "Category-wise Breakdown",
-        content:
-          "The exact seat count in each category, along with reservation-wise distribution, is published by KNRUHS in the counselling notification for the admission year. The admissions office can share the current year's matrix on request.",
-        layout: "full",
-      },
-    ],
-    quickLinks: linksExcept("/admissions/seat-matrix"),
-    cta: {
-      text: ADMISSIONS_DESK,
-      label: "Contact Admissions",
-      path: "/contact",
-    },
+      "Category-wise distribution of annual intake seats and admission criteria for the MBBS programme.",
+    sections: [],
+    quickLinks: [],
   },
 
   "/admissions/fee-structure": {
@@ -261,47 +215,11 @@ export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
 
   "/admissions/forms": {
     eyebrow: "Admissions",
-    title: "Application Forms",
+    title: "Application Forms & Proformas",
     subtitle:
-      "Application and declaration forms used during admission, verification and the academic year, available from the admissions office.",
-    sections: [
-      {
-        title: "Forms Issued by the Institute",
-        bullets: [
-          "MBBS Management (B-Category) application form",
-          "MBBS NRI (C-Category) application form and sponsor declaration",
-          "Nursing, allied health and paramedical diploma application forms",
-          "Anti-ragging affidavit for the student and the parent or guardian",
-          "Hostel admission and mess registration form",
-          "Transport registration form for the college bus service",
-          "Bonafide, conduct and transfer certificate request forms",
-        ],
-        layout: "full",
-      },
-      {
-        title: "How to Obtain a Form",
-        content:
-          "Application and declaration forms are issued by the admissions office on campus and are also supplied to candidates at the time of counselling and reporting. Call ahead to confirm which forms apply to your category before travelling to the campus.",
-        layout: "half",
-      },
-      {
-        title: "Submitting a Completed Form",
-        content:
-          "Completed forms are submitted in person at the administrative office along with the supporting documents listed in the admission criteria. Keep a copy of every form and an official receipt for every payment.",
-        layout: "half",
-      },
-      {
-        title: "Admissions Desk",
-        content: ADMISSIONS_DESK,
-        layout: "full",
-      },
-    ],
-    quickLinks: linksExcept("/admissions/forms"),
-    cta: {
-      text: "Check the eligibility conditions and the document checklist before collecting an application form.",
-      label: "Admission Criteria",
-      path: "/admissions/criteria",
-    },
+      "Official downloadable application forms, affidavit bonds, and certificate checklists required for MBBS admission verification and reporting at Arundathi Institute of Medical Sciences.",
+    sections: [],
+    quickLinks: [],
   },
 
   "/admissions/admitted-list": {

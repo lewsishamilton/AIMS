@@ -10,6 +10,7 @@ import disciplinaryPdf from "./assets/Disciplinary committee.pdf"
 import meuPdf from "./assets/MEU.pdf"
 import FacultyPage from "./pages/FacultyPage"
 import DepartmentFacultyPage from "./pages/DepartmentFacultyPage"
+import DepartmentsPage from "./pages/DepartmentsPage"
 import MediaGalleryPage from "./pages/MediaGalleryPage"
 import AwardsPage from "./pages/AwardsPage"
 
@@ -17,6 +18,7 @@ import AboutHospitalPage from "./pages/AboutHospitalPage"
 import AboutInstitutionPage from "./pages/AboutInstitutionPage"
 import FounderPage from "./pages/FounderPage"
 import ManagementPage from "./pages/ManagementPage"
+import DeanProfilePage from "./pages/DeanProfilePage"
 import ContactPage from "./pages/ContactPage"
 import AimsInNewsPage from "./pages/AimsInNewsPage"
 import MachinesPage from "./pages/MachinesPage"
@@ -118,9 +120,9 @@ function App() {
           }
         />
 
-        <Route path="/departments" element={<FacultyPage />} />
+        <Route path="/departments" element={<DepartmentsPage />} />
         <Route path="/departments/:departmentId" element={<DepartmentFacultyPage />} />
-        <Route path="/Departments" element={<FacultyPage />} />
+        <Route path="/Departments" element={<DepartmentsPage />} />
         <Route path="/Departments/:departmentId" element={<DepartmentFacultyPage />} />
         <Route path="/faculty" element={<FacultyPage />} />
         <Route path="/faculty/:departmentId" element={<DepartmentFacultyPage />} />
@@ -147,6 +149,9 @@ function App() {
         <Route path="/management" element={<ManagementPage />} />
         <Route path="/Management" element={<ManagementPage />} />
         <Route path="/leadership/management" element={<ManagementPage />} />
+        <Route path="/dean" element={<DeanProfilePage />} />
+        <Route path="/Dean" element={<DeanProfilePage />} />
+        <Route path="/leadership/dean" element={<DeanProfilePage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/Contact" element={<ContactPage />} />
         <Route path="/about/awards" element={<AwardsPage />} />
