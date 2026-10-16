@@ -23,6 +23,12 @@ export interface ManagementMember {
     bio?: string[];
     messageTitle?: string;
     message: string[];
+    signOff?: {
+      closing?: string;
+      name?: string;
+      role?: string;
+      institution?: string;
+    };
   };
 }
 
@@ -165,7 +171,7 @@ export const DEAN_AND_PRINCIPAL: ManagementMember[] = [
   },
   {
     id: "dr-s-suma-preethi",
-    name: "Dr. S. Suma Preethi",
+    name: "Dr. A. Suma Preethi",
     role: "Principal",
     category: "principal",
     hierarchyTier: "Institutional Leadership",
@@ -174,18 +180,22 @@ export const DEAN_AND_PRINCIPAL: ManagementMember[] = [
     badges: ["Principal", "Academic Head"],
     photoUrl: sumaPreethiImg,
     profile: {
-      fullName: "Dr. S. Suma Preethi",
-      title: "Principal · Arundathi Institute of Medical Sciences (AIMS)",
-      bio: [
-        "Dr. S. Suma Preethi serves as the Principal of Arundathi Institute of Medical Sciences (AIMS). With extensive experience in medical education, curriculum execution, and academic leadership, she guides the academic ecosystem with steadfast dedication.",
-        "Under her guidance, AIMS emphasizes holistic learning, evidence-based training, medical research, and compassionate patient care in strict alignment with National Medical Commission (NMC) standards.",
-      ],
-      messageTitle: "Principal’s Message",
+      fullName: "Dr. A. Suma Preethi",
+      title: "Principal · Arundathi Institute of Medical Sciences",
+      messageTitle: "PRINCIPAL’S DESK",
       message: [
-        "Welcome to Arundathi Institute of Medical Sciences (AIMS). As Principal, it is a privilege to lead an institution dedicated to academic distinction, innovative medical learning, and ethical clinical practice.",
-        "Our educational philosophy centres on nurturing competent, compassionate healthcare leaders equipped with sound scientific knowledge, diagnostic acumen, and genuine empathy. Through our modern infrastructure, modern diagnostic laboratories, and experiential clinical training, our students receive comprehensive mentorship from day one.",
-        "We foster an atmosphere of critical thinking, inquiry, and lifelong learning, inspiring our students to excel in medicine and make meaningful contributions to societal health.",
+        "It gives me immense pleasure and a profound sense of anticipation to extend a warm and heartfelt welcome to each one of you as you begin your journey as medical students at Arundathi Institute of Medical Sciences.",
+        "Your admission to medical college marks the beginning of a transformative chapter in your life. By choosing medicine as your profession, you have chosen a path that demands academic excellence, discipline, compassion, integrity, and an unwavering commitment to the service of humanity.",
+        "Medical education is a journey of knowledge, discipline, compassion, and continuous learning. Over the coming years, you will gain academic knowledge, clinical skills, research experience, and the values essential to becoming a competent and compassionate physician.",
+        "At Arundathi Institute of Medical Sciences, we are committed to providing a supportive and inspiring environment that encourages you to learn, grow, innovate, and serve society with integrity and empathy. Remember that becoming a good doctor goes beyond academic excellence. Respect for patients, ethical conduct, teamwork, effective communication, and compassion are equally important in shaping a truly successful medical professional. Make the most of every opportunity to develop not only your knowledge and skills, but also your character and sense of responsibility.",
+        "As you step into this Campus of Possibilities, embrace every opportunity, respect your teachers and peers, care for your patients, and always strive for excellence. I warmly welcome you to the Arundathi Institute of Medical Sciences family and wish you a fulfilling and successful journey towards becoming the healthcare professionals of tomorrow.",
       ],
+      signOff: {
+        closing: "Wishing you a bright and successful journey ahead!",
+        name: "Dr. A Suma Preethi",
+        role: "Principal",
+        institution: "Arundathi Institute of Medical Sciences",
+      },
     },
   },
 ];
