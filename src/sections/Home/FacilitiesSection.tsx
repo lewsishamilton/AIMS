@@ -9,7 +9,6 @@ import transportationImg from "../../assets/facilities/transport.webp";
 import messImg from "../../assets/facilities/mess.webp";
 import gymImg from "../../assets/facilities/gym.webp";
 import hostelImg from "../../assets/facilities/hostel.webp";
-import tableTennisImg from "../../assets/facilities/table_tennis.webp";
 
 export interface FacilityItem {
   id: string;
@@ -30,6 +29,7 @@ const FACILITIES: FacilityItem[] = [
     description: "Multi-purpose indoor arena engineered for basketball, badminton, volleyball, and inter-collegiate events.",
     image: indoorStadiumImg,
     imageAlt: "Indoor Stadium at AIMS",
+    path: "/facilities/indoor-stadium",
   },
   {
     id: "02",
@@ -47,6 +47,7 @@ const FACILITIES: FacilityItem[] = [
     description: "Hygienic multi-cuisine dining facility serving balanced, nutritious, and wholesome meals prepared fresh daily.",
     image: messImg,
     imageAlt: "Student Mess & Dining at AIMS",
+    path: "/facilities/mess",
   },
   {
     id: "04",
@@ -55,6 +56,7 @@ const FACILITIES: FacilityItem[] = [
     description: "Modern fitness center equipped with advanced cardio, strength training machines, and free weights.",
     image: gymImg,
     imageAlt: "Campus Gymnasium at AIMS",
+    path: "/facilities/gym",
   },
   {
     id: "05",
@@ -63,14 +65,7 @@ const FACILITIES: FacilityItem[] = [
     description: "Secure, well-furnished student residences with 24/7 power backup, high-speed Wi-Fi, and study lounges.",
     image: hostelImg,
     imageAlt: "Student Hostels at AIMS",
-  },
-  {
-    id: "06",
-    tag: "INDOOR RECREATION",
-    name: "Table Tennis",
-    description: "Dedicated indoor recreation zone featuring tournament-standard table tennis boards for leisure and practice.",
-    image: tableTennisImg,
-    imageAlt: "Table Tennis Facility at AIMS",
+    path: "/facilities/hostel",
   },
 ];
 
@@ -112,7 +107,7 @@ export const FacilitiesSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Elastic Accordion Gallery - All 6 facilities in one line */}
+        {/* Elastic Accordion Gallery - All facilities in one line */}
         <div className="flex h-[560px] w-full flex-col gap-2.5 sm:gap-3 md:h-[440px] lg:h-[475px] md:flex-row md:gap-3 lg:gap-3.5">
           {FACILITIES.map((facility) => {
             const isActive = activeId === facility.id;

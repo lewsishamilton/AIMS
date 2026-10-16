@@ -227,6 +227,18 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
       Transportation: g(facilityMods, "transport.webp"),
     },
   },
+  "/facilities/hostel": {
+    sectionImages: { "A Home on Campus": IMG.hostel },
+  },
+  "/facilities/mess": {
+    sectionImages: { "Good Food, Every Day": g(facilityMods, "mess.webp") },
+  },
+  "/facilities/gym": {
+    sectionImages: { "Fitness for a Demanding Profession": g(facilityMods, "gym.webp") },
+  },
+  "/facilities/indoor-stadium": {
+    sectionImages: { "Sport Under One Roof": IMG.stadium },
+  },
 
   // ── Medical services ──
   "/services/specialities": {
