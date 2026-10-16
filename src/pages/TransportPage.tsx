@@ -88,7 +88,7 @@ const TransportPage: React.FC = () => {
                       </span>
                       <span
                         className={`flex shrink-0 items-center text-[11px] font-bold uppercase tracking-wider ${
-                          active ? "text-teal-300" : "text-[#94a3b8] group-hover:text-[#1f3351] dark:group-hover:text-teal-300"
+                          active ? "text-white dark:text-teal-300" : "text-[#94a3b8] group-hover:text-[#1f3351] dark:group-hover:text-teal-300"
                         }`}
                       >
                         View <ChevronRight className="h-3.5 w-3.5" />

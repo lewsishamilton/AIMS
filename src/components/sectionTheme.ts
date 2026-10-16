@@ -18,9 +18,6 @@ import {
  * Refresh.
  */
 
-/** The site's single accent — teal, as used by every kicker across the site. */
-export const ACCENT = "#2dd4bf";
-
 export interface SectionTheme {
   /** Area of the site, shown in the breadcrumb. */
   name: string;

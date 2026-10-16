@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowUpRight, Sparkles, Building2 } from "lucide-react";
-import aboutImg from "../assets/about.png";
+import aboutImg from "../assets/about.webp";
 
 export default function AboutInstitutionPage() {
   return (

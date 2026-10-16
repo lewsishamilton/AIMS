@@ -140,7 +140,7 @@ const OpdSchedule: React.FC = () => {
                     >
                       <span className="truncate px-2 text-[10px] font-bold text-white sm:text-[11px] dark:text-[#04241f]">
                         {/* The full range does not fit the band on a phone. */}
-                        <span className="sm:hidden">8 AM – 5 PM</span>
+                        <span className="sm:hidden">9 AM – 4 PM</span>
                         <span className="hidden sm:inline">
                           {formatTime(OPD_OPEN_MIN)} – {formatTime(OPD_CLOSE_MIN)}
                         </span>

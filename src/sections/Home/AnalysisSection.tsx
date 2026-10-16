@@ -75,7 +75,8 @@ const KPIS = [
 ]
 
 // OP / IP hues: validated colorblind-safe on both the light and the navy dark surface.
-const OP_C = "#0d9488", IP_C = "#d97706"
+// OP colour is navy in light mode and teal in dark mode (CSS variables set on the section).
+const OP_C = "var(--op-color)", IP_C = "#d97706"
 
 const TABS = [
   { key: "trend", tab: "Monthly Trend" },
@@ -128,8 +129,8 @@ const TrendChart: React.FC<{ hover: number | null; setHover: (i: number | null) 
       >
         <defs>
           <linearGradient id="aims-wave-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#2dd4bf" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#2dd4bf" stopOpacity="0" />
+            <stop offset="0%" style={{ stopColor: "var(--wave-color)" }} stopOpacity="0.45" />
+            <stop offset="100%" style={{ stopColor: "var(--wave-color)" }} stopOpacity="0" />
           </linearGradient>
         </defs>
         {[0.25, 0.5, 0.75, 1].map((f) => (
@@ -261,7 +262,7 @@ export const AnalysisSection: React.FC = () => {
   }
 
   return (
-    <section className="relative bg-white dark:bg-transparent transition-colors duration-300 overflow-x-clip py-12 sm:py-16">
+    <section className="relative bg-white dark:bg-transparent transition-colors duration-300 overflow-x-clip py-12 sm:py-16 [--op-color:#1f3351] [--wave-color:#3b5b8a] dark:[--op-color:#0d9488] dark:[--wave-color:#2dd4bf]">
       <ContainerStagger className="relative z-20 place-self-center px-6 pb-8 text-center">
         <ContainerAnimated>
           <div className="inline-flex items-center justify-center gap-3 mb-3">

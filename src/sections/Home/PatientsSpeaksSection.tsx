@@ -181,7 +181,7 @@ export const PatientsSpeaksSection: React.FC = () => {
             <button
               onClick={() => setActiveVideoId(null)}
               aria-label="Close video"
-              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 hover:bg-teal-500 text-white hover:border-teal-400 border border-white/30 backdrop-blur-md flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg"
+              className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-black/60 hover:bg-[#1f3351] dark:hover:bg-teal-500 text-white hover:border-white/50 dark:hover:border-teal-400 border border-white/30 backdrop-blur-md flex items-center justify-center transition-all duration-200 cursor-pointer shadow-lg"
             >
               <X className="w-5 h-5" />
             </button>

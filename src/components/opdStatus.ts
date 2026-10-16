@@ -11,9 +11,9 @@ export const DAY_NAMES = [
   "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday",
 ] as const;
 
-/** OPD runs Monday to Saturday, 8:00 AM to 5:00 PM. Sunday is index 6. */
-export const OPD_OPEN_MIN = 8 * 60;
-export const OPD_CLOSE_MIN = 17 * 60;
+/** OPD runs Monday to Saturday, 9:00 AM to 4:00 PM (as on the old site's OPD page). Sunday is index 6. */
+export const OPD_OPEN_MIN = 9 * 60;
+export const OPD_CLOSE_MIN = 16 * 60;
 export const OPD_DAYS = [0, 1, 2, 3, 4, 5];
 
 export function isOpdDay(dayIdx: number): boolean {
@@ -31,7 +31,7 @@ export interface OpdStatus {
   open: boolean;
   /** Short pill text, e.g. "Open now". */
   label: string;
-  /** Sentence under the pill, e.g. "Closes at 5:00 PM". */
+  /** Sentence under the pill, e.g. "Closes at 4:00 PM". */
   detail: string;
 }
 
@@ -48,7 +48,7 @@ export function opdStatus(dayIdx: number, minutes: number): OpdStatus {
     };
   }
 
-  // Not open — find the next session. Today still counts if we are before 8 AM.
+  // Not open — find the next session. Today still counts if we are before 9 AM.
   let offset = isOpdDay(dayIdx) && minutes < OPD_OPEN_MIN ? 0 : 1;
   while (!isOpdDay((dayIdx + offset) % 7)) offset++;
 
@@ -81,19 +81,19 @@ if (import.meta.env.DEV) {
     if (got !== want) console.error(`[opdStatus] ${what}: got "${got}", want "${want}"`);
   };
   // Mid-session on a weekday.
-  check(opdStatus(2, 10 * 60).detail, "Closes at 5:00 PM", "Wed 10:00");
+  check(opdStatus(2, 10 * 60).detail, "Closes at 4:00 PM", "Wed 10:00");
   check(String(opdStatus(2, 10 * 60).open), "true", "Wed 10:00 open");
-  // Boundaries: 8:00 is open, 17:00 is already closed.
-  check(String(opdStatus(0, OPD_OPEN_MIN).open), "true", "Mon 08:00");
-  check(String(opdStatus(0, OPD_CLOSE_MIN).open), "false", "Mon 17:00");
+  // Boundaries: 9:00 is open, 16:00 is already closed.
+  check(String(opdStatus(0, OPD_OPEN_MIN).open), "true", "Mon 09:00");
+  check(String(opdStatus(0, OPD_CLOSE_MIN).open), "false", "Mon 16:00");
   // Before opening, same day.
-  check(opdStatus(0, 6 * 60).detail, "Opens today at 8:00 AM", "Mon 06:00");
+  check(opdStatus(0, 6 * 60).detail, "Opens today at 9:00 AM", "Mon 06:00");
   // After closing, next day is a working day.
-  check(opdStatus(0, 20 * 60).detail, "Opens tomorrow at 8:00 AM", "Mon 20:00");
+  check(opdStatus(0, 20 * 60).detail, "Opens tomorrow at 9:00 AM", "Mon 20:00");
   // Saturday evening must skip Sunday and name Monday.
-  check(opdStatus(5, 20 * 60).detail, "Opens Monday at 8:00 AM", "Sat 20:00");
+  check(opdStatus(5, 20 * 60).detail, "Opens Monday at 9:00 AM", "Sat 20:00");
   // Sunday is closed all day and rolls to tomorrow.
-  check(opdStatus(6, 10 * 60).detail, "Opens tomorrow at 8:00 AM", "Sun 10:00");
+  check(opdStatus(6, 10 * 60).detail, "Opens tomorrow at 9:00 AM", "Sun 10:00");
   // Midnight must read 12:00 AM, not 0:00 AM.
   check(formatTime(0), "12:00 AM", "formatTime(0)");
   check(formatTime(12 * 60), "12:00 PM", "formatTime(noon)");

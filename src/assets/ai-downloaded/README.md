@@ -6,23 +6,23 @@ source id is kept so each one can be traced or replaced.
 
 | File | Unsplash id | Used for |
 |---|---|---|
-| `endoscopy.jpg` | `photo-1784864144666-a2bffcc20a6f` | GI endoscopy, ERCP, medical gastroenterology |
-| `maternity.jpg` | `photo-1740853265752-fb0c80daed78` | Obstetrics & gynaecology, mother & child |
-| `icu-ventilator.jpg` | `photo-1630128295920-627fb9aff5a4` | Critical care, casualty infrastructure |
-| `physiotherapy.jpg` | `photo-1746806942507-a7e93fdd6dd4` | B.P.T. programme |
-| `reconstructive-surgery.jpg` | `photo-1551601651-2a8555f1a136` | Plastic & reconstructive surgery |
+| `endoscopy.webp` | `photo-1784864144666-a2bffcc20a6f` | GI endoscopy, ERCP, medical gastroenterology |
+| `maternity.webp` | `photo-1740853265752-fb0c80daed78` | Obstetrics & gynaecology, mother & child |
+| `icu-ventilator.webp` | `photo-1630128295920-627fb9aff5a4` | Critical care, casualty infrastructure |
+| `physiotherapy.webp` | `photo-1746806942507-a7e93fdd6dd4` | B.P.T. programme |
+| `reconstructive-surgery.webp` | `photo-1551601651-2a8555f1a136` | Plastic & reconstructive surgery |
+| `dialysis.webp` | `photo-1742436598939-f5cd30ba7827` | Nephrology & Dialysis (Super Specialities) |
 
 **Replace these with real AIMS photographs when they exist.** Stock images on a
 hospital's own pages read to visitors as that hospital's facilities, so they are
 used only where the picture is plainly illustrative, never to stand in for a
 named AIMS ward, lab or theatre.
 
-## No dialysis photograph
+## Dialysis photograph
 
-Neither Unsplash nor Pexels has a genuine haemodialysis image — searches return
-IV pumps, blood donation and ventilators, all mistagged. Rather than pass one of
-those off as a dialysis unit, the four affected cards (Nephrology & Dialysis,
-Dialysis Technician, Renal Sciences, Pharmacy) render as glyph tiles instead.
+Earlier searches found no genuine haemodialysis image, so dialysis cards used glyph tiles.
+`dialysis.webp` (a real dialysis machine) now covers Nephrology & Dialysis on Super
+Specialities; Dialysis Technician, Renal Sciences and Pharmacy still use glyph tiles.
 
 ## Misnamed assets elsewhere in the repository
 

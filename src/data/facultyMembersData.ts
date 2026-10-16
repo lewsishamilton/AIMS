@@ -17,7 +17,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "anatomy",
     "departmentName": "Anatomy",
     "category": "Pre-Clinical",
-    "photoUrl": "/faculty/konuri-vijaya-kumar.jpg"
+    "photoUrl": "/faculty/konuri-vijaya-kumar.webp"
   },
   {
     "id": "fac-002",
@@ -93,7 +93,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "physiology",
     "departmentName": "Physiology",
     "category": "Pre-Clinical",
-    "photoUrl": "/faculty/krishnaveni-a.jpg"
+    "photoUrl": "/faculty/krishnaveni-a.webp"
   },
   {
     "id": "fac-007",
@@ -169,7 +169,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "biochemistry",
     "departmentName": "Biochemistry",
     "category": "Pre-Clinical",
-    "photoUrl": "/faculty/arikotla-suma-preethi.jpg"
+    "photoUrl": "/faculty/arikotla-suma-preethi.webp"
   },
   {
     "id": "fac-012",
@@ -290,7 +290,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "pharmacology",
     "departmentName": "Pharmacology",
     "category": "Para-Clinical",
-    "photoUrl": "/faculty/fazeel-zubair-ahmed.jpg"
+    "photoUrl": "/faculty/fazeel-zubair-ahmed.webp"
   },
   {
     "id": "fac-020",
@@ -381,7 +381,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "pathology",
     "departmentName": "Pathology",
     "category": "Para-Clinical",
-    "photoUrl": "/faculty/sistla-radha.jpg"
+    "photoUrl": "/faculty/sistla-radha.webp"
   },
   {
     "id": "fac-026",
@@ -562,7 +562,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "microbiology",
     "departmentName": "Microbiology",
     "category": "Para-Clinical",
-    "photoUrl": "/faculty/manisha-singh.jpg"
+    "photoUrl": "/faculty/manisha-singh.webp"
   },
   {
     "id": "fac-038",
@@ -698,7 +698,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "forensic-medicine",
     "departmentName": "Forensic Medicine",
     "category": "Para-Clinical",
-    "photoUrl": "/faculty/mathangi-pranavanath.jpg"
+    "photoUrl": "/faculty/mathangi-pranavanath.webp"
   },
   {
     "id": "fac-047",
@@ -714,7 +714,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "community-medicine",
     "departmentName": "Community Medicine",
     "category": "Para-Clinical",
-    "photoUrl": "/faculty/sudhakar-babu.jpg"
+    "photoUrl": "/faculty/sudhakar-babu.webp"
   },
   {
     "id": "fac-048",
@@ -835,7 +835,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "general-medicine",
     "departmentName": "General Medicine",
     "category": "Clinical",
-    "photoUrl": "/faculty/bhargava.jpg"
+    "photoUrl": "/faculty/bhargava.webp"
   },
   {
     "id": "fac-056",
@@ -1076,7 +1076,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "paediatrics",
     "departmentName": "Paediatrics",
     "category": "Clinical",
-    "photoUrl": "/faculty/ratna-kumar.jpg"
+    "photoUrl": "/faculty/ratna-kumar.webp"
   },
   {
     "id": "fac-072",
@@ -1242,7 +1242,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "dermatology",
     "departmentName": "Dermatology",
     "category": "Clinical",
-    "photoUrl": "/faculty/bandhavi.jpg"
+    "photoUrl": "/faculty/bandhavi.webp"
   },
   {
     "id": "fac-083",
@@ -1318,7 +1318,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "psychiatry",
     "departmentName": "Psychiatry",
     "category": "Clinical",
-    "photoUrl": "/faculty/vishnu.jpg"
+    "photoUrl": "/faculty/vishnu.webp"
   },
   {
     "id": "fac-088",
@@ -1379,7 +1379,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "general-surgery",
     "departmentName": "General Surgery",
     "category": "Clinical",
-    "photoUrl": "/faculty/kb-chakravarthy.jpg"
+    "photoUrl": "/faculty/kb-chakravarthy.webp"
   },
   {
     "id": "fac-092",
@@ -1605,7 +1605,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "orthopaedics",
     "departmentName": "Orthopaedics",
     "category": "Clinical",
-    "photoUrl": "/faculty/pidikiti-rajendra-prasad.jpg"
+    "photoUrl": "/faculty/pidikiti-rajendra-prasad.webp"
   },
   {
     "id": "fac-107",
@@ -1771,7 +1771,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "ent",
     "departmentName": "ENT / Otorhinolaryngology",
     "category": "Clinical",
-    "photoUrl": "/faculty/deepthi.jpg"
+    "photoUrl": "/faculty/deepthi.webp"
   },
   {
     "id": "fac-118",
@@ -1877,7 +1877,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "ophthalmology",
     "departmentName": "Ophthalmology",
     "category": "Clinical",
-    "photoUrl": "/faculty/s-anila.jpg"
+    "photoUrl": "/faculty/s-anila.webp"
   },
   {
     "id": "fac-125",
@@ -1983,7 +1983,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "obstetrics-gynaecology",
     "departmentName": "Obstetrics & Gynaecology",
     "category": "Clinical",
-    "photoUrl": "/faculty/radhika-rani.jpg"
+    "photoUrl": "/faculty/radhika-rani.webp"
   },
   {
     "id": "fac-132",
@@ -2179,7 +2179,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "anaesthesiology",
     "departmentName": "Anaesthesiology",
     "category": "Clinical",
-    "photoUrl": "/faculty/b-devanand.jpg"
+    "photoUrl": "/faculty/b-devanand.webp"
   },
   {
     "id": "fac-145",
@@ -2360,7 +2360,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "radiology",
     "departmentName": "Radiology",
     "category": "Clinical",
-    "photoUrl": "/faculty/trivikram.jpg"
+    "photoUrl": "/faculty/trivikram.webp"
   },
   {
     "id": "fac-157",
@@ -2481,7 +2481,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "respiratory-medicine",
     "departmentName": "Respiratory Medicine",
     "category": "Clinical",
-    "photoUrl": "/faculty/anirudh.jpg"
+    "photoUrl": "/faculty/anirudh.webp"
   },
   {
     "id": "fac-165",
@@ -2542,7 +2542,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "dentistry",
     "departmentName": "Dentistry",
     "category": "Clinical",
-    "photoUrl": "/faculty/indira-priyadarshini.jpg"
+    "photoUrl": "/faculty/indira-priyadarshini.webp"
   },
   {
     "id": "fac-169",

@@ -92,7 +92,7 @@ export default function ManagementPage() {
       >
         {/* Photo or Initials Monogram Frame */}
         {member.photoUrl ? (
-          <img
+          <img loading="lazy" decoding="async"
             src={member.photoUrl}
             alt={member.name}
             className={`absolute inset-0 w-full h-full object-cover ${

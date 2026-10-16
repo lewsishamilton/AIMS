@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import aboutImg from "../../assets/about.png";
-import hospitalImg from "../../assets/aims-hospital.jpg";
+import aboutImg from "../../assets/about.webp";
+import hospitalImg from "../../assets/aims-hospital.webp";
 
 interface AboutSlide {
   kicker: string;
@@ -244,7 +244,7 @@ export const AboutSection: React.FC = () => {
                   {/* Image Column */}
                   <div className="relative mx-auto w-full max-w-lg lg:max-w-none">
                     <div className="relative z-10 overflow-hidden rounded-[26px] border border-[#dce8ee] dark:border-white/15 bg-white dark:bg-white/5 shadow-md dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] pointer-events-none">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={slide.image}
                         alt={slide.imageAlt}
                         draggable={false}

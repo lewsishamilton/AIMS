@@ -1,8 +1,8 @@
-import laxmanReddyImg from "../assets/Management/M.LaxmanReddy.jpeg";
-import anushreyaReddyImg from "../assets/Management/M.Anushreya Reddy.jpeg";
-import mamathaReddyImg from "../assets/Management/M.Mamatha Reddy.jpeg";
-import dhirenReddyImg from "../assets/Management/M.Dhiren Reddy.jpeg";
-import devanandImg from "../assets/Management/Dr.B.Devanand.jpeg";
+import laxmanReddyImg from "../assets/Management/M.LaxmanReddy.webp";
+import anushreyaReddyImg from "../assets/Management/M.Anushreya Reddy.webp";
+import mamathaReddyImg from "../assets/Management/M.Mamatha Reddy.webp";
+import dhirenReddyImg from "../assets/Management/M.Dhiren Reddy.webp";
+import devanandImg from "../assets/Management/Dr.B.Devanand.webp";
 
 export interface ManagementMember {
   id: string;

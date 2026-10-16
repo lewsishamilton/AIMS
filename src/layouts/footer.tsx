@@ -1,4 +1,4 @@
-import logoWhite from "../assets/logo-white.png";
+import logoWhite from "../assets/logo-white.webp";
 
 // Mirrors the navbar's order: Discover → Academics/Admissions → Hospital/Patient Care.
 const footerColumns = [
@@ -42,7 +42,6 @@ export default function Footer() {
   return (
     <>
       <style>{`
-                @import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&family=Manrope:wght@200..800&display=swap");
             
                 * {
                     font-family: "DM Sans", sans-serif;
@@ -62,7 +61,7 @@ export default function Footer() {
                 href="/"
                 className="flex items-center justify-center md:justify-start"
               >
-                <img
+                <img loading="lazy" decoding="async"
                   src={logoWhite}
                   alt="Arundathi Institute of Medical Sciences & Hospital"
                   className="h-13 md:h-16 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
@@ -226,14 +225,14 @@ export default function Footer() {
             </p>
             <div className="flex items-center gap-6">
               <a
-                href="#"
+                href="/terms-and-conditions"
                 className="text-xs text-white/60 hover:text-white transition-colors"
               >
                 Terms & Conditions
               </a>
               <div className="w-px h-4 bg-white/20"></div>
               <a
-                href="#"
+                href="/privacy-policy"
                 className="text-xs text-white/60 hover:text-white transition-colors"
               >
                 Privacy Policy

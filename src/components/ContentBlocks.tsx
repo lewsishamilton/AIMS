@@ -15,7 +15,12 @@ export function groupSections(sections: ContentBlock[]): SectionGroup[] {
   let currentHalfGroup: ContentBlock[] = [];
 
   for (const s of sections) {
-    if (s.layout === "half") {
+    if (s.layout === "half" || s.layout === "third") {
+      // A switch between half and third starts a new row group.
+      if (currentHalfGroup.length > 0 && currentHalfGroup[0].layout !== s.layout) {
+        groups.push({ type: "grid", sections: currentHalfGroup });
+        currentHalfGroup = [];
+      }
       currentHalfGroup.push(s);
     } else {
       if (currentHalfGroup.length > 0) {

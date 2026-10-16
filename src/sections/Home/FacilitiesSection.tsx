@@ -4,12 +4,12 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "../../lib/utils";
 
 // Images for campus facilities from assets/facilities folder
-import indoorStadiumImg from "../../assets/facilities/indoor_stadium.jpeg";
-import transportationImg from "../../assets/facilities/transport.jpeg";
-import messImg from "../../assets/facilities/mess.jpeg";
-import gymImg from "../../assets/facilities/gym.jpeg";
-import hostelImg from "../../assets/facilities/hostel.jpeg";
-import tableTennisImg from "../../assets/facilities/table_tennis.jpeg";
+import indoorStadiumImg from "../../assets/facilities/indoor_stadium.webp";
+import transportationImg from "../../assets/facilities/transport.webp";
+import messImg from "../../assets/facilities/mess.webp";
+import gymImg from "../../assets/facilities/gym.webp";
+import hostelImg from "../../assets/facilities/hostel.webp";
+import tableTennisImg from "../../assets/facilities/table_tennis.webp";
 
 export interface FacilityItem {
   id: string;
@@ -137,7 +137,7 @@ export const FacilitiesSection: React.FC = () => {
               >
                 {/* Background Image Layer */}
                 <div className="absolute inset-0 h-full w-full overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={facility.image}
                     alt={facility.imageAlt}
                     className={cn(

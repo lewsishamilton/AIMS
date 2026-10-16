@@ -16,7 +16,10 @@ export interface Department {
   achievements: DeptAchievement[];
 }
 
-const img = (n: number, ext: "jpg" | "png" = "jpg") => `/awards-images/image${n}.${ext}`;
+// Images are WebP. image47 and image55 existed as both .png and .jpg, so those keep the old extension in the name.
+const BOTH_FORMATS = new Set([47, 55]);
+const img = (n: number, ext: "jpg" | "png" = "jpg") =>
+  `/awards-images/image${n}${BOTH_FORMATS.has(n) ? `-${ext}` : ""}.webp`;
 
 export const institutionInfo = {
   name: "ARUNDATHI INSTITUTE OF MEDICAL SCIENCES (AIMS)",

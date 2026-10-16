@@ -16,56 +16,126 @@ export const PATIENT_CARE_PAGES: Record<string, StaticPageDef> = {
     eyebrow: "Patient Care",
     title: "Citizen Charter",
     subtitle:
-      "What every patient and attendant at Marri Arundhathi Multi-Specialty Hospital is entitled to, what we ask of you in return, and how to raise a complaint if we fall short.",
+      "The services, timings and standards that patients and visitors can expect at Arundathi Institute of Medical Sciences, and how to raise a complaint.",
+    // Follows the institute's published Citizen Charter.
     sections: [
       {
-        title: "Our Commitment",
+        title: "General Information",
         content:
-          "Arundathi Institute of Medical Sciences was founded on the conviction that quality medical care should not be out of reach for ordinary families. This charter sets out, in plain terms, the standard of service a patient can expect from the hospital and the route available to them when that standard is not met.",
+          "Arundathi Institute of Medical Sciences is located in Dundigal, Hyderabad, offering exceptional healthcare services to the community.",
         layout: "full",
       },
       {
-        title: "Your Rights as a Patient",
+        title: "Working Hours",
         bullets: [
-          "Access to 24×7 emergency and casualty services with 25 beds, central oxygen supply and central suction",
-          "Free wheelchairs and stretchers available at the outpatient entrance",
-          "Complimentary food and mineral water for admitted patients",
-          "Clean and maintained sanitary facilities",
-          "Lifts and ramps providing accessible movement for patients with disabilities",
-          "An explanation of your diagnosis, treatment plan and expected cost in a language you understand",
-          "Privacy and confidentiality of your medical records",
-        ],
-        layout: "full",
-      },
-      {
-        title: "Service Commitments",
-        bullets: [
-          "The hospital operates round the clock, every day of the year",
-          "Emergency and casualty services are available 24×7",
-          "Diagnostic services run continuously, including nights and holidays",
-          "Outpatient consultation: Monday to Saturday, 8:00 AM to 5:00 PM",
-          "Specialist cover across all clinical and super-speciality departments",
-          "A hygienic cafeteria serving meals at nominal prices",
-          "The campus is strictly tobacco-free",
+          "College: 9:00 AM to 4:00 PM on all working days",
+          "Hospital: round the clock, with 24/7 emergency services",
+          "Central Library: 8:30 AM to 9:00 PM on working days, and 8:30 AM to 4:00 PM on holidays",
         ],
         layout: "half",
       },
       {
-        title: "Your Responsibilities",
-        bullets: [
-          "Beware of touts and unauthorised persons on the premises",
-          "Do not engage with anyone claiming to arrange treatment or admission for a fee",
-          "Keep your valuables with you; the hospital is not responsible for personal property",
-          "Cooperate with administrative staff and security personnel",
-          "Give complete and accurate information about your medical history",
-          "Respect hospital timings, visiting hours and the comfort of other patients",
-        ],
+        title: "Staff Uniform",
+        content:
+          "All staff wear colour-coded uniforms, which helps maintain a professional environment. Each staff member also wears a white apron and an AIMS identification card for easy identification.",
         layout: "half",
       },
       {
-        title: "Grievance Redressal",
+        title: "Casualty and Emergency Services",
+        bullets: [
+          "Casualty and emergency services operate 24/7, ensuring immediate care for urgent cases",
+          "A separate emergency section for the OBG department is attached to the labour room",
+          "The casualty ward has 25 beds, central oxygen supply, central suction and essential emergency equipment such as defibrillators",
+          "The ward connects to a well-equipped emergency operating theatre with anaesthesia and resuscitation facilities",
+          "Casualty Medical Officers and Resident Doctors are available 24/7, and consultants are on call around the clock",
+          "Radiology, the central laboratory and the pharmacy are located adjacent to the casualty ward for swift service",
+        ],
+        layout: "full",
+      },
+      {
+        title: "OPD Services",
         content:
-          "A patient who is not satisfied with the service received may lodge a complaint with the reception, the casualty medical officer, the Resident Medical Officer, the Medical Superintendent or the Dean. Every grievance is acknowledged, and the institution makes a sincere attempt to resolve the issue promptly. Constructive feedback is welcomed and is used to correct what is not working.",
+          "Spacious OPD facilities provide specialised care in General Medicine, General Surgery, Orthopaedics, OBG, Paediatrics, Ophthalmology, ENT, Dermatology, TB Chest, Psychiatry and Dentistry. Each department has consultation rooms, waiting halls, registration counters, procedure rooms and clinical demonstration rooms, giving ample space for care, teaching and clinical demonstrations.",
+        layout: "half",
+      },
+      {
+        title: "OPD Timings",
+        content:
+          "General OPD operates from Monday to Saturday, 8:00 AM to 5:00 PM, ensuring convenient access to healthcare services.",
+        layout: "half",
+      },
+      {
+        title: "Diagnostic Services",
+        content:
+          "The Central Laboratory provides diagnostic services 24/7, performing routine and specialised tests across Pathology, Biochemistry and Microbiology. A Laboratory Information System (LIS) ensures speedier and accurate report generation. The Radiology Department has two portable X-ray machines, two 500 mA machines and two ultrasound machines with Doppler.",
+        layout: "half",
+      },
+      {
+        title: "Cafeteria",
+        content:
+          "A canteen within the hospital premises serves hygienic food at nominal prices, so patients and visitors have access to affordable meals.",
+        layout: "half",
+      },
+      {
+        title: "Support Services and Facilities",
+        bullets: [
+          "Wheelchairs and stretchers for disabled patients",
+          "Lifts and ramps for easy patient movement",
+          "24-hour UPS and backup generators supporting emergency services",
+          "Free food and mineral water for in-patients",
+          "Clean and hygienic washrooms for patients and their attendants",
+          "A strict Tobacco-Free Campus policy",
+        ],
+        layout: "full",
+      },
+      {
+        title: "Investigation Process",
+        content:
+          "After consultation, the treating doctor prescribes the necessary investigations on the outpatient slip. Patients below the poverty line must complete a requisition form for investigations at the designated counter. Biochemistry, Pathology and Microbiology tests are conducted at the Central Lab on the ground floor of the main building. Admission decisions rest solely with the treating doctor.",
+        layout: "half",
+      },
+      {
+        title: "Medical Certificates",
+        content:
+          "The CMO, RMO or treating doctors issue medical fitness certificates, medical leave certificates, in-patient discharge certificates and wound certificates. Certificates are provided on payment of the prescribed fees at the cash counter.",
+        layout: "half",
+      },
+      {
+        title: "Patient Assistance",
+        content:
+          "Wheelchairs and stretcher trolleys are provided free of cost at the OPD entrance, and adequate seating is arranged for waiting patients.",
+        layout: "half",
+      },
+      {
+        title: "Visiting Hours",
+        bullets: ["7:00 AM to 8:30 AM", "1:00 PM to 2:00 PM", "4:30 PM to 7:00 PM"],
+        layout: "half",
+      },
+      {
+        title: "Safety Measures",
+        content:
+          "Your safety is our priority. Beware of touts and unauthorised persons: we do not encourage middlemen. Please take care of your valuables and do not engage with requests for favours from staff or officials. Our commitment is to make this institute corruption-free, and we appreciate your cooperation with our administrative staff and security personnel.",
+        layout: "full",
+      },
+      {
+        title: "Complaints and Grievances",
+        content:
+          "If you are not satisfied with our services, please register a complaint. It helps us improve and serve you better. Complaints can be lodged with Reception and Registration, the Casualty Medical Officer, the RMO, the Medical Superintendent or the Dean. Every complaint is acknowledged, and we make sincere attempts to resolve issues promptly. Feedback and constructive suggestions are welcome and can be addressed to the Dean or the Medical Superintendent.",
+        layout: "full",
+      },
+      {
+        title: "Eligibility for MBBS Admissions",
+        bullets: [
+          "Nationality: Indian citizens, or children or dependents of Non-Resident Indians",
+          "Seats are filled by the Competent Authority, Kaloji Narayana Rao University of Health Sciences, Warangal, Telangana, based on NEET marks or ranks; the university issues admission notifications every year",
+          "Qualification: higher secondary or Indian School Certificate examination (10+2 equivalent) with Physics, Chemistry, Biology and English; candidates with other qualifications may need a year of pre-professional training",
+          "Candidates with science degrees including Physics, Chemistry and Biology from recognised universities may also qualify",
+          "Only candidates who pass NEET (UG), conducted by the NTA, with the percentile required for their category are considered",
+          "Age: 17 years completed on or before 31 December of the admission year, as per NMC regulations",
+          "Foreign students and NRI candidates are eligible under the Management Quota, Category C seats",
+          "Minimum marks in science subjects: General (OC) 50%, BC/SC/ST 40%, OC-PH 45%",
+          "Reservations do not apply to B and C category seats; admissions strictly follow NMC norms for transparency and fairness",
+        ],
         layout: "full",
       },
     ],
@@ -81,11 +151,11 @@ export const PATIENT_CARE_PAGES: Record<string, StaticPageDef> = {
     eyebrow: "Patient Care",
     title: "OPD Timings & Visiting",
     subtitle:
-      "Outpatient consultations run Monday to Saturday, 8:00 AM to 5:00 PM. Emergency and casualty services are open 24 hours, seven days a week.",
+      "Outpatient consultations run Monday to Saturday, 9:00 AM to 4:00 PM. Emergency and casualty services are open 24 hours, seven days a week.",
     sections: [
       {
         title: "Outpatient Department",
-        badges: ["Mon–Sat", "8:00 AM – 5:00 PM"],
+        badges: ["Mon–Sat", "9:00 AM – 4:00 PM"],
         content:
           "All clinical and super-speciality departments hold outpatient clinics during OPD hours. Registration opens at the front desk; a valid photo identification is required for a new registration, and returning patients should bring their hospital card or previous prescription.",
         layout: "full",
@@ -119,7 +189,7 @@ export const PATIENT_CARE_PAGES: Record<string, StaticPageDef> = {
       {
         title: "Visiting Hours",
         content:
-          "Visiting hours for inpatients are notified on each ward. One attendant is permitted to stay with an admitted patient. Visitors are not permitted inside intensive care units except during the notified visiting window, and children are discouraged from visiting the wards.",
+          "Visiting hours for inpatients are 7:00 AM to 8:30 AM, 1:00 PM to 2:00 PM and 4:30 PM to 7:00 PM. One attendant is permitted to stay with an admitted patient. Visitors are not permitted inside intensive care units except during the notified visiting window, and children are discouraged from visiting the wards.",
         layout: "half",
       },
       {
@@ -202,7 +272,7 @@ export const PATIENT_CARE_PAGES: Record<string, StaticPageDef> = {
     eyebrow: "Patient Care",
     title: "Insurance & TPA",
     subtitle:
-      "How cashless and reimbursement claims are handled at Marri Arundhathi Multi-Specialty Hospital, and what the insurance desk needs from you.",
+      "How cashless and reimbursement claims are handled at Arundathi Hospital, and what the insurance desk needs from you.",
     sections: [
       {
         title: "The Insurance Desk",

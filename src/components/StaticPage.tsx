@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "motion/react";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import type { ContentBlock } from "../data/types";
 import type { LucideIcon } from "lucide-react";
 import type { PageMedia } from "../data/pageImages";
@@ -11,8 +11,8 @@ import AdmittedStudentsList from "./AdmittedStudentsList";
 import SeatMatrix from "./SeatMatrix";
 import ApplicationForms from "./ApplicationForms";
 import CampusVirtualTour from "./CampusVirtualTour";
+import { GovernmentApprovalDocs, UniversityAffiliationDocs, MbbsCurriculumDoc } from "./DocumentList";
 import PageHero from "./PageHero";
-import { ACCENT, sectionFor } from "./sectionTheme";
 import { groupSections } from "./ContentBlocks";
 
 export interface PageCard {
@@ -226,12 +226,14 @@ const TileGrid: React.FC<{
   blocks: ContentBlock[];
   imageFor: (block: ContentBlock) => string | undefined;
   startIndex: number;
-}> = ({ blocks, imageFor, startIndex }) => (
-  <div className="grid gap-6 sm:gap-7 md:grid-cols-2">
+}> = ({ blocks, imageFor, startIndex }) => {
+  const cols = blocks[0]?.layout === "third" ? 3 : 2;
+  return (
+  <div className={`grid gap-6 sm:gap-7 ${cols === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
     {blocks.map((block, i) => {
       const image = imageFor(block);
       return (
-        <Reveal key={i} delay={(i % 2) * 0.1}>
+        <Reveal key={i} delay={(i % cols) * 0.1}>
           <article className="group flex h-full flex-col overflow-hidden rounded-[26px] border border-[#e4ecf2] bg-white shadow-[0_10px_30px_rgba(15,23,42,0.07)] transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_22px_50px_rgba(15,23,42,0.15)] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] dark:backdrop-blur-xl">
             {image ? (
               <div className="relative h-40 w-full overflow-hidden sm:h-44">
@@ -286,7 +288,8 @@ const TileGrid: React.FC<{
       );
     })}
   </div>
-);
+  );
+};
 
 /* ─────────────────────────── Cards ─────────────────────────── */
 
@@ -366,7 +369,7 @@ const ImageCard: React.FC<{
           {card.link && (
             <Link
               to={card.link.path}
-              className="group/link mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-[#1f3351] hover:text-[#0d9488] dark:text-teal-300 dark:hover:text-teal-200"
+              className="group/link mt-auto inline-flex items-center gap-2 pt-5 text-sm font-semibold text-[#1f3351] hover:text-[#0d2346] dark:text-teal-300 dark:hover:text-teal-200"
             >
               {card.link.label}
               <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover/link:translate-x-1" />
@@ -376,48 +379,6 @@ const ImageCard: React.FC<{
       )}
     </article>
   </Reveal>
-);
-
-/* ─────────────────────── Related pages ─────────────────────── */
-
-/** Each tile previews the glyph of the masthead it leads to. */
-const QuickLinkTiles: React.FC<{ links: { name: string; path: string }[] }> = ({
-  links,
-}) => (
-  <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
-    {links.map((l, i) => {
-      const { Icon } = sectionFor(l.path);
-      return (
-        <Reveal key={l.path} delay={(i % 4) * 0.07}>
-          <Link
-            to={l.path}
-            className="group relative flex h-32 flex-col justify-end overflow-hidden rounded-[20px] border border-[#e4ecf2] bg-[#13243c] p-5 transition-transform duration-500 hover:-translate-y-1 sm:h-36 dark:border-white/10 dark:bg-[#0b1626]"
-          >
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-80"
-              style={{
-                background: `radial-gradient(70% 120% at 85% 5%, ${ACCENT}38, transparent 70%)`,
-              }}
-            />
-            <Icon
-              aria-hidden="true"
-              strokeWidth={1}
-              className="pointer-events-none absolute -right-3 -top-3 h-24 w-24 transition-transform duration-500 group-hover:scale-110"
-              style={{ color: ACCENT, opacity: 0.18 }}
-            />
-            <span className="relative mb-2 block h-[1.5px] w-8 bg-white/25" />
-            <span className="relative flex items-end justify-between gap-2">
-              <span className="min-w-0 break-words font-['Manrope',sans-serif] text-sm font-bold leading-snug text-white sm:text-[15px]">
-                {l.name}
-              </span>
-              <ArrowUpRight className="h-4 w-4 flex-shrink-0 text-white/70 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-white" />
-            </span>
-          </Link>
-        </Reveal>
-      );
-    })}
-  </div>
 );
 
 /* ─────────────────────────── Page ─────────────────────────── */
@@ -451,6 +412,9 @@ const PAGE_WIDGETS: Record<string, React.FC | undefined> = {
 /** Purpose-built blocks rendered below main content or cards. */
 const PAGE_BOTTOM_WIDGETS: Record<string, React.FC | undefined> = {
   "/facilities/campus-life": CampusVirtualTour,
+  "/approvals/government": GovernmentApprovalDocs,
+  "/approvals/university-affiliation": UniversityAffiliationDocs,
+  "/academics/mbbs": MbbsCurriculumDoc,
 };
 
 const StaticPage: React.FC<StaticPageDef> = ({
@@ -462,7 +426,6 @@ const StaticPage: React.FC<StaticPageDef> = ({
   cardsSubtitle,
   cards,
   cardColumns = 3,
-  quickLinks,
   cta,
   media = DEFAULT_MEDIA,
 }) => {
@@ -579,18 +542,6 @@ const StaticPage: React.FC<StaticPageDef> = ({
           </div>
         )}
 
-        {quickLinks && quickLinks.length > 0 && (
-          <div className="mt-16 sm:mt-20">
-            <Reveal className="mb-7">
-              <Eyebrow>Explore Next</Eyebrow>
-              <h2 className="mt-3 font-['Manrope',sans-serif] text-2xl font-bold tracking-tight text-[#162740] dark:text-white sm:text-3xl">
-                Related Pages
-              </h2>
-            </Reveal>
-            <QuickLinkTiles links={quickLinks} />
-          </div>
-        )}
-
         {cta && (
           <Reveal className="mt-14 sm:mt-16">
             <div className="flex flex-col gap-6 rounded-[28px] bg-gradient-to-br from-[#1f3351] to-[#0b172a] p-8 sm:flex-row sm:items-center sm:justify-between sm:p-11 dark:from-teal-900/40 dark:to-[#0b172a] dark:border dark:border-white/10">
@@ -599,7 +550,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
               </p>
               <Link
                 to={cta.path}
-                className="group inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-xs font-bold text-[#0b172a] transition-all duration-300 hover:bg-teal-400 hover:text-white sm:text-sm"
+                className="group inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-xs font-bold text-[#0b172a] transition-all duration-300 hover:bg-[#0d2346] hover:text-white dark:hover:bg-teal-400 sm:text-sm"
               >
                 {cta.label}
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

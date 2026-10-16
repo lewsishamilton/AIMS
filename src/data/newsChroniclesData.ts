@@ -1,12 +1,12 @@
-import chronicle1 from "../assets/News/chronicle-1.png";
-import chronicle2 from "../assets/News/chronicle-2.png";
-import chronicle3 from "../assets/News/chronicle-3.png";
-import chronicle4 from "../assets/News/chronicle-4.png";
-import chronicle5 from "../assets/News/chronicle-5.png";
-import chronicle6 from "../assets/News/chronicle-6.png";
-import image1 from "../assets/News/image-1.png";
-import image2 from "../assets/News/image-2.png";
-import image3 from "../assets/News/image-3.png";
+import chronicle1 from "../assets/News/chronicle-1.webp";
+import chronicle2 from "../assets/News/chronicle-2.webp";
+import chronicle3 from "../assets/News/chronicle-3.webp";
+import chronicle4 from "../assets/News/chronicle-4.webp";
+import chronicle5 from "../assets/News/chronicle-5.webp";
+import chronicle6 from "../assets/News/chronicle-6.webp";
+import image1 from "../assets/News/image-1.webp";
+import image2 from "../assets/News/image-2.webp";
+import image3 from "../assets/News/image-3.webp";
 
 export interface ChronicleItem {
   id: number;

@@ -7,7 +7,6 @@ const ADMISSION_LINKS = [
   { name: "Fee Structure", path: "/admissions/fee-structure" },
   { name: "Application Forms", path: "/admissions/forms" },
   { name: "Admitted List", path: "/admissions/admitted-list" },
-  { name: "Regulations", path: "/admissions/regulations" },
 ];
 
 const linksExcept = (path: string) =>
@@ -108,7 +107,7 @@ export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
       {
         title: "Age & Nationality",
         bullets: [
-          "The candidate must have completed 17 years of age as on the date notified for the admission year",
+          "The candidate must have completed 17 years of age on or before 31 December of the admission year, as per NMC regulations",
           "Convener quota candidates must be an Indian National, a Person of Indian Origin, or an OCI card holder",
           "Local and non-local status is determined as per the rules of the Government of Telangana",
         ],
@@ -226,60 +225,9 @@ export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
     eyebrow: "Admissions",
     title: "Admitted List",
     subtitle:
-      "Batch-wise student registration and admission roster across academic years ratified by Kaloji Narayana Rao University of Health Sciences (KNRUHS) and approved by the National Medical Commission (NMC).",
+      "Batch-wise student registration and admission records across academic years ratified by Kaloji Narayana Rao University of Health Sciences (KNRUHS) and approved by the National Medical Commission (NMC).",
     sections: [],
     quickLinks: linksExcept("/admissions/admitted-list"),
   },
 
-  "/admissions/regulations": {
-    eyebrow: "Admissions",
-    title: "Admission Regulations",
-    subtitle:
-      "Admissions at AIMS are governed by the National Medical Commission, the Government of Telangana and Kaloji Narayana Rao University of Health Sciences, Warangal.",
-    sections: [
-      {
-        title: "Governing Authorities",
-        bullets: [
-          "National Medical Commission — recognition, sanctioned intake and curriculum",
-          "Government of Telangana — reservation policy, local-area rules and fee regulation",
-          "Kaloji Narayana Rao University of Health Sciences — affiliation, counselling, examinations and degree award",
-          "National Testing Agency — conduct of NEET-UG, the single qualifying examination for MBBS admission",
-        ],
-        layout: "full",
-      },
-      {
-        title: "Anti-Ragging",
-        content:
-          "Ragging is a criminal offence and is prohibited in every form on campus, in the hostels, in the hospital and in transport. Every student and parent signs an anti-ragging undertaking at admission, and the institute's Anti Ragging Committee acts on complaints under the regulations in force.",
-        layout: "half",
-      },
-      {
-        title: "Code of Conduct",
-        content:
-          "Students are bound by the institute's code of conduct and by the professional conduct expected of a medical trainee in clinical areas. Breaches are dealt with by the Disciplinary Committee, and complaints of sexual harassment by the POSH Internal Committee.",
-        layout: "half",
-      },
-      {
-        title: "Attendance & Progression",
-        bullets: [
-          "Minimum attendance in theory and practical or clinical work as prescribed by NMC is mandatory to appear for university examinations",
-          "Internal assessment must be satisfactory for a candidate to be sent up for the professional examination",
-          "Progression between phases follows the regulations notified by NMC and KNRUHS",
-          "Completion of the compulsory rotating internship is required before the degree is awarded",
-        ],
-        layout: "full",
-      },
-      {
-        title: "Withdrawal & Refund",
-        content:
-          "Withdrawal from an allotted seat, release of original certificates and refund of fees are governed by the rules notified by the competent authority and the university for the admission year. Apply in writing to the administrative office.",
-        layout: "full",
-      },
-    ],
-    quickLinks: [
-      ...linksExcept("/admissions/regulations"),
-      { name: "Anti Ragging Committee", path: "/committess/anti-ragging" },
-      { name: "Disciplinary Committee", path: "/committess/disciplinary" },
-    ],
-  },
 };

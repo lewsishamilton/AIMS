@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { ArrowUpRight, Sparkles, ShieldCheck } from "lucide-react";
-import hospitalImg from "../assets/aims-hospital.jpg";
+import hospitalImg from "../assets/aims-hospital.webp";
 
 export default function AboutHospitalPage() {
   return (

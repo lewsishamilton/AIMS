@@ -24,7 +24,7 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
         badges: ["150 Seats", "NMC Recognised", "KNRUHS Affiliated"],
         content: [
           "The undergraduate medical programme at Arundathi Institute of Medical Sciences spans four and a half years, organised as nine semesters of six months each, and is completed with one year of compulsory rotating internship.",
-          "Teaching follows the competency-based medical education curriculum prescribed by the National Medical Commission, combining structured lectures, small-group tutorials, practical and clinical postings, skill-lab training and early clinical exposure at the attached Marri Arundhathi Multi-Specialty Hospital.",
+          "Teaching follows the competency-based medical education curriculum prescribed by the National Medical Commission, combining structured lectures, small-group tutorials, practical and clinical postings, skill-lab training and early clinical exposure at the attached Arundathi Hospital.",
         ],
         layout: "full",
       },
@@ -34,7 +34,7 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
         content:
           "Human Anatomy, Physiology including Bio-Physics, Biochemistry, and an introduction to Community Medicine including Humanities.",
         badges: ["Anatomy", "Physiology", "Biochemistry"],
-        layout: "half",
+        layout: "third",
       },
       {
         title: "Phase II — Para-Clinical",
@@ -42,14 +42,15 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
         content:
           "Pathology, Pharmacology, Microbiology, Forensic Medicine including Toxicology, and part of Community Medicine, alongside the first clinical postings.",
         badges: ["Pathology", "Pharmacology", "Microbiology", "Forensic Medicine"],
-        layout: "half",
+        layout: "third",
       },
       {
         title: "Phase III — Clinical",
         subtitle: "Semesters 6–9",
         content:
           "Medicine, Surgery and allied specialities including Paediatrics, Psychiatry, Dermatology, Orthopaedics, Anaesthesiology, Radio-Diagnosis, Ophthalmology, ENT, Obstetrics & Gynaecology and Community Medicine.",
-        layout: "full",
+        badges: ["Medicine", "Surgery", "Allied Specialities"],
+        layout: "third",
       },
       {
         title: "Compulsory Rotating Internship",
@@ -95,7 +96,7 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
       {
         title: "Learning Inside a Working Hospital",
         content:
-          "Students in the nursing and allied health programmes train on the wards, in the operation theatres, in the central laboratory and in the physiotherapy unit of Marri Arundhathi Multi-Specialty Hospital. Clinical postings are supervised by the same consultants who teach the MBBS programme, and shared access to the skill lab, museums and digital library means allied health students learn beside medical undergraduates rather than apart from them.",
+          "Students in the nursing and allied health programmes train on the wards, in the operation theatres, in the central laboratory and in the physiotherapy unit of Arundathi Hospital. Clinical postings are supervised by the same consultants who teach the MBBS programme, and shared access to the skill lab, museums and digital library means allied health students learn beside medical undergraduates rather than apart from them.",
         layout: "full",
       },
     ],

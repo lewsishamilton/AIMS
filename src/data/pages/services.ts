@@ -16,7 +16,7 @@ export const SERVICE_PAGES: Record<string, StaticPageDef> = {
     eyebrow: "Hospital",
     title: "Specialities",
     subtitle:
-      "Marri Arundhathi Multi-Specialty Hospital runs full-fledged clinical departments staffed by consultants, senior residents and round-the-clock resident doctors, supported by shared operation theatres, intensive care and diagnostics.",
+      "Arundathi Hospital runs full-fledged clinical departments staffed by consultants, senior residents and round-the-clock resident doctors, supported by shared operation theatres, intensive care and diagnostics.",
     cards: [
       {
         name: "General Medicine",
@@ -120,7 +120,7 @@ export const SERVICE_PAGES: Record<string, StaticPageDef> = {
     ],
     quickLinks: linksExcept("/services/specialities"),
     cta: {
-      text: "Outpatient consultations run Monday to Saturday, 8:00 AM to 5:00 PM. Emergency and casualty services are available 24×7.",
+      text: "Outpatient consultations run Monday to Saturday, 9:00 AM to 4:00 PM. Emergency and casualty services are available 24×7.",
       label: "Plan Your Visit",
       path: "/patient-care/opd-timings",
     },
@@ -238,7 +238,7 @@ export const SERVICE_PAGES: Record<string, StaticPageDef> = {
       {
         title: "Round-the-Clock Casualty",
         content: [
-          "The casualty department at Marri Arundhathi Multi-Specialty Hospital is open 24×7 and is the first point of contact for accident victims, cardiac and neurological emergencies, poisoning, obstetric emergencies and acutely ill medical patients.",
+          "The casualty department at Arundathi Hospital is open 24×7 and is the first point of contact for accident victims, cardiac and neurological emergencies, poisoning, obstetric emergencies and acutely ill medical patients.",
           "Resident doctors are present on the floor at all hours and are backed by on-call consultants from every clinical and super-speciality department, so a patient can move from triage to a specialist team without leaving the building.",
         ],
         layout: "full",

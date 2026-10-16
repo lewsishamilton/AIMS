@@ -8,6 +8,7 @@ import {
 import { groupSections, renderContentBlock } from "../components/ContentBlocks";
 import HodProfileCard from "../sections/Faculty/HodProfileCard";
 import FacultyRosterTable from "../sections/Faculty/FacultyRosterTable";
+import { NmcDeclarationDocs } from "../components/DocumentList";
 import { Users, ArrowLeft } from "lucide-react";
 
 export const DepartmentFacultyPage: React.FC = () => {
@@ -205,11 +206,11 @@ export const DepartmentFacultyPage: React.FC = () => {
               </div>
             )}
 
-            {/* 2. Faculty Data Rows (By Tier or Complete Roster) */}
+            {/* 2. Faculty Data Rows (By Tier or Complete List) */}
             <div className="space-y-6">
               <div className="flex items-center justify-between border-b border-[#e4ecf2] pb-3 dark:border-white/10">
                 <h3 className="font-['Manrope',sans-serif] text-lg font-bold text-[#162740] dark:text-white">
-                  Faculty Roster & Cadres
+                  Faculty Members
                 </h3>
                 <span className="text-xs font-semibold text-[#64748b] dark:text-slate-400">
                   {allFaculty.length} Total Members
@@ -225,6 +226,8 @@ export const DepartmentFacultyPage: React.FC = () => {
             </div>
           </div>
         )}
+
+        <NmcDeclarationDocs departmentId={department.id} departmentName={department.name} />
       </div>
     </section>
   );

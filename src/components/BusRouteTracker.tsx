@@ -31,8 +31,8 @@ const MAP_STYLES = {
 /** Map colours per theme. Stop badges: [upcoming, passed, current]. */
 const LINE = {
   light: {
-    base: "rgba(31,51,81,0.35)", progress: "#0d9488", label: "#162740", halo: "#ffffff",
-    badgeFill: ["#ffffff", "#0d9488", "#1f3351"], badgeStroke: ["#1f3351", "#0d9488", "#2dd4bf"], badgeText: ["#1f3351", "#ffffff", "#ffffff"],
+    base: "rgba(31,51,81,0.3)", progress: "#1f3351", label: "#162740", halo: "#ffffff",
+    badgeFill: ["#ffffff", "#1f3351", "#0d2346"], badgeStroke: ["#1f3351", "#1f3351", "#9fb3cf"], badgeText: ["#1f3351", "#ffffff", "#ffffff"],
   },
   dark: {
     base: "rgba(148,163,184,0.35)", progress: "#2dd4bf", label: "#e2e8f0", halo: "#0b1424",
@@ -332,7 +332,7 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
       {/* Header: route name + contacts */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="min-w-0">
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-teal-600 dark:text-teal-400">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#1f3351] dark:text-teal-400">
             Route {String(route.no).padStart(2, "0")}
           </p>
           <h2 className="mt-1 font-['Manrope',sans-serif] text-xl font-bold tracking-tight text-[#162740] sm:text-2xl dark:text-white">
@@ -446,7 +446,7 @@ const BusRouteTracker: React.FC<{ route: BusRoute }> = ({ route }) => {
                     status === "current"
                       ? "bg-white text-[#1f3351] dark:bg-teal-400 dark:text-[#06201d]"
                       : status === "passed"
-                        ? "bg-teal-600 text-white dark:bg-teal-500/80"
+                        ? "bg-[#1f3351] text-white dark:bg-teal-500/80"
                         : "border border-[#cbd5e1] text-[#64748b] dark:border-white/20 dark:text-slate-400"
                   }`}
                 >

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight } from "lucide-react";
-import founderImg from "../../assets/marri-rajashekhar-reddy-profile-main-1.png";
+import founderImg from "../../assets/marri-rajashekhar-reddy-profile-main-1.webp";
 
 const MAIN_QUOTE =
   "I have seen families and dreams falling apart due to unaffordable healthcare which had bothered me since long. With an unflinching zeal to provide free services, I made a promise to my mother to set up a hospital where every family can gain access to quality healthcare across generations with affordability no more a barrier.";
@@ -44,7 +44,7 @@ const FounderSection: React.FC = () => {
             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
           >
             <div className="relative overflow-hidden rounded-[26px] border border-[#dce8ee] dark:border-white/15 bg-[#f7fafc] dark:bg-white/5 shadow-[0_14px_38px_rgba(8,44,76,0.10)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] group">
-              <img
+              <img loading="lazy" decoding="async"
                 src={founderImg}
                 alt="Marri Rajasekhar Reddy — Founder, AIMS"
                 className="w-full h-[270px] sm:h-[300px] lg:h-[310px] xl:h-[320px] object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import preclinicalImg from "../../assets/preclinical.jpg";
-import paraclinicalImg from "../../assets/paraclinical.jpg";
-import clinicalImg from "../../assets/clinical.jpg";
+import preclinicalImg from "../../assets/preclinical.webp";
+import paraclinicalImg from "../../assets/paraclinical.webp";
+import clinicalImg from "../../assets/clinical.webp";
 
 const DEPARTMENTS = [
   {
@@ -70,7 +70,7 @@ const DepartmentsSection = () => {
             >
               {/* Background Image with subtle scale on hover */}
               <div className="w-full h-full overflow-hidden">
-                <img
+                <img loading="lazy" decoding="async"
                   src={dept.image}
                   alt={dept.imageAlt}
                   className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"

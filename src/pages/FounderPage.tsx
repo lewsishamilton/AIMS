@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Globe } from "lucide-react";
-import founderImg from "../assets/marri-rajashekhar-reddy-profile-main-1.png";
+import founderImg from "../assets/marri-rajashekhar-reddy-profile-main-1.webp";
 
 export default function FounderPage() {
   const socialLinks = [

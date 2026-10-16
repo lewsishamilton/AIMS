@@ -1,14 +1,16 @@
 import { motion } from "motion/react";
-import nabhLogo from "../assets/Accreditations/nabh_logo.png";
-import nmcLogo from "../assets/Accreditations/nmc_logo.png";
-import knruhsLogo from "../assets/Accreditations/knruhs_logo.png";
-import viceChancellorImg from "../assets/Accreditations/vice-chancellor.png";
-import registrarImg from "../assets/Accreditations/registrar.png";
+import { FileText } from "lucide-react";
+import nabhLogo from "../assets/Accreditations/nabh_logo.webp";
+import nmcLogo from "../assets/Accreditations/nmc_logo.webp";
+import knruhsLogo from "../assets/Accreditations/knruhs_logo.webp";
+import viceChancellorImg from "../assets/Accreditations/vice-chancellor.webp";
+import registrarImg from "../assets/Accreditations/registrar.webp";
 
 interface Accreditation {
   logo: string;
   name: string;
   description: string;
+  certificate?: { file: string; note: string };
 }
 
 interface Official {
@@ -25,19 +27,23 @@ const ACCREDITATIONS: Accreditation[] = [
     logo: nabhLogo,
     name: "NABH Accreditation",
     description:
-      "Marri Arundhathi Multi-Specialty Hospital, attached to AIMS Arundhathi Institute of Technology, is accredited by the National Accreditation Board for Hospitals & Healthcare Providers (NABH). The accreditation reflects standards for quality healthcare, patient safety, continuous clinical improvement, and healthcare protocols.",
+      "Arundathi Hospital, attached to Arundathi Institute of Medical Sciences, is accredited by the National Accreditation Board for Hospitals & Healthcare Providers (NABH). The accreditation reflects standards for quality healthcare, patient safety, continuous clinical improvement, and healthcare protocols.",
+    certificate: {
+      file: "/documents/nabh-certificate.pdf",
+      note: "Pre-Entry Level · Certificate No. PEH-2023-2208 · Valid 30 May 2023 – 29 May 2025",
+    },
   },
   {
     logo: nmcLogo,
     name: "National Medical Commission (NMC)",
     description:
-      "The MBBS undergraduate program at AIMS Arundhathi Institute of Technology is recognized by the National Medical Commission (NMC). This recognition reflects compliance with national medical education standards, infrastructure requirements, laboratory facilities, and clinical training requirements.",
+      "The MBBS undergraduate program at Arundathi Institute of Medical Sciences is recognized by the National Medical Commission (NMC). This recognition reflects compliance with national medical education standards, infrastructure requirements, laboratory facilities, and clinical training requirements.",
   },
   {
     logo: knruhsLogo,
     name: "Kaloji Narayana Rao University of Health Sciences (KNRUHS)",
     description:
-      "AIMS Arundhathi Institute of Technology is academically affiliated with Kaloji Narayana Rao University of Health Sciences (KNRUHS), Warangal. The university oversees academic curriculum, examinations, and degree-related academic processes for medical programs.",
+      "Arundathi Institute of Medical Sciences is academically affiliated with Kaloji Narayana Rao University of Health Sciences (KNRUHS), Warangal. The university oversees academic curriculum, examinations, and degree-related academic processes for medical programs.",
   },
 ];
 
@@ -102,7 +108,7 @@ export default function AccreditationsPage() {
               } items-center gap-8 sm:gap-12 rounded-[22px] border border-[#dce8ee] dark:border-white/10 bg-[#fbfcfd] dark:bg-[#0c1626] shadow-[0_4px_18px_rgba(8,44,76,0.05)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] p-6 sm:p-8`}
             >
               <div className="w-[180px] sm:w-[200px] shrink-0 flex items-center justify-center">
-                <img
+                <img loading="lazy" decoding="async"
                   src={item.logo}
                   alt={`${item.name} logo`}
                   className="max-w-[170px] max-h-[130px] w-auto h-auto object-contain"
@@ -116,6 +122,19 @@ export default function AccreditationsPage() {
                 <p className="text-sm sm:text-[15px] text-[#596d86] dark:text-slate-300 leading-relaxed">
                   {item.description}
                 </p>
+                {item.certificate && (
+                  <div className="mt-4 flex flex-col items-center gap-2 sm:flex-row sm:items-center sm:gap-3">
+                    <a
+                      href={item.certificate.file}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-[#1f3351] px-4 py-2 text-xs sm:text-sm font-semibold text-white transition-colors hover:bg-[#162740] dark:bg-teal-500 dark:text-[#04121f]"
+                    >
+                      <FileText className="h-4 w-4" /> View Certificate
+                    </a>
+                    <span className="text-xs text-[#62748a] dark:text-slate-400">{item.certificate.note}</span>
+                  </div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -142,7 +161,7 @@ export default function AccreditationsPage() {
                 className="flex flex-col sm:flex-row items-center gap-6 sm:gap-10 rounded-[18px] border border-[#e7eef4] dark:border-white/10 bg-white dark:bg-[#0c1626] p-6 sm:p-7"
               >
                 <div className="w-[150px] h-[150px] sm:w-[175px] sm:h-[175px] shrink-0">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={official.image}
                     alt={official.designation}
                     className="w-full h-full object-cover rounded-full border border-[#e7eef4] dark:border-white/15"

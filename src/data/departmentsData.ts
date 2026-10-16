@@ -1,25 +1,25 @@
 import type { Department } from "./types";
-import anatomyImg from "../assets/Departments/Anatomy.jpeg";
-import physiologyImg from "../assets/Departments/physiology.PNG";
-import biochemistryImg from "../assets/Departments/Biochemistry.png";
-import pharmacologyImg from "../assets/Departments/pharmacology.png";
-import pathologyImg from "../assets/Departments/pathology.PNG";
-import microbiologyImg from "../assets/Departments/microbiology.png";
-import forensicMedicineImg from "../assets/Departments/forensic_medicine.PNG";
-import communityMedicineImg from "../assets/Departments/community_medicine.PNG";
-import generalMedicineImg from "../assets/Departments/general_medicine.png";
-import paediatricsImg from "../assets/Departments/paediatrics.PNG";
-import dermatologyImg from "../assets/Departments/dermatology.png";
-import psychiatryImg from "../assets/Departments/psychiatry.PNG";
-import generalSurgeryImg from "../assets/Departments/general_Surgery.png";
-import orthopaedicsImg from "../assets/Departments/orthopaaedics.png";
-import entImg from "../assets/Departments/ENT.PNG";
-import ophthalmologyImg from "../assets/Departments/ophthalmology.PNG";
-import obstetricsGynaecologyImg from "../assets/Departments/gynacology.jpeg";
-import anaesthesiologyImg from "../assets/Departments/anaesthisiology.PNG";
-import radiologyImg from "../assets/Departments/radiology.PNG";
-import respiratoryMedicineImg from "../assets/Departments/respiratory medicine.jpeg";
-import dentistryImg from "../assets/Departments/denistry.PNG";
+import anatomyImg from "../assets/Departments/Anatomy.webp";
+import physiologyImg from "../assets/Departments/physiology.webp";
+import biochemistryImg from "../assets/Departments/Biochemistry.webp";
+import pharmacologyImg from "../assets/Departments/pharmacology.webp";
+import pathologyImg from "../assets/Departments/pathology.webp";
+import microbiologyImg from "../assets/Departments/microbiology.webp";
+import forensicMedicineImg from "../assets/Departments/forensic_medicine.webp";
+import communityMedicineImg from "../assets/Departments/community_medicine.webp";
+import generalMedicineImg from "../assets/Departments/general_medicine.webp";
+import paediatricsImg from "../assets/Departments/paediatrics.webp";
+import dermatologyImg from "../assets/Departments/dermatology.webp";
+import psychiatryImg from "../assets/Departments/psychiatry.webp";
+import generalSurgeryImg from "../assets/Departments/general_Surgery.webp";
+import orthopaedicsImg from "../assets/Departments/orthopaaedics.webp";
+import entImg from "../assets/Departments/ENT.webp";
+import ophthalmologyImg from "../assets/Departments/ophthalmology.webp";
+import obstetricsGynaecologyImg from "../assets/Departments/gynacology.webp";
+import anaesthesiologyImg from "../assets/Departments/anaesthisiology.webp";
+import radiologyImg from "../assets/Departments/radiology.webp";
+import respiratoryMedicineImg from "../assets/Departments/respiratory medicine.webp";
+import dentistryImg from "../assets/Departments/denistry.webp";
 
 export const DEPARTMENT_METADATA: Record<
   string,
@@ -101,7 +101,7 @@ export const DEPARTMENT_METADATA: Record<
     "category": "Pre-Clinical",
     "description": "Cellular functions, cardiovascular hemodynamics, and organ systems physiology.",
     "bgImage": physiologyImg,
-    "gradient": "from-emerald-950/90 via-slate-900/80 to-teal-900/70",
+    "gradient": "from-slate-950/90 via-slate-900/80 to-blue-900/70",
     "details": {
       "sections": [
         {
@@ -225,7 +225,7 @@ export const DEPARTMENT_METADATA: Record<
     "category": "Para-Clinical",
     "description": "Pharmacokinetics, therapeutics, clinical trials, and pharmacovigilance.",
     "bgImage": pharmacologyImg,
-    "gradient": "from-cyan-950/90 via-slate-900/80 to-blue-900/70",
+    "gradient": "from-indigo-950/90 via-slate-900/80 to-blue-900/70",
     "details": {
       "sections": [
         {
@@ -355,7 +355,7 @@ export const DEPARTMENT_METADATA: Record<
     "category": "Para-Clinical",
     "description": "Bacteriology, virology, mycology, parasitology, and hospital infection control.",
     "bgImage": microbiologyImg,
-    "gradient": "from-teal-950/90 via-slate-900/80 to-emerald-900/70",
+    "gradient": "from-blue-950/90 via-slate-900/80 to-slate-900/70",
     "details": {
       "sections": [
         {
@@ -457,7 +457,7 @@ export const DEPARTMENT_METADATA: Record<
     "category": "Para-Clinical",
     "description": "Epidemiology, public health administration, preventive healthcare, and biostatistics.",
     "bgImage": communityMedicineImg,
-    "gradient": "from-sky-950/90 via-slate-900/80 to-cyan-900/70",
+    "gradient": "from-sky-950/90 via-slate-900/80 to-indigo-900/70",
     "details": {
       "sections": [
         {
@@ -759,7 +759,7 @@ export const DEPARTMENT_METADATA: Record<
     "category": "Clinical",
     "description": "Advanced minimally invasive laparoscopic surgery, surgical oncology, and trauma care.",
     "bgImage": generalSurgeryImg,
-    "gradient": "from-slate-950/90 via-blue-950/80 to-cyan-900/70",
+    "gradient": "from-slate-950/90 via-blue-950/80 to-indigo-900/70",
     "details": {
       "sections": [
         {
@@ -808,7 +808,7 @@ export const DEPARTMENT_METADATA: Record<
     "category": "Clinical",
     "description": "Trauma surgery, joint replacements, arthroscopy, spine care, and sports medicine.",
     "bgImage": orthopaedicsImg,
-    "gradient": "from-cyan-950/90 via-slate-900/80 to-sky-900/70",
+    "gradient": "from-indigo-950/90 via-slate-900/80 to-sky-900/70",
     "details": {
       "sections": [
         {
@@ -863,7 +863,7 @@ export const DEPARTMENT_METADATA: Record<
     "category": "Clinical",
     "description": "Otology, rhinology, head & neck surgery, audiology, and endoscopic sinus procedures.",
     "bgImage": entImg,
-    "gradient": "from-emerald-950/90 via-slate-900/80 to-teal-900/70",
+    "gradient": "from-slate-950/90 via-slate-900/80 to-blue-900/70",
     "details": {
       "sections": [
         {
@@ -1027,7 +1027,7 @@ export const DEPARTMENT_METADATA: Record<
     "category": "Clinical",
     "description": "Perioperative anesthesia care, critical care resuscitation, and acute/chronic pain medicine.",
     "bgImage": anaesthesiologyImg,
-    "gradient": "from-teal-950/90 via-slate-900/80 to-cyan-900/70",
+    "gradient": "from-blue-950/90 via-slate-900/80 to-indigo-900/70",
     "details": {
       "sections": [
         {
@@ -1184,7 +1184,7 @@ export const DEPARTMENT_METADATA: Record<
     "category": "Clinical",
     "description": "Oral & maxillofacial care, restorative dentistry, orthodontic diagnosis, and periodontal therapy.",
     "bgImage": dentistryImg,
-    "gradient": "from-cyan-950/90 via-slate-900/80 to-emerald-900/70",
+    "gradient": "from-indigo-950/90 via-slate-900/80 to-slate-900/70",
     "details": {
       "sections": [
         {

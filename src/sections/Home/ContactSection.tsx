@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import logo from "../../assets/logo.png";
-import logoWhite from "../../assets/logo-white.png";
+import logo from "../../assets/logo.webp";
+import logoWhite from "../../assets/logo-white.webp";
 import {
   Phone,
   Mail,
@@ -63,8 +63,13 @@ export const ContactSection: React.FC = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    // Spam trap: real visitors never see or fill the hidden "website" field; bots usually do.
+    if ((e.currentTarget.elements.namedItem("website") as HTMLInputElement | null)?.value) {
+      setIsSubmitted(true);
+      return;
+    }
     setIsSubmitting(true);
     setErrorMessage(null);
     setIsSubmitted(false);
@@ -99,14 +104,11 @@ export const ContactSection: React.FC = () => {
 
       const data = await response.json();
 
-      if (
-        response.ok ||
-        data.success === "true" ||
-        data.success === true ||
-        (data.message &&
-          typeof data.message === "string" &&
-          data.message.includes("Activation"))
-      ) {
+      // FormSubmit only delivers once arundathihospital@gmail.com has clicked its one-time
+      // activation link. Until then it replies "needs Activation" and drops the message, so
+      // treat that as a failure and fall back to the visitor's email app instead.
+      const needsActivation = typeof data.message === "string" && /activat/i.test(data.message);
+      if (response.ok && String(data.success) === "true" && !needsActivation) {
         setIsSubmitted(true);
         setFormData({
           name: "",
@@ -183,12 +185,12 @@ export const ContactSection: React.FC = () => {
             {/* Main Info Card */}
             <div className="rounded-[24px] border border-[#dce8ee] dark:border-white/10 bg-[#fbfaf5] dark:bg-white/[0.04] dark:backdrop-blur-xl p-7 sm:p-9 shadow-xs dark:shadow-[0_20px_50px_rgba(0,0,0,0.4)] h-full flex flex-col justify-between">
               <div className="mb-6 pb-5 border-b border-[#dce8ee] dark:border-white/10 flex items-center justify-center">
-                <img
+                <img loading="lazy" decoding="async"
                   src={logo}
                   alt="Arundathi Institute of Medical Sciences & Hospital"
                   className="h-12 sm:h-14 w-auto object-contain dark:hidden drop-shadow-xs"
                 />
-                <img
+                <img loading="lazy" decoding="async"
                   src={logoWhite}
                   alt="Arundathi Institute of Medical Sciences & Hospital"
                   className="h-12 sm:h-14 w-auto object-contain hidden dark:block drop-shadow-xs"
@@ -268,7 +270,7 @@ export const ContactSection: React.FC = () => {
                       Working Hours
                     </span>
                     <p className="text-sm text-[#1f3351] dark:text-slate-200 font-medium mt-0.5">
-                      OPD: Mon - Sat: 8:00 AM - 8:00 PM
+                      OPD: Mon - Sat: 9:00 AM - 4:00 PM
                     </p>
                   </div>
                 </div>
@@ -326,6 +328,15 @@ export const ContactSection: React.FC = () => {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Spam trap, hidden from people and screen readers */}
+                <input
+                  type="text"
+                  name="website"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  className="absolute -left-[9999px] h-px w-px opacity-0"
+                />
                 {/* Full Name & Email */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>

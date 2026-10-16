@@ -3,7 +3,7 @@ import { Plus } from 'lucide-react';
 import './Marquee.css';
 
 const marqueeItems = [
-  "AIMS ARUNDHATHI HOSPITAL",
+  "AIMS ARUNDATHI HOSPITAL",
   "SIX ARCHIVAL CHRONICLES",
   "SURGICAL PRECISION",
   "INNOVATIVE RESEARCH",

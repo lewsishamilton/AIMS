@@ -36,7 +36,8 @@ export interface ContentBlock {
   content?: string | string[];
   bullets?: string[];
   badges?: string[];
-  layout?: "full" | "half";
+  /** "half" tiles sit two per row, "third" tiles three per row (e.g. the MBBS phases). */
+  layout?: "full" | "half" | "third";
 }
 
 export interface DepartmentDetails {

@@ -91,7 +91,7 @@ export const FacultyCard: React.FC<FacultyCardProps> = ({
     >
       {/* Photo (Static - zero scaling or movement on hover) */}
       {hasPhoto ? (
-        <img
+        <img loading="lazy" decoding="async"
           src={photoUrl}
           alt={displayName}
           onError={() => setImgFailed(true)}

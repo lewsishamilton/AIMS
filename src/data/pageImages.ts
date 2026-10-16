@@ -5,7 +5,7 @@ import { Droplets, Pill } from "lucide-react";
  * Media manifest for the content-driven pages.
  *
  * Every name below was checked against the actual picture, not its filename —
- * several assets are misnamed in the repository (`Blood Bank/1.png` is a cath
+ * several assets are misnamed in the repository (`Blood Bank/1.webp` is a cath
  * lab, the file called "ADVANCED ENDOSCOPY" is a treadmill for stress testing)
  * and `aims-campus-03` is not even AIMS, so it is never referenced.
  *
@@ -17,13 +17,13 @@ import { Droplets, Pill } from "lucide-react";
 
 type Mod = { default: string };
 
-const campusMods = import.meta.glob<Mod>("../assets/stockImages/aims-campus-*.jpeg", { eager: true });
-const clgMods = import.meta.glob<Mod>("../assets/clg-imgs/**/*.{png,PNG,jpg,jpeg}", { eager: true });
-const deptMods = import.meta.glob<Mod>("../assets/Departments/*.{png,PNG,jpg,jpeg,JPEG}", { eager: true });
-const facilityMods = import.meta.glob<Mod>("../assets/facilities/*.jpeg", { eager: true });
-const aiMods = import.meta.glob<Mod>("../assets/ai-downloaded/*.jpg", { eager: true });
+const campusMods = import.meta.glob<Mod>("../assets/stockImages/aims-campus-*.webp", { eager: true });
+const clgMods = import.meta.glob<Mod>("../assets/clg-imgs/**/*.webp", { eager: true });
+const deptMods = import.meta.glob<Mod>("../assets/Departments/*.webp", { eager: true });
+const facilityMods = import.meta.glob<Mod>("../assets/facilities/*.webp", { eager: true });
+const aiMods = import.meta.glob<Mod>("../assets/ai-downloaded/*.webp", { eager: true });
 
-const FALLBACK_KEY = "../assets/stockImages/aims-campus-15.jpeg";
+const FALLBACK_KEY = "../assets/stockImages/aims-campus-15.webp";
 
 /** Resolve a globbed asset by path suffix. Warns and falls back rather than blanking the page. */
 function g(mods: Record<string, Mod>, suffix: string): string {
@@ -33,7 +33,7 @@ function g(mods: Record<string, Mod>, suffix: string): string {
   return campusMods[FALLBACK_KEY]?.default ?? "";
 }
 
-const campus = (n: number) => g(campusMods, `aims-campus-${String(n).padStart(2, "0")}.jpeg`);
+const campus = (n: number) => g(campusMods, `aims-campus-${String(n).padStart(2, "0")}.webp`);
 const machine = (file: string) => g(clgMods, `aims images machines/${file}`);
 
 /**
@@ -42,31 +42,31 @@ const machine = (file: string) => g(clgMods, `aims images machines/${file}`);
  */
 export const IMG = {
   // ── Teaching spaces (real AIMS) ──
-  dissectionHall: g(clgMods, "Anatomy/5.png"),
+  dissectionHall: g(clgMods, "Anatomy/5.webp"),
   anatomyMuseum: campus(51), // articulated skeleton, wall charts, students
   specimenMuseum: campus(50), // tall specimen cabinets
   microscopyLab2: campus(45),
   practicalLab: campus(46),
   computerLab: campus(52), // rows of monitors — the digital library
-  physiologyLab: g(clgMods, "pysiology/2.png"),
-  skillsLabMannequin: g(clgMods, "skills/2.png"),
-  skillsLabCharts: g(clgMods, "skills/1.png"),
-  meuLectureHall: g(clgMods, "MEU/2.png"),
-  meuEntrance: g(clgMods, "MEU/3.png"),
-  libraryShelves: g(clgMods, "central library/3.jpg"),
+  physiologyLab: g(clgMods, "pysiology/2.webp"),
+  skillsLabMannequin: g(clgMods, "skills/2.webp"),
+  skillsLabCharts: g(clgMods, "skills/1.webp"),
+  meuLectureHall: g(clgMods, "MEU/2.webp"),
+  meuEntrance: g(clgMods, "MEU/3.webp"),
+  libraryShelves: g(clgMods, "central library/3.webp"),
 
   // ── Hospital (real AIMS) ──
-  atrium: g(clgMods, "Lobby/1.png"),
-  lobbyCorridor: g(clgMods, "Lobby/4.png"),
-  opdWaiting: g(clgMods, "Lobby/5.png"), // patients seated in the waiting area
-  hospitalPorch: g(clgMods, "Lobby/7.png"), // entrance canopy with an ambulance
-  otTeam: g(clgMods, "Operation Room/1.png"),
-  otEmpty: g(clgMods, "Operation Room/5.png"),
-  microsurgery: g(clgMods, "Operation Room/6.png"),
-  cathLabRoom: g(clgMods, "Blood Bank/1.png"), // misfiled: this is the cath lab
-  bloodBankStorage: g(clgMods, "Blood Bank/2.png"),
-  centralLabBench: g(clgMods, "Central Lab/1.png"),
-  labMicroscopist: g(clgMods, "Central Lab/3.png"),
+  atrium: g(clgMods, "Lobby/1.webp"),
+  lobbyCorridor: g(clgMods, "Lobby/4.webp"),
+  opdWaiting: g(clgMods, "Lobby/5.webp"), // patients seated in the waiting area
+  hospitalPorch: g(clgMods, "Lobby/7.webp"), // entrance canopy with an ambulance
+  otTeam: g(clgMods, "Operation Room/1.webp"),
+  otEmpty: g(clgMods, "Operation Room/5.webp"),
+  microsurgery: g(clgMods, "Operation Room/6.webp"),
+  cathLabRoom: g(clgMods, "Blood Bank/1.webp"), // misfiled: this is the cath lab
+  bloodBankStorage: g(clgMods, "Blood Bank/2.webp"),
+  centralLabBench: g(clgMods, "Central Lab/1.webp"),
+  labMicroscopist: g(clgMods, "Central Lab/3.webp"),
 
   // ── Campus & administration (real AIMS) ──
   auditorium: campus(29), // full auditorium, seated audience
@@ -77,42 +77,43 @@ export const IMG = {
   houseVisit: campus(44), // doorstep survey, geotagged Dundigal
 
   // ── Equipment (real AIMS) ──
-  cathLab: machine("cath lab.jpeg"),
-  mri: machine("mri machine images.jpeg"),
-  ctScan: machine("ct scan image.jpeg"),
-  xray: machine("hospital digital x ray.jpeg"),
-  bloodBags: machine("BLOOD BANK.jpeg"),
-  pathLab: machine("PATHLAB.jpeg"),
-  heartLung: machine("HEART LUNG MACHINE WITH HEMOTHERM.jpeg"),
-  balloonPump: machine("INTRA AORTIC BALLON PUMP.jpeg"),
-  neuroMicroscope: machine("NEURO MICROSCOPE.jpeg"),
-  eeg: machine("EEG MACHINE.jpeg"),
-  phaco: machine("LEGION PHACO UNIT.jpeg"),
-  thuliumLaser: machine("THULIUM LASER.jpeg"),
+  cathLab: machine("cath lab.webp"),
+  mri: machine("mri machine images.webp"),
+  ctScan: machine("ct scan image.webp"),
+  xray: machine("hospital digital x ray.webp"),
+  bloodBags: machine("BLOOD BANK.webp"),
+  pathLab: machine("PATHLAB.webp"),
+  heartLung: machine("HEART LUNG MACHINE WITH HEMOTHERM.webp"),
+  balloonPump: machine("INTRA AORTIC BALLON PUMP.webp"),
+  neuroMicroscope: machine("NEURO MICROSCOPE.webp"),
+  eeg: machine("EEG MACHINE.webp"),
+  phaco: machine("LEGION PHACO UNIT.webp"),
+  thuliumLaser: machine("THULIUM LASER.webp"),
   // Misfiled as "ADVANCED ENDOSCOPY" — the picture is a treadmill, i.e. TMT.
-  treadmillTmt: machine("FULLY AUTOMATED CENTRAL LAB ADVANCED ENDOSCOPY.jpeg"),
+  treadmillTmt: machine("FULLY AUTOMATED CENTRAL LAB ADVANCED ENDOSCOPY.webp"),
 
   // ── Speciality stock already in the repository ──
-  generalMedicine: g(deptMods, "general_medicine.png"),
-  respiratory: g(deptMods, "respiratory medicine.jpeg"),
-  dermatology: g(deptMods, "dermatology.png"),
-  generalSurgery: g(deptMods, "general_Surgery.png"),
-  orthopaedics: g(deptMods, "orthopaaedics.png"),
-  ophthalmology: g(deptMods, "ophthalmology.PNG"),
-  ent: g(deptMods, "ENT.PNG"),
-  dentistry: g(deptMods, "denistry.PNG"),
-  anaesthesiology: g(deptMods, "anaesthisiology.PNG"),
+  generalMedicine: g(deptMods, "general_medicine.webp"),
+  respiratory: g(deptMods, "respiratory medicine.webp"),
+  dermatology: g(deptMods, "dermatology.webp"),
+  generalSurgery: g(deptMods, "general_Surgery.webp"),
+  orthopaedics: g(deptMods, "orthopaaedics.webp"),
+  ophthalmology: g(deptMods, "ophthalmology.webp"),
+  ent: g(deptMods, "ENT.webp"),
+  dentistry: g(deptMods, "denistry.webp"),
+  anaesthesiology: g(deptMods, "anaesthisiology.webp"),
 
   // ── Fetched stock, for gaps AIMS has no photograph of ──
-  icuVentilator: g(aiMods, "ai-downloaded/icu-ventilator.jpg"),
-  physiotherapy: g(aiMods, "ai-downloaded/physiotherapy.jpg"),
-  reconstructiveSurgery: g(aiMods, "ai-downloaded/reconstructive-surgery.jpg"),
-  endoscopy: g(aiMods, "ai-downloaded/endoscopy.jpg"),
-  maternity: g(aiMods, "ai-downloaded/maternity.jpg"),
+  icuVentilator: g(aiMods, "ai-downloaded/icu-ventilator.webp"),
+  physiotherapy: g(aiMods, "ai-downloaded/physiotherapy.webp"),
+  reconstructiveSurgery: g(aiMods, "ai-downloaded/reconstructive-surgery.webp"),
+  endoscopy: g(aiMods, "ai-downloaded/endoscopy.webp"),
+  maternity: g(aiMods, "ai-downloaded/maternity.webp"),
+  dialysis: g(aiMods, "ai-downloaded/dialysis.webp"),
 
   // ── Campus life ──
-  hostel: g(facilityMods, "hostel.jpeg"),
-  stadium: g(facilityMods, "indoor_stadium.jpeg"),
+  hostel: g(facilityMods, "hostel.webp"),
+  stadium: g(facilityMods, "indoor_stadium.webp"),
 } as const;
 
 export interface PageMedia {
@@ -219,11 +220,11 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
   "/facilities/campus-life": {
     cardImages: {
       Hostels: IMG.hostel,
-      "Food Court & Mess": g(facilityMods, "mess.jpeg"),
-      "Gymnasium & Fitness Centre": g(facilityMods, "gym.jpeg"),
+      "Food Court & Mess": g(facilityMods, "mess.webp"),
+      "Gymnasium & Fitness Centre": g(facilityMods, "gym.webp"),
       "Indoor Stadium": IMG.stadium,
-      "Sports & Games": g(facilityMods, "table_tennis.jpeg"),
-      Transportation: g(facilityMods, "transport.jpeg"),
+      "Sports & Games": g(facilityMods, "table_tennis.webp"),
+      Transportation: g(facilityMods, "transport.webp"),
     },
   },
 
@@ -250,8 +251,8 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
       Neurosurgery: IMG.neuroMicroscope,
       "Medical Gastroenterology": IMG.endoscopy,
       "Plastic & Cosmetic Surgery": IMG.reconstructiveSurgery,
+      "Nephrology & Dialysis": IMG.dialysis,
     },
-    cardIcons: { "Nephrology & Dialysis": Droplets },
   },
   "/services/emergency-trauma": {
     sectionImages: {

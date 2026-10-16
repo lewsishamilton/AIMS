@@ -99,7 +99,7 @@ export const MachinesSection: React.FC<MachinesSectionProps> = ({
                 {machine.category && (
                   <div className="absolute top-3 left-3 z-10">
                     <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] sm:text-[10.5px] font-semibold tracking-wider uppercase text-white bg-[#1f3351]/90 dark:bg-black/70 border border-white/20 shadow-xs">
-                      <Activity className="w-3 h-3 text-teal-300 dark:text-teal-300" />
+                      <Activity className="w-3 h-3 text-white/90 dark:text-teal-300" />
                       <span>{machine.category}</span>
                     </span>
                   </div>

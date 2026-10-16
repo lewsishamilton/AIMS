@@ -17,11 +17,11 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
     eyebrow: "Facilities",
     title: "Hospital Facilities",
     subtitle:
-      "Marri Arundhathi Multi-Specialty Hospital provides the clinical infrastructure for patient care and for undergraduate teaching — outpatient, inpatient, critical care, diagnostics and pharmacy in a single block.",
+      "Arundathi Hospital provides the clinical infrastructure for patient care and for undergraduate teaching — outpatient, inpatient, critical care, diagnostics and pharmacy in a single block.",
     cards: [
       {
         name: "Outpatient Department",
-        meta: "Monday–Saturday, 8:00 AM – 5:00 PM",
+        meta: "Monday–Saturday, 9:00 AM – 4:00 PM",
         description:
           "Consulting rooms for every clinical and super-speciality department, with registration, billing and pharmacy on the same floor. Wheelchairs and stretchers are available free of charge at the entrance.",
       },

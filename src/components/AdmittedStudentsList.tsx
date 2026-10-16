@@ -9,19 +9,15 @@ import {
   Download,
   Calendar,
   Building2,
-  FileSpreadsheet,
+  FileText,
 } from "lucide-react";
 import { ADMITTED_BATCHES, type AdmittedBatch } from "../data/admittedStudents";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 export const AdmittedStudentsList: React.FC = () => {
-  // Store expanded state for each batch ID. By default, open the first/latest batch.
-  const [expandedBatches, setExpandedBatches] = useState<Record<string, boolean>>({
-    "2025-26": true,
-    "2024-25": false,
-    "2023-24": false,
-  });
+  // Store expanded state for each batch ID. All start closed until clicked.
+  const [expandedBatches, setExpandedBatches] = useState<Record<string, boolean>>({});
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedYearFilter, setSelectedYearFilter] = useState<string>("all");
@@ -101,37 +97,36 @@ export const AdmittedStudentsList: React.FC = () => {
     return ADMITTED_BATCHES.reduce((acc, b) => acc + b.totalStudents, 0);
   }, []);
 
-  // CSV export function for current or selected batch
-  const exportToCSV = (batch?: AdmittedBatch) => {
-    const batchesToExport = batch ? [batch] : ADMITTED_BATCHES;
-    let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Academic Year,Batch,Sl. No.,Registration Number / Roll No,Student Name\n";
+  // PDF export for one batch or all batches. jsPDF is loaded only when someone downloads.
+  const exportToPDF = async (batch?: AdmittedBatch) => {
+    const [{ jsPDF }, { default: autoTable }] = await Promise.all([
+      import("jspdf"),
+      import("jspdf-autotable"),
+    ]);
+    const doc = new jsPDF({ unit: "pt", format: "a4" });
 
-    batchesToExport.forEach((b) => {
-      b.students.forEach((s) => {
-        const row = [
-          `"${b.academicYear}"`,
-          `"${b.batchName}"`,
-          s.slNo,
-          `"${s.rollNo}"`,
-          `"${s.name.replace(/"/g, '""')}"`,
-        ].join(",");
-        csvContent += row + "\n";
+    (batch ? [batch] : ADMITTED_BATCHES).forEach((b, i) => {
+      if (i > 0) doc.addPage();
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(14);
+      doc.setTextColor(31, 51, 81);
+      doc.text("Arundathi Institute of Medical Sciences", 40, 50);
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(10);
+      doc.setTextColor(89, 109, 134);
+      doc.text(`MBBS Admitted Students - Academic Year ${b.academicYear} - ${b.totalStudents} students`, 40, 68);
+      autoTable(doc, {
+        startY: 84,
+        head: [["Sl. No.", "Registration / Roll No.", "Student Name"]],
+        body: b.students.map((s) => [s.slNo, s.rollNo, s.name]),
+        styles: { fontSize: 9, cellPadding: 5 },
+        headStyles: { fillColor: [31, 51, 81] },
+        alternateRowStyles: { fillColor: [248, 250, 252] },
+        margin: { left: 40, right: 40 },
       });
     });
 
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute(
-      "download",
-      batch
-        ? `AIMS_Admitted_Students_${batch.id}.csv`
-        : `AIMS_Admitted_Students_All_Batches.csv`
-    );
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    doc.save(batch ? `AIMS_Admitted_Students_${batch.id}.pdf` : "AIMS_Admitted_Students_All_Batches.pdf");
   };
 
   return (
@@ -157,7 +152,7 @@ export const AdmittedStudentsList: React.FC = () => {
         </div>
 
         <div className="flex flex-col rounded-[22px] border border-[#e4ecf2] bg-white p-5 shadow-[0_8px_24px_rgba(15,23,42,0.05)] dark:border-white/10 dark:bg-white/[0.03]">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-500/10 text-teal-600 dark:bg-teal-500/15 dark:text-teal-300">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#1f3351]/10 text-[#1f3351] dark:bg-teal-500/15 dark:text-teal-300">
             <Calendar className="h-5 w-5" />
           </span>
           <span className="mt-3 text-2xl font-extrabold text-[#162740] dark:text-white sm:text-3xl">
@@ -266,13 +261,13 @@ export const AdmittedStudentsList: React.FC = () => {
             </button>
           </div>
 
-          {/* Export CSV button */}
+          {/* Export PDF button */}
           <button
-            onClick={() => exportToCSV()}
+            onClick={() => exportToPDF()}
             className="inline-flex items-center gap-1.5 rounded-full bg-[#1f3351] px-4 py-2 text-xs font-bold text-white shadow-sm transition-colors hover:bg-[#162740] dark:bg-teal-600 dark:hover:bg-teal-500"
           >
             <Download className="h-3.5 w-3.5" />
-            <span>Export Roster</span>
+            <span>Download PDF</span>
           </button>
         </div>
       </motion.div>
@@ -286,7 +281,7 @@ export const AdmittedStudentsList: React.FC = () => {
           </span>
           <button
             onClick={() => setSearchQuery("")}
-            className="text-teal-600 underline hover:text-teal-700 dark:text-teal-400"
+            className="text-[#1f3351] underline hover:text-[#0d2346] dark:text-teal-400"
           >
             Clear Search
           </button>
@@ -361,12 +356,12 @@ export const AdmittedStudentsList: React.FC = () => {
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          exportToCSV(batch);
+                          exportToPDF(batch);
                         }}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1f3351] hover:text-teal-600 dark:text-teal-400 dark:hover:text-teal-300"
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#1f3351] hover:underline dark:text-teal-400 dark:hover:text-teal-300"
                       >
-                        <FileSpreadsheet className="h-3.5 w-3.5" />
-                        Download CSV for {batch.academicYear}
+                        <FileText className="h-3.5 w-3.5" />
+                        Download PDF for {batch.academicYear}
                       </button>
                     </div>
 

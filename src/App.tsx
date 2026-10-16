@@ -1,5 +1,7 @@
 import Navbar from "./layouts/navbar"
 import Footer from "./layouts/footer"
+import BrochureTab from "./components/BrochureTab"
+import ChatAssistant from "./components/ChatAssistant"
 import HeroPage from "./pages/HomePage"
 import scintificPdf from "./assets/Scientific-committee.pdf"
 import antiRaggingPdf from "./assets/Anti Ragging Committee.pdf"
@@ -8,31 +10,30 @@ import poshInternalPdf from "./assets/POSH internal committee.pdf"
 import pharmacovigilancePdf from "./assets/pharmacvigilance committee.pdf"
 import disciplinaryPdf from "./assets/Disciplinary committee.pdf"
 import meuPdf from "./assets/MEU.pdf"
-import FacultyPage from "./pages/FacultyPage"
-import DepartmentFacultyPage from "./pages/DepartmentFacultyPage"
-import DepartmentsPage from "./pages/DepartmentsPage"
-import MediaGalleryPage from "./pages/MediaGalleryPage"
-import AwardsPage from "./pages/AwardsPage"
 
-import AboutHospitalPage from "./pages/AboutHospitalPage"
-import AboutInstitutionPage from "./pages/AboutInstitutionPage"
-import FounderPage from "./pages/FounderPage"
-import ManagementPage from "./pages/ManagementPage"
-import LeadershipProfilePage from "./pages/LeadershipProfilePage"
-import ContactPage from "./pages/ContactPage"
-import AimsInNewsPage from "./pages/AimsInNewsPage"
-import MachinesPage from "./pages/MachinesPage"
-import AccreditationsPage from "./pages/AccreditationsPage"
-import VirtualTourPage from "./pages/VirtualTourPage"
-import PdfViewerSection from "./layouts/PdfViewer"
-import StaticPage from "./components/StaticPage"
-import { STATIC_PAGES } from "./data/pages"
-import { PAGE_MEDIA, DEFAULT_MEDIA } from "./data/pageImages"
 import { Route, Routes } from "react-router-dom"
 import ScrollToTop from "./ScrollToTop"
 import { lazy, Suspense } from "react"
 
-// Map libraries are heavy; load them only when someone opens the bus routes page.
+// Every page except Home is split into its own file and downloaded when first opened.
+const FacultyPage = lazy(() => import("./pages/FacultyPage"))
+const DepartmentFacultyPage = lazy(() => import("./pages/DepartmentFacultyPage"))
+const DepartmentsPage = lazy(() => import("./pages/DepartmentsPage"))
+const MediaGalleryPage = lazy(() => import("./pages/MediaGalleryPage"))
+const AwardsPage = lazy(() => import("./pages/AwardsPage"))
+const AboutHospitalPage = lazy(() => import("./pages/AboutHospitalPage"))
+const AboutInstitutionPage = lazy(() => import("./pages/AboutInstitutionPage"))
+const FounderPage = lazy(() => import("./pages/FounderPage"))
+const ManagementPage = lazy(() => import("./pages/ManagementPage"))
+const LeadershipProfilePage = lazy(() => import("./pages/LeadershipProfilePage"))
+const ContactPage = lazy(() => import("./pages/ContactPage"))
+const AimsInNewsPage = lazy(() => import("./pages/AimsInNewsPage"))
+const MachinesPage = lazy(() => import("./pages/MachinesPage"))
+const AccreditationsPage = lazy(() => import("./pages/AccreditationsPage"))
+const VirtualTourPage = lazy(() => import("./pages/VirtualTourPage"))
+const PdfViewerSection = lazy(() => import("./layouts/PdfViewer"))
+const StaticRoute = lazy(() => import("./components/StaticRoute"))
+
 const TransportPage = lazy(() => import("./pages/TransportPage"))
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
     <>
       <ScrollToTop />
       <Navbar />
+      <Suspense fallback={<div className="min-h-screen" />}>
       <Routes>
         <Route path="/" element={<HeroPage />} />
 
@@ -156,18 +158,15 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/Contact" element={<ContactPage />} />
         <Route path="/about/awards" element={<AwardsPage />} />
-        <Route path="/facilities/transport" element={<Suspense fallback={<div className="min-h-screen" />}><TransportPage /></Suspense>} />
+        <Route path="/facilities/transport" element={<TransportPage />} />
 
         {/* Content-driven pages: academics, admissions, services, facilities, patient care */}
-        {Object.entries(STATIC_PAGES).map(([path, page]) => (
-          <Route
-            key={path}
-            path={path}
-            element={<StaticPage {...page} media={PAGE_MEDIA[path] ?? DEFAULT_MEDIA} />}
-          />
-        ))}
+        <Route path="*" element={<StaticRoute />} />
       </Routes>
+      </Suspense>
       <Footer />
+      <BrochureTab />
+      <ChatAssistant />
     </>
   )
 }

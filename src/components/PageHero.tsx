@@ -2,28 +2,63 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronRight } from "lucide-react";
-import { ACCENT, sectionFor } from "./sectionTheme";
+import { sectionFor } from "./sectionTheme";
 
 /**
  * The universal page masthead.
  *
- * One design for every interior page: a dark band carrying a breadcrumb, the
- * page title and a drawn motif, rather than a photograph chosen for atmosphere.
- * Each area of the site gets its own glyph (see `sectionTheme.ts`) so you can
- * tell where you are, but the palette is the site's single teal accent
- * throughout — the band should not change colour from page to page.
- *
- * Deliberately dark in both themes — in light mode the navbar above it is
- * solid white, so the band gives the title contrast and separates the header
- * from the page; in dark mode it sits in the site's own palette.
+ * A full-width background photograph chosen for the page, under a dark blue tint and a
+ * left-to-right gradient so the soft-white title always reads. Photos live in
+ * assets/hero (Unsplash, see its README); rounded bottom corners end the band on the page.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-/** A single heartbeat traced across the band — P wave, QRS complex, T wave. */
-const ECG_PATH =
-  "M0,100 H300 l20,-14 14,28 16,-14 H520 l16,10 12,-64 14,116 12,-62 10,10 " +
-  "H760 c26,0 26,-32 52,-32 26,0 26,32 52,32 H1100 l18,-12 14,24 16,-12 H1440";
+const HERO = import.meta.glob<string>("../assets/hero/*.webp", { eager: true, import: "default" });
+const hero = (name: string) => HERO[`../assets/hero/${name}.webp`];
+
+/** Exact route → photo; unlisted routes use their area's photo, then the default. */
+const PAGE_PHOTO: Record<string, string> = {
+  "/admissions": "admissions",
+  "/admissions/criteria": "admission-criteria",
+  "/admissions/seat-matrix": "seat-matrix",
+  "/admissions/fee-structure": "fee-structure",
+  "/admissions/forms": "application-forms",
+  "/admissions/admitted-list": "admitted-list",
+  "/academics/mbbs": "mbbs",
+  "/academics/nursing-allied-health": "nursing",
+  "/academics/paramedical-diplomas": "paramedical",
+  "/academics/calendar": "academic-calendar",
+  "/academics/research": "research",
+  "/about/centres-of-excellence": "centres-of-excellence",
+  "/approvals/government": "government-approvals",
+  "/approvals/university-affiliation": "university-affiliation",
+  "/facilities/academic": "academic-facilities",
+  "/facilities/campus-life": "campus-life",
+  "/facilities/hospital": "hospital-facilities",
+  "/facilities/transport": "transport",
+  "/patient-care/admission-discharge": "admission-discharge",
+  "/patient-care/citizen-charter": "citizen-charter",
+  "/patient-care/feedback": "feedback",
+  "/patient-care/insurance": "insurance",
+  "/patient-care/opd-timings": "opd-timings",
+  "/services/diagnostics": "diagnostics",
+  "/services/emergency-trauma": "emergency",
+  "/services/specialities": "specialities",
+  "/services/super-specialities": "super-specialities",
+  "/virtual-tour": "virtual-tour",
+  "/privacy-policy": "legal",
+  "/terms-and-conditions": "legal",
+};
+
+const AREA_PHOTO: Record<string, string> = {
+  Committees: "committees",
+  Admissions: "admissions",
+  Academics: "seat-matrix",
+  Hospital: "specialities",
+  "Patient Care": "citizen-charter",
+  Facilities: "hospital-facilities",
+};
 
 const PageHero: React.FC<{
   eyebrow?: string;
@@ -31,118 +66,96 @@ const PageHero: React.FC<{
   subtitle?: string;
   pathname: string;
 }> = ({ eyebrow, title, subtitle, pathname }) => {
-  const { name, Icon } = sectionFor(pathname);
+  const { name } = sectionFor(pathname);
+  const path = pathname.replace(/\/+$/, "") || "/";
+  const photo = hero(PAGE_PHOTO[path] ?? AREA_PHOTO[name] ?? "default");
   const reduceMotion = useReducedMotion();
 
   return (
-    <header className="relative isolate overflow-hidden bg-[#13243c] pb-14 pt-32 dark:bg-[#080f1d] sm:pb-16 lg:pb-20 lg:pt-40">
-      {/* Accent glows, tinted per area of the site */}
-      <div
+    <header
+      className="relative isolate overflow-hidden bg-[#0d2346] pb-20 pt-32 sm:pb-24 lg:pb-28 lg:pt-40 dark:bg-[#060e1d]"
+      // A gentle convex curve along the bottom; the page's own background shows beneath it in both themes.
+      style={{ clipPath: "ellipse(150% 100% at 50% 0%)" }}
+    >
+      {/* Background photograph, with a slow settle-in zoom */}
+      <motion.img
+        src={photo}
+        fetchPriority="high"
+        decoding="async"
+        alt=""
         aria-hidden="true"
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(58% 120% at 86% 8%, ${ACCENT}33, transparent 68%),
-                       radial-gradient(48% 95% at 2% 100%, ${ACCENT}1f, transparent 70%)`,
-        }}
+        initial={reduceMotion ? undefined : { scale: 1.12 }}
+        animate={reduceMotion ? undefined : { scale: 1 }}
+        transition={{ duration: 2.4, ease: EASE }}
+        className="absolute inset-0 -z-10 h-full w-full object-cover"
       />
 
-      {/* Measured grid, faded out towards the bottom-left */}
+      {/* Dark blue tint over the whole photo */}
+      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[#0d2346]/45 mix-blend-multiply dark:bg-[#040a16]/60" />
+      {/* Gradient. Desktop: deep behind the text, then lighter where there is no text so the photo shows.
+          Phones: the text spans the full width, so it stays deep across. */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 opacity-70"
+        className="absolute inset-0 -z-10 hidden md:block"
         style={{
-          backgroundImage:
-            "linear-gradient(to right, rgba(255,255,255,0.055) 1px, transparent 1px)," +
-            "linear-gradient(to bottom, rgba(255,255,255,0.055) 1px, transparent 1px)",
-          backgroundSize: "68px 68px",
-          maskImage: "radial-gradient(90% 110% at 78% 0%, #000 25%, transparent 78%)",
-          WebkitMaskImage: "radial-gradient(90% 110% at 78% 0%, #000 25%, transparent 78%)",
+          background:
+            "linear-gradient(90deg, rgba(9,25,52,0.94) 0%, rgba(11,31,61,0.82) 38%, rgba(12,33,66,0.72) 55%, rgba(13,35,70,0.35) 75%, rgba(13,35,70,0.15) 100%)",
         }}
       />
-
-      {/* Heartbeat trace */}
-      <svg
+      <div
         aria-hidden="true"
-        viewBox="0 0 1440 200"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 w-full sm:h-20 lg:h-24"
-        style={{ filter: `drop-shadow(0 0 10px ${ACCENT}66)` }}
-      >
-        <motion.path
-          d={ECG_PATH}
-          fill="none"
-          stroke={ACCENT}
-          strokeWidth={2.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          opacity={0.5}
-          initial={reduceMotion ? undefined : { pathLength: 0 }}
-          animate={reduceMotion ? undefined : { pathLength: 1 }}
-          transition={{ duration: 2.2, ease: "easeInOut", delay: 0.2 }}
-        />
-      </svg>
-
-      {/* Area glyph */}
-      <motion.div
+        className="absolute inset-0 -z-10 md:hidden"
+        style={{
+          background: "linear-gradient(90deg, rgba(9,25,52,0.94) 0%, rgba(11,31,61,0.82) 50%, rgba(13,35,70,0.62) 100%)",
+        }}
+      />
+      {/* Shade along the bottom so the band sits on the page */}
+      <div
         aria-hidden="true"
-        initial={reduceMotion ? undefined : { opacity: 0, scale: 0.88 }}
-        animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
-        transition={{ duration: 1, ease: EASE, delay: 0.15 }}
-        className="pointer-events-none absolute -right-8 -top-6 hidden sm:block lg:right-6 lg:top-10"
-      >
-        <Icon
-          strokeWidth={0.9}
-          className="h-52 w-52 lg:h-64 lg:w-64"
-          style={{ color: ACCENT, opacity: 0.13 }}
-        />
-      </motion.div>
+        className="absolute inset-x-0 bottom-0 -z-10 h-1/2"
+        style={{ background: "linear-gradient(to top, rgba(6,16,34,0.4), transparent)" }}
+      />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 sm:px-8 lg:px-12">
+      <div className="relative mx-auto w-full max-w-[1280px] px-4 sm:px-8 lg:px-12">
         <motion.div
-          initial={reduceMotion ? undefined : { opacity: 0, y: 22 }}
+          initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
           animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: EASE }}
+          transition={{ duration: 0.7, ease: EASE, delay: 0.1 }}
+          className="max-w-2xl lg:max-w-[700px]"
         >
           <nav
             aria-label="Breadcrumb"
-            className="mb-5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/45 sm:text-[11px]"
+            className="mb-7 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-white/70 backdrop-blur-md sm:text-[11px]"
           >
             <Link to="/" className="transition-colors hover:text-white">
               Home
             </Link>
             <ChevronRight className="h-3 w-3 flex-shrink-0" aria-hidden="true" />
-            <span className="text-white/75">{name}</span>
+            <span className="text-white">{name}</span>
           </nav>
 
-          <div className="mb-4 inline-flex items-center gap-3">
-            <span className="h-[1.5px] w-8 flex-shrink-0 bg-white/20 sm:w-10" />
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-teal-400 sm:text-[13px]">
+          {/* Label framed by a line on each side, like the site's section labels. The negative
+              right margin cancels the letter-spacing after the last letter so both gaps match. */}
+          <div className="mb-4 flex w-fit items-center gap-3">
+            <span className="h-px w-10 flex-shrink-0 bg-white/50" />
+            <span className="mr-[-0.24em] text-xs font-semibold uppercase tracking-[0.24em] text-[#f1f5f9]/90 sm:text-[13px]">
               {eyebrow ?? name}
             </span>
-            <span className="h-[1.5px] w-8 flex-shrink-0 bg-white/20 sm:w-10" />
+            <span className="h-px w-10 flex-shrink-0 bg-white/50" />
           </div>
 
-          <h1 className="max-w-4xl font-['Manrope',sans-serif] text-3xl font-bold leading-[1.12] tracking-tight text-white sm:text-4xl lg:text-[50px]">
+          <h1 className="font-['Manrope',sans-serif] text-3xl font-bold leading-[1.1] tracking-tight text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.3)] sm:text-4xl lg:text-[52px]">
             {title}
           </h1>
 
           {subtitle && (
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-white/70 sm:text-base lg:text-[17px]">
+            <p className="mt-5 text-sm leading-relaxed text-[#e2e8f0]/90 sm:text-base lg:text-[17px]">
               {subtitle}
             </p>
           )}
         </motion.div>
       </div>
-
-      {/* Accent hairline closing the band */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 h-px"
-        style={{
-          background: `linear-gradient(to right, transparent, ${ACCENT}88, transparent)`,
-        }}
-      />
     </header>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from "../assets/logo.png";
-import logoWhite from "../assets/logo-white.png";
+import logo from "../assets/logo.webp";
+import logoWhite from "../assets/logo-white.webp";
 import { useTheme } from "../context/ThemeContext";
 
 interface SubItem {
@@ -85,7 +85,6 @@ const Navbar = () => {
                     name: "Faculty",
                     path: "/faculty",
                     subItems: [
-                        { name: "All Faculty", path: "/faculty" },
                         { name: "Pre-Clinical Faculty", path: "/faculty?category=Pre-Clinical" },
                         { name: "Para-Clinical Faculty", path: "/faculty?category=Para-Clinical" },
                         { name: "Clinical Faculty", path: "/faculty?category=Clinical" },
@@ -94,6 +93,8 @@ const Navbar = () => {
                 { name: "Academic Facilities", path: "/facilities/academic" },
                 { name: "Academic Calendar", path: "/academics/calendar" },
                 { name: "Research & Publications", path: "/academics/research" },
+                { name: "LMS", path: "https://lms.aims.ac.in/" },
+                { name: "ERP Login", path: "https://portal.vmedulife.com/public/auth/#/login/aims-hyderabad" },
             ],
         },
         {
@@ -115,7 +116,6 @@ const Navbar = () => {
                 { name: "Fee Structure", path: "/admissions/fee-structure" },
                 { name: "Application Forms", path: "/admissions/forms" },
                 { name: "Admitted List", path: "/admissions/admitted-list" },
-                { name: "Regulations", path: "/admissions/regulations" },
             ],
         },
         {
@@ -157,6 +157,10 @@ const Navbar = () => {
             ],
         },
     ];
+
+    // LMS and ERP are separate sites: open them in a new tab.
+    const external = (path: string) =>
+        path.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {};
 
     const { theme, toggleTheme } = useTheme();
     const [isScrolled, setIsScrolled] = React.useState(false);
@@ -345,6 +349,7 @@ const Navbar = () => {
                                 >
                                     <Link
                                         to={item.path}
+                                        {...external(item.path)}
                                         className={`flex items-center justify-between px-3 py-1.5 text-[13.5px] font-semibold transition-all duration-150 ${dropdownItemClass}`}
                                     >
                                         <span>{item.name}</span>
@@ -545,6 +550,7 @@ const Navbar = () => {
                                                     <div key={itemIdx} className="flex flex-col">
                                                         <Link
                                                             to={item.path}
+                                        {...external(item.path)}
                                                             onClick={() => setIsMenuOpen(false)}
                                                             className={`py-1.5 text-sm font-semibold transition-colors ${
                                                                 isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"

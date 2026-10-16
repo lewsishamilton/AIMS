@@ -39,14 +39,8 @@ export const FacultyPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedDeptFilter, setSelectedDeptFilter] = useState<string>("all");
 
-  // Track expanded state for each department ID. By default, open the first 3 departments.
-  const [expandedDepts, setExpandedDepts] = useState<Record<string, boolean>>(() => {
-    const initial: Record<string, boolean> = {};
-    DEPARTMENTS.forEach((d, idx) => {
-      initial[d.id] = idx < 3;
-    });
-    return initial;
-  });
+  // Track expanded state for each department ID. All start closed until clicked.
+  const [expandedDepts, setExpandedDepts] = useState<Record<string, boolean>>({});
 
   // Scroll to top on mount
   useEffect(() => {
@@ -188,38 +182,43 @@ export const FacultyPage: React.FC = () => {
     return filteredData.reduce((acc, d) => acc + d.filteredMembers.length, 0);
   }, [filteredData]);
 
-  // CSV export function for faculty roster
-  const exportFacultyCSV = () => {
-    let csvContent = "data:text/csv;charset=utf-8,";
-    csvContent += "Department,Category,Sl. No.,Faculty Name,Designation,Cadre,Registration Code\n";
+  // PDF export of the faculty currently shown (respects category, department and search filters).
+  // jsPDF is loaded only when someone downloads.
+  const exportFacultyPDF = async () => {
+    const [{ jsPDF }, { default: autoTable }] = await Promise.all([
+      import("jspdf"),
+      import("jspdf-autotable"),
+    ]);
+    const doc = new jsPDF({ unit: "pt", format: "a4" });
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor(31, 51, 81);
+    doc.text("Arundathi Institute of Medical Sciences", 40, 50);
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(10);
+    doc.setTextColor(89, 109, 134);
+    const total = filteredData.reduce((n, d) => n + d.filteredMembers.length, 0);
+    doc.text(`Faculty Directory${selectedCategory === "All" ? "" : ` - ${selectedCategory}`} - ${total} faculty members`, 40, 68);
 
-    filteredData.forEach(({ department, filteredMembers }) => {
-      filteredMembers.forEach((f, idx) => {
-        const row = [
-          `"${department.name}"`,
-          `"${department.category}"`,
-          idx + 1,
-          `"${f.name.replace(/"/g, '""')}"`,
-          `"${f.designation.replace(/"/g, '""')}"`,
-          `"${f.roleBadge.replace(/"/g, '""')}"`,
-          `"${f.regCode || `AIMS-${String(f.serialNumber || idx + 1).padStart(3, "0")}`}"`,
-        ].join(",");
-        csvContent += row + "\n";
-      });
+    autoTable(doc, {
+      startY: 84,
+      head: [["Sl. No.", "Faculty Name", "Designation", "Cadre", "Reg. Code"]],
+      body: filteredData.flatMap(({ department, filteredMembers }) => [
+        [
+          {
+            content: `${department.name} (${department.category}) - ${filteredMembers.length}`,
+            colSpan: 5,
+            styles: { fillColor: [241, 245, 249], textColor: [31, 51, 81], fontStyle: "bold" as const },
+          },
+        ],
+        ...filteredMembers.map((f, idx) => [idx + 1, f.name, f.designation, f.roleBadge, f.regCode || "-"]),
+      ]),
+      styles: { fontSize: 8.5, cellPadding: 4 },
+      headStyles: { fillColor: [31, 51, 81] },
+      margin: { left: 40, right: 40 },
     });
 
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute(
-      "download",
-      selectedCategory === "All"
-        ? `AIMS_Faculty_Directory_All.csv`
-        : `AIMS_Faculty_Directory_${selectedCategory}.csv`
-    );
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    doc.save(selectedCategory === "All" ? "AIMS_Faculty_Directory_All.pdf" : `AIMS_Faculty_Directory_${selectedCategory}.pdf`);
   };
 
   const categories: ("All" | DepartmentCategory)[] = [
@@ -406,12 +405,12 @@ export const FacultyPage: React.FC = () => {
 
               <button
                 type="button"
-                onClick={exportFacultyCSV}
+                onClick={exportFacultyPDF}
                 className="inline-flex cursor-pointer items-center gap-1.5 rounded-full bg-[#1f3351] px-3.5 py-1.5 text-xs font-bold text-white shadow-2xs transition-colors hover:bg-[#162740] dark:bg-white/15 dark:text-white dark:hover:bg-white/25"
               >
                 <Download className="h-3.5 w-3.5" />
-                <span className="hidden sm:inline">Export Roster</span>
-                <span className="sm:hidden">CSV</span>
+                <span className="hidden sm:inline">Download PDF</span>
+                <span className="sm:hidden">PDF</span>
               </button>
             </div>
           </div>

@@ -33,7 +33,7 @@ export default function Hero() {
           <div className="hero-top-left">
             <span className="hero-status-pill">
               <span className="pulse-circle"></span>
-              AIMS ARUNDHATHI HOSPITAL
+              AIMS ARUNDATHI HOSPITAL
             </span>
             <span className="hero-meta-divider">•</span>
             <span className="hero-meta-text">ARCHIVAL EDITION VOL. 01</span>
@@ -114,7 +114,7 @@ export default function Hero() {
           >
             <p className="hero-editorial-description">
               A curated narrative celebrating human vitality, high-precision surgical arts, 
-              and patient-first healthcare at AIMS Arundhathi Hospital. Documenting our six core chronicles 
+              and patient-first healthcare at Arundathi Hospital. Documenting our six core chronicles 
               of clinical excellence.
             </p>
 

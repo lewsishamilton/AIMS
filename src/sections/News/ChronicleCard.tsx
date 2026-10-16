@@ -182,7 +182,7 @@ export default function ChronicleCard({
               </button>
 
               <div className="overflow-auto max-h-[80vh] w-full flex items-center justify-center">
-                <img 
+                <img loading="lazy" decoding="async" 
                   src={image} 
                   alt={`AIMS Chronicle ${number} Full Clipping`} 
                   className="max-h-[78vh] w-auto max-w-full object-contain rounded-lg"

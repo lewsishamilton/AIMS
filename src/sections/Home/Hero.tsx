@@ -1,20 +1,34 @@
-import aimsvideo from "../../assets/AIMS.mp4";
+import aimsVideo from "../../assets/AIMS.mp4";
+import aimsVideoMobile from "../../assets/AIMS-720.mp4";
+import aimsPoster from "../../assets/AIMS-poster.webp";
 import HeroStats from "./Hero-stats";
+
+// Visitors who turned on data saving get the still frame instead of the video.
+const saveData =
+    typeof navigator !== "undefined" &&
+    (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
 
 const Hero = () => {
     return (
         <section className="relative w-full h-screen min-h-[650px] max-md:h-[100svh] max-md:min-h-0 flex flex-col justify-end overflow-hidden font-['Inter',sans-serif]">
-            {/* Background Video */}
-            <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="absolute inset-0 w-full h-full object-cover z-0"
-            >
-                <source src={aimsvideo} type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
+            {/* Background video: 720p on phones, 1080p elsewhere; the poster (its opening frame) shows while it loads */}
+            {saveData ? (
+                <img src={aimsPoster} alt="" className="absolute inset-0 w-full h-full object-cover z-0" />
+            ) : (
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    preload="auto"
+                    poster={aimsPoster}
+                    className="absolute inset-0 w-full h-full object-cover z-0"
+                >
+                    <source src={aimsVideoMobile} type="video/mp4" media="(max-width: 767px)" />
+                    <source src={aimsVideo} type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            )}
 
             {/* Dark Vignette */}
             <div className="absolute inset-0 bg-black/35 z-10" />

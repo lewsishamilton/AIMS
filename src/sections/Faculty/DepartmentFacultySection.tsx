@@ -128,7 +128,7 @@ export const DepartmentFacultySection: React.FC<DepartmentFacultySectionProps> =
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4 text-[#1f3351] dark:text-white" />
                     <span className="text-xs font-bold uppercase tracking-wider text-[#1f3351] dark:text-white">
-                      Departmental Faculty Roster ({members.length})
+                      Departmental Faculty
                     </span>
                   </div>
                   <span className="text-[11px] font-medium text-[#64748b] dark:text-slate-300">

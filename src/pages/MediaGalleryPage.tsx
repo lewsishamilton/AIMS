@@ -2,18 +2,18 @@ import React, { useState, useEffect } from "react";
 import { Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import real campus images from stock assets
-import img01 from "../assets/stockImages/aims-campus-07.jpeg";
-import img02 from "../assets/stockImages/aims-campus-15.jpeg";
-import img03 from "../assets/stockImages/aims-campus-47.jpeg";
-import img04 from "../assets/stockImages/aims-campus-41.jpeg";
-import img05 from "../assets/stockImages/aims-campus-19.jpeg";
-import img06 from "../assets/stockImages/aims-campus-38.jpeg";
-import img07 from "../assets/stockImages/aims-campus-37.jpeg";
-import img08 from "../assets/stockImages/aims-campus-03.jpeg";
-import img09 from "../assets/stockImages/aims-campus-35.jpeg";
-import img10 from "../assets/stockImages/aims-campus-21.jpeg";
-import img11 from "../assets/stockImages/aims-campus-31.jpeg";
-import img12 from "../assets/stockImages/aims-campus-48.jpeg";
+import img01 from "../assets/stockImages/aims-campus-07.webp";
+import img02 from "../assets/stockImages/aims-campus-15.webp";
+import img03 from "../assets/stockImages/aims-campus-47.webp";
+import img04 from "../assets/stockImages/aims-campus-41.webp";
+import img05 from "../assets/stockImages/aims-campus-19.webp";
+import img06 from "../assets/stockImages/aims-campus-38.webp";
+import img07 from "../assets/stockImages/aims-campus-37.webp";
+import img08 from "../assets/stockImages/aims-campus-03.webp";
+import img09 from "../assets/stockImages/aims-campus-35.webp";
+import img10 from "../assets/stockImages/aims-campus-21.webp";
+import img11 from "../assets/stockImages/aims-campus-31.webp";
+import img12 from "../assets/stockImages/aims-campus-48.webp";
 
 const photos = [
   { src: img01, title: "Main Campus Entrance" },
@@ -90,71 +90,71 @@ const allCollageItems: EventItem[] = collageRows.flat();
 
 // ─── Direct Imports from src/assets/clg-imgs (strictly authentic folder structures) ───
 // Administration Block (5 images)
-import admin1 from "../assets/clg-imgs/administration block/1.png";
-import admin2 from "../assets/clg-imgs/administration block/2.png";
-import admin3 from "../assets/clg-imgs/administration block/3.png";
-import admin4 from "../assets/clg-imgs/administration block/4.png";
-import admin5 from "../assets/clg-imgs/administration block/5.png";
+import admin1 from "../assets/clg-imgs/administration block/1.webp";
+import admin2 from "../assets/clg-imgs/administration block/2.webp";
+import admin3 from "../assets/clg-imgs/administration block/3.webp";
+import admin4 from "../assets/clg-imgs/administration block/4.webp";
+import admin5 from "../assets/clg-imgs/administration block/5.webp";
 
 // Skill Lab (4 images)
-import skill1 from "../assets/clg-imgs/skills/1.png";
-import skill2 from "../assets/clg-imgs/skills/2.png";
-import skill3 from "../assets/clg-imgs/skills/3.png";
-import skill4 from "../assets/clg-imgs/skills/4.png";
+import skill1 from "../assets/clg-imgs/skills/1.webp";
+import skill2 from "../assets/clg-imgs/skills/2.webp";
+import skill3 from "../assets/clg-imgs/skills/3.webp";
+import skill4 from "../assets/clg-imgs/skills/4.webp";
 
 // Physiology (3 images)
-import phys1 from "../assets/clg-imgs/pysiology/1.png";
-import phys2 from "../assets/clg-imgs/pysiology/2.png";
-import phys3 from "../assets/clg-imgs/pysiology/3.png";
+import phys1 from "../assets/clg-imgs/pysiology/1.webp";
+import phys2 from "../assets/clg-imgs/pysiology/2.webp";
+import phys3 from "../assets/clg-imgs/pysiology/3.webp";
 
 // MEU (3 images)
-import meu1 from "../assets/clg-imgs/MEU/1.png";
-import meu2 from "../assets/clg-imgs/MEU/2.png";
-import meu3 from "../assets/clg-imgs/MEU/3.png";
+import meu1 from "../assets/clg-imgs/MEU/1.webp";
+import meu2 from "../assets/clg-imgs/MEU/2.webp";
+import meu3 from "../assets/clg-imgs/MEU/3.webp";
 
 // Central Library (4 images)
-import lib1 from "../assets/clg-imgs/central library/1.jpg";
-import lib2 from "../assets/clg-imgs/central library/2.jpg";
-import lib3 from "../assets/clg-imgs/central library/3.jpg";
-import lib4 from "../assets/clg-imgs/central library/4.jpg";
+import lib1 from "../assets/clg-imgs/central library/1.webp";
+import lib2 from "../assets/clg-imgs/central library/2.webp";
+import lib3 from "../assets/clg-imgs/central library/3.webp";
+import lib4 from "../assets/clg-imgs/central library/4.webp";
 
 // Anatomy (5 images)
-import anat1 from "../assets/clg-imgs/Anatomy/1.png";
-import anat2 from "../assets/clg-imgs/Anatomy/2.png";
-import anat3 from "../assets/clg-imgs/Anatomy/3.png";
-import anat5 from "../assets/clg-imgs/Anatomy/5.png";
-import anat6 from "../assets/clg-imgs/Anatomy/6.png";
+import anat1 from "../assets/clg-imgs/Anatomy/1.webp";
+import anat2 from "../assets/clg-imgs/Anatomy/2.webp";
+import anat3 from "../assets/clg-imgs/Anatomy/3.webp";
+import anat5 from "../assets/clg-imgs/Anatomy/5.webp";
+import anat6 from "../assets/clg-imgs/Anatomy/6.webp";
 
 // Operation Room (7 images)
-import or1 from "../assets/clg-imgs/Operation Room/1.png";
-import or2 from "../assets/clg-imgs/Operation Room/2.png";
-import or3 from "../assets/clg-imgs/Operation Room/3.png";
-import or4 from "../assets/clg-imgs/Operation Room/4.png";
-import or5 from "../assets/clg-imgs/Operation Room/5.png";
-import or6 from "../assets/clg-imgs/Operation Room/6.png";
-import or7 from "../assets/clg-imgs/Operation Room/7.png";
+import or1 from "../assets/clg-imgs/Operation Room/1.webp";
+import or2 from "../assets/clg-imgs/Operation Room/2.webp";
+import or3 from "../assets/clg-imgs/Operation Room/3.webp";
+import or4 from "../assets/clg-imgs/Operation Room/4.webp";
+import or5 from "../assets/clg-imgs/Operation Room/5.webp";
+import or6 from "../assets/clg-imgs/Operation Room/6.webp";
+import or7 from "../assets/clg-imgs/Operation Room/7.webp";
 
 // Blood Bank (4 images)
-import bb1 from "../assets/clg-imgs/Blood Bank/1.png";
-import bb2 from "../assets/clg-imgs/Blood Bank/2.png";
-import bb3 from "../assets/clg-imgs/Blood Bank/3.png";
-import bbOt from "../assets/clg-imgs/Blood Bank/ot-picture-SLS05934.jpg";
+import bb1 from "../assets/clg-imgs/Blood Bank/1.webp";
+import bb2 from "../assets/clg-imgs/Blood Bank/2.webp";
+import bb3 from "../assets/clg-imgs/Blood Bank/3.webp";
+import bbOt from "../assets/clg-imgs/Blood Bank/ot-picture-SLS05934.webp";
 
 // Central Lab (3 images)
-import cl1 from "../assets/clg-imgs/Central Lab/1.png";
-import cl2 from "../assets/clg-imgs/Central Lab/2.png";
-import cl3 from "../assets/clg-imgs/Central Lab/3.png";
+import cl1 from "../assets/clg-imgs/Central Lab/1.webp";
+import cl2 from "../assets/clg-imgs/Central Lab/2.webp";
+import cl3 from "../assets/clg-imgs/Central Lab/3.webp";
 
 // Lobby (9 images)
-import lobby1 from "../assets/clg-imgs/Lobby/1.png";
-import lobby2 from "../assets/clg-imgs/Lobby/2.png";
-import lobby3 from "../assets/clg-imgs/Lobby/3.png";
-import lobby4 from "../assets/clg-imgs/Lobby/4.png";
-import lobby5 from "../assets/clg-imgs/Lobby/5.png";
-import lobby6 from "../assets/clg-imgs/Lobby/6.png";
-import lobby7 from "../assets/clg-imgs/Lobby/7.png";
-import lobby8 from "../assets/clg-imgs/Lobby/8.png";
-import lobby9 from "../assets/clg-imgs/Lobby/9.png";
+import lobby1 from "../assets/clg-imgs/Lobby/1.webp";
+import lobby2 from "../assets/clg-imgs/Lobby/2.webp";
+import lobby3 from "../assets/clg-imgs/Lobby/3.webp";
+import lobby4 from "../assets/clg-imgs/Lobby/4.webp";
+import lobby5 from "../assets/clg-imgs/Lobby/5.webp";
+import lobby6 from "../assets/clg-imgs/Lobby/6.webp";
+import lobby7 from "../assets/clg-imgs/Lobby/7.webp";
+import lobby8 from "../assets/clg-imgs/Lobby/8.webp";
+import lobby9 from "../assets/clg-imgs/Lobby/9.webp";
 
 export interface ArenaSectionData {
   id: string;
@@ -718,7 +718,7 @@ export const MediaGalleryPage: React.FC = () => {
             <button
               onClick={() => setSelectedEvent(null)}
               aria-label="Close modal"
-              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-teal-500 text-white flex items-center justify-center border border-white/20 hover:border-teal-400 transition-all cursor-pointer hover:rotate-90"
+              className="absolute top-3.5 right-3.5 sm:top-4 sm:right-4 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-[#1f3351] dark:hover:bg-teal-500 text-white flex items-center justify-center border border-white/20 hover:border-teal-400 transition-all cursor-pointer hover:rotate-90"
             >
               <X className="w-5 h-5" />
             </button>
@@ -727,7 +727,7 @@ export const MediaGalleryPage: React.FC = () => {
             <button
               onClick={handlePrevEvent}
               aria-label="Previous photo"
-              className="absolute left-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-teal-500 text-white flex items-center justify-center border border-white/20 hover:border-teal-400 transition-all cursor-pointer shadow-md"
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-[#1f3351] dark:hover:bg-teal-500 text-white flex items-center justify-center border border-white/20 hover:border-teal-400 transition-all cursor-pointer shadow-md"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -735,7 +735,7 @@ export const MediaGalleryPage: React.FC = () => {
             <button
               onClick={handleNextEvent}
               aria-label="Next photo"
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-teal-500 text-white flex items-center justify-center border border-white/20 hover:border-teal-400 transition-all cursor-pointer shadow-md"
+              className="absolute right-3.5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/50 hover:bg-[#1f3351] dark:hover:bg-teal-500 text-white flex items-center justify-center border border-white/20 hover:border-teal-400 transition-all cursor-pointer shadow-md"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
