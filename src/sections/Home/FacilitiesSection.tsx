@@ -9,7 +9,6 @@ import transportationImg from "../../assets/facilities/transport.webp";
 import messImg from "../../assets/facilities/mess.webp";
 import gymImg from "../../assets/facilities/gym.webp";
 import hostelImg from "../../assets/facilities/hostel.webp";
-import tableTennisImg from "../../assets/facilities/table_tennis.webp";
 
 export interface FacilityItem {
   id: string;
@@ -68,14 +67,6 @@ const FACILITIES: FacilityItem[] = [
     imageAlt: "Student Hostels at AIMS",
     path: "/facilities/hostel",
   },
-  {
-    id: "06",
-    tag: "INDOOR RECREATION",
-    name: "Table Tennis",
-    description: "Dedicated indoor recreation zone featuring tournament-standard table tennis boards for leisure and practice.",
-    image: tableTennisImg,
-    imageAlt: "Table Tennis Facility at AIMS",
-  },
 ];
 
 const EXPLORE_CLASS =
@@ -116,7 +107,7 @@ export const FacilitiesSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Elastic Accordion Gallery - All 6 facilities in one line */}
+        {/* Elastic Accordion Gallery - All facilities in one line */}
         <div className="flex h-[560px] w-full flex-col gap-2.5 sm:gap-3 md:h-[440px] lg:h-[475px] md:flex-row md:gap-3 lg:gap-3.5">
           {FACILITIES.map((facility) => {
             const isActive = activeId === facility.id;
