@@ -72,15 +72,7 @@ const Navbar = () => {
             name: "ACADEMICS",
             path: "/departments",
             dropdown: [
-                {
-                    name: "Departments",
-                    path: "/departments",
-                    subItems: [
-                        { name: "Pre-Clinical", path: "/departments?category=Pre-Clinical" },
-                        { name: "Para-Clinical", path: "/departments?category=Para-Clinical" },
-                        { name: "Clinical", path: "/departments?category=Clinical" },
-                    ],
-                },
+                { name: "Departments", path: "/departments" },
                 {
                     name: "Faculty",
                     path: "/faculty",
