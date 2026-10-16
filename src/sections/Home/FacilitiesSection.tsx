@@ -30,6 +30,7 @@ const FACILITIES: FacilityItem[] = [
     description: "Multi-purpose indoor arena engineered for basketball, badminton, volleyball, and inter-collegiate events.",
     image: indoorStadiumImg,
     imageAlt: "Indoor Stadium at AIMS",
+    path: "/facilities/indoor-stadium",
   },
   {
     id: "02",
@@ -47,6 +48,7 @@ const FACILITIES: FacilityItem[] = [
     description: "Hygienic multi-cuisine dining facility serving balanced, nutritious, and wholesome meals prepared fresh daily.",
     image: messImg,
     imageAlt: "Student Mess & Dining at AIMS",
+    path: "/facilities/mess",
   },
   {
     id: "04",
@@ -55,6 +57,7 @@ const FACILITIES: FacilityItem[] = [
     description: "Modern fitness center equipped with advanced cardio, strength training machines, and free weights.",
     image: gymImg,
     imageAlt: "Campus Gymnasium at AIMS",
+    path: "/facilities/gym",
   },
   {
     id: "05",
@@ -63,6 +66,7 @@ const FACILITIES: FacilityItem[] = [
     description: "Secure, well-furnished student residences with 24/7 power backup, high-speed Wi-Fi, and study lounges.",
     image: hostelImg,
     imageAlt: "Student Hostels at AIMS",
+    path: "/facilities/hostel",
   },
   {
     id: "06",

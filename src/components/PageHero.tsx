@@ -14,8 +14,13 @@ import { sectionFor } from "./sectionTheme";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
-const HERO = import.meta.glob<string>("../assets/hero/*.webp", { eager: true, import: "default" });
-const hero = (name: string) => HERO[`../assets/hero/${name}.webp`];
+// Facility pages use the real AIMS photos from assets/facilities, looked up by the same bare name.
+const HERO = import.meta.glob<string>(["../assets/hero/*.webp", "../assets/facilities/*.webp"], {
+  eager: true,
+  import: "default",
+});
+const hero = (name: string) =>
+  HERO[`../assets/hero/${name}.webp`] ?? HERO[`../assets/facilities/${name}.webp`];
 
 /** Exact route → photo; unlisted routes use their area's photo, then the default. */
 const PAGE_PHOTO: Record<string, string> = {
@@ -37,6 +42,10 @@ const PAGE_PHOTO: Record<string, string> = {
   "/facilities/campus-life": "campus-life",
   "/facilities/hospital": "hospital-facilities",
   "/facilities/transport": "transport",
+  "/facilities/hostel": "hostel",
+  "/facilities/mess": "mess",
+  "/facilities/gym": "gym",
+  "/facilities/indoor-stadium": "indoor_stadium",
   "/patient-care/admission-discharge": "admission-discharge",
   "/patient-care/citizen-charter": "citizen-charter",
   "/patient-care/feedback": "feedback",
