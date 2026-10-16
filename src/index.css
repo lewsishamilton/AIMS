@@ -253,7 +253,7 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   background-color: rgba(234, 88, 12, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: #ffffff !important;
+  color: #0d2346 !important;
   border: 1px solid rgba(254, 215, 170, 0.35);
   box-shadow: 0 4px 16px rgba(194, 65, 12, 0.25), 0 2px 6px rgba(0, 0, 0, 0.12);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -262,6 +262,7 @@ html.dark [class*="dark:bg-[#070f1e]"] {
 
 .brochure-tab:hover {
   background-color: rgba(249, 115, 22, 0.95);
+  color: #09172e !important;
   border-color: rgba(255, 255, 255, 0.55);
   box-shadow: 0 6px 20px rgba(234, 88, 12, 0.38), 0 0 12px rgba(251, 146, 60, 0.3);
   transform: translateX(-3px);

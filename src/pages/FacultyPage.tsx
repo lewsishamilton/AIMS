@@ -202,16 +202,16 @@ export const FacultyPage: React.FC = () => {
 
     autoTable(doc, {
       startY: 84,
-      head: [["Sl. No.", "Faculty Name", "Designation", "Cadre", "Reg. Code"]],
+      head: [["Sl. No.", "Faculty Name", "Designation", "Reg. Code"]],
       body: filteredData.flatMap(({ department, filteredMembers }) => [
         [
           {
             content: `${department.name} (${department.category}) - ${filteredMembers.length}`,
-            colSpan: 5,
+            colSpan: 4,
             styles: { fillColor: [241, 245, 249], textColor: [31, 51, 81], fontStyle: "bold" as const },
           },
         ],
-        ...filteredMembers.map((f, idx) => [idx + 1, f.name, f.designation, f.roleBadge, f.regCode || "-"]),
+        ...filteredMembers.map((f, idx) => [idx + 1, f.name, f.designation, f.regCode || "-"]),
       ]),
       styles: { fontSize: 8.5, cellPadding: 4 },
       headStyles: { fillColor: [31, 51, 81] },
