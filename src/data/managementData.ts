@@ -3,7 +3,7 @@ import anushreyaReddyImg from "../assets/Management/M.Anushreya Reddy.webp";
 import mamathaReddyImg from "../assets/Management/M.Mamatha Reddy.webp";
 import dhirenReddyImg from "../assets/Management/M.Dhiren Reddy.webp";
 import devanandImg from "../assets/Management/Dr.B.Devanand.webp";
-import sumaPreethiImg from "../assets/Management/Dr.S.SumaPreethi.webp";
+import sumaPreethiImg from "../assets/Management/sumapreethi.png";
 
 export interface ManagementMember {
   id: string;
