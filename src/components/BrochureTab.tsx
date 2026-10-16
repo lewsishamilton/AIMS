@@ -36,10 +36,10 @@ export default function BrochureTab() {
         aria-label="Open the AIMS brochure (PDF, 22.7 MB)"
         title="AIMS Brochure (PDF, 22.7 MB)"
         style={{ borderRightWidth: 0 }}
-        className="brochure-tab flex flex-col items-center gap-2 rounded-l-xl px-2 py-3.5 sm:px-2.5 sm:py-4 text-[#0d2346]"
+        className="brochure-tab flex flex-col items-center gap-2 rounded-l-xl px-2 py-3.5 sm:px-2.5 sm:py-4 text-[#f8fafc]"
       >
         <BookOpen className="relative z-10 h-4 w-4" strokeWidth={2.5} />
-        <span className="relative z-10 rotate-180 text-[11px] font-bold uppercase tracking-[0.2em] [writing-mode:vertical-rl] sm:text-xs text-[#0d2346]">
+        <span className="relative z-10 rotate-180 text-[11px] font-bold uppercase tracking-[0.2em] [writing-mode:vertical-rl] sm:text-xs text-[#f8fafc]">
           Brochure
         </span>
       </a>
