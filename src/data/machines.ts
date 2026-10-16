@@ -5,7 +5,7 @@ import cathLabImg from "../assets/clg-imgs/MACHINE IMAGES/aims images machines/c
 import ctScannerImg from "../assets/clg-imgs/MACHINE IMAGES/aims images machines/ct scan image.webp";
 import eegImg from "../assets/clg-imgs/MACHINE IMAGES/aims images machines/EEG MACHINE.webp";
 import emgImg from "../assets/clg-imgs/MACHINE IMAGES/aims images machines/EMG MACHINE.webp";
-import entImg from "../assets/clg-imgs/MACHINE IMAGES/aims images machines/ENT MICROSCOPE.webp";
+import entImg from "../assets/clg-imgs/MACHINE IMAGES/aims images machines/entequipment.webp";
 import centralLabImg from "../assets/clg-imgs/MACHINE IMAGES/aims images machines/FULLY AUTOMATED CENTRAL LAB ADVANCED ENDOSCOPY.webp";
 import heartLungImg from "../assets/clg-imgs/MACHINE IMAGES/aims images machines/HEART LUNG MACHINE WITH HEMOTHERM.webp";
 import digitalXRayImg from "../assets/clg-imgs/MACHINE IMAGES/aims images machines/hospital digital x ray.webp";
