@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Phone, Copy, Check } from "lucide-react";
 import {
   EXECUTIVE_MEMBERS,
-  PRINCIPALS,
+  DEAN_AND_PRINCIPAL,
   type ManagementMember,
 } from "../data/managementData";
 
@@ -154,7 +154,7 @@ export default function ManagementPage() {
             {member.designationNote ? ` (${member.designationNote})` : ""}
           </p>
 
-          {/* Contact action for members with phone numbers (Principals) */}
+          {/* Contact action for members with phone numbers */}
           {member.contact && (
             <div className="mt-3.5 pt-3 border-t border-white/15">
               <div className="flex items-center justify-between gap-2 p-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
@@ -283,9 +283,9 @@ export default function ManagementPage() {
             </div>
           )}
 
-          {/* 2. EXECUTIVE OFFICERS AND MEMBERS */}
+          {/* 2. EXECUTIVE OFFICERS AND MEMBERS (Secretary, Treasurer, Executive Member) */}
           <div className="mb-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-6 gap-x-3.5 sm:gap-x-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto gap-y-6 gap-x-4 sm:gap-x-6">
               {executiveProfiles.map((member) => (
                 <MemberCard key={member.id} member={member} />
               ))}
@@ -294,19 +294,22 @@ export default function ManagementPage() {
         </section>
 
         {/* =========================================================================
-            SECTION 2: PRINCIPAL
+            SECTION 2: DEAN & PRINCIPAL (Institutional Leadership)
            ========================================================================= */}
         <section className="pt-8 border-t border-[#dce8ee] dark:border-white/10">
           <div className="text-center mb-10 pb-4 border-b border-[#dce8ee] dark:border-white/10">
             <h2 className="font-['Manrope',sans-serif] text-2xl sm:text-3xl lg:text-[34px] font-bold text-[#1f3351] dark:text-white leading-tight">
-              Principal
+              Dean &amp; Principal
             </h2>
+            <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base mt-2 max-w-xl mx-auto">
+              Academic and institutional leadership driving medical excellence, patient care standards, and student education at AIMS.
+            </p>
           </div>
 
-          {/* PRINCIPALS (B.Sc MLT, Nursing, Physiotherapy) */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 gap-x-4 sm:gap-x-5 max-w-4xl mx-auto">
-            {PRINCIPALS.map((principal) => (
-              <MemberCard key={principal.id} member={principal} />
+          {/* Dean & Principal Side by Side */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-6 sm:gap-x-8 max-w-2xl mx-auto">
+            {DEAN_AND_PRINCIPAL.map((leader) => (
+              <MemberCard key={leader.id} member={leader} />
             ))}
           </div>
         </section>

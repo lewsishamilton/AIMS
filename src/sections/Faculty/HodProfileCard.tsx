@@ -108,12 +108,10 @@ export const HodProfileCard: React.FC<HodProfileCardProps> = ({
 
           {/* Bottom Level: Institutional Accreditations & Supporting Credentials */}
           <div className="flex flex-wrap items-center justify-center gap-2 border-t border-[#dce8ee] pt-4.5 sm:justify-start dark:border-white/10">
-            {hod.regCode && (
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-[#cbd5e1] bg-white px-3.5 py-1 font-mono text-xs font-bold text-[#1f3351] shadow-2xs dark:border-white/15 dark:bg-white/5 dark:text-white">
-                <ShieldCheck className="h-3.5 w-3.5 text-[#1f3351] dark:text-white" />
-                Reg: {hod.regCode}
-              </span>
-            )}
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#cbd5e1] bg-white px-3.5 py-1 font-mono text-xs font-bold text-[#1f3351] shadow-2xs dark:border-white/15 dark:bg-white/5 dark:text-white">
+              <ShieldCheck className="h-3.5 w-3.5 text-[#1f3351] dark:text-white" />
+              {hod.regCode ? `Reg: ${hod.regCode}` : `Ref: AIMS-${String(hod.serialNumber || 1).padStart(3, "0")}`}
+            </span>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[#cbd5e1] bg-white px-3.5 py-1 text-xs font-bold text-[#1f3351] shadow-2xs dark:border-white/10 dark:bg-white/5 dark:text-slate-200">
               <UserCheck className="h-3.5 w-3.5 text-[#1f3351] dark:text-white" />
               NMC Recognized Faculty

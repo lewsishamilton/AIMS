@@ -154,6 +154,9 @@ function App() {
         <Route path="/dean" element={<LeadershipProfilePage id="dr-b-devanand" />} />
         <Route path="/Dean" element={<LeadershipProfilePage id="dr-b-devanand" />} />
         <Route path="/leadership/dean" element={<LeadershipProfilePage id="dr-b-devanand" />} />
+        <Route path="/principal" element={<LeadershipProfilePage id="dr-s-suma-preethi" />} />
+        <Route path="/Principal" element={<LeadershipProfilePage id="dr-s-suma-preethi" />} />
+        <Route path="/leadership/principal" element={<LeadershipProfilePage id="dr-s-suma-preethi" />} />
         <Route path="/leadership/:id" element={<LeadershipProfilePage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/Contact" element={<ContactPage />} />

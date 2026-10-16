@@ -1,9 +1,9 @@
 import { Navigate, useParams } from "react-router-dom";
-import { EXECUTIVE_MEMBERS } from "../data/managementData";
+import { ALL_LEADERSHIP_MEMBERS } from "../data/managementData";
 
 export default function LeadershipProfilePage({ id }: { id?: string }) {
   const params = useParams();
-  const member = EXECUTIVE_MEMBERS.find((m) => m.id === (id ?? params.id));
+  const member = ALL_LEADERSHIP_MEMBERS.find((m) => m.id === (id ?? params.id));
   if (!member?.profile) return <Navigate to="/management" replace />;
   const { profile } = member;
 

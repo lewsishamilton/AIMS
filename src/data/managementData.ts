@@ -3,14 +3,15 @@ import anushreyaReddyImg from "../assets/Management/M.Anushreya Reddy.webp";
 import mamathaReddyImg from "../assets/Management/M.Mamatha Reddy.webp";
 import dhirenReddyImg from "../assets/Management/M.Dhiren Reddy.webp";
 import devanandImg from "../assets/Management/Dr.B.Devanand.webp";
+import sumaPreethiImg from "../assets/Management/Dr.S.SumaPreethi.webp";
 
 export interface ManagementMember {
   id: string;
   name: string;
   role: string;
   designationNote?: string;
-  category: "executive" | "principal";
-  hierarchyTier: "President" | "Key Executive Officers" | "Executive Members" | "Institutional Principals";
+  category: "executive" | "academic" | "principal";
+  hierarchyTier: "President" | "Key Executive Officers" | "Executive Members" | "Institutional Leadership" | "Institutional Principals";
   hierarchyRank: number; // 1 = Highest
   contact?: string;
   departmentOrWing?: string;
@@ -59,7 +60,7 @@ export const EXECUTIVE_MEMBERS: ManagementMember[] = [
     role: "Secretary",
     category: "executive",
     hierarchyTier: "Key Executive Officers",
-    hierarchyRank: 3,
+    hierarchyRank: 2,
     departmentOrWing: "Executive Committee",
     badges: ["Secretary", "Administration"],
     photoUrl: anushreyaReddyImg,
@@ -85,7 +86,7 @@ export const EXECUTIVE_MEMBERS: ManagementMember[] = [
     role: "Treasurer",
     category: "executive",
     hierarchyTier: "Key Executive Officers",
-    hierarchyRank: 4,
+    hierarchyRank: 3,
     departmentOrWing: "Executive Committee",
     badges: ["Treasurer", "Finance & Planning"],
     photoUrl: mamathaReddyImg,
@@ -107,33 +108,12 @@ export const EXECUTIVE_MEMBERS: ManagementMember[] = [
     },
   },
   {
-    id: "dr-b-devanand",
-    name: "Dr. B. Devanand",
-    role: "Dean",
-    category: "executive",
-    hierarchyTier: "Executive Members",
-    hierarchyRank: 6,
-    departmentOrWing: "Executive Committee",
-    badges: ["Dean"],
-    photoUrl: devanandImg,
-    profile: {
-      fullName: "Dr. B. Devanand",
-      title: "Dean · Arundathi Institute of Medical Sciences (AIMS)",
-      message: [
-        "At Arundathi Institute of Medical Sciences, our mission is built upon three fundamental pillars: academic excellence, advanced clinical care, and compassionate community service. As Dean, it is my privilege to welcome you to an institution dedicated to shaping the future of healthcare through rigorous education, scientific inquiry, and ethical practice.",
-        "Our medical curriculum is designed not only to deliver comprehensive theoretical knowledge and clinical skill, but also to instil empathy, integrity, and professionalism in every student. Supported by a highly qualified and experienced faculty, state-of-the-art teaching facilities, modern laboratories, and a modern hospital infrastructure, we ensure that our students receive well-rounded hands-on clinical exposure from the very beginning of their journey.",
-        "We are committed to maintaining the highest standards set by national regulatory authorities, ensuring our academic programs, research initiatives, and patient care protocols remain at the forefront of modern medicine. Through continuous quality improvement, evidence-based training, and a vibrant research environment, we strive to empower our medical trainees to become competent, patient-centric healthcare leaders of tomorrow.",
-        "To our prospective and current students, faculty, and healthcare professionals: we invite you to be part of a dynamic learning ecosystem where passion meets purpose. To our patients and community: we reaffirm our dedicated pledge to offer quality, accessible, and compassionate care to all.",
-      ],
-    },
-  },
-  {
     id: "m-dhiren-reddy",
     name: "M. Dhiren Reddy",
     role: "Member",
     category: "executive",
     hierarchyTier: "Executive Members",
-    hierarchyRank: 7,
+    hierarchyRank: 4,
     departmentOrWing: "Executive Committee",
     badges: ["Executive Member"],
     photoUrl: dhirenReddyImg,
@@ -156,44 +136,65 @@ export const EXECUTIVE_MEMBERS: ManagementMember[] = [
   },
 ];
 
-export const PRINCIPALS: ManagementMember[] = [
+export const DEAN_AND_PRINCIPAL: ManagementMember[] = [
   {
-    id: "p-vimala",
-    name: "P. Vimala",
-    designationNote: "Bsc MLT",
-    role: "Principal",
-    category: "principal",
-    hierarchyTier: "Institutional Principals",
+    id: "dr-b-devanand",
+    name: "Dr. B. Devanand",
+    role: "Dean",
+    category: "academic",
+    hierarchyTier: "Institutional Leadership",
     hierarchyRank: 1,
-    contact: "9391912390",
-    departmentOrWing: "B.Sc Medical Laboratory Technology (MLT)",
-    badges: ["Principal", "Allied Health Sciences"],
-    photoUrl: "",
+    departmentOrWing: "Arundathi Institute of Medical Sciences",
+    badges: ["Dean", "Institutional Leadership"],
+    photoUrl: devanandImg,
+    profile: {
+      fullName: "Dr. B. Devanand",
+      title: "Dean · Arundathi Institute of Medical Sciences (AIMS)",
+      bio: [
+        "Dr. B. Devanand is a distinguished medical educator and healthcare administrator serving as the Dean of Arundathi Institute of Medical Sciences (AIMS).",
+        "He oversees academic operations, clinical training curricula, faculty governance, and tertiary healthcare delivery at AIMS, ensuring adherence to National Medical Commission (NMC) mandates.",
+      ],
+      messageTitle: "Dean’s Welcome",
+      message: [
+        "At Arundathi Institute of Medical Sciences, our mission is built upon three fundamental pillars: academic excellence, advanced clinical care, and compassionate community service. As Dean, it is my privilege to welcome you to an institution dedicated to shaping the future of healthcare through rigorous education, scientific inquiry, and ethical practice.",
+        "Our medical curriculum is designed not only to deliver comprehensive theoretical knowledge and clinical skill, but also to instil empathy, integrity, and professionalism in every student. Supported by a highly qualified and experienced faculty, state-of-the-art teaching facilities, modern laboratories, and a modern hospital infrastructure, we ensure that our students receive well-rounded hands-on clinical exposure from the very beginning of their journey.",
+        "We are committed to maintaining the highest standards set by national regulatory authorities, ensuring our academic programs, research initiatives, and patient care protocols remain at the forefront of modern medicine. Through continuous quality improvement, evidence-based training, and a vibrant research environment, we strive to empower our medical trainees to become competent, patient-centric healthcare leaders of tomorrow.",
+        "To our prospective and current students, faculty, and healthcare professionals: we invite you to be part of a dynamic learning ecosystem where passion meets purpose. To our patients and community: we reaffirm our dedicated pledge to offer quality, accessible, and compassionate care to all.",
+      ],
+    },
   },
   {
-    id: "mrs-leena-deepthi",
-    name: "Mrs. Leena Deepthi",
-    designationNote: "Nursing",
+    id: "dr-s-suma-preethi",
+    name: "Dr. S. Suma Preethi",
     role: "Principal",
     category: "principal",
-    hierarchyTier: "Institutional Principals",
+    hierarchyTier: "Institutional Leadership",
     hierarchyRank: 2,
-    contact: "9391859112",
-    departmentOrWing: "Arundathi College of Nursing",
-    badges: ["Principal", "Nursing"],
-    photoUrl: "",
+    departmentOrWing: "Arundathi Institute of Medical Sciences",
+    badges: ["Principal", "Academic Head"],
+    photoUrl: sumaPreethiImg,
+    profile: {
+      fullName: "Dr. S. Suma Preethi",
+      title: "Principal · Arundathi Institute of Medical Sciences (AIMS)",
+      bio: [
+        "Dr. S. Suma Preethi serves as the Principal of Arundathi Institute of Medical Sciences (AIMS). With extensive experience in medical education, curriculum execution, and academic leadership, she guides the academic ecosystem with steadfast dedication.",
+        "Under her guidance, AIMS emphasizes holistic learning, evidence-based training, medical research, and compassionate patient care in strict alignment with National Medical Commission (NMC) standards.",
+      ],
+      messageTitle: "Principal’s Message",
+      message: [
+        "Welcome to Arundathi Institute of Medical Sciences (AIMS). As Principal, it is a privilege to lead an institution dedicated to academic distinction, innovative medical learning, and ethical clinical practice.",
+        "Our educational philosophy centres on nurturing competent, compassionate healthcare leaders equipped with sound scientific knowledge, diagnostic acumen, and genuine empathy. Through our modern infrastructure, modern diagnostic laboratories, and experiential clinical training, our students receive comprehensive mentorship from day one.",
+        "We foster an atmosphere of critical thinking, inquiry, and lifelong learning, inspiring our students to excel in medicine and make meaningful contributions to societal health.",
+      ],
+    },
   },
-  {
-    id: "dr-k-madhavi",
-    name: "Dr. K. Madhavi",
-    designationNote: "Physiotherapy",
-    role: "Principal",
-    category: "principal",
-    hierarchyTier: "Institutional Principals",
-    hierarchyRank: 3,
-    contact: "9391912105",
-    departmentOrWing: "Arundathi College of Physiotherapy",
-    badges: ["Principal", "Physiotherapy"],
-    photoUrl: "",
-  },
+];
+
+export const PRINCIPALS: ManagementMember[] = [
+  DEAN_AND_PRINCIPAL[1],
+];
+
+export const ALL_LEADERSHIP_MEMBERS: ManagementMember[] = [
+  ...EXECUTIVE_MEMBERS,
+  ...DEAN_AND_PRINCIPAL,
 ];

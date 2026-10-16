@@ -57,12 +57,15 @@ export function getCategoryCounts(): Record<"All" | DepartmentCategory, number> 
   };
 }
 
-/** The department's HOD only when the faculty data names one; no fallback to the senior-most member. */
+/** The department's HOD. Prioritizes rank 1, HOD badge or Head designation, falling back to the first member. */
 export function getDepartmentHod(departmentId: string): FacultyMember | undefined {
-  return getFacultyByDepartment(departmentId).find(
-    (f) =>
-      f.rank === 1 ||
-      f.roleBadge?.toLowerCase().includes("hod") ||
-      f.designation?.toLowerCase().includes("head")
+  const deptFaculty = getFacultyByDepartment(departmentId);
+  return (
+    deptFaculty.find(
+      (f) =>
+        f.rank === 1 ||
+        f.roleBadge?.toLowerCase().includes("hod") ||
+        f.designation?.toLowerCase().includes("head")
+    ) || deptFaculty[0]
   );
 }
