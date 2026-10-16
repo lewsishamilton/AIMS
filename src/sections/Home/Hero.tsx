@@ -1,6 +1,7 @@
 import aimsVideo from "../../assets/AIMS.mp4";
 import aimsVideoMobile from "../../assets/AIMS-720.mp4";
-import aimsPoster from "../../assets/AIMS-poster.webp";
+import aimsPosterMobile from "../../assets/AIMS-poster.webp";
+import aimsPosterDesktop from "../../assets/AIMS-poster-desktop.webp";
 import HeroStats from "./Hero-stats";
 
 // Visitors who turned on data saving get the still frame instead of the video.
@@ -8,10 +9,14 @@ const saveData =
     typeof navigator !== "undefined" &&
     (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
 
+// Phones and desktop play different videos, so each gets its own opening frame as the poster.
+const aimsPoster =
+    typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches ? aimsPosterMobile : aimsPosterDesktop;
+
 const Hero = () => {
     return (
         <section className="relative w-full h-screen min-h-[650px] max-md:h-[100svh] max-md:min-h-0 flex flex-col justify-end overflow-hidden font-['Inter',sans-serif]">
-            {/* Background video: 720p on phones, 1080p elsewhere; the poster (its opening frame) shows while it loads */}
+            {/* Background video: 720p on phones, the edited 1080p film elsewhere; the poster (its opening frame) shows while it loads */}
             {saveData ? (
                 <img src={aimsPoster} alt="" className="absolute inset-0 w-full h-full object-cover z-0" />
             ) : (

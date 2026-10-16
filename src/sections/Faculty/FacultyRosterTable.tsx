@@ -23,25 +23,6 @@ export const FacultyRosterTable: React.FC<FacultyRosterTableProps> = ({
     );
   }
 
-  const getTierBadge = (tier: string, rank?: number) => {
-    if (rank === 1 || tier.toLowerCase().includes("head")) {
-      return "bg-[#1f3351]/12 text-[#1f3351] border-[#1f3351]/25 dark:bg-white/15 dark:text-white dark:border-white/25";
-    }
-    if (rank === 2 || tier.toLowerCase().includes("professors")) {
-      return "bg-[#1f3351]/8 text-[#1f3351] border-[#1f3351]/20 dark:bg-white/10 dark:text-slate-100 dark:border-white/20";
-    }
-    if (rank === 3 || tier.toLowerCase().includes("associate")) {
-      return "bg-[#1f3351]/6 text-[#1f3351] border-[#1f3351]/15 dark:bg-white/8 dark:text-slate-200 dark:border-white/15";
-    }
-    if (rank === 4 || tier.toLowerCase().includes("assistant")) {
-      return "bg-[#1f3351]/5 text-[#1f3351] border-[#1f3351]/10 dark:bg-white/6 dark:text-slate-200 dark:border-white/10";
-    }
-    if (rank === 5 || tier.toLowerCase().includes("senior resident")) {
-      return "bg-slate-100 text-[#1f3351] border-[#cbd5e1] dark:bg-white/[0.04] dark:text-slate-200 dark:border-white/10";
-    }
-    return "bg-slate-100 text-[#475569] border-slate-200 dark:bg-white/[0.03] dark:text-slate-300 dark:border-white/10";
-  };
-
   return (
     <div className={`w-full overflow-x-auto ${className}`}>
       <table className="w-full text-left text-sm">
@@ -55,9 +36,6 @@ export const FacultyRosterTable: React.FC<FacultyRosterTableProps> = ({
             </th>
             <th scope="col" className="px-4 py-3.5 sm:px-6">
               Designation
-            </th>
-            <th scope="col" className="px-4 py-3.5 sm:px-6">
-              Academic Cadre
             </th>
             <th scope="col" className="w-36 px-4 py-3.5 text-right sm:w-44 sm:px-6">
               Reg / Ref Code
@@ -96,18 +74,6 @@ export const FacultyRosterTable: React.FC<FacultyRosterTableProps> = ({
                 {/* Designation */}
                 <td className="whitespace-nowrap px-4 py-3.5 text-xs font-semibold text-[#1f3351] dark:text-slate-200 sm:px-6 sm:text-sm">
                   {faculty.designation}
-                </td>
-
-                {/* Cadre / Academic Tier badge */}
-                <td className="whitespace-nowrap px-4 py-3.5 sm:px-6">
-                  <span
-                    className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[11px] font-semibold ${getTierBadge(
-                      faculty.tier,
-                      faculty.rank
-                    )}`}
-                  >
-                    {faculty.roleBadge || faculty.tier}
-                  </span>
                 </td>
 
                 {/* Registration Code */}
