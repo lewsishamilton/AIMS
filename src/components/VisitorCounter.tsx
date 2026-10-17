@@ -29,10 +29,10 @@ const CricketFlipDigit: React.FC<FlipDigitProps> = ({ digit }) => {
   }, [digit, currentDigit]);
 
   return (
-    <div className="relative w-4.5 sm:w-5.5 h-7 sm:h-8.5 select-none perspective-[400px]">
+    <div className="relative w-5 sm:w-6 h-7 sm:h-8 shrink-0 select-none perspective-[400px]">
       {/* ─── Static Underlying Background (Pure black, unbroken, no lines anywhere) ─── */}
-      <div className="absolute inset-0 flex items-center justify-center rounded-[2.5px] sm:rounded-[3px] overflow-hidden shadow-[0_2px_6px_rgba(0,0,0,0.8)] bg-black">
-        <span className="font-['Manrope',sans-serif] font-black text-sm sm:text-base text-white tracking-tight">
+      <div className="absolute inset-0 flex items-center justify-center rounded-[3px] overflow-hidden shadow-[0_2px_6px_rgba(0,0,0,0.8)] bg-black">
+        <span className="font-['Manrope',sans-serif] font-black text-xs sm:text-sm text-white tracking-tight leading-none text-center">
           {currentDigit}
         </span>
       </div>
@@ -41,15 +41,15 @@ const CricketFlipDigit: React.FC<FlipDigitProps> = ({ digit }) => {
       {isFlipping && (
         <>
           {/* Falling Top Flap */}
-          <div className="absolute top-0 inset-x-0 h-1/2 overflow-hidden bg-black rounded-t-[2.5px] sm:rounded-t-[3px] z-20 animate-cricket-flip-top">
-            <div className="absolute top-0 left-0 right-0 h-[200%] flex items-center justify-center font-['Manrope',sans-serif] font-black text-sm sm:text-base text-white tracking-tight">
+          <div className="absolute top-0 inset-x-0 h-1/2 overflow-hidden bg-black rounded-t-[3px] z-20 animate-cricket-flip-top">
+            <div className="absolute top-0 left-0 right-0 h-[200%] flex items-center justify-center font-['Manrope',sans-serif] font-black text-xs sm:text-sm text-white tracking-tight leading-none text-center">
               {prevDigit}
             </div>
           </div>
 
           {/* Unfolding Bottom Flap */}
-          <div className="absolute bottom-0 inset-x-0 h-1/2 overflow-hidden bg-black rounded-b-[2.5px] sm:rounded-b-[3px] z-20 animate-cricket-flip-bottom">
-            <div className="absolute bottom-0 left-0 right-0 h-[200%] flex items-center justify-center font-['Manrope',sans-serif] font-black text-sm sm:text-base text-white tracking-tight">
+          <div className="absolute bottom-0 inset-x-0 h-1/2 overflow-hidden bg-black rounded-b-[3px] z-20 animate-cricket-flip-bottom">
+            <div className="absolute bottom-0 left-0 right-0 h-[200%] flex items-center justify-center font-['Manrope',sans-serif] font-black text-xs sm:text-sm text-white tracking-tight leading-none text-center">
               {currentDigit}
             </div>
           </div>
@@ -69,14 +69,14 @@ const CricketScoreBox: React.FC<{
   const digits = formattedString.split("");
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="w-full flex flex-col items-center justify-center text-center">
       {/* Title */}
-      <span className="text-[10px] sm:text-[11px] font-bold text-white/70 uppercase tracking-widest font-['Manrope',sans-serif] mb-1.5">
+      <span className="text-[10px] sm:text-[11px] font-bold text-white/70 uppercase tracking-widest font-['Manrope',sans-serif] mb-1.5 whitespace-nowrap text-center pl-[0.1em]">
         {title}
       </span>
 
       {/* Row of Cricket Flap Boards - clean, flat, transparent background */}
-      <div className="flex items-center gap-0.5 sm:gap-1">
+      <div className="flex items-center justify-center gap-0.5 sm:gap-1">
         {digits.map((d, idx) => (
           <CricketFlipDigit key={idx} digit={d} />
         ))}
@@ -230,9 +230,9 @@ export const VisitorCounter: React.FC<VisitorCounterProps> = ({ className = "" }
   }, []);
 
   return (
-    <div className={`w-full flex items-center justify-center ${className}`}>
-      {/* Clean, transparent container - no blue/gray wrapper, no border, no line in between */}
-      <div className="inline-flex flex-row items-center justify-center gap-6 sm:gap-10 py-1">
+    <div className={`w-full flex items-center justify-center px-4 ${className}`}>
+      {/* Perfectly centered grid on mobile and desktop */}
+      <div className="w-full max-w-xs sm:max-w-md grid grid-cols-2 gap-3 sm:gap-8 justify-items-center items-start py-1">
         {/* Box 1: Today Visitors */}
         <CricketScoreBox
           title="Today's Visitors"

@@ -219,7 +219,7 @@ export default function Footer() {
           </div>
 
           {/* ─── Live Visitor Counter ─── */}
-          <div className="-mt-4 sm:-mt-6 mb-3">
+          <div className="mt-4 sm:mt-2 mb-2 w-full flex justify-center">
             <VisitorCounter />
           </div>
 

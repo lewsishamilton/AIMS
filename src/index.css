@@ -256,7 +256,7 @@ html.dark [class*="dark:bg-[#070f1e]"] {
   color: #f8fafc !important;
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: 0 4px 16px rgba(13, 35, 70, 0.35), 0 2px 6px rgba(0, 0, 0, 0.15);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
 
