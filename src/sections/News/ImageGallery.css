@@ -165,12 +165,97 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+  .image-gallery-section {
+    padding: 3rem 1.25rem 3.5rem;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+  .gallery-header-container {
+    margin-bottom: 1.8rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
   .gallery-three-up-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+  .gallery-frame-col {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .gallery-frame-card-compact {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0.85rem;
+    border-radius: 18px; /* Neat fillet on card */
+    overflow: hidden;
   }
   .compact-gallery-box {
     max-height: none;
-    aspect-ratio: 16 / 9;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    position: relative;
+    overflow: hidden;
+    border-radius: 14px; /* Neat fillet on placeholder frame */
+    box-sizing: border-box;
+  }
+  /* Frame 1: Wide panoramic campus shot placeholder adjusted to wide aspect ratio so full building fits seamlessly */
+  #gallery-frame-1 .compact-gallery-box {
+    aspect-ratio: 2.35 / 1;
+  }
+  /* Frame 2: Operation theatre wide landscape placeholder */
+  #gallery-frame-2 .compact-gallery-box {
+    aspect-ratio: 16 / 10;
+  }
+  /* Frame 3: Patient care room placeholder */
+  #gallery-frame-3 .compact-gallery-box {
+    aspect-ratio: 4 / 3;
+  }
+  .gallery-frame-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 14px; /* Neat fillet on image itself */
+    display: block;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 640px) {
+  .image-gallery-section {
+    padding: 2.5rem 1rem 3rem;
+  }
+  .gallery-three-up-grid {
+    gap: 1.35rem;
+  }
+  .gallery-frame-card-compact {
+    padding: 0.75rem;
+    border-radius: 16px; /* Symmetrical neat fillet on all 4 corners */
+    border: 1px solid var(--border-subtle);
+  }
+  .compact-gallery-box {
+    border-radius: 12px; /* Symmetrical neat fillet on frame */
+  }
+  .gallery-frame-img {
+    border-radius: 12px; /* Symmetrical neat fillet on all four sides */
+  }
+  #gallery-frame-1 .compact-gallery-box {
+    aspect-ratio: 2.35 / 1;
+  }
+  #gallery-frame-2 .compact-gallery-box {
+    aspect-ratio: 16 / 10.5;
+  }
+  #gallery-frame-3 .compact-gallery-box {
+    aspect-ratio: 4 / 3.2;
+  }
+  .gallery-caption-title {
+    font-size: 0.76rem;
   }
 }

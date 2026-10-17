@@ -95,7 +95,7 @@
   font-family: var(--font-display);
   font-size: clamp(1.8rem, 2.6vw, 2.4rem);
   color: var(--text-primary);
-  line-height: 1.05;
+  line-height: 1.25; /* Ample line spacing so two-line titles never touch */
   letter-spacing: 0.01em;
   transition: transform var(--transition-fast);
 }
@@ -311,33 +311,41 @@
 }
 
 @media (max-width: 768px) {
-  /* Read More button enabled on mobile */
+  /* Small, clean Read more button on mobile */
   .chronicle-read-more-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.35rem;
     align-self: flex-start;
-    padding: 0.35rem 0.85rem;
+    padding: 0.3rem 0.75rem;
     border-radius: 9999px;
-    background-color: rgba(28, 28, 28, 0.06);
-    border: 1px solid var(--border-subtle);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-strong);
     color: var(--text-primary);
     font-family: var(--font-sans);
-    font-size: 0.76rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-transform: none; /* No all-caps */
     cursor: pointer;
-    margin-top: 0.2rem;
+    margin-top: 0.25rem;
+    margin-bottom: 0.15rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     transition: all var(--transition-fast);
   }
 
   .chronicle-read-more-btn:active {
     transform: scale(0.97);
+    background-color: var(--bg-primary);
   }
 
-  .read-more-arrow {
-    font-size: 0.82rem;
+  .read-more-chevron {
+    color: var(--text-secondary);
     transition: transform var(--transition-fast);
+  }
+
+  .chronicle-read-more-btn:active .read-more-chevron {
+    color: var(--text-primary);
   }
 
   /* When collapsed on mobile, hide the long supporting paragraphs */
@@ -383,8 +391,9 @@
     line-height: 1;
   }
   .compact-card-title {
-    font-size: 1.45rem;
-    line-height: 1.18;
+    font-size: 1.38rem;
+    line-height: 1.32; /* Clear vertical separation between lines */
+    letter-spacing: 0.015em;
     word-break: break-word;
     overflow-wrap: break-word;
   }

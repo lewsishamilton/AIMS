@@ -31,7 +31,7 @@ export default function ImageGallery() {
             viewport={{ once: true, margin: "-40px" }}
             transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.25, 1, 0.5, 1] }}
           >
-            <div className="gallery-frame-card-compact">
+            <div className="gallery-frame-card-compact" id={`gallery-${frame.id}`}>
               <div className={`empty-frame-box compact-gallery-box ${frame.image ? 'has-image' : ''}`}>
                 {frame.image ? (
                   <img 

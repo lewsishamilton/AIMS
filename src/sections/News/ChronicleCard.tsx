@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Image as ImageIcon, ZoomIn, X } from 'lucide-react';
+import { Image as ImageIcon, ZoomIn, X, ChevronDown, ChevronUp } from 'lucide-react';
 import type { ChronicleItem } from '../../data/newsChroniclesData';
 import './ChronicleCard.css';
 
@@ -101,10 +101,12 @@ export default function ChronicleCard({
                 onClick={() => setIsExpanded(prev => !prev)}
                 aria-expanded={isExpanded}
               >
-                <span>{isExpanded ? 'Read Less' : 'Read More'}</span>
-                <span className="read-more-arrow" aria-hidden="true">
-                  {isExpanded ? '↑' : '↓'}
-                </span>
+                <span>{isExpanded ? 'Read less' : 'Read more'}</span>
+                {isExpanded ? (
+                  <ChevronUp size={12} className="read-more-chevron" />
+                ) : (
+                  <ChevronDown size={12} className="read-more-chevron" />
+                )}
               </button>
             )}
           </div>

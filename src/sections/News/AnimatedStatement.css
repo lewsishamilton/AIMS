@@ -82,21 +82,32 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .statement-section-slim {
-    padding: 3rem var(--section-padding-x);
-    min-height: 290px;
+    padding: 1.5rem var(--section-padding-x);
+    min-height: auto;
   }
   .statement-bottom-indicator {
-    margin-top: 1.5rem;
+    margin-top: 0.75rem;
   }
 }
 
 @media (max-width: 640px) {
+  .statement-section-slim {
+    padding: 1.15rem 0.75rem 1rem;
+    min-height: auto;
+  }
+  .statement-centered-stage {
+    gap: 0;
+  }
   .statement-mask-centered {
-    padding: 0.2rem 0.5rem;
+    padding: 0 0.25rem;
   }
   .statement-text-centered {
-    font-size: clamp(1.8rem, 8.5vw, 2.6rem);
+    font-size: clamp(1.4rem, 6.8vw, 1.95rem);
     white-space: normal;
-    line-height: 1.05;
+    line-height: 1.08;
+  }
+  .statement-bottom-indicator {
+    margin-top: 0.6rem;
+    gap: 0.6rem;
   }
 }
