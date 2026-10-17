@@ -86,9 +86,25 @@
 /* Responsive */
 @media (max-width: 900px) {
   .chronicles-vertical-section {
-    padding: 3.5rem clamp(0.5rem, 1.5vw, 1rem) 3rem;
+    padding: 3rem clamp(0.5rem, 1.5vw, 1rem) 2.5rem;
+  }
+  .chronicles-top-header {
+    margin-bottom: 2rem;
   }
   .chronicle-card-sticky-slot {
-    margin-bottom: clamp(120px, 18vh, 180px);
+    margin-bottom: clamp(140px, 20vh, 220px);
+  }
+}
+
+@media (max-width: 640px) {
+  .chronicles-vertical-section {
+    padding: 2.5rem 0.5rem 2rem;
+  }
+  .chronicle-card-sticky-slot {
+    top: 60px !important;
+    margin-bottom: clamp(180px, 26vh, 260px);
+  }
+  .chronicle-card-sticky-slot:last-child {
+    margin-bottom: 1.5rem;
   }
 }
