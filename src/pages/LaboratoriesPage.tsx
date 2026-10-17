@@ -7,7 +7,6 @@ import {
   FlaskConical,
   Building2,
   Stethoscope,
-  Sparkles,
   Activity,
 } from "lucide-react";
 
@@ -358,14 +357,6 @@ export const LaboratoriesPage: React.FC = () => {
         />
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center justify-center gap-2.5 px-4 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800/60 shadow-xs mb-4">
-            <Sparkles className="w-4 h-4 text-teal-600 dark:text-teal-400 animate-pulse" />
-            <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-teal-800 dark:text-teal-300 uppercase">
-              INFRASTRUCTURE &amp; CLINICAL ARENAS
-            </span>
-          </div>
-
           {/* Main Title */}
           <h1 className="font-['Manrope',sans-serif] text-3xl sm:text-5xl lg:text-6xl font-black text-[#162740] dark:text-white tracking-tight leading-[1.08] mb-4 uppercase">
             Welcome to Gallery Arena of AIMS
@@ -465,25 +456,7 @@ export const LaboratoriesPage: React.FC = () => {
 
       {/* ─── Academic & Campus Facilities Stream ─── */}
       {(activeFilter === "all" || activeFilter === "academic") && (
-        <section className="relative pb-16 sm:pb-20 border-t border-[#e2e8f0] dark:border-white/10 pt-10 sm:pt-14">
-          <div className="w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-12">
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center justify-center gap-3 mb-2.5">
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-                <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
-                  ACADEMIC &amp; SIMULATION FACILITIES
-                </span>
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-              </div>
-              <h2 className="font-['Manrope',sans-serif] text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#162740] dark:text-white tracking-tight uppercase">
-                Pre-Clinical Laboratories &amp; Campus Blocks
-              </h2>
-              <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base leading-relaxed mt-2 max-w-2xl mx-auto">
-                Comprehensive training spaces including simulation suites, anatomy halls, physiology laboratories, and central knowledge archives.
-              </p>
-            </div>
-          </div>
-
+        <section className="relative pb-16 sm:pb-20 border-t border-[#e2e8f0] dark:border-white/10 pt-10 sm:pt-12">
           <div className="space-y-12 sm:space-y-16">
             {filteredSections
               .filter((s) => s.group === "academic")
@@ -494,27 +467,7 @@ export const LaboratoriesPage: React.FC = () => {
 
       {/* ─── Arundathi Hospital Section ─── */}
       {(activeFilter === "all" || activeFilter === "hospital") && (
-        <section className="relative pb-20 sm:pb-28 border-t border-[#e2e8f0] dark:border-white/10 pt-12 sm:pt-16">
-          <div className="w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 mb-10 sm:mb-14">
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center justify-center gap-3 mb-2.5">
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-                <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
-                  NABH ACCREDITED TEACHING HOSPITAL
-                </span>
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-              </div>
-
-              <h2 className="font-['Manrope',sans-serif] text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#162740] dark:text-white tracking-tight uppercase">
-                Arundathi Hospital Clinical Facilities
-              </h2>
-
-              <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base leading-relaxed mt-2 max-w-2xl mx-auto">
-                Modern surgical operation suites, 24/7 licensed blood bank, automated central pathology diagnostic lab, and welcoming patient registration atrium.
-              </p>
-            </div>
-          </div>
-
+        <section className="relative pb-20 sm:pb-28 border-t border-[#e2e8f0] dark:border-white/10 pt-10 sm:pt-12">
           <div className="space-y-12 sm:space-y-16">
             {filteredSections
               .filter((s) => s.group === "hospital")

@@ -1,4 +1,5 @@
 import logoWhite from "../assets/logo-white.webp";
+import VisitorCounter from "../components/VisitorCounter";
 
 // Mirrors the navbar's order: Discover → Academics/Admissions → Hospital/Patient Care.
 const footerColumns = [
@@ -217,7 +218,12 @@ export default function Footer() {
 
           </div>
 
-          <div className="w-full h-px mt-12 mb-4 bg-linear-to-r from-black via-white/25 to-black"></div>
+          {/* ─── Live Visitor Counter ─── */}
+          <div className="-mt-4 sm:-mt-6 mb-3">
+            <VisitorCounter />
+          </div>
+
+          <div className="w-full h-px mt-6 sm:mt-8 mb-4 bg-linear-to-r from-black via-white/25 to-black"></div>
 
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-white/60">
