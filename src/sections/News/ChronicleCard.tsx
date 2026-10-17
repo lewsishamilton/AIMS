@@ -27,6 +27,7 @@ export default function ChronicleCard({
   motionStyles = {} 
 }: ChronicleCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const { number, title, category, tags, description, supportingContent, image } = chronicle;
   const {
     cardScale,
@@ -83,11 +84,29 @@ export default function ChronicleCard({
               {description}
             </motion.p>
 
-            {supportingContent && supportingContent.map((paragraph, pIdx) => (
-              <p key={pIdx} className="compact-card-supporting-text">
-                {paragraph}
-              </p>
-            ))}
+            {supportingContent && supportingContent.length > 0 && (
+              <div className={`compact-supporting-container ${isExpanded ? 'is-expanded' : 'is-collapsed'}`}>
+                {supportingContent.map((paragraph, pIdx) => (
+                  <p key={pIdx} className="compact-card-supporting-text">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            )}
+
+            {supportingContent && supportingContent.length > 0 && (
+              <button 
+                type="button"
+                className="chronicle-read-more-btn"
+                onClick={() => setIsExpanded(prev => !prev)}
+                aria-expanded={isExpanded}
+              >
+                <span>{isExpanded ? 'Read Less' : 'Read More'}</span>
+                <span className="read-more-arrow" aria-hidden="true">
+                  {isExpanded ? '↑' : '↓'}
+                </span>
+              </button>
+            )}
           </div>
 
           {/* Tags Footer */}

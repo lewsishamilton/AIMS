@@ -89,3 +89,14 @@
     margin-top: 1.5rem;
   }
 }
+
+@media (max-width: 640px) {
+  .statement-mask-centered {
+    padding: 0.2rem 0.5rem;
+  }
+  .statement-text-centered {
+    font-size: clamp(1.8rem, 8.5vw, 2.6rem);
+    white-space: normal;
+    line-height: 1.05;
+  }
+}

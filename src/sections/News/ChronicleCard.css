@@ -275,14 +275,26 @@
   transform: none;
 }
 
+/* Supporting Container & Read More Toggle (Mobile Read More Pattern) */
+.chronicle-read-more-btn {
+  display: none; /* Hidden on laptop/desktop view */
+}
+
+.compact-supporting-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
 /* RESPONSIVE */
 @media (max-width: 960px) {
   .compact-card-inner {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.6rem;
   }
   .compact-card-right {
     justify-content: center;
+    width: 100%;
   }
   .compact-image-frame-box {
     max-width: 360px;
@@ -298,24 +310,99 @@
   }
 }
 
+@media (max-width: 768px) {
+  /* Read More button enabled on mobile */
+  .chronicle-read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    align-self: flex-start;
+    padding: 0.35rem 0.85rem;
+    border-radius: 9999px;
+    background-color: rgba(28, 28, 28, 0.06);
+    border: 1px solid var(--border-subtle);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    margin-top: 0.2rem;
+    transition: all var(--transition-fast);
+  }
+
+  .chronicle-read-more-btn:active {
+    transform: scale(0.97);
+  }
+
+  .read-more-arrow {
+    font-size: 0.82rem;
+    transition: transform var(--transition-fast);
+  }
+
+  /* When collapsed on mobile, hide the long supporting paragraphs */
+  .compact-supporting-container.is-collapsed {
+    display: none;
+  }
+
+  .compact-supporting-container.is-expanded {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    animation: fadeInContent 0.3s ease-out;
+  }
+
+  @keyframes fadeInContent {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
 @media (max-width: 640px) {
   .chronicle-compact-card {
-    padding: 1.8rem 1.4rem;
-    border-radius: 20px;
+    padding: 1.4rem 1.1rem;
+    border-radius: 18px;
+  }
+  .compact-card-inner {
+    gap: 1.3rem;
+  }
+  .compact-card-left {
+    gap: 0.9rem;
+  }
+  .compact-header-row {
+    gap: 0.75rem;
   }
   .compact-chapter-num {
-    font-size: 2.4rem;
+    font-size: 2.2rem;
+    line-height: 1;
   }
   .compact-card-title {
-    font-size: 1.8rem;
+    font-size: 1.45rem;
+    line-height: 1.18;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
   .compact-card-description.primary-lead,
   .compact-card-supporting-text {
-    font-size: 0.94rem;
-    line-height: 1.62;
+    font-size: 0.88rem;
+    line-height: 1.58;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+  .compact-image-frame-box {
+    max-width: 100%;
+    width: 100%;
+    aspect-ratio: 16 / 10;
   }
   #chronicle-06 .compact-image-frame-box {
     max-width: 100%;
     aspect-ratio: 1032 / 504;
   }
 }
+

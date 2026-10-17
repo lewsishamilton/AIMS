@@ -403,6 +403,17 @@ html.dark .compact-archive-edition {
   color: var(--text-muted);
 }
 
+html.dark .chronicle-read-more-btn {
+  background-color: rgba(94, 234, 212, 0.08);
+  border-color: rgba(94, 234, 212, 0.25);
+  color: #5eead4;
+}
+
+html.dark .chronicle-read-more-btn:hover {
+  background-color: rgba(94, 234, 212, 0.15);
+  border-color: rgba(94, 234, 212, 0.4);
+}
+
 html.dark .compact-card-description.primary-lead {
   color: #dce7f1;
 }
