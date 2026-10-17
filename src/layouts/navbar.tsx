@@ -115,6 +115,10 @@ const Navbar = () => {
             path: "/services/specialities",
             dropdown: [
                 {
+                    name: "Laboratories",
+                    path: "/laboratories",
+                },
+                {
                     name: "Clinical Care",
                     path: "/services/specialities",
                     subItems: [

@@ -20,6 +20,7 @@ const FacultyPage = lazy(() => import("./pages/FacultyPage"))
 const DepartmentFacultyPage = lazy(() => import("./pages/DepartmentFacultyPage"))
 const DepartmentsPage = lazy(() => import("./pages/DepartmentsPage"))
 const MediaGalleryPage = lazy(() => import("./pages/MediaGalleryPage"))
+const LaboratoriesPage = lazy(() => import("./pages/LaboratoriesPage"))
 const AwardsPage = lazy(() => import("./pages/AwardsPage"))
 const AboutHospitalPage = lazy(() => import("./pages/AboutHospitalPage"))
 const AboutInstitutionPage = lazy(() => import("./pages/AboutInstitutionPage"))
@@ -136,6 +137,9 @@ function App() {
         <Route path="/media-gallery" element={<MediaGalleryPage />} />
         <Route path="/gallery" element={<MediaGalleryPage />} />
         <Route path="/media-gallary" element={<MediaGalleryPage />} />
+        <Route path="/laboratories" element={<LaboratoriesPage />} />
+        <Route path="/infrastructure/laboratories" element={<LaboratoriesPage />} />
+        <Route path="/facilities/laboratories" element={<LaboratoriesPage />} />
         <Route path="/aims-in-the-news" element={<AimsInNewsPage />} />
         <Route path="/aims-in-news" element={<AimsInNewsPage />} />
         <Route path="/news" element={<AimsInNewsPage />} />

@@ -88,202 +88,21 @@ const collageRowShape: [string, string][] = [
 
 const allCollageItems: EventItem[] = collageRows.flat();
 
-// ─── Direct Imports from src/assets/clg-imgs (strictly authentic folder structures) ───
-// Administration Block (5 images)
-import admin1 from "../assets/clg-imgs/administration block/1.webp";
-import admin2 from "../assets/clg-imgs/administration block/2.webp";
-import admin3 from "../assets/clg-imgs/administration block/3.webp";
-import admin4 from "../assets/clg-imgs/administration block/4.webp";
-import admin5 from "../assets/clg-imgs/administration block/5.webp";
-
-// Skill Lab (4 images)
-import skill1 from "../assets/clg-imgs/skills/1.webp";
-import skill2 from "../assets/clg-imgs/skills/2.webp";
-import skill3 from "../assets/clg-imgs/skills/3.webp";
-import skill4 from "../assets/clg-imgs/skills/4.webp";
-
-// Physiology (3 images)
-import phys1 from "../assets/clg-imgs/pysiology/1.webp";
-import phys2 from "../assets/clg-imgs/pysiology/2.webp";
-import phys3 from "../assets/clg-imgs/pysiology/3.webp";
-
-// MEU (3 images)
-import meu1 from "../assets/clg-imgs/MEU/1.webp";
-import meu2 from "../assets/clg-imgs/MEU/2.webp";
-import meu3 from "../assets/clg-imgs/MEU/3.webp";
-
-// Central Library (4 images)
-import lib1 from "../assets/clg-imgs/central library/1.webp";
-import lib2 from "../assets/clg-imgs/central library/2.webp";
-import lib3 from "../assets/clg-imgs/central library/3.webp";
-import lib4 from "../assets/clg-imgs/central library/4.webp";
-
-// Anatomy (5 images)
-import anat1 from "../assets/clg-imgs/Anatomy/1.webp";
-import anat2 from "../assets/clg-imgs/Anatomy/2.webp";
-import anat3 from "../assets/clg-imgs/Anatomy/3.webp";
-import anat5 from "../assets/clg-imgs/Anatomy/5.webp";
-import anat6 from "../assets/clg-imgs/Anatomy/6.webp";
-
-// Operation Room (7 images)
-import or1 from "../assets/clg-imgs/Operation Room/1.webp";
-import or2 from "../assets/clg-imgs/Operation Room/2.webp";
-import or3 from "../assets/clg-imgs/Operation Room/3.webp";
-import or4 from "../assets/clg-imgs/Operation Room/4.webp";
-import or5 from "../assets/clg-imgs/Operation Room/5.webp";
-import or6 from "../assets/clg-imgs/Operation Room/6.webp";
-import or7 from "../assets/clg-imgs/Operation Room/7.webp";
-
-// Blood Bank (4 images)
-import bb1 from "../assets/clg-imgs/Blood Bank/1.webp";
-import bb2 from "../assets/clg-imgs/Blood Bank/2.webp";
-import bb3 from "../assets/clg-imgs/Blood Bank/3.webp";
-import bbOt from "../assets/clg-imgs/Blood Bank/ot-picture-SLS05934.webp";
-
-// Central Lab (3 images)
-import cl1 from "../assets/clg-imgs/Central Lab/1.webp";
-import cl2 from "../assets/clg-imgs/Central Lab/2.webp";
-import cl3 from "../assets/clg-imgs/Central Lab/3.webp";
-
-// Lobby (9 images)
-import lobby1 from "../assets/clg-imgs/Lobby/1.webp";
-import lobby2 from "../assets/clg-imgs/Lobby/2.webp";
-import lobby3 from "../assets/clg-imgs/Lobby/3.webp";
-import lobby4 from "../assets/clg-imgs/Lobby/4.webp";
-import lobby5 from "../assets/clg-imgs/Lobby/5.webp";
-import lobby6 from "../assets/clg-imgs/Lobby/6.webp";
-import lobby7 from "../assets/clg-imgs/Lobby/7.webp";
-import lobby8 from "../assets/clg-imgs/Lobby/8.webp";
-import lobby9 from "../assets/clg-imgs/Lobby/9.webp";
-
-export interface ArenaSectionData {
-  id: string;
-  title: string;
-  category: string;
-  group: "academic" | "hospital";
-  description: string;
-  direction: "ltr" | "rtl";
-  images: string[];
-}
-
-const arenaSections: ArenaSectionData[] = [
-  {
-    id: "admin-block",
-    title: "Administration Block",
-    category: "Campus Infrastructure",
-    group: "academic",
-    description: "Administrative offices, deanery, student affairs, and executive governance suites.",
-    direction: "ltr",
-    images: [admin1, admin2, admin3, admin4, admin5],
-  },
-  {
-    id: "skill-lab",
-    title: "Skill Lab",
-    category: "Clinical Simulation",
-    group: "academic",
-    description: "Hands-on medical simulation lab equipped with high-fidelity task trainers and clinical practice models.",
-    direction: "rtl",
-    images: [skill1, skill2, skill3, skill4],
-  },
-  {
-    id: "physiology",
-    title: "Physiology",
-    category: "Pre-Clinical Department",
-    group: "academic",
-    description: "Physiology teaching laboratories for clinical examinations, hematology experiments, and practical learning.",
-    direction: "ltr",
-    images: [phys1, phys2, phys3],
-  },
-  {
-    id: "meu",
-    title: "M E U",
-    category: "Medical Education Unit",
-    group: "academic",
-    description: "Medical Education Unit dedicated to continuous faculty development, curriculum design, and medical pedagogy.",
-    direction: "rtl",
-    images: [meu1, meu2, meu3],
-  },
-  {
-    id: "central-library",
-    title: "Central Library",
-    category: "Academic Resource",
-    group: "academic",
-    description: "Multi-tiered knowledge repository with digital journals, reference treatises, and quiet study areas.",
-    direction: "ltr",
-    images: [lib1, lib2, lib3, lib4],
-  },
-  {
-    id: "anatomy",
-    title: "Anatomy",
-    category: "Pre-Clinical Department",
-    group: "academic",
-    description: "Comprehensive anatomy museum, histology practical lab, and modern cadaveric dissection arena.",
-    direction: "rtl",
-    images: [anat1, anat2, anat3, anat5, anat6],
-  },
-  {
-    id: "operation-room",
-    title: "Operation Room",
-    category: "Surgical Complex",
-    group: "hospital",
-    description: "State-of-the-art modular surgical suites with laminar airflow and advanced surgical infrastructure.",
-    direction: "ltr",
-    images: [or1, or2, or3, or4, or5, or6, or7],
-  },
-  {
-    id: "blood-bank",
-    title: "Blood Bank",
-    category: "Transfusion Services",
-    group: "hospital",
-    description: "24/7 licensed blood transfusion center with component separation and cryopreservation units.",
-    direction: "rtl",
-    images: [bb1, bb2, bb3, bbOt],
-  },
-  {
-    id: "central-lab",
-    title: "Central Lab",
-    category: "Diagnostic Services",
-    group: "hospital",
-    description: "Fully automated central diagnostic laboratory operating 24/7 for inpatient and emergency investigations.",
-    direction: "ltr",
-    images: [cl1, cl2, cl3],
-  },
-  {
-    id: "lobby",
-    title: "Lobby",
-    category: "Patient Atrium",
-    group: "hospital",
-    description: "Welcoming, spacious patient reception, registration atrium, and visitor lounge at Arundathi Hospital.",
-    direction: "rtl",
-    images: [lobby1, lobby2, lobby3, lobby4, lobby5, lobby6, lobby7, lobby8, lobby9],
-  },
-];
-
-const createMarqueeItems = (images: string[]) => {
-  if (!images || images.length === 0) return [];
-  let base = [...images];
-  while (base.length < 8) {
-    base = [...base, ...images];
-  }
-  return [...base, ...base];
-};
-
 export const MediaGalleryPage: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
-  const [activeGalleryList, setActiveGalleryList] = useState<EventItem[]>(allCollageItems);
 
   const handlePrevEvent = () => {
     if (!selectedEvent) return;
-    const currentIndex = activeGalleryList.findIndex((e) => e.id === selectedEvent.id);
-    const prevIndex = (currentIndex - 1 + activeGalleryList.length) % activeGalleryList.length;
-    setSelectedEvent(activeGalleryList[prevIndex]);
+    const currentIndex = allCollageItems.findIndex((e) => e.id === selectedEvent.id);
+    const prevIndex = (currentIndex - 1 + allCollageItems.length) % allCollageItems.length;
+    setSelectedEvent(allCollageItems[prevIndex]);
   };
 
   const handleNextEvent = () => {
     if (!selectedEvent) return;
-    const currentIndex = activeGalleryList.findIndex((e) => e.id === selectedEvent.id);
-    const nextIndex = (currentIndex + 1) % activeGalleryList.length;
-    setSelectedEvent(activeGalleryList[nextIndex]);
+    const currentIndex = allCollageItems.findIndex((e) => e.id === selectedEvent.id);
+    const nextIndex = (currentIndex + 1) % allCollageItems.length;
+    setSelectedEvent(allCollageItems[nextIndex]);
   };
 
   useEffect(() => {
@@ -295,14 +114,13 @@ export const MediaGalleryPage: React.FC = () => {
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedEvent, activeGalleryList]);
+  }, [selectedEvent]);
 
   // Reusable Photo Card with subtly increased border curve and fluid hover interactions
   const renderPhotoCard = (item: EventItem) => (
     <div
       key={item.id}
       onClick={() => {
-        setActiveGalleryList(allCollageItems);
         setSelectedEvent(item);
       }}
       style={{ "--w": item.w ?? 1, "--h": item.h ?? 1 } as React.CSSProperties}
@@ -339,88 +157,6 @@ export const MediaGalleryPage: React.FC = () => {
       </div>
     </div>
   );
-
-  // Reusable Photo Card for Arena Sections with Auto Infinite Marquee
-  const renderArenaRow = (section: ArenaSectionData) => {
-    const marqueeCards = createMarqueeItems(section.images);
-    const isLtr = section.direction === "ltr";
-
-    return (
-      <div key={section.id} className="w-full overflow-hidden">
-        {/* Row Header */}
-        <div className="max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 mb-4 sm:mb-5 text-center">
-          <div className="inline-flex items-center justify-center gap-2 mb-1.5">
-            <span className="w-5 sm:w-6 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-            <span className="text-[11px] sm:text-xs font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
-              {section.category}
-            </span>
-            <span className="w-5 sm:w-6 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-          </div>
-          <h3 className="font-['Manrope',sans-serif] text-xl sm:text-2xl md:text-3xl font-bold text-[#162740] dark:text-white tracking-tight">
-            {section.title}
-          </h3>
-        </div>
-
-        {/* Infinite Scrolling Track */}
-        <div className="w-full overflow-hidden">
-          <div
-            className="flex w-max gap-3.5 sm:gap-4 lg:gap-5 py-2 hover:[animation-play-state:paused]"
-            style={{
-              animation: `${isLtr ? "arenaMarqueeLtr" : "arenaMarqueeRtl"} ${section.images.length * 6 > 30 ? section.images.length * 6 : 32
-                }s linear infinite`,
-            }}
-          >
-            {marqueeCards.map((imgSrc, idx) => {
-              const originalIndex = idx % section.images.length;
-              return (
-                <div
-                  key={`${section.id}-${idx}`}
-                  onClick={() => {
-                    const sectionEventItems: EventItem[] = section.images.map((src, i) => ({
-                      id: `${section.id}-${i}`,
-                      title: `${section.title} (Photo ${i + 1} of ${section.images.length})`,
-                      category: section.category,
-                      src,
-                      description: section.description,
-                    }));
-                    setActiveGalleryList(sectionEventItems);
-                    setSelectedEvent(sectionEventItems[originalIndex]);
-                  }}
-                  className="relative shrink-0 w-[260px] sm:w-[320px] md:w-[360px] h-[175px] sm:h-[210px] md:h-[235px] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-[#dce8ee] dark:border-white/15 bg-white dark:bg-slate-900/60 shadow-[0_3px_12px_rgba(8,44,76,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_14px_30px_rgba(8,44,76,0.18)] transition-all duration-300 cursor-pointer group hover:-translate-y-1 select-none"
-                >
-                  <img
-                    src={imgSrc}
-                    alt={`${section.title} - ${originalIndex + 1}`}
-                    loading="lazy"
-                    draggable={false}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
-
-                  {/* Hover Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b172a]/85 via-[#0b172a]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[16px] sm:rounded-[20px]" />
-
-                  {/* Hover Details & Expand Icon */}
-                  <div className="absolute bottom-0 inset-x-0 p-3 sm:p-4 text-white opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 flex items-center justify-between z-10">
-                    <div>
-                      <span className="inline-block px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider bg-white/20 backdrop-blur-md text-white border border-white/25 mb-1">
-                        {section.category}
-                      </span>
-                      <h4 className="font-['Manrope',sans-serif] text-xs sm:text-sm font-bold text-white leading-snug drop-shadow-sm">
-                        {section.title} #{originalIndex + 1}
-                      </h4>
-                    </div>
-                    <span className="w-8 h-8 rounded-full bg-white/25 backdrop-blur-md flex items-center justify-center text-white border border-white/30 shadow-xs group-hover:scale-110 transition-transform">
-                      <Maximize2 className="w-3.5 h-3.5" />
-                    </span>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   return (
     <div className="w-full bg-[#FAF9F5] dark:bg-transparent min-h-screen pt-20 sm:pt-24 transition-colors duration-300">
@@ -634,75 +370,6 @@ export const MediaGalleryPage: React.FC = () => {
         </div>
       </section>
 
-      {/* ─── Gallery Arena Section: Welcome to Gallery Arena of AIMS ─── */}
-      <section className="atmos-dots relative pt-8 sm:pt-10 pb-16 sm:pb-24 bg-[#FAF9F5] dark:bg-transparent border-t border-[#e2e8f0] dark:border-white/10 overflow-hidden">
-        {/* Subtle background radial pattern */}
-        <div
-          className="atmos-dots-fade absolute inset-0 pointer-events-none opacity-20 dark:opacity-10"
-          style={{
-            backgroundImage: `radial-gradient(#64748b 1px, transparent 1px)`,
-            backgroundSize: "28px 28px",
-          }}
-        />
-
-        <div className="relative z-10 w-full">
-          {/* Main Section Header */}
-          <div className="w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-              <div className="inline-flex items-center justify-center gap-3 mb-3">
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-                <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
-                  CAMPUS &amp; CLINICAL FACILITIES
-                </span>
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-              </div>
-
-              <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[42px] font-black text-[#162740] dark:text-white tracking-tight leading-tight mb-3 uppercase">
-                Welcome to Gallery Arena of AIMS
-              </h2>
-
-              <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
-                Explore dynamic visual streams of our administrative, academic, laboratory, and super-speciality facilities.
-              </p>
-            </div>
-          </div>
-
-          {/* Academic & Campus Sections (Alternating Left-to-Right and Right-to-Left) */}
-          <div className="space-y-12 sm:space-y-16">
-            {arenaSections
-              .filter((s) => s.group === "academic")
-              .map((section) => renderArenaRow(section))}
-          </div>
-
-          {/* Arundathi Hospital Section Divider & Title */}
-          <div className="w-full max-w-[1340px] mx-auto px-4 sm:px-6 lg:px-8 my-16 sm:my-22 pt-14 border-t border-[#e2e8f0] dark:border-white/10">
-            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-              <div className="inline-flex items-center justify-center gap-3 mb-3">
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-                <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
-                  NABH ACCREDITED TEACHING HOSPITAL
-                </span>
-                <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-              </div>
-
-              <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[42px] font-black text-[#162740] dark:text-white tracking-tight leading-tight mb-3 uppercase">
-                Arundathi Hospital
-              </h2>
-
-              <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto leading-relaxed">
-                Modern surgical operation suites, blood bank, advanced pathology, 24/7 central diagnostic lab, and welcoming patient reception atrium.
-              </p>
-            </div>
-          </div>
-
-          {/* Hospital Sections (Alternating Left-to-Right and Right-to-Left) */}
-          <div className="space-y-12 sm:space-y-16">
-            {arenaSections
-              .filter((s) => s.group === "hospital")
-              .map((section) => renderArenaRow(section))}
-          </div>
-        </div>
-      </section>
 
       {/* Lightbox Modal with Fluid Spring Scale-In Animation */}
       {selectedEvent && (
@@ -770,22 +437,6 @@ export const MediaGalleryPage: React.FC = () => {
       {/* Global Style for Keyframe Marquee and Modal Animation */}
       <style>{`
         @keyframes galleryInfiniteMarquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        @keyframes arenaMarqueeLtr {
-          0% {
-            transform: translateX(-50%);
-          }
-          100% {
-            transform: translateX(0);
-          }
-        }
-        @keyframes arenaMarqueeRtl {
           0% {
             transform: translateX(0);
           }
