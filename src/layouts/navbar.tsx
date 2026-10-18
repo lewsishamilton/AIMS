@@ -456,7 +456,7 @@ const Navbar = () => {
             `}</style>
 
             <nav
-                className={`fixed top-0 left-0 w-full px-6 md:px-12 xl:px-8 2xl:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
+                className={`fixed top-0 left-0 w-full px-2.5 min-[360px]:px-3 min-[400px]:px-5 md:px-12 xl:px-8 2xl:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
                     theme === "dark" ? "text-white" : isWhiteTheme ? "text-gray-900" : "text-white"
                 }`}
             >
@@ -472,13 +472,13 @@ const Navbar = () => {
                             : "bg-transparent border-b border-transparent"
                     }`}
                 />
-                <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-4 relative">
+                <div className="max-w-screen-2xl mx-auto flex items-center justify-between gap-2 min-[400px]:gap-4 relative">
                     {/* Logo */}
                     <Link to="/#" className="flex items-center shrink-0 py-2">
                         <img
                             src={isWhiteTheme ? logo : logoWhite}
                             alt="Arundathi Institute of Medical Sciences & Hospital"
-                            className="h-10 md:h-11 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
+                            className="h-8 min-[360px]:h-9 min-[400px]:h-10 md:h-11 w-auto object-contain transition-colors duration-300 drop-shadow-sm"
                         />
                     </Link>
 
@@ -512,18 +512,18 @@ const Navbar = () => {
                     </div>
 
                     {/* Mobile Controls: Virtual Tour, Call Icon, Theme Toggle & Menu Button */}
-                    <div className="flex xl:hidden items-center gap-2 py-3">
+                    <div className="flex xl:hidden items-center gap-1 min-[360px]:gap-1.5 min-[400px]:gap-2 py-3 shrink-0">
                         <Link
                             to="/aims-in-the-news"
                             title="AIMS in the News"
-                            className={`virtual-tour-btn ${isNavTransparent ? "is-glass" : ""} flex items-center justify-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide`}
+                            className={`virtual-tour-btn ${isNavTransparent ? "is-glass" : ""} flex items-center justify-center px-2 min-[360px]:px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide`}
                         >
                             <span className="relative z-10">News</span>
                         </Link>
                         <Link
                             to="/virtual-tour"
                             title="Virtual Tour"
-                            className={`virtual-tour-btn ${isNavTransparent ? "is-glass" : ""} flex items-center justify-center px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide`}
+                            className={`virtual-tour-btn ${isNavTransparent ? "is-glass" : ""} flex items-center justify-center px-2 min-[360px]:px-2.5 py-1 rounded-full text-[11px] font-semibold tracking-wide`}
                         >
                             <span className="relative z-10">Tour</span>
                         </Link>
@@ -536,7 +536,7 @@ const Navbar = () => {
 
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className={`p-2 rounded-full focus:outline-none transition-all duration-200 ${
+                            className={`w-8 h-8 flex items-center justify-center rounded-full focus:outline-none transition-all duration-200 ${
                                 theme === "dark"
                                     ? "text-white bg-black/25 backdrop-blur-md border border-white/20 hover:bg-black/40"
                                     : isWhiteTheme
@@ -545,7 +545,7 @@ const Navbar = () => {
                             }`}
                             aria-label="Toggle Menu"
                         >
-                            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                                 <line x1="4" y1="6" x2="20" y2="6" />
                                 <line x1="4" y1="12" x2="20" y2="12" />
                                 <line x1="4" y1="18" x2="20" y2="18" />
@@ -556,7 +556,7 @@ const Navbar = () => {
 
                 {/* Mobile Drawer */}
                 <div
-                    className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-6 sm:px-8 pt-20 pb-10 text-sm font-semibold tracking-wide transition-transform duration-300 xl:hidden overflow-y-auto overscroll-contain ${
+                    className={`fixed top-0 left-0 z-[60] w-full h-screen flex flex-col justify-start items-start px-6 sm:px-8 pt-20 pb-10 text-sm font-semibold tracking-wide transition-transform duration-300 xl:hidden overflow-y-auto overscroll-contain ${
                         isMenuOpen ? "translate-x-0 m-drawer-open" : "-translate-x-full"
                     } ${
                         drawerLight
@@ -639,7 +639,7 @@ const Navbar = () => {
                         })}
                     </div>
                     {/* Quick Admissions & Contact Card in Mobile Drawer */}
-                    <div className={`mt-6 p-4 rounded-2xl border ${drawerLight ? "bg-white border-[#1f3351]/15" : "bg-white/5 border-white/15"}`}>
+                    <div className={`w-full mt-6 p-4 rounded-2xl border ${drawerLight ? "bg-white border-[#1f3351]/15" : "bg-white/5 border-white/15"}`}>
                         <div className={`mb-2 ${drawerLight ? "text-[#1f3351]" : "text-white"}`}>
                             <span className="block text-xs font-bold uppercase tracking-wider">
                                 Admissions Enquiry
@@ -660,9 +660,9 @@ const Navbar = () => {
                         <Link
                             to="/contact"
                             onClick={() => setIsMenuOpen(false)}
-                            className={`mt-3 block text-center text-xs font-semibold py-2 rounded-xl transition-colors ${drawerLight ? "bg-[#1f3351] text-white hover:bg-[#0d2346]" : "bg-white text-[#1f3351] hover:bg-[#fbfaf5]"}`}
+                            className={`mt-4 flex w-full min-h-11 items-center justify-center rounded-xl px-4 text-sm font-semibold tracking-normal transition-colors ${drawerLight ? "bg-[#1f3351] text-white hover:bg-[#0d2346]" : "bg-white text-[#1f3351] hover:bg-[#fbfaf5]"}`}
                         >
-                            Go to Contact Us Page &rarr;
+                            Contact Us
                         </Link>
                     </div>
                 </div>

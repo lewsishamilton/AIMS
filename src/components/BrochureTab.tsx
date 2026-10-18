@@ -22,7 +22,7 @@ export default function BrochureTab() {
 
   return (
     <div
-      className={`fixed right-0 top-1/2 z-40 -translate-y-1/2 max-sm:translate-x-0 max-sm:opacity-100 max-sm:pointer-events-auto max-sm:transition-none transition-[transform,opacity] duration-500 ease-out ${
+      className={`fixed right-0 top-1/2 max-sm:top-[50svh] z-40 -translate-y-1/2 max-sm:translate-x-0 max-sm:opacity-100 max-sm:pointer-events-auto max-sm:transition-none transition-[transform,opacity] duration-500 ease-out ${
         pastHero ? "sm:translate-x-0 sm:opacity-100 sm:pointer-events-auto" : "sm:translate-x-full sm:opacity-0 sm:pointer-events-none"
       }`}
       aria-hidden={false}
