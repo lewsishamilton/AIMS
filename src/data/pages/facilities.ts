@@ -81,7 +81,7 @@ export const FACILITY_PAGES: Record<string, StaticPageDef> = {
       },
       {
         name: "Ambulance Service",
-        meta: "+91 81794 32491",
+        meta: "24×7",
         description:
           "Equipped ambulances for emergency transport and inter-facility transfer, coordinated through the casualty department at any hour.",
       },

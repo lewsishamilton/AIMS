@@ -26,7 +26,6 @@ interface Entry {
 }
 
 const PHONE = "+91 80556 67888";
-const AMBULANCE = "+91 81794 32491";
 const ADMISSIONS_PHONE = "+91 90009 94842 (Dr. Achireddy)";
 const EMAIL = "arundathihospital@gmail.com";
 const ADDRESS = "Beside MLRIT, Dundigal, Gandi Maisamma, Medchal-Malkajgiri District, Telangana 500043";
@@ -35,7 +34,7 @@ const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Contact details",
     keywords: ["contact", "phone", "number", "call", "email", "mail", "reach", "reception", "helpline", "mobile", "achireddy", "admissions"],
-    answer: `Reception: ${PHONE}\nAmbulance (24×7): ${AMBULANCE}\nAdmissions Enquiry (Dr. Achireddy): ${ADMISSIONS_PHONE}\nEmail: ${EMAIL}`,
+    answer: `Reception: ${PHONE}\nAdmissions Enquiry (Dr. Achireddy): ${ADMISSIONS_PHONE}\nEmail: ${EMAIL}`,
     links: [{ label: "Contact page", path: "/contact" }],
   },
   {
@@ -50,7 +49,7 @@ const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Emergency and ambulance",
     keywords: ["emergency", "ambulance", "casualty", "trauma", "accident", "urgent", "icu", "critical"],
-    answer: `The casualty department is open 24×7. For an ambulance call ${AMBULANCE}.`,
+    answer: `The casualty department is open 24×7. Come straight to casualty in an emergency.`,
     links: [{ label: "Emergency Care", path: "/services/emergency-trauma" }],
   },
   {
@@ -207,8 +206,8 @@ const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Complaints and feedback",
     keywords: ["complaint", "complaints", "feedback", "grievance", "suggestion"],
-    answer: `Feedback and grievances can be raised as described on the Feedback & Grievance page, or by email to ${EMAIL}.`,
-    links: [{ label: "Feedback & Grievance", path: "/patient-care/feedback" }],
+    answer: `Complaints and feedback can be sent through the form on the Complaints & Feedback page, or by email to ${EMAIL}.`,
+    links: [{ label: "Complaints & Feedback", path: "/patient-care/feedback" }],
   },
 ];
 

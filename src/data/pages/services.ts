@@ -267,7 +267,6 @@ export const SERVICE_PAGES: Record<string, StaticPageDef> = {
         title: "Emergency Contact",
         subtitle: "Save these numbers before you need them",
         bullets: [
-          "Ambulance: +91 81794 32491",
           "Hospital reception: +91 80556 67888",
           "Alternate line: +91 80741 58018",
           "Beside MLRIT, Dundigal, Gandi Maisamma, Medchal–Malkajgiri District, Telangana 500043",

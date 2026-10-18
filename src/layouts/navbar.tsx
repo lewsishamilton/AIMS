@@ -149,7 +149,7 @@ const Navbar = () => {
                 { name: "OPD Timings & Visiting", path: "/patient-care/opd-timings" },
                 { name: "Admission & Discharge", path: "/patient-care/admission-discharge" },
                 { name: "Insurance & TPA", path: "/patient-care/insurance" },
-                { name: "Feedback & Grievance", path: "/patient-care/feedback" },
+                { name: "Complaints & Feedback", path: "/patient-care/feedback" },
             ],
         },
     ];

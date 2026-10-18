@@ -5,7 +5,7 @@ const PATIENT_LINKS = [
   { name: "OPD Timings", path: "/patient-care/opd-timings" },
   { name: "Admission & Discharge", path: "/patient-care/admission-discharge" },
   { name: "Insurance & TPA", path: "/patient-care/insurance" },
-  { name: "Feedback & Grievance", path: "/patient-care/feedback" },
+  { name: "Complaints & Feedback", path: "/patient-care/feedback" },
 ];
 
 const linksExcept = (path: string) =>
@@ -142,7 +142,7 @@ export const PATIENT_CARE_PAGES: Record<string, StaticPageDef> = {
     quickLinks: linksExcept("/patient-care/citizen-charter"),
     cta: {
       text: "Have a complaint, a suggestion, or something that went well and deserves saying? We would like to hear it.",
-      label: "Feedback & Grievance",
+      label: "Complaints & Feedback",
       path: "/patient-care/feedback",
     },
   },
@@ -198,7 +198,6 @@ export const PATIENT_CARE_PAGES: Record<string, StaticPageDef> = {
           "Beside MLRIT, Dundigal, Gandi Maisamma, Medchal–Malkajgiri District, Telangana 500043",
           "Reception: +91 80556 67888",
           "Alternate line: +91 80741 58018",
-          "Ambulance: +91 81794 32491",
         ],
         layout: "half",
       },
@@ -334,9 +333,9 @@ export const PATIENT_CARE_PAGES: Record<string, StaticPageDef> = {
 
   "/patient-care/feedback": {
     eyebrow: "Patient Care",
-    title: "Feedback & Grievance",
+    title: "Complaints & Feedback",
     subtitle:
-      "Tell us what went wrong — or what went right. Every grievance is acknowledged and acted on, and feedback is what tells us where the hospital needs to improve.",
+      "Tell us what went wrong, or what went right. Every complaint is acknowledged and acted on, and feedback tells us where the hospital needs to improve.",
     sections: [
       {
         title: "Who to Approach",
@@ -347,14 +346,14 @@ export const PATIENT_CARE_PAGES: Record<string, StaticPageDef> = {
           "Casualty Medical Officer — for concerns arising in the emergency department",
           "Resident Medical Officer — for ward, nursing and inpatient service issues",
           "Medical Superintendent — for clinical care and hospital administration",
-          "Dean — for academic matters and for grievances not resolved at other levels",
+          "Dean — for academic matters and for complaints not resolved at other levels",
         ],
         layout: "full",
       },
       {
         title: "What Happens Next",
         bullets: [
-          "Your grievance is recorded and acknowledged",
+          "Your complaint is recorded and acknowledged",
           "It is referred to the department concerned for a factual report",
           "A sincere attempt is made to resolve the issue promptly",
           "The outcome is communicated back to the complainant",

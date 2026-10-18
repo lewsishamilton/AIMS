@@ -172,11 +172,10 @@ const OpdSchedule: React.FC = () => {
       </div>
 
       {/* Always-open services */}
-      <div className="grid gap-px border-t border-[#e4ecf2] bg-[#e4ecf2] sm:grid-cols-3 dark:border-white/10 dark:bg-white/10">
+      <div className="grid gap-px border-t border-[#e4ecf2] bg-[#e4ecf2] sm:grid-cols-2 dark:border-white/10 dark:bg-white/10">
         {[
           { icon: Ambulance, title: "Emergency & Casualty", detail: "24×7, including Sundays and holidays" },
           { icon: Clock, title: "Diagnostics & Blood Bank", detail: "Radiology, central lab and blood bank never close" },
-          { icon: Phone, title: "Ambulance", detail: "+91 81794 32491" },
         ].map(({ icon: Icon, title, detail }) => (
           <div key={title} className="bg-white p-5 sm:p-6 dark:bg-[#0b1220]">
             <Icon className="mb-2.5 h-5 w-5 text-[#1f3351] dark:text-teal-400" />

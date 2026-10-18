@@ -10,6 +10,7 @@ import OpdSchedule from "./OpdSchedule";
 import AdmittedStudentsList from "./AdmittedStudentsList";
 import SeatMatrix from "./SeatMatrix";
 import ApplicationForms from "./ApplicationForms";
+import ComplaintsFeedbackForm from "./ComplaintsFeedbackForm";
 import CampusVirtualTour from "./CampusVirtualTour";
 import { GovernmentApprovalDocs, UniversityAffiliationDocs, MbbsCurriculumDoc } from "./DocumentList";
 import PageHero from "./PageHero";
@@ -407,6 +408,7 @@ const PAGE_WIDGETS: Record<string, React.FC | undefined> = {
   "/admissions/admitted-list": AdmittedStudentsList,
   "/admissions/seat-matrix": SeatMatrix,
   "/admissions/forms": ApplicationForms,
+  "/patient-care/feedback": ComplaintsFeedbackForm,
 };
 
 /** Purpose-built blocks rendered below main content or cards. */

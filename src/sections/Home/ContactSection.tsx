@@ -345,13 +345,6 @@ export const ContactSection: React.FC = () => {
                       <span className="text-xs font-medium text-[#4b6382] dark:text-teal-400 mr-1.5">Reception:</span>
                       +91 80556 67888
                     </a>
-                    <a
-                      href="tel:+918179432491"
-                      className="text-sm text-[#1f3351] dark:text-teal-300 font-semibold hover:underline block mt-0.5"
-                    >
-                      <span className="text-xs font-medium text-[#4b6382] dark:text-teal-400 mr-1.5">Ambulance:</span>
-                      +91 81794 32491
-                    </a>
                     <span className="text-xs text-[#62748a] dark:text-slate-400 block mt-0.5">
                       Emergency &amp; Ambulance services available 24/7
                     </span>

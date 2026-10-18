@@ -18,7 +18,7 @@ export const LEGAL_PAGES: Record<string, StaticPageDef> = {
       {
         title: "Not Medical Advice",
         content:
-          "Information on this website is general and is not a substitute for consultation with a qualified doctor. Do not use it to diagnose or treat any condition. In an emergency, come to the casualty department, which is open 24×7, or call the ambulance on +91 81794 32491.",
+          "Information on this website is general and is not a substitute for consultation with a qualified doctor. Do not use it to diagnose or treat any condition. In an emergency, come to the casualty department, which is open 24×7.",
         layout: "half",
       },
       {
@@ -130,7 +130,7 @@ export const LEGAL_PAGES: Record<string, StaticPageDef> = {
     quickLinks: [
       { name: "Terms & Conditions", path: "/terms-and-conditions" },
       { name: "Contact", path: "/contact" },
-      { name: "Feedback & Grievance", path: "/patient-care/feedback" },
+      { name: "Complaints & Feedback", path: "/patient-care/feedback" },
     ],
   },
 };
