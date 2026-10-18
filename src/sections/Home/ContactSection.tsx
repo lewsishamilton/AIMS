@@ -287,32 +287,6 @@ export const ContactSection: React.FC = () => {
               </div>
 
               <div className="flex-1 flex flex-col justify-around gap-6">
-                {/* Admissions Enquiry Card inside Left Column */}
-                <div className="flex items-start gap-4 p-3.5 rounded-2xl bg-[#1f3351]/5 dark:bg-white/[0.05] border border-[#1f3351]/15 dark:border-white/15">
-                  <div className="w-9 h-9 rounded-xl bg-[#1f3351] text-white dark:bg-white/15 dark:text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
-                    <PhoneCall className="w-4 h-4" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-xs font-bold text-[#1f3351] dark:text-white uppercase tracking-wider block">
-                        Admissions Enquiry
-                      </span>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#1f3351] text-white dark:bg-white/20 dark:text-white">
-                        Direct Desk
-                      </span>
-                    </div>
-                    <p className="text-xs font-bold text-[#1f3351] dark:text-slate-100 mt-1">
-                      Dr. Achireddy
-                    </p>
-                    <a
-                      href="tel:+919000994842"
-                      className="text-sm text-[#1f3351] dark:text-white font-extrabold hover:underline block mt-0.5"
-                    >
-                      +91 90009 94842
-                    </a>
-                  </div>
-                </div>
-
                 {/* Location */}
                 <div className="flex items-start gap-4">
                   <div className="w-9 h-9 rounded-lg bg-white dark:bg-white/10 border border-[#dce8ee] dark:border-white/15 text-[#1f3351] dark:text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
