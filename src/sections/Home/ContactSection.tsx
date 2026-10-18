@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import logo from "../../assets/logo.webp";
 import logoWhite from "../../assets/logo-white.webp";
@@ -13,6 +14,10 @@ import {
   AlertCircle,
   ChevronDown,
   Check,
+  Copy,
+  PhoneCall,
+  MessageSquare,
+  GraduationCap,
 } from "lucide-react";
 
 export const ContactSection: React.FC = () => {
@@ -23,6 +28,16 @@ export const ContactSection: React.FC = () => {
     subject: "",
     message: "",
   });
+
+  const [copiedNumber, setCopiedNumber] = useState<string | null>(null);
+
+  const handleCopyNumber = (num: string) => {
+    navigator.clipboard.writeText(num);
+    setCopiedNumber(num);
+    setTimeout(() => setCopiedNumber(null), 2500);
+  };
+
+  const copied = copiedNumber === "9000994842";
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -172,6 +187,80 @@ export const ContactSection: React.FC = () => {
           </p>
         </motion.div>
 
+        {/* ─── Admissions Enquiry Spotlight ─── */}
+        <motion.div
+          id="admissions-enquiry"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
+          className="mb-10 sm:mb-14 scroll-mt-24 sm:scroll-mt-28"
+        >
+          <div className="rounded-[24px] border border-[#1f3351]/15 dark:border-white/15 bg-[#fbfaf5] dark:bg-white/[0.04] dark:backdrop-blur-xl p-5 sm:p-7 lg:px-10 lg:py-8 shadow-[0_14px_36px_rgba(13,35,70,0.07)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.45)] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:gap-12">
+            {/* Who to contact, and their number */}
+            <div className="flex items-start gap-4 sm:gap-5 min-w-0">
+              <div className="hidden sm:flex w-14 h-14 rounded-2xl bg-[#1f3351] text-white dark:bg-white dark:text-[#1f3351] items-center justify-center shrink-0 shadow-sm">
+                <GraduationCap className="w-7 h-7" aria-hidden="true" />
+              </div>
+              <div className="min-w-0">
+                <span className="block text-xs font-bold uppercase tracking-[0.16em] text-[#1f3351]/65 dark:text-white/65">
+                  Admissions Enquiry
+                </span>
+                <h3 className="mt-1 font-['Manrope',sans-serif] text-2xl sm:text-[30px] font-extrabold text-[#1f3351] dark:text-white tracking-tight leading-tight">
+                  Dr. Achireddy
+                </h3>
+                <div className="mt-2 flex items-center gap-2">
+                  <PhoneCall className="hidden sm:block w-4 h-4 text-[#1f3351]/70 dark:text-white/70 shrink-0" aria-hidden="true" />
+                  <a
+                    href="tel:+919000994842"
+                    className="text-lg sm:text-xl font-bold text-[#1f3351] dark:text-white tracking-wide whitespace-nowrap hover:underline underline-offset-4"
+                  >
+                    +91 90009 94842
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => handleCopyNumber("9000994842")}
+                    aria-label={copied ? "Number copied" : "Copy admissions number"}
+                    title={copied ? "Copied" : "Copy number"}
+                    className="shrink-0 w-11 h-11 -my-2 rounded-xl text-[#1f3351]/70 hover:text-[#1f3351] hover:bg-[#1f3351]/[0.06] dark:text-white/70 dark:hover:text-white dark:hover:bg-white/10 flex items-center justify-center transition-colors cursor-pointer"
+                  >
+                    {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* What you can do */}
+            <div className="flex flex-col gap-3 w-full lg:w-[340px] shrink-0">
+              <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
+                <a
+                  href="tel:+919000994842"
+                  className="inline-flex items-center justify-center gap-2 min-h-12 px-3 rounded-2xl bg-[#1f3351] hover:bg-[#0d2346] text-white dark:bg-white dark:text-[#1f3351] dark:hover:bg-[#fbfaf5] font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.97]"
+                >
+                  <PhoneCall className="w-4 h-4 shrink-0" aria-hidden="true" />
+                  <span>Call Now</span>
+                </a>
+                <a
+                  href="https://wa.me/919000994842?text=Hello%20Dr.%20Achireddy%20Sir,%20I%20am%20inquiring%20about%20admissions%20at%20AIMS."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 min-h-12 px-3 rounded-2xl bg-white hover:bg-[#1f3351]/[0.04] text-[#1f3351] border border-[#1f3351]/20 dark:bg-transparent dark:hover:bg-white/10 dark:text-white dark:border-white/25 font-bold text-sm transition-all duration-200 active:scale-[0.97]"
+                >
+                  <MessageSquare className="w-4 h-4 shrink-0" aria-hidden="true" />
+                  <span>WhatsApp</span>
+                </a>
+              </div>
+              <Link
+                to="/admissions"
+                className="group inline-flex items-center justify-center gap-1 py-1 text-[13px] font-semibold text-[#1f3351]/75 hover:text-[#1f3351] dark:text-white/70 dark:hover:text-white transition-colors"
+              >
+                Admissions overview &amp; criteria
+                <span className="transition-transform group-hover:translate-x-0.5" aria-hidden="true">&rarr;</span>
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Two-Column Grid: Contact Information & Contact Form */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           {/* ─── Left Column: Official Contact Information ─── */}
@@ -198,6 +287,32 @@ export const ContactSection: React.FC = () => {
               </div>
 
               <div className="flex-1 flex flex-col justify-around gap-6">
+                {/* Admissions Enquiry Card inside Left Column */}
+                <div className="flex items-start gap-4 p-3.5 rounded-2xl bg-[#1f3351]/5 dark:bg-white/[0.05] border border-[#1f3351]/15 dark:border-white/15">
+                  <div className="w-9 h-9 rounded-xl bg-[#1f3351] text-white dark:bg-white/15 dark:text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
+                    <PhoneCall className="w-4 h-4" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-bold text-[#1f3351] dark:text-white uppercase tracking-wider block">
+                        Admissions Enquiry
+                      </span>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-[#1f3351] text-white dark:bg-white/20 dark:text-white">
+                        Direct Desk
+                      </span>
+                    </div>
+                    <p className="text-xs font-bold text-[#1f3351] dark:text-slate-100 mt-1">
+                      Dr. Achireddy
+                    </p>
+                    <a
+                      href="tel:+919000994842"
+                      className="text-sm text-[#1f3351] dark:text-white font-extrabold hover:underline block mt-0.5"
+                    >
+                      +91 90009 94842
+                    </a>
+                  </div>
+                </div>
+
                 {/* Location */}
                 <div className="flex items-start gap-4">
                   <div className="w-9 h-9 rounded-lg bg-white dark:bg-white/10 border border-[#dce8ee] dark:border-white/15 text-[#1f3351] dark:text-white flex items-center justify-center shrink-0 mt-0.5 shadow-xs">
@@ -221,12 +336,13 @@ export const ContactSection: React.FC = () => {
                   </div>
                   <div>
                     <span className="text-xs font-bold text-[#4b6382] dark:text-teal-400 uppercase tracking-wider block">
-                      Phone &amp; Emergency
+                      Hospital &amp; Emergency
                     </span>
                     <a
                       href="tel:+918055667888"
                       className="text-sm text-[#1f3351] dark:text-teal-300 font-semibold hover:underline block mt-0.5"
                     >
+                      <span className="text-xs font-medium text-[#4b6382] dark:text-teal-400 mr-1.5">Reception:</span>
                       +91 80556 67888
                     </a>
                     <a

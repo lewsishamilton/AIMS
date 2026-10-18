@@ -13,7 +13,7 @@ const linksExcept = (path: string) =>
   ADMISSION_LINKS.filter((l) => l.path !== path);
 
 const ADMISSIONS_DESK =
-  "Admissions office: +91 80557 78999 · info@aims.ac.in · Beside MLRIT, Dundigal, Gandi Maisamma, Medchal–Malkajgiri District, Telangana 500043.";
+  "Admissions office (Dr. Achireddy): +91 90009 94842 / +91 80557 78999 · info@aims.ac.in · Beside MLRIT, Dundigal, Gandi Maisamma, Medchal–Malkajgiri District, Telangana 500043.";
 
 export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
   "/admissions": {

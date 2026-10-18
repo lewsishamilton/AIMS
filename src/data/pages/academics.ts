@@ -139,9 +139,9 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
     ],
     quickLinks: linksExcept("/academics/nursing-allied-health"),
     cta: {
-      text: "Intake, eligibility and fee details for nursing and allied health programmes are confirmed each academic year. Speak to the admissions office on +91 80557 78999.",
+      text: "Intake, eligibility and fee details for nursing and allied health programmes are confirmed each academic year. Speak to admissions in-charge Dr. Achireddy on +91 90009 94842.",
       label: "Admissions Enquiry",
-      path: "/admissions",
+      path: "/contact#admissions-enquiry",
     },
   },
 
@@ -218,9 +218,9 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
     ],
     quickLinks: linksExcept("/academics/paramedical-diplomas"),
     cta: {
-      text: "Course duration, eligibility and intake for each diploma are confirmed at the start of the academic session. Call the admissions office on +91 80557 78999 for the current prospectus.",
+      text: "Course duration, eligibility and intake for each diploma are confirmed at the start of the academic session. Call admissions in-charge Dr. Achireddy on +91 90009 94842 for the current prospectus.",
       label: "Admissions Enquiry",
-      path: "/admissions",
+      path: "/contact#admissions-enquiry",
     },
   },
 

@@ -27,15 +27,15 @@ interface Entry {
 
 const PHONE = "+91 80556 67888";
 const AMBULANCE = "+91 81794 32491";
-const ADMISSIONS_PHONE = "+91 80557 78999";
+const ADMISSIONS_PHONE = "+91 90009 94842 (Dr. Achireddy)";
 const EMAIL = "arundathihospital@gmail.com";
 const ADDRESS = "Beside MLRIT, Dundigal, Gandi Maisamma, Medchal-Malkajgiri District, Telangana 500043";
 
 const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Contact details",
-    keywords: ["contact", "phone", "number", "call", "email", "mail", "reach", "reception", "helpline", "mobile"],
-    answer: `Reception: ${PHONE}\nAmbulance (24×7): ${AMBULANCE}\nAdmissions: ${ADMISSIONS_PHONE}\nEmail: ${EMAIL}`,
+    keywords: ["contact", "phone", "number", "call", "email", "mail", "reach", "reception", "helpline", "mobile", "achireddy", "admissions"],
+    answer: `Reception: ${PHONE}\nAmbulance (24×7): ${AMBULANCE}\nAdmissions Enquiry (Dr. Achireddy): ${ADMISSIONS_PHONE}\nEmail: ${EMAIL}`,
     links: [{ label: "Contact page", path: "/contact" }],
   },
   {

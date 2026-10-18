@@ -252,6 +252,79 @@ const Navbar = () => {
         ? "text-gray-700 hover:text-black hover:bg-gray-100/80 rounded-lg"
         : "text-white/85 hover:text-white hover:bg-white/15 rounded-lg";
 
+    const renderContactCallButton = (isMobile = false) => {
+        const isDark = theme === "dark";
+        const isContactActive = pathname === "/contact";
+
+        const buttonClass = isDark
+            ? isScrolled
+                ? isContactActive
+                    ? "bg-white/20 text-white border border-white/40 backdrop-blur-xl shadow-[0_2px_12px_rgba(255,255,255,0.25)]"
+                    : "bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/35 backdrop-blur-xl shadow-[0_2px_10px_rgba(0,0,0,0.3)] hover:shadow-[0_0_12px_rgba(255,255,255,0.25)]"
+                : isContactActive
+                ? "bg-white/20 text-white border border-white/35 backdrop-blur-sm shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+                : "bg-transparent hover:bg-white/15 text-white/90 hover:text-white border border-white/20 hover:border-white/35 backdrop-blur-sm shadow-none hover:shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+            : isWhiteTheme
+            ? isContactActive
+                ? "bg-[#1f3351] text-white border border-[#1f3351] shadow-xs"
+                : "bg-gray-100/90 hover:bg-gray-200/90 text-[#1f3351] hover:text-[#0d2346] border border-gray-200/80 shadow-xs hover:shadow-sm"
+            : "bg-transparent hover:bg-white/15 text-white/90 hover:text-white border border-white/25 hover:border-white/40 backdrop-blur-sm shadow-none hover:shadow-[0_0_12px_rgba(255,255,255,0.2)]";
+
+        // Desktop: glide to the Admissions card on the home page, so visitors stay on (and can scroll back up) the main page.
+        const handleClick = (e: React.MouseEvent) => {
+            setIsMenuOpen(false);
+            const card = pathname === "/" ? document.getElementById("admissions-enquiry") : null;
+            if (card) {
+                e.preventDefault();
+                card.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        };
+
+        const className = `group relative flex items-center justify-center rounded-full transition-all duration-300 cursor-pointer active:scale-90 ${
+            isMobile ? "w-8 h-8" : "w-9 h-9"
+        } ${buttonClass}`;
+
+        // Phone dial symbol
+        const icon = (
+            <svg
+                className={`${isMobile ? "w-4 h-4" : "w-[17px] h-[17px]"} transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-12`}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                viewBox="0 0 24 24"
+            >
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                <path d="M14.05 2a9 9 0 0 1 8 7.94" />
+                <path d="M14.05 6A5 5 0 0 1 18 10" />
+            </svg>
+        );
+
+        // Phones can dial, so the mobile button calls the admissions desk directly.
+        return isMobile ? (
+            <a
+                href="tel:+919000994842"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Call Admissions: Dr. Achireddy"
+                title="Call Admissions: Dr. Achireddy (9000994842)"
+                className={className}
+            >
+                {icon}
+            </a>
+        ) : (
+            <Link
+                to={{ pathname: "/", hash: "#admissions-enquiry" }}
+                onClick={handleClick}
+                aria-label="Admissions Enquiry: Dr. Achireddy"
+                title="Admissions Enquiry: Dr. Achireddy (9000994842)"
+                className={className}
+            >
+                {icon}
+            </Link>
+        );
+    };
+
     const renderThemeToggle = (isMobile = false) => {
         const isDark = theme === "dark";
         // Button style dynamically adjusts to match transparent vs opaque navbar states
@@ -425,7 +498,7 @@ const Navbar = () => {
                         {navLinks.map((link, i) => renderDesktopNavItem(link, i, i >= navLinks.length - 2))}
                     </div>
 
-                    {/* News, Virtual Tour & Theme Toggle (Desktop) */}
+                    {/* News, Virtual Tour, Call Icon & Theme Toggle (Desktop) */}
                     <div className="hidden xl:flex items-center gap-3 shrink-0">
                         <Link
                             to="/aims-in-the-news"
@@ -442,10 +515,14 @@ const Navbar = () => {
                             <span className="relative z-10 whitespace-nowrap">Virtual Tour</span>
                         </Link>
 
+                        {/* Admissions & Contact Call Button */}
+                        {renderContactCallButton(false)}
+
+                        {/* Dark / Light Mode Toggle */}
                         {renderThemeToggle(false)}
                     </div>
 
-                    {/* Mobile Controls: Virtual Tour, Theme Toggle & Menu Button */}
+                    {/* Mobile Controls: Virtual Tour, Call Icon, Theme Toggle & Menu Button */}
                     <div className="flex xl:hidden items-center gap-2 py-3">
                         <Link
                             to="/aims-in-the-news"
@@ -462,6 +539,10 @@ const Navbar = () => {
                             <span className="relative z-10">Tour</span>
                         </Link>
 
+                        {/* Call Button beside Theme Toggle on Mobile */}
+                        {renderContactCallButton(true)}
+
+                        {/* Dark / Light Mode Toggle on Mobile */}
                         {renderThemeToggle(true)}
 
                         <button
@@ -571,6 +652,33 @@ const Navbar = () => {
                                 </div>
                             );
                         })}
+                    </div>
+                    {/* Quick Admissions & Contact Card in Mobile Drawer */}
+                    <div className={`mt-6 p-4 rounded-2xl border ${isWhiteTheme ? "bg-[#fbfaf5] border-[#dce8ee]" : "bg-white/5 border-white/15"}`}>
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="text-xs font-bold uppercase tracking-wider text-[#1f3351] dark:text-white">
+                                Admissions Enquiry
+                            </span>
+                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#1f3351] text-white dark:bg-white/20 dark:text-white">
+                                Dr. Achireddy
+                            </span>
+                        </div>
+                        <a
+                            href="tel:+919000994842"
+                            className="flex items-center gap-2 text-sm font-bold text-[#1f3351] dark:text-white hover:underline"
+                        >
+                            <svg className="w-4 h-4 text-[#1f3351] dark:text-white shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                            </svg>
+                            <span>+91 90009 94842</span>
+                        </a>
+                        <Link
+                            to="/contact"
+                            onClick={() => setIsMenuOpen(false)}
+                            className="mt-3 block text-center text-xs font-semibold py-2 rounded-xl bg-[#1f3351] text-white hover:bg-[#16273f] dark:bg-white dark:text-[#1f3351] dark:hover:bg-slate-100 transition-colors"
+                        >
+                            Go to Contact Us Page &rarr;
+                        </Link>
                     </div>
                 </div>
             </nav>
