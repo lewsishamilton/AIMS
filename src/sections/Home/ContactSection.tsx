@@ -198,22 +198,22 @@ export const ContactSection: React.FC = () => {
         >
           <div className="rounded-[24px] border border-[#1f3351]/15 dark:border-white/15 bg-[#fbfaf5] dark:bg-white/[0.04] dark:backdrop-blur-xl p-5 sm:p-7 lg:px-10 lg:py-8 shadow-[0_14px_36px_rgba(13,35,70,0.07)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.45)] flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 lg:gap-12">
             {/* Who to contact, and their number */}
-            <div className="flex items-start gap-4 sm:gap-5 min-w-0">
+            <div className="flex items-center gap-4 sm:gap-5 min-w-0">
               <div className="hidden sm:flex w-14 h-14 rounded-2xl bg-[#1f3351] text-white dark:bg-white dark:text-[#1f3351] items-center justify-center shrink-0 shadow-sm">
                 <GraduationCap className="w-7 h-7" aria-hidden="true" />
               </div>
+              {/* Number is sized to span the same width as the name above it */}
               <div className="min-w-0">
-                <span className="block text-xs font-bold uppercase tracking-[0.16em] text-[#1f3351]/65 dark:text-white/65">
+                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-[#1f3351] dark:text-white/80">
                   Admissions Enquiry
                 </span>
-                <h3 className="mt-1 font-['Manrope',sans-serif] text-2xl sm:text-[30px] font-extrabold text-[#1f3351] dark:text-white tracking-tight leading-tight">
+                <h3 className="mt-1 font-['Manrope',sans-serif] text-2xl sm:text-[30px] font-semibold text-[#1f3351] dark:text-white tracking-tight leading-tight">
                   Dr. Achireddy
                 </h3>
-                <div className="mt-2 flex items-center gap-2">
-                  <PhoneCall className="hidden sm:block w-4 h-4 text-[#1f3351]/70 dark:text-white/70 shrink-0" aria-hidden="true" />
+                <div className="mt-1.5 flex items-center gap-2">
                   <a
                     href="tel:+919000994842"
-                    className="text-lg sm:text-xl font-bold text-[#1f3351] dark:text-white tracking-wide whitespace-nowrap hover:underline underline-offset-4"
+                    className="text-base sm:text-xl font-semibold text-[#1f3351] dark:text-white tracking-wide whitespace-nowrap hover:underline underline-offset-4"
                   >
                     +91 90009 94842
                   </a>
@@ -222,7 +222,7 @@ export const ContactSection: React.FC = () => {
                     onClick={() => handleCopyNumber("9000994842")}
                     aria-label={copied ? "Number copied" : "Copy admissions number"}
                     title={copied ? "Copied" : "Copy number"}
-                    className="shrink-0 w-11 h-11 -my-2 rounded-xl text-[#1f3351]/70 hover:text-[#1f3351] hover:bg-[#1f3351]/[0.06] dark:text-white/70 dark:hover:text-white dark:hover:bg-white/10 flex items-center justify-center transition-colors cursor-pointer"
+                    className="relative shrink-0 w-8 h-8 -mr-1.5 rounded-lg after:absolute after:-inset-1.5 after:content-[''] text-[#1f3351]/70 hover:text-[#1f3351] hover:bg-[#1f3351]/[0.06] dark:text-white/70 dark:hover:text-white dark:hover:bg-white/10 flex items-center justify-center transition-colors cursor-pointer"
                   >
                     {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                   </button>

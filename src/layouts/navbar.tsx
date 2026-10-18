@@ -163,6 +163,8 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
     const [openDrawerIdx, setOpenDrawerIdx] = React.useState<number | null>(null);
     const isWhiteTheme = theme === "dark" ? false : (pathname !== "/" || isScrolled);
+    // The phone menu follows the site theme: soft white in light mode, dark only in dark mode.
+    const drawerLight = theme !== "dark";
     const isNavTransparent = theme === "dark" ? !isScrolled : !isWhiteTheme;
 
     // Hover-intent state: a short grace delay before closing/switching so a brief
@@ -253,22 +255,9 @@ const Navbar = () => {
         : "text-white/85 hover:text-white hover:bg-white/15 rounded-lg";
 
     const renderContactCallButton = (isMobile = false) => {
-        const isDark = theme === "dark";
-        const isContactActive = pathname === "/contact";
-
-        const buttonClass = isDark
-            ? isScrolled
-                ? isContactActive
-                    ? "bg-white/20 text-white border border-white/40 backdrop-blur-xl shadow-[0_2px_12px_rgba(255,255,255,0.25)]"
-                    : "bg-white/10 hover:bg-white/20 text-white border border-white/20 hover:border-white/35 backdrop-blur-xl shadow-[0_2px_10px_rgba(0,0,0,0.3)] hover:shadow-[0_0_12px_rgba(255,255,255,0.25)]"
-                : isContactActive
-                ? "bg-white/20 text-white border border-white/35 backdrop-blur-sm shadow-[0_0_10px_rgba(255,255,255,0.2)]"
-                : "bg-transparent hover:bg-white/15 text-white/90 hover:text-white border border-white/20 hover:border-white/35 backdrop-blur-sm shadow-none hover:shadow-[0_0_10px_rgba(255,255,255,0.2)]"
-            : isWhiteTheme
-            ? isContactActive
-                ? "bg-[#1f3351] text-white border border-[#1f3351] shadow-xs"
-                : "bg-gray-100/90 hover:bg-gray-200/90 text-[#1f3351] hover:text-[#0d2346] border border-gray-200/80 shadow-xs hover:shadow-sm"
-            : "bg-transparent hover:bg-white/15 text-white/90 hover:text-white border border-white/25 hover:border-white/40 backdrop-blur-sm shadow-none hover:shadow-[0_0_12px_rgba(255,255,255,0.2)]";
+        // WhatsApp-green with a white handset, so the call button is recognisable at a glance in every theme.
+        const buttonClass =
+            "bg-[#25D366] hover:bg-[#1EBE5A] text-[#ffffff] border border-[#25D366] shadow-[0_2px_10px_rgba(37,211,102,0.35)] hover:shadow-[0_4px_14px_rgba(37,211,102,0.45)]";
 
         // Desktop: glide to the Admissions card on the home page, so visitors stay on (and can scroll back up) the main page.
         const handleClick = (e: React.MouseEvent) => {
@@ -570,20 +559,16 @@ const Navbar = () => {
                     className={`fixed top-0 left-0 w-full h-screen flex flex-col justify-start items-start px-6 sm:px-8 pt-20 pb-10 text-sm font-semibold tracking-wide transition-transform duration-300 xl:hidden overflow-y-auto overscroll-contain ${
                         isMenuOpen ? "translate-x-0 m-drawer-open" : "-translate-x-full"
                     } ${
-                        theme === "dark"
-                            ? "bg-[#070d18]/95 backdrop-blur-2xl text-white border-r border-white/10"
-                            : isWhiteTheme
-                            ? "bg-white text-gray-900 shadow-2xl"
-                            : "bg-black/80 backdrop-blur-2xl text-white border-r border-white/10"
+                        drawerLight
+                            ? "bg-[#fbfaf5] text-[#1f3351] shadow-2xl"
+                            : "bg-[#070d18]/95 backdrop-blur-2xl text-white border-r border-white/10"
                     }`}
                 >
                     <button
                         aria-label="Close menu"
                         className={`absolute top-6 right-6 p-2 rounded-full ${
-                            theme === "dark"
-                                ? "text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20"
-                                : isWhiteTheme
-                                ? "text-gray-800 hover:bg-gray-100"
+                            drawerLight
+                                ? "text-[#1f3351] bg-white border border-[#1f3351]/15 hover:bg-[#1f3351]/[0.06]"
                                 : "text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20"
                         }`}
                         onClick={() => setIsMenuOpen(false)}
@@ -598,10 +583,10 @@ const Navbar = () => {
                         {navLinks.map((link, idx) => {
                             const isOpen = openDrawerIdx === idx;
                             const subLinkClass = `block py-1.5 text-[13px] transition-colors ${
-                                isWhiteTheme ? "text-gray-600 hover:text-black" : "text-white/70 hover:text-white"
+                                drawerLight ? "text-[#1f3351]/75 hover:text-[#1f3351]" : "text-white/70 hover:text-white"
                             }`;
                             return (
-                                <div key={idx} className={`w-full border-b ${isWhiteTheme ? "border-gray-200" : "border-white/15"}`}>
+                                <div key={idx} className={`w-full border-b ${drawerLight ? "border-[#1f3351]/10" : "border-white/15"}`}>
                                     <button
                                         type="button"
                                         aria-expanded={isOpen}
@@ -630,13 +615,13 @@ const Navbar = () => {
                                         {...external(item.path)}
                                                             onClick={() => setIsMenuOpen(false)}
                                                             className={`py-1.5 text-sm font-semibold transition-colors ${
-                                                                isWhiteTheme ? "text-gray-800 hover:text-black" : "text-white/90 hover:text-white"
+                                                                drawerLight ? "text-[#1f3351] hover:text-[#0d2346]" : "text-white/90 hover:text-white"
                                                             }`}
                                                         >
                                                             {item.name}
                                                         </Link>
                                                         {item.subItems && (
-                                                            <div className={`ml-1 pl-3 mb-1 border-l ${isWhiteTheme ? "border-gray-200" : "border-white/20"}`}>
+                                                            <div className={`ml-1 pl-3 mb-1 border-l ${drawerLight ? "border-[#1f3351]/15" : "border-white/20"}`}>
                                                                 {item.subItems.map((sub, subIdx) => (
                                                                     <Link key={subIdx} to={sub.path} onClick={() => setIsMenuOpen(false)} className={subLinkClass}>
                                                                         {sub.name}
@@ -654,20 +639,20 @@ const Navbar = () => {
                         })}
                     </div>
                     {/* Quick Admissions & Contact Card in Mobile Drawer */}
-                    <div className={`mt-6 p-4 rounded-2xl border ${isWhiteTheme ? "bg-[#fbfaf5] border-[#dce8ee]" : "bg-white/5 border-white/15"}`}>
-                        <div className="flex items-center justify-between gap-2 mb-2">
-                            <span className="text-xs font-bold uppercase tracking-wider text-[#1f3351] dark:text-white">
+                    <div className={`mt-6 p-4 rounded-2xl border ${drawerLight ? "bg-white border-[#1f3351]/15" : "bg-white/5 border-white/15"}`}>
+                        <div className={`mb-2 ${drawerLight ? "text-[#1f3351]" : "text-white"}`}>
+                            <span className="block text-xs font-bold uppercase tracking-wider">
                                 Admissions Enquiry
                             </span>
-                            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#1f3351] text-white dark:bg-white/20 dark:text-white">
+                            <span className="block mt-0.5 text-base font-semibold">
                                 Dr. Achireddy
                             </span>
                         </div>
                         <a
                             href="tel:+919000994842"
-                            className="flex items-center gap-2 text-sm font-bold text-[#1f3351] dark:text-white hover:underline"
+                            className={`flex items-center gap-2 text-sm font-bold hover:underline ${drawerLight ? "text-[#1f3351]" : "text-white"}`}
                         >
-                            <svg className="w-4 h-4 text-[#1f3351] dark:text-white shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
+                            <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" viewBox="0 0 24 24">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                             </svg>
                             <span>+91 90009 94842</span>
@@ -675,7 +660,7 @@ const Navbar = () => {
                         <Link
                             to="/contact"
                             onClick={() => setIsMenuOpen(false)}
-                            className="mt-3 block text-center text-xs font-semibold py-2 rounded-xl bg-[#1f3351] text-white hover:bg-[#16273f] dark:bg-white dark:text-[#1f3351] dark:hover:bg-slate-100 transition-colors"
+                            className={`mt-3 block text-center text-xs font-semibold py-2 rounded-xl transition-colors ${drawerLight ? "bg-[#1f3351] text-white hover:bg-[#0d2346]" : "bg-white text-[#1f3351] hover:bg-[#fbfaf5]"}`}
                         >
                             Go to Contact Us Page &rarr;
                         </Link>
