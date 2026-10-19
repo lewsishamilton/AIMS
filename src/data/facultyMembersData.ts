@@ -371,7 +371,7 @@ export const ALL_FACULTY: FacultyMember[] = [
     "id": "fac-025",
     "serialNumber": 25,
     "rawName": "DR.SISTLA RADHA",
-    "name": "Dr. SISTLA RADHA",
+    "name": "Dr. S. Radha",
     "rawDesignation": "Professor NG",
     "designation": "Professor & Head of Department",
     "roleBadge": "HOD / Professor",
@@ -2166,10 +2166,10 @@ export const ALL_FACULTY: FacultyMember[] = [
     "category": "Clinical"
   },
   {
-    "id": "fac-144",
-    "serialNumber": 144,
-    "rawName": "Dr B Devanand",
-    "name": "Dr. B Devanand",
+    "id": "fac-145",
+    "serialNumber": 145,
+    "rawName": "DR.TADAKALA VIJAYA KUMAR",
+    "name": "Dr. T. Vijay Kumar",
     "rawDesignation": "Professor NG",
     "designation": "Professor & Head of Department",
     "roleBadge": "HOD / Professor",
@@ -2179,13 +2179,13 @@ export const ALL_FACULTY: FacultyMember[] = [
     "departmentId": "anaesthesiology",
     "departmentName": "Anaesthesiology",
     "category": "Clinical",
-    "photoUrl": "/faculty/b-devanand.webp"
+    "photoUrl": "/faculty/tadakala-vijaya-kumar.webp"
   },
   {
-    "id": "fac-145",
-    "serialNumber": 145,
-    "rawName": "DR.TADAKALA VIJAYA KUMAR",
-    "name": "Dr. TADAKALA VIJAYA KUMAR",
+    "id": "fac-144",
+    "serialNumber": 144,
+    "rawName": "Dr B Devanand",
+    "name": "Dr. B Devanand",
     "rawDesignation": "Professor NG",
     "designation": "Professor",
     "roleBadge": "Professor",

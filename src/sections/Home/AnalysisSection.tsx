@@ -44,10 +44,45 @@ const monthLabel = (i: number) => {
   const d = new Date(2022, 7 + i)
   return `${d.toLocaleString("en-US", { month: "short" })} ${String(d.getFullYear()).slice(2)}`
 }
-const TREND = Array.from({ length: Math.max(MONTHS, MONTHLY_OP.length) }, (_, i) => ({
-  label: monthLabel(i),
-  value: MONTHLY_OP[i] ?? Math.round(33620 + (i - 11) * 420 + (noise() - 0.5) * 3000),
-}))
+// May 2026 is index 45 ((2026 - 2022) * 12 + 4 - 7 = 45).
+// Up to Apr 2026, keeps the original graph's exact appearance and values.
+// From May 2026 onwards, increases non-linearly with organic healthcare seasonality and zero drops.
+const MAY_2026_INDEX = 45
+
+const SEASONAL_VELOCITIES: Record<number, number> = {
+  4: 1.25, // May: Spring recovery / OPD pickup
+  5: 1.10, // Jun: Monsoon onset / school reopenings
+  6: 1.45, // Jul: Monsoon viral infections surge
+  7: 1.65, // Aug: Peak seasonal disease burden
+  8: 1.35, // Sep: Post-monsoon wave
+  9: 1.15, // Oct: Festival period steady gains
+  10: 1.40, // Nov: Winter respiratory surge
+  11: 1.20, // Dec: Steady year-end volume
+  0: 0.90, // Jan: Steady
+  1: 1.00, // Feb: Short month
+  2: 1.15, // Mar: Spring ramp
+  3: 0.95, // Apr: Exams / pre-summer
+}
+
+let lastGeneratedVal = 0
+
+const TREND = Array.from({ length: Math.max(MONTHS, MONTHLY_OP.length) }, (_, i) => {
+  const label = monthLabel(i)
+  if (i < MAY_2026_INDEX) {
+    const val = MONTHLY_OP[i] ?? Math.round(33620 + (i - 11) * 420 + (noise() - 0.5) * 3000)
+    lastGeneratedVal = val
+    return { label, value: val }
+  } else {
+    const d = new Date(2022, 7 + i)
+    const calMonth = d.getMonth()
+    const velocity = SEASONAL_VELOCITIES[calMonth] ?? 1.15
+    const r = ((i * 2654435761) >>> 0) % 100
+    // Organic, non-linear monthly increase (strictly positive, realistic curve)
+    const inc = Math.round(1100 * velocity + r * 3.5)
+    lastGeneratedVal += inc
+    return { label, value: lastGeneratedVal }
+  }
+})
 const TREND_END = TREND[TREND.length - 1]
 if (import.meta.env.DEV && TREND_END.value <= MONTHLY_OP[11]) console.error("[AnalysisSection] trend is not rising")
 
