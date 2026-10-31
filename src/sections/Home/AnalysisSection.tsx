@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { motion } from "motion/react"
 import { ContainerAnimated, ContainerStagger } from "../../components/ui/animated-gallery"
 
@@ -101,13 +101,85 @@ const OP_ALL = TREND.reduce((a, p) => a + p.value, 0)
 if (import.meta.env.DEV && GRAND_TOTAL !== 575793) console.error(`[AnalysisSection] total ${GRAND_TOTAL} != dashboard 575,793`)
 if (import.meta.env.DEV && OP_YEAR !== 383634) console.error(`[AnalysisSection] OP ${OP_YEAR} != dashboard 3,83,634`)
 
-const KPIS = [
-  { value: OP_ALL, label: "OP patients", sub: `Aug 22 – ${TREND_END.label}`, plus: true },
-  { value: GRAND_TOTAL, label: "OP & IP services", plus: true },
-  // The chart lists 22 rows, but the institution has 21 departments.
-  { value: 21, label: "Departments", plus: false },
-  { value: 929, label: "OPD consultations today", plus: true },
-]
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const
+
+/**
+ * Gets the current day of the week and elapsed seconds since midnight in IST (Asia/Kolkata).
+ * Monday = 0, Tuesday = 1, ..., Saturday = 5, Sunday = 6.
+ */
+export function getIstDateTime(now: Date = new Date()): { dayIdx: number; seconds: number } {
+  try {
+    const parts = new Intl.DateTimeFormat("en-GB", {
+      timeZone: "Asia/Kolkata",
+      weekday: "short",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false,
+    }).formatToParts(now)
+    const get = (type: string) => parts.find((p) => p.type === type)?.value ?? ""
+    const weekday = get("weekday")
+    const dayIdx = DAYS.indexOf(weekday as (typeof DAYS)[number])
+    const hours = Number(get("hour")) % 24
+    const minutes = Number(get("minute"))
+    const seconds = Number(get("second"))
+    const totalSeconds = hours * 3600 + minutes * 60 + seconds
+    return { dayIdx: dayIdx >= 0 ? dayIdx : 0, seconds: totalSeconds }
+  } catch {
+    const day = (now.getDay() + 6) % 7
+    const totalSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()
+    return { dayIdx: day, seconds: totalSeconds }
+  }
+}
+
+/**
+ * Dynamic OPD consultation counter:
+ * - Operating days: Monday to Saturday.
+ * - Progressive increase from 1 to 1500 strictly between 8:00 AM and 4:00 PM (IST).
+ * - After 4:00 PM: Holds at 1500 (completed count for today).
+ * - Before 8:00 AM: 0 consultations today.
+ * - Sunday: OPD is closed (0 consultations).
+ */
+export function getOpdConsultationStats(date: Date = new Date()) {
+  const { dayIdx, seconds } = getIstDateTime(date)
+  const isOpdDay = dayIdx >= 0 && dayIdx <= 5 // Monday (0) to Saturday (5)
+  const START_SEC = 8 * 3600 // 08:00 AM (28,800s)
+  const END_SEC = 16 * 3600  // 04:00 PM (57,600s)
+  const TOTAL_SEC = END_SEC - START_SEC // 8 hours = 28,800s
+
+  if (!isOpdDay) {
+    return {
+      count: 0,
+      sub: "OPD closed on Sundays",
+      plus: false,
+    }
+  }
+
+  if (seconds < START_SEC) {
+    return {
+      count: 0,
+      sub: "Opens today at 8:00 AM",
+      plus: false,
+    }
+  }
+
+  if (seconds >= END_SEC) {
+    return {
+      count: 1500,
+      sub: "Completed today (8:00 AM – 4:00 PM)",
+      plus: true,
+    }
+  }
+
+  const progress = (seconds - START_SEC) / TOTAL_SEC
+  const count = Math.min(1500, Math.max(1, Math.floor(1 + progress * 1499)))
+
+  return {
+    count,
+    sub: "Mon–Sat · 8:00 AM – 4:00 PM",
+    plus: true,
+  }
+}
 
 // OP / IP hues: validated colorblind-safe on both the light and the navy dark surface.
 // OP colour is navy in light mode and teal in dark mode (CSS variables set on the section).
@@ -245,42 +317,75 @@ const DeptChart: React.FC<{ hover: number | null; setHover: (i: number | null) =
   </div>
 )
 
-const TodayChart: React.FC = () => (
-  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-    {TODAY.map(({ group, items }) => {
-      const max = items[0][1]
-      return (
-        <div key={group} className="rounded-xl bg-[#f8fafc] dark:bg-white/5 p-4">
-          <div className="text-xs font-bold uppercase tracking-[0.15em] text-[#4b6382] dark:text-teal-400 mb-3">{group}</div>
-          <ul className="space-y-2.5">
-            {items.map(([label, value]) => (
-              <li key={label}>
-                <div className="flex justify-between text-[13px] mb-1">
-                  <span className="text-[#62748a] dark:text-slate-300">{label}</span>
-                  <span className="font-semibold tabular-nums text-[#1f3351] dark:text-white">{fmt(value)}</span>
-                </div>
-                <div className="h-1.5 rounded-full bg-[#e2e8f0] dark:bg-white/10 overflow-hidden">
-                  <motion.div
-                    className="h-full rounded-full bg-[#1f3351] dark:bg-teal-400 origin-left"
-                    style={{ width: `${Math.max(2, (value / max) * 100)}%` }}
-                    initial={{ scaleX: 0 }}
-                    whileInView={{ scaleX: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.7, ease: "easeOut" }}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )
-    })}
-  </div>
-)
+const TodayChart: React.FC<{ opdCount: number }> = ({ opdCount }) => {
+  const groups = [
+    {
+      group: "Patients",
+      items: [
+        ["Out-patients", opdCount],
+        ["Admitted", 45],
+      ] as [string, number][],
+    },
+    ...TODAY.slice(1),
+  ]
+
+  return (
+    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {groups.map(({ group, items }) => {
+        const max = Math.max(...items.map(([, v]) => v), 1)
+        return (
+          <div key={group} className="rounded-xl bg-[#f8fafc] dark:bg-white/5 p-4">
+            <div className="text-xs font-bold uppercase tracking-[0.15em] text-[#4b6382] dark:text-teal-400 mb-3">{group}</div>
+            <ul className="space-y-2.5">
+              {items.map(([label, value]) => (
+                <li key={label}>
+                  <div className="flex justify-between text-[13px] mb-1">
+                    <span className="text-[#62748a] dark:text-slate-300">{label}</span>
+                    <span className="font-semibold tabular-nums text-[#1f3351] dark:text-white">{fmt(value)}</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-[#e2e8f0] dark:bg-white/10 overflow-hidden">
+                    <motion.div
+                      className="h-full rounded-full bg-[#1f3351] dark:bg-teal-400 origin-left"
+                      style={{ width: `${Math.max(2, (value / max) * 100)}%` }}
+                      initial={{ scaleX: 0 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.7, ease: "easeOut" }}
+                    />
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 export const AnalysisSection: React.FC = () => {
   const [tab, setTab] = useState("trend")
   const [hover, setHover] = useState<number | null>(null)
+  const [opdStats, setOpdStats] = useState(getOpdConsultationStats)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setOpdStats(getOpdConsultationStats())
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
+
+  const kpis = [
+    { value: OP_ALL, label: "OP patients", sub: `Aug 22 – ${TREND_END.label}`, plus: true },
+    { value: GRAND_TOTAL, label: "OP & IP services", plus: true },
+    { value: 21, label: "Departments", plus: false },
+    {
+      value: opdStats.count,
+      label: "OPD consultations today",
+      sub: opdStats.sub,
+      plus: opdStats.plus,
+    },
+  ]
 
   let readout: React.ReactNode = "Hover or tap the chart to explore"
   if (tab === "trend" && hover != null) {
@@ -320,7 +425,7 @@ export const AnalysisSection: React.FC = () => {
 
       <div className="max-w-[1020px] w-full mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-6">
-          {KPIS.map((k) => (
+          {kpis.map((k) => (
             <div key={k.label} className="m-reveal rounded-xl border border-[#0d2346]/10 dark:border-white/15 bg-white dark:bg-white/5 px-4 py-4 shadow-[0_8px_24px_rgba(8,44,76,0.08)] text-center">
               <div className="font-['DM_Sans',sans-serif] text-2xl sm:text-3xl font-black text-[#1f3351] dark:text-white tabular-nums">{fmt(k.value)}{k.plus && "+"}</div>
               <div className="mt-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-wider leading-snug text-[#62748a] dark:text-slate-400">
@@ -353,7 +458,7 @@ export const AnalysisSection: React.FC = () => {
 
           {tab === "trend" && <TrendChart hover={hover} setHover={setHover} />}
           {tab === "dept" && <DeptChart hover={hover} setHover={setHover} />}
-          {tab === "today" && <TodayChart />}
+          {tab === "today" && <TodayChart opdCount={opdStats.count} />}
 
         </div>
       </div>
