@@ -144,8 +144,7 @@ export const ContactSection: React.FC = () => {
       const mailtoUrl = `mailto:${targetEmail}?subject=${encodeURIComponent(
         subjectLine
       )}&body=${encodeURIComponent(
-        `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nSubject: ${
-          formData.subject || "General Inquiry"
+        `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nSubject: ${formData.subject || "General Inquiry"
         }\n\nMessage:\n${formData.message}`
       )}`;
       window.location.href = mailtoUrl;
@@ -208,7 +207,7 @@ export const ContactSection: React.FC = () => {
                   Admissions Enquiry
                 </span>
                 <h3 className="mt-1 font-['Manrope',sans-serif] text-2xl sm:text-[30px] font-semibold text-[#1f3351] dark:text-white tracking-tight leading-tight">
-                  Dr. Achireddy
+                  Dr.Ch.Achireddy
                 </h3>
                 <div className="mt-1.5 flex items-center gap-2">
                   <a
@@ -494,11 +493,10 @@ export const ContactSection: React.FC = () => {
                       onClick={() => setIsDropdownOpen((prev) => !prev)}
                       aria-haspopup="listbox"
                       aria-expanded={isDropdownOpen}
-                      className={`w-full px-4 py-3 rounded-xl bg-[#f8fafc] dark:bg-white/5 border border-[#dce8ee] dark:border-white/15 text-sm flex items-center justify-between transition-all outline-none text-left cursor-pointer ${
-                        isDropdownOpen
-                          ? "border-[#1f3351] dark:border-teal-400 ring-2 ring-[#1f3351]/10 bg-white dark:bg-white/10"
-                          : "hover:border-[#1f3351]/40 dark:hover:border-white/30"
-                      }`}
+                      className={`w-full px-4 py-3 rounded-xl bg-[#f8fafc] dark:bg-white/5 border border-[#dce8ee] dark:border-white/15 text-sm flex items-center justify-between transition-all outline-none text-left cursor-pointer ${isDropdownOpen
+                        ? "border-[#1f3351] dark:border-teal-400 ring-2 ring-[#1f3351]/10 bg-white dark:bg-white/10"
+                        : "hover:border-[#1f3351]/40 dark:hover:border-white/30"
+                        }`}
                     >
                       <span
                         className={
@@ -510,11 +508,10 @@ export const ContactSection: React.FC = () => {
                         {formData.subject || "Select an option"}
                       </span>
                       <ChevronDown
-                        className={`w-4 h-4 text-[#62748a] dark:text-slate-400 transition-transform duration-200 shrink-0 ${
-                          isDropdownOpen
-                            ? "rotate-180 text-[#1f3351] dark:text-teal-400"
-                            : ""
-                        }`}
+                        className={`w-4 h-4 text-[#62748a] dark:text-slate-400 transition-transform duration-200 shrink-0 ${isDropdownOpen
+                          ? "rotate-180 text-[#1f3351] dark:text-teal-400"
+                          : ""
+                          }`}
                       />
                     </button>
 
@@ -541,11 +538,10 @@ export const ContactSection: React.FC = () => {
                                   }));
                                   setIsDropdownOpen(false);
                                 }}
-                                className={`w-full px-3.5 py-2.5 rounded-xl text-sm font-medium flex items-center justify-between transition-colors text-left cursor-pointer ${
-                                  isSelected
-                                    ? "bg-[#1f3351] text-white dark:bg-teal-500/20 dark:text-teal-300"
-                                    : "text-[#1f3351] dark:text-slate-200 hover:bg-[#f1f5f9] dark:hover:bg-white/10"
-                                }`}
+                                className={`w-full px-3.5 py-2.5 rounded-xl text-sm font-medium flex items-center justify-between transition-colors text-left cursor-pointer ${isSelected
+                                  ? "bg-[#1f3351] text-white dark:bg-teal-500/20 dark:text-teal-300"
+                                  : "text-[#1f3351] dark:text-slate-200 hover:bg-[#f1f5f9] dark:hover:bg-white/10"
+                                  }`}
                               >
                                 <span>{option}</span>
                                 {isSelected && (
