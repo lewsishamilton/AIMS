@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from "motion/react";
-import { Award, Building2, Layers, Medal, Quote, Users, type LucideIcon } from "lucide-react";
+import { Award, Building2, GraduationCap, Layers, Medal, Quote, Trophy, Users, type LucideIcon } from "lucide-react";
 import PageHero from "../components/PageHero";
 import {
   institutionInfo,
@@ -19,7 +19,8 @@ import {
 /*
  * Awards & Achievements. Built from the same parts as the rest of the site: the photo
  * masthead, centred section headers with the ruled kicker, and one white card style for
- * every achievement. An entry without a photograph is a text-only card, never a stand-in.
+ * every achievement. Entries without a photograph get a navy placeholder of the same size,
+ * so every row of cards lines up.
  */
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -42,6 +43,10 @@ const CARD =
 const HEADING = "font-['Manrope',sans-serif] font-bold tracking-tight text-[#162740] dark:text-white";
 const EYEBROW = "text-xs font-semibold uppercase tracking-wider text-[#4b6382] dark:text-teal-400";
 const BODY = "text-sm leading-relaxed text-[#596d86] dark:text-slate-300";
+
+/* Awards get one accent beside the site navy: a warm medal gold, used only where something was won. */
+const GOLD_BADGE =
+  "inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#b8892b] via-[#d4af4f] to-[#b8892b] px-3 py-1 text-[11px] font-bold text-[#1f1606] shadow-[0_4px_14px_rgba(184,137,43,0.35)]";
 
 /** Centred section header: ruled kicker, title, one-line summary. Matches the home page sections. */
 const SectionHeader: React.FC<{ kicker: string; title: string; text: string }> = ({ kicker, title, text }) => (
@@ -72,11 +77,33 @@ interface CardMeta {
   text: React.ReactNode;
 }
 
+/** Stands in for a missing photograph: navy panel, faint dot grid, a gold-ringed icon and a label. */
+const ImagePlaceholder: React.FC<{ icon: LucideIcon; label?: string }> = ({ icon: Icon, label }) => (
+  <div
+    className="flex h-full w-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-[#0d2346] via-[#1f3351] to-[#0d2346] px-6 text-center dark:from-[#0a1830] dark:via-[#13233d] dark:to-[#0a1830]"
+  >
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 opacity-[0.12]"
+      style={{ backgroundImage: "radial-gradient(rgba(255,255,255,0.9) 1px, transparent 1px)", backgroundSize: "18px 18px" }}
+    />
+    <span className="relative flex h-14 w-14 items-center justify-center rounded-full border-2 border-[#d4af4f]/80 bg-white/5 text-[#e3c565]">
+      <Icon className="h-6 w-6" strokeWidth={1.75} aria-hidden="true" />
+    </span>
+    {label && (
+      <span className="relative max-w-[85%] text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75">{label}</span>
+    )}
+  </div>
+);
+
 /** The one achievement card used across the page. */
 const AchievementCard: React.FC<{
   image?: string | null;
   imageAlt?: string;
   objectPosition?: string;
+  /** Shown when there is no photograph. */
+  placeholderIcon?: LucideIcon;
+  placeholderLabel?: string;
   badge?: string;
   eyebrow?: string;
   title: string;
@@ -84,32 +111,44 @@ const AchievementCard: React.FC<{
   quote?: string;
   description?: string;
   footer?: { label: string; text: string };
-}> = ({ image, imageAlt, objectPosition, badge, eyebrow, title, meta = [], quote, description, footer }) => (
-  <article className={`${CARD} flex h-full flex-col`}>
-    {image && (
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#e4ecf2] dark:bg-white/5">
+}> = ({
+  image,
+  imageAlt,
+  objectPosition,
+  placeholderIcon = Award,
+  placeholderLabel,
+  badge,
+  eyebrow,
+  title,
+  meta = [],
+  quote,
+  description,
+  footer,
+}) => (
+  <article
+    className={`${CARD} group flex h-full flex-col transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_20px_44px_rgba(15,23,42,0.13)]`}
+  >
+    <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#e4ecf2] dark:bg-white/5">
+      {image ? (
         <img
           src={image}
           alt={imageAlt ?? title}
           loading="lazy"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
           style={objectPosition ? { objectPosition } : undefined}
         />
-        {badge && (
-          <span className="absolute left-4 top-4 rounded-full bg-[#0d2346]/85 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
-            {badge}
-          </span>
-        )}
-      </div>
-    )}
-
-    <div className="flex grow flex-col p-6">
-      {!image && badge && (
-        <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#1f3351]/[0.07] px-3 py-1 text-[11px] font-semibold text-[#1f3351] dark:bg-white/10 dark:text-slate-200">
-          <Award className="h-3.5 w-3.5" aria-hidden="true" />
-          {badge}
+      ) : (
+        <ImagePlaceholder icon={placeholderIcon} label={placeholderLabel} />
+      )}
+      {badge && (
+        <span className={`${GOLD_BADGE} absolute left-4 top-4 max-w-[calc(100%-2rem)]`}>
+          <Award className="h-3.5 w-3.5 flex-shrink-0" aria-hidden="true" />
+          <span className="truncate">{badge}</span>
         </span>
       )}
+    </div>
+
+    <div className="flex grow flex-col p-6">
       {eyebrow && <p className={`${EYEBROW} mb-2`}>{eyebrow}</p>}
       <h3 className={`${HEADING} text-lg leading-snug`}>{title}</h3>
 
@@ -129,9 +168,12 @@ const AchievementCard: React.FC<{
 
       {footer && (
         <div className="mt-auto pt-5">
-          <div className="border-t border-[#e4ecf2] pt-4 dark:border-white/10">
-            <p className="text-[11px] font-semibold uppercase tracking-wider text-[#1f3351] dark:text-teal-400">{footer.label}</p>
-            <p className="mt-1 text-[13px] font-medium leading-relaxed text-[#162740] dark:text-slate-200">{footer.text}</p>
+          <div className="flex gap-3 rounded-xl border border-[#d4af4f]/40 bg-gradient-to-br from-[#fdf8ea] to-[#f8efd5] px-4 py-3 dark:border-[#d4af4f]/25 dark:from-[#d4af4f]/[0.08] dark:to-[#d4af4f]/[0.03]">
+            <Trophy className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#9a7420] dark:text-[#e3c565]" aria-hidden="true" />
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-wider text-[#8a6a12] dark:text-[#e3c565]">{footer.label}</p>
+              <p className="mt-0.5 text-[13px] font-medium leading-relaxed text-[#2a2110] dark:text-slate-200">{footer.text}</p>
+            </div>
           </div>
         </div>
       )}
@@ -139,9 +181,9 @@ const AchievementCard: React.FC<{
   </article>
 );
 
-/** Cards of uneven height, packed into columns so short text-only cards leave no gaps. */
-const Masonry: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div className="columns-1 gap-6 md:columns-2 lg:columns-3 [&>*]:mb-6 [&>*]:break-inside-avoid">{children}</div>
+/** Even three-column grid; cards stretch so their footers line up along each row. */
+const CardGrid: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">{children}</div>
 );
 
 /* ─────────────────────────── Section index ─────────────────────────── */
@@ -251,11 +293,12 @@ function DepartmentsSection() {
           {departments.map((d) => chip(d.id, shortName(d.name), d.achievements.length))}
         </div>
 
-        <Masonry>
+        <CardGrid>
           {shown.map(({ dept: d, a }) => (
-              <Reveal key={a.id}>
+              <Reveal className="h-full" key={a.id}>
                 <AchievementCard
                   image={a.image}
+                  placeholderLabel={shortName(d.name)}
                   badge={a.badge}
                   eyebrow={shortName(d.name)}
                   title={a.title}
@@ -268,7 +311,7 @@ function DepartmentsSection() {
                 />
               </Reveal>
           ))}
-        </Masonry>
+        </CardGrid>
 
         {shown.length < matching.length && (
           <div className="mt-4 text-center">
@@ -315,20 +358,21 @@ function NariShakti() {
 
       <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {categories.map((cat) => (
-          <Reveal key={cat.award}>
-            <article className={`${CARD} h-full p-6`}>
-              <div className="flex items-center gap-2.5">
-                <span className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#1f3351]/[0.07] text-[#1f3351] dark:bg-white/10 dark:text-teal-300">
-                  <Award className="h-[18px] w-[18px]" aria-hidden="true" />
+          <Reveal className="h-full" key={cat.award}>
+            <article className={`${CARD} relative h-full p-6 pt-7`}>
+              <span aria-hidden="true" className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#b8892b] via-[#e3c565] to-[#b8892b]" />
+              <div className="flex items-center gap-3">
+                <span className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#d4af4f] to-[#a67c1f] text-white shadow-[0_6px_16px_rgba(184,137,43,0.35)]">
+                  <Award className="h-5 w-5" aria-hidden="true" />
                 </span>
-                <h4 className={`${HEADING} text-base`}>{cat.award}</h4>
+                <h4 className={`${HEADING} text-[17px]`}>{cat.award}</h4>
               </div>
               <p className={`${BODY} mt-3`}>{cat.description}</p>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {cat.awardees.map((p) => (
                   <li
                     key={p.name}
-                    className="rounded-full border border-[#e4ecf2] px-3 py-1 text-[12px] text-[#162740] dark:border-white/10 dark:text-slate-200"
+                    className="rounded-full border border-[#d4af4f]/40 bg-[#fdf8ea] px-3 py-1 text-[12px] text-[#2a2110] dark:border-[#d4af4f]/25 dark:bg-[#d4af4f]/[0.08] dark:text-slate-200"
                   >
                     <span className="font-semibold">{p.name}</span>
                     {p.program && <span className="text-[#4b6382] dark:text-slate-400"> · {p.program}</span>}
@@ -353,13 +397,14 @@ function FacultySection() {
           text="Teaching results, research grants, patents and publications from AIMS faculty."
         />
 
-        <Masonry>
+        <CardGrid>
           {facultyAchievements.map((f) => (
-            <Reveal key={f.id}>
+            <Reveal className="h-full" key={f.id}>
               <AchievementCard
                 image={f.image}
                 imageAlt={`${f.name}, ${f.department}`}
                 objectPosition={f.objectPosition ?? "center 20%"}
+                placeholderLabel={f.award}
                 badge={f.award}
                 title={f.name}
                 meta={[{ icon: Building2, text: f.department }]}
@@ -368,7 +413,7 @@ function FacultySection() {
               />
             </Reveal>
           ))}
-        </Masonry>
+        </CardGrid>
 
         <NariShakti />
 
@@ -380,10 +425,12 @@ function FacultySection() {
           />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {nationalAwards.map((n) => (
-              <Reveal key={n.id}>
+              <Reveal className="h-full" key={n.id}>
                 <AchievementCard
                   image={n.image}
                   imageAlt={`${n.recipient}, ${n.award}`}
+                  placeholderIcon={Medal}
+                  placeholderLabel={n.domain}
                   badge={n.domain}
                   eyebrow={n.program}
                   title={n.recipient}
@@ -411,11 +458,13 @@ function StudentsSection() {
           text="Research presentations, hackathons, quizzes and debates at conferences across the state."
         />
 
-        <Masonry>
+        <CardGrid>
           {studentAchievements.map((s) => (
-            <Reveal key={s.id}>
+            <Reveal className="h-full" key={s.id}>
               <AchievementCard
                 image={s.image}
+                placeholderIcon={GraduationCap}
+                placeholderLabel={s.event}
                 eyebrow={s.event}
                 title={s.title}
                 meta={[{ icon: Users, text: `${s.students} · ${s.year}` }]}
@@ -423,7 +472,7 @@ function StudentsSection() {
               />
             </Reveal>
           ))}
-        </Masonry>
+        </CardGrid>
 
         <div className="mt-16 sm:mt-20">
           <SubHeader kicker={academicToppers.event} title="Academic Toppers" text={academicToppers.quote} />
@@ -567,7 +616,7 @@ function SportsSection() {
           <SubHeader kicker="Previous season" title={sportsSeason2025.title} text={sportsSeason2025.summary} />
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {sportsSeason2025.events.map((ev) => (
-              <Reveal key={ev.name}>
+              <Reveal className="h-full" key={ev.name}>
                 <ResultsList
                   title={ev.name}
                   when={ev.when}
@@ -596,7 +645,7 @@ function WingsSection() {
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {wings.map((w) => (
-            <Reveal key={w.id}>
+            <Reveal className="h-full" key={w.id}>
               <AchievementCard
                 image={w.image}
                 title={w.name}
