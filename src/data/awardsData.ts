@@ -1,3 +1,6 @@
+// Fine Arts wing photo: students holding up their drawings and posters in the atrium.
+import fineArtsExhibition from "../assets/stockImages/aims-campus-36.webp";
+
 export interface DeptAchievement {
   id: string;
   title: string;
@@ -934,7 +937,7 @@ export const wings = [
     name: "Fine Arts Wing",
     motto: "Where imagination takes form.",
     description: "Sanctuary for creative visual expression through drawing, painting, and exhibition installations.",
-    image: img(47, "png"),
+    image: fineArtsExhibition,
     highlight: "Drawing & Painting Exhibition: Eekshitha, N. Anjali, Mythri, D. Anil, Janaki, Sreenidhi",
   },
   {

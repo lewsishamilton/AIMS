@@ -521,12 +521,14 @@ function SportsResultRow({ event, winner, position }: { event: string; winner: s
   const medal = position.includes("1st") ? "gold" : position.includes("2nd") ? "silver" : position.includes("3rd") ? "bronze" : null;
   return (
     <div className="sports-compact-row">
-      <div className="sports-row-meta">
-        <Activity size={12} className="sports-activity-icon" />
-        <span className="sports-event-name">{event}</span>
+      <div className="sports-row-main">
+        <div className="sports-row-meta">
+          <Activity size={12} className="sports-activity-icon" />
+          <span className="sports-event-name">{event}</span>
+        </div>
+        <span className="sports-winner-text">{winner}</span>
       </div>
       <div className="sports-row-winner">
-        <span className="sports-winner-text">{winner}</span>
         <span className={`sports-chip ${medal ? `chip-${medal}` : "chip-selected"}`}>
           {medal && (
             <span className="sports-chip-medal" aria-label={`${position.split(" ")[0]} Prize`}>

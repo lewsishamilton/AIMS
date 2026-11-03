@@ -87,19 +87,55 @@ const collageRowShape: [string, string][] = [
   ["clamp(160px, 20vw, 220px)", "62%"],
 ];
 
-const allCollageItems: EventItem[] = collageRows.flat();
+/*
+ * Every other event photo joins the collage as extra rows in the same style: four above the
+ * original rows and four below. Each added photo takes its width weight and height share from
+ * the original twelve in turn, so the rows look and animate exactly like the originals.
+ */
+const collageSrcs = new Set(collageRows.flat().map((e) => e.src));
+const archiveExtras: EventItem[] = (() => {
+  const rest = galleryArchive.filter((p) => !collageSrcs.has(p.src));
+  // The archive is grouped by kind; deal it out one kind at a time so neighbouring photos differ.
+  const queues = GALLERY_CATEGORIES.map((c) => rest.filter((p) => p.category === c));
+  const mixed: EventItem[] = [];
+  while (queues.some((q) => q.length)) queues.forEach((q) => q.length && mixed.push(q.shift()!));
+  const sizes = collageRows.flat();
+  return mixed.map((e, i) => ({ ...e, w: sizes[i % sizes.length].w, h: sizes[i % sizes.length].h }));
+})();
+
+const EXTRA_ROWS_ABOVE = 4;
+const EXTRA_ROWS_BELOW = 4;
+const extraRows: EventItem[][] = (() => {
+  const count = EXTRA_ROWS_ABOVE + EXTRA_ROWS_BELOW;
+  const rows: EventItem[][] = Array.from({ length: count }, () => []);
+  archiveExtras.forEach((e, i) => rows[Math.floor((i * count) / archiveExtras.length)].push(e));
+  return rows;
+})();
+
+/** [height, width] for the added rows, in the original rows' style. */
+const extraRowShape: [string, string][] = [
+  ["clamp(150px, 19vw, 210px)", "92%"],
+  ["clamp(180px, 23vw, 260px)", "100%"],
+  ["clamp(160px, 20vw, 220px)", "88%"],
+  ["clamp(180px, 23vw, 260px)", "96%"],
+];
+
+const galleryRows: EventItem[][] = [
+  ...extraRows.slice(0, EXTRA_ROWS_ABOVE),
+  ...collageRows,
+  ...extraRows.slice(EXTRA_ROWS_ABOVE),
+];
+const galleryRowShape: [string, string][] = [
+  ...Array.from({ length: EXTRA_ROWS_ABOVE }, (_, i) => extraRowShape[i % extraRowShape.length]),
+  ...collageRowShape,
+  ...Array.from({ length: EXTRA_ROWS_BELOW }, (_, i) => extraRowShape[(i + 2) % extraRowShape.length]),
+];
+
+const allCollageItems: EventItem[] = galleryRows.flat();
 
 export const MediaGalleryPage: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
-  // The lightbox steps through the set it was opened from: the collage, or the filtered archive.
-  const [navList, setNavList] = useState<EventItem[]>(allCollageItems);
-  const [archiveFilter, setArchiveFilter] = useState<"All" | (typeof GALLERY_CATEGORIES)[number]>("All");
-  const archiveShown = archiveFilter === "All" ? galleryArchive : galleryArchive.filter((p) => p.category === archiveFilter);
-
-  const openFrom = (list: EventItem[], item: EventItem) => {
-    setNavList(list);
-    setSelectedEvent(item);
-  };
+  const navList = allCollageItems;
 
   const handlePrevEvent = () => {
     if (!selectedEvent) return;
@@ -130,7 +166,7 @@ export const MediaGalleryPage: React.FC = () => {
   const renderPhotoCard = (item: EventItem) => (
     <div
       key={item.id}
-      onClick={() => openFrom(allCollageItems, item)}
+      onClick={() => setSelectedEvent(item)}
       style={{ "--w": item.w ?? 1, "--h": item.h ?? 1 } as React.CSSProperties}
       className="collage-item group cursor-pointer overflow-hidden rounded-[10px] sm:rounded-[14px] bg-white dark:bg-slate-900/60 border border-[#e2e8f0]/90 dark:border-white/15 shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_24px_50px_rgba(22,39,64,0.28)] dark:hover:shadow-[0_24px_50px_rgba(0,0,0,0.6)] select-none"
     >
@@ -345,8 +381,8 @@ export const MediaGalleryPage: React.FC = () => {
 
           {/* Diamond Collage: rows taper in width to form a diamond silhouette */}
           <div className="max-md:hidden flex flex-col gap-1.5 sm:gap-2 max-w-[1080px] mx-auto select-none">
-            {collageRows.map((row, i) => (
-              <div key={i} className="collage-row" style={{ "--row-h": collageRowShape[i][0], "--row-w": collageRowShape[i][1] } as React.CSSProperties}>
+            {galleryRows.map((row, i) => (
+              <div key={i} className="collage-row" style={{ "--row-h": galleryRowShape[i][0], "--row-w": galleryRowShape[i][1] } as React.CSSProperties}>
                 {row.map(renderPhotoCard)}
               </div>
             ))}
@@ -364,11 +400,11 @@ export const MediaGalleryPage: React.FC = () => {
             className="md:hidden -mx-4 h-[62svh] overflow-auto select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             <div className="w-[1080px] [zoom:0.6] p-4 flex flex-col gap-2">
-              {collageRows.map((row, i) => (
+              {galleryRows.map((row, i) => (
                 <div
                   key={i}
                   className="collage-row"
-                  style={{ "--row-h": collageRowShape[i][0].replace(/^clamp\([^,]+,[^,]+,\s*([^)]+)\)$/, "$1"), "--row-w": collageRowShape[i][1] } as React.CSSProperties}
+                  style={{ "--row-h": galleryRowShape[i][0].replace(/^clamp\([^,]+,[^,]+,\s*([^)]+)\)$/, "$1"), "--row-w": galleryRowShape[i][1] } as React.CSSProperties}
                 >
                   {row.map(renderPhotoCard)}
                 </div>
@@ -378,72 +414,6 @@ export const MediaGalleryPage: React.FC = () => {
         </div>
       </section>
 
-
-      {/* Photo Archive: every event photograph, filterable by kind */}
-      <section className="relative pt-4 sm:pt-6 pb-16 sm:pb-20 bg-[#FAF9F5] dark:bg-transparent">
-        <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-7 sm:mb-9">
-            <div className="inline-flex items-center justify-center gap-3 mb-3">
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-              <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
-                PHOTO ARCHIVE
-              </span>
-              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
-            </div>
-            <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#162740] dark:text-white tracking-tight leading-tight mb-3.5">
-              Life at AIMS
-            </h2>
-            <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
-              Community outreach, health awareness days, celebrations, sports and academic events.
-            </p>
-          </div>
-
-          <div className="mb-7 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:justify-center">
-            {(["All", ...GALLERY_CATEGORIES] as const).map((cat) => {
-              const count = cat === "All" ? galleryArchive.length : galleryArchive.filter((p) => p.category === cat).length;
-              const active = archiveFilter === cat;
-              return (
-                <button
-                  key={cat}
-                  type="button"
-                  onClick={() => setArchiveFilter(cat)}
-                  aria-pressed={active}
-                  className={`flex-shrink-0 rounded-full px-4 py-2 text-[13px] font-semibold transition-colors ${
-                    active
-                      ? "bg-[#1f3351] text-white dark:bg-teal-600"
-                      : "border border-[#e2e8f0] bg-white text-[#4b6382] hover:text-[#1f3351] dark:border-white/15 dark:bg-white/5 dark:text-slate-300 dark:hover:text-white"
-                  }`}
-                >
-                  {cat} <span className="opacity-60">({count})</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
-            {archiveShown.map((photo) => (
-              <button
-                key={photo.id}
-                type="button"
-                onClick={() => openFrom(archiveShown, photo)}
-                className="group relative aspect-[4/3] overflow-hidden rounded-[10px] sm:rounded-[14px] border border-[#e2e8f0]/90 bg-white text-left shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:border-white/15 dark:bg-slate-900/60"
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.title}
-                  loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b172a]/85 via-[#0b172a]/10 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-3">
-                  <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-white/75">{photo.category}</span>
-                  <h3 className="font-['Manrope',sans-serif] text-[12px] sm:text-sm font-bold leading-tight text-white line-clamp-2">{photo.title}</h3>
-                </div>
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Lightbox Modal with Fluid Spring Scale-In Animation */}
       {selectedEvent && (
