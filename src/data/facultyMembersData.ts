@@ -1,12 +1,12 @@
 import type { FacultyMember, HierarchyTierMeta } from "./types";
 
-// Source of truth: TOTAL FACULTY LIST.pdf (169 records, S.No 1-169).
-// raw* fields keep the PDF text verbatim; photos are cropped from the same PDF row.
+// Source of truth: TOTAL FACULTY LIST.xlsx (170 records, S.No 1-170).
+// raw* fields keep the spreadsheet text verbatim; photos were cropped from the earlier PDF list.
 export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-001",
     "serialNumber": 1,
-    "rawName": "DR.KONURI  VIJAYA KUMAR",
+    "rawName": "Dr.KONURI  VIJAYA KUMAR",
     "name": "Dr. KONURI VIJAYA KUMAR",
     "rawDesignation": "Professor/Head Of Department NG",
     "designation": "Professor & Head of Department",
@@ -22,7 +22,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-002",
     "serialNumber": 2,
-    "rawName": "DR.MERAJ AHMED",
+    "rawName": "Dr.MERAJ AHMED",
     "name": "Dr. MERAJ AHMED",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor",
@@ -37,7 +37,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-003",
     "serialNumber": 3,
-    "rawName": "DR.Thanuja",
+    "rawName": "Dr.Thanuja",
     "name": "Dr. Thanuja",
     "rawDesignation": "Professor",
     "designation": "Professor",
@@ -52,7 +52,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-004",
     "serialNumber": 4,
-    "rawName": "DR.MUDASIR BASHIR",
+    "rawName": "Dr. MUDASIR BASHIR",
     "name": "Dr. MUDASIR BASHIR",
     "rawDesignation": "Senior Resident NG",
     "designation": "Senior Resident",
@@ -67,7 +67,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-005",
     "serialNumber": 5,
-    "rawName": "DR.Atiya Qasim",
+    "rawName": "Dr. Atiya Qasim",
     "name": "Dr. Atiya Qasim",
     "rawDesignation": "Senior Resident NG",
     "designation": "Senior Resident",
@@ -82,7 +82,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-006",
     "serialNumber": 6,
-    "rawName": "DR.Krishnaveni .A",
+    "rawName": "Dr. Krishnaveni .A",
     "name": "Dr. Krishnaveni .A",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor & Head of Department",
@@ -98,7 +98,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-007",
     "serialNumber": 7,
-    "rawName": "DR.SAMBASIVARAO PENUMALA",
+    "rawName": "Dr. SAMBASIVARAO PENUMALA",
     "name": "Dr. SAMBASIVARAO PENUMALA",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -143,8 +143,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-010",
     "serialNumber": 10,
-    "rawName": "Mr.SATISH",
-    "name": "Mr. SATISH",
+    "rawName": "Mr.Nuthalapati Ratna Satish Babu",
+    "name": "Mr. Nuthalapati Ratna Satish Babu",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -158,7 +158,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-011",
     "serialNumber": 11,
-    "rawName": "DR.ARIKOTLA SUMA PREETHI",
+    "rawName": "Dr. ARIKOTLA SUMA PREETHI",
     "name": "Dr. ARIKOTLA SUMA PREETHI",
     "rawDesignation": "Professor NG",
     "designation": "Professor & Head of Department",
@@ -174,7 +174,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-012",
     "serialNumber": 12,
-    "rawName": "DR.SEERLA LALITHA DEVI",
+    "rawName": "Dr. SEERLA LALITHA DEVI",
     "name": "Dr. SEERLA LALITHA DEVI",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -189,7 +189,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-013",
     "serialNumber": 13,
-    "rawName": "DR.RANI ABRAHAM BANSODE",
+    "rawName": "Dr. RANI ABRAHAM BANSODE",
     "name": "Dr. RANI ABRAHAM BANSODE",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -204,7 +204,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-014",
     "serialNumber": 14,
-    "rawName": "DR.Anil Kumar Porandla",
+    "rawName": "Dr. Anil Kumar Porandla",
     "name": "Dr. Anil Kumar Porandla",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -219,7 +219,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-015",
     "serialNumber": 15,
-    "rawName": "DR.Beena T B",
+    "rawName": "Dr. Beena T B",
     "name": "Dr. Beena T B",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -234,7 +234,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-016",
     "serialNumber": 16,
-    "rawName": "DR.Ashwini Deshpande",
+    "rawName": "Dr. Ashwini Deshpande",
     "name": "Dr. Ashwini Deshpande",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -249,7 +249,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-017",
     "serialNumber": 17,
-    "rawName": "DR.ASIYA AMERA",
+    "rawName": "Dr. ASIYA AMERA",
     "name": "Dr. ASIYA AMERA",
     "rawDesignation": "Senior Resident NG",
     "designation": "Senior Resident",
@@ -264,7 +264,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-018",
     "serialNumber": 18,
-    "rawName": "DR.JAVEED ZAHEER SIDDIQUI",
+    "rawName": "Dr. JAVEED ZAHEER SIDDIQUI",
     "name": "Dr. JAVEED ZAHEER SIDDIQUI",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
@@ -279,7 +279,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-019",
     "serialNumber": 19,
-    "rawName": "DR.Fazeel Zubair Ahmed",
+    "rawName": "Dr. Fazeel Zubair Ahmed",
     "name": "Dr. Fazeel Zubair Ahmed",
     "rawDesignation": "Professor NG",
     "designation": "Professor & Head of Department",
@@ -295,7 +295,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-020",
     "serialNumber": 20,
-    "rawName": "DR.G SIRISHA",
+    "rawName": "Dr. G SIRISHA",
     "name": "Dr. G SIRISHA",
     "rawDesignation": "Professor NG",
     "designation": "Professor",
@@ -310,7 +310,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-021",
     "serialNumber": 21,
-    "rawName": "DR.S SIRISHA",
+    "rawName": "Dr. S SIRISHA",
     "name": "Dr. S SIRISHA",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -325,7 +325,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-022",
     "serialNumber": 22,
-    "rawName": "DR.Dharmapuri Tirumala Venkata Naresh",
+    "rawName": "Dr. Dharmapuri Tirumala Venkata Naresh",
     "name": "Dr. Dharmapuri Tirumala Venkata Naresh",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -340,7 +340,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-023",
     "serialNumber": 23,
-    "rawName": "DR.Santoshi Roopa D",
+    "rawName": "Dr. Santoshi Roopa D",
     "name": "Dr. Santoshi Roopa D",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -355,7 +355,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-024",
     "serialNumber": 24,
-    "rawName": "DR.BYRU JYOTHI",
+    "rawName": "Dr. BYRU JYOTHI",
     "name": "Dr. BYRU JYOTHI",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -370,7 +370,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-025",
     "serialNumber": 25,
-    "rawName": "DR.SISTLA RADHA",
+    "rawName": "Dr. SISTLA RADHA",
     "name": "Dr. S. Radha",
     "rawDesignation": "Professor NG",
     "designation": "Professor & Head of Department",
@@ -386,7 +386,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-026",
     "serialNumber": 26,
-    "rawName": "DR.TAMEEM AFROZ",
+    "rawName": "Dr. TAMEEM AFROZ",
     "name": "Dr. TAMEEM AFROZ",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor",
@@ -401,7 +401,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-027",
     "serialNumber": 27,
-    "rawName": "DR.WAHAB",
+    "rawName": "Dr. WAHAB",
     "name": "Dr. WAHAB",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -416,7 +416,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-028",
     "serialNumber": 28,
-    "rawName": "DR.SHAMSHUDDIN",
+    "rawName": "Dr. SHAMSHUDDIN",
     "name": "Dr. SHAMSHUDDIN",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -431,7 +431,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-029",
     "serialNumber": 29,
-    "rawName": "DR.KADIYAM SHILPA MADHURI",
+    "rawName": "Dr. KADIYAM SHILPA MADHURI",
     "name": "Dr. KADIYAM SHILPA MADHURI",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -446,7 +446,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-030",
     "serialNumber": 30,
-    "rawName": "DR.Mustigudala Sita Tejaswi",
+    "rawName": "Dr. Mustigudala Sita Tejaswi",
     "name": "Dr. Mustigudala Sita Tejaswi",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -461,7 +461,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-031",
     "serialNumber": 31,
-    "rawName": "DR.Shaik Nuzhath",
+    "rawName": "Dr. Shaik Nuzhath",
     "name": "Dr. Shaik Nuzhath",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -476,7 +476,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-032",
     "serialNumber": 32,
-    "rawName": "DR.Jillella Priyanka Ravali",
+    "rawName": "Dr. Jillella Priyanka Ravali",
     "name": "Dr. Jillella Priyanka Ravali",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -491,8 +491,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-033",
     "serialNumber": 33,
-    "rawName": "DR.MUKTHAR ALI",
-    "name": "Dr. MUKTHAR ALI",
+    "rawName": "Dr. MUKTHAR MOHIUDDIN",
+    "name": "Dr. MUKTHAR MOHIUDDIN",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -506,7 +506,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-034",
     "serialNumber": 34,
-    "rawName": "DR.SANIYA JAHAN",
+    "rawName": "Dr. SANIYA JAHAN",
     "name": "Dr. SANIYA JAHAN",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
@@ -521,7 +521,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-035",
     "serialNumber": 35,
-    "rawName": "DR.GUNDU MOUNIKA",
+    "rawName": "Dr. GUNDU MOUNIKA",
     "name": "Dr. GUNDU MOUNIKA",
     "rawDesignation": "Senior Resident NG",
     "designation": "Senior Resident",
@@ -536,7 +536,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-036",
     "serialNumber": 36,
-    "rawName": "DR.SWATHI.C",
+    "rawName": "Dr. SWATHI.C",
     "name": "Dr. SWATHI.C",
     "rawDesignation": "Senior Resident NG",
     "designation": "Senior Resident",
@@ -551,7 +551,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-037",
     "serialNumber": 37,
-    "rawName": "DR.MANISHA SINGH",
+    "rawName": "Dr. MANISHA SINGH",
     "name": "Dr. MANISHA SINGH",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor & Head of Department",
@@ -567,7 +567,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-038",
     "serialNumber": 38,
-    "rawName": "DR.RITU VAISH",
+    "rawName": "Dr. RITU VAISH",
     "name": "Dr. RITU VAISH",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor",
@@ -582,8 +582,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-039",
     "serialNumber": 39,
-    "rawName": "DR.MEHREEN",
-    "name": "Dr. MEHREEN",
+    "rawName": "Dr. SYEDA FAKIHA MEHREEN",
+    "name": "Dr. SYEDA FAKIHA MEHREEN",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -597,8 +597,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-040",
     "serialNumber": 40,
-    "rawName": "DR.Spoorthy",
-    "name": "Dr. Spoorthy",
+    "rawName": "Dr. Dasari Spurthy",
+    "name": "Dr. Dasari Spurthy",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -627,7 +627,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-042",
     "serialNumber": 42,
-    "rawName": "DR.PISUPATI VIMALA",
+    "rawName": "Mrs. PISUPATI VIMALA",
     "name": "Dr. PISUPATI VIMALA",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -640,10 +640,10 @@ export const ALL_FACULTY: FacultyMember[] = [
     "category": "Para-Clinical"
   },
   {
-    "id": "fac-043",
+    "id": "fac-170",
     "serialNumber": 43,
-    "rawName": "DR.Mudu Venkateswarlu",
-    "name": "Dr. Mudu Venkateswarlu",
+    "rawName": "Dr. Eluri Pratima",
+    "name": "Dr. Eluri Pratima",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
     "roleBadge": "Assistant Professor",
@@ -657,7 +657,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-044",
     "serialNumber": 44,
-    "rawName": "DR.K. DIVYA",
+    "rawName": "Dr. K. DIVYA",
     "name": "Dr. K. DIVYA",
     "rawDesignation": "Senior Resident NG",
     "designation": "Senior Resident",
@@ -672,8 +672,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-045",
     "serialNumber": 45,
-    "rawName": "DR.DR.ARCY",
-    "name": "Dr. ARCY",
+    "rawName": "Dr. ARCY BILLORIA",
+    "name": "Dr. ARCY BILLORIA",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -687,7 +687,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-046",
     "serialNumber": 46,
-    "rawName": "DR.Mathangi Pranavanath",
+    "rawName": "Dr. Mathangi Pranavanath",
     "name": "Dr. Mathangi Pranavanath",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor & Head of Department",
@@ -703,8 +703,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-047",
     "serialNumber": 47,
-    "rawName": "DR.SUDHAKAR BABU",
-    "name": "Dr. SUDHAKAR BABU",
+    "rawName": "Dr.Bandaru Sudhakar Babu",
+    "name": "Dr. Bandaru Sudhakar Babu",
     "rawDesignation": "Professor NG",
     "designation": "Professor & Head of Department",
     "roleBadge": "HOD / Professor",
@@ -719,7 +719,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-048",
     "serialNumber": 48,
-    "rawName": "DR.DAVA SWETHA",
+    "rawName": "Dr. DAVA SWETHA",
     "name": "Dr. DAVA SWETHA",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -734,7 +734,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-049",
     "serialNumber": 49,
-    "rawName": "DR.SYEDA SAMIA QUADRI",
+    "rawName": "Dr. SYEDA SAMIA QUADRI",
     "name": "Dr. SYEDA SAMIA QUADRI",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -749,7 +749,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-050",
     "serialNumber": 50,
-    "rawName": "DR.Burma Tejashwini",
+    "rawName": "Dr. Burma Tejashwini",
     "name": "Dr. Burma Tejashwini",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -764,7 +764,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-051",
     "serialNumber": 51,
-    "rawName": "DR.Allada Lavanya",
+    "rawName": "Dr. Allada Lavanya",
     "name": "Dr. Allada Lavanya",
     "rawDesignation": "Statistician(minimum A.P. Level) NG",
     "designation": "Statistician (minimum A.P. Level)",
@@ -779,8 +779,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-052",
     "serialNumber": 52,
-    "rawName": "DR.Harshita Mandava",
-    "name": "Dr. Harshita Mandava",
+    "rawName": "Dr. Harshitha Mandava",
+    "name": "Dr. Harshitha Mandava",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
     "roleBadge": "Assistant Professor",
@@ -794,8 +794,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-053",
     "serialNumber": 53,
-    "rawName": "DR.SONAL",
-    "name": "Dr. SONAL",
+    "rawName": "Dr. Dayama Sonal",
+    "name": "Dr. Dayama Sonal",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -809,8 +809,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-054",
     "serialNumber": 54,
-    "rawName": "DR.A RAVALI",
-    "name": "Dr. A RAVALI",
+    "rawName": "Dr. Annaram Ravali",
+    "name": "Dr. Annaram Ravali",
     "rawDesignation": "ASSOC.PROF",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -824,8 +824,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-055",
     "serialNumber": 55,
-    "rawName": "DR.BHARGAVA",
-    "name": "Dr. BHARGAVA",
+    "rawName": "Dr. DINNI BHARGAVA",
+    "name": "Dr. DINNI BHARGAVA",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor & Head of Department",
     "roleBadge": "HOD / Professor",
@@ -840,8 +840,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-056",
     "serialNumber": 56,
-    "rawName": "DR.TNJ RAJESH",
-    "name": "Dr. TNJ RAJESH",
+    "rawName": "Dr. TIPIRNENI NAGA JAWAHAR RAJESH",
+    "name": "Dr. TIPIRNENI NAGA JAWAHAR RAJESH",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor",
     "roleBadge": "Professor",
@@ -855,8 +855,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-057",
     "serialNumber": 57,
-    "rawName": "DR.YASMEEN",
-    "name": "Dr. YASMEEN",
+    "rawName": "Dr. YASMEEN MASTAN PATHAN",
+    "name": "Dr. YASMEEN MASTAN PATHAN",
     "rawDesignation": "ASSOC.PROF",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -870,8 +870,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-058",
     "serialNumber": 58,
-    "rawName": "DR.BHARATH KANTH",
-    "name": "Dr. BHARATH KANTH",
+    "rawName": "Dr. MADADI BHARATH KANTH REDDY",
+    "name": "Dr. MADADI BHARATH KANTH REDDY",
     "rawDesignation": "ASSOC.PROF",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -885,8 +885,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-059",
     "serialNumber": 59,
-    "rawName": "DR.HARSHA VARDHAN",
-    "name": "Dr. HARSHA VARDHAN",
+    "rawName": "Dr. KATARU HARSHA VARDHAN REDDY",
+    "name": "Dr. KATARU HARSHA VARDHAN REDDY",
     "rawDesignation": "ASSOC.PROF",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -900,7 +900,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-060",
     "serialNumber": 60,
-    "rawName": "DR.KOLACHANA SRIDHARA PHANI PRASHANTH",
+    "rawName": "Dr. KOLACHANA SRIDHARA PHANI PRASHANTH",
     "name": "Dr. KOLACHANA SRIDHARA PHANI PRASHANTH",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -915,7 +915,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-061",
     "serialNumber": 61,
-    "rawName": "DR.GANESH YALLABANDI",
+    "rawName": "Dr.GANESH YALLABANDI",
     "name": "Dr. GANESH YALLABANDI",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -930,7 +930,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-062",
     "serialNumber": 62,
-    "rawName": "DR.Siliveru Vamshikrishna",
+    "rawName": "Dr. Siliveru Vamshikrishna",
     "name": "Dr. Siliveru Vamshikrishna",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -945,7 +945,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-063",
     "serialNumber": 63,
-    "rawName": "DR.L.Sanjana Reddy",
+    "rawName": "Dr.L.Sanjana Reddy",
     "name": "Dr. L.Sanjana Reddy",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -960,7 +960,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-064",
     "serialNumber": 64,
-    "rawName": "DR.RAMIREDDY KRISHNA CHAITANYA REDDY",
+    "rawName": "Dr. RAMIREDDY KRISHNA CHAITANYA REDDY",
     "name": "Dr. RAMIREDDY KRISHNA CHAITANYA REDDY",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -975,8 +975,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-065",
     "serialNumber": 65,
-    "rawName": "DR.AMITHA",
-    "name": "Dr. AMITHA",
+    "rawName": "Dr. BUKYA AMITHA",
+    "name": "Dr. BUKYA AMITHA",
     "rawDesignation": "ASSIST.PROF",
     "designation": "Assistant Professor",
     "roleBadge": "Assistant Professor",
@@ -990,8 +990,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-066",
     "serialNumber": 66,
-    "rawName": "DR.RAGHU RAM",
-    "name": "Dr. RAGHU RAM",
+    "rawName": "Dr. POLAVARAPU RAGHU RAm",
+    "name": "Dr. POLAVARAPU RAGHU RAM",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -1005,8 +1005,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-067",
     "serialNumber": 67,
-    "rawName": "DR.PHANEENDRA",
-    "name": "Dr. PHANEENDRA",
+    "rawName": "Dr. G Phaneendra Reddy",
+    "name": "Dr. G Phaneendra Reddy",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -1020,8 +1020,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-068",
     "serialNumber": 68,
-    "rawName": "DR.VAMSHI CHOWDARY",
-    "name": "Dr. VAMSHI CHOWDARY",
+    "rawName": "Dr. VAMSI CHOWDARY KILARU",
+    "name": "Dr. VAMSI CHOWDARY KILARU",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -1035,7 +1035,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-069",
     "serialNumber": 69,
-    "rawName": "DR.Chintala Punith Reddy",
+    "rawName": "Dr. Chintala Punith Reddy",
     "name": "Dr. Chintala Punith Reddy",
     "rawDesignation": "Senior Resident NG",
     "designation": "Senior Resident",
@@ -1050,8 +1050,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   {
     "id": "fac-070",
     "serialNumber": 70,
-    "rawName": "DR.Bindu BhAVANI",
-    "name": "Dr. Bindu BhAVANI",
+    "rawName": "Dr. MUDIREDDY BINDU BHAVANI",
+    "name": "Dr. MUDIREDDY BINDU BHAVANI",
     "rawDesignation": "Senior Resident NG",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -1063,10 +1063,25 @@ export const ALL_FACULTY: FacultyMember[] = [
     "category": "Clinical"
   },
   {
-    "id": "fac-071",
+    "id": "fac-171",
     "serialNumber": 71,
-    "rawName": "DR.RATNA KUMAR",
-    "name": "Dr. RATNA KUMAR",
+    "rawName": "Dr D Chandraiah",
+    "name": "Dr. D Chandraiah",
+    "rawDesignation": "PROFESSOR",
+    "designation": "Professor",
+    "roleBadge": "Professor",
+    "rank": 2,
+    "tier": "Head of Department & Professors",
+    "rawDepartment": "PAEDIATRICS",
+    "departmentId": "paediatrics",
+    "departmentName": "Paediatrics",
+    "category": "Clinical"
+  },
+  {
+    "id": "fac-071",
+    "serialNumber": 72,
+    "rawName": "Dr. K RATNA KUMAR",
+    "name": "Dr. K RATNA KUMAR",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor & Head of Department",
     "roleBadge": "HOD / Professor",
@@ -1080,9 +1095,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-072",
-    "serialNumber": 72,
-    "rawName": "DR.P LAKSHMI",
-    "name": "Dr. P LAKSHMI",
+    "serialNumber": 73,
+    "rawName": "Dr. PAVULURI LAKSHMI KUMARI",
+    "name": "Dr. PAVULURI LAKSHMI KUMARI",
     "rawDesignation": "ASSOC.PROF",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -1095,9 +1110,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-073",
-    "serialNumber": 73,
-    "rawName": "DR.SRINIVAS GANDHARI",
-    "name": "Dr. SRINIVAS GANDHARI",
+    "serialNumber": 74,
+    "rawName": "Dr. Gandhari Srinivas",
+    "name": "Dr. Gandhari Srinivas",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -1110,8 +1125,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-074",
-    "serialNumber": 74,
-    "rawName": "DR.Gopireddy Silpa",
+    "serialNumber": 75,
+    "rawName": "Dr. Gopireddy Silpa",
     "name": "Dr. Gopireddy Silpa",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -1125,8 +1140,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-075",
-    "serialNumber": 75,
-    "rawName": "DR.RIDHIMA VARDHINENI",
+    "serialNumber": 76,
+    "rawName": "Dr. RIDHIMA VARDHINENI",
     "name": "Dr. RIDHIMA VARDHINENI",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -1140,7 +1155,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-076",
-    "serialNumber": 76,
+    "serialNumber": 77,
     "rawName": "DR.OGIRALA VENKATA PHALGUNA",
     "name": "Dr. OGIRALA VENKATA PHALGUNA",
     "rawDesignation": "Assistant Professor NG",
@@ -1155,9 +1170,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-077",
-    "serialNumber": 77,
-    "rawName": "DR.TEJASWI",
-    "name": "Dr. TEJASWI",
+    "serialNumber": 78,
+    "rawName": "Dr. Gullapelli Tejaswi",
+    "name": "Dr. Gullapelli Tejaswi",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
     "roleBadge": "Assistant Professor",
@@ -1170,9 +1185,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-078",
-    "serialNumber": 78,
-    "rawName": "DR.SRUTHI",
-    "name": "Dr. SRUTHI",
+    "serialNumber": 79,
+    "rawName": "Dr. KANDADI SRUTHI",
+    "name": "Dr. KANDADI SRUTHI",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
     "roleBadge": "Assistant Professor",
@@ -1185,9 +1200,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-079",
-    "serialNumber": 79,
-    "rawName": "DR.PAVAN",
-    "name": "Dr. PAVAN",
+    "serialNumber": 80,
+    "rawName": "Dr. Avuluri Pavan",
+    "name": "Dr. Avuluri Pavan",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -1200,9 +1215,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-080",
-    "serialNumber": 80,
-    "rawName": "DR.R ANUSHA",
-    "name": "Dr. R ANUSHA",
+    "serialNumber": 81,
+    "rawName": "Dr. REGULAPATI ANUSHA",
+    "name": "Dr. REGULAPATI ANUSHA",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -1215,9 +1230,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-081",
-    "serialNumber": 81,
-    "rawName": "DR.SUSHANTH",
-    "name": "Dr. SUSHANTH",
+    "serialNumber": 82,
+    "rawName": "Dr. LINGALA SUSHANTH PRABHATH",
+    "name": "Dr. LINGALA SUSHANTH PRABHATH",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -1230,9 +1245,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-082",
-    "serialNumber": 82,
-    "rawName": "DR.BANDHAVI",
-    "name": "Dr. BANDHAVI",
+    "serialNumber": 83,
+    "rawName": "Dr. KARRI BANDHAVI",
+    "name": "Dr. KARRI BANDHAVI",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor & Head of Department",
     "roleBadge": "HOD / Professor",
@@ -1246,9 +1261,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-083",
-    "serialNumber": 83,
-    "rawName": "DR.SRINIVAS BABU",
-    "name": "Dr. SRINIVAS BABU",
+    "serialNumber": 84,
+    "rawName": "Dr.NANNEBOYINA SRINIVAS BABU",
+    "name": "Dr. NANNEBOYINA SRINIVAS BABU",
     "rawDesignation": "ASSOC.PROF",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -1261,8 +1276,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-084",
-    "serialNumber": 84,
-    "rawName": "DR.KOTAPATI NARENDAR BABU",
+    "serialNumber": 85,
+    "rawName": "Dr.KOTAPATI NARENDAR BABU",
     "name": "Dr. KOTAPATI NARENDAR BABU",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -1276,8 +1291,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-085",
-    "serialNumber": 85,
-    "rawName": "DR.BATHINA NAVYA",
+    "serialNumber": 86,
+    "rawName": "Dr.BATHINA NAVYA",
     "name": "Dr. BATHINA NAVYA",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -1291,8 +1306,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-086",
-    "serialNumber": 86,
-    "rawName": "DR.S MOUNIKA",
+    "serialNumber": 87,
+    "rawName": "Dr. S MOUNIKA",
     "name": "Dr. S MOUNIKA",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
@@ -1306,8 +1321,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-087",
-    "serialNumber": 87,
-    "rawName": "DR.VISHNU",
+    "serialNumber": 88,
+    "rawName": "Dr. VISHNU",
     "name": "Dr. VISHNU",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor & Head of Department",
@@ -1322,9 +1337,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-088",
-    "serialNumber": 88,
-    "rawName": "DR.SHANTI MOHAN",
-    "name": "Dr. SHANTI MOHAN",
+    "serialNumber": 89,
+    "rawName": "Dr. KHETAVATH SHANTI MOHAN",
+    "name": "Dr. KHETAVATH SHANTI MOHAN",
     "rawDesignation": "ASSOC.PROF",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -1337,8 +1352,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-089",
-    "serialNumber": 89,
-    "rawName": "DR.SADDI MOUNIKA",
+    "serialNumber": 90,
+    "rawName": "Dr. SADDI MOUNIKA",
     "name": "Dr. SADDI MOUNIKA",
     "rawDesignation": "Assistant Professor NG",
     "designation": "Assistant Professor",
@@ -1352,9 +1367,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-090",
-    "serialNumber": 90,
-    "rawName": "DR.VARSHA",
-    "name": "Dr. VARSHA",
+    "serialNumber": 91,
+    "rawName": "Dr. VARSHA GALIPELLI",
+    "name": "Dr. VARSHA GALIPELLI",
     "rawDesignation": "SENIOR RESIDENT",
     "designation": "Senior Resident",
     "roleBadge": "Senior Resident",
@@ -1367,7 +1382,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-091",
-    "serialNumber": 91,
+    "serialNumber": 92,
     "rawName": "DR.KB CHAKRAVARTHY",
     "name": "Dr. KB CHAKRAVARTHY",
     "rawDesignation": "Professor NG",
@@ -1383,8 +1398,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-092",
-    "serialNumber": 92,
-    "rawName": "DR.CH VENKATA PAVAN",
+    "serialNumber": 93,
+    "rawName": "Dr.CH VENKATA PAVAN",
     "name": "Dr. CH VENKATA PAVAN",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor",
@@ -1398,9 +1413,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-093",
-    "serialNumber": 93,
-    "rawName": "DR.MARUTHI",
-    "name": "Dr. MARUTHI",
+    "serialNumber": 94,
+    "rawName": "Dr. CHITNENI MARUTHI",
+    "name": "Dr. CHITNENI MARUTHI",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor",
     "roleBadge": "Professor",
@@ -1413,7 +1428,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-094",
-    "serialNumber": 94,
+    "serialNumber": 95,
     "rawName": "DR.JINKA RAJESH",
     "name": "Dr. JINKA RAJESH",
     "rawDesignation": "PROFESSOR",
@@ -1428,9 +1443,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-095",
-    "serialNumber": 95,
-    "rawName": "DR.GURUVA REDDY",
-    "name": "Dr. GURUVA REDDY",
+    "serialNumber": 96,
+    "rawName": "Dr. DONGA GURUVA REDDY",
+    "name": "Dr. DONGA GURUVA REDDY",
     "rawDesignation": "PROFESSOR",
     "designation": "Professor",
     "roleBadge": "Professor",
@@ -1443,9 +1458,9 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-096",
-    "serialNumber": 96,
-    "rawName": "DR.SHEKHAR REDDY",
-    "name": "Dr. SHEKHAR REDDY",
+    "serialNumber": 97,
+    "rawName": "Dr. YANALA SHEKAR REDDY",
+    "name": "Dr. YANALA SHEKAR REDDY",
     "rawDesignation": "ASSOC.PROF",
     "designation": "Associate Professor",
     "roleBadge": "Associate Professor",
@@ -1458,8 +1473,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-097",
-    "serialNumber": 97,
-    "rawName": "DR.JAKLETI RAVI TEJA",
+    "serialNumber": 98,
+    "rawName": "Dr. JAKLETI RAVI TEJA",
     "name": "Dr. JAKLETI RAVI TEJA",
     "rawDesignation": "Associate Professor NG",
     "designation": "Associate Professor",
@@ -1473,8 +1488,8 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-098",
-    "serialNumber": 98,
-    "rawName": "DR.ARUN KANALA",
+    "serialNumber": 99,
+    "rawName": "Dr. ARUN KANALA",
     "name": "Dr. ARUN KANALA",
     "rawDesignation": "ASSOC.PROF",
     "designation": "Associate Professor",
@@ -1488,7 +1503,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-099",
-    "serialNumber": 99,
+    "serialNumber": 100,
     "rawName": "DR.V S G S Kumar Korada",
     "name": "Dr. V S G S Kumar Korada",
     "rawDesignation": "Assistant Professor NG",
@@ -1503,7 +1518,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-100",
-    "serialNumber": 100,
+    "serialNumber": 101,
     "rawName": "DR.DR.ASIM NIZAM ZEESHAN",
     "name": "Dr. ASIM NIZAM ZEESHAN",
     "rawDesignation": "Assistant Professor NG",
@@ -1518,7 +1533,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-101",
-    "serialNumber": 101,
+    "serialNumber": 102,
     "rawName": "DR.J MOUNICA",
     "name": "Dr. J MOUNICA",
     "rawDesignation": "Senior Resident NG",
@@ -1533,7 +1548,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-102",
-    "serialNumber": 102,
+    "serialNumber": 103,
     "rawName": "DR.Mekala Pravallika",
     "name": "Dr. Mekala Pravallika",
     "rawDesignation": "Senior Resident NG",
@@ -1548,7 +1563,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-103",
-    "serialNumber": 103,
+    "serialNumber": 104,
     "rawName": "DR.Vaddi Sarath Chandra",
     "name": "Dr. Vaddi Sarath Chandra",
     "rawDesignation": "Senior Resident NG",
@@ -1563,7 +1578,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-104",
-    "serialNumber": 104,
+    "serialNumber": 105,
     "rawName": "DR.SYAM BABU",
     "name": "Dr. SYAM BABU",
     "rawDesignation": "Senior Resident NG",
@@ -1578,7 +1593,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-105",
-    "serialNumber": 105,
+    "serialNumber": 106,
     "rawName": "DR.SWATHI",
     "name": "Dr. SWATHI",
     "rawDesignation": "SENIOR RESIDENT",
@@ -1593,7 +1608,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-106",
-    "serialNumber": 106,
+    "serialNumber": 107,
     "rawName": "DR.PIDIKITI RAJENDRA PRASAD",
     "name": "Dr. PIDIKITI RAJENDRA PRASAD",
     "rawDesignation": "Professor NG",
@@ -1609,7 +1624,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-107",
-    "serialNumber": 107,
+    "serialNumber": 108,
     "rawName": "DR.RAJASHEKAR REDDY",
     "name": "Dr. RAJASHEKAR REDDY",
     "rawDesignation": "PROFESSOR",
@@ -1624,7 +1639,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-108",
-    "serialNumber": 108,
+    "serialNumber": 109,
     "rawName": "DR.Nagesh Muddamsetti",
     "name": "Dr. Nagesh Muddamsetti",
     "rawDesignation": "Associate Professor NG",
@@ -1639,7 +1654,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-109",
-    "serialNumber": 109,
+    "serialNumber": 110,
     "rawName": "DR.P KARTHIK",
     "name": "Dr. P KARTHIK",
     "rawDesignation": "ASSOC.PROF",
@@ -1654,7 +1669,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-110",
-    "serialNumber": 110,
+    "serialNumber": 111,
     "rawName": "DR.VINAYAKA RAO",
     "name": "Dr. VINAYAKA RAO",
     "rawDesignation": "ASSIST.PROF",
@@ -1669,7 +1684,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-111",
-    "serialNumber": 111,
+    "serialNumber": 112,
     "rawName": "DR.D UDAY KUMAR",
     "name": "Dr. D UDAY KUMAR",
     "rawDesignation": "ASSIST.PROF",
@@ -1684,7 +1699,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-112",
-    "serialNumber": 112,
+    "serialNumber": 113,
     "rawName": "DR.VAMSHI .G",
     "name": "Dr. VAMSHI .G",
     "rawDesignation": "ASSIST.PROF",
@@ -1699,7 +1714,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-113",
-    "serialNumber": 113,
+    "serialNumber": 114,
     "rawName": "DR.ABHILASH C S",
     "name": "Dr. ABHILASH C S",
     "rawDesignation": "Assistant Professor NG",
@@ -1714,7 +1729,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-114",
-    "serialNumber": 114,
+    "serialNumber": 115,
     "rawName": "DR.Chintalapuri Pranay Bhargav Reddy",
     "name": "Dr. Chintalapuri Pranay Bhargav Reddy",
     "rawDesignation": "Senior Resident NG",
@@ -1729,7 +1744,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-115",
-    "serialNumber": 115,
+    "serialNumber": 116,
     "rawName": "DR.Peddareddygari Amruth Simha Reddy",
     "name": "Dr. Peddareddygari Amruth Simha Reddy",
     "rawDesignation": "Senior Resident NG",
@@ -1744,7 +1759,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-116",
-    "serialNumber": 116,
+    "serialNumber": 117,
     "rawName": "DR.K ROHITH",
     "name": "Dr. K ROHITH",
     "rawDesignation": "SENIOR RESIDENT",
@@ -1759,7 +1774,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-117",
-    "serialNumber": 117,
+    "serialNumber": 118,
     "rawName": "DR.DEEPTHI",
     "name": "Dr. DEEPTHI",
     "rawDesignation": "PROFESSOR",
@@ -1775,7 +1790,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-118",
-    "serialNumber": 118,
+    "serialNumber": 119,
     "rawName": "DR.D VENKATESH",
     "name": "Dr. D VENKATESH",
     "rawDesignation": "ASSOC.PROF",
@@ -1790,7 +1805,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-119",
-    "serialNumber": 119,
+    "serialNumber": 120,
     "rawName": "DR.MOHAN KRISHNA",
     "name": "Dr. MOHAN KRISHNA",
     "rawDesignation": "ASSOC.PROF",
@@ -1805,7 +1820,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-120",
-    "serialNumber": 120,
+    "serialNumber": 121,
     "rawName": "DR.RAGHAVENDRA RAO",
     "name": "Dr. RAGHAVENDRA RAO",
     "rawDesignation": "Assistant Professor NG",
@@ -1820,7 +1835,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-121",
-    "serialNumber": 121,
+    "serialNumber": 122,
     "rawName": "DR.Baljepally Ramani Manasa",
     "name": "Dr. Baljepally Ramani Manasa",
     "rawDesignation": "Assistant Professor NG",
@@ -1835,7 +1850,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-122",
-    "serialNumber": 122,
+    "serialNumber": 123,
     "rawName": "DR.Veera Venkata Sai Vineela",
     "name": "Dr. Veera Venkata Sai Vineela",
     "rawDesignation": "SENIOR RESIDENT",
@@ -1850,7 +1865,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-123",
-    "serialNumber": 123,
+    "serialNumber": 124,
     "rawName": "DR.JEENA",
     "name": "Dr. JEENA",
     "rawDesignation": "SENIOR RESIDENT",
@@ -1865,7 +1880,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-124",
-    "serialNumber": 124,
+    "serialNumber": 125,
     "rawName": "DR.S ANILA",
     "name": "Dr. S ANILA",
     "rawDesignation": "PROFESSOR",
@@ -1881,7 +1896,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-125",
-    "serialNumber": 125,
+    "serialNumber": 126,
     "rawName": "DR.Siddhartha Singh",
     "name": "Dr. Siddhartha Singh",
     "rawDesignation": "Associate Professor NG",
@@ -1896,7 +1911,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-126",
-    "serialNumber": 126,
+    "serialNumber": 127,
     "rawName": "DR.Regulapati Prakhya",
     "name": "Dr. Regulapati Prakhya",
     "rawDesignation": "Assistant Professor NG",
@@ -1911,7 +1926,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-127",
-    "serialNumber": 127,
+    "serialNumber": 128,
     "rawName": "DR.Gudepu Suchita",
     "name": "Dr. Gudepu Suchita",
     "rawDesignation": "Assistant Professor NG",
@@ -1926,7 +1941,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-128",
-    "serialNumber": 128,
+    "serialNumber": 129,
     "rawName": "DR.SHAMILI",
     "name": "Dr. SHAMILI",
     "rawDesignation": "SENIOR RESIDENT",
@@ -1941,7 +1956,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-129",
-    "serialNumber": 129,
+    "serialNumber": 130,
     "rawName": "DR.SNEHITHA",
     "name": "Dr. SNEHITHA",
     "rawDesignation": "SENIOR RESIDENT",
@@ -1956,7 +1971,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-130",
-    "serialNumber": 130,
+    "serialNumber": 131,
     "rawName": "DR.RAMYA TEJASWI",
     "name": "Dr. RAMYA TEJASWI",
     "rawDesignation": "SENIOR RESIDENT",
@@ -1971,7 +1986,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-131",
-    "serialNumber": 131,
+    "serialNumber": 132,
     "rawName": "DR.RADHIKA RANI",
     "name": "Dr. RADHIKA RANI",
     "rawDesignation": "PROFESSOR",
@@ -1987,7 +2002,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-132",
-    "serialNumber": 132,
+    "serialNumber": 133,
     "rawName": "DR.V JAYASREE",
     "name": "Dr. V JAYASREE",
     "rawDesignation": "ASSOC.PROF",
@@ -2002,7 +2017,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-133",
-    "serialNumber": 133,
+    "serialNumber": 134,
     "rawName": "DR.MACHERLA ABHILAASHA",
     "name": "Dr. MACHERLA ABHILAASHA",
     "rawDesignation": "Associate Professor NG",
@@ -2017,7 +2032,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-134",
-    "serialNumber": 134,
+    "serialNumber": 135,
     "rawName": "DR.PRASHANTHI S",
     "name": "Dr. PRASHANTHI S",
     "rawDesignation": "ASSOC.PROF",
@@ -2032,7 +2047,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-135",
-    "serialNumber": 135,
+    "serialNumber": 136,
     "rawName": "DR.SHREEJA",
     "name": "Dr. SHREEJA",
     "rawDesignation": "ASSIST.PROF",
@@ -2047,7 +2062,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-136",
-    "serialNumber": 136,
+    "serialNumber": 137,
     "rawName": "DR.malae manisha",
     "name": "Dr. malae manisha",
     "rawDesignation": "ASSIST.PROF",
@@ -2062,7 +2077,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-137",
-    "serialNumber": 137,
+    "serialNumber": 138,
     "rawName": "DR.RAJITHA",
     "name": "Dr. RAJITHA",
     "rawDesignation": "Assistant Professor NG",
@@ -2077,7 +2092,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-138",
-    "serialNumber": 138,
+    "serialNumber": 139,
     "rawName": "DR.BATTHULA MOUNIKA",
     "name": "Dr. BATTHULA MOUNIKA",
     "rawDesignation": "ASSIST.PROF",
@@ -2092,7 +2107,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-139",
-    "serialNumber": 139,
+    "serialNumber": 140,
     "rawName": "DR.SWETHA PADALA",
     "name": "Dr. SWETHA PADALA",
     "rawDesignation": "ASSIST.PROF",
@@ -2107,7 +2122,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-140",
-    "serialNumber": 140,
+    "serialNumber": 141,
     "rawName": "DR.SUCHETHA",
     "name": "Dr. SUCHETHA",
     "rawDesignation": "SENIOR RESIDENT",
@@ -2122,7 +2137,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-141",
-    "serialNumber": 141,
+    "serialNumber": 142,
     "rawName": "DR.PRIYANKA NV",
     "name": "Dr. PRIYANKA NV",
     "rawDesignation": "SENIOR RESIDENT",
@@ -2137,7 +2152,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-142",
-    "serialNumber": 142,
+    "serialNumber": 143,
     "rawName": "DR.SUSHMA",
     "name": "Dr. SUSHMA",
     "rawDesignation": "Senior Resident NG",
@@ -2152,7 +2167,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-143",
-    "serialNumber": 143,
+    "serialNumber": 144,
     "rawName": "DR.MOUNICA",
     "name": "Dr. MOUNICA",
     "rawDesignation": "Senior Resident NG",
@@ -2166,8 +2181,23 @@ export const ALL_FACULTY: FacultyMember[] = [
     "category": "Clinical"
   },
   {
-    "id": "fac-145",
+    "id": "fac-144",
     "serialNumber": 145,
+    "rawName": "Dr B Devanand",
+    "name": "Dr. B Devanand",
+    "rawDesignation": "Professor NG",
+    "designation": "Professor",
+    "roleBadge": "Professor",
+    "rank": 2,
+    "tier": "Head of Department & Professors",
+    "rawDepartment": "Anaesthesiology",
+    "departmentId": "anaesthesiology",
+    "departmentName": "Anaesthesiology",
+    "category": "Clinical"
+  },
+  {
+    "id": "fac-145",
+    "serialNumber": 146,
     "rawName": "DR.TADAKALA VIJAYA KUMAR",
     "name": "Dr. T. Vijay Kumar",
     "rawDesignation": "Professor NG",
@@ -2182,23 +2212,8 @@ export const ALL_FACULTY: FacultyMember[] = [
     "photoUrl": "/faculty/tadakala-vijaya-kumar.webp"
   },
   {
-    "id": "fac-144",
-    "serialNumber": 144,
-    "rawName": "Dr B Devanand",
-    "name": "Dr. B Devanand",
-    "rawDesignation": "Professor NG",
-    "designation": "Professor",
-    "roleBadge": "Professor",
-    "rank": 2,
-    "tier": "Head of Department & Professors",
-    "rawDepartment": "Anaesthesiology",
-    "departmentId": "anaesthesiology",
-    "departmentName": "Anaesthesiology",
-    "category": "Clinical"
-  },
-  {
     "id": "fac-146",
-    "serialNumber": 146,
+    "serialNumber": 147,
     "rawName": "DR.Avula Bharath",
     "name": "Dr. Avula Bharath",
     "rawDesignation": "Associate Professor NG",
@@ -2213,7 +2228,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-147",
-    "serialNumber": 147,
+    "serialNumber": 148,
     "rawName": "DR.GOPIKRISHNA",
     "name": "Dr. GOPIKRISHNA",
     "rawDesignation": "ASSOC.PROF",
@@ -2228,7 +2243,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-148",
-    "serialNumber": 148,
+    "serialNumber": 149,
     "rawName": "DR.Satare Swathi",
     "name": "Dr. Satare Swathi",
     "rawDesignation": "Assistant Professor NG",
@@ -2243,7 +2258,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-149",
-    "serialNumber": 149,
+    "serialNumber": 150,
     "rawName": "DR.Mandava Bhargavi",
     "name": "Dr. Mandava Bhargavi",
     "rawDesignation": "Assistant Professor NG",
@@ -2258,7 +2273,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-150",
-    "serialNumber": 150,
+    "serialNumber": 151,
     "rawName": "DR.Sudam Vishwani",
     "name": "Dr. Sudam Vishwani",
     "rawDesignation": "Assistant Professor NG",
@@ -2273,7 +2288,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-151",
-    "serialNumber": 151,
+    "serialNumber": 152,
     "rawName": "DR.N ROHINI",
     "name": "Dr. N ROHINI",
     "rawDesignation": "ASSIST.PROF",
@@ -2288,7 +2303,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-152",
-    "serialNumber": 152,
+    "serialNumber": 153,
     "rawName": "DR.RAJESH MATAM",
     "name": "Dr. RAJESH MATAM",
     "rawDesignation": "ASSIST.PROF",
@@ -2303,7 +2318,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-153",
-    "serialNumber": 153,
+    "serialNumber": 154,
     "rawName": "DR.JAI KISHORE REDDY",
     "name": "Dr. JAI KISHORE REDDY",
     "rawDesignation": "Senior Resident NG",
@@ -2318,7 +2333,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-154",
-    "serialNumber": 154,
+    "serialNumber": 155,
     "rawName": "DR.Bommakanti Nandini",
     "name": "Dr. Bommakanti Nandini",
     "rawDesignation": "Senior Resident NG",
@@ -2333,7 +2348,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-155",
-    "serialNumber": 155,
+    "serialNumber": 156,
     "rawName": "DR.KANTALE MANJUSHA",
     "name": "Dr. KANTALE MANJUSHA",
     "rawDesignation": "SENIOR RESIDENT",
@@ -2348,7 +2363,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-156",
-    "serialNumber": 156,
+    "serialNumber": 157,
     "rawName": "DR.TRIVIKRAM",
     "name": "Dr. TRIVIKRAM",
     "rawDesignation": "PROFESSOR",
@@ -2364,7 +2379,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-157",
-    "serialNumber": 157,
+    "serialNumber": 158,
     "rawName": "DR.Lakshmi Sindhura Adusumilli",
     "name": "Dr. Lakshmi Sindhura Adusumilli",
     "rawDesignation": "Associate Professor NG",
@@ -2379,7 +2394,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-158",
-    "serialNumber": 158,
+    "serialNumber": 159,
     "rawName": "DR.SHYAMALA JAVVADI",
     "name": "Dr. SHYAMALA JAVVADI",
     "rawDesignation": "Associate Professor NG",
@@ -2394,7 +2409,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-159",
-    "serialNumber": 159,
+    "serialNumber": 160,
     "rawName": "DR.CH ANUSHA",
     "name": "Dr. CH ANUSHA",
     "rawDesignation": "ASSIST.PROF",
@@ -2409,7 +2424,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-160",
-    "serialNumber": 160,
+    "serialNumber": 161,
     "rawName": "DR.KARUNITH REDDY",
     "name": "Dr. KARUNITH REDDY",
     "rawDesignation": "SENIOR RESIDENT",
@@ -2424,7 +2439,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-161",
-    "serialNumber": 161,
+    "serialNumber": 162,
     "rawName": "DR.SRUJANA REDDY",
     "name": "Dr. SRUJANA REDDY",
     "rawDesignation": "SENIOR RESIDENT",
@@ -2439,7 +2454,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-162",
-    "serialNumber": 162,
+    "serialNumber": 163,
     "rawName": "DR.K ROHINI",
     "name": "Dr. K ROHINI",
     "rawDesignation": "SENIOR RESIDENT",
@@ -2454,7 +2469,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-163",
-    "serialNumber": 163,
+    "serialNumber": 164,
     "rawName": "DR.CHINNAM NAIDU",
     "name": "Dr. CHINNAM NAIDU",
     "rawDesignation": "SENIOR RESIDENT",
@@ -2469,7 +2484,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-164",
-    "serialNumber": 164,
+    "serialNumber": 165,
     "rawName": "DR.ANIRUDH",
     "name": "Dr. ANIRUDH",
     "rawDesignation": "PROFESSOR",
@@ -2485,7 +2500,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-165",
-    "serialNumber": 165,
+    "serialNumber": 166,
     "rawName": "DR.A SOWMYA",
     "name": "Dr. A SOWMYA",
     "rawDesignation": "ASSOC.PROF",
@@ -2500,7 +2515,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-166",
-    "serialNumber": 166,
+    "serialNumber": 167,
     "rawName": "K Soumya Rani",
     "name": "K Soumya Rani",
     "rawDesignation": "Assistant Professor NG",
@@ -2515,7 +2530,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-167",
-    "serialNumber": 167,
+    "serialNumber": 168,
     "rawName": "DR.KRANTHI KUMAR",
     "name": "Dr. KRANTHI KUMAR",
     "rawDesignation": "SENIOR RESIDENT",
@@ -2530,7 +2545,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-168",
-    "serialNumber": 168,
+    "serialNumber": 169,
     "rawName": "DR.Indira Priyadarshini",
     "name": "Dr. Indira Priyadarshini",
     "rawDesignation": "Assistant Professor NG",
@@ -2546,7 +2561,7 @@ export const ALL_FACULTY: FacultyMember[] = [
   },
   {
     "id": "fac-169",
-    "serialNumber": 169,
+    "serialNumber": 170,
     "rawName": "DR.PRATHYUSHA",
     "name": "Dr. PRATHYUSHA",
     "rawDesignation": "SENIOR RESIDENT",
