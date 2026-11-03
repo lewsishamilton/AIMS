@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { galleryArchive, GALLERY_CATEGORIES } from "../data/galleryData";
 
 // Import real campus images from stock assets
 import img01 from "../assets/stockImages/aims-campus-07.webp";
@@ -16,16 +17,16 @@ import img11 from "../assets/stockImages/aims-campus-31.webp";
 import img12 from "../assets/stockImages/aims-campus-48.webp";
 
 const photos = [
-  { src: img01, title: "Main Campus Entrance" },
-  { src: img02, title: "Grand Medical Auditorium" },
-  { src: img03, title: "Microscopy Research Wing" },
-  { src: img04, title: "Anatomy Dissection Arena" },
-  { src: img05, title: "Central Reference Library" },
-  { src: img06, title: "Clinical Pathology Suite" },
-  { src: img07, title: "Biochemistry Laboratory" },
-  { src: img08, title: "Campus Green Promenade" },
-  { src: img09, title: "Indoor Recreation Arena" },
-  { src: img10, title: "Modern Gymnasium" },
+  { src: img01, title: "World Health Day 2026 Quiz" },
+  { src: img02, title: "AIMS Students and Faculty" },
+  { src: img03, title: "Microscopy Practical Session" },
+  { src: img04, title: "Poster Exhibition in the Atrium" },
+  { src: img05, title: "Bathukamma Celebrations" },
+  { src: img06, title: "Exhibition Walkthrough" },
+  { src: img07, title: "World AIDS Day" },
+  { src: img08, title: "Women's Team at AMET" },
+  { src: img09, title: "Cultural Programme on the Lawn" },
+  { src: img10, title: "Bathukamma Dance" },
 ];
 
 const marqueePhotos = [...photos, ...photos];
@@ -45,36 +46,36 @@ export interface EventItem {
 // reads as a diamond instead of a filled rectangle.
 const collageRows: EventItem[][] = [
   [
-    { id: "ev-01", title: "Academic Poster Day & Student Life", category: "Student Life", src: img11, w: 1.1, h: 0.96,
-      description: "Medical students showcasing research posters and public health innovations during campus health week." },
-    { id: "ev-02", title: "Scholars Interactive Study Circle", category: "Academics", src: img05, w: 1.5, h: 1,
-      description: "Collaborative study groups, peer learning, and research literature reviews in the central reference library." },
+    { id: "ev-01", title: "Traditional Day", category: "Celebrations", src: img11, w: 1.1, h: 0.96,
+      description: "Students in traditional attire and white coats in front of the institute." },
+    { id: "ev-02", title: "Bathukamma Celebrations", category: "Celebrations", src: img05, w: 1.5, h: 1,
+      description: "Faculty and students around the Bathukamma in the atrium." },
   ],
   [
-    { id: "ev-03", title: "Dean's Honors & Scholar Awards", category: "Ceremony", src: img06, w: 0.85, h: 0.94,
-      description: "Celebrating institutional academic awards, clinical merit badges, and university honors." },
-    { id: "ev-04", title: "Campus Entrance & Main Promenade", category: "Campus", src: img01, w: 1.15, h: 0.97,
-      description: "Students, faculty, and visiting clinical delegates congregating at the architectural main gates." },
-    { id: "ev-05", title: "Hands-on Practical & Dissection Arena", category: "Clinical Lab", src: img04, w: 1.4, h: 1,
-      description: "Intensive clinical osteology and anatomical practical demonstration under senior surgeon mentorship." },
-    { id: "ev-06", title: "Campus Green Promenade Pathway", category: "Outreach", src: img08, w: 0.85, h: 0.94,
-      description: "Students walking through tree-lined pathways connecting clinical hospital wings and lecture halls." },
+    { id: "ev-03", title: "Exhibition Walkthrough", category: "Health Days", src: img06, w: 0.85, h: 0.94,
+      description: "Guests viewing student exhibits during an awareness day." },
+    { id: "ev-04", title: "World Health Day 2026 Quiz", category: "Health Days", src: img01, w: 1.15, h: 0.97,
+      description: "Organisers of the nationwide quiz contest for MBBS students on World Health Day 2026." },
+    { id: "ev-05", title: "Poster Exhibition in the Atrium", category: "Health Days", src: img04, w: 1.4, h: 1,
+      description: "Student posters on display across the atrium." },
+    { id: "ev-06", title: "Women's Team at AMET", category: "Sports", src: img08, w: 0.85, h: 0.94,
+      description: "AIMS women's team at the Academy of Maritime Education and Training." },
   ],
   [
-    { id: "ev-07", title: "Pine Grove Contemplation Walk", category: "Campus Life", src: img10, w: 1.1, h: 0.97,
-      description: "Peaceful moments between clinical rotations surrounded by campus pine trees and nature." },
-    { id: "ev-08", title: "Grand Portico Gateway", category: "Architecture", src: img02, w: 1, h: 0.9,
-      description: "Morning light over the grand architectural arches and medical auditorium portico." },
-    { id: "ev-09", title: "Rural Outreach Care", category: "Community Camp", src: img12, w: 0.95, h: 0.94,
-      description: "Field doctors and volunteers conducting community health surveys in local health camps." },
+    { id: "ev-07", title: "Bathukamma Dance", category: "Celebrations", src: img10, w: 1.1, h: 0.97,
+      description: "Students dancing around the Bathukamma in the atrium." },
+    { id: "ev-08", title: "AIMS Students and Faculty", category: "Campus", src: img02, w: 1, h: 0.9,
+      description: "Students and faculty in front of the institute." },
+    { id: "ev-09", title: "Community Health Awareness Session", category: "Community Outreach", src: img12, w: 0.95, h: 0.94,
+      description: "A health talk for local women by AIMS students." },
   ],
   [
-    { id: "ev-10", title: "Microscopy & Fluorescence Assay", category: "Research", src: img03, w: 1.3, h: 1,
-      description: "Deep molecular biology and advanced fluorescent microscopy diagnostic assays." },
-    { id: "ev-11", title: "Distinguished Medical Graduates", category: "Convocation", src: img07, w: 1, h: 0.95,
-      description: "Graduating medical cohort gathered in formal suits and ceremonial regalia on convocation day." },
-    { id: "ev-12", title: "Collegiate Sports & Recreation Meet", category: "Sports Fest", src: img09, w: 1.1, h: 0.97,
-      description: "Inter-departmental indoor tournament, team sportsmanship, and student recreation championship." },
+    { id: "ev-10", title: "Microscopy Practical Session", category: "Laboratory", src: img03, w: 1.3, h: 1,
+      description: "MBBS students working at individual microscopes during a practical." },
+    { id: "ev-11", title: "World AIDS Day", category: "Health Days", src: img07, w: 1, h: 0.95,
+      description: "Students and faculty with the World AIDS Day banner in front of the institute." },
+    { id: "ev-12", title: "Cultural Programme on the Lawn", category: "Celebrations", src: img09, w: 1.1, h: 0.97,
+      description: "Faculty, guests and performers at an open-air cultural programme." },
   ],
 ];
 
@@ -90,19 +91,28 @@ const allCollageItems: EventItem[] = collageRows.flat();
 
 export const MediaGalleryPage: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  // The lightbox steps through the set it was opened from: the collage, or the filtered archive.
+  const [navList, setNavList] = useState<EventItem[]>(allCollageItems);
+  const [archiveFilter, setArchiveFilter] = useState<"All" | (typeof GALLERY_CATEGORIES)[number]>("All");
+  const archiveShown = archiveFilter === "All" ? galleryArchive : galleryArchive.filter((p) => p.category === archiveFilter);
+
+  const openFrom = (list: EventItem[], item: EventItem) => {
+    setNavList(list);
+    setSelectedEvent(item);
+  };
 
   const handlePrevEvent = () => {
     if (!selectedEvent) return;
-    const currentIndex = allCollageItems.findIndex((e) => e.id === selectedEvent.id);
-    const prevIndex = (currentIndex - 1 + allCollageItems.length) % allCollageItems.length;
-    setSelectedEvent(allCollageItems[prevIndex]);
+    const currentIndex = navList.findIndex((e) => e.id === selectedEvent.id);
+    const prevIndex = (currentIndex - 1 + navList.length) % navList.length;
+    setSelectedEvent(navList[prevIndex]);
   };
 
   const handleNextEvent = () => {
     if (!selectedEvent) return;
-    const currentIndex = allCollageItems.findIndex((e) => e.id === selectedEvent.id);
-    const nextIndex = (currentIndex + 1) % allCollageItems.length;
-    setSelectedEvent(allCollageItems[nextIndex]);
+    const currentIndex = navList.findIndex((e) => e.id === selectedEvent.id);
+    const nextIndex = (currentIndex + 1) % navList.length;
+    setSelectedEvent(navList[nextIndex]);
   };
 
   useEffect(() => {
@@ -120,9 +130,7 @@ export const MediaGalleryPage: React.FC = () => {
   const renderPhotoCard = (item: EventItem) => (
     <div
       key={item.id}
-      onClick={() => {
-        setSelectedEvent(item);
-      }}
+      onClick={() => openFrom(allCollageItems, item)}
       style={{ "--w": item.w ?? 1, "--h": item.h ?? 1 } as React.CSSProperties}
       className="collage-item group cursor-pointer overflow-hidden rounded-[10px] sm:rounded-[14px] bg-white dark:bg-slate-900/60 border border-[#e2e8f0]/90 dark:border-white/15 shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_24px_50px_rgba(22,39,64,0.28)] dark:hover:shadow-[0_24px_50px_rgba(0,0,0,0.6)] select-none"
     >
@@ -370,6 +378,72 @@ export const MediaGalleryPage: React.FC = () => {
         </div>
       </section>
 
+
+      {/* Photo Archive: every event photograph, filterable by kind */}
+      <section className="relative pt-4 sm:pt-6 pb-16 sm:pb-20 bg-[#FAF9F5] dark:bg-transparent">
+        <div className="w-full max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-7 sm:mb-9">
+            <div className="inline-flex items-center justify-center gap-3 mb-3">
+              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+              <span className="text-xs sm:text-[13px] font-bold tracking-[0.2em] text-[#4b6382] dark:text-teal-400 uppercase">
+                PHOTO ARCHIVE
+              </span>
+              <span className="w-8 sm:w-10 h-[1.5px] bg-[#cbd5e1] dark:bg-white/20" />
+            </div>
+            <h2 className="font-['Manrope',sans-serif] text-3xl sm:text-4xl lg:text-[44px] font-bold text-[#162740] dark:text-white tracking-tight leading-tight mb-3.5">
+              Life at AIMS
+            </h2>
+            <p className="text-[#596d86] dark:text-slate-300 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl mx-auto">
+              Community outreach, health awareness days, celebrations, sports and academic events.
+            </p>
+          </div>
+
+          <div className="mb-7 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:justify-center">
+            {(["All", ...GALLERY_CATEGORIES] as const).map((cat) => {
+              const count = cat === "All" ? galleryArchive.length : galleryArchive.filter((p) => p.category === cat).length;
+              const active = archiveFilter === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setArchiveFilter(cat)}
+                  aria-pressed={active}
+                  className={`flex-shrink-0 rounded-full px-4 py-2 text-[13px] font-semibold transition-colors ${
+                    active
+                      ? "bg-[#1f3351] text-white dark:bg-teal-600"
+                      : "border border-[#e2e8f0] bg-white text-[#4b6382] hover:text-[#1f3351] dark:border-white/15 dark:bg-white/5 dark:text-slate-300 dark:hover:text-white"
+                  }`}
+                >
+                  {cat} <span className="opacity-60">({count})</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 lg:grid-cols-4">
+            {archiveShown.map((photo) => (
+              <button
+                key={photo.id}
+                type="button"
+                onClick={() => openFrom(archiveShown, photo)}
+                className="group relative aspect-[4/3] overflow-hidden rounded-[10px] sm:rounded-[14px] border border-[#e2e8f0]/90 bg-white text-left shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:border-white/15 dark:bg-slate-900/60"
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.title}
+                  loading="lazy"
+                  className="h-full w-full object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0b172a]/85 via-[#0b172a]/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-2.5 sm:p-3">
+                  <span className="text-[9px] sm:text-[10px] font-semibold uppercase tracking-wider text-white/75">{photo.category}</span>
+                  <h3 className="font-['Manrope',sans-serif] text-[12px] sm:text-sm font-bold leading-tight text-white line-clamp-2">{photo.title}</h3>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Lightbox Modal with Fluid Spring Scale-In Animation */}
       {selectedEvent && (
