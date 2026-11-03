@@ -1432,6 +1432,8 @@
   font-weight: 700;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   line-height: 1.2;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .awards-page .sports-chip-medal {
@@ -1455,6 +1457,24 @@
   background: linear-gradient(180deg, #fdf4f0 0%, #f8e5de 100%);
   color: #8c4722;
   border: 1px solid #e8bcab;
+}
+
+.awards-page .chip-selected {
+  background: var(--aw-color-blue-soft);
+  color: var(--aw-color-primary-navy);
+  border: 1px solid var(--aw-border-light);
+}
+
+.awards-page .sports-season-card {
+  margin-top: 24px;
+}
+
+.awards-page .sports-subcol-when {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--aw-text-secondary);
 }
 
 .awards-page .external-medals-stack {
