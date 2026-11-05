@@ -275,6 +275,23 @@
   transform: none;
 }
 
+/* Portrait newspaper clipping (Chronicle 07) — keep the full article visible */
+#chronicle-07 .compact-image-frame-box {
+  aspect-ratio: 472 / 693;
+  max-width: 360px;
+}
+
+#chronicle-07 .compact-card-img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+#chronicle-07.chronicle-compact-card:hover .compact-card-img {
+  transform: none;
+}
+
 /* Supporting Container & Read More Toggle (Mobile Read More Pattern) */
 .chronicle-read-more-btn {
   display: none; /* Hidden on laptop/desktop view */

@@ -4,6 +4,7 @@ import chronicle3 from "../assets/News/chronicle-3.webp";
 import chronicle4 from "../assets/News/chronicle-4.webp";
 import chronicle5 from "../assets/News/chronicle-5.webp";
 import chronicle6 from "../assets/News/chronicle-6.webp";
+import chronicle7 from "../assets/News/chronicle-7.png";
 import image1 from "../assets/News/image-1.webp";
 import image2 from "../assets/News/image-2.webp";
 import image3 from "../assets/News/image-3.webp";
@@ -112,6 +113,20 @@ export const chronicles: ChronicleItem[] = [
       "Engagements between public representatives and medical leaders foster vital coordination in identifying community health priorities and expanding healthcare access. The walkthrough reaffirmed the hospital's ongoing mission to provide high-standard tertiary medical treatments and specialized clinical care within reach of all citizens."
     ],
     image: chronicle6
+  },
+  {
+    id: 7,
+    number: "07",
+    title: "FOURTH MBBS BATCH INAUGURATED",
+    subtitle: "ACADEMIC MILESTONE 2026-27",
+    category: "MEDICAL EDUCATION",
+    tags: ["MBBS Batch", "Medical Education"],
+    description: "Arundathi Institute of Medical Sciences (AIMS), Dundigal, inaugurated its fourth batch of MBBS students for the academic year 2026-2027, marking another milestone in the institution's medical education journey.",
+    supportingContent: [
+      "Dr. Raja Rao, Principal and ADME of Osmania Medical College, Koti, attended as chief guest and appreciated the facilities available at AIMS, particularly the hospital's free medical care for patients. He commended the management for its commitment to making healthcare accessible to the poor and needy.",
+      "Founder Secretary Marri Rajashekar Reddy reiterated the institution's commitment to affordable healthcare. The incoming batch joins a growing academic community that pairs rigorous clinical training with a strong ethos of service to the region."
+    ],
+    image: chronicle7
   }
 ];
 

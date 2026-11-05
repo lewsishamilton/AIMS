@@ -7,7 +7,7 @@ import './ChroniclesSection.css';
 export default function ChroniclesSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const total = chronicles.length; // Exactly 6 items
+  const total = chronicles.length;
 
   // Calculate active card based on scroll position (100% reversible up and down)
   useEffect(() => {
