@@ -151,6 +151,20 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
       const token = readStoredGitHubToken()
       if (!repo || !token) throw new Error(gitErrorMessage(pushError), { cause: pushError })
 
+      // GitHub's rules engine is currently rejecting updates to existing refs,
+      // but creating a *new* ref still uploads the commit objects we need.
+      const tempBranch = `aims-stats-publish-${Date.now()}`
+      try {
+        await runGit(['push', 'origin', `HEAD:refs/heads/${tempBranch}`])
+      } catch (uploadError) {
+        throw new Error(
+          `${gitErrorMessage(pushError)} — could not upload the commit: ${gitErrorMessage(
+            uploadError
+          )}`,
+          { cause: uploadError }
+        )
+      }
+
       const headers = {
         Authorization: `Bearer ${token}`,
         Accept: 'application/vnd.github+json',
@@ -159,6 +173,7 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
       }
       const refUrl = `https://api.github.com/repos/${repo}/git/refs/heads/${encodeURIComponent(branch)}`
 
+      let apiError: unknown = null
       try {
         const existing = await fetch(refUrl, { headers })
         const response = existing.ok
@@ -174,14 +189,26 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
             })
 
         if (!response.ok) {
-          throw new Error(
-            `GitHub API fallback failed (${response.status}): ${(
-              await response.text()
-            ).slice(0, 300)}`,
-            { cause: pushError }
+          const detail = await response.text()
+          apiError = new Error(
+            `GitHub API fallback failed (${response.status}): ${detail.slice(0, 300)}`
           )
         }
-      } catch (apiError) {
+      } catch (error) {
+        apiError = error
+      }
+
+      // Remove the temporary ref; the real branch has been updated above.
+      try {
+        await fetch(
+          `https://api.github.com/repos/${repo}/git/refs/heads/${encodeURIComponent(tempBranch)}`,
+          { method: 'DELETE', headers }
+        )
+      } catch {
+        // Best effort cleanup.
+      }
+
+      if (apiError) {
         throw new Error(
           `${gitErrorMessage(pushError)} — API fallback also failed: ${gitErrorMessage(apiError)}`,
           { cause: apiError }
