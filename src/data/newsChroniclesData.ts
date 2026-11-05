@@ -5,6 +5,7 @@ import chronicle4 from "../assets/News/chronicle-4.webp";
 import chronicle5 from "../assets/News/chronicle-5.webp";
 import chronicle6 from "../assets/News/chronicle-6.webp";
 import chronicle7 from "../assets/News/chronicle-7.png";
+import chronicle8 from "../assets/News/chronicle-8.webp";
 import image1 from "../assets/News/image-1.webp";
 import image2 from "../assets/News/image-2.webp";
 import image3 from "../assets/News/image-3.webp";
@@ -127,6 +128,20 @@ export const chronicles: ChronicleItem[] = [
       "Founder Secretary Marri Rajashekar Reddy reiterated the institution's commitment to affordable healthcare. The incoming batch joins a growing academic community that pairs rigorous clinical training with a strong ethos of service to the region."
     ],
     image: chronicle7
+  },
+  {
+    id: 8,
+    number: "08",
+    title: "FOURTH MBBS BATCH WELCOMED",
+    subtitle: "AI, ROBOTIC SURGERY & FUTURE CARE",
+    category: "MEDICAL EDUCATION",
+    tags: ["MBBS Batch", "Robotic Surgery"],
+    description: "Arundathi Institute of Medical Sciences (AIMS), Dundigal, held a grand welcome ceremony for its fourth batch of MBBS students for the 2026-27 academic year at the Arundathi Auditorium.",
+    supportingContent: [
+      "Chief guest Dr. Raja Rao, Principal of Osmania Medical College, spoke about the growing role of technology in medicine and urged students to keep pace with artificial intelligence, machine learning, and the latest advances in robotic surgery.",
+      "Founder Secretary and Malkajgiri MLA Marri Rajashekar Reddy said accessible healthcare is the institution's goal, and that Arundathi Hospital provides free treatment and care to the poor. Chairman Marri Laxman Reddy, Director Marri Dheeran Reddy, Dean Dr. Devanand and Principal Dr. Suma Preeti also participated."
+    ],
+    image: chronicle8
   }
 ];
 

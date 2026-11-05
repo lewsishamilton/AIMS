@@ -114,7 +114,7 @@ export default function Hero() {
           >
             <p className="hero-editorial-description">
               A curated narrative celebrating human vitality, high-precision surgical arts, 
-              and patient-first healthcare at Arundathi Hospital. Documenting our seven core chronicles 
+              and patient-first healthcare at Arundathi Hospital. Documenting our eight core chronicles 
               of clinical excellence.
             </p>
 
