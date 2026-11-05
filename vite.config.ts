@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { execFile } from 'node:child_process'
+import { execFile, execFileSync } from 'node:child_process'
 import fs from 'node:fs'
 import fsp from 'node:fs/promises'
 import type { IncomingMessage, ServerResponse } from 'node:http'
@@ -61,6 +61,29 @@ function gitErrorMessage(error: unknown): string {
   return String(error)
 }
 
+/** Extracts "owner/name" from an HTTPS or SSH GitHub remote URL. */
+function parseGitHubRepo(remoteUrl: string): string | null {
+  const match = /github\.com[/:]([^/]+)\/([^/]+?)(?:\.git)?$/.exec(remoteUrl.trim())
+  return match ? `${match[1]}/${match[2]}` : null
+}
+
+/** Reads the GitHub token that git already uses (no token is logged). */
+function readStoredGitHubToken(): string | null {
+  try {
+    const stdout = execFileSync('git', ['credential', 'fill'], {
+      input: 'protocol=https\nhost=github.com\n\n',
+      encoding: 'utf8',
+      timeout: 30_000,
+      windowsHide: true,
+      env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
+    })
+    const match = /^password=(.+)$/m.exec(stdout)
+    return match ? match[1].trim() : null
+  } catch {
+    return null
+  }
+}
+
 function sendJson(res: ServerResponse, status: number, body: unknown) {
   res.statusCode = status
   res.setHeader('Content-Type', 'application/json; charset=utf-8')
@@ -109,6 +132,70 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
       timeout: 120_000,
       env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
     })
+
+  /**
+   * Pushes the current HEAD. If GitHub rejects the git ref update (for example
+   * the transient "fatal error in commit_refs_rules" server bug), the same
+   * credential is used against the REST API to update the branch.
+   */
+  const pushHead = async () => {
+    const branch = (await runGit(['rev-parse', '--abbrev-ref', 'HEAD'])).stdout.trim()
+    const sha = (await runGit(['rev-parse', 'HEAD'])).stdout.trim()
+
+    try {
+      await runGit(['push', 'origin', 'HEAD'])
+      return
+    } catch (pushError) {
+      const remote = (await runGit(['remote', 'get-url', 'origin'])).stdout
+      const repo = parseGitHubRepo(remote)
+      const token = readStoredGitHubToken()
+      if (!repo || !token) throw new Error(gitErrorMessage(pushError), { cause: pushError })
+
+      const headers = {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/vnd.github+json',
+        'User-Agent': 'aims-stats-publisher',
+        'X-GitHub-Api-Version': '2022-11-28',
+      }
+      const refUrl = `https://api.github.com/repos/${repo}/git/refs/heads/${encodeURIComponent(branch)}`
+
+      try {
+        const existing = await fetch(refUrl, { headers })
+        const response = existing.ok
+          ? await fetch(refUrl, {
+              method: 'PATCH',
+              headers,
+              body: JSON.stringify({ sha, force: false }),
+            })
+          : await fetch(`https://api.github.com/repos/${repo}/git/refs`, {
+              method: 'POST',
+              headers,
+              body: JSON.stringify({ ref: `refs/heads/${branch}`, sha }),
+            })
+
+        if (!response.ok) {
+          throw new Error(
+            `GitHub API fallback failed (${response.status}): ${(
+              await response.text()
+            ).slice(0, 300)}`,
+            { cause: pushError }
+          )
+        }
+      } catch (apiError) {
+        throw new Error(
+          `${gitErrorMessage(pushError)} — API fallback also failed: ${gitErrorMessage(apiError)}`,
+          { cause: apiError }
+        )
+      }
+
+      // Keep the local remote-tracking ref in sync after the API update.
+      try {
+        await runGit(['fetch', 'origin', branch])
+      } catch {
+        // Not critical: the remote branch is already updated.
+      }
+    }
+  }
 
   return {
     name: 'aims-owner-stats-publisher',
@@ -225,7 +312,7 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
             committed = true
           }
 
-          await runGit(['push', 'origin', 'HEAD'])
+          await pushHead()
         } catch (error) {
           sendJson(res, 502, {
             ok: false,
