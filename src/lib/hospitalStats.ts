@@ -306,9 +306,15 @@ export function parseManualValue(value: string | undefined | null): number | nul
   return Number.isFinite(n) ? n : null;
 }
 
-/** Merge manual overrides over the baseline figures. */
-export function resolveTodayStats(manual: ManualStats | null): TodayStats {
-  const resolved: TodayStats = { ...TODAY_DEFAULTS };
+/**
+ * Merge figures for display, lowest priority first:
+ *   baseline defaults → figures published for the website → local owner preview.
+ */
+export function resolveTodayStats(
+  manual: ManualStats | null,
+  published: TodayStats | null = null
+): TodayStats {
+  const resolved: TodayStats = { ...TODAY_DEFAULTS, ...(published ?? {}) };
   if (manual) {
     for (const { key } of TODAY_METRICS) {
       const value = parseManualValue(manual[key]);
@@ -318,10 +324,10 @@ export function resolveTodayStats(manual: ManualStats | null): TodayStats {
   return resolved;
 }
 
-/** Pre-filled editor values for the current baseline figures. */
-export function defaultManualStats(): ManualStats {
+/** Pre-filled editor values for the figures currently on display. */
+export function defaultManualStats(base: TodayStats = TODAY_DEFAULTS): ManualStats {
   const form = { ...EMPTY_MANUAL_STATS };
-  for (const { key } of TODAY_METRICS) form[key] = String(TODAY_DEFAULTS[key]);
+  for (const { key } of TODAY_METRICS) form[key] = String(base[key]);
   return form;
 }
 

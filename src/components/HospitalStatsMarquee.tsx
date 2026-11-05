@@ -5,6 +5,7 @@ import {
   defaultManualStats,
   getPrevDayInfo,
   loadManualStats,
+  parseManualValue,
   resolveTodayStats,
   saveManualStats,
   EMPTY_MANUAL_STATS,
@@ -12,7 +13,9 @@ import {
   TODAY_METRICS,
   type ManualStats,
   type TodayGroup,
+  type TodayStats,
 } from "../lib/hospitalStats";
+import { usePublishedStats } from "../lib/publishedStats";
 import { useTheme } from "../context/ThemeContext";
 import { useLocation } from "react-router-dom";
 
@@ -39,14 +42,22 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
   const isWhiteTheme =
     propIsWhiteTheme ?? (theme !== "dark" && location.pathname !== "/");
 
-  // Owner-only: no edit affordance is rendered publicly. The editor can only
-  // be opened on the authorized local system via the secret shortcut below.
+  // Owner-only: the pencil and editor are rendered only on the authorized
+  // local system; public/deployed builds never expose them.
   const canEditStats = canEditHospitalStats();
+
+  // Site-wide figures, published by the owner and shown to every visitor.
+  const {
+    stats: publishedStats,
+    date: publishedDate,
+    loading: publishedLoading,
+    refresh: refreshPublished,
+  } = usePublishedStats();
 
   // Previous day key for localStorage (stable per mount)
   const prevDay = getPrevDayInfo();
 
-  // Manual override state
+  // Manual override state (owner preview only)
   const [manualStats, setManualStats] = useState<ManualStats | null>(() =>
     loadManualStats(prevDay.key)
   );
@@ -54,25 +65,43 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
   // Editor dialog state
   const [showEditor, setShowEditor] = useState(false);
   const [editForm, setEditForm] = useState<ManualStats>(EMPTY_MANUAL_STATS);
+  const [publishing, setPublishing] = useState(false);
+  const [publishStatus, setPublishStatus] = useState<
+    { kind: "ok" | "error"; message: string } | null
+  >(null);
 
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  // Owner-only secret shortcut (Ctrl+Shift+E). The pencil button was removed
-  // so visitors never see an edit affordance; only the authorized local setup
-  // can open the editor.
+  // Local preview wins; otherwise everyone sees the published figures.
+  const stats = resolveTodayStats(manualStats, publishedStats);
+
+  const openEditor = () => {
+    if (!canEditStats) return;
+    const saved = loadManualStats(prevDay.key);
+    setEditForm(saved ? { ...EMPTY_MANUAL_STATS, ...saved } : defaultManualStats(stats));
+    setPublishStatus(null);
+    setShowEditor(true);
+  };
+
+  // Owner-only shortcut (Ctrl+Shift+E) on top of the pencil button.
   useEffect(() => {
     if (!canEditStats) return;
     const onOwnerShortcut = (e: KeyboardEvent) => {
       if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "e") {
         e.preventDefault();
         const saved = loadManualStats(prevDay.key);
-        setEditForm(saved ? { ...EMPTY_MANUAL_STATS, ...saved } : defaultManualStats());
+        setEditForm(
+          saved
+            ? { ...EMPTY_MANUAL_STATS, ...saved }
+            : defaultManualStats(resolveTodayStats(null, publishedStats))
+        );
+        setPublishStatus(null);
         setShowEditor(true);
       }
     };
     window.addEventListener("keydown", onOwnerShortcut);
     return () => window.removeEventListener("keydown", onOwnerShortcut);
-  }, [canEditStats, prevDay.key]);
+  }, [canEditStats, prevDay.key, publishedStats]);
 
   // Close on Escape / outside click
   useEffect(() => {
@@ -105,8 +134,61 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
     setShowEditor(false);
   };
 
-  const stats = resolveTodayStats(manualStats);
+  /**
+   * Writes the figures to the site-wide JSON and pushes the change so the
+   * public deploy picks it up. Only reachable on the owner's local dev server:
+   * the endpoint does not exist in production builds.
+   */
+  const handlePublish = async () => {
+    if (!canEditStats) return;
+    setPublishing(true);
+    setPublishStatus(null);
+
+    // Blank fields keep the value already on display.
+    const nextStats = TODAY_METRICS.reduce((acc, { key }) => {
+      acc[key] = parseManualValue(editForm[key]) ?? stats[key];
+      return acc;
+    }, {} as TodayStats);
+
+    try {
+      const response = await fetch("/__owner/publish-stats", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ date: prevDay.key, stats: nextStats }),
+      });
+      const data = (await response.json().catch(() => null)) as
+        | { ok?: boolean; message?: string; error?: string }
+        | null;
+
+      if (!response.ok || !data?.ok) {
+        throw new Error(data?.error || `Publish failed (HTTP ${response.status})`);
+      }
+
+      // Keep a local preview as well, then re-read the published JSON.
+      saveManualStats(prevDay.key, editForm);
+      setManualStats({ ...editForm });
+      await refreshPublished();
+      setPublishStatus({
+        kind: "ok",
+        message: data.message || "Published. The website updates after the deploy finishes.",
+      });
+    } catch (error) {
+      setPublishStatus({
+        kind: "error",
+        message:
+          error instanceof Error
+            ? error.message
+            : "Could not reach the local publish endpoint. Is `npm run dev` running on this machine?",
+      });
+    } finally {
+      setPublishing(false);
+    }
+  };
+
   const fmt = (n: number) => n.toLocaleString("en-IN");
+  const publishedLabel = publishedDate
+    ? publishedDate.split("-").reverse().join("/")
+    : null;
 
   // Every figure from the Today dataset scrolls across the ticker.
   const items = TODAY_METRICS.map((metric) => ({
@@ -231,6 +313,26 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
             </div>
           </div>
         </div>
+
+        {/* Owner-only pencil: never rendered on the public/deployed site */}
+        {canEditStats && (
+          <button
+            onClick={openEditor}
+            title="Edit statistics"
+            aria-label="Edit hospital statistics"
+            className="absolute right-2 top-1/2 z-20 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4af37]/45 bg-[#0b1e35]/85 text-[#e6c98a] shadow-[0_0_16px_rgba(212,175,55,0.18)] backdrop-blur-md transition-all duration-200 hover:bg-[#d4af37] hover:text-[#0b1e35]"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              className="h-3.5 w-3.5"
+              aria-hidden="true"
+            >
+              <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* Editor dialog / modal — owner-only */}
@@ -306,39 +408,68 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
             </div>
 
             {/* Actions */}
-            <div className="flex gap-2 mt-6">
+            <div className="mt-6 space-y-2">
               <button
-                onClick={handleSave}
-                className="flex-1 rounded-lg bg-gradient-to-r from-[#c9a227] to-[#e6c98a] text-[#0a1628] text-sm font-bold py-2 shadow-[0_8px_22px_rgba(212,175,55,0.28)] transition-all hover:from-[#d4af37] hover:to-[#f0d99a] active:scale-[0.98]"
+                onClick={handlePublish}
+                disabled={publishing}
+                className="w-full rounded-lg bg-gradient-to-r from-[#c9a227] to-[#e6c98a] text-[#0a1628] text-sm font-bold py-2 shadow-[0_8px_22px_rgba(212,175,55,0.28)] transition-all hover:from-[#d4af37] hover:to-[#f0d99a] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
               >
-                Save
+                {publishing ? "Publishing…" : "Publish to website"}
               </button>
-              <button
-                onClick={handleClear}
-                className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
-                  isWhiteTheme
-                    ? "bg-gray-100 hover:bg-gray-200 text-[#1f3351]/70"
-                    : "bg-white/10 hover:bg-white/20 text-white/70"
-                }`}
-                title="Clear saved data and restore baseline values"
-              >
-                Reset
-              </button>
-              <button
-                onClick={() => setShowEditor(false)}
-                className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
-                  isWhiteTheme
-                    ? "bg-gray-100 hover:bg-gray-200 text-[#1f3351]/70"
-                    : "bg-white/10 hover:bg-white/20 text-white/70"
-                }`}
-              >
-                Cancel
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleSave}
+                  className={`flex-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                    isWhiteTheme
+                      ? "bg-gray-100 hover:bg-gray-200 text-[#1f3351]/70"
+                      : "bg-white/10 hover:bg-white/20 text-white/70"
+                  }`}
+                  title="Keep these figures as a preview on this device only"
+                >
+                  Save preview
+                </button>
+                <button
+                  onClick={handleClear}
+                  className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                    isWhiteTheme
+                      ? "bg-gray-100 hover:bg-gray-200 text-[#1f3351]/70"
+                      : "bg-white/10 hover:bg-white/20 text-white/70"
+                  }`}
+                  title="Clear this device's preview and show the published figures"
+                >
+                  Reset
+                </button>
+                <button
+                  onClick={() => setShowEditor(false)}
+                  className={`rounded-lg px-3 py-2 text-sm font-semibold transition-colors ${
+                    isWhiteTheme
+                      ? "bg-gray-100 hover:bg-gray-200 text-[#1f3351]/70"
+                      : "bg-white/10 hover:bg-white/20 text-white/70"
+                  }`}
+                >
+                  Close
+                </button>
+              </div>
             </div>
+
+            {publishStatus && (
+              <p
+                role="status"
+                className={`mt-3 rounded-md px-3 py-2 text-xs ${
+                  publishStatus.kind === "ok"
+                    ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300"
+                    : "bg-red-500/15 text-red-700 dark:text-red-300"
+                }`}
+              >
+                {publishStatus.message}
+              </p>
+            )}
 
             {/* Hint */}
             <p className={`text-[10px] mt-3 text-center ${isWhiteTheme ? "text-[#1f3351]/35" : "text-white/30"}`}>
-              Saved values are stored locally on this device.
+              “Publish to website” updates the figures for every visitor.
+              {publishedLabel && ` Last published for ${publishedLabel}.`}
+              {publishedLoading && " Checking for updates…"}
             </p>
           </div>
         </div>

@@ -12,6 +12,7 @@ import {
   type ManualStats,
   type TodayStats,
 } from "../../lib/hospitalStats"
+import { usePublishedStats } from "../../lib/publishedStats"
 
 // Department figures from aims.ac.in/stats-dashboard (Tableau "OP and IP services"), today's from the
 // "Today's Stats" ticker on aims.ac.in. ip omitted where the dashboard only gives OP.
@@ -292,6 +293,7 @@ export const AnalysisSection: React.FC = () => {
   const [manualStats, setManualStats] = useState<ManualStats | null>(() =>
     loadManualStats(getPrevDayInfo().key)
   )
+  const { stats: publishedStats } = usePublishedStats()
 
   // Stay in sync when figures are saved or cleared in the stats ticker.
   // (The native "storage" event does not fire in the same document.)
@@ -301,8 +303,8 @@ export const AnalysisSection: React.FC = () => {
     return () => window.removeEventListener(HOSPITAL_STATS_UPDATED_EVENT, sync)
   }, [])
 
-  // Manual entries win; anything left blank keeps the baseline figure.
-  const figures = resolveTodayStats(manualStats)
+  // Local preview wins; otherwise show the figures published for everyone.
+  const figures = resolveTodayStats(manualStats, publishedStats)
   const manual = hasManualOverrides(manualStats)
 
   const kpis = [
@@ -312,7 +314,7 @@ export const AnalysisSection: React.FC = () => {
     {
       value: figures.opd,
       label: "OPD consultations today",
-      sub: manual ? "Updated manually" : "Today's figures",
+      sub: manual ? "Updated manually" : publishedStats ? "Latest published figures" : "Today's figures",
       plus: true,
     },
   ]
