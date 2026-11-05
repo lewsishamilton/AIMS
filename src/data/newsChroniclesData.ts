@@ -147,13 +147,13 @@ export const chronicles: ChronicleItem[] = [
   {
     id: 9,
     number: "09",
-    title: "80,000 FREE SURGERIES & A NEW MBBS BATCH",
+    title: "30,000 FREE SURGERIES & A NEW MBBS BATCH",
     subtitle: "ORIENTATION DAY 2026-27",
     category: "COMMUNITY HEALTH",
     tags: ["Orientation Day", "Free Healthcare"],
     description: "Arundathi Institute of Medical Sciences (AIMS), Dundigal, celebrated its fourth Orientation Day for the 2026-27 MBBS batch, with Malkajgiri MLA Marri Rajashekar Reddy joining as guest of honour.",
     supportingContent: [
-      "Addressing the students, the MLA said the institution's goal is to provide better free medical care to the poor, and noted that more than 80,000 surgeries have already been performed free of cost. He urged future doctors to pair clinical skills with compassion and ethical values.",
+      "Addressing the students, the MLA said the institution's goal is to provide better free medical care to the poor, and noted that more than 30,000 surgeries have already been performed free of cost. He urged future doctors to pair clinical skills with compassion and ethical values.",
       "Chief guest Dr. Raja Rao, Principal of Osmania Medical College, encouraged students to build awareness of modern technologies such as AI, machine learning and robotic surgery. Chairman Marri Laxman Reddy, Director Marri Dheeran Reddy, Dean Dr. B. Devanand, Principal Dr. Suma Preeti, faculty, students and parents attended."
     ],
     image: chronicle9
