@@ -134,94 +134,95 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
     })
 
   /**
-   * Pushes the current HEAD. If GitHub rejects the git ref update (for example
-   * the transient "fatal error in commit_refs_rules" server bug), the same
-   * credential is used against the REST API to update the branch.
+   * Fallback used when GitHub rejects the git push (currently the server-side
+   * "fatal error in commit_refs_rules" bug). Creates the same commit through
+   * the Git Data API with the credential git already stores locally.
    */
-  const pushHead = async () => {
-    const branch = (await runGit(['rev-parse', '--abbrev-ref', 'HEAD'])).stdout.trim()
-    const sha = (await runGit(['rev-parse', 'HEAD'])).stdout.trim()
-
-    try {
-      await runGit(['push', 'origin', 'HEAD'])
-      return
-    } catch (pushError) {
-      const remote = (await runGit(['remote', 'get-url', 'origin'])).stdout
-      const repo = parseGitHubRepo(remote)
-      const token = readStoredGitHubToken()
-      if (!repo || !token) throw new Error(gitErrorMessage(pushError), { cause: pushError })
-
-      // GitHub's rules engine is currently rejecting updates to existing refs,
-      // but creating a *new* ref still uploads the commit objects we need.
-      const tempBranch = `aims-stats-publish-${Date.now()}`
-      try {
-        await runGit(['push', 'origin', `HEAD:refs/heads/${tempBranch}`])
-      } catch (uploadError) {
-        throw new Error(
-          `${gitErrorMessage(pushError)} — could not upload the commit: ${gitErrorMessage(
-            uploadError
-          )}`,
-          { cause: uploadError }
-        )
-      }
-
-      const headers = {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/vnd.github+json',
-        'User-Agent': 'aims-stats-publisher',
-        'X-GitHub-Api-Version': '2022-11-28',
-      }
-      const refUrl = `https://api.github.com/repos/${repo}/git/refs/heads/${encodeURIComponent(branch)}`
-
-      let apiError: unknown = null
-      try {
-        const existing = await fetch(refUrl, { headers })
-        const response = existing.ok
-          ? await fetch(refUrl, {
-              method: 'PATCH',
-              headers,
-              body: JSON.stringify({ sha, force: false }),
-            })
-          : await fetch(`https://api.github.com/repos/${repo}/git/refs`, {
-              method: 'POST',
-              headers,
-              body: JSON.stringify({ ref: `refs/heads/${branch}`, sha }),
-            })
-
-        if (!response.ok) {
-          const detail = await response.text()
-          apiError = new Error(
-            `GitHub API fallback failed (${response.status}): ${detail.slice(0, 300)}`
-          )
-        }
-      } catch (error) {
-        apiError = error
-      }
-
-      // Remove the temporary ref; the real branch has been updated above.
-      try {
-        await fetch(
-          `https://api.github.com/repos/${repo}/git/refs/heads/${encodeURIComponent(tempBranch)}`,
-          { method: 'DELETE', headers }
-        )
-      } catch {
-        // Best effort cleanup.
-      }
-
-      if (apiError) {
-        throw new Error(
-          `${gitErrorMessage(pushError)} — API fallback also failed: ${gitErrorMessage(apiError)}`,
-          { cause: apiError }
-        )
-      }
-
-      // Keep the local remote-tracking ref in sync after the API update.
-      try {
-        await runGit(['fetch', 'origin', branch])
-      } catch {
-        // Not critical: the remote branch is already updated.
-      }
+  const publishCommitViaApi = async (
+    content: string,
+    message: string
+  ): Promise<{ branch: string; remoteSha: string; commitSha: string }> => {
+    const remote = (await runGit(['remote', 'get-url', 'origin'])).stdout
+    const repo = parseGitHubRepo(remote)
+    const token = readStoredGitHubToken()
+    if (!repo || !token) {
+      throw new Error('No GitHub credentials are available for the API fallback')
     }
+
+    const branch = (await runGit(['rev-parse', '--abbrev-ref', 'HEAD'])).stdout.trim()
+    const headers: Record<string, string> = {
+      Authorization: `Bearer ${token}`,
+      Accept: 'application/vnd.github+json',
+      'Content-Type': 'application/json',
+      'User-Agent': 'aims-stats-publisher',
+      'X-GitHub-Api-Version': '2022-11-28',
+    }
+
+    interface GitHubApiResponse {
+      object?: { sha?: string }
+      tree?: { sha?: string }
+      sha?: string
+    }
+
+    const api = async (
+      suffix: string,
+      init?: { method?: string; body?: string }
+    ): Promise<GitHubApiResponse> => {
+      const response = await fetch(`https://api.github.com/repos/${repo}${suffix}`, {
+        ...init,
+        headers,
+      })
+      if (!response.ok) {
+        throw new Error(
+          `${suffix} returned ${response.status}: ${(await response.text()).slice(0, 300)}`
+        )
+      }
+      return (await response.json()) as GitHubApiResponse
+    }
+
+    const requireSha = (value: string | undefined, label: string): string => {
+      if (!value) throw new Error(`GitHub API response is missing ${label}`)
+      return value
+    }
+
+    const ref = await api(`/git/ref/heads/${branch}`)
+    const remoteSha = requireSha(ref.object?.sha, 'the branch commit')
+    const remoteCommit = await api(`/git/commits/${remoteSha}`)
+    const baseTree = requireSha(remoteCommit.tree?.sha, 'the base tree')
+
+    const blob = await api('/git/blobs', {
+      method: 'POST',
+      body: JSON.stringify({
+        content: Buffer.from(content, 'utf8').toString('base64'),
+        encoding: 'base64',
+      }),
+    })
+    const blobSha = requireSha(blob.sha, 'the stats blob')
+
+    const tree = await api('/git/trees', {
+      method: 'POST',
+      body: JSON.stringify({
+        base_tree: baseTree,
+        tree: [
+          { path: SRC_STATS_FILE, mode: '100644', type: 'blob', sha: blobSha },
+          { path: PUBLIC_STATS_FILE, mode: '100644', type: 'blob', sha: blobSha },
+        ],
+      }),
+    })
+    const treeSha = requireSha(tree.sha, 'the new tree')
+
+    const commit = await api('/git/commits', {
+      method: 'POST',
+      body: JSON.stringify({ message, tree: treeSha, parents: [remoteSha] }),
+    })
+    const commitSha = requireSha(commit.sha, 'the new commit')
+
+    await api(`/git/refs/heads/${branch}`, {
+      method: 'PATCH',
+      body: JSON.stringify({ sha: commitSha, force: false }),
+    })
+
+    return { branch, remoteSha, commitSha }
   }
 
   return {
@@ -295,6 +296,30 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
             ? payload.date
             : previousIstDayKey()
 
+        // Skip identical republishes (e.g. a double click).
+        let previous: { date?: unknown; stats?: unknown } | null
+        try {
+          previous = JSON.parse(await fsp.readFile(srcStatsPath, 'utf8'))
+        } catch {
+          previous = null
+        }
+        const previousStats = (previous?.stats ?? null) as Record<string, unknown> | null
+        const unchanged =
+          previous?.date === date &&
+          previousStats != null &&
+          PUBLISHED_STAT_KEYS.every((key) => Number(previousStats[key]) === stats[key])
+
+        if (unchanged) {
+          copyStatsToPublic()
+          sendJson(res, 200, {
+            ok: true,
+            committed: false,
+            date,
+            message: 'Those figures are already published.',
+          })
+          return
+        }
+
         const document = {
           date,
           updatedAt: new Date().toISOString(),
@@ -315,7 +340,11 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
           return
         }
 
+        const branch = (await runGit(['rev-parse', '--abbrev-ref', 'HEAD'])).stdout.trim()
+        const beforeSha = (await runGit(['rev-parse', 'HEAD'])).stdout.trim()
+
         let committed = false
+        let usedApiFallback = false
         try {
           await runGit(['add', '--', SRC_STATS_FILE, PUBLIC_STATS_FILE])
           const staged = await runGit([
@@ -339,7 +368,29 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
             committed = true
           }
 
-          await pushHead()
+          try {
+            await runGit(['push', 'origin', 'HEAD'])
+          } catch {
+            // GitHub is currently rejecting some git ref updates with
+            // "fatal error in commit_refs_rules"; create the same commit
+            // through the Git Data API instead.
+            const result = await publishCommitViaApi(
+              json,
+              `Update hospital stats for ${date}`
+            )
+            usedApiFallback = true
+
+            // If this was the only local commit, keep local history aligned
+            // with the commit created on GitHub.
+            try {
+              await runGit(['fetch', 'origin', branch])
+              if (beforeSha === result.remoteSha) {
+                await runGit(['reset', '--mixed', `origin/${branch}`])
+              }
+            } catch {
+              // The site is published; local history can be reconciled later.
+            }
+          }
         } catch (error) {
           sendJson(res, 502, {
             ok: false,
@@ -353,9 +404,10 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
           ok: true,
           committed,
           date,
-          message: committed
-            ? 'Published. The public website updates when the deploy finishes.'
-            : 'Already up to date — nothing new to publish.',
+          mode: usedApiFallback ? 'api' : 'git',
+          message: usedApiFallback
+            ? 'Published via the GitHub API because git push is failing. The website updates when the deploy finishes.'
+            : 'Published. The public website updates when the deploy finishes.',
         })
       })
     },

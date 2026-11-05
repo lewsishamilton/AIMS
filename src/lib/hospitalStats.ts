@@ -219,14 +219,16 @@ const LS_PREFIX = "aims_hospital_stats_";
  *   - the app is running in development (this machine / local dev server), and
  *   - `VITE_STATS_EDITOR=owner` is set locally (see `.env.local`).
  *
- * Production builds therefore hide the editor and ignore any stored overrides,
- * so visitors can never change the figures shown on the site.
+ * This is a constant rather than a function on purpose: production builds
+ * replace both values at compile time, so the whole editor UI (and its strings)
+ * is eliminated from the public bundle instead of merely hidden at runtime.
  */
+export const OWNER_STATS_EDITING: boolean =
+  import.meta.env.DEV === true &&
+  import.meta.env.VITE_STATS_EDITOR === "owner";
+
 export function canEditHospitalStats(): boolean {
-  return (
-    import.meta.env.DEV === true &&
-    import.meta.env.VITE_STATS_EDITOR === "owner"
-  );
+  return OWNER_STATS_EDITING;
 }
 
 /** Dispatched on window whenever a manual entry is saved or cleared. */

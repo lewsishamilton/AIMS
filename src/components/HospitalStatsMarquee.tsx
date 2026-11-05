@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
-  canEditHospitalStats,
+  OWNER_STATS_EDITING,
   clearManualStats,
   defaultManualStats,
   getPrevDayInfo,
@@ -43,8 +43,9 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
     propIsWhiteTheme ?? (theme !== "dark" && location.pathname !== "/");
 
   // Owner-only: the pencil and editor are rendered only on the authorized
-  // local system; public/deployed builds never expose them.
-  const canEditStats = canEditHospitalStats();
+  // local system. In production this is a compile-time `false`, so the editor
+  // markup is removed from the public bundle entirely.
+  const canEditStats = OWNER_STATS_EDITING;
 
   // Site-wide figures, published by the owner and shown to every visitor.
   const {
