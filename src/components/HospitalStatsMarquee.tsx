@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
+  canEditHospitalStats,
   clearManualStats,
   defaultManualStats,
   getPrevDayInfo,
@@ -38,6 +39,10 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
   const isWhiteTheme =
     propIsWhiteTheme ?? (theme !== "dark" && location.pathname !== "/");
 
+  // Owner-only: no edit affordance is rendered publicly. The editor can only
+  // be opened on the authorized local system via the secret shortcut below.
+  const canEditStats = canEditHospitalStats();
+
   // Previous day key for localStorage (stable per mount)
   const prevDay = getPrevDayInfo();
 
@@ -52,12 +57,22 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
 
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  // Open editor: pre-fill with saved values or the baseline figures
-  const openEditor = () => {
-    const saved = loadManualStats(prevDay.key);
-    setEditForm(saved ? { ...EMPTY_MANUAL_STATS, ...saved } : defaultManualStats());
-    setShowEditor(true);
-  };
+  // Owner-only secret shortcut (Ctrl+Shift+E). The pencil button was removed
+  // so visitors never see an edit affordance; only the authorized local setup
+  // can open the editor.
+  useEffect(() => {
+    if (!canEditStats) return;
+    const onOwnerShortcut = (e: KeyboardEvent) => {
+      if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "e") {
+        e.preventDefault();
+        const saved = loadManualStats(prevDay.key);
+        setEditForm(saved ? { ...EMPTY_MANUAL_STATS, ...saved } : defaultManualStats());
+        setShowEditor(true);
+      }
+    };
+    window.addEventListener("keydown", onOwnerShortcut);
+    return () => window.removeEventListener("keydown", onOwnerShortcut);
+  }, [canEditStats, prevDay.key]);
 
   // Close on Escape / outside click
   useEffect(() => {
@@ -181,7 +196,7 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
         }
       `}</style>
 
-      {/* Marquee bar — outer wrapper is relative so the pencil button isn't clipped by overflow-hidden */}
+      {/* Marquee bar */}
       <div className="relative w-full">
         {/* Premium scrolling ticker */}
         <div className="hospital-marquee-bar relative w-full overflow-hidden border-y border-[#d4af37]/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_12px_34px_rgba(0,0,0,0.5)]">
@@ -216,27 +231,10 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
             </div>
           </div>
         </div>
-
-        {/* Edit (pencil) button — sits on the outer wrapper, never clipped */}
-        <button
-          onClick={openEditor}
-          title="Edit stats"
-          className="absolute right-2 top-1/2 z-20 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4af37]/45 bg-[#0b1e35]/85 text-[#e6c98a] shadow-[0_0_16px_rgba(212,175,55,0.18)] backdrop-blur-md transition-all duration-200 hover:bg-[#d4af37] hover:text-[#0b1e35]"
-          aria-label="Edit hospital stats"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="w-3.5 h-3.5"
-          >
-            <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-          </svg>
-        </button>
       </div>
 
-      {/* Editor dialog / modal */}
-      {showEditor && (
+      {/* Editor dialog / modal — owner-only */}
+      {canEditStats && showEditor && (
         <div className={overlayBg} role="dialog" aria-modal="true" aria-label="Edit Hospital Stats">
           <div
             ref={dialogRef}

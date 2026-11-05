@@ -211,6 +211,24 @@ export const EMPTY_MANUAL_STATS: ManualStats = {
 
 const LS_PREFIX = "aims_hospital_stats_";
 
+/**
+ * Owner-only gate for editing hospital stats.
+ *
+ * Manual figures are a maintenance tool, not a public feature. Editing is
+ * allowed only when both are true:
+ *   - the app is running in development (this machine / local dev server), and
+ *   - `VITE_STATS_EDITOR=owner` is set locally (see `.env.local`).
+ *
+ * Production builds therefore hide the editor and ignore any stored overrides,
+ * so visitors can never change the figures shown on the site.
+ */
+export function canEditHospitalStats(): boolean {
+  return (
+    import.meta.env.DEV === true &&
+    import.meta.env.VITE_STATS_EDITOR === "owner"
+  );
+}
+
 /** Dispatched on window whenever a manual entry is saved or cleared. */
 export const HOSPITAL_STATS_UPDATED_EVENT = "aims:hospital-stats-updated";
 
@@ -243,6 +261,8 @@ export function getPrevDayInfo(): { label: string; key: string } {
 }
 
 export function loadManualStats(dateKey: string): ManualStats | null {
+  // Ignore overrides on any system that is not the authorized owner setup.
+  if (!canEditHospitalStats()) return null;
   try {
     const raw = localStorage.getItem(`${LS_PREFIX}${dateKey}`);
     if (raw) return JSON.parse(raw) as ManualStats;
@@ -253,6 +273,7 @@ export function loadManualStats(dateKey: string): ManualStats | null {
 }
 
 export function saveManualStats(dateKey: string, stats: ManualStats) {
+  if (!canEditHospitalStats()) return;
   try {
     localStorage.setItem(`${LS_PREFIX}${dateKey}`, JSON.stringify(stats));
   } catch {
@@ -262,6 +283,7 @@ export function saveManualStats(dateKey: string, stats: ManualStats) {
 }
 
 export function clearManualStats(dateKey: string) {
+  if (!canEditHospitalStats()) return;
   try {
     localStorage.removeItem(`${LS_PREFIX}${dateKey}`);
   } catch {
