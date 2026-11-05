@@ -311,6 +311,25 @@
   transform: none;
 }
 
+/* Landscape newspaper clipping (Chronicle 09) — show the full article */
+#chronicle-09 .compact-image-frame-box {
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 916 / 859;
+  background-color: #ffffff;
+}
+
+#chronicle-09 .compact-card-img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+#chronicle-09.chronicle-compact-card:hover .compact-card-img {
+  transform: none;
+}
+
 /* Supporting Container & Read More Toggle (Mobile Read More Pattern) */
 .chronicle-read-more-btn {
   display: none; /* Hidden on laptop/desktop view */

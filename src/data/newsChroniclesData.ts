@@ -6,6 +6,7 @@ import chronicle5 from "../assets/News/chronicle-5.webp";
 import chronicle6 from "../assets/News/chronicle-6.webp";
 import chronicle7 from "../assets/News/chronicle-7.png";
 import chronicle8 from "../assets/News/chronicle-8.webp";
+import chronicle9 from "../assets/News/chronicle-9.webp";
 import image1 from "../assets/News/image-1.webp";
 import image2 from "../assets/News/image-2.webp";
 import image3 from "../assets/News/image-3.webp";
@@ -142,6 +143,20 @@ export const chronicles: ChronicleItem[] = [
       "Founder Secretary and Malkajgiri MLA Marri Rajashekar Reddy said accessible healthcare is the institution's goal, and that Arundathi Hospital provides free treatment and care to the poor. Chairman Marri Laxman Reddy, Director Marri Dheeran Reddy, Dean Dr. Devanand and Principal Dr. Suma Preeti also participated."
     ],
     image: chronicle8
+  },
+  {
+    id: 9,
+    number: "09",
+    title: "80,000 FREE SURGERIES & A NEW MBBS BATCH",
+    subtitle: "ORIENTATION DAY 2026-27",
+    category: "COMMUNITY HEALTH",
+    tags: ["Orientation Day", "Free Healthcare"],
+    description: "Arundathi Institute of Medical Sciences (AIMS), Dundigal, celebrated its fourth Orientation Day for the 2026-27 MBBS batch, with Malkajgiri MLA Marri Rajashekar Reddy joining as guest of honour.",
+    supportingContent: [
+      "Addressing the students, the MLA said the institution's goal is to provide better free medical care to the poor, and noted that more than 80,000 surgeries have already been performed free of cost. He urged future doctors to pair clinical skills with compassion and ethical values.",
+      "Chief guest Dr. Raja Rao, Principal of Osmania Medical College, encouraged students to build awareness of modern technologies such as AI, machine learning and robotic surgery. Chairman Marri Laxman Reddy, Director Marri Dheeran Reddy, Dean Dr. B. Devanand, Principal Dr. Suma Preeti, faculty, students and parents attended."
+    ],
+    image: chronicle9
   }
 ];
 
