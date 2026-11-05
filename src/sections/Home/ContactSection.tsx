@@ -203,7 +203,7 @@ export const ContactSection: React.FC = () => {
               </div>
               {/* Number is sized to span the same width as the name above it */}
               <div className="min-w-0">
-                <span className="block text-xs font-semibold uppercase tracking-[0.16em] text-[#1f3351] dark:text-white/80">
+                <span className="block text-lg font-bold uppercase tracking-[0.16em] text-[#1f3351] dark:text-white/80">
                   Admissions Enquiry
                 </span>
                 <h3 className="mt-1 font-['Manrope',sans-serif] text-2xl sm:text-[30px] font-semibold text-[#1f3351] dark:text-white tracking-tight leading-tight">

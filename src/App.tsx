@@ -1,6 +1,5 @@
 import Navbar from "./layouts/navbar"
 import Footer from "./layouts/footer"
-import BrochureTab from "./components/BrochureTab"
 import ChatAssistant from "./components/ChatAssistant"
 import HeroPage from "./pages/HomePage"
 import scintificPdf from "./assets/Scientific-committee.pdf"
@@ -172,7 +171,6 @@ function App() {
       </Routes>
       </Suspense>
       <Footer />
-      <BrochureTab />
       <ChatAssistant />
     </>
   )

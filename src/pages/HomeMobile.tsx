@@ -7,6 +7,7 @@ import CampusGallerySection from "../sections/Home/CampusGallerySection";
 import PatientsSpeaksSection from "../sections/Home/PatientsSpeaksSection";
 import ContactSection from "../sections/Home/ContactSection";
 import AnalysisSection from "../sections/Home/AnalysisSection";
+import HospitalStatsMarquee from "../components/HospitalStatsMarquee";
 
 /**
  * Mobile Home view. Kept as its own file so the phone experience can be edited
@@ -31,11 +32,12 @@ function HomeMobile() {
     <div className="relative w-full overflow-x-clip">
       <Hero />
       <AboutSection />
+      <HospitalStatsMarquee />
       <DepartmentsSection />
       <FacilitiesSection />
       <PatientsSpeaksSection />
-      <CampusGallerySection />
       <AnalysisSection />
+      <CampusGallerySection />
       <ContactSection />
     </div>
   );

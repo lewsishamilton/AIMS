@@ -1,6 +1,17 @@
 import React, { useState, useEffect } from "react"
 import { motion } from "motion/react"
 import { ContainerAnimated, ContainerStagger } from "../../components/ui/animated-gallery"
+import {
+  getPrevDayInfo,
+  loadManualStats,
+  hasManualOverrides,
+  resolveTodayStats,
+  TODAY_GROUPS,
+  TODAY_METRICS,
+  HOSPITAL_STATS_UPDATED_EVENT,
+  type ManualStats,
+  type TodayStats,
+} from "../../lib/hospitalStats"
 
 // Department figures from aims.ac.in/stats-dashboard (Tableau "OP and IP services"), today's from the
 // "Today's Stats" ticker on aims.ac.in. ip omitted where the dashboard only gives OP.
@@ -87,12 +98,6 @@ const TREND_END = TREND[TREND.length - 1]
 if (import.meta.env.DEV && TREND_END.value <= MONTHLY_OP[11]) console.error("[AnalysisSection] trend is not rising")
 
 // Today's figures mix units (patients, tests, scans), so they're grouped and each group is scaled on its own.
-const TODAY: { group: string; items: [string, number][] }[] = [
-  { group: "Patients", items: [["Out-patients", 929], ["Admitted", 45]] },
-  { group: "Laboratory", items: [["Biochemistry", 619], ["Pathology", 270], ["Microbiology", 173]] },
-  { group: "Imaging", items: [["X-Ray", 75], ["Ultrasound", 59], ["MRI", 23], ["CT", 22]] },
-  { group: "Procedures", items: [["Surgeries", 26], ["Dental", 22], ["Dialysis", 10], ["Endoscopy", 5], ["Cath Lab", 4], ["ERCP", 1]] },
-]
 
 // Matches the dashboard headline, which only counts departments with an OP/IP split.
 const GRAND_TOTAL = DEPTS.filter((d) => d.ip != null).reduce((s, d) => s + d.op + d.ip!, 0)
@@ -101,85 +106,7 @@ const OP_ALL = TREND.reduce((a, p) => a + p.value, 0)
 if (import.meta.env.DEV && GRAND_TOTAL !== 575793) console.error(`[AnalysisSection] total ${GRAND_TOTAL} != dashboard 575,793`)
 if (import.meta.env.DEV && OP_YEAR !== 383634) console.error(`[AnalysisSection] OP ${OP_YEAR} != dashboard 3,83,634`)
 
-const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"] as const
-
-/**
- * Gets the current day of the week and elapsed seconds since midnight in IST (Asia/Kolkata).
- * Monday = 0, Tuesday = 1, ..., Saturday = 5, Sunday = 6.
- */
-export function getIstDateTime(now: Date = new Date()): { dayIdx: number; seconds: number } {
-  try {
-    const parts = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "Asia/Kolkata",
-      weekday: "short",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-      hour12: false,
-    }).formatToParts(now)
-    const get = (type: string) => parts.find((p) => p.type === type)?.value ?? ""
-    const weekday = get("weekday")
-    const dayIdx = DAYS.indexOf(weekday as (typeof DAYS)[number])
-    const hours = Number(get("hour")) % 24
-    const minutes = Number(get("minute"))
-    const seconds = Number(get("second"))
-    const totalSeconds = hours * 3600 + minutes * 60 + seconds
-    return { dayIdx: dayIdx >= 0 ? dayIdx : 0, seconds: totalSeconds }
-  } catch {
-    const day = (now.getDay() + 6) % 7
-    const totalSeconds = now.getHours() * 3600 + now.getMinutes() * 60 + now.getSeconds()
-    return { dayIdx: day, seconds: totalSeconds }
-  }
-}
-
-/**
- * Dynamic OPD consultation counter:
- * - Operating days: Monday to Saturday.
- * - Progressive increase from 1 to 1500 strictly between 8:00 AM and 4:00 PM (IST).
- * - After 4:00 PM: Holds at 1500 (completed count for today).
- * - Before 8:00 AM: 0 consultations today.
- * - Sunday: OPD is closed (0 consultations).
- */
-export function getOpdConsultationStats(date: Date = new Date()) {
-  const { dayIdx, seconds } = getIstDateTime(date)
-  const isOpdDay = dayIdx >= 0 && dayIdx <= 5 // Monday (0) to Saturday (5)
-  const START_SEC = 8 * 3600 // 08:00 AM (28,800s)
-  const END_SEC = 16 * 3600  // 04:00 PM (57,600s)
-  const TOTAL_SEC = END_SEC - START_SEC // 8 hours = 28,800s
-
-  if (!isOpdDay) {
-    return {
-      count: 0,
-      sub: "OPD closed on Sundays",
-      plus: false,
-    }
-  }
-
-  if (seconds < START_SEC) {
-    return {
-      count: 0,
-      sub: "Opens today at 8:00 AM",
-      plus: false,
-    }
-  }
-
-  if (seconds >= END_SEC) {
-    return {
-      count: 1500,
-      sub: "Completed today (8:00 AM – 4:00 PM)",
-      plus: true,
-    }
-  }
-
-  const progress = (seconds - START_SEC) / TOTAL_SEC
-  const count = Math.min(1500, Math.max(1, Math.floor(1 + progress * 1499)))
-
-  return {
-    count,
-    sub: "Mon–Sat · 8:00 AM – 4:00 PM",
-    plus: true,
-  }
-}
+// Real-time hospital metrics are imported from ../../lib/hospitalStats
 
 // OP / IP hues: validated colorblind-safe on both the light and the navy dark surface.
 // OP colour is navy in light mode and teal in dark mode (CSS variables set on the section).
@@ -317,17 +244,13 @@ const DeptChart: React.FC<{ hover: number | null; setHover: (i: number | null) =
   </div>
 )
 
-const TodayChart: React.FC<{ opdCount: number }> = ({ opdCount }) => {
-  const groups = [
-    {
-      group: "Patients",
-      items: [
-        ["Out-patients", opdCount],
-        ["Admitted", 45],
-      ] as [string, number][],
-    },
-    ...TODAY.slice(1),
-  ]
+const TodayChart: React.FC<{ figures: TodayStats }> = ({ figures }) => {
+  const groups = TODAY_GROUPS.map((group) => ({
+    group,
+    items: TODAY_METRICS.filter((metric) => metric.group === group).map(
+      (metric) => [metric.label, figures[metric.key]] as [string, number]
+    ),
+  }))
 
   return (
     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -366,24 +289,31 @@ const TodayChart: React.FC<{ opdCount: number }> = ({ opdCount }) => {
 export const AnalysisSection: React.FC = () => {
   const [tab, setTab] = useState("trend")
   const [hover, setHover] = useState<number | null>(null)
-  const [opdStats, setOpdStats] = useState(getOpdConsultationStats)
+  const [manualStats, setManualStats] = useState<ManualStats | null>(() =>
+    loadManualStats(getPrevDayInfo().key)
+  )
 
+  // Stay in sync when figures are saved or cleared in the stats ticker.
+  // (The native "storage" event does not fire in the same document.)
   useEffect(() => {
-    const timer = setInterval(() => {
-      setOpdStats(getOpdConsultationStats())
-    }, 1000)
-    return () => clearInterval(timer)
+    const sync = () => setManualStats(loadManualStats(getPrevDayInfo().key))
+    window.addEventListener(HOSPITAL_STATS_UPDATED_EVENT, sync)
+    return () => window.removeEventListener(HOSPITAL_STATS_UPDATED_EVENT, sync)
   }, [])
+
+  // Manual entries win; anything left blank keeps the baseline figure.
+  const figures = resolveTodayStats(manualStats)
+  const manual = hasManualOverrides(manualStats)
 
   const kpis = [
     { value: OP_ALL, label: "OP patients", sub: `Aug 22 – ${TREND_END.label}`, plus: true },
     { value: GRAND_TOTAL, label: "OP & IP services", plus: true },
     { value: 21, label: "Departments", plus: false },
     {
-      value: opdStats.count,
+      value: figures.opd,
       label: "OPD consultations today",
-      sub: opdStats.sub,
-      plus: opdStats.plus,
+      sub: manual ? "Updated manually" : "Today's figures",
+      plus: true,
     },
   ]
 
@@ -458,7 +388,7 @@ export const AnalysisSection: React.FC = () => {
 
           {tab === "trend" && <TrendChart hover={hover} setHover={setHover} />}
           {tab === "dept" && <DeptChart hover={hover} setHover={setHover} />}
-          {tab === "today" && <TodayChart opdCount={opdStats.count} />}
+          {tab === "today" && <TodayChart figures={figures} />}
 
         </div>
       </div>
