@@ -1,3 +1,6 @@
+// Fine Arts wing photo: students holding up their drawings and posters in the atrium.
+import fineArtsExhibition from "../assets/stockImages/aims-campus-36.webp";
+
 export interface DeptAchievement {
   id: string;
   title: string;
@@ -862,8 +865,45 @@ export const sportsAccolades = {
   ],
   externalEvents: [
     { tournament: "ARUDVEG 2026, ICFAI Hyderabad", category: "Table Tennis — Singles", athlete: "Nawazia", result: "Silver Medal (Tournament Finalist)" },
-    { tournament: "ANASTOMOZ 2025, Apollo IMS", category: "Table Tennis — Singles", athlete: "Nawazia", result: "Bronze Medal" },
-    { tournament: "ANASTOMOZ 2K25, Apollo IMS", category: "Table Tennis — Doubles", athlete: "Nawazia & Bhavna", result: "Silver Medal" },
+  ],
+};
+
+/** 2025 season, in date order. `position` is a placing ("1st Place") or "Selected" for a university team. */
+export const sportsSeason2025 = {
+  title: "2025 Sports Season",
+  summary: "University team selections, the Nirbhay 2K25 sports meet and inter-college table tennis medals.",
+  events: [
+    {
+      name: "KNRUHS Selections — South Zone Inter-University Games 2K25",
+      when: "January 2025",
+      results: [
+        { event: "Men's Cricket", winner: "M. Kartheek, Laxmi Narayana, S. Daksh", position: "Selected" },
+        { event: "Women's Table Tennis", winner: "Nawazia Begum", position: "Selected" },
+        { event: "Women's Basketball", winner: "Raeesah Ranaa", position: "Selected" },
+        { event: "Men's Football", winner: "Vishwesh Chitte", position: "Selected" },
+      ],
+    },
+    {
+      name: "Nirbhay 2K25 Sports Meet",
+      when: "April 2025",
+      results: [
+        { event: "Women's Shot Put", winner: "A. Ananya", position: "1st Place" },
+        { event: "Women's Discus Throw", winner: "N. Prathyusha", position: "2nd Place" },
+        { event: "Women's Chess", winner: "Raeesah Ranaa", position: "1st Place" },
+        { event: "Women's Table Tennis Singles", winner: "Nawazia Begum", position: "1st Place" },
+        { event: "Women's Table Tennis Doubles", winner: "Nawazia Begum & Isha Badhe", position: "1st Place" },
+        { event: "Women's Table Tennis Doubles", winner: "Raeesah Ranaa & K. Bhavana", position: "2nd Place" },
+        { event: "Men's Table Tennis Singles", winner: "Shree Lande", position: "2nd Place" },
+      ],
+    },
+    {
+      name: "ANASTOMOZ 2K25, Apollo IMS",
+      when: "October 2025",
+      results: [
+        { event: "Women's Table Tennis Doubles", winner: "Nawazia Begum & K. Bhavana", position: "2nd Place" },
+        { event: "Women's Table Tennis Singles", winner: "Nawazia Begum", position: "3rd Place" },
+      ],
+    },
   ],
 };
 
@@ -897,7 +937,7 @@ export const wings = [
     name: "Fine Arts Wing",
     motto: "Where imagination takes form.",
     description: "Sanctuary for creative visual expression through drawing, painting, and exhibition installations.",
-    image: img(47, "png"),
+    image: fineArtsExhibition,
     highlight: "Drawing & Painting Exhibition: Eekshitha, N. Anjali, Mythri, D. Anil, Janaki, Sreenidhi",
   },
   {

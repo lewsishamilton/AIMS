@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Maximize2, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { galleryArchive, GALLERY_CATEGORIES } from "../data/galleryData";
 
 // Import real campus images from stock assets
 import img01 from "../assets/stockImages/aims-campus-07.webp";
@@ -16,16 +17,16 @@ import img11 from "../assets/stockImages/aims-campus-31.webp";
 import img12 from "../assets/stockImages/aims-campus-48.webp";
 
 const photos = [
-  { src: img01, title: "Main Campus Entrance" },
-  { src: img02, title: "Grand Medical Auditorium" },
-  { src: img03, title: "Microscopy Research Wing" },
-  { src: img04, title: "Anatomy Dissection Arena" },
-  { src: img05, title: "Central Reference Library" },
-  { src: img06, title: "Clinical Pathology Suite" },
-  { src: img07, title: "Biochemistry Laboratory" },
-  { src: img08, title: "Campus Green Promenade" },
-  { src: img09, title: "Indoor Recreation Arena" },
-  { src: img10, title: "Modern Gymnasium" },
+  { src: img01, title: "World Health Day 2026 Quiz" },
+  { src: img02, title: "AIMS Students and Faculty" },
+  { src: img03, title: "Microscopy Practical Session" },
+  { src: img04, title: "Poster Exhibition in the Atrium" },
+  { src: img05, title: "Bathukamma Celebrations" },
+  { src: img06, title: "Exhibition Walkthrough" },
+  { src: img07, title: "World AIDS Day" },
+  { src: img08, title: "Women's Team at AMET" },
+  { src: img09, title: "Cultural Programme on the Lawn" },
+  { src: img10, title: "Bathukamma Dance" },
 ];
 
 const marqueePhotos = [...photos, ...photos];
@@ -45,36 +46,36 @@ export interface EventItem {
 // reads as a diamond instead of a filled rectangle.
 const collageRows: EventItem[][] = [
   [
-    { id: "ev-01", title: "Academic Poster Day & Student Life", category: "Student Life", src: img11, w: 1.1, h: 0.96,
-      description: "Medical students showcasing research posters and public health innovations during campus health week." },
-    { id: "ev-02", title: "Scholars Interactive Study Circle", category: "Academics", src: img05, w: 1.5, h: 1,
-      description: "Collaborative study groups, peer learning, and research literature reviews in the central reference library." },
+    { id: "ev-01", title: "Traditional Day", category: "Celebrations", src: img11, w: 1.1, h: 0.96,
+      description: "Students in traditional attire and white coats in front of the institute." },
+    { id: "ev-02", title: "Bathukamma Celebrations", category: "Celebrations", src: img05, w: 1.5, h: 1,
+      description: "Faculty and students around the Bathukamma in the atrium." },
   ],
   [
-    { id: "ev-03", title: "Dean's Honors & Scholar Awards", category: "Ceremony", src: img06, w: 0.85, h: 0.94,
-      description: "Celebrating institutional academic awards, clinical merit badges, and university honors." },
-    { id: "ev-04", title: "Campus Entrance & Main Promenade", category: "Campus", src: img01, w: 1.15, h: 0.97,
-      description: "Students, faculty, and visiting clinical delegates congregating at the architectural main gates." },
-    { id: "ev-05", title: "Hands-on Practical & Dissection Arena", category: "Clinical Lab", src: img04, w: 1.4, h: 1,
-      description: "Intensive clinical osteology and anatomical practical demonstration under senior surgeon mentorship." },
-    { id: "ev-06", title: "Campus Green Promenade Pathway", category: "Outreach", src: img08, w: 0.85, h: 0.94,
-      description: "Students walking through tree-lined pathways connecting clinical hospital wings and lecture halls." },
+    { id: "ev-03", title: "Exhibition Walkthrough", category: "Health Days", src: img06, w: 0.85, h: 0.94,
+      description: "Guests viewing student exhibits during an awareness day." },
+    { id: "ev-04", title: "World Health Day 2026 Quiz", category: "Health Days", src: img01, w: 1.15, h: 0.97,
+      description: "Organisers of the nationwide quiz contest for MBBS students on World Health Day 2026." },
+    { id: "ev-05", title: "Poster Exhibition in the Atrium", category: "Health Days", src: img04, w: 1.4, h: 1,
+      description: "Student posters on display across the atrium." },
+    { id: "ev-06", title: "Women's Team at AMET", category: "Sports", src: img08, w: 0.85, h: 0.94,
+      description: "AIMS women's team at the Academy of Maritime Education and Training." },
   ],
   [
-    { id: "ev-07", title: "Pine Grove Contemplation Walk", category: "Campus Life", src: img10, w: 1.1, h: 0.97,
-      description: "Peaceful moments between clinical rotations surrounded by campus pine trees and nature." },
-    { id: "ev-08", title: "Grand Portico Gateway", category: "Architecture", src: img02, w: 1, h: 0.9,
-      description: "Morning light over the grand architectural arches and medical auditorium portico." },
-    { id: "ev-09", title: "Rural Outreach Care", category: "Community Camp", src: img12, w: 0.95, h: 0.94,
-      description: "Field doctors and volunteers conducting community health surveys in local health camps." },
+    { id: "ev-07", title: "Bathukamma Dance", category: "Celebrations", src: img10, w: 1.1, h: 0.97,
+      description: "Students dancing around the Bathukamma in the atrium." },
+    { id: "ev-08", title: "AIMS Students and Faculty", category: "Campus", src: img02, w: 1, h: 0.9,
+      description: "Students and faculty in front of the institute." },
+    { id: "ev-09", title: "Community Health Awareness Session", category: "Community Outreach", src: img12, w: 0.95, h: 0.94,
+      description: "A health talk for local women by AIMS students." },
   ],
   [
-    { id: "ev-10", title: "Microscopy & Fluorescence Assay", category: "Research", src: img03, w: 1.3, h: 1,
-      description: "Deep molecular biology and advanced fluorescent microscopy diagnostic assays." },
-    { id: "ev-11", title: "Distinguished Medical Graduates", category: "Convocation", src: img07, w: 1, h: 0.95,
-      description: "Graduating medical cohort gathered in formal suits and ceremonial regalia on convocation day." },
-    { id: "ev-12", title: "Collegiate Sports & Recreation Meet", category: "Sports Fest", src: img09, w: 1.1, h: 0.97,
-      description: "Inter-departmental indoor tournament, team sportsmanship, and student recreation championship." },
+    { id: "ev-10", title: "Microscopy Practical Session", category: "Laboratory", src: img03, w: 1.3, h: 1,
+      description: "MBBS students working at individual microscopes during a practical." },
+    { id: "ev-11", title: "World AIDS Day", category: "Health Days", src: img07, w: 1, h: 0.95,
+      description: "Students and faculty with the World AIDS Day banner in front of the institute." },
+    { id: "ev-12", title: "Cultural Programme on the Lawn", category: "Celebrations", src: img09, w: 1.1, h: 0.97,
+      description: "Faculty, guests and performers at an open-air cultural programme." },
   ],
 ];
 
@@ -86,23 +87,68 @@ const collageRowShape: [string, string][] = [
   ["clamp(160px, 20vw, 220px)", "62%"],
 ];
 
-const allCollageItems: EventItem[] = collageRows.flat();
+/*
+ * Every other event photo joins the collage as extra rows in the same style: four above the
+ * original rows and four below. Each added photo takes its width weight and height share from
+ * the original twelve in turn, so the rows look and animate exactly like the originals.
+ */
+const collageSrcs = new Set(collageRows.flat().map((e) => e.src));
+const archiveExtras: EventItem[] = (() => {
+  const rest = galleryArchive.filter((p) => !collageSrcs.has(p.src));
+  // The archive is grouped by kind; deal it out one kind at a time so neighbouring photos differ.
+  const queues = GALLERY_CATEGORIES.map((c) => rest.filter((p) => p.category === c));
+  const mixed: EventItem[] = [];
+  while (queues.some((q) => q.length)) queues.forEach((q) => q.length && mixed.push(q.shift()!));
+  const sizes = collageRows.flat();
+  return mixed.map((e, i) => ({ ...e, w: sizes[i % sizes.length].w, h: sizes[i % sizes.length].h }));
+})();
+
+const EXTRA_ROWS_ABOVE = 4;
+const EXTRA_ROWS_BELOW = 4;
+const extraRows: EventItem[][] = (() => {
+  const count = EXTRA_ROWS_ABOVE + EXTRA_ROWS_BELOW;
+  const rows: EventItem[][] = Array.from({ length: count }, () => []);
+  archiveExtras.forEach((e, i) => rows[Math.floor((i * count) / archiveExtras.length)].push(e));
+  return rows;
+})();
+
+/** [height, width] for the added rows, in the original rows' style. */
+const extraRowShape: [string, string][] = [
+  ["clamp(150px, 19vw, 210px)", "92%"],
+  ["clamp(180px, 23vw, 260px)", "100%"],
+  ["clamp(160px, 20vw, 220px)", "88%"],
+  ["clamp(180px, 23vw, 260px)", "96%"],
+];
+
+const galleryRows: EventItem[][] = [
+  ...extraRows.slice(0, EXTRA_ROWS_ABOVE),
+  ...collageRows,
+  ...extraRows.slice(EXTRA_ROWS_ABOVE),
+];
+const galleryRowShape: [string, string][] = [
+  ...Array.from({ length: EXTRA_ROWS_ABOVE }, (_, i) => extraRowShape[i % extraRowShape.length]),
+  ...collageRowShape,
+  ...Array.from({ length: EXTRA_ROWS_BELOW }, (_, i) => extraRowShape[(i + 2) % extraRowShape.length]),
+];
+
+const allCollageItems: EventItem[] = galleryRows.flat();
 
 export const MediaGalleryPage: React.FC = () => {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
+  const navList = allCollageItems;
 
   const handlePrevEvent = () => {
     if (!selectedEvent) return;
-    const currentIndex = allCollageItems.findIndex((e) => e.id === selectedEvent.id);
-    const prevIndex = (currentIndex - 1 + allCollageItems.length) % allCollageItems.length;
-    setSelectedEvent(allCollageItems[prevIndex]);
+    const currentIndex = navList.findIndex((e) => e.id === selectedEvent.id);
+    const prevIndex = (currentIndex - 1 + navList.length) % navList.length;
+    setSelectedEvent(navList[prevIndex]);
   };
 
   const handleNextEvent = () => {
     if (!selectedEvent) return;
-    const currentIndex = allCollageItems.findIndex((e) => e.id === selectedEvent.id);
-    const nextIndex = (currentIndex + 1) % allCollageItems.length;
-    setSelectedEvent(allCollageItems[nextIndex]);
+    const currentIndex = navList.findIndex((e) => e.id === selectedEvent.id);
+    const nextIndex = (currentIndex + 1) % navList.length;
+    setSelectedEvent(navList[nextIndex]);
   };
 
   useEffect(() => {
@@ -120,9 +166,7 @@ export const MediaGalleryPage: React.FC = () => {
   const renderPhotoCard = (item: EventItem) => (
     <div
       key={item.id}
-      onClick={() => {
-        setSelectedEvent(item);
-      }}
+      onClick={() => setSelectedEvent(item)}
       style={{ "--w": item.w ?? 1, "--h": item.h ?? 1 } as React.CSSProperties}
       className="collage-item group cursor-pointer overflow-hidden rounded-[10px] sm:rounded-[14px] bg-white dark:bg-slate-900/60 border border-[#e2e8f0]/90 dark:border-white/15 shadow-[0_2px_10px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_20px_rgba(0,0,0,0.4)] hover:shadow-[0_24px_50px_rgba(22,39,64,0.28)] dark:hover:shadow-[0_24px_50px_rgba(0,0,0,0.6)] select-none"
     >
@@ -337,8 +381,8 @@ export const MediaGalleryPage: React.FC = () => {
 
           {/* Diamond Collage: rows taper in width to form a diamond silhouette */}
           <div className="max-md:hidden flex flex-col gap-1.5 sm:gap-2 max-w-[1080px] mx-auto select-none">
-            {collageRows.map((row, i) => (
-              <div key={i} className="collage-row" style={{ "--row-h": collageRowShape[i][0], "--row-w": collageRowShape[i][1] } as React.CSSProperties}>
+            {galleryRows.map((row, i) => (
+              <div key={i} className="collage-row" style={{ "--row-h": galleryRowShape[i][0], "--row-w": galleryRowShape[i][1] } as React.CSSProperties}>
                 {row.map(renderPhotoCard)}
               </div>
             ))}
@@ -356,11 +400,11 @@ export const MediaGalleryPage: React.FC = () => {
             className="md:hidden -mx-4 h-[62svh] overflow-auto select-none [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             <div className="w-[1080px] [zoom:0.6] p-4 flex flex-col gap-2">
-              {collageRows.map((row, i) => (
+              {galleryRows.map((row, i) => (
                 <div
                   key={i}
                   className="collage-row"
-                  style={{ "--row-h": collageRowShape[i][0].replace(/^clamp\([^,]+,[^,]+,\s*([^)]+)\)$/, "$1"), "--row-w": collageRowShape[i][1] } as React.CSSProperties}
+                  style={{ "--row-h": galleryRowShape[i][0].replace(/^clamp\([^,]+,[^,]+,\s*([^)]+)\)$/, "$1"), "--row-w": galleryRowShape[i][1] } as React.CSSProperties}
                 >
                   {row.map(renderPhotoCard)}
                 </div>

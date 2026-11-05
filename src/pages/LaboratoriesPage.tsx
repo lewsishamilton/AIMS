@@ -67,6 +67,15 @@ import cl1 from "../assets/clg-imgs/Central Lab/1.webp";
 import cl2 from "../assets/clg-imgs/Central Lab/2.webp";
 import cl3 from "../assets/clg-imgs/Central Lab/3.webp";
 
+// Teaching labs photographed on campus (assets/stockImages)
+import practicalMicroscopy1 from "../assets/stockImages/aims-campus-45.webp";
+import practicalMicroscopy2 from "../assets/stockImages/aims-campus-46.webp";
+import practicalMicroscopy3 from "../assets/stockImages/aims-campus-47.webp";
+import practicalBenches from "../assets/stockImages/aims-campus-49.webp";
+import anatomySpecimenCabinets from "../assets/stockImages/aims-campus-50.webp";
+import anatomyMuseumSkeleton from "../assets/stockImages/aims-campus-51.webp";
+import digitalLibrary from "../assets/stockImages/aims-campus-52.webp";
+
 // Lobby (9 images)
 import lobby1 from "../assets/clg-imgs/Lobby/1.webp";
 import lobby2 from "../assets/clg-imgs/Lobby/2.webp";
@@ -147,7 +156,7 @@ const arenaSections: ArenaSectionData[] = [
     description:
       "Multi-tiered knowledge repository with digital medical databases, international research journals, reference treatises, and quiet study areas.",
     direction: "ltr",
-    images: [lib1, lib2, lib3, lib4],
+    images: [lib1, lib2, lib3, lib4, digitalLibrary],
   },
   {
     id: "anatomy",
@@ -157,7 +166,17 @@ const arenaSections: ArenaSectionData[] = [
     description:
       "Comprehensive anatomy museum with rare specimens, histology practical lab, and modern cadaveric dissection arena conforming to NMC standards.",
     direction: "rtl",
-    images: [anat1, anat2, anat3, anat5, anat6],
+    images: [anat1, anat2, anat3, anat5, anat6, anatomyMuseumSkeleton, anatomySpecimenCabinets],
+  },
+  {
+    id: "practical-labs",
+    title: "Practical Laboratories",
+    category: "Pre & Para-Clinical Labs",
+    group: "academic",
+    description:
+      "Microscopy and bench practicals for MBBS students, with individual microscopes, reagent benches and wall charts for each batch.",
+    direction: "ltr",
+    images: [practicalMicroscopy1, practicalMicroscopy2, practicalMicroscopy3, practicalBenches],
   },
   {
     id: "operation-room",

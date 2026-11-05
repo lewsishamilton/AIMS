@@ -7,8 +7,8 @@
   --aw-color-blue-accent: #1F5A85;
   --aw-color-blue-mid: #2E6F95;
   --aw-color-blue-light: #418bb6;
-  --aw-color-blue-soft: #EAF4FA;
-  --aw-color-blue-tint: #F3F8FC;
+  --aw-color-blue-soft: #EEF0F3;
+  --aw-color-blue-tint: #F5F6F8;
   --aw-color-bg-alt: #f5f2e8;
   --aw-color-white: #FFFFFF;
   
@@ -22,8 +22,8 @@
   --aw-text-secondary: #62748a;
   --aw-text-muted: #62748a;
   --aw-text-small: #62748a;
-  --aw-border-light: #d8e5f0;
-  --aw-border-subtle: #e8f0f6;
+  --aw-border-light: #e4ecf2;
+  --aw-border-subtle: #eef2f6;
   
   /* Shadows & Radius */
   --aw-shadow-sm: 0 2px 8px rgba(31, 51, 81, 0.05);
@@ -323,7 +323,7 @@
 }
 
 .awards-page .dept-bg-tint {
-  background-color: rgba(240, 235, 222, 0.35);
+  background-color: transparent;
 }
 
 .awards-page .dept-header-wrap {
@@ -364,7 +364,7 @@
 .awards-page .dept-image-pane {
   position: relative;
   height: 100%;
-  background-color: #f8fafc;
+  background-color: var(--aw-color-blue-tint);
   overflow: hidden;
   border-radius: 12px; /* FILLETED ON ALL SIDES INCLUDING RIGHT SIDES */
 }
@@ -552,7 +552,7 @@
 .awards-page .institutional-image-placeholder {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #f0f5fa 0%, #e6eff7 100%);
+  background: var(--aw-color-blue-tint);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -570,7 +570,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(255, 255, 255, 0.75);
+  background: var(--aw-color-white);
 }
 
 .awards-page .placeholder-icon-wrap {
@@ -649,7 +649,7 @@
 .awards-page .faculty-card-photo-wrapper {
   position: relative;
   height: 250px;
-  background-color: #f1f5f9;
+  background-color: var(--aw-color-blue-tint);
   overflow: hidden;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
@@ -721,7 +721,7 @@
    7. NARI SHAKTI PURASKAR (INSIDE FACULTY ACHIEVEMENTS)
    -------------------------------------------------------------------------- */
 .awards-page .nari-shakti-subdomain-block {
-  background: linear-gradient(180deg, #fbf7ee 0%, #ffffff 100%);
+  background: var(--aw-color-white);
   border: 1.5px solid var(--aw-color-gold-border);
   border-radius: 12px;
   padding: 36px 28px;
@@ -815,7 +815,7 @@
   overflow: hidden;
   border: 1px solid var(--aw-color-gold-border);
   box-shadow: var(--aw-shadow-sm);
-  background-color: #f8fafc;
+  background-color: var(--aw-color-blue-tint);
 }
 
 .awards-page .ns-first-image-wrap {
@@ -870,12 +870,12 @@
 
 .awards-page .ns-arundathi-card {
   border: 1.5px solid #d4af37;
-  background: linear-gradient(180deg, #fffdf8 0%, #ffffff 100%);
+  background: var(--aw-color-white);
   box-shadow: 0 4px 14px rgba(212, 175, 55, 0.12);
 }
 
 .awards-page .ns-award-distinction-badge {
-  background: #fdf5e2;
+  background: var(--aw-color-blue-tint);
   border-left: 3px solid var(--aw-color-gold);
   padding: 8px 12px;
   border-radius: 4px;
@@ -913,7 +913,7 @@
 
 .awards-page .ns-awardees-list {
   margin-top: auto;
-  background: #fdfaf4;
+  background: var(--aw-color-blue-tint);
   padding: 8px 10px;
   border-radius: 4px;
   border-left: 2px solid var(--aw-color-gold);
@@ -951,7 +951,7 @@
    8. NATIONAL AWARDS (INSIDE FACULTY ACHIEVEMENTS)
    -------------------------------------------------------------------------- */
 .awards-page .national-awards-subdomain-block {
-  background: var(--aw-color-blue-tint);
+  background: var(--aw-color-white);
   border: 1px solid var(--aw-border-light);
   border-radius: 12px;
   padding: 30px 24px;
@@ -1005,7 +1005,7 @@
 
 .awards-page .national-card-media {
   height: 240px;
-  background-color: #f1f5f9;
+  background-color: var(--aw-color-blue-tint);
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   overflow: hidden;
@@ -1049,7 +1049,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #fdfaf2;
+  background: var(--aw-color-blue-tint);
   border: 1px solid var(--aw-color-gold-border);
   padding: 8px 12px;
   border-radius: var(--aw-radius-sm);
@@ -1118,9 +1118,21 @@
   color: var(--aw-color-primary-navy);
 }
 
+.awards-page .rigor-event-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--aw-text-secondary);
+}
+
 .awards-page .rigor-card-media {
   height: 240px;
-  background-color: #f8fafc;
+  background-color: var(--aw-color-blue-tint);
   overflow: hidden;
 }
 
@@ -1177,7 +1189,7 @@
 
 /* ACADEMIC TOPPERS IN STUDENT DOMAIN */
 .awards-page .annual-day-block {
-  background: linear-gradient(135deg, #f5f9fc 0%, #ffffff 100%);
+  background: var(--aw-color-white);
   border: 1px solid var(--aw-border-light);
   border-radius: 12px;
   padding: 30px 24px;
@@ -1221,6 +1233,14 @@
 
 /* STAGE PHOTOS WITHOUT DUPLICATE NAMES UNDERNEATH */
 /* 8 TOPPERS IMAGES IN 4x2 GRID (NO STANDALONE NAME BOXES) */
+.awards-page .toppers-names {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 18px;
+  margin-bottom: 22px;
+}
+
 .awards-page .toppers-eight-images-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1228,7 +1248,7 @@
 }
 
 .awards-page .topper-grid-cell {
-  background: #f1f5f9;
+  background: var(--aw-color-blue-tint);
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--aw-border-light);
@@ -1281,7 +1301,7 @@
   height: 100%;
   border-radius: 10px;
   overflow: hidden;
-  background: #f8fafc;
+  background: var(--aw-color-blue-tint);
 }
 
 .awards-page .sports-dual-img {
@@ -1352,7 +1372,7 @@
 
 .awards-page .sports-columns-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr));
   gap: 24px;
 }
 
@@ -1400,6 +1420,22 @@
   border-bottom: none;
 }
 
+.awards-page .sports-compact-row {
+  gap: 12px;
+}
+
+.awards-page .sports-row-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.awards-page .sports-row-main .sports-winner-text {
+  padding-left: 18px;
+  line-height: 1.4;
+}
+
 .awards-page .sports-row-meta {
   display: flex;
   align-items: center;
@@ -1432,6 +1468,8 @@
   font-weight: 700;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   line-height: 1.2;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .awards-page .sports-chip-medal {
@@ -1455,6 +1493,24 @@
   background: linear-gradient(180deg, #fdf4f0 0%, #f8e5de 100%);
   color: #8c4722;
   border: 1px solid #e8bcab;
+}
+
+.awards-page .chip-selected {
+  background: var(--aw-color-blue-soft);
+  color: var(--aw-color-primary-navy);
+  border: 1px solid var(--aw-border-light);
+}
+
+.awards-page .sports-season-card {
+  margin-top: 24px;
+}
+
+.awards-page .sports-subcol-when {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--aw-text-secondary);
 }
 
 .awards-page .external-medals-stack {
@@ -1523,7 +1579,7 @@
 /* EXACTLY ONE IMAGE PER WING */
 .awards-page .wing-single-media {
   height: 240px;
-  background-color: #f8fafc;
+  background-color: var(--aw-color-blue-tint);
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   overflow: hidden;
@@ -1849,7 +1905,7 @@ html.dark .awards-page .topper-grid-cell {
 
 /* Nari Shakti Puraskar — gold prestige block re-tuned for a dark card */
 html.dark .awards-page .nari-shakti-subdomain-block {
-  background: linear-gradient(180deg, rgba(232, 200, 118, 0.07) 0%, rgba(255, 255, 255, 0.02) 100%);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 html.dark .awards-page .ns-tagline-wrap {
@@ -1872,12 +1928,12 @@ html.dark .awards-page .ns-presided-note {
 
 html.dark .awards-page .ns-arundathi-card {
   border-color: rgba(232, 200, 118, 0.5);
-  background: linear-gradient(180deg, rgba(232, 200, 118, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+  background: rgba(255, 255, 255, 0.03);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 html.dark .awards-page .ns-award-distinction-badge {
-  background: rgba(232, 200, 118, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   color: #e9d9ad;
 }
 

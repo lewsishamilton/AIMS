@@ -26,6 +26,7 @@ import {
   studentAchievements,
   academicToppers,
   sportsAccolades,
+  sportsSeason2025,
   wings,
   type Department,
   type DeptAchievement,
@@ -449,13 +450,6 @@ function StudentAchievements() {
             const isCentered = item.id === "stu-7" || item.title.includes("Webinar");
             return (
               <div key={item.id} className={`student-rigor-card ${isCentered ? "student-rigor-card-centered" : ""}`}>
-                <div className="rigor-card-header">
-                  <div className="rigor-tag-wrap">
-                    <Microscope size={15} />
-                    <span>{item.event}</span>
-                  </div>
-                </div>
-
                 <div className="rigor-card-media">
                   {item.image ? (
                     <img src={item.image} alt={item.title} loading="lazy" className="rigor-img" />
@@ -465,6 +459,10 @@ function StudentAchievements() {
                 </div>
 
                 <div className="rigor-card-body">
+                  <p className="rigor-event-line">
+                    <Microscope size={13} />
+                    <span>{item.event}</span>
+                  </p>
                   <h3 className="rigor-card-title">{item.title}</h3>
 
                   <div className="rigor-scholars-box">
@@ -491,6 +489,18 @@ function StudentAchievements() {
             <p className="annual-subline">"{academicToppers.quote}"</p>
           </div>
 
+          {academicToppers.toppers.length > 0 && (
+            <div className="ns-awardee-badges toppers-names">
+              {academicToppers.toppers.map((t) => (
+                <div key={`${t.name}-${t.program}`} className="ns-awardee-chip">
+                  <CheckCircle2 size={13} className="ns-check-icon" />
+                  <span className="ns-awardee-name">{t.name}</span>
+                  <span className="ns-awardee-dept">({t.program})</span>
+                </div>
+              ))}
+            </div>
+          )}
+
           {academicToppers.gallery && academicToppers.gallery.length > 0 && (
             <div className="toppers-eight-images-grid">
               {academicToppers.gallery.map((imgSrc, idx) => (
@@ -503,6 +513,32 @@ function StudentAchievements() {
         </div>
       </div>
     </section>
+  );
+}
+
+/** One event row: event name, winner(s) and a placing chip (gold/silver/bronze, or "Selected"). */
+function SportsResultRow({ event, winner, position }: { event: string; winner: string; position: string }) {
+  const medal = position.includes("1st") ? "gold" : position.includes("2nd") ? "silver" : position.includes("3rd") ? "bronze" : null;
+  return (
+    <div className="sports-compact-row">
+      <div className="sports-row-main">
+        <div className="sports-row-meta">
+          <Activity size={12} className="sports-activity-icon" />
+          <span className="sports-event-name">{event}</span>
+        </div>
+        <span className="sports-winner-text">{winner}</span>
+      </div>
+      <div className="sports-row-winner">
+        <span className={`sports-chip ${medal ? `chip-${medal}` : "chip-selected"}`}>
+          {medal && (
+            <span className="sports-chip-medal" aria-label={`${position.split(" ")[0]} Prize`}>
+              {medal === "gold" ? "🥇" : medal === "silver" ? "🥈" : "🥉"}
+            </span>
+          )}
+          <span className="sports-chip-label">{position}</span>
+        </span>
+      </div>
+    </div>
   );
 }
 
@@ -543,35 +579,7 @@ function SportsSection() {
                 </div>
                 <div className="sports-events-compact-list">
                   {internalEvents.map((evt, idx) => (
-                    <div key={idx} className="sports-compact-row">
-                      <div className="sports-row-meta">
-                        <Activity size={12} className="sports-activity-icon" />
-                        <span className="sports-event-name">{evt.event}</span>
-                      </div>
-                      <div className="sports-row-winner">
-                        <span className="sports-winner-text">{evt.winner}</span>
-                        <span
-                          className={`sports-chip ${
-                            evt.position.includes("1st") ? "chip-gold" : evt.position.includes("2nd") ? "chip-silver" : "chip-bronze"
-                          }`}
-                        >
-                          {evt.position.includes("1st") ? (
-                            <span className="sports-chip-medal" aria-label="1st Prize">
-                              🥇
-                            </span>
-                          ) : evt.position.includes("2nd") ? (
-                            <span className="sports-chip-medal" aria-label="2nd Prize">
-                              🥈
-                            </span>
-                          ) : evt.position.includes("3rd") ? (
-                            <span className="sports-chip-medal" aria-label="3rd Prize">
-                              🥉
-                            </span>
-                          ) : null}
-                          <span className="sports-chip-label">{evt.position}</span>
-                        </span>
-                      </div>
-                    </div>
+                    <SportsResultRow key={idx} {...evt} />
                   ))}
                 </div>
               </div>
@@ -599,6 +607,32 @@ function SportsSection() {
                   ))}
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="sports-single-hero-card sports-season-card">
+          <div className="sports-single-content-pane">
+            <h3 className="sports-meet-heading">{sportsSeason2025.title}</h3>
+            <p className="sports-summary-desc">{sportsSeason2025.summary}</p>
+
+            <div className="sports-columns-grid">
+              {sportsSeason2025.events.map((ev) => (
+                <div key={ev.name} className="sports-subcolumn">
+                  <div className="sports-subcol-title">
+                    <Trophy size={16} className="col-icon" />
+                    <h4>
+                      {ev.name}
+                      <span className="sports-subcol-when">{ev.when}</span>
+                    </h4>
+                  </div>
+                  <div className="sports-events-compact-list">
+                    {ev.results.map((r, idx) => (
+                      <SportsResultRow key={idx} {...r} />
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
