@@ -143,11 +143,12 @@ const Badges: React.FC<{ items: string[] }> = ({ items }) => (
 const SplitSection: React.FC<{
   block: ContentBlock;
   image: string;
+  ratio?: string;
   flip: boolean;
-}> = ({ block, image, flip }) => (
+}> = ({ block, image, ratio, flip }) => (
   <Reveal className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14">
     <div className={flip ? "lg:order-2" : ""}>
-      <Frame src={image} alt={block.title ?? "AIMS"} />
+      <Frame src={image} alt={block.title ?? "AIMS"} ratio={ratio} />
     </div>
     <div className={flip ? "lg:order-1" : ""}>
       <SectionBody block={block} />
@@ -492,6 +493,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
                     key={i}
                     block={row.block}
                     image={row.image}
+                    ratio={row.block.title ? media.sectionImageRatios?.[row.block.title] : undefined}
                     flip={row.flip}
                   />
                 );

@@ -1,5 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 import { Droplets, Pill } from "lucide-react";
+import collegeBuildingFront from "../assets/stockImages/college-building-front.webp";
 
 /**
  * Media manifest for the content-driven pages.
@@ -54,6 +55,7 @@ export const IMG = {
   meuLectureHall: g(clgMods, "MEU/2.webp"),
   meuEntrance: g(clgMods, "MEU/3.webp"),
   libraryShelves: g(clgMods, "central library/3.webp"),
+  collegeBuildingFront, // blue-and-white main block from the car park
 
   // ── Hospital (real AIMS) ──
   atrium: g(clgMods, "Lobby/1.webp"),
@@ -119,6 +121,8 @@ export const IMG = {
 export interface PageMedia {
   /** Photograph for a section, keyed by its `title`. Omit to render it as prose. */
   sectionImages?: Record<string, string>;
+  /** Frame shape for a section photo, keyed by `title`, when 4:3 would crop it (e.g. "aspect-video"). */
+  sectionImageRatios?: Record<string, string>;
   /** Photograph for a card, keyed by its `name`. Omit for the no-photo card. */
   cardImages?: Record<string, string>;
   /** Glyph for a card with no photograph, so the tile still reads as designed. */
@@ -143,9 +147,13 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
   },
   "/academics/postgraduate": {
     sectionImages: {
-      "Postgraduate Training at AIMS": IMG.opdWaiting,
+      "Postgraduate Training at AIMS": IMG.collegeBuildingFront,
       "Clinical Learning": IMG.otTeam,
       "Research & Dissertation": IMG.practicalLab,
+    },
+    // The building shot is 16:9; a 4:3 frame cut off both ends of the block.
+    sectionImageRatios: {
+      "Postgraduate Training at AIMS": "aspect-video",
     },
   },
   "/academics/nursing-allied-health": {
