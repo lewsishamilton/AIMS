@@ -61,6 +61,14 @@ const PAGE_PHOTO: Record<string, string> = {
   "/terms-and-conditions": "legal",
 };
 
+/** Routes whose masthead plays a looping clip instead of the photo (files live in public/videos). */
+const PAGE_VIDEO: Record<string, { src: string; poster: string }> = {
+  "/academics/postgraduate": {
+    src: "/videos/pg-campus-slow.mp4",
+    poster: "/videos/pg-campus-poster.jpg",
+  },
+};
+
 const AREA_PHOTO: Record<string, string> = {
   Committees: "committees",
   Admissions: "admissions",
@@ -79,6 +87,7 @@ const PageHero: React.FC<{
   const { name } = sectionFor(pathname);
   const path = pathname.replace(/\/+$/, "") || "/";
   const photo = hero(PAGE_PHOTO[path] ?? AREA_PHOTO[name] ?? "default");
+  const video = PAGE_VIDEO[path];
   const reduceMotion = useReducedMotion();
 
   return (
@@ -87,18 +96,35 @@ const PageHero: React.FC<{
       // A gentle convex curve along the bottom; the page's own background shows beneath it in both themes.
       style={{ clipPath: "ellipse(150% 100% at 50% 0%)" }}
     >
-      {/* Background photograph, with a slow settle-in zoom */}
-      <motion.img
-        src={photo}
-        fetchPriority="high"
-        decoding="async"
-        alt=""
-        aria-hidden="true"
-        initial={reduceMotion ? undefined : { scale: 1.12 }}
-        animate={reduceMotion ? undefined : { scale: 1 }}
-        transition={{ duration: 2.4, ease: EASE }}
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
-      />
+      {/* Background photograph (or clip), with a slow settle-in zoom. Reduced motion keeps the clip's still frame. */}
+      {video ? (
+        <motion.video
+          src={reduceMotion ? undefined : video.src}
+          poster={video.poster}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+          initial={reduceMotion ? undefined : { scale: 1.12 }}
+          animate={reduceMotion ? undefined : { scale: 1 }}
+          transition={{ duration: 2.4, ease: EASE }}
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+        />
+      ) : (
+        <motion.img
+          src={photo}
+          fetchPriority="high"
+          decoding="async"
+          alt=""
+          aria-hidden="true"
+          initial={reduceMotion ? undefined : { scale: 1.12 }}
+          animate={reduceMotion ? undefined : { scale: 1 }}
+          transition={{ duration: 2.4, ease: EASE }}
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+        />
+      )}
 
       {/* Dark blue tint over the whole photo */}
       <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[#0d2346]/45 mix-blend-multiply dark:bg-[#040a16]/60" />
