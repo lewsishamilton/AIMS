@@ -18,23 +18,23 @@ export const AdmissionsMarquee: React.FC = () => {
       {Array.from({ length: 3 }).map((_, i) => (
         <span
           key={i}
-          className="flex shrink-0 items-center gap-3 px-8 py-0.5 text-sm font-semibold text-white sm:text-[15px]"
+          className="flex shrink-0 items-center gap-3 whitespace-nowrap px-8 text-sm font-semibold text-white sm:text-[15px]"
         >
           <span aria-hidden="true" className="text-base text-[#e6c98a]">
             ★
           </span>
-          <span className="flex flex-col gap-1 leading-tight">
+          <span className="flex items-center gap-3 leading-tight">
             <span>
               Admissions for <span className="text-[#e6c98a]">PG / MS</span> programmes
             </span>
-            <span className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11.5px] font-medium text-white/80 sm:text-xs">
+            <span className="flex items-center gap-2 text-[13px] font-medium text-white/80 sm:text-sm">
               <ArrowDown className="h-3.5 w-3.5 shrink-0 text-[#e6c98a]" aria-hidden="true" />
               <a
                 href="#admissions-enquiry"
                 onClick={scrollToEnquiry}
                 className="underline-offset-4 hover:text-white hover:underline"
               >
-                Contact the Admission Enquiry: Dr. Ch. Achireddy
+                Admission Enquiry: Dr. Ch. Achireddy
               </a>
               <span aria-hidden="true" className="text-white/35">
                 ·
