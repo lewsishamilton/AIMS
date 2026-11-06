@@ -3,26 +3,11 @@ import { PhoneCall, X } from "lucide-react";
 
 const POPUP_IMAGE = "/images/admissions-popup.png";
 const ADMISSIONS_TEL = "tel:+919000994842";
-const SEEN_KEY = "aims-admissions-popup-seen";
-
-/** Admissions poster shown over the home page on the first visit of each browser session. */
+/** Admissions poster shown over the home page on every visit and refresh. */
 export const AdmissionsPopup: React.FC = () => {
-  const [open, setOpen] = useState(() => {
-    try {
-      return sessionStorage.getItem(SEEN_KEY) !== "1";
-    } catch {
-      return true;
-    }
-  });
+  const [open, setOpen] = useState(true);
 
-  const close = () => {
-    setOpen(false);
-    try {
-      sessionStorage.setItem(SEEN_KEY, "1");
-    } catch {
-      /* storage unavailable; popup simply shows again next load */
-    }
-  };
+  const close = () => setOpen(false);
 
   useEffect(() => {
     if (!open) return;
@@ -63,7 +48,7 @@ export const AdmissionsPopup: React.FC = () => {
           src={POPUP_IMAGE}
           alt="PG / MS admissions announcement"
           className="max-h-[calc(100vh-7rem)] min-h-0 w-full flex-1 object-contain"
-          onError={() => setOpen(false)}
+          onError={close}
         />
 
         <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 bg-[#0d2346] px-4 py-3 text-center text-sm font-semibold text-white sm:text-[15px]">
