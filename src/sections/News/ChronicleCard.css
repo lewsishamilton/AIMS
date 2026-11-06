@@ -330,6 +330,25 @@
   transform: none;
 }
 
+/* Portrait NMC announcement (Chronicle 10) — keep the full notice visible */
+#chronicle-10 .compact-image-frame-box {
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 631 / 925;
+  background-color: #ffffff;
+}
+
+#chronicle-10 .compact-card-img {
+  object-fit: contain;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+#chronicle-10.chronicle-compact-card:hover .compact-card-img {
+  transform: none;
+}
+
 /* Supporting Container & Read More Toggle (Mobile Read More Pattern) */
 .chronicle-read-more-btn {
   display: none; /* Hidden on laptop/desktop view */

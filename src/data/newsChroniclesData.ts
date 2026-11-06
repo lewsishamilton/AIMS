@@ -7,6 +7,7 @@ import chronicle6 from "../assets/News/chronicle-6.webp";
 import chronicle7 from "../assets/News/chronicle-7.png";
 import chronicle8 from "../assets/News/chronicle-8.webp";
 import chronicle9 from "../assets/News/chronicle-9.webp";
+import chronicle10 from "../assets/News/chronicle-10.webp";
 import image1 from "../assets/News/image-1.webp";
 import image2 from "../assets/News/image-2.webp";
 import image3 from "../assets/News/image-3.webp";
@@ -157,6 +158,20 @@ export const chronicles: ChronicleItem[] = [
       "Chief guest Dr. Raja Rao, Principal of Osmania Medical College, encouraged students to build awareness of modern technologies such as AI, machine learning and robotic surgery. Chairman Marri Laxman Reddy, Director Marri Dheeran Reddy, Dean Dr. B. Devanand, Principal Dr. Suma Preeti, faculty, students and parents attended."
     ],
     image: chronicle9
+  },
+  {
+    id: 10,
+    number: "10",
+    title: "40 PG MEDICAL SEATS ACROSS 10 SPECIALITIES",
+    subtitle: "NMC UPDATED PG SEAT MATRIX 2026-27",
+    category: "MEDICAL EDUCATION",
+    tags: ["NMC Recognition", "PG Medical Seats"],
+    description: "Arundathi Institute of Medical Sciences (AIMS), Medchal, Telangana, has been included in the National Medical Commission (NMC) updated PG Seat Matrix for the academic year 2026-27.",
+    supportingContent: [
+      "A total of 40 Postgraduate Medical Seats across 10 specialities are reflected in the latest NMC list — a proud milestone for the institute and its postgraduate medical education programme.",
+      "The recognition reflects AIMS' continued investment in clinical training, faculty strength and patient care across its specialities."
+    ],
+    image: chronicle10
   }
 ];
 
