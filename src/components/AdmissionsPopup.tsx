@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { PhoneCall, X } from "lucide-react";
+import { X } from "lucide-react";
 
-const POPUP_IMAGE = "/images/admissions-popup.png";
-const ADMISSIONS_TEL = "tel:+919000994842";
+const POPUP_IMAGE = "/images/admissions-popup.png?v=2";
+
 /** Admissions poster shown over the home page on every visit and refresh. */
 export const AdmissionsPopup: React.FC = () => {
   const [open, setOpen] = useState(true);
@@ -32,7 +32,7 @@ export const AdmissionsPopup: React.FC = () => {
       aria-label="PG admissions announcement"
     >
       <div
-        className="relative flex max-h-full w-full max-w-lg flex-col overflow-hidden rounded-xl bg-white shadow-2xl dark:bg-[#0d1626]"
+        className="relative max-h-full w-fit overflow-hidden rounded-xl bg-white shadow-2xl dark:bg-[#0d1626]"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -46,26 +46,10 @@ export const AdmissionsPopup: React.FC = () => {
 
         <img
           src={POPUP_IMAGE}
-          alt="PG / MS admissions announcement"
-          className="max-h-[calc(100vh-7rem)] min-h-0 w-full flex-1 object-contain"
+          alt="PG / MD / MS admissions announcement. Admission enquiry: Dr. Ch. Achireddy, 9000994842"
+          className="block max-h-[calc(100vh-2rem)] w-auto max-w-full object-contain sm:max-w-lg"
           onError={close}
         />
-
-        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 bg-[#0d2346] px-4 py-3 text-center text-sm font-semibold text-white sm:text-[15px]">
-          <span>
-            Admission Enquiry - <span className="text-[#e6c98a]">Dr. Ch. Achireddy</span>
-          </span>
-          <span aria-hidden="true" className="text-white/40">
-            -
-          </span>
-          <a
-            href={ADMISSIONS_TEL}
-            className="inline-flex items-center gap-1.5 whitespace-nowrap text-[#e6c98a] underline-offset-4 hover:underline"
-          >
-            <PhoneCall className="h-4 w-4" aria-hidden="true" />
-            +91 90009 94842
-          </a>
-        </div>
       </div>
     </div>
   );
