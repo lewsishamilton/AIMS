@@ -182,6 +182,7 @@ export const DISCOVER_PAGES: Record<string, StaticPageDef> = {
       { name: "Government Approvals", path: "/approvals/government" },
       { name: "Accreditations", path: "/accreditations" },
       { name: "MBBS Programme", path: "/academics/mbbs" },
+      { name: "Postgraduate (MD/MS)", path: "/academics/postgraduate" },
       { name: "Admission Criteria", path: "/admissions/criteria" },
     ],
   },

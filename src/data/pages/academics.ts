@@ -2,6 +2,7 @@ import type { StaticPageDef } from "../../components/StaticPage";
 
 const ACADEMIC_LINKS = [
   { name: "MBBS", path: "/academics/mbbs" },
+  { name: "Postgraduate (MD/MS)", path: "/academics/postgraduate" },
   { name: "Nursing & Allied Health", path: "/academics/nursing-allied-health" },
   { name: "Paramedical Diplomas", path: "/academics/paramedical-diplomas" },
   { name: "Academic Calendar", path: "/academics/calendar" },
@@ -11,6 +12,9 @@ const ACADEMIC_LINKS = [
 
 const linksExcept = (path: string) =>
   ACADEMIC_LINKS.filter((l) => l.path !== path);
+
+const ADMISSIONS_OFFICE =
+  "Admissions office (Dr. Achireddy): +91 90009 94842 / +91 80557 78999 · info@aims.ac.in · Beside MLRIT, Dundigal, Gandi Maisamma, Medchal–Malkajgiri District, Telangana 500043.";
 
 export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
   "/academics/mbbs": {
@@ -82,6 +86,113 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
     quickLinks: linksExcept("/academics/mbbs"),
     cta: {
       text: "Admission to MBBS is through NEET-UG counselling conducted by KNRUHS for the Convener quota, and through the institute for Management and NRI categories.",
+      label: "View Admission Criteria",
+      path: "/admissions/criteria",
+    },
+  },
+
+  "/academics/postgraduate": {
+    eyebrow: "Programs Offered",
+    title: "Postgraduate Medical Education (MD / MS)",
+    subtitle:
+      "Advanced clinical and academic training for MBBS graduates, delivered inside a functioning tertiary-care hospital and affiliated to Kaloji Narayana Rao University of Health Sciences, Warangal.",
+    sections: [
+      {
+        title: "Postgraduate Training at AIMS",
+        badges: ["NEET-PG", "KNRUHS Affiliated", "Hospital-Based Learning"],
+        content: [
+          "Postgraduate medical education at Arundathi Institute of Medical Sciences is built around supervised clinical responsibility. Residents work in the same hospital that serves the community, taking increasing responsibility for patient care across outpatient clinics, wards, intensive care units and operation theatres under the guidance of senior consultants.",
+          "The MD and MS programmes follow the curriculum and assessment framework prescribed by the National Medical Commission and are affiliated to Kaloji Narayana Rao University of Health Sciences. The specialities, sanctioned intake and seat matrix available in each academic year are notified by the National Medical Commission and the university before counselling.",
+        ],
+        layout: "full",
+      },
+      {
+        title: "MD Programmes",
+        subtitle: "Doctor of Medicine",
+        bullets: [
+          "MD Dermatology",
+          "MD General Medicine",
+          "MD Paediatrics",
+          "MD Anesthesiology",
+          "MD Biochemistry",
+          "MD Pathology",
+        ],
+        layout: "half",
+      },
+      {
+        title: "MS Programmes",
+        subtitle: "Master of Surgery",
+        bullets: [
+          "MS Obstetrics and Gynaecology",
+          "MS Orthopedics",
+          "MS General Surgery",
+          "MS Ophthalmology",
+        ],
+        layout: "half",
+      },
+      {
+        title: "Year 1 — Foundations",
+        subtitle: "Applied basic sciences & supervised practice",
+        content:
+          "Orientation to the speciality, applied basic sciences, structured ward and outpatient postings, and supervised training in core clinical skills and procedures.",
+        layout: "third",
+      },
+      {
+        title: "Year 2 — Clinical Responsibility",
+        subtitle: "Graded independence",
+        content:
+          "Greater responsibility for ward rounds, emergency and intensive-care duties, procedure training and operative or interventional work under consultant supervision.",
+        layout: "third",
+      },
+      {
+        title: "Year 3 — Senior Residency",
+        subtitle: "Dissertation & examination",
+        content:
+          "Senior-level clinical responsibility, completion and submission of the dissertation, and preparation for the university theory, practical and viva examinations.",
+        layout: "third",
+      },
+      {
+        title: "Clinical Learning",
+        bullets: [
+          "Rotations through the general and super-speciality units of the attached hospital",
+          "Daily ward rounds, case presentations and mortality review meetings",
+          "Structured seminars, journal clubs and inter-departmental case discussions",
+          "Hands-on training in the skill lab and simulation facility",
+          "Emergency, intensive-care and operation-theatre duties appropriate to the speciality",
+          "Teaching experience with undergraduate students during clinical postings",
+        ],
+        layout: "half",
+      },
+      {
+        title: "Research & Dissertation",
+        content: [
+          "Every postgraduate resident completes a supervised dissertation on a clinically relevant question, developed with the guidance of the department and submitted to the university as part of the degree requirements.",
+          "Research proposals are reviewed by the Institutional Ethics Committee and the Scientific Committee before work begins, and residents have access to the Central Research Laboratory, the digital library and departmental research facilities.",
+        ],
+        layout: "half",
+      },
+      {
+        title: "Eligibility & Admission",
+        bullets: [
+          "MBBS degree from a medical college recognised by the National Medical Commission",
+          "Completion of the compulsory rotating internship before the counselling cut-off date",
+          "A valid NEET-PG score at the percentile prescribed for the candidate's category",
+          "Permanent or provisional registration with a State Medical Council or the National Medical Commission",
+          "Allotment through KNRUHS counselling for Convener quota seats, with Management and NRI seats filled as notified",
+        ],
+        layout: "full",
+      },
+      {
+        title: "Talk to the Postgraduate Admissions Office",
+        content:
+          "For the current year's recognised specialities, seat matrix, fee notification and counselling schedule, contact the admissions office. " +
+          ADMISSIONS_OFFICE,
+        layout: "full",
+      },
+    ],
+    quickLinks: linksExcept("/academics/postgraduate"),
+    cta: {
+      text: "Postgraduate admission follows NEET-PG and the counselling notifications issued by KNRUHS. Review the general admission process and the documents required at verification before you apply.",
       label: "View Admission Criteria",
       path: "/admissions/criteria",
     },

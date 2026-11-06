@@ -66,11 +66,12 @@ const FAQ: Omit<Entry, "text">[] = [
   },
   {
     title: "Admissions",
-    keywords: ["admission", "admissions", "apply", "neet", "counselling", "join", "eligibility", "eligible", "process", "mbbs seat"],
-    answer: `MBBS admission is through NEET-UG and state counselling (KNRUHS). Steps, criteria and required documents are on the Admissions pages. Admissions office: ${ADMISSIONS_PHONE}.`,
+    keywords: ["admission", "admissions", "apply", "neet", "neet-pg", "counselling", "join", "eligibility", "eligible", "process", "mbbs seat", "pg seat"],
+    answer: `MBBS admission is through NEET-UG and state counselling (KNRUHS); postgraduate MD/MS admission is through NEET-PG. Steps, criteria and required documents are on the Admissions pages. Admissions office: ${ADMISSIONS_PHONE}.`,
     links: [
       { label: "Admissions Overview", path: "/admissions" },
       { label: "Admission Criteria", path: "/admissions/criteria" },
+      { label: "Postgraduate (MD/MS)", path: "/academics/postgraduate" },
     ],
   },
   {
@@ -102,10 +103,11 @@ const FAQ: Omit<Entry, "text">[] = [
   },
   {
     title: "Courses offered",
-    keywords: ["course", "courses", "programme", "program", "degree", "nursing", "bsc", "physiotherapy", "diploma", "paramedical", "allied"],
-    answer: "AIMS offers MBBS, Nursing & Allied Health degrees (B.Sc. Nursing, B.Sc. MLT, Physiotherapy) and paramedical diplomas.",
+    keywords: ["course", "courses", "programme", "program", "degree", "postgraduate", "post graduate", "pg", "md", "ms", "nursing", "bsc", "physiotherapy", "diploma", "paramedical", "allied"],
+    answer: "AIMS offers MBBS, postgraduate MD/MS programmes (subject to annual NMC recognition and KNRUHS notification), Nursing & Allied Health degrees (B.Sc. Nursing, B.Sc. MLT, Physiotherapy) and paramedical diplomas.",
     links: [
       { label: "MBBS", path: "/academics/mbbs" },
+      { label: "Postgraduate (MD/MS)", path: "/academics/postgraduate" },
       { label: "Nursing & Allied Health", path: "/academics/nursing-allied-health" },
       { label: "Paramedical Diplomas", path: "/academics/paramedical-diplomas" },
     ],

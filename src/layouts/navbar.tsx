@@ -98,6 +98,7 @@ const Navbar = () => {
                     path: "/academics/mbbs",
                     subItems: [
                         { name: "Undergraduate (MBBS)", path: "/academics/mbbs" },
+                        { name: "Postgraduate (MD/MS)", path: "/academics/postgraduate" },
                         { name: "Nursing & Allied Health", path: "/academics/nursing-allied-health" },
                         { name: "Paramedical Diplomas", path: "/academics/paramedical-diplomas" },
                     ],

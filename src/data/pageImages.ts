@@ -141,6 +141,13 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
       "Teaching & Clinical Learning": IMG.skillsLabMannequin,
     },
   },
+  "/academics/postgraduate": {
+    sectionImages: {
+      "Postgraduate Training at AIMS": IMG.opdWaiting,
+      "Clinical Learning": IMG.otTeam,
+      "Research & Dissertation": IMG.practicalLab,
+    },
+  },
   "/academics/nursing-allied-health": {
     sectionImages: { "Learning Inside a Working Hospital": IMG.atrium },
     cardImages: {

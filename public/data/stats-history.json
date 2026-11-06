@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "updatedAt": "2026-11-06T08:14:11.332Z",
+  "entries": [
+    {
+      "date": "2026-11-05",
+      "updatedAt": "2026-11-06T08:14:11.332Z",
+      "stats": {
+        "opd": 1295,
+        "admitted": 85,
+        "discharges": 32,
+        "biochemistry": 715,
+        "pathology": 328,
+        "microbiology": 142,
+        "xray": 105,
+        "ultrasound": 56,
+        "mri": 15,
+        "ct": 10,
+        "surgeries": 25,
+        "dental": 5,
+        "dialysis": 3,
+        "endoscopy": 5,
+        "cathLab": 4,
+        "ercp": 1
+      }
+    }
+  ]
+}

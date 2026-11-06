@@ -31,6 +31,7 @@ const PAGE_PHOTO: Record<string, string> = {
   "/admissions/forms": "application-forms",
   "/admissions/admitted-list": "admitted-list",
   "/academics/mbbs": "mbbs",
+  "/academics/postgraduate": "mbbs",
   "/academics/nursing-allied-health": "nursing",
   "/academics/paramedical-diplomas": "paramedical",
   "/academics/calendar": "academic-calendar",

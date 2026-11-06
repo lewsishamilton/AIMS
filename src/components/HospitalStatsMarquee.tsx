@@ -468,7 +468,8 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
 
             {/* Hint */}
             <p className={`text-[10px] mt-3 text-center ${isWhiteTheme ? "text-[#1f3351]/35" : "text-white/30"}`}>
-              “Publish to website” updates the figures for every visitor.
+              “Publish to website” updates the figures for every visitor and saves
+              the day to STATISTICS.xlsx.
               {publishedLabel && ` Last published for ${publishedLabel}.`}
               {publishedLoading && " Checking for updates…"}
             </p>

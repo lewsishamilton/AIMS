@@ -26,7 +26,7 @@ export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
         title: "How Admission Works",
         content: [
           "Admission to the MBBS programme at Arundathi Institute of Medical Sciences is entirely NEET-based. Convener quota (A-Category) seats are allotted on merit through counselling conducted by Kaloji Narayana Rao University of Health Sciences, Warangal. Management (B-Category) and NRI (C-Category) seats are filled by the institute in accordance with the rules notified by the Government of Telangana and the university.",
-          "Nursing, allied health and paramedical diploma admissions are handled directly by the institute's admissions office, with intake and eligibility notified at the start of each academic session.",
+          "Postgraduate MD and MS admission is through NEET-PG and counselling conducted by KNRUHS, with the recognised specialities and seat matrix notified for each academic year. Nursing, allied health and paramedical diploma admissions are handled directly by the institute's admissions office, with intake and eligibility notified at the start of each academic session.",
         ],
         layout: "full",
       },
@@ -62,7 +62,7 @@ export const ADMISSION_PAGES: Record<string, StaticPageDef> = {
     ],
     quickLinks: linksExcept("/admissions"),
     cta: {
-      text: "Not sure which programme fits? Start with the MBBS course structure, or look at the nursing, allied health and paramedical diploma options.",
+      text: "Not sure which programme fits? Explore the MBBS and postgraduate MD/MS programmes, or look at the nursing, allied health and paramedical diploma options.",
       label: "View Programmes",
       path: "/academics/mbbs",
     },

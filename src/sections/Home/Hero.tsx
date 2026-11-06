@@ -3,6 +3,7 @@ import aimsVideoMobile from "../../assets/AIMS-mobile.mp4";
 import aimsPosterMobile from "../../assets/AIMS-poster.webp";
 import aimsPosterDesktop from "../../assets/AIMS-poster-desktop.webp";
 import HeroStats from "./Hero-stats";
+import AdmissionsMarquee from "../../components/AdmissionsMarquee";
 
 // Visitors who turned on data saving get the still frame instead of the video.
 const saveData =
@@ -43,6 +44,11 @@ const Hero = () => {
 
             {/* Bottom Gradient */}
             <div className="absolute inset-x-0 bottom-0 h-72 bg-gradient-to-t from-[#0d2346]/95 via-[#0d2346]/40 to-transparent dark:from-[#070d18]/95 dark:via-[#070d18]/50 z-10 pointer-events-none" />
+
+            {/* PG admissions notice, tucked under the fixed navbar's logo row (offsets track the navbar height per breakpoint) */}
+            <div className="absolute inset-x-0 top-12 min-[360px]:top-[52px] min-[400px]:top-14 md:top-[60px] xl:top-16 z-20">
+                <AdmissionsMarquee />
+            </div>
 
             {/* Hard-locked to the absolute bottom border */}
             <div className="relative z-20 w-full pb-6 sm:pb-10 lg:pb-12 mb-0">

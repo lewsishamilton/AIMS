@@ -7,31 +7,22 @@ import type { IncomingMessage, ServerResponse } from 'node:http'
 import path from 'node:path'
 import { promisify } from 'node:util'
 import { defineConfig, loadEnv, type Plugin } from 'vite'
+import {
+  EXCEL_FILE,
+  HISTORY_FILE,
+  PUBLIC_STATS_FILE,
+  SRC_STATS_FILE,
+  STAT_KEYS,
+  readStatsHistory,
+  serializeHistory,
+  statisticsWorkbookExists,
+  upsertHistoryEntry,
+  writeStatisticsWorkbook,
+  writeStatsHistory,
+  type StatValues,
+} from './scripts/stats-store.ts'
 
 const execFileAsync = promisify(execFile)
-
-/** Keep in sync with TODAY_METRICS in src/lib/hospitalStats.ts. */
-const PUBLISHED_STAT_KEYS = [
-  'opd',
-  'admitted',
-  'discharges',
-  'surgeries',
-  'biochemistry',
-  'pathology',
-  'microbiology',
-  'xray',
-  'ultrasound',
-  'mri',
-  'ct',
-  'dental',
-  'dialysis',
-  'endoscopy',
-  'cathLab',
-  'ercp',
-] as const
-
-const SRC_STATS_FILE = 'src/data/todayStats.json'
-const PUBLIC_STATS_FILE = 'public/data/today-stats.json'
 
 function previousIstDayKey(): string {
   try {
@@ -104,7 +95,9 @@ async function readRequestBody(req: IncomingMessage): Promise<string> {
  *
  * - Exists only when running `vite` (development) with VITE_STATS_EDITOR=owner.
  * - Writes the published JSON used by the running app.
- * - Commits and pushes that JSON so the public deploy picks it up.
+ * - Appends the day to `public/data/stats-history.json` and regenerates
+ *   `STATISTICS.xlsx` from that history.
+ * - Commits and pushes all of those files so the public deploy picks them up.
  *
  * Production builds never include this plugin, so visitors cannot publish.
  */
@@ -139,7 +132,7 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
    * the Git Data API with the credential git already stores locally.
    */
   const publishCommitViaApi = async (
-    content: string,
+    files: Array<{ path: string; content: Buffer }>,
     message: string
   ): Promise<{ branch: string; remoteSha: string; commitSha: string }> => {
     const remote = (await runGit(['remote', 'get-url', 'origin'])).stdout
@@ -190,23 +183,34 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
     const remoteCommit = await api(`/git/commits/${remoteSha}`)
     const baseTree = requireSha(remoteCommit.tree?.sha, 'the base tree')
 
-    const blob = await api('/git/blobs', {
-      method: 'POST',
-      body: JSON.stringify({
-        content: Buffer.from(content, 'utf8').toString('base64'),
-        encoding: 'base64',
-      }),
-    })
-    const blobSha = requireSha(blob.sha, 'the stats blob')
+    const treeEntries: Array<{
+      path: string
+      mode: '100644'
+      type: 'blob'
+      sha: string
+    }> = []
+    for (const file of files) {
+      const blob = await api('/git/blobs', {
+        method: 'POST',
+        body: JSON.stringify({
+          // Base64 works for both UTF-8 text and the binary workbook.
+          content: file.content.toString('base64'),
+          encoding: 'base64',
+        }),
+      })
+      treeEntries.push({
+        path: file.path,
+        mode: '100644',
+        type: 'blob',
+        sha: requireSha(blob.sha, `the blob for ${file.path}`),
+      })
+    }
 
     const tree = await api('/git/trees', {
       method: 'POST',
       body: JSON.stringify({
         base_tree: baseTree,
-        tree: [
-          { path: SRC_STATS_FILE, mode: '100644', type: 'blob', sha: blobSha },
-          { path: PUBLIC_STATS_FILE, mode: '100644', type: 'blob', sha: blobSha },
-        ],
+        tree: treeEntries,
       }),
     })
     const treeSha = requireSha(tree.sha, 'the new tree')
@@ -278,8 +282,8 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
           return
         }
 
-        const stats: Record<string, number> = {}
-        for (const key of PUBLISHED_STAT_KEYS) {
+        const stats = {} as StatValues
+        for (const key of STAT_KEYS) {
           const value = Number((statsInput as Record<string, unknown>)[key])
           if (!Number.isInteger(value) || value < 0 || value > 10_000_000) {
             sendJson(res, 400, {
@@ -296,7 +300,8 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
             ? payload.date
             : previousIstDayKey()
 
-        // Skip identical republishes (e.g. a double click).
+        // Skip identical republishes (e.g. a double click), but still repair a
+        // missing history file or workbook.
         let previous: { date?: unknown; stats?: unknown } | null
         try {
           previous = JSON.parse(await fsp.readFile(srcStatsPath, 'utf8'))
@@ -304,10 +309,23 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
           previous = null
         }
         const previousStats = (previous?.stats ?? null) as Record<string, unknown> | null
+
+        const savedAt = new Date().toISOString()
+        const historyBefore = await readStatsHistory(root)
+        const historyAfter = upsertHistoryEntry(historyBefore, {
+          date,
+          updatedAt: savedAt,
+          stats,
+        })
+        const historyChanged = historyAfter !== historyBefore
+        const workbookMissing = !statisticsWorkbookExists(root)
+
         const unchanged =
           previous?.date === date &&
           previousStats != null &&
-          PUBLISHED_STAT_KEYS.every((key) => Number(previousStats[key]) === stats[key])
+          STAT_KEYS.every((key) => Number(previousStats[key]) === stats[key]) &&
+          !historyChanged &&
+          !workbookMissing
 
         if (unchanged) {
           copyStatsToPublic()
@@ -322,16 +340,40 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
 
         const document = {
           date,
-          updatedAt: new Date().toISOString(),
+          updatedAt: savedAt,
           stats,
         }
         const json = `${JSON.stringify(document, null, 2)}\n`
+
+        const written: Array<{ path: string; content: Buffer }> = [
+          { path: SRC_STATS_FILE, content: Buffer.from(json, 'utf8') },
+          { path: PUBLIC_STATS_FILE, content: Buffer.from(json, 'utf8') },
+        ]
+        let workbookWarning: string | null = null
 
         try {
           await fsp.mkdir(path.dirname(srcStatsPath), { recursive: true })
           await fsp.mkdir(path.dirname(publicStatsPath), { recursive: true })
           await fsp.writeFile(srcStatsPath, json, 'utf8')
           await fsp.writeFile(publicStatsPath, json, 'utf8')
+
+          if (historyChanged) {
+            await writeStatsHistory(root, historyAfter)
+            written.push({
+              path: HISTORY_FILE,
+              content: Buffer.from(serializeHistory(historyAfter), 'utf8'),
+            })
+          }
+
+          if (historyChanged || workbookMissing) {
+            try {
+              const workbook = await writeStatisticsWorkbook(root, historyAfter)
+              written.push({ path: EXCEL_FILE, content: workbook })
+            } catch (error) {
+              workbookWarning = `The figures were published, but ${EXCEL_FILE} could not be rebuilt: ${gitErrorMessage(error)}`
+              console.warn(workbookWarning)
+            }
+          }
         } catch (error) {
           sendJson(res, 500, {
             ok: false,
@@ -342,29 +384,23 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
 
         const branch = (await runGit(['rev-parse', '--abbrev-ref', 'HEAD'])).stdout.trim()
         const beforeSha = (await runGit(['rev-parse', 'HEAD'])).stdout.trim()
+        const paths = written.map((file) => file.path)
+        const message = `Update hospital stats for ${date}`
 
         let committed = false
         let usedApiFallback = false
         try {
-          await runGit(['add', '--', SRC_STATS_FILE, PUBLIC_STATS_FILE])
+          await runGit(['add', '--', ...paths])
           const staged = await runGit([
             'diff',
             '--cached',
             '--name-only',
             '--',
-            SRC_STATS_FILE,
-            PUBLIC_STATS_FILE,
+            ...paths,
           ])
 
           if (staged.stdout.trim()) {
-            await runGit([
-              'commit',
-              '-m',
-              `Update hospital stats for ${date}`,
-              '--',
-              SRC_STATS_FILE,
-              PUBLIC_STATS_FILE,
-            ])
+            await runGit(['commit', '-m', message, '--', ...paths])
             committed = true
           }
 
@@ -374,10 +410,9 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
             // GitHub is currently rejecting some git ref updates with
             // "fatal error in commit_refs_rules"; create the same commit
             // through the Git Data API instead.
-            const result = await publishCommitViaApi(
-              json,
-              `Update hospital stats for ${date}`
-            )
+            if (!committed) throw new Error('Nothing new to publish')
+
+            const result = await publishCommitViaApi(written, message)
             usedApiFallback = true
 
             // If this was the only local commit, keep local history aligned
@@ -405,9 +440,11 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
           committed,
           date,
           mode: usedApiFallback ? 'api' : 'git',
-          message: usedApiFallback
-            ? 'Published via the GitHub API because git push is failing. The website updates when the deploy finishes.'
-            : 'Published. The public website updates when the deploy finishes.',
+          message: workbookWarning
+            ? `${workbookWarning} The figures were saved; check the dev console.`
+            : usedApiFallback
+              ? 'Published via the GitHub API because git push is failing. The website updates when the deploy finishes.'
+              : 'Published. The daily history and STATISTICS.xlsx were updated. The public website updates when the deploy finishes.',
         })
       })
     },
@@ -434,7 +471,12 @@ export default defineConfig(({ mode }) => {
       watch: {
         // The publish endpoint writes these files; do not reload the page for
         // them. The app re-fetches the published JSON after a publish instead.
-        ignored: ['**/src/data/todayStats.json', '**/public/data/today-stats.json'],
+        ignored: [
+          '**/src/data/todayStats.json',
+          '**/public/data/today-stats.json',
+          '**/public/data/stats-history.json',
+          '**/STATISTICS.xlsx',
+        ],
       },
     },
   }

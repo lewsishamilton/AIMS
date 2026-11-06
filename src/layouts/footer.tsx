@@ -19,6 +19,7 @@ const footerColumns = [
     title: "Academics",
     links: [
       { label: "MBBS Programme", href: "/academics/mbbs" },
+      { label: "Postgraduate (MD/MS)", href: "/academics/postgraduate" },
       { label: "Admissions", href: "/admissions" },
       { label: "Fee Structure", href: "/admissions/fee-structure" },
       { label: "Departments", href: "/departments" },
