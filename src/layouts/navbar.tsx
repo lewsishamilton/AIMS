@@ -4,10 +4,16 @@ import logo from "../assets/logo.webp";
 import logoWhite from "../assets/logo-white.webp";
 import { useTheme } from "../context/ThemeContext";
 
-interface SubItem {
+interface SubSubItem {
     name: string;
     path: string;
     subItems?: { name: string; path: string }[];
+}
+
+interface SubItem {
+    name: string;
+    path: string;
+    subItems?: SubSubItem[];
 }
 
 interface NavLinkItem {
@@ -98,7 +104,22 @@ const Navbar = () => {
                     path: "/academics/mbbs",
                     subItems: [
                         { name: "Undergraduate (MBBS)", path: "/academics/mbbs" },
-                        { name: "Postgraduate (MD/MS)", path: "/academics/postgraduate" },
+                        {
+                            name: "Postgraduate (MD/MS)",
+                            path: "/academics/postgraduate",
+                            subItems: [
+                                { name: "MD Dermatology", path: "/academics/postgraduate" },
+                                { name: "MD General Medicine", path: "/academics/postgraduate" },
+                                { name: "MD Paediatrics", path: "/academics/postgraduate" },
+                                { name: "MD Anesthesiology", path: "/academics/postgraduate" },
+                                { name: "MD Biochemistry", path: "/academics/postgraduate" },
+                                { name: "MD Pathology", path: "/academics/postgraduate" },
+                                { name: "MS Obstetrics and Gynaecology", path: "/academics/postgraduate" },
+                                { name: "MS Orthopedics", path: "/academics/postgraduate" },
+                                { name: "MS General Surgery", path: "/academics/postgraduate" },
+                                { name: "MS Ophthalmology", path: "/academics/postgraduate" },
+                            ],
+                        },
                         { name: "Nursing & Allied Health", path: "/academics/nursing-allied-health" },
                         { name: "Paramedical Diplomas", path: "/academics/paramedical-diplomas" },
                     ],
@@ -427,13 +448,36 @@ const Navbar = () => {
                                             {/* Level 2 Items */}
                                             <div className="p-1 relative text-white">
                                                 {item.subItems.map((sub, subIdx) => (
-                                                    <Link
-                                                        key={subIdx}
-                                                        to={sub.path}
-                                                        className={`block whitespace-nowrap px-3 py-1.5 text-[13.5px] font-semibold transition-all duration-150 ${dropdownItemClass}`}
-                                                    >
-                                                        {sub.name}
-                                                    </Link>
+                                                    <div key={subIdx} className="relative group/l3">
+                                                        <Link
+                                                            to={sub.path}
+                                                            className={`flex items-center justify-between gap-3 whitespace-nowrap px-3 py-1.5 text-[13.5px] font-semibold transition-all duration-150 ${dropdownItemClass}`}
+                                                        >
+                                                            <span>{sub.name}</span>
+                                                            {sub.subItems && <ChevronRight />}
+                                                        </Link>
+
+                                                        {/* Level 3 Flyout (opens on hover of its Level 2 row) */}
+                                                        {sub.subItems && (
+                                                            <div className="absolute left-[calc(100%+4px)] -top-1 hidden group-hover/l3:block w-max min-w-52 z-50 before:absolute before:top-0 before:-left-3 before:w-4 before:h-full">
+                                                                <div
+                                                                    className={`absolute inset-0 pointer-events-none -z-10 ${dropdownGlassBackground}`}
+                                                                    style={{ backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)" }}
+                                                                />
+                                                                <div className="p-1 relative text-white">
+                                                                    {sub.subItems.map((leaf, leafIdx) => (
+                                                                        <Link
+                                                                            key={leafIdx}
+                                                                            to={leaf.path}
+                                                                            className={`block whitespace-nowrap px-3 py-1.5 text-[13.5px] font-semibold transition-all duration-150 ${dropdownItemClass}`}
+                                                                        >
+                                                                            {leaf.name}
+                                                                        </Link>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 ))}
                                             </div>
                                         </div>
@@ -624,9 +668,20 @@ const Navbar = () => {
                                                         {item.subItems && (
                                                             <div className={`ml-1 pl-3 mb-1 border-l ${drawerLight ? "border-[#1f3351]/15" : "border-white/20"}`}>
                                                                 {item.subItems.map((sub, subIdx) => (
-                                                                    <Link key={subIdx} to={sub.path} onClick={() => setIsMenuOpen(false)} className={subLinkClass}>
-                                                                        {sub.name}
-                                                                    </Link>
+                                                                    <React.Fragment key={subIdx}>
+                                                                        <Link to={sub.path} onClick={() => setIsMenuOpen(false)} className={subLinkClass}>
+                                                                            {sub.name}
+                                                                        </Link>
+                                                                        {sub.subItems && (
+                                                                            <div className={`ml-1 pl-3 mb-1 border-l ${drawerLight ? "border-[#1f3351]/15" : "border-white/20"}`}>
+                                                                                {sub.subItems.map((leaf, leafIdx) => (
+                                                                                    <Link key={leafIdx} to={leaf.path} onClick={() => setIsMenuOpen(false)} className={subLinkClass}>
+                                                                                        {leaf.name}
+                                                                                    </Link>
+                                                                                ))}
+                                                                            </div>
+                                                                        )}
+                                                                    </React.Fragment>
                                                                 ))}
                                                             </div>
                                                         )}
