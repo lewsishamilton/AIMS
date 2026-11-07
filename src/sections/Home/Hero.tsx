@@ -2,6 +2,7 @@ import aimsVideo from "../../assets/AIMS.mp4";
 import aimsVideoMobile from "../../assets/AIMS-mobile.mp4";
 import aimsPosterMobile from "../../assets/AIMS-poster.webp";
 import aimsPosterDesktop from "../../assets/AIMS-poster-desktop.webp";
+import { useEffect, useState } from "react";
 import HeroStats from "./Hero-stats";
 import AdmissionsMarquee from "../../components/AdmissionsMarquee";
 
@@ -15,12 +16,21 @@ const aimsPoster =
     typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches ? aimsPosterMobile : aimsPosterDesktop;
 
 const Hero = () => {
+    // The poster paints first; the video is only added once the page has finished loading, so its
+    // download never competes with the first view (what search engines measure as page speed).
+    const [videoReady, setVideoReady] = useState(() => typeof document !== "undefined" && document.readyState === "complete");
+    useEffect(() => {
+        if (videoReady || saveData) return;
+        const onLoad = () => setVideoReady(true);
+        window.addEventListener("load", onLoad, { once: true });
+        return () => window.removeEventListener("load", onLoad);
+    }, [videoReady]);
+
     return (
         <section className="relative w-full h-screen min-h-[650px] max-md:h-[100svh] max-md:min-h-0 flex flex-col justify-end overflow-hidden font-['Inter',sans-serif]">
             {/* Background video: a vertical 1080p cut on phones, the landscape 1080p film elsewhere; the poster (its opening frame) shows while it loads */}
-            {saveData ? (
-                <img src={aimsPoster} alt="" className="absolute inset-0 w-full h-full object-cover z-0" />
-            ) : (
+            <img src={aimsPoster} alt="" fetchPriority="high" className="absolute inset-0 w-full h-full object-cover z-0" />
+            {!saveData && videoReady && (
                 <video
                     autoPlay
                     loop
@@ -32,7 +42,6 @@ const Hero = () => {
                 >
                     <source src={aimsVideoMobile} type="video/mp4" media="(max-width: 767px)" />
                     <source src={aimsVideo} type="video/mp4" />
-                    Your browser does not support the video tag.
                 </video>
             )}
 
