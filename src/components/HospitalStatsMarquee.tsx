@@ -193,40 +193,23 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
 
   // Every figure from the Today dataset scrolls across the ticker.
   const items = TODAY_METRICS.map((metric) => ({
-    label: metric.label.toUpperCase(),
+    label: metric.label,
     value: metric.key === "opd" ? `${fmt(stats.opd)}+` : fmt(stats[metric.key]),
-    ...GROUP_STYLES[metric.group],
   }));
 
-  const renderGroup = () => (
-    <div className="flex items-center shrink-0">
+  const renderGroup = (copy: number) => (
+    <ul className="flex items-center shrink-0" aria-hidden={copy > 0 || undefined}>
       {items.map((item, idx) => (
-        <div key={idx} className="flex items-center">
-          <div className="flex items-center gap-2 sm:gap-2.5 px-5 sm:px-7 whitespace-nowrap">
-            <span
-              className="h-1.5 w-1.5 shrink-0 rounded-full"
-              style={{ background: item.accent, boxShadow: `0 0 10px ${item.accent}90` }}
-              aria-hidden="true"
-            />
-            <span
-              className="text-[9.5px] sm:text-[10.5px] font-semibold uppercase tracking-[0.2em]"
-              style={{ color: item.labelColor, textShadow: `0 0 10px ${item.accent}40` }}
-            >
-              {item.label}
-            </span>
-            <span
-              className="text-sm sm:text-[15px] font-bold tabular-nums tracking-tight"
-              style={{ color: item.valueColor, textShadow: `0 0 14px ${item.accent}70` }}
-            >
-              {item.value}
-            </span>
-          </div>
-          <span className="select-none text-[9px] text-[#d4af37]/30" aria-hidden="true">
-            ◆
+        <li key={idx} className="flex items-center gap-2.5 whitespace-nowrap border-r border-white/15 px-5 sm:px-7">
+          <span className="text-[10.5px] sm:text-[11px] font-semibold uppercase tracking-[0.14em] text-white/65">
+            {item.label}
           </span>
-        </div>
+          <span className="font-['Manrope',sans-serif] text-[15px] sm:text-base font-bold tabular-nums tracking-tight text-white">
+            {item.value}
+          </span>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 
   const editorGroups = TODAY_GROUPS.map((group) => ({
@@ -251,10 +234,6 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
-        @keyframes hospitalMarqueeSheen {
-          0% { transform: translateX(-120%); }
-          55%, 100% { transform: translateX(420%); }
-        }
         .hospital-marquee-track {
           display: flex;
           width: max-content;
@@ -264,53 +243,39 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
         .hospital-marquee-track:hover {
           animation-play-state: paused;
         }
-        .hospital-marquee-sheen {
-          animation: hospitalMarqueeSheen 9s ease-in-out infinite;
-        }
-        .hospital-marquee-bar {
-          background-color: #061426;
-          background-image:
-            radial-gradient(90% 220% at 8% 50%, rgba(45, 212, 191, 0.32) 0%, transparent 55%),
-            radial-gradient(90% 220% at 92% 50%, rgba(212, 175, 55, 0.26) 0%, transparent 55%),
-            linear-gradient(100deg, #061426 0%, #0b2a49 32%, #0f4a63 50%, #0b2a49 68%, #061426 100%);
-        }
         @media (prefers-reduced-motion: reduce) {
-          .hospital-marquee-track, .hospital-marquee-sheen { animation: none; }
+          .hospital-marquee-track { animation: none; }
         }
       `}</style>
 
       {/* Marquee bar */}
       <div className="relative w-full">
-        {/* Premium scrolling ticker */}
-        <div className="hospital-marquee-bar relative w-full overflow-hidden border-y border-[#d4af37]/40 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_12px_34px_rgba(0,0,0,0.5)]">
-          {/* Gold hairlines + slow sheen sweep */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-[#d4af37]/70 to-transparent" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-px bg-gradient-to-r from-transparent via-[#d4af37]/35 to-transparent" />
-          <div className="hospital-marquee-sheen pointer-events-none absolute inset-y-0 left-0 z-10 w-1/4 bg-gradient-to-r from-transparent via-[#d4af37]/[0.07] to-transparent" />
-
+        {/* Scrolling ticker of the day's figures */}
+        <div className="relative w-full overflow-hidden bg-[#0d2346] dark:bg-[#0f1b2e] dark:border-y dark:border-white/10">
           <div className="flex items-center">
-            {/* Live badge (hidden on small screens to keep the ticker readable) */}
-            <div className="relative z-20 hidden shrink-0 items-center gap-2 border-r border-[#d4af37]/20 py-2 pl-5 pr-4 sm:flex">
-              <span className="relative flex h-1.5 w-1.5">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            {/* Label (hidden on small screens to keep the ticker readable) */}
+            <div className="relative z-20 hidden shrink-0 items-center gap-2 bg-[#0a1d3a] py-3 pl-5 pr-5 sm:flex lg:pl-8 dark:bg-[#0b1626]">
+              <span className="relative flex h-2 w-2" aria-hidden="true">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-50 motion-reduce:hidden" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-[#e6c98a]">
+              <span className="font-['Manrope',sans-serif] text-[11px] font-bold uppercase tracking-[0.18em] text-white">
                 Today
               </span>
             </div>
 
             <div
-              className="relative min-w-0 flex-1 overflow-hidden py-2"
+              className="relative min-w-0 flex-1 overflow-hidden py-3"
               role="region"
-              aria-label="Hospital Stats Ticker"
+              aria-label="Hospital figures today"
             >
               <div className="hospital-marquee-track">
-                {renderGroup()}
-                {renderGroup()}
+                {renderGroup(0)}
+                {renderGroup(1)}
               </div>
               {/* Edge fade so text dissolves instead of clipping */}
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#061426] to-transparent sm:w-24" />
+              <div className="pointer-events-none absolute inset-y-0 left-0 w-8 bg-gradient-to-r from-[#0d2346] to-transparent dark:from-[#0f1b2e]" />
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0d2346] to-transparent sm:w-24 dark:from-[#0f1b2e]" />
             </div>
           </div>
         </div>
@@ -321,7 +286,7 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
             onClick={openEditor}
             title="Edit statistics"
             aria-label="Edit hospital statistics"
-            className="absolute right-2 top-1/2 z-20 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-[#d4af37]/45 bg-[#0b1e35]/85 text-[#e6c98a] shadow-[0_0_16px_rgba(212,175,55,0.18)] backdrop-blur-md transition-all duration-200 hover:bg-[#d4af37] hover:text-[#0b1e35]"
+            className="absolute right-2 top-1/2 z-20 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-[#0a1d3a] text-white transition-colors duration-200 hover:bg-white hover:text-[#0d2346]"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

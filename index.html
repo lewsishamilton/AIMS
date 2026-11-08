@@ -4,7 +4,55 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AIMS — Arundathi Institute of Medical Sciences & Hospital</title>
+    <meta name="theme-color" content="#0d2346" />
+    <!-- Each page's title, description, canonical and share tags are written in by scripts/seo/prerender.ts at build time. -->
+    <title>Arundathi Institute of Medical Sciences &amp; Hospital, Hyderabad</title>
+    <!-- Structured data: tells search engines this is a hospital and a medical college, with address and contacts. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "CollegeOrUniversity",
+            "@id": "https://www.aims.ac.in/#college",
+            "name": "Arundathi Institute of Medical Sciences",
+            "alternateName": "AIMS Hyderabad",
+            "url": "https://www.aims.ac.in/",
+            "image": "https://www.aims.ac.in/images/og-aims.jpg",
+            "email": "arundathihospital@gmail.com",
+            "telephone": "+91-90009-94842",
+            "address": { "@id": "https://www.aims.ac.in/#address" },
+            "hasMap": "https://maps.google.com/?q=Beside+MLRIT,+Dundigal,+Gandi+Maisamma,+Medchal-Malkajgiri+District,+Telangana+500043",
+            "sameAs": [
+              "https://www.facebook.com/people/Aims-MedCollege/100092051179931/",
+              "https://www.instagram.com/arundathihospital/",
+              "https://www.linkedin.com/company/arundathi-institute-of-medical-sciences/",
+              "https://www.youtube.com/@arundathihospital"
+            ]
+          },
+          {
+            "@type": "Hospital",
+            "@id": "https://www.aims.ac.in/#hospital",
+            "name": "Arundathi Hospital",
+            "url": "https://www.aims.ac.in/about-hospital/",
+            "image": "https://www.aims.ac.in/images/og-aims.jpg",
+            "telephone": "+91-80556-67888",
+            "address": { "@id": "https://www.aims.ac.in/#address" },
+            "openingHours": "Mo-Su 00:00-23:59",
+            "parentOrganization": { "@id": "https://www.aims.ac.in/#college" }
+          },
+          {
+            "@type": "PostalAddress",
+            "@id": "https://www.aims.ac.in/#address",
+            "streetAddress": "Beside MLRIT, Dundigal, Gandi Maisamma",
+            "addressLocality": "Hyderabad",
+            "addressRegion": "Telangana",
+            "postalCode": "500043",
+            "addressCountry": "IN"
+          }
+        ]
+      }
+    </script>
     <!-- Google Fonts, loaded once here (not via CSS @import, which delays rendering).
          DM Sans, Inter, Manrope: site-wide. Playfair Display, Bodoni Moda, Prata, Anton: AIMS in News page.
          Browsers only download a font's files on pages that use it. -->

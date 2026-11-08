@@ -234,17 +234,6 @@ export const LaboratoriesPage: React.FC = () => {
   const [activePhotoList, setActivePhotoList] = useState<ModalPhotoItem[]>([]);
   const [activeFilter, setActiveFilter] = useState<"all" | "academic" | "hospital">("all");
 
-  useEffect(() => {
-    document.title = "Laboratories & Infrastructure Gallery Arena | AIMS";
-    const metaDescription = document.querySelector('meta[name="description"]');
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        "content",
-        "Explore the state-of-the-art laboratories, pre-clinical dissection halls, simulation skill labs, modular operation suites, and central diagnostic facilities at Arundathi Institute of Medical Sciences (AIMS)."
-      );
-    }
-  }, []);
-
   const handlePrevPhoto = () => {
     if (!selectedPhoto || activePhotoList.length === 0) return;
     const currentIndex = activePhotoList.findIndex((p) => p.id === selectedPhoto.id);
