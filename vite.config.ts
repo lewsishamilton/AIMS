@@ -456,13 +456,219 @@ function ownerStatsPlugin(mode: string, env: Record<string, string>): Plugin | n
   }
 }
 
+/**
+ * Temporary helper: publishes the poster changes through the GitHub API.
+ * Triggered once by GET /__aims/publish-posters while the dev server is running.
+ */
+function publishPostersPlugin(): Plugin {
+  let publishing = false
+
+  return {
+    name: 'aims-publish-posters',
+    configureServer(server) {
+      const root = process.cwd()
+      const runGit = (args: string[]) =>
+        execFileAsync('git', args, {
+          cwd: root,
+          windowsHide: true,
+          timeout: 60_000,
+          env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
+        })
+
+      server.middlewares.use(async (req, res, next) => {
+        const [endpoint, query] = (req.url || '').split('?')
+        if (endpoint !== '/__aims/publish-posters') {
+          next()
+          return
+        }
+        if (publishing) {
+          sendJson(res, 409, { ok: false, error: 'A publish is already running' })
+          return
+        }
+        publishing = true
+        sendJson(res, 202, { ok: true, started: true })
+        const dryRun = query === 'dry=1'
+
+        const statusPath = path.join(root, '.tmp-publish.json')
+        const report = async (body: Record<string, unknown>) => {
+          try {
+            await fsp.writeFile(
+              statusPath,
+              JSON.stringify({ at: new Date().toISOString(), ...body }, null, 2)
+            )
+          } catch (error) {
+            console.error('[aims-publish] could not write status', error)
+          }
+        }
+
+        const paths = [
+          'src/components/FloatingPoster.tsx',
+          'src/components/NewPosterPopup.tsx',
+          'src/components/AdmissionsPopup.tsx',
+          'src/pages/HomePage.tsx',
+          'public/images/aims-diwali-poster.png',
+        ]
+        const message =
+          'Add moving Diwali poster with automatic expiry and center admissions poster'
+
+        try {
+          console.log('[aims-publish] resolving remote and credentials')
+          await report({ stage: 'resolving-credentials' })
+          const remote = (await runGit(['remote', 'get-url', 'origin'])).stdout
+          const repo = parseGitHubRepo(remote)
+          let tokenSource = 'credential-helper'
+          let token = readStoredGitHubToken()
+          if (!token) {
+            try {
+              token =
+                execFileSync('gh', ['auth', 'token'], {
+                  encoding: 'utf8',
+                  timeout: 6000,
+                  windowsHide: true,
+                  env: { ...process.env, GIT_TERMINAL_PROMPT: '0' },
+                }).trim() || null
+              tokenSource = 'gh-cli'
+            } catch {
+              token = null
+            }
+          }
+          if (!repo || !token) {
+            throw new Error(
+              'No GitHub write credentials are available (credential helper and gh CLI both failed)'
+            )
+          }
+          await report({ stage: 'credentials', tokenSource, tokenLength: token.length })
+
+          const branch = (await runGit(['rev-parse', '--abbrev-ref', 'HEAD'])).stdout.trim()
+          console.log(`[aims-publish] repo ${repo}, branch ${branch}, token ${token.length} chars`)
+          const headers: Record<string, string> = {
+            Authorization: `Bearer ${token}`,
+            Accept: 'application/vnd.github+json',
+            'Content-Type': 'application/json',
+            'User-Agent': 'aims-poster-publisher',
+            'X-GitHub-Api-Version': '2022-11-28',
+          }
+
+          interface GitHubApiResponse {
+            object?: { sha?: string }
+            tree?: { sha?: string }
+            sha?: string
+          }
+
+          const api = async (
+            suffix: string,
+            init?: { method?: string; body?: string }
+          ): Promise<GitHubApiResponse> => {
+            const response = await fetch(`https://api.github.com/repos/${repo}${suffix}`, {
+              ...init,
+              headers,
+            })
+            if (!response.ok) {
+              throw new Error(
+                `${suffix} returned ${response.status}: ${(await response.text()).slice(0, 300)}`
+              )
+            }
+            return (await response.json()) as GitHubApiResponse
+          }
+
+          const requireSha = (value: string | undefined, label: string): string => {
+            if (!value) throw new Error(`GitHub API response is missing ${label}`)
+            return value
+          }
+
+          const ref = await api(`/git/ref/heads/${branch}`)
+          const remoteSha = requireSha(ref.object?.sha, 'the branch commit')
+          console.log(`[aims-publish] remote head ${remoteSha}`)
+          if (dryRun) {
+            await report({ ok: true, dryRun: true, repo, branch, remoteSha, tokenSource })
+            return
+          }
+          const remoteCommit = await api(`/git/commits/${remoteSha}`)
+          const baseTree = requireSha(remoteCommit.tree?.sha, 'the base tree')
+
+          const treeEntries: Array<{
+            path: string
+            mode: '100644'
+            type: 'blob'
+            sha: string
+          }> = []
+          for (const filePath of paths) {
+            const content = await fsp.readFile(path.join(root, filePath))
+            const blob = await api('/git/blobs', {
+              method: 'POST',
+              body: JSON.stringify({
+                content: content.toString('base64'),
+                encoding: 'base64',
+              }),
+            })
+            treeEntries.push({
+              path: filePath,
+              mode: '100644',
+              type: 'blob',
+              sha: requireSha(blob.sha, `the blob for ${filePath}`),
+            })
+          }
+
+          const tree = await api('/git/trees', {
+            method: 'POST',
+            body: JSON.stringify({ base_tree: baseTree, tree: treeEntries }),
+          })
+          const commit = await api('/git/commits', {
+            method: 'POST',
+            body: JSON.stringify({
+              message,
+              tree: requireSha(tree.sha, 'the new tree'),
+              parents: [remoteSha],
+            }),
+          })
+          const commitSha = requireSha(commit.sha, 'the new commit')
+          console.log(`[aims-publish] created commit ${commitSha}`)
+
+          await api(`/git/refs/heads/${branch}`, {
+            method: 'PATCH',
+            body: JSON.stringify({ sha: commitSha, force: false }),
+          })
+          console.log('[aims-publish] remote branch updated')
+
+          // Keep the local clone aligned with the commit created on GitHub.
+          let localSync = 'not needed'
+          try {
+            const lockPath = path.join(root, '.git', 'index.lock')
+            if (fs.existsSync(lockPath)) fs.rmSync(lockPath, { force: true })
+            await runGit(['fetch', 'origin', branch])
+            await runGit(['reset', '--mixed', `origin/${branch}`])
+            localSync = 'done'
+          } catch (error) {
+            localSync = `skipped: ${gitErrorMessage(error)}`
+          }
+
+          sendJson(res, 200, {
+            ok: true,
+            repo,
+            branch,
+            previousSha: remoteSha,
+            commitSha,
+            files: paths,
+            localSync,
+          })
+        } catch (error) {
+          console.error('[aims-publish] FAILED', error)
+          sendJson(res, 500, { ok: false, error: gitErrorMessage(error) })
+        } finally {
+          publishing = false
+        }
+      })
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   const ownerPlugin = ownerStatsPlugin(mode, env)
 
   return {
-    plugins: [react(), tailwindcss(), ownerPlugin],
+    plugins: [react(), tailwindcss(), ownerPlugin, publishPostersPlugin()],
     base: process.env.VITE_BASE_PATH || '/',
     optimizeDeps: {
       include: ['maplibre-gl'],
@@ -476,6 +682,11 @@ export default defineConfig(({ mode }) => {
           '**/public/data/today-stats.json',
           '**/public/data/stats-history.json',
           '**/STATISTICS.xlsx',
+          // Large static assets occasionally sit behind a cloud-sync / antivirus
+          // lock on Windows; watching them throws EBUSY and kills the dev server.
+          // They are served from /public over HTTP, so no watching is needed.
+          '**/public/images/**',
+          '**/public/documents/**',
         ],
       },
     },
