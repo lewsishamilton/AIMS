@@ -8,6 +8,14 @@ import chronicle7 from "../assets/News/chronicle-7.png";
 import chronicle8 from "../assets/News/chronicle-8.webp";
 import chronicle9 from "../assets/News/chronicle-9.webp";
 import chronicle10 from "../assets/News/chronicle-10.webp";
+import chronicle11 from "../assets/News/chronicle-11.webp";
+import chronicle11Card from "../assets/News/chronicle-11-card.webp";
+import chronicle12 from "../assets/News/chronicle-12.webp";
+import chronicle12Card from "../assets/News/chronicle-12-card.webp";
+import chronicle13 from "../assets/News/chronicle-13.webp";
+import chronicle13Card from "../assets/News/chronicle-13-card.webp";
+import chronicle14 from "../assets/News/chronicle-14.webp";
+import chronicle14Card from "../assets/News/chronicle-14-card.webp";
 import image1 from "../assets/News/image-1.webp";
 import image2 from "../assets/News/image-2.webp";
 import image3 from "../assets/News/image-3.webp";
@@ -21,7 +29,10 @@ export interface ChronicleItem {
   tags: string[];
   description: string;
   supportingContent: string[];
+  /** Full clipping, shown in "View Full Clipping". */
   image: string;
+  /** 4:3 card thumbnail (headline over photo) when the clipping itself crops badly in the card. */
+  cardImage?: string;
 }
 
 export interface GalleryFrame {
@@ -172,6 +183,66 @@ export const chronicles: ChronicleItem[] = [
       "The recognition reflects AIMS' continued investment in clinical training, faculty strength and patient care across its specialities."
     ],
     image: chronicle10
+  },
+  {
+    id: 11,
+    number: "11",
+    title: "SPORTSPERSONS FELICITATED AT ARUNDATHI",
+    subtitle: "NAMASTHE TELANGANA · 14 NOVEMBER 2026",
+    category: "SPORTS & FITNESS",
+    tags: ["Felicitation", "Sports & Fitness"],
+    description: "Arundathi Institute of Medical Sciences and Hospital, Dundigal, held a felicitation programme on Friday evening to honour people excelling in sports, with retired IAS officer Dr. N. Satyanarayana attending as chief guest.",
+    supportingContent: [
+      "Veteran athlete Marri Laxman Reddy, Chairman of MLR Institutions, Arundathi Hospital and St. Martin's Children's Educational Society, urged young people to develop an interest in exercise and sports. Physiotherapist Dr. Jaganmohan Reddy Soma, national-level cyclist Dr. B.R. Hariharan, and Tanisk and Kulashekar, who excel in swimming and cycling competitions, were felicitated, and coach Krishna was honoured with a cash award.",
+      "Avanthika Constructions Chairman and Managing Director Yannam Srinivasa Reddy, Medgenix Pharma India Pvt. Ltd. Managing Director Bhaskar Uppala, K Ramesh, MLR Institute of Technology Director Dr. Radhika Devi, Arundathi Hospital Dean Dr. Devanand, and AIMS students and faculty attended."
+    ],
+    image: chronicle11,
+    cardImage: chronicle11Card
+  },
+  {
+    id: 12,
+    number: "12",
+    title: "VETERAN SPORTSPERSONS HONOURED",
+    subtitle: "ANDHRA JYOTHY · 15 NOVEMBER 2026",
+    category: "SPORTS & FITNESS",
+    tags: ["Felicitation", "Veteran Athletes"],
+    description: "Marri Laxman Reddy, Chairman of MLRIT Institutions, urged young people to take veteran sportspersons as their inspiration and make sports and exercise part of their daily lives, at a felicitation ceremony held at Arundathi Medical College, Dundigal.",
+    supportingContent: [
+      "Marathon runner Dr. Jagan Mohan Reddy, sprinter Hariharan, national cyclist Tanisk and swimmer Kulashekar were felicitated at the ceremony.",
+      "Retired IAS officer Satyanarayana, members of the Masters Athletics Association of Telangana, Avanthika Constructions MD Yannam Srinivasa Reddy, Medgenix Pharma MD Bhaskar Uppala and others attended."
+    ],
+    image: chronicle12,
+    cardImage: chronicle12Card
+  },
+  {
+    id: 13,
+    number: "13",
+    title: "FELICITATION CEREMONY FOR ACHIEVERS",
+    subtitle: "TELANGANA TODAY · CITY BUREAU, HYDERABAD",
+    category: "SPORTS & FITNESS",
+    tags: ["Felicitation", "Healthy Lifestyle"],
+    description: "Arundathi Institute of Medical Sciences and Hospital organised a special Felicitation Ceremony for Achievers, with the objective of encouraging students and the younger generation to pursue sports, fitness and a healthy lifestyle.",
+    supportingContent: [
+      "The programme was organised under the leadership of Marri Laxman Reddy, Chairman of Arundathi Institute of Medical Sciences, MLR Group of Institutions and St. Martin's Children Educational Society, whose continued efforts towards promoting sports and fitness have been inspiring students and young achievers. First-year MBBS students, doctors, faculty and staff attended.",
+      "Dr. N. Satyanarayana, IAS (Retd.), recognised the achievements of Dr. Jagan Mohan Reddy Soma, Dr. B. R. Hariharan, Tanisk and Kulashekar. The event also highlighted the Masters Athletic Association, Telangana State, and its supporters — Yannam Srinivasa Reddy, Chairman and MD of Avanthika Constructions and Chief Patron; Bhaskar Uppala, Managing Director of Medgenix Pharma India Pvt Ltd and Patron; and K Ramesh, Patron."
+    ],
+    image: chronicle13,
+    cardImage: chronicle13Card
+  },
+  {
+    id: 14,
+    number: "14",
+    title: "YOUTH SHOULD EMBRACE SPORTS & EXERCISE",
+    subtitle: "CS NEWS · 14 NOVEMBER 2026",
+    category: "SPORTS & FITNESS",
+    tags: ["Felicitation", "Youth & Fitness"],
+    description: "Young people should develop an interest in sports and exercise alongside their studies and adopt a healthy lifestyle through daily exercise, said Marri Laxman Reddy, Chairman of Arundathi Institute of Medical Sciences and Hospital, as talented sportspersons were felicitated at the institute on Friday.",
+    supportingContent: [
+      "Retired IAS officer Dr. N. Satyanarayana attended as chief guest. Dr. Jagan Mohan Reddy Soma, Dr. B. R. Hariharan, Tanisk and Kulashekar, who have excelled in sports at national and international level, were felicitated and presented with cash prizes, and coach Krishna was specially honoured for training the sportspersons.",
+      "Marri Laxman Reddy urged parents to give sports the same importance as studies, saying sport builds discipline and determination along with physical fitness, and that the achievers' success is an inspiration to young people. MLRIT Director Dr. Radhika Devi, Arundathi Hospital Dean Dr. Devanand, first-year MBBS students, doctors, faculty and hospital staff attended."
+    ],
+    image: chronicle14,
+    cardImage: chronicle14Card
   }
 ];
 

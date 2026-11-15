@@ -28,7 +28,7 @@ export default function ChronicleCard({
 }: ChronicleCardProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const { number, title, category, tags, description, supportingContent, image } = chronicle;
+  const { number, title, category, tags, description, supportingContent, image, cardImage } = chronicle;
   const {
     cardScale,
     cardOpacity,
@@ -144,9 +144,9 @@ export default function ChronicleCard({
                 onClick={() => setIsModalOpen(true)}
                 title="Click to view full clipping"
               >
-                <img 
-                  src={image} 
-                  alt={`AIMS Chronicle ${number}`} 
+                <img
+                  src={cardImage ?? image}
+                  alt={`AIMS Chronicle ${number}`}
                   className="compact-card-img"
                   loading="lazy"
                 />
