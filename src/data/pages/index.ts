@@ -1,5 +1,6 @@
 import type { StaticPageDef } from "../../components/StaticPage";
 import { ACADEMIC_PAGES } from "./academics";
+import { PG_PROGRAMME_PAGES } from "./postgraduate";
 import { ADMISSION_PAGES } from "./admissions";
 import { SERVICE_PAGES } from "./services";
 import { FACILITY_PAGES } from "./facilities";
@@ -15,6 +16,7 @@ import { LEGAL_PAGES } from "./legal";
 export const STATIC_PAGES: Record<string, StaticPageDef> = {
   ...DISCOVER_PAGES,
   ...ACADEMIC_PAGES,
+  ...PG_PROGRAMME_PAGES,
   ...ADMISSION_PAGES,
   ...SERVICE_PAGES,
   ...FACILITY_PAGES,

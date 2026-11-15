@@ -39,6 +39,8 @@ export interface StaticPageDef {
   cardsSubtitle?: string;
   cards?: PageCard[];
   cardColumns?: 2 | 3;
+  /** Title of the section the card grid follows. Omit to place the cards after all sections. */
+  cardsAfter?: string;
   /** Related pages shown at the bottom. */
   quickLinks?: { name: string; path: string }[];
   /** Closing call-to-action strip. */
@@ -429,6 +431,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
   cardsSubtitle,
   cards,
   cardColumns = 3,
+  cardsAfter,
   cta,
   media = DEFAULT_MEDIA,
 }) => {
@@ -468,6 +471,33 @@ const StaticPage: React.FC<StaticPageDef> = ({
     }
   }
 
+  // Row the card grid follows; -1 places it after every section.
+  const cardsRowIndex =
+    hasCards && cardsAfter
+      ? rows.findIndex((r) =>
+          r.kind === "tiles" ? r.blocks.some((b) => b.title === cardsAfter) : r.block.title === cardsAfter
+        )
+      : -1;
+
+  const cardsGrid = hasCards ? (
+    <div>
+      {cardsTitle && (
+        <SectionHeading eyebrow={eyebrow ?? "AIMS"} title={cardsTitle} subtitle={cardsSubtitle} />
+      )}
+      <div className={`grid gap-6 sm:grid-cols-2 sm:gap-7 ${cardColumns === 3 ? "lg:grid-cols-3" : ""}`}>
+        {cards!.map((card, i) => (
+          <ImageCard
+            key={card.name}
+            card={card}
+            index={i}
+            image={card.image ?? media.cardImages?.[card.name]}
+            icon={media.cardIcons?.[card.name]}
+          />
+        ))}
+      </div>
+    </div>
+  ) : null;
+
   return (
     <div className="atmos-page min-h-screen bg-[#FAF9F5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
       <PageHero
@@ -475,6 +505,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
         title={title}
         subtitle={subtitle}
         pathname={pathname}
+        image={media.heroImage}
       />
 
       <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 pb-20 sm:px-8 lg:px-12">
@@ -487,57 +518,39 @@ const StaticPage: React.FC<StaticPageDef> = ({
         {rows.length > 0 && (
           <div className="space-y-14 pt-12 sm:space-y-16 lg:space-y-20">
             {rows.map((row, i) => {
+              let node: React.ReactNode;
               if (row.kind === "split") {
-                return (
+                node = (
                   <SplitSection
-                    key={i}
                     block={row.block}
                     image={row.image}
                     ratio={row.block.title ? media.sectionImageRatios?.[row.block.title] : undefined}
                     flip={row.flip}
                   />
                 );
-              }
-              if (row.kind === "prose") {
-                return <ProseSection key={i} block={row.block} />;
+              } else if (row.kind === "prose") {
+                node = <ProseSection block={row.block} />;
+              } else {
+                node = (
+                  <TileGrid
+                    blocks={row.blocks}
+                    imageFor={sectionImage}
+                    startIndex={row.startIndex}
+                  />
+                );
               }
               return (
-                <TileGrid
-                  key={i}
-                  blocks={row.blocks}
-                  imageFor={sectionImage}
-                  startIndex={row.startIndex}
-                />
+                <React.Fragment key={i}>
+                  {node}
+                  {i === cardsRowIndex && cardsGrid}
+                </React.Fragment>
               );
             })}
           </div>
         )}
 
-        {hasCards && (
-          <div className={rows.length > 0 || Widget ? "mt-16 sm:mt-20" : "pt-12"}>
-            {cardsTitle && (
-              <SectionHeading
-                eyebrow={eyebrow ?? "AIMS"}
-                title={cardsTitle}
-                subtitle={cardsSubtitle}
-              />
-            )}
-            <div
-              className={`grid gap-6 sm:grid-cols-2 sm:gap-7 ${
-                cardColumns === 3 ? "lg:grid-cols-3" : ""
-              }`}
-            >
-              {cards!.map((card, i) => (
-                <ImageCard
-                  key={card.name}
-                  card={card}
-                  index={i}
-                  image={card.image ?? media.cardImages?.[card.name]}
-                  icon={media.cardIcons?.[card.name]}
-                />
-              ))}
-            </div>
-          </div>
+        {hasCards && cardsRowIndex === -1 && (
+          <div className={rows.length > 0 || Widget ? "mt-16 sm:mt-20" : "pt-12"}>{cardsGrid}</div>
         )}
 
         {BottomWidget && (

@@ -1,4 +1,5 @@
 import type { StaticPageDef } from "../../components/StaticPage";
+import { PG_PROGRAMMES, pgPath } from "./postgraduate";
 
 const ACADEMIC_LINKS = [
   { name: "MBBS", path: "/academics/mbbs" },
@@ -107,30 +108,6 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
         layout: "full",
       },
       {
-        title: "MD Programmes",
-        subtitle: "Doctor of Medicine",
-        bullets: [
-          "MD Dermatology",
-          "MD General Medicine",
-          "MD Paediatrics",
-          "MD Anesthesiology",
-          "MD Biochemistry",
-          "MD Pathology",
-        ],
-        layout: "half",
-      },
-      {
-        title: "MS Programmes",
-        subtitle: "Master of Surgery",
-        bullets: [
-          "MS Obstetrics and Gynaecology",
-          "MS Orthopedics",
-          "MS General Surgery",
-          "MS Ophthalmology",
-        ],
-        layout: "half",
-      },
-      {
         title: "Year 1 — Foundations",
         subtitle: "Applied basic sciences & supervised practice",
         content:
@@ -190,6 +167,16 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
         layout: "full",
       },
     ],
+    cardsTitle: "MD & MS Programmes",
+    cardsSubtitle: "Ten postgraduate specialities. Open a programme to see its department, facilities and clinical services.",
+    cards: PG_PROGRAMMES.map((p) => ({
+      name: p.name,
+      meta: p.degree === "MD" ? "Doctor of Medicine" : "Master of Surgery",
+      description: p.summary,
+      link: { label: "View programme", path: pgPath(p.slug) },
+    })),
+    cardColumns: 2,
+    cardsAfter: "Postgraduate Training at AIMS",
     quickLinks: linksExcept("/academics/postgraduate"),
     cta: {
       text: "Postgraduate admission follows NEET-PG and the counselling notifications issued by KNRUHS. Review the general admission process and the documents required at verification before you apply.",

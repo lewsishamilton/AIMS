@@ -83,10 +83,12 @@ const PageHero: React.FC<{
   title: string;
   subtitle?: string;
   pathname: string;
-}> = ({ eyebrow, title, subtitle, pathname }) => {
+  /** Photograph for this page, overriding the route and area lookups. */
+  image?: string;
+}> = ({ eyebrow, title, subtitle, pathname, image }) => {
   const { name } = sectionFor(pathname);
   const path = pathname.replace(/\/+$/, "") || "/";
-  const photo = hero(PAGE_PHOTO[path] ?? AREA_PHOTO[name] ?? "default");
+  const photo = image ?? hero(PAGE_PHOTO[path] ?? AREA_PHOTO[name] ?? "default");
   const video = PAGE_VIDEO[path];
   const reduceMotion = useReducedMotion();
 

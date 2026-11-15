@@ -104,6 +104,10 @@ export const IMG = {
   ent: g(deptMods, "ENT.webp"),
   dentistry: g(deptMods, "denistry.webp"),
   anaesthesiology: g(deptMods, "anaesthisiology.webp"),
+  paediatrics: g(deptMods, "paediatrics.webp"), // doctor listening to an infant's chest
+  pathology: g(deptMods, "pathology.webp"), // gloved hand holding a blood tube by a microscope (small: 639px)
+  biochemistry: g(deptMods, "Biochemistry.webp"), // pipette over a well plate
+  // Not used: `gynacology.webp` is an empty operating theatre, not obstetrics — `maternity` is used instead.
 
   // ── Fetched stock, for gaps AIMS has no photograph of ──
   icuVentilator: g(aiMods, "ai-downloaded/icu-ventilator.webp"),
@@ -127,7 +131,47 @@ export interface PageMedia {
   cardImages?: Record<string, string>;
   /** Glyph for a card with no photograph, so the tile still reads as designed. */
   cardIcons?: Record<string, LucideIcon>;
+  /** Masthead photograph, overriding PageHero's route/area lookup. */
+  heroImage?: string;
 }
+
+/**
+ * The MD / MS programme pages: a department photo beside the "About" section and on the
+ * overview card, and a masthead that uses a real AIMS photo where one shows the department's work.
+ */
+const PG_PHOTOS: Record<string, { department: string; about: string; hero: string }> = {
+  "md-general-medicine": { department: "General Medicine", about: IMG.generalMedicine, hero: IMG.cathLabRoom },
+  "ms-general-surgery": { department: "General Surgery", about: IMG.generalSurgery, hero: IMG.otTeam },
+  "ms-orthopedics": { department: "Orthopaedics", about: IMG.orthopaedics, hero: IMG.orthopaedics },
+  "md-paediatrics": { department: "Paediatrics", about: IMG.paediatrics, hero: IMG.paediatrics },
+  "md-dermatology": { department: "Dermatology", about: IMG.dermatology, hero: IMG.dermatology },
+  "ms-ophthalmology": { department: "Ophthalmology", about: IMG.ophthalmology, hero: IMG.ophthalmology },
+  "ms-obstetrics-and-gynaecology": { department: "Obstetrics & Gynaecology", about: IMG.maternity, hero: IMG.maternity },
+  "md-anesthesiology": { department: "Anaesthesiology", about: IMG.anaesthesiology, hero: IMG.otTeam },
+  "md-pathology": { department: "Pathology", about: IMG.pathology, hero: IMG.labMicroscopist },
+  "md-biochemistry": { department: "Biochemistry", about: IMG.biochemistry, hero: IMG.centralLabBench },
+};
+
+const PG_PROGRAMME_MEDIA: Record<string, PageMedia> = Object.fromEntries(
+  Object.entries(PG_PHOTOS).map(([slug, p]) => [
+    `/academics/postgraduate/${slug}`,
+    { heroImage: p.hero, sectionImages: { [`About the Department of ${p.department}`]: p.about } },
+  ])
+);
+
+/** Overview-page card photos, keyed by programme name. */
+export const PG_CARD_IMAGES: Record<string, string> = {
+  "MD General Medicine": IMG.generalMedicine,
+  "MS General Surgery": IMG.generalSurgery,
+  "MS Orthopedics": IMG.orthopaedics,
+  "MD Paediatrics": IMG.paediatrics,
+  "MD Dermatology": IMG.dermatology,
+  "MS Ophthalmology": IMG.ophthalmology,
+  "MS Obstetrics and Gynaecology": IMG.maternity,
+  "MD Anesthesiology": IMG.anaesthesiology,
+  "MD Pathology": IMG.pathology,
+  "MD Biochemistry": IMG.biochemistry,
+};
 
 /**
  * Only the pages that have something worth photographing appear here. A route
@@ -136,6 +180,7 @@ export interface PageMedia {
  */
 export const PAGE_MEDIA: Record<string, PageMedia> = {
   // ── Academics ──
+  ...PG_PROGRAMME_MEDIA,
   "/academics/mbbs": {
     sectionImages: {
       "Phase I — Pre-Clinical": IMG.anatomyMuseum,
@@ -155,6 +200,7 @@ export const PAGE_MEDIA: Record<string, PageMedia> = {
     sectionImageRatios: {
       "Postgraduate Training at AIMS": "aspect-video",
     },
+    cardImages: PG_CARD_IMAGES,
   },
   "/academics/nursing-allied-health": {
     sectionImages: { "Learning Inside a Working Hospital": IMG.atrium },
