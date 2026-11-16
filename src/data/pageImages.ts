@@ -179,6 +179,16 @@ export const PG_CARD_IMAGES: Record<string, string> = {
  * and its sections carry themselves typographically.
  */
 export const PAGE_MEDIA: Record<string, PageMedia> = {
+  // ── Careers ──
+  "/careers/teaching": {
+    heroImage: IMG.meuLectureHall,
+    sectionImages: { "Teach at AIMS": IMG.dissectionHall },
+  },
+  "/careers/non-teaching": {
+    heroImage: IMG.atrium,
+    sectionImages: { "Work at Arundathi Hospital": IMG.labMicroscopist },
+  },
+
   // ── Academics ──
   ...PG_PROGRAMME_MEDIA,
   "/academics/mbbs": {

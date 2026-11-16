@@ -7,6 +7,7 @@ import { FACILITY_PAGES } from "./facilities";
 import { PATIENT_CARE_PAGES } from "./patientCare";
 import { DISCOVER_PAGES } from "./discover";
 import { LEGAL_PAGES } from "./legal";
+import { CAREER_PAGES } from "./careers";
 
 /**
  * Every content-driven page on the site, keyed by route path.
@@ -22,6 +23,7 @@ export const STATIC_PAGES: Record<string, StaticPageDef> = {
   ...FACILITY_PAGES,
   ...PATIENT_CARE_PAGES,
   ...LEGAL_PAGES,
+  ...CAREER_PAGES,
 };
 
 export type { StaticPageDef };

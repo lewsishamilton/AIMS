@@ -22,6 +22,7 @@ const FounderPage = lazy(() => import("./pages/FounderPage"))
 const ManagementPage = lazy(() => import("./pages/ManagementPage"))
 const LeadershipProfilePage = lazy(() => import("./pages/LeadershipProfilePage"))
 const ContactPage = lazy(() => import("./pages/ContactPage"))
+const FacultyApplicationPage = lazy(() => import("./pages/FacultyApplicationPage"))
 const AimsInNewsPage = lazy(() => import("./pages/AimsInNewsPage"))
 const MachinesPage = lazy(() => import("./pages/MachinesPage"))
 const AccreditationsPage = lazy(() => import("./pages/AccreditationsPage"))
@@ -89,6 +90,8 @@ function App() {
         <Route path="/leadership/principal" element={<LeadershipProfilePage id="dr-s-suma-preethi" />} />
         <Route path="/leadership/:id" element={<LeadershipProfilePage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/careers/teaching/apply" element={<FacultyApplicationPage />} />
+        <Route path="/careers/teaching/apply/thank-you" element={<FacultyApplicationPage />} />
         <Route path="/Contact" element={<ContactPage />} />
         <Route path="/about/awards" element={<AwardsPage />} />
         <Route path="/facilities/transport" element={<TransportPage />} />

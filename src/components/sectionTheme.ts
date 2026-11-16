@@ -1,6 +1,7 @@
 import {
   Building2,
   BookOpen,
+  Briefcase,
   GraduationCap,
   HeartPulse,
   Scale,
@@ -33,6 +34,7 @@ const SECTIONS: { prefix: string; theme: SectionTheme }[] = [
   { prefix: "/about", theme: { name: "Discover AIMS", Icon: ShieldCheck } },
   { prefix: "/approvals", theme: { name: "Approvals & Excellence", Icon: ShieldCheck } },
   { prefix: "/committess", theme: { name: "Committees", Icon: Scale } },
+  { prefix: "/careers", theme: { name: "Careers", Icon: Briefcase } },
 ];
 
 export const DEFAULT_THEME: SectionTheme = {

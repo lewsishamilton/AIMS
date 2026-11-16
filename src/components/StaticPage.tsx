@@ -14,6 +14,7 @@ import ComplaintsFeedbackForm from "./ComplaintsFeedbackForm";
 import CampusVirtualTour from "./CampusVirtualTour";
 import { GovernmentApprovalDocs, UniversityAffiliationDocs, MbbsCurriculumDoc } from "./DocumentList";
 import PageHero from "./PageHero";
+import TeachingApplyOptions from "./TeachingApplyOptions";
 import { groupSections } from "./ContentBlocks";
 
 export interface PageCard {
@@ -420,6 +421,7 @@ const PAGE_BOTTOM_WIDGETS: Record<string, React.FC | undefined> = {
   "/approvals/government": GovernmentApprovalDocs,
   "/approvals/university-affiliation": UniversityAffiliationDocs,
   "/academics/mbbs": MbbsCurriculumDoc,
+  "/careers/teaching": TeachingApplyOptions,
 };
 
 const StaticPage: React.FC<StaticPageDef> = ({

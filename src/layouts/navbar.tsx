@@ -174,6 +174,14 @@ const Navbar = () => {
                 { name: "Complaints & Feedback", path: "/patient-care/feedback" },
             ],
         },
+        {
+            name: "CAREERS",
+            path: "/careers/teaching",
+            dropdown: [
+                { name: "Teaching", path: "/careers/teaching" },
+                { name: "Non-Teaching", path: "/careers/non-teaching" },
+            ],
+        },
     ];
 
     // LMS and ERP are separate sites: open them in a new tab.
@@ -400,7 +408,7 @@ const Navbar = () => {
                 {/* Menu Button */}
                 <Link
                     to={link.path}
-                    className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap px-2.5 2xl:px-3.5 py-1.5 rounded-full font-semibold tracking-wide text-[13px] 2xl:text-sm border border-transparent transition-all duration-300 ease-out ${activeHoverPill}`}
+                    className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap px-1.5 min-[1440px]:px-2.5 2xl:px-3.5 py-1.5 rounded-full font-semibold tracking-wide text-[13px] 2xl:text-sm border border-transparent transition-all duration-300 ease-out ${activeHoverPill}`}
                 >
                     <span>{link.name}</span>
                     <ChevronDown />
@@ -501,7 +509,7 @@ const Navbar = () => {
             `}</style>
 
             <nav
-                className={`fixed top-0 left-0 w-full px-2.5 min-[360px]:px-3 min-[400px]:px-5 md:px-12 xl:px-8 2xl:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
+                className={`fixed top-0 left-0 w-full px-2.5 min-[360px]:px-3 min-[400px]:px-5 md:px-12 xl:px-6 min-[1440px]:px-8 2xl:px-20 font-['Inter',sans-serif] transition-colors duration-300 z-50 ${
                     theme === "dark" ? "text-white" : isWhiteTheme ? "text-gray-900" : "text-white"
                 }`}
             >
@@ -533,7 +541,7 @@ const Navbar = () => {
                     </div>
 
                     {/* News, Virtual Tour, Call Icon & Theme Toggle (Desktop) */}
-                    <div className="hidden xl:flex items-center gap-3 shrink-0">
+                    <div className="hidden xl:flex items-center gap-2 min-[1440px]:gap-3 shrink-0">
                         <Link
                             to="/aims-in-the-news"
                             title="AIMS in the News"
