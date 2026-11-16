@@ -310,3 +310,30 @@ html.dark [class*="dark:bg-[#070f1e]"] {
 @keyframes m-reveal {
   from { opacity: 0; transform: translateY(48px) scale(0.96); }
 }
+
+/* ── Careers: "Apply Online" / "Download Form (PDF)" buttons ──
+   A calm colour cycle (navy → teal → royal blue), changing every 3 seconds, to draw the eye of
+   people looking to apply. White text stays readable on every shade. The two buttons run out of
+   step so they never change together. Reduced-motion users get the steady navy button. */
+@keyframes apply-cycle {
+  0%, 26%   { background-color: #1f3351; border-color: #1f3351; box-shadow: 0 6px 18px rgba(31, 51, 81, 0.28); }
+  33%, 59%  { background-color: #0f766e; border-color: #0f766e; box-shadow: 0 6px 18px rgba(15, 118, 110, 0.32); }
+  66%, 92%  { background-color: #1e4fa3; border-color: #1e4fa3; box-shadow: 0 6px 18px rgba(30, 79, 163, 0.30); }
+  100%      { background-color: #1f3351; border-color: #1f3351; box-shadow: 0 6px 18px rgba(31, 51, 81, 0.28); }
+}
+
+.apply-cta {
+  color: #fff !important;
+  background-color: #1f3351;
+  border: 1px solid #1f3351;
+  animation: apply-cycle 9s ease-in-out infinite;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+.apply-cta:hover { transform: translateY(-1px); filter: brightness(1.08); }
+.apply-cta:focus-visible { outline: 3px solid #5eead4; outline-offset: 2px; }
+/* Second button starts on teal, so the pair is always two different colours. */
+.apply-cta--alt { animation-delay: -3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .apply-cta, .apply-cta--alt { animation: none; }
+}

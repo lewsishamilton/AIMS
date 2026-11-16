@@ -236,7 +236,7 @@ function ApplicationForm() {
         <a
           href={BLANK_FORM_URL}
           download={BLANK_FORM_FILENAME}
-          className="inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-xl border border-[#1f3351]/25 px-4 font-semibold hover:bg-[#1f3351]/5 dark:border-white/25"
+          className="apply-cta apply-cta--alt inline-flex min-h-10 shrink-0 items-center justify-center gap-2 rounded-xl px-4 font-semibold"
         >
           <Download className="h-4 w-4" aria-hidden="true" /> Download Form (PDF)
         </a>

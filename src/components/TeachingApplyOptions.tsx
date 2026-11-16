@@ -27,7 +27,7 @@ export default function TeachingApplyOptions() {
             Fill in the Application for Faculty Recruitment on this website. It reaches the institute as a PDF and you
             get a confirmation by email.
           </p>
-          <Link to="/careers/teaching/apply" className={`${btn} bg-[#1f3351] text-white hover:bg-[#0d2346] dark:bg-white dark:text-[#1f3351]`}>
+          <Link to="/careers/teaching/apply" className={`${btn} apply-cta`}>
             <FileText className="h-4 w-4" aria-hidden="true" /> Apply Online
           </Link>
         </div>
@@ -68,7 +68,7 @@ export default function TeachingApplyOptions() {
           <a
             href={BLANK_FORM_URL}
             download={BLANK_FORM_FILENAME}
-            className={`${btn} border border-[#1f3351]/25 text-[#1f3351] hover:bg-[#1f3351]/5 dark:border-white/25 dark:text-white`}
+            className={`${btn} apply-cta apply-cta--alt`}
           >
             <Download className="h-4 w-4" aria-hidden="true" /> Download Form (PDF)
           </a>
