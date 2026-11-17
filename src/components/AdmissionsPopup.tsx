@@ -1,7 +1,7 @@
 import React from "react";
 import FloatingPoster from "./FloatingPoster";
 
-const POPUP_IMAGE = "/images/admissions-popup.png?v=3";
+const POPUP_IMAGE = "/images/admissions-popup.png?v=4";
 
 /**
  * Existing admissions poster, fixed in the center of the home page.
@@ -12,7 +12,7 @@ const POPUP_IMAGE = "/images/admissions-popup.png?v=3";
 export const AdmissionsPopup: React.FC = () => (
   <FloatingPoster
     src={POPUP_IMAGE}
-    alt="PG / MD / MS admissions announcement. Admission enquiry: Dr. Ch. Achireddy, 9000994842"
+    alt="AIMS included in the NMC updated PG seat matrix for 2026–27. PG courses: MD Dermatology, General Medicine, Paediatrics, Anesthesiology, Biochemistry, Pathology; MS Obstetrics and Gynaecology, Orthopedics, General Surgery, Ophthalmology. Admissions enquiry: Dr. Ch. Achireddy, 9000994842"
     label="Admissions announcement poster"
     closeLabel="Close admissions poster"
     posterId="admissions"
