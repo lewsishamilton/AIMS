@@ -260,14 +260,14 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
               <span className="font-['Manrope',sans-serif] text-[11px] font-bold uppercase tracking-[0.18em] text-white">
-                Today
+                Yesterday
               </span>
             </div>
 
             <div
               className="relative min-w-0 flex-1 overflow-hidden py-3"
               role="region"
-              aria-label="Hospital figures today"
+              aria-label="Hospital figures yesterday"
             >
               <div className="hospital-marquee-track">
                 {renderGroup(0)}
@@ -313,7 +313,7 @@ export const HospitalStatsMarquee: React.FC<HospitalStatsMarqueeProps> = ({
               <div>
                 <h2 className="text-base font-bold tracking-wide">Edit Hospital Stats</h2>
                 <p className={`text-xs mt-0.5 ${isWhiteTheme ? "text-[#1f3351]/50" : "text-white/50"}`}>
-                  Update every figure shown in Today
+                  Update every figure shown in Yesterday
                 </p>
               </div>
               <button

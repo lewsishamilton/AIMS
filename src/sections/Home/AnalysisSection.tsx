@@ -116,7 +116,7 @@ const OP_C = "var(--op-color)", IP_C = "#d97706"
 const TABS = [
   { key: "trend", tab: "Monthly Trend" },
   { key: "dept", tab: "Departments" },
-  { key: "today", tab: "Today" },
+  { key: "today", tab: "Yesterday" },
 ]
 
 const W = 1000, H = 320, PAD_L = 90, PAD_X = 30, PAD_TOP = 24, PAD_BOTTOM = 70
@@ -313,8 +313,8 @@ export const AnalysisSection: React.FC = () => {
     { value: 21, label: "Departments", plus: false },
     {
       value: figures.opd,
-      label: "OPD consultations today",
-      sub: manual ? "Updated manually" : publishedStats ? "Latest published figures" : "Today's figures",
+      label: "OPD consultations yesterday",
+      sub: manual ? "Updated manually" : publishedStats ? "Latest published figures" : "Yesterday's figures",
       plus: true,
     },
   ]
