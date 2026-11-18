@@ -15,6 +15,7 @@ import CampusVirtualTour from "./CampusVirtualTour";
 import { GovernmentApprovalDocs, UniversityAffiliationDocs, MbbsCurriculumDoc } from "./DocumentList";
 import PageHero from "./PageHero";
 import TeachingApplyOptions from "./TeachingApplyOptions";
+import { TeachingRecruitmentShowcase, NonTeachingRecruitmentShowcase } from "./RecruitmentShowcase";
 import { groupSections } from "./ContentBlocks";
 
 export interface PageCard {
@@ -413,6 +414,8 @@ const PAGE_WIDGETS: Record<string, React.FC | undefined> = {
   "/admissions/seat-matrix": SeatMatrix,
   "/admissions/forms": ApplicationForms,
   "/patient-care/feedback": ComplaintsFeedbackForm,
+  "/careers/teaching": TeachingRecruitmentShowcase,
+  "/careers/non-teaching": NonTeachingRecruitmentShowcase,
 };
 
 /** Purpose-built blocks rendered below main content or cards. */
