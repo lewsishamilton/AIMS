@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { CONTACT, localDigits, telHref } from "../../data/siteInfo";
 import { motion } from "motion/react";
 import logo from "../../assets/logo.webp";
 import logoWhite from "../../assets/logo-white.webp";
@@ -37,7 +38,7 @@ export const ContactSection: React.FC = () => {
     setTimeout(() => setCopiedNumber(null), 2500);
   };
 
-  const copied = copiedNumber === "9000994842";
+  const copied = copiedNumber === localDigits(CONTACT.admissionsPhone);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -89,7 +90,7 @@ export const ContactSection: React.FC = () => {
     setErrorMessage(null);
     setIsSubmitted(false);
 
-    const targetEmail = "arundathihospital@gmail.com";
+    const targetEmail = CONTACT.email;
     const subjectLine = formData.subject
       ? `[AIMS Inquiry] ${formData.subject} - from ${formData.name}`
       : `[AIMS Inquiry] New Contact Message from ${formData.name}`;
@@ -211,14 +212,14 @@ export const ContactSection: React.FC = () => {
                 </h3>
                 <div className="mt-1.5 flex items-center gap-2">
                   <a
-                    href="tel:+919000994842"
+                    href={telHref(CONTACT.admissionsPhone)}
                     className="text-base sm:text-xl font-semibold text-[#1f3351] dark:text-white tracking-wide whitespace-nowrap hover:underline underline-offset-4"
                   >
-                    +91 90009 94842
+                    {CONTACT.admissionsPhone}
                   </a>
                   <button
                     type="button"
-                    onClick={() => handleCopyNumber("9000994842")}
+                    onClick={() => handleCopyNumber(localDigits(CONTACT.admissionsPhone))}
                     aria-label={copied ? "Number copied" : "Copy admissions number"}
                     title={copied ? "Copied" : "Copy number"}
                     className="relative shrink-0 w-8 h-8 -mr-1.5 rounded-lg after:absolute after:-inset-1.5 after:content-[''] text-[#1f3351]/70 hover:text-[#1f3351] hover:bg-[#1f3351]/[0.06] dark:text-white/70 dark:hover:text-white dark:hover:bg-white/10 flex items-center justify-center transition-colors cursor-pointer"
@@ -233,14 +234,14 @@ export const ContactSection: React.FC = () => {
             <div className="flex flex-col gap-3 w-full lg:w-[340px] shrink-0">
               <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
                 <a
-                  href="tel:+919000994842"
+                  href={telHref(CONTACT.admissionsPhone)}
                   className="inline-flex items-center justify-center gap-2 min-h-12 px-3 rounded-2xl bg-[#1f3351] hover:bg-[#0d2346] text-white dark:bg-white dark:text-[#1f3351] dark:hover:bg-[#fbfaf5] font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.97]"
                 >
                   <PhoneCall className="w-4 h-4 shrink-0" aria-hidden="true" />
                   <span>Call Now</span>
                 </a>
                 <a
-                  href="https://wa.me/919000994842?text=Hello%20Dr.%20Achireddy%20Sir,%20I%20am%20inquiring%20about%20admissions%20at%20AIMS."
+                  href={`https://wa.me/91${localDigits(CONTACT.admissionsPhone)}?text=Hello%20Dr.%20Achireddy%20Sir,%20I%20am%20inquiring%20about%20admissions%20at%20AIMS.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 min-h-12 px-3 rounded-2xl bg-white hover:bg-[#1f3351]/[0.04] text-[#1f3351] border border-[#1f3351]/20 dark:bg-transparent dark:hover:bg-white/10 dark:text-white dark:border-white/25 font-bold text-sm transition-all duration-200 active:scale-[0.97]"
@@ -296,8 +297,7 @@ export const ContactSection: React.FC = () => {
                       Campus Address
                     </span>
                     <p className="text-sm text-[#1f3351] dark:text-slate-200 mt-0.5 leading-relaxed font-medium">
-                      Beside MLRIT, Dundigal, Gandi Maisamma, Medchal-Malkajgiri
-                      District, Telangana 500043
+                      {CONTACT.address}
                     </p>
                   </div>
                 </div>
@@ -312,11 +312,11 @@ export const ContactSection: React.FC = () => {
                       Hospital &amp; Emergency
                     </span>
                     <a
-                      href="tel:+918055667888"
+                      href={telHref(CONTACT.receptionPhone)}
                       className="text-sm text-[#1f3351] dark:text-teal-300 font-semibold hover:underline block mt-0.5"
                     >
                       <span className="text-xs font-medium text-[#4b6382] dark:text-teal-400 mr-1.5">Reception:</span>
-                      +91 80556 67888
+                      {CONTACT.receptionPhone}
                     </a>
                     <span className="text-xs text-[#62748a] dark:text-slate-400 block mt-0.5">
                       Emergency &amp; Ambulance services available 24/7
@@ -334,10 +334,10 @@ export const ContactSection: React.FC = () => {
                       Email Inquiry
                     </span>
                     <a
-                      href="mailto:arundathihospital@gmail.com"
+                      href={`mailto:${CONTACT.email}`}
                       className="text-sm text-[#1f3351] dark:text-teal-300 font-semibold hover:underline block mt-0.5 break-all"
                     >
-                      arundathihospital@gmail.com
+                      {CONTACT.email}
                     </a>
                   </div>
                 </div>
@@ -388,7 +388,7 @@ export const ContactSection: React.FC = () => {
                     <span>
                       Thank you for contacting us. Your message has been sent to{" "}
                       <span className="font-semibold text-emerald-950 dark:text-emerald-200">
-                        arundathihospital@gmail.com
+                        {CONTACT.email}
                       </span>{" "}
                       and our team will respond to you promptly.
                     </span>

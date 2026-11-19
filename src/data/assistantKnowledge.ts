@@ -7,6 +7,11 @@ import { chronicles } from "./newsChroniclesData";
 import { COMMITTEES } from "./committees";
 import { BUS_ROUTES } from "./busRoutesData";
 import publishedStats from "./todayStats.json";
+import { CONTACT, SEAT_MATRIX } from "./siteInfo";
+import { DAY_NAMES, OPD_CLOSE_MIN, OPD_DAYS, OPD_OPEN_MIN, formatTime } from "../components/opdStatus";
+import { DEPARTMENT_METADATA } from "./departmentsData";
+import { MACHINES_DATA } from "./machines";
+import { departments as AWARD_DEPARTMENTS, facultyAchievements, nationalAwards } from "./awardsData";
 import { TODAY_METRICS } from "../lib/hospitalStats";
 import {
   BLANK_FORM_URL,
@@ -47,10 +52,23 @@ interface Entry {
   boost?: number;
 }
 
-const PHONE = "+91 80556 67888";
-const ADMISSIONS_PHONE = "+91 90009 94842 (Dr. Achireddy)";
-const EMAIL = "arundathihospital@gmail.com";
-const ADDRESS = "Beside MLRIT, Dundigal, Gandi Maisamma, Medchal-Malkajgiri District, Telangana 500043";
+// Contact details come from data/siteInfo.ts — the same source as the footer and the home contact section.
+const PHONE = CONTACT.receptionPhone;
+const ADMISSIONS_PHONE = `${CONTACT.admissionsPhone} (${CONTACT.admissionsContact})`;
+const EMAIL = CONTACT.email;
+const ADDRESS = CONTACT.address;
+
+/** A content page's current subtitle, so FAQ answers that summarise a page follow its edits. */
+const pageText = (path: string, fallback: string) => STATIC_PAGES[path]?.subtitle ?? fallback;
+
+/** "Monday to Saturday, 9:00 AM to 4:00 PM", from the same constants the OPD Timings page uses. */
+const opdHours = () => {
+  const days = [...OPD_DAYS].sort((a, b) => a - b);
+  const contiguous = days.every((d, i) => i === 0 || d === days[i - 1] + 1);
+  const dayText =
+    contiguous && days.length > 1 ? `${DAY_NAMES[days[0]]} to ${DAY_NAMES[days[days.length - 1]]}` : days.map((d) => DAY_NAMES[d]).join(", ");
+  return `${dayText}, ${formatTime(OPD_OPEN_MIN)} to ${formatTime(OPD_CLOSE_MIN)}`;
+};
 
 const fmtNum = (n: number) => n.toLocaleString("en-IN");
 const fmtDate = (iso: string) => {
@@ -87,7 +105,7 @@ const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Contact details",
     keywords: ["contact", "phone", "number", "call", "email", "mail", "reception", "helpline", "mobile", "achireddy", "telephone"],
-    answer: `Reception: ${PHONE}\nAdmissions Enquiry (Dr. Achireddy): ${ADMISSIONS_PHONE}\nEmail: ${EMAIL}`,
+    answer: `Reception: ${PHONE}\nAdmissions Enquiry: ${ADMISSIONS_PHONE}\nEmail: ${EMAIL}\nAddress: ${ADDRESS}`,
     links: [{ label: "Contact page", path: "/contact" }],
   },
   {
@@ -108,7 +126,7 @@ const FAQ: Omit<Entry, "text">[] = [
   {
     title: "OPD timings",
     keywords: ["opd timings", "opd", "timing", "timings", "hours", "open", "close", "time", "outpatient", "consultation", "visiting", "doctor available", "sunday"],
-    answer: "The OPD runs Monday to Saturday, 9:00 AM to 4:00 PM. Emergency and casualty are open 24×7.",
+    answer: `The OPD runs ${opdHours()}. Emergency and casualty are open 24×7.`,
     links: [{ label: "OPD Timings & Visiting", path: "/patient-care/opd-timings" }],
   },
   {
@@ -130,13 +148,13 @@ const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Seat matrix",
     keywords: ["seats", "seat", "intake", "matrix", "quota", "category", "nri", "convener", "how many seats", "mbbs seats"],
-    answer: "AIMS has 150 MBBS seats: A-Category 75 (50%), B-Category 52 (35%) and C-Category / NRI 23 (15%).",
+    answer: `AIMS has ${SEAT_MATRIX.total} MBBS seats: ${SEAT_MATRIX.categories.map((c) => `${c.name}${"note" in c ? ` / ${c.note}` : ""} ${c.seats} (${c.share}%)`).join(", ")}.`,
     links: [{ label: "Seat Matrix", path: "/admissions/seat-matrix" }],
   },
   {
     title: "Fees",
     keywords: ["fee", "fees", "tuition", "payment", "pay", "dd", "demand draft"],
-    answer: "MBBS fees are fixed by the state fee regulatory notification each year. The Fee Structure page explains what is covered, and the Application Forms page has the bank details for fee payment.",
+    answer: pageText("/admissions/fee-structure", "MBBS fees are fixed by the state fee regulatory notification each year."),
     links: [
       { label: "Fee Structure", path: "/admissions/fee-structure" },
       { label: "Bank details & forms", path: "/admissions/forms" },
@@ -145,7 +163,7 @@ const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Application forms",
     keywords: ["form", "forms", "bond", "affidavit", "checklist", "proforma", "download form"],
-    answer: "All admission forms and bonds (checklist, fee bond, bank guarantee, discontinuation bond, genuinity bond, anti-ragging bond, NRI affidavit) can be viewed and downloaded on the Application Forms page.",
+    answer: pageText("/admissions/forms", "All admission forms and bonds can be viewed and downloaded on the Application Forms page."),
     links: [{ label: "Application Forms", path: "/admissions/forms" }],
   },
   {
@@ -195,7 +213,7 @@ const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Brochure",
     keywords: ["brochure", "prospectus", "booklet", "download brochure"],
-    answer: "You can open or download the AIMS brochure (PDF, 22.7 MB).",
+    answer: "You can open or download the AIMS brochure (PDF).",
     links: [{ label: "Open brochure", path: "/documents/aims-brochure.pdf", external: true }],
   },
   {
@@ -436,12 +454,73 @@ function buildEntries(): Entry[] {
     });
   }
 
+  // Department pages' own sections (overview, highlights, facilities...) feed the department answer's matching
+  // and answer on their own when asked about a specific facility.
+  for (const [id, meta] of Object.entries(DEPARTMENT_METADATA)) {
+    for (const sec of meta.details?.sections ?? []) {
+      if (!sec.title) continue;
+      const body = flatten([sec.subtitle, sec.content, sec.bullets]);
+      if (!body.trim()) continue;
+      const bullets = sec.bullets?.length ? `\n• ${sec.bullets.slice(0, 8).join("\n• ")}` : "";
+      const prose = Array.isArray(sec.content) ? sec.content[0] : sec.content;
+      entries.push({
+        title: `${meta.name} – ${sec.title}`,
+        keywords: [meta.name, ...(DEPT_ALIASES[id] ?? [])],
+        text: body,
+        answer: `${meta.name} – ${sec.title}: ${prose ?? ""}${bullets}`.replace(": \n", ":\n"),
+        links: [{ label: `${meta.name} department`, path: `/departments/${id}` }],
+      });
+    }
+  }
+
+  // Machines & Equipment page.
+  for (const m of MACHINES_DATA) {
+    entries.push({
+      title: m.name,
+      keywords: [m.category ?? ""],
+      text: m.description,
+      answer: `${m.name}${m.category ? ` (${m.category})` : ""}: ${m.description}`,
+      links: [{ label: "Machines & Equipment", path: "/machines-equipment" }],
+    });
+  }
+
+  // Awards page: department, faculty and national awards.
+  for (const d of AWARD_DEPARTMENTS) {
+    for (const a of d.achievements) {
+      entries.push({
+        title: a.title,
+        keywords: [d.name, a.category, a.badge, "award", "achievement"],
+        text: [a.description, a.recognition, a.people, a.collaborators].join(" "),
+        answer: `${a.title} (${d.name}): ${a.description}`,
+        links: [{ label: "Awards & Achievements", path: "/about/awards" }],
+      });
+    }
+  }
+  for (const a of facultyAchievements) {
+    entries.push({
+      title: `${a.name} – ${a.award}`,
+      keywords: [a.department, "award", "achievement"],
+      text: [a.occasion, a.description, a.significance].join(" "),
+      answer: `${a.name} (${a.department}) received ${a.award}${a.occasion ? ` at ${a.occasion}` : ""}. ${a.description}`,
+      links: [{ label: "Awards & Achievements", path: "/about/awards" }],
+    });
+  }
+  for (const a of nationalAwards) {
+    entries.push({
+      title: `${a.recipient} – ${a.award}`,
+      keywords: [a.program, a.domain, "national award", "award"],
+      text: a.details,
+      answer: `${a.recipient} (${a.program}) — ${a.award}. ${a.details}`,
+      links: [{ label: "Awards & Achievements", path: "/about/awards" }],
+    });
+  }
+
   // Leadership: Dean, Principal, President, Secretary... read from the management data.
   for (const m of ALL_LEADERSHIP_MEMBERS) {
     entries.push({
       title: `${m.role} ${m.name}`,
       keywords: [m.role, m.designationNote ?? "", ...(ROLE_ALIASES[m.role] ?? [])],
-      text: [m.departmentOrWing, m.profile?.title].filter(Boolean).join(" "),
+      text: [m.departmentOrWing, m.profile?.title, ...(m.profile?.bio ?? [])].filter(Boolean).join(" "),
       answer: `${m.name} is the ${m.role}${m.designationNote ? ` (${m.designationNote})` : ""} of AIMS.`,
       links: [
         { label: `${m.role} — profile`, path: `/leadership/${m.id}` },
@@ -629,4 +708,14 @@ export function matchQuestion(question: string): AssistantReply {
     };
   }
   return FALLBACK;
+}
+
+if (import.meta.env?.DEV) {
+  void import("../seo/routeMeta").then(({ metaFor }) => {
+    const missing = new Set<string>();
+    for (const e of buildEntries())
+      for (const l of e.links)
+        if (!l.external && !/^\/(documents|forms)\//.test(l.path) && !metaFor(l.path)) missing.add(`${l.path} (from "${e.title}")`);
+    if (missing.size) console.warn("[assistant] links to pages that do not exist:\n" + [...missing].join("\n"));
+  });
 }

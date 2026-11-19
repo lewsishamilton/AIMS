@@ -1,5 +1,6 @@
 import logoWhite from "../assets/logo-white.webp";
 import VisitorCounter from "../components/VisitorCounter";
+import { CONTACT, MAPS_URL, telHref } from "../data/siteInfo";
 
 // Mirrors the navbar's order: Discover → Academics/Admissions → Hospital/Patient Care.
 const footerColumns = [
@@ -75,7 +76,7 @@ export default function Footer() {
               </h3>
               <div className="flex flex-col gap-3 mt-4 max-w-sm items-center md:items-start text-center md:text-left">
                 <a
-                  href="https://maps.google.com/?q=Beside+MLRIT,+Dundigal,+Gandi+Maisamma,+Medchal-Malkajgiri+District,+Telangana+500043"
+                  href={MAPS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3 text-sm text-white/60 hover:text-white transition-colors"
@@ -87,13 +88,10 @@ export default function Footer() {
                   >
                     <path d="M10 0C5.86 0 2.5 3.36 2.5 7.5c0 6.25 7.5 12.5 7.5 12.5s7.5-6.25 7.5-12.5C17.5 3.36 14.14 0 10 0zm0 10.5a3 3 0 110-6 3 3 0 010 6z" />
                   </svg>
-                  <span>
-                    Beside MLRIT, Dundigal, Gandi Maisamma,
-                    Medchal-Malkajgiri Dist. Telangana 500043
-                  </span>
+                  <span>{CONTACT.address}</span>
                 </a>
                 <a
-                  href="tel:+919000994842"
+                  href={telHref(CONTACT.admissionsPhone)}
                   className="flex items-center gap-3 text-sm text-white/90 hover:text-white transition-colors font-medium"
                 >
                   <svg
@@ -103,10 +101,10 @@ export default function Footer() {
                   >
                     <path d="M2 3.5A1.5 1.5 0 013.5 2h2.1a1 1 0 01.98.8l.9 4.5a1 1 0 01-.6 1.14l-2.08.83a13.1 13.1 0 005.9 5.9l.83-2.08a1 1 0 011.14-.6l4.5.9a1 1 0 01.8.98v2.1a1.5 1.5 0 01-1.5 1.5h-1C9.2 19 2 11.65 2 5v-1.5z" />
                   </svg>
-                  <span>Admissions (Dr. Achireddy): +91 90009 94842</span>
+                  <span>Admissions (Dr. Achireddy): {CONTACT.admissionsPhone}</span>
                 </a>
                 <a
-                  href="tel:+918055667888"
+                  href={telHref(CONTACT.receptionPhone)}
                   className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
                 >
                   <svg
@@ -116,10 +114,10 @@ export default function Footer() {
                   >
                     <path d="M2 3.5A1.5 1.5 0 013.5 2h2.1a1 1 0 01.98.8l.9 4.5a1 1 0 01-.6 1.14l-2.08.83a13.1 13.1 0 005.9 5.9l.83-2.08a1 1 0 011.14-.6l4.5.9a1 1 0 01.8.98v2.1a1.5 1.5 0 01-1.5 1.5h-1C9.2 19 2 11.65 2 5v-1.5z" />
                   </svg>
-                  <span>+91 80556 67888</span>
+                  <span>{CONTACT.receptionPhone}</span>
                 </a>
                 <a
-                  href="mailto:arundathihospital@gmail.com"
+                  href={`mailto:${CONTACT.email}`}
                   className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
                 >
                   <svg
@@ -130,7 +128,7 @@ export default function Footer() {
                     <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                     <path d="M18 8.118l-8 4-8-4v6a2 2 0 002 2h12a2 2 0 002-2v-6z" />
                   </svg>
-                  <span>arundathihospital@gmail.com</span>
+                  <span>{CONTACT.email}</span>
                 </a>
               </div>
 

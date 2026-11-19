@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "motion/react";
 import { CheckCircle2, ShieldCheck, Building2 } from "lucide-react";
+import { SEAT_MATRIX } from "../data/siteInfo";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -36,30 +37,16 @@ export const SeatMatrix: React.FC = () => {
               </tr>
             </thead>
             <tbody className="divide-y divide-[#cbd5e1] dark:divide-white/10">
-              <tr className="transition-colors hover:bg-slate-50 dark:hover:bg-white/[0.02]">
-                <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#1f3351] sm:px-8 dark:border-white/10 dark:text-white">
-                  A-Category
-                </td>
-                <td className="px-6 py-4 font-medium text-[#334155] sm:px-8 dark:text-slate-200">
-                  50% of sanctioned intake (75 seats)
-                </td>
-              </tr>
-              <tr className="transition-colors hover:bg-slate-50 dark:hover:bg-white/[0.02]">
-                <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#1f3351] sm:px-8 dark:border-white/10 dark:text-white">
-                  B-Category
-                </td>
-                <td className="px-6 py-4 font-medium text-[#334155] sm:px-8 dark:text-slate-200">
-                  35% of sanctioned intake (52 seats)
-                </td>
-              </tr>
-              <tr className="transition-colors hover:bg-slate-50 dark:hover:bg-white/[0.02]">
-                <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#1f3351] sm:px-8 dark:border-white/10 dark:text-white">
-                  C-Category
-                </td>
-                <td className="px-6 py-4 font-medium text-[#334155] sm:px-8 dark:text-slate-200">
-                  15% of sanctioned intake (23 seats)
-                </td>
-              </tr>
+              {SEAT_MATRIX.categories.map((c) => (
+                <tr key={c.name} className="transition-colors hover:bg-slate-50 dark:hover:bg-white/[0.02]">
+                  <td className="border-r border-[#cbd5e1] px-6 py-4 font-['Manrope',sans-serif] font-bold text-[#1f3351] sm:px-8 dark:border-white/10 dark:text-white">
+                    {c.name}
+                  </td>
+                  <td className="px-6 py-4 font-medium text-[#334155] sm:px-8 dark:text-slate-200">
+                    {c.share}% of sanctioned intake ({c.seats} seats)
+                  </td>
+                </tr>
+              ))}
             </tbody>
             <tfoot>
               <tr className="border-t-2 border-[#cbd5e1] bg-[#f8fafc]/80 font-bold dark:border-white/10 dark:bg-white/[0.04]">
@@ -67,7 +54,7 @@ export const SeatMatrix: React.FC = () => {
                   Total
                 </td>
                 <td className="px-6 py-3.5 font-['Manrope',sans-serif] text-sm sm:text-base font-bold text-[#1f3351] sm:px-8 dark:text-white">
-                  100% of sanctioned intake (150 seats)
+                  100% of sanctioned intake ({SEAT_MATRIX.total} seats)
                 </td>
               </tr>
             </tfoot>
