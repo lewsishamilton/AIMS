@@ -19,6 +19,7 @@ import {
   BLANK_FORM_FILENAME,
   BLANK_FORM_URL,
   RECRUITMENT_EMAIL,
+  RECRUITMENT_OPENINGS,
   RECRUITMENT_PHONES,
 } from "../data/facultyApplication";
 
@@ -28,23 +29,9 @@ import {
  * reads well on phones and to screen readers; the poster itself opens full size on click.
  */
 
-const OPENINGS = [
-  {
-    icon: Briefcase,
-    title: "Faculty Posts",
-    lines: ["Professor · Associate Professor", "Assistant Professor · Senior Resident", "14 departments"],
-  },
-  {
-    icon: HeartPulse,
-    title: "Nursing Staff",
-    lines: ["GNM & B.Sc. Nursing", "With TSMC, INC registration", "Experienced candidates preferred"],
-  },
-  {
-    icon: Monitor,
-    title: "Computer Operators",
-    lines: ["Any degree with computer knowledge", "English and Telugu typing"],
-  },
-];
+/** Icon per opening; the openings themselves live in data/facultyApplication.ts (shared with the site assistant). */
+const OPENING_ICONS = { faculty: Briefcase, nursing: HeartPulse, computer: Monitor } as const;
+const OPENINGS = RECRUITMENT_OPENINGS.map((o) => ({ ...o, icon: OPENING_ICONS[o.key] }));
 
 function Lightbox({ onClose }: { onClose: () => void }) {
   useEffect(() => {

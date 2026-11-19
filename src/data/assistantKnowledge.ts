@@ -1,11 +1,33 @@
 import { STATIC_PAGES } from "./pages";
 import { DEPARTMENTS, ALL_FACULTY, getDepartmentHod } from "./facultyData";
 import { formatFacultyName } from "../sections/Faculty/FacultyCardProp";
+import { ALL_LEADERSHIP_MEMBERS } from "./managementData";
+import { ADMITTED_BATCHES } from "./admittedStudents";
+import { chronicles } from "./newsChroniclesData";
+import { COMMITTEES } from "./committees";
+import { BUS_ROUTES } from "./busRoutesData";
+import publishedStats from "./todayStats.json";
+import { TODAY_METRICS } from "../lib/hospitalStats";
+import {
+  BLANK_FORM_URL,
+  RECRUITMENT_EMAIL,
+  RECRUITMENT_OPENINGS,
+  RECRUITMENT_PHONES,
+  RECRUITMENT_WALK_IN,
+} from "./facultyApplication";
 
 /**
- * Knowledge for the on-site assistant. Everything except the FAQ answers below is read from the
- * site's own data, so new pages, departments and faculty are picked up automatically.
- * ponytail: keyword-overlap scoring, no NLP. Swap matchQuestion for an LLM call if free-form chat is ever needed.
+ * Knowledge for the on-site assistant.
+ *
+ * Almost everything is read from the site's own data — content pages, departments, faculty,
+ * leadership, news, committees, bus routes, careers and the published hospital figures — so when
+ * the website changes, the assistant's answers change with it. Only the short FAQ answers below are
+ * written by hand, and those reuse the same contact constants the site uses.
+ *
+ * Matching is keyword scoring, with three refinements: words are weighted by how rare they are on
+ * the site (so "discharge" outweighs "process"), an exact page/department name wins, and near-misses
+ * ("gynecologist", small typos) still match. When nothing matches strongly, the closest pages are
+ * offered instead of a dead end.
  */
 
 export interface AssistantLink {
@@ -30,16 +52,47 @@ const ADMISSIONS_PHONE = "+91 90009 94842 (Dr. Achireddy)";
 const EMAIL = "arundathihospital@gmail.com";
 const ADDRESS = "Beside MLRIT, Dundigal, Gandi Maisamma, Medchal-Malkajgiri District, Telangana 500043";
 
+const fmtNum = (n: number) => n.toLocaleString("en-IN");
+const fmtDate = (iso: string) => {
+  const d = new Date(`${iso}T00:00:00`);
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+};
+const titleCase = (s: string) => s.toLowerCase().replace(/\b([a-z])/g, (m) => m.toUpperCase());
+
+// ── Live, data-driven answers ──────────────────────────────────────────────────────────────
+
+const careersAnswer = () => {
+  const openings = RECRUITMENT_OPENINGS.map((o) => `• ${o.title}: ${o.lines.join(", ")}`).join("\n");
+  return `AIMS is currently recruiting:\n${openings}\n${RECRUITMENT_WALK_IN} Email: ${RECRUITMENT_EMAIL}. Phone: ${RECRUITMENT_PHONES.join(" / ")}.`;
+};
+
+const statsAnswer = () => {
+  const s = publishedStats as { date?: string | null; stats?: Record<string, number> | null };
+  if (!s.stats) return "The latest daily hospital figures are shown in the ticker on the home page.";
+  const parts = TODAY_METRICS.filter((m) => typeof s.stats![m.key] === "number").map((m) => `${m.label} ${fmtNum(s.stats![m.key])}`);
+  return `Latest published hospital figures${s.date ? ` (for ${fmtDate(s.date)})` : ""}: ${parts.join(", ")}.`;
+};
+
+const latestNews = chronicles[chronicles.length - 1];
+const newsAnswer = () =>
+  latestNews
+    ? `Latest in AIMS in News: "${titleCase(latestNews.title)}" (${latestNews.subtitle}). ${latestNews.description}`
+    : "Press coverage of AIMS is collected on the AIMS in News page.";
+
+const admittedYears = ADMITTED_BATCHES.map((b) => b.academicYear).join(", ");
+
+// ── Hand-written FAQ ───────────────────────────────────────────────────────────────────────
+
 const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Contact details",
-    keywords: ["contact", "phone", "number", "call", "email", "mail", "reach", "reception", "helpline", "mobile", "achireddy", "admissions"],
+    keywords: ["contact", "phone", "number", "call", "email", "mail", "reception", "helpline", "mobile", "achireddy", "telephone"],
     answer: `Reception: ${PHONE}\nAdmissions Enquiry (Dr. Achireddy): ${ADMISSIONS_PHONE}\nEmail: ${EMAIL}`,
     links: [{ label: "Contact page", path: "/contact" }],
   },
   {
     title: "Location and directions",
-    keywords: ["address", "location", "where", "located", "directions", "map", "route", "dundigal", "reach", "how to come"],
+    keywords: ["address", "location", "where", "located", "directions", "map", "route", "dundigal", "how to reach", "how to come", "reach"],
     answer: `We are at ${ADDRESS}.`,
     links: [
       { label: "Open in Google Maps", path: "https://maps.google.com/?q=Arundathi+Institute+of+Medical+Sciences+Dundigal", external: true },
@@ -49,7 +102,7 @@ const FAQ: Omit<Entry, "text">[] = [
   {
     title: "Emergency and ambulance",
     keywords: ["emergency", "ambulance", "casualty", "trauma", "accident", "urgent", "icu", "critical"],
-    answer: `The casualty department is open 24×7. Come straight to casualty in an emergency.`,
+    answer: `The casualty department is open 24×7. Come straight to casualty in an emergency, or call ${PHONE}.`,
     links: [{ label: "Emergency Care", path: "/services/emergency-trauma" }],
   },
   {
@@ -66,7 +119,7 @@ const FAQ: Omit<Entry, "text">[] = [
   },
   {
     title: "Admissions",
-    keywords: ["admission", "admissions", "apply", "neet", "neet-pg", "counselling", "join", "eligibility", "eligible", "process", "mbbs seat", "pg seat"],
+    keywords: ["admission", "admissions", "apply", "neet", "neet-pg", "counselling", "join", "eligibility", "eligible"],
     answer: `MBBS admission is through NEET-UG and state counselling (KNRUHS); postgraduate MD/MS admission is through NEET-PG. Steps, criteria and required documents are on the Admissions pages. Admissions office: ${ADMISSIONS_PHONE}.`,
     links: [
       { label: "Admissions Overview", path: "/admissions" },
@@ -76,7 +129,7 @@ const FAQ: Omit<Entry, "text">[] = [
   },
   {
     title: "Seat matrix",
-    keywords: ["seats", "seat", "intake", "matrix", "quota", "category", "nri", "management", "convener"],
+    keywords: ["seats", "seat", "intake", "matrix", "quota", "category", "nri", "convener", "how many seats", "mbbs seats"],
     answer: "AIMS has 150 MBBS seats: A-Category 75 (50%), B-Category 52 (35%) and C-Category / NRI 23 (15%).",
     links: [{ label: "Seat Matrix", path: "/admissions/seat-matrix" }],
   },
@@ -97,13 +150,13 @@ const FAQ: Omit<Entry, "text">[] = [
   },
   {
     title: "Admitted students list",
-    keywords: ["admitted", "list", "students", "selected", "batch", "roll", "merit"],
-    answer: "The admitted MBBS student lists for 2023–24, 2024–25 and 2025–26 are on the Admitted List page, with a PDF download.",
+    keywords: ["admitted", "selected", "batch", "roll", "merit", "admitted list", "student list"],
+    answer: `The admitted MBBS student lists for ${admittedYears} are on the Admitted List page, with a PDF download.`,
     links: [{ label: "Admitted List", path: "/admissions/admitted-list" }],
   },
   {
     title: "Courses offered",
-    keywords: ["course", "courses", "programme", "program", "degree", "postgraduate", "post graduate", "pg", "md", "ms", "nursing", "bsc", "physiotherapy", "diploma", "paramedical", "allied"],
+    keywords: ["course", "courses", "programme", "program", "degree", "postgraduate", "post graduate", "nursing", "bsc", "physiotherapy", "diploma", "paramedical", "allied"],
     answer: "AIMS offers MBBS, postgraduate MD/MS programmes (subject to annual NMC recognition and KNRUHS notification), Nursing & Allied Health degrees (B.Sc. Nursing, B.Sc. MLT, Physiotherapy) and paramedical diplomas.",
     links: [
       { label: "MBBS", path: "/academics/mbbs" },
@@ -111,6 +164,33 @@ const FAQ: Omit<Entry, "text">[] = [
       { label: "Nursing & Allied Health", path: "/academics/nursing-allied-health" },
       { label: "Paramedical Diplomas", path: "/academics/paramedical-diplomas" },
     ],
+  },
+  {
+    title: "Careers and recruitment",
+    keywords: [
+      "career", "careers", "job", "jobs", "vacancy", "vacancies", "recruitment", "recruiting", "hiring", "opening", "openings",
+      "walk-in", "walk in", "interview", "salary", "resume", "cv", "work at aims", "staff nurse", "nursing staff",
+      "computer operator", "faculty post", "faculty recruitment", "apply for job", "teaching post", "assistant professor post",
+      "faculty job", "job application", "application form for job", "nurse job",
+    ],
+    answer: careersAnswer(),
+    links: [
+      { label: "Careers", path: "/careers" },
+      { label: "Apply online (faculty)", path: "/careers/teaching/apply" },
+      { label: "Download application form", path: BLANK_FORM_URL, external: true },
+    ],
+  },
+  {
+    title: "Hospital statistics",
+    keywords: ["statistics", "stats", "figures", "patients", "yesterday", "today", "opd count", "how many patients", "admitted patients", "surgeries done", "daily"],
+    answer: statsAnswer(),
+    links: [{ label: "Home page figures", path: "/" }],
+  },
+  {
+    title: "Latest news",
+    keywords: ["news", "latest", "press", "newspaper", "media coverage", "aims in news", "recent"],
+    answer: newsAnswer(),
+    links: [{ label: "AIMS in News", path: "/aims-in-the-news" }],
   },
   {
     title: "Brochure",
@@ -130,45 +210,45 @@ const FAQ: Omit<Entry, "text">[] = [
   },
   {
     title: "Bus routes and transport",
-    keywords: ["bus", "buses", "transport", "transportation", "route", "routes", "pickup", "stop", "driver", "commute"],
-    answer: "College buses run on multiple routes across Hyderabad. The Bus Routes page shows every route, its stops, and the in-charge and driver contacts.",
+    keywords: ["bus", "buses", "transport", "transportation", "routes", "pickup", "stop", "driver", "commute", "bus timings", "bus timing", "college bus"],
+    answer: `College buses run on ${BUS_ROUTES.length} routes across Hyderabad. The Bus Routes page shows every route, its stops, and the in-charge and driver contacts. Ask me about your area (for example "bus to Kompally").`,
     links: [{ label: "Bus Routes & Tracker", path: "/facilities/transport" }],
   },
   {
     title: "Hostel and campus life",
     keywords: ["hostel", "hostels", "mess", "food", "canteen", "gym", "sports", "stadium", "campus", "accommodation", "room"],
     answer: "The campus has boys' and girls' hostels, a mess and food court, a gymnasium, an indoor stadium and outdoor sports facilities.",
-    links: [{ label: "Campus Life", path: "/facilities/campus-life" }],
+    links: [
+      { label: "Campus Life", path: "/facilities/campus-life" },
+      { label: "Hostel", path: "/facilities/hostel" },
+    ],
   },
   {
     title: "Departments",
-    keywords: ["department", "departments", "specialty", "speciality", "branch", "subjects"],
+    keywords: ["departments", "specialty", "speciality", "specialities", "branch", "subjects", "all departments"],
     answer: `AIMS has ${DEPARTMENTS.length} academic departments across Pre-Clinical, Para-Clinical and Clinical. Ask about any department by name, or browse them all.`,
     links: [{ label: "All Departments", path: "/departments" }],
   },
   {
     title: "Faculty",
-    keywords: ["faculty", "doctors", "teachers", "professors", "staff", "lecturers"],
+    keywords: ["faculty", "doctors", "teachers", "professors", "lecturers", "list of doctors", "faculty list"],
     answer: `The Faculty Directory lists all ${ALL_FACULTY.length} faculty members by department. You can also ask me about a doctor by name.`,
     links: [{ label: "Faculty Directory", path: "/faculty" }],
   },
   {
-    title: "Dean",
-    keywords: ["dean", "principal", "head of college"],
-    answer: "The Dean of AIMS is Dr. B. Devanand. His profile and message are on the Dean page.",
-    links: [
-      { label: "Dean", path: "/dean" },
-      { label: "Management", path: "/management" },
-    ],
-  },
-  {
-    title: "Founder and management",
-    keywords: ["founder", "chairman", "president", "management", "owner", "rajasekhar", "laxman", "secretary", "trust", "society"],
-    answer: "AIMS was founded by Marri Rajasekhar Reddy. The executive committee is led by President Marri Laxman Reddy.",
+    title: "Founder",
+    keywords: ["founder", "founded", "established", "rajasekhar"],
+    answer: "AIMS was founded by Marri Rajasekhar Reddy.",
     links: [
       { label: "Founder", path: "/founder" },
       { label: "Management", path: "/management" },
     ],
+  },
+  {
+    title: "Management",
+    keywords: ["management", "management team", "executive committee", "leadership", "governing body", "trust", "society"],
+    answer: `The executive committee of AIMS: ${ALL_LEADERSHIP_MEMBERS.filter((m) => m.category === "executive").map((m) => `${m.name} (${m.role})`).join(", ")}.`,
+    links: [{ label: "Management", path: "/management" }],
   },
   {
     title: "Virtual tour",
@@ -177,8 +257,8 @@ const FAQ: Omit<Entry, "text">[] = [
     links: [{ label: "Virtual Tour", path: "/virtual-tour" }],
   },
   {
-    title: "Gallery, news and awards",
-    keywords: ["gallery", "photos", "pictures", "images", "events", "news", "media", "awards", "achievements"],
+    title: "Gallery and awards",
+    keywords: ["gallery", "photos", "pictures", "images", "events", "awards", "achievements"],
     answer: "Photos and events are in the Media Gallery, press coverage in AIMS in News, and achievements on the Awards page.",
     links: [
       { label: "Media Gallery", path: "/media-gallery" },
@@ -197,13 +277,9 @@ const FAQ: Omit<Entry, "text">[] = [
   },
   {
     title: "Committees",
-    keywords: ["committee", "committees", "ragging", "anti", "anti-ragging", "ethics", "posh", "harassment", "pharmacovigilance", "disciplinary", "meu", "scientific"],
-    answer: "AIMS has Anti-Ragging, Ethics, POSH Internal, Pharmacovigilance, Disciplinary and Scientific committees and a Medical Education Unit.",
-    links: [
-      { label: "Anti Ragging", path: "/committess/anti-ragging" },
-      { label: "POSH Internal", path: "/committess/posh-internal" },
-      { label: "Ethics", path: "/committess/ethics" },
-    ],
+    keywords: ["committee", "committees"],
+    answer: `AIMS has ${COMMITTEES.length} committees and units: ${COMMITTEES.map((c) => c.title).join(", ")}. Ask about any of them by name.`,
+    links: COMMITTEES.slice(0, 3).map((c) => ({ label: c.title, path: c.path })),
   },
   {
     title: "Complaints and feedback",
@@ -220,48 +296,119 @@ const ROUTE_PAGES: { title: string; path: string; keywords: string[]; answer: st
   { title: "Contact Us", path: "/contact", keywords: ["contact", "enquiry", "message", "write"], answer: "Send us a message or find our phone numbers and address." },
 ];
 
-/** Other spellings and short forms people type for department names. */
-const DEPT_ALIASES: Record<string, string[]> = {
-  paediatrics: ["pediatrics", "pediatric", "child", "children", "kids"],
-  "obstetrics-gynaecology": ["obg", "obgyn", "gynecology", "gynaecology", "gynec", "pregnancy", "maternity", "women"],
-  orthopaedics: ["orthopedics", "ortho", "bone", "fracture"],
-  anaesthesiology: ["anesthesiology", "anesthesia", "anaesthesia"],
-  ent: ["ear", "nose", "throat", "otorhinolaryngology"],
-  ophthalmology: ["eye", "eyes", "vision", "cataract"],
-  dermatology: ["skin", "dvl", "derma"],
-  "respiratory-medicine": ["pulmonology", "chest", "lungs", "tb", "asthma"],
-  radiology: ["radio-diagnosis", "radiodiagnosis", "imaging", "xray", "scan"],
-  dentistry: ["dental", "teeth", "tooth", "dentist"],
-  psychiatry: ["mental", "psychology", "psychiatrist"],
-  "forensic-medicine": ["forensic", "fmt"],
-  "community-medicine": ["spm", "psm", "preventive", "social medicine"],
-  "general-medicine": ["medicine", "physician", "fever"],
-  "general-surgery": ["surgery", "surgeon"],
+/** Everyday words for the super-speciality units listed as cards on the Specialities pages. */
+const CARD_ALIASES: Record<string, string[]> = {
+  cardiology: ["heart", "cardiac", "cardiologist", "chest pain", "heart attack"],
+  nephrology: ["kidney", "kidneys", "nephrologist", "dialysis"],
+  neurology: ["brain", "nerve", "nerves", "stroke", "epilepsy", "neurologist", "paralysis"],
+  neurosurgery: ["brain surgery", "spine surgery", "neurosurgeon"],
+  gastroenterology: ["stomach", "liver", "gastro", "digestion", "gastroenterologist"],
+  urology: ["urine", "urinary", "prostate", "urologist", "stones"],
 };
+
+/** Aliases for a card, matched by name containment ("Nephrology & Dialysis" → nephrology). */
+const cardAliases = (name: string) =>
+  Object.entries(CARD_ALIASES)
+    .filter(([k]) => name.toLowerCase().includes(k))
+    .flatMap(([, v]) => v);
+
+/** Other words people use for a committee. */
+const COMMITTEE_ALIASES: Record<string, string[]> = {
+  "/committess/anti-ragging": ["ragging", "ragging complaint", "report ragging"],
+  "/committess/posh-internal": ["sexual harassment", "harassment", "women safety"],
+};
+
+/** Other words people use for a leadership role. */
+const ROLE_ALIASES: Record<string, string[]> = {
+  President: ["chairman", "chairperson", "head of management"],
+  Principal: ["head of college"],
+  Dean: ["dean of college"],
+};
+
+/** Other spellings, short forms and "-ist" words people type for department names. */
+const DEPT_ALIASES: Record<string, string[]> = {
+  paediatrics: ["pediatrics", "pediatric", "paediatrician", "pediatrician", "child", "children", "kids", "child specialist"],
+  "obstetrics-gynaecology": ["obg", "obgyn", "gynecology", "gynaecology", "gynecologist", "gynaecologist", "gynec", "pregnancy", "maternity", "women", "delivery"],
+  orthopaedics: ["orthopedics", "ortho", "orthopedician", "orthopaedician", "bone", "fracture", "joint"],
+  anaesthesiology: ["anesthesiology", "anesthesia", "anaesthesia", "anaesthetist", "anesthesiologist"],
+  ent: ["ear", "nose", "throat", "otorhinolaryngology", "ent specialist"],
+  ophthalmology: ["eye", "eyes", "vision", "cataract", "ophthalmologist", "eye doctor"],
+  dermatology: ["skin", "dvl", "derma", "dermatologist", "hair"],
+  "respiratory-medicine": ["pulmonology", "pulmonologist", "chest", "lungs", "tb", "asthma"],
+  radiology: ["radio-diagnosis", "radiodiagnosis", "imaging", "radiologist"],
+  dentistry: ["dental", "teeth", "tooth", "dentist"],
+  psychiatry: ["mental", "psychology", "psychiatrist", "depression"],
+  "forensic-medicine": ["forensic", "fmt", "postmortem"],
+  "community-medicine": ["spm", "psm", "preventive", "social medicine"],
+  "general-medicine": ["medicine", "physician", "fever", "general physician"],
+  "general-surgery": ["surgery", "surgeon", "general surgeon"],
+};
+
+// ── Text helpers ───────────────────────────────────────────────────────────────────────────
 
 const words = (s: string) =>
   s
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, " ")
-    .split(/\s+/)
-    .map((w) => (w.length > 3 && w.endsWith("s") ? w.slice(0, -1) : w))
+    .split(/[\s-]+/)
+    .map((w) => (w.length > 3 && w.endsWith("s") && !w.endsWith("ss") ? w.slice(0, -1) : w))
     .filter((w) => w.length > 1);
 
 const flatten = (v: unknown): string =>
   typeof v === "string" ? v : Array.isArray(v) ? v.map(flatten).join(" ") : v && typeof v === "object" ? Object.values(v).map(flatten).join(" ") : "";
 
+const norm = (s: string) => words(s).join(" ");
+
+/** Edit distance, capped — only used for typo tolerance on words of 5+ letters. */
+function editDistance(a: string, b: string, max = 2): number {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    let best = i;
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      best = Math.min(best, cur[j]);
+    }
+    if (best > max) return max + 1;
+    prev = cur;
+  }
+  return prev[b.length];
+}
+
+// ── Index ──────────────────────────────────────────────────────────────────────────────────
+
 function buildEntries(): Entry[] {
-  const entries: Entry[] = FAQ.map((f) => ({ ...f, text: f.answer, boost: 2 }));
+  const entries: Entry[] = FAQ.map((f) => ({ ...f, text: f.answer, boost: 1 }));
 
   for (const [path, page] of Object.entries(STATIC_PAGES)) {
     entries.push({
       title: page.title,
       // Card names and section headings ("Cardiology", "Central Library") are what people ask for by name.
-      keywords: [page.eyebrow ?? "", ...(page.cards ?? []).map((c) => c.name), ...(page.sections ?? []).map((b) => b.title ?? "")],
+      keywords: [
+        page.eyebrow ?? "",
+        ...(page.cards ?? []).map((c) => c.name),
+        ...(page.sections ?? []).map((b) => b.title ?? ""),
+      ],
       text: flatten([page.subtitle, page.sections, page.cardsTitle, page.cards?.map((c) => [c.name, c.meta, c.description])]),
       answer: page.subtitle ?? page.title,
       links: [{ label: page.title, path }],
     });
+  }
+
+  // Each card on a content page (a speciality, a facility, a programme) answers on its own.
+  for (const [path, page] of Object.entries(STATIC_PAGES)) {
+    for (const c of page.cards ?? []) {
+      if (!c.description) continue;
+      entries.push({
+        title: c.name,
+        // Everyday words ("heart", "kidney") point to the hospital service, not to courses named after it.
+        keywords: [...(path.startsWith("/services") ? cardAliases(c.name) : []), c.meta ?? ""],
+        text: flatten([c.description, c.bullets]),
+        answer: `${c.name}${c.meta ? ` (${c.meta})` : ""}: ${c.description}`,
+        links: [{ label: page.title, path }],
+      });
+    }
   }
 
   for (const r of ROUTE_PAGES) entries.push({ ...r, text: r.answer, links: [{ label: r.title, path: r.path }] });
@@ -288,68 +435,198 @@ function buildEntries(): Entry[] {
       links: [{ label: `${f.departmentName} faculty`, path: `/departments/${f.departmentId}` }],
     });
   }
+
+  // Leadership: Dean, Principal, President, Secretary... read from the management data.
+  for (const m of ALL_LEADERSHIP_MEMBERS) {
+    entries.push({
+      title: `${m.role} ${m.name}`,
+      keywords: [m.role, m.designationNote ?? "", ...(ROLE_ALIASES[m.role] ?? [])],
+      text: [m.departmentOrWing, m.profile?.title].filter(Boolean).join(" "),
+      answer: `${m.name} is the ${m.role}${m.designationNote ? ` (${m.designationNote})` : ""} of AIMS.`,
+      links: [
+        { label: `${m.role} — profile`, path: `/leadership/${m.id}` },
+        { label: "Management", path: "/management" },
+      ],
+      boost: 1.5,
+    });
+  }
+
+  // Committees, each by name.
+  for (const c of COMMITTEES) {
+    entries.push({
+      title: c.title,
+      keywords: [c.title.replace(/committee/i, "").trim(), ...(COMMITTEE_ALIASES[c.path] ?? [])],
+      text: c.subtitle,
+      answer: `${c.title}: ${c.subtitle}.`,
+      links: [{ label: c.title, path: c.path }],
+    });
+  }
+
+  // News items from AIMS in News.
+  for (const n of chronicles) {
+    entries.push({
+      title: titleCase(n.title),
+      keywords: [...n.tags, n.category],
+      text: [n.subtitle, n.description, ...n.supportingContent].join(" "),
+      answer: `${titleCase(n.title)}: ${n.description}`,
+      links: [{ label: "AIMS in News", path: "/aims-in-the-news" }],
+    });
+  }
+
+  // Bus routes: "bus to Kompally" → the route that stops there, with the in-charge's contact.
+  for (const r of BUS_ROUTES) {
+    const stops = r.stops.filter((s) => s !== "AIMS");
+    entries.push({
+      title: `Bus route ${r.no}`,
+      keywords: [...stops, ...(r.passBy ?? [])],
+      text: "bus route stop",
+      answer: `Bus route ${r.no} stops at ${stops.join(", ")}. In-charge: ${r.incharge.name} (${r.incharge.phone}).`,
+      links: [{ label: "Bus Routes & Tracker", path: "/facilities/transport" }],
+    });
+  }
+
   return entries;
 }
 
 const STOP = new Set(
-  "a an the is are was be to of in on at for and or what where when who how which can do does i me my we our you your it this that there about tell please show give want need get any have has with from by aims arundathi college hospital institute dr doctor sir madam hi hello".split(" ")
+  "a an the is are was be to of in on at for and or what where when who how which can do does i me my we our you your it this that there about tell please show give want need get any have has with from by aims arundathi college hospital institute dr sir madam hi hello much many available know".split(" ")
 );
 
-let INDEX: { entry: Entry; title: Set<string>; keys: Set<string>; text: Set<string> }[] | null = null;
+/** Low-information words, ignored when the question also names something specific ("neurology department"). */
+const GENERIC = new Set(["department", "dept", "service", "facility", "detail", "information", "info", "section", "unit", "specialist", "doctor", "checkup", "treatment", "consultation"]);
 
-export interface AssistantReply {
-  text: string;
-  links: AssistantLink[];
+interface Indexed {
+  entry: Entry;
+  title: Set<string>;
+  keys: Set<string>;
+  text: Set<string>;
+  titleNorm: string;
+  keyNorms: string[];
 }
 
-export const FALLBACK: AssistantReply = {
-  text: `I couldn't find that on the website. Try asking about admissions, fees, OPD timings, departments, a doctor's name, transport or hostels. You can also call ${PHONE} or email ${EMAIL}.`,
-  links: [{ label: "Contact page", path: "/contact" }],
-};
+let INDEX: Indexed[] | null = null;
+let IDF: Map<string, number> | null = null;
+let VOCAB: string[] = [];
 
-export function matchQuestion(question: string): AssistantReply {
-  const q = question.trim().toLowerCase();
-  if (/^(hi|hello|hey|namaste|good (morning|afternoon|evening))\b/.test(q) && q.split(/\s+/).length <= 3) {
-    return { text: "Hello! I can answer questions about AIMS and take you to the right page. What would you like to know?", links: [] };
-  }
-  if (/^(thanks|thank you|ok|okay|great)\b/.test(q)) return { text: "You're welcome! Anything else I can help with?", links: [] };
-
-  INDEX ??= buildEntries().map((entry) => ({
+function ensureIndex() {
+  if (INDEX) return;
+  INDEX = buildEntries().map((entry) => ({
     entry,
     title: new Set(words(entry.title)),
     keys: new Set(entry.keywords.flatMap(words)),
     text: new Set(words(entry.text)),
+    titleNorm: norm(entry.title.replace(/\s+department$/i, "")),
+    keyNorms: entry.keywords.map(norm).filter(Boolean),
   }));
-
-  const terms = [...new Set(words(q))].filter((w) => !STOP.has(w));
-  if (terms.length === 0) return FALLBACK;
-
-  const scored = INDEX.map(({ entry, title, keys, text }) => {
-    let score = 0;
-    for (const t of terms) {
-      if (title.has(t)) score += 3;
-      else if (keys.has(t)) score += 2.5;
-      else if (text.has(t)) score += 0.6;
-    }
-    for (const k of entry.keywords) {
-      const key = k.toLowerCase();
-      // Multi-word keywords ("demand draft") match on the raw question; asking for a name exactly ("cardiology") wins ties.
-      if (key.includes(" ") && q.includes(key)) score += 2.5;
-      if (key === q.replace(/[?.!]+$/, "")) score += 2;
-    }
-    return { entry, score: score > 0 ? score + (entry.boost ?? 0) : 0 };
-  })
-    .filter((s) => s.score >= 2.5)
-    .sort((a, b) => b.score - a.score);
-
-  if (scored.length === 0) return FALLBACK;
-  const best = scored[0].entry;
-  // Add a second strong match's link when it points somewhere new.
-  const extra = scored
-    .slice(1, 3)
-    .filter((s) => s.score >= scored[0].score * 0.8)
-    .flatMap((s) => s.entry.links)
-    .filter((l) => !best.links.some((b) => b.path === l.path));
-  return { text: best.answer, links: [...best.links, ...extra].slice(0, 4) };
+  // Rarer words carry more weight: a word on 2 pages tells us more than one on 200.
+  const df = new Map<string, number>();
+  for (const i of INDEX) for (const w of new Set([...i.title, ...i.keys, ...i.text])) df.set(w, (df.get(w) ?? 0) + 1);
+  const n = INDEX.length;
+  IDF = new Map([...df].map(([w, c]) => [w, 0.45 + 0.85 * (Math.log(n / c) / Math.log(n))]));
+  VOCAB = [...df.keys()].filter((w) => w.length >= 5);
 }
 
+/** A query word that isn't on the site maps to its closest site word ("gynecologist" → "gynecology"). */
+function resolveTerm(t: string): { word: string; factor: number } | null {
+  if (IDF!.has(t)) return { word: t, factor: 1 };
+  if (t.length < 5) return null;
+  let best: { word: string; factor: number } | null = null;
+  for (const v of VOCAB) {
+    let p = 0;
+    while (p < t.length && p < v.length && t[p] === v[p]) p++;
+    if (p >= 6 || (p >= 5 && p >= Math.min(t.length, v.length) - 1)) {
+      const f = 0.85;
+      if (!best || f > best.factor || (f === best.factor && v.length < best.word.length)) best = { word: v, factor: f };
+    } else if (editDistance(t, v, t.length >= 9 ? 2 : 1) <= (t.length >= 9 ? 2 : 1)) {
+      if (!best || 0.8 > best.factor) best = { word: v, factor: 0.8 };
+    }
+  }
+  return best;
+}
+
+// ── Answering ──────────────────────────────────────────────────────────────────────────────
+
+export interface AssistantReply {
+  text: string;
+  links: AssistantLink[];
+  /** How the reply was found: a direct answer, the closest pages, or general help. */
+  kind?: "answer" | "suggestions" | "fallback";
+}
+
+export const FALLBACK: AssistantReply = {
+  text: `I couldn't find that on the website. Try asking about admissions, fees, OPD timings, departments, a doctor's name, careers, transport or hostels. You can also call ${PHONE} or email ${EMAIL}.`,
+  links: [
+    { label: "Contact page", path: "/contact" },
+    { label: "Admissions", path: "/admissions" },
+    { label: "Departments", path: "/departments" },
+    { label: "Careers", path: "/careers" },
+  ],
+  kind: "fallback",
+};
+
+export function matchQuestion(question: string): AssistantReply {
+  const q = question.trim().toLowerCase();
+  if (/^(hi|hello|hey|hai|namaste|namaskar|good (morning|afternoon|evening))\b/.test(q) && q.split(/\s+/).length <= 3) {
+    return { text: "Hello! I can answer questions about AIMS and take you to the right page. What would you like to know?", links: [], kind: "answer" };
+  }
+  if (/^(thanks|thank you|thank u|ok|okay|great|nice|good)\b/.test(q) && q.split(/\s+/).length <= 4) {
+    return { text: "You're welcome! Anything else I can help with?", links: [], kind: "answer" };
+  }
+
+  ensureIndex();
+  const qNorm = norm(q.replace(/[?.!]+$/, ""));
+  const all = [...new Set(words(q))].filter((w) => !STOP.has(w));
+  const specific = all.filter((w) => !GENERIC.has(w));
+  const raw = specific.length > 0 ? specific : all;
+  const terms = raw.map(resolveTerm).filter((t): t is { word: string; factor: number } => t !== null);
+  if (raw.length === 0) return FALLBACK;
+
+  const scored = INDEX!.map(({ entry, title, keys, text, titleNorm, keyNorms }) => {
+    let score = 0;
+    let hits = 0;
+    for (const { word, factor } of terms) {
+      const w = IDF!.get(word)! * factor;
+      if (title.has(word)) (score += 4 * w), hits++;
+      else if (keys.has(word)) (score += 2.5 * w), hits++;
+      else if (text.has(word)) (score += 0.6 * w), hits++;
+    }
+    if (score === 0) return { entry, score: 0 };
+    // Asking for a page, department or doctor by its exact name wins.
+    if (titleNorm && qNorm === titleNorm) score += 6;
+    else if (titleNorm.split(" ").length >= 2 && (` ${qNorm} `).includes(` ${titleNorm} `)) score += 3;
+    for (const k of keyNorms) {
+      if (k === qNorm) score += 3;
+      else if (k.includes(" ") && (` ${qNorm} `).includes(` ${k} `)) score += 2.5;
+    }
+    // Matching more of the question beats matching one word strongly.
+    score *= 0.6 + 0.4 * (hits / Math.max(1, terms.length));
+    return { entry, score: score + (entry.boost ?? 0) };
+  })
+    .filter((s) => s.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  const strong = scored.filter((s) => s.score >= 2.3);
+  if (strong.length > 0) {
+    const best = strong[0].entry;
+    // Add a second strong match's link when it points somewhere new.
+    const extra = strong
+      .slice(1, 3)
+      .filter((s) => s.score >= strong[0].score * 0.8)
+      .flatMap((s) => s.entry.links)
+      .filter((l) => !best.links.some((b) => b.path === l.path));
+    return { text: best.answer, links: [...best.links, ...extra].slice(0, 4), kind: "answer" };
+  }
+
+  // Nothing strong: offer the closest pages rather than a dead end.
+  const near = scored.filter((s) => s.score >= 1.2).slice(0, 3);
+  if (near.length > 0) {
+    const links: AssistantLink[] = [];
+    for (const s of near) for (const l of s.entry.links) if (!links.some((x) => x.path === l.path)) links.push(l);
+    return {
+      text: `I'm not completely sure, but these look closest to your question: ${near.map((s) => s.entry.title).join(", ")}. You can also call ${PHONE}.`,
+      links: links.slice(0, 4),
+      kind: "suggestions",
+    };
+  }
+  return FALLBACK;
+}
