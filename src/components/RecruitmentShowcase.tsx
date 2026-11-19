@@ -184,13 +184,6 @@ function Showcase() {
             >
               <Mail className="h-4 w-4" aria-hidden="true" /> Email Your CV
             </a>
-            <button
-              type="button"
-              onClick={() => setOpen(true)}
-              className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-white/30 px-5 text-sm font-semibold text-white hover:bg-white/10"
-            >
-              <ZoomIn className="h-4 w-4" aria-hidden="true" /> View Poster
-            </button>
           </div>
 
           <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/15 pt-5 text-sm">

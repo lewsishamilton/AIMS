@@ -508,6 +508,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
         subtitle={subtitle}
         pathname={pathname}
         image={media.heroImage}
+        strongSubtitle={media.heroSubtitleStrong}
       />
 
       <div className="relative z-10 mx-auto w-full max-w-[1280px] px-4 pb-20 sm:px-8 lg:px-12">

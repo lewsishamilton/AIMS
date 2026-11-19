@@ -133,6 +133,8 @@ export interface PageMedia {
   cardIcons?: Record<string, LucideIcon>;
   /** Masthead photograph, overriding PageHero's route/area lookup. */
   heroImage?: string;
+  /** Show the masthead subtitle larger and brighter. */
+  heroSubtitleStrong?: boolean;
 }
 
 /**
@@ -180,7 +182,7 @@ export const PG_CARD_IMAGES: Record<string, string> = {
  */
 export const PAGE_MEDIA: Record<string, PageMedia> = {
   // ── Careers ──
-  "/careers": { heroImage: IMG.meuLectureHall },
+  "/careers": { heroImage: IMG.meuLectureHall, heroSubtitleStrong: true },
 
   // ── Academics ──
   ...PG_PROGRAMME_MEDIA,

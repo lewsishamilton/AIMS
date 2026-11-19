@@ -85,7 +85,9 @@ const PageHero: React.FC<{
   pathname: string;
   /** Photograph for this page, overriding the route and area lookups. */
   image?: string;
-}> = ({ eyebrow, title, subtitle, pathname, image }) => {
+  /** Larger, brighter subtitle for pages whose subtitle is the key message (e.g. Careers). */
+  strongSubtitle?: boolean;
+}> = ({ eyebrow, title, subtitle, pathname, image, strongSubtitle }) => {
   const { name } = sectionFor(pathname);
   const path = pathname.replace(/\/+$/, "") || "/";
   const photo = image ?? hero(PAGE_PHOTO[path] ?? AREA_PHOTO[name] ?? "default");
@@ -188,7 +190,13 @@ const PageHero: React.FC<{
           </h1>
 
           {subtitle && (
-            <p className="mt-5 text-sm leading-relaxed text-[#e2e8f0]/90 sm:text-base lg:text-[17px]">
+            <p
+              className={
+                strongSubtitle
+                  ? "mt-5 max-w-3xl text-lg font-normal leading-snug text-white sm:text-xl lg:text-2xl"
+                  : "mt-5 text-sm leading-relaxed text-[#e2e8f0]/90 sm:text-base lg:text-[17px]"
+              }
+            >
               {subtitle}
             </p>
           )}
