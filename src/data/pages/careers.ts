@@ -11,6 +11,6 @@ export const CAREER_PAGES: Record<string, StaticPageDef> = {
     eyebrow: "Careers",
     title: "Careers at AIMS",
     subtitle:
-      "The Institute invites applications for faculty positions throughout the year from qualified and deserving candidates who meet the prescribed eligibility and shortlisting criteria",
+      "AIMS invites applications for faculty positions throughout the year from qualified and deserving candidates who meet the prescribed eligibility and shortlisting criteria",
   },
 };
