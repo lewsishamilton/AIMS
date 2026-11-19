@@ -176,11 +176,7 @@ const Navbar = () => {
         },
         {
             name: "CAREERS",
-            path: "/careers/teaching",
-            dropdown: [
-                { name: "Teaching", path: "/careers/teaching" },
-                { name: "Non-Teaching", path: "/careers/non-teaching" },
-            ],
+            path: "/careers",
         },
     ];
 
@@ -411,7 +407,7 @@ const Navbar = () => {
                     className={`relative z-10 flex items-center gap-1.5 whitespace-nowrap px-1.5 min-[1440px]:px-2.5 2xl:px-3.5 py-1.5 rounded-full font-semibold tracking-wide text-[13px] 2xl:text-sm border border-transparent transition-all duration-300 ease-out ${activeHoverPill}`}
                 >
                     <span>{link.name}</span>
-                    <ChevronDown />
+                    {link.dropdown && <ChevronDown />}
                 </Link>
 
                 {/* Level 1 Dropdown */}
@@ -638,6 +634,20 @@ const Navbar = () => {
                             const subLinkClass = `block py-1.5 text-[13px] transition-colors ${
                                 drawerLight ? "text-[#1f3351]/75 hover:text-[#1f3351]" : "text-white/70 hover:text-white"
                             }`;
+                            // A top-level item without a dropdown (e.g. CAREERS) is a plain link.
+                            if (!link.dropdown) {
+                                return (
+                                    <div key={idx} className={`w-full border-b ${drawerLight ? "border-[#1f3351]/10" : "border-white/15"}`}>
+                                        <Link
+                                            to={link.path}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="w-full flex items-center justify-between py-4 font-bold tracking-wide text-left"
+                                        >
+                                            <span>{link.name}</span>
+                                        </Link>
+                                    </div>
+                                );
+                            }
                             return (
                                 <div key={idx} className={`w-full border-b ${drawerLight ? "border-[#1f3351]/10" : "border-white/15"}`}>
                                     <button

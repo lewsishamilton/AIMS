@@ -4,7 +4,7 @@ import ChatAssistant from "./components/ChatAssistant"
 import HeroPage from "./pages/HomePage"
 import { COMMITTEES } from "./data/committees"
 
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
 import ScrollToTop from "./ScrollToTop"
 import SeoHead from "./components/SeoHead"
 import { lazy, Suspense } from "react"
@@ -90,6 +90,8 @@ function App() {
         <Route path="/leadership/principal" element={<LeadershipProfilePage id="dr-s-suma-preethi" />} />
         <Route path="/leadership/:id" element={<LeadershipProfilePage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/careers/teaching" element={<Navigate to="/careers" replace />} />
+        <Route path="/careers/non-teaching" element={<Navigate to="/careers" replace />} />
         <Route path="/careers/teaching/apply" element={<FacultyApplicationPage />} />
         <Route path="/careers/teaching/apply/thank-you" element={<FacultyApplicationPage />} />
         <Route path="/Contact" element={<ContactPage />} />

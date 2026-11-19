@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "motion/react";
@@ -7,7 +7,6 @@ import {
   Download,
   FileText,
   HeartPulse,
-  IndianRupee,
   Mail,
   Monitor,
   Phone,
@@ -25,7 +24,7 @@ import {
 
 /**
  * "We're hiring" banner built around the recruitment notification poster, shown at the top of
- * the Teaching and Non-Teaching careers pages. The poster's content is repeated as real text so it
+ * the Careers page. The poster's content is repeated as real text so it
  * reads well on phones and to screen readers; the poster itself opens full size on click.
  */
 
@@ -33,7 +32,7 @@ const OPENINGS = [
   {
     icon: Briefcase,
     title: "Faculty Posts",
-    lines: ["Professor · Associate Professor", "Assistant Professor · Senior Resident", "19 broad-speciality departments"],
+    lines: ["Professor · Associate Professor", "Assistant Professor · Senior Resident", "14 departments"],
   },
   {
     icon: HeartPulse,
@@ -84,7 +83,7 @@ function Lightbox({ onClose }: { onClose: () => void }) {
   );
 }
 
-function Showcase({ variant }: { variant: "teaching" | "non-teaching" }) {
+function Showcase() {
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
 
@@ -164,31 +163,27 @@ function Showcase({ variant }: { variant: "teaching" | "non-teaching" }) {
               </p>
             </div>
             <div className="flex items-start gap-3 rounded-2xl bg-white/[0.06] p-3.5">
-              <IndianRupee className="mt-0.5 h-5 w-5 shrink-0 text-[#ffb36b]" aria-hidden="true" />
+              <Download className="mt-0.5 h-5 w-5 shrink-0 text-[#ffb36b]" aria-hidden="true" />
               <p className="text-sm">
-                <b>Attractive salary package</b>, negotiable based on qualifications and experience.
+                <b>Application form:</b> download it from this website, or apply online for faculty posts.
               </p>
             </div>
           </div>
 
           <div className="mt-6 flex flex-wrap gap-3">
-            {variant === "teaching" ? (
-              <>
-                <Link to="/careers/teaching/apply" className="apply-cta inline-flex min-h-11 items-center gap-2 rounded-xl px-5 text-sm font-semibold">
-                  <FileText className="h-4 w-4" aria-hidden="true" /> Apply Online
-                </Link>
-                <a href={BLANK_FORM_URL} download={BLANK_FORM_FILENAME} className="apply-cta apply-cta--alt inline-flex min-h-11 items-center gap-2 rounded-xl px-5 text-sm font-semibold">
-                  <Download className="h-4 w-4" aria-hidden="true" /> Download Form (PDF)
-                </a>
-              </>
-            ) : (
-              <a
-                href={`mailto:${RECRUITMENT_EMAIL}?subject=${encodeURIComponent("Application – Non-Teaching Position")}`}
-                className="apply-cta inline-flex min-h-11 items-center gap-2 rounded-xl px-5 text-sm font-semibold"
-              >
-                <Mail className="h-4 w-4" aria-hidden="true" /> Email Your CV
-              </a>
-            )}
+            <Link to="/careers/teaching/apply" className="apply-cta inline-flex min-h-11 items-center gap-2 rounded-xl px-5 text-sm font-semibold">
+              <FileText className="h-4 w-4" aria-hidden="true" /> Apply Online (Faculty)
+            </Link>
+            <a href={BLANK_FORM_URL} download={BLANK_FORM_FILENAME} className="apply-cta apply-cta--alt inline-flex min-h-11 items-center gap-2 rounded-xl px-5 text-sm font-semibold">
+              <Download className="h-4 w-4" aria-hidden="true" /> Download Form (PDF)
+            </a>
+            <a
+              href={`mailto:${RECRUITMENT_EMAIL}?subject=${encodeURIComponent("Job Application – AIMS")}`}
+              className="apply-cta inline-flex min-h-11 items-center gap-2 rounded-xl px-5 text-sm font-semibold"
+              style={{ animationDelay: "-6s" }}
+            >
+              <Mail className="h-4 w-4" aria-hidden="true" /> Email Your CV
+            </a>
             <button
               type="button"
               onClick={() => setOpen(true)}
@@ -216,5 +211,4 @@ function Showcase({ variant }: { variant: "teaching" | "non-teaching" }) {
   );
 }
 
-export const TeachingRecruitmentShowcase: React.FC = () => <Showcase variant="teaching" />;
-export const NonTeachingRecruitmentShowcase: React.FC = () => <Showcase variant="non-teaching" />;
+export default Showcase;

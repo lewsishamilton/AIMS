@@ -133,10 +133,10 @@ function ThankYou() {
       </p>
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <Link
-          to="/careers/teaching"
+          to="/careers"
           className="inline-flex items-center justify-center min-h-11 px-6 rounded-xl bg-[#1f3351] hover:bg-[#0d2346] text-white dark:bg-white dark:text-[#1f3351] text-sm font-semibold transition-colors"
         >
-          Back to Teaching Positions
+          Back to Careers
         </Link>
         <Link
           to="/"

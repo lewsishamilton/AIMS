@@ -160,6 +160,8 @@ const ALIASES: Record<string, string> = {
   "/leadership/management": "/management",
   "/Contact": "/contact",
   "/careers/teaching/apply/thank-you": "/careers/teaching/apply",
+  "/careers/teaching": "/careers",
+  "/careers/non-teaching": "/careers",
   "/dean": "/leadership/dr-b-devanand",
   "/Dean": "/leadership/dr-b-devanand",
   "/leadership/dean": "/leadership/dr-b-devanand",

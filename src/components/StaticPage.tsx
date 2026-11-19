@@ -14,8 +14,7 @@ import ComplaintsFeedbackForm from "./ComplaintsFeedbackForm";
 import CampusVirtualTour from "./CampusVirtualTour";
 import { GovernmentApprovalDocs, UniversityAffiliationDocs, MbbsCurriculumDoc } from "./DocumentList";
 import PageHero from "./PageHero";
-import TeachingApplyOptions from "./TeachingApplyOptions";
-import { TeachingRecruitmentShowcase, NonTeachingRecruitmentShowcase } from "./RecruitmentShowcase";
+import RecruitmentShowcase from "./RecruitmentShowcase";
 import { groupSections } from "./ContentBlocks";
 
 export interface PageCard {
@@ -414,8 +413,7 @@ const PAGE_WIDGETS: Record<string, React.FC | undefined> = {
   "/admissions/seat-matrix": SeatMatrix,
   "/admissions/forms": ApplicationForms,
   "/patient-care/feedback": ComplaintsFeedbackForm,
-  "/careers/teaching": TeachingRecruitmentShowcase,
-  "/careers/non-teaching": NonTeachingRecruitmentShowcase,
+  "/careers": RecruitmentShowcase,
 };
 
 /** Purpose-built blocks rendered below main content or cards. */
@@ -424,7 +422,6 @@ const PAGE_BOTTOM_WIDGETS: Record<string, React.FC | undefined> = {
   "/approvals/government": GovernmentApprovalDocs,
   "/approvals/university-affiliation": UniversityAffiliationDocs,
   "/academics/mbbs": MbbsCurriculumDoc,
-  "/careers/teaching": TeachingApplyOptions,
 };
 
 const StaticPage: React.FC<StaticPageDef> = ({
