@@ -3,20 +3,11 @@ import { Briefcase, GraduationCap } from "lucide-react";
 import "./HomeApplyTabs.css";
 
 /**
- * "Apply – Job" (orange) and "Apply – Admissions" (blue): two tabs fixed to the right edge of the
- * home page. Job opens the Careers page; Admissions opens /admissions/apply, whose main button leads
- * to the admissions enquiry form. Sits below the admissions pop-up (z-70) and the assistant (z-60).
+ * "Apply – Admissions" (blue) and "Apply – Job" (orange): two eye-catching tabs fixed to the right edge of
+ * every page (mounted in App.tsx). Admissions opens /admissions/apply; Job opens Careers. Sits below the
+ * admissions pop-up (z-70) and the assistant (z-60).
  */
 const TABS = [
-  {
-    label: "Apply – Job",
-    to: "/careers",
-    external: false,
-    Icon: Briefcase,
-    glow: "rgba(244, 123, 32, 0.65)",
-    className:
-      "bg-gradient-to-b from-[#F47B20] to-[#D9581A] shadow-[0_10px_26px_rgba(228,86,26,0.45)] hover:shadow-[0_14px_32px_rgba(228,86,26,0.6)]",
-  },
   {
     label: "Apply – Admissions",
     to: "/admissions/apply",
@@ -25,6 +16,15 @@ const TABS = [
     glow: "rgba(59, 130, 246, 0.65)",
     className:
       "bg-gradient-to-b from-[#1f4f9c] to-[#132a52] shadow-[0_10px_26px_rgba(19,42,82,0.45)] hover:shadow-[0_14px_32px_rgba(19,42,82,0.6)]",
+  },
+  {
+    label: "Apply – Job",
+    to: "/careers",
+    external: false,
+    Icon: Briefcase,
+    glow: "rgba(244, 123, 32, 0.65)",
+    className:
+      "bg-gradient-to-b from-[#F47B20] to-[#D9581A] shadow-[0_10px_26px_rgba(228,86,26,0.45)] hover:shadow-[0_14px_32px_rgba(228,86,26,0.6)]",
   },
 ];
 

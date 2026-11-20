@@ -1,6 +1,7 @@
 import Navbar from "./layouts/navbar"
 import Footer from "./layouts/footer"
 import ChatAssistant from "./components/ChatAssistant"
+import HomeApplyTabs from "./components/HomeApplyTabs"
 import HeroPage from "./pages/HomePage"
 import { COMMITTEES } from "./data/committees"
 
@@ -106,6 +107,7 @@ function App() {
       </Routes>
       </Suspense>
       <Footer />
+      <HomeApplyTabs />
       <ChatAssistant />
     </>
   )
