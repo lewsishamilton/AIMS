@@ -281,9 +281,10 @@ const Navbar = () => {
         : "text-white/85 hover:text-white hover:bg-white/15 rounded-lg";
 
     const renderContactCallButton = (isMobile = false) => {
-        // WhatsApp-green with a white handset, so the call button is recognisable at a glance in every theme.
-        const buttonClass =
-            "bg-[#25D366] hover:bg-[#1EBE5A] text-[#ffffff] border border-[#25D366] shadow-[0_2px_10px_rgba(37,211,102,0.35)] hover:shadow-[0_4px_14px_rgba(37,211,102,0.45)]";
+        // Brand colours: navy with a white handset on light pages, white with a navy handset over the dark hero.
+        const buttonClass = isWhiteTheme
+            ? "bg-[#1f3351] hover:bg-[#0d2346] text-white border border-[#1f3351] shadow-[0_2px_10px_rgba(13,35,70,0.25)]"
+            : "bg-white hover:bg-white/90 text-[#1f3351] border border-white shadow-[0_2px_10px_rgba(0,0,0,0.25)]";
 
         // Desktop: glide to the Admissions card on the home page, so visitors stay on (and can scroll back up) the main page.
         const handleClick = (e: React.MouseEvent) => {
