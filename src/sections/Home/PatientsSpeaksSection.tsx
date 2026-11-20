@@ -96,7 +96,7 @@ export const PatientsSpeaksSection: React.FC = () => {
           display: flex;
           gap: 1.75rem;
           width: max-content;
-          animation: marquee-scroll-left 46s linear infinite;
+          animation: marquee-scroll-left 70s linear infinite;
           will-change: transform;
         }
 
@@ -104,7 +104,7 @@ export const PatientsSpeaksSection: React.FC = () => {
           display: flex;
           gap: 1.75rem;
           width: max-content;
-          animation: marquee-scroll-right 46s linear infinite;
+          animation: marquee-scroll-right 70s linear infinite;
           will-change: transform;
         }
 

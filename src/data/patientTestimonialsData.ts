@@ -26,7 +26,21 @@ export const PATIENT_SHORTS: PatientShort[] = [
   { id: "lSK45LJdn5g", title: "Free Family Planning Operation", category: "Gynecology" },
   { id: "WDfdpLjQn-M", title: "Free Nerve Weakness & Neuro Treatment", category: "Neurology" },
   { id: "S2JzaZhZPnQ", title: "Free Critical Care & Emergency Recovery", category: "Critical Care" },
+  { id: "eYdU0P5906Y", title: "Free Cardiac Stent Surgery", category: "Cardiology" },
+  { id: "rvil5oNF-vc", title: "Free L4–L5 Disc Surgery", category: "Spine Surgery" },
+  { id: "mUShcbg0nWM", title: "Free Varicose Veins Surgery", category: "Vascular Surgery" },
+  { id: "9Fsl39g26xg", title: "Free Arthroscopy Surgery", category: "Orthopedics" },
+  { id: "rXMbY5ed3mI", title: "Free Spinal Surgery", category: "Spine Surgery" },
+  { id: "m4BY3_vH0Ic", title: "Free Cardiac Stent Procedure", category: "Cardiology" },
+  { id: "ZXy39cmIsG8", title: "Free Obstetric Surgery", category: "Obstetrics" },
+  { id: "ys3LCvmtIDM", title: "Free Sciatica Surgery", category: "Spine Surgery" },
+  { id: "17MLVT6zf4c", title: "Free Spinal Fixation Surgery", category: "Spine Surgery" },
+  { id: "B98Tx-cxSig", title: "Free Pediatric Treatment", category: "Pediatrics" },
+  { id: "oFPhsqmIg7U", title: "Free Appendicitis Surgery", category: "General Surgery" },
+  { id: "1RPglU_NChQ", title: "Free Eye Surgery", category: "Ophthalmology" },
 ];
 
-export const ROW_1_SHORTS = PATIENT_SHORTS.slice(0, 11);
-export const ROW_2_SHORTS = PATIENT_SHORTS.slice(11);
+// Two scrolling rows, split as evenly as the list allows (first row takes the extra one).
+const ROW_SPLIT = Math.ceil(PATIENT_SHORTS.length / 2);
+export const ROW_1_SHORTS = PATIENT_SHORTS.slice(0, ROW_SPLIT);
+export const ROW_2_SHORTS = PATIENT_SHORTS.slice(ROW_SPLIT);
