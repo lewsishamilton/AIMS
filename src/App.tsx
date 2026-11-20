@@ -23,6 +23,7 @@ const ManagementPage = lazy(() => import("./pages/ManagementPage"))
 const LeadershipProfilePage = lazy(() => import("./pages/LeadershipProfilePage"))
 const ContactPage = lazy(() => import("./pages/ContactPage"))
 const FacultyApplicationPage = lazy(() => import("./pages/FacultyApplicationPage"))
+const AdmissionEnquiryPage = lazy(() => import("./pages/AdmissionEnquiryPage"))
 const AimsInNewsPage = lazy(() => import("./pages/AimsInNewsPage"))
 const MachinesPage = lazy(() => import("./pages/MachinesPage"))
 const AccreditationsPage = lazy(() => import("./pages/AccreditationsPage"))
@@ -93,6 +94,8 @@ function App() {
         <Route path="/careers/teaching" element={<Navigate to="/careers" replace />} />
         <Route path="/careers/non-teaching" element={<Navigate to="/careers" replace />} />
         <Route path="/careers/teaching/apply" element={<FacultyApplicationPage />} />
+        <Route path="/admissions/apply/enquire" element={<AdmissionEnquiryPage />} />
+        <Route path="/admissions/apply/enquire/thank-you" element={<AdmissionEnquiryPage />} />
         <Route path="/careers/teaching/apply/thank-you" element={<FacultyApplicationPage />} />
         <Route path="/Contact" element={<ContactPage />} />
         <Route path="/about/awards" element={<AwardsPage />} />

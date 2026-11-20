@@ -1,0 +1,87 @@
+/* Apply – Job / Apply – Admissions tabs on the home page: eye-catching but calm.
+   Slide in on load, then a pulsing glow ring, a periodic shine sweep and a gentle nudge out
+   from the screen edge. Reduced-motion visitors get the static tabs. */
+
+.apply-tab {
+  position: relative;
+  animation:
+    apply-tab-in 0.9s cubic-bezier(0.22, 1.4, 0.36, 1) both,
+    apply-tab-nudge 6s ease-in-out 2.5s infinite;
+}
+.apply-tab:nth-child(2) {
+  animation-delay: 0.25s, 3.2s;
+}
+
+/* Pulsing glow ring around each tab, in its own colour (set via --tab-glow). */
+.apply-tab::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 var(--tab-glow);
+  animation: apply-tab-pulse 2.2s ease-out 1s infinite;
+  pointer-events: none;
+}
+.apply-tab:nth-child(2)::before {
+  animation-delay: 2.1s;
+}
+
+/* Shine sweeping along the tab (top to bottom, since the tab is vertical), clipped to the tab. */
+.apply-tab__shine {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.apply-tab__shine::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -60%;
+  height: 45%;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  transform: skewY(-12deg);
+  animation: apply-tab-shine 4s ease-in-out 1.6s infinite;
+  pointer-events: none;
+}
+.apply-tab:nth-child(2) .apply-tab__shine::after {
+  animation-delay: 3.6s;
+}
+
+@keyframes apply-tab-in {
+  from { transform: translateX(110%); opacity: 0; }
+  to { transform: translateX(4px); opacity: 1; }
+}
+@keyframes apply-tab-nudge {
+  0%, 84%, 100% { transform: translateX(4px); }
+  88% { transform: translateX(-8px); }
+  92% { transform: translateX(2px); }
+  96% { transform: translateX(-4px); }
+}
+@keyframes apply-tab-pulse {
+  0% { box-shadow: 0 0 0 0 var(--tab-glow); }
+  70%, 100% { box-shadow: 0 0 0 14px transparent; }
+}
+@keyframes apply-tab-shine {
+  0%, 55% { top: -60%; }
+  85%, 100% { top: 120%; }
+}
+
+.apply-tab:hover,
+.apply-tab:focus-visible {
+  animation-play-state: paused;
+  transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .apply-tab,
+  .apply-tab::before,
+  .apply-tab__shine::after {
+    animation: none;
+  }
+  .apply-tab {
+    transform: translateX(4px);
+  }
+}

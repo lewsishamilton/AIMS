@@ -11,6 +11,8 @@ export const CONTACT = {
   admissionsPhone: "+91 90009 94842",
   admissionsContact: "Dr. Ch. Achireddy",
   email: "arundathihospital@gmail.com",
+  /** Admissions enquiries (Apply for Admissions page and its enquiry form). */
+  admissionsEmail: "admissions@aims.ac.in",
   address: "Beside MLRIT, Dundigal, Gandi Maisamma, Medchal-Malkajgiri District, Telangana 500043",
 } as const;
 

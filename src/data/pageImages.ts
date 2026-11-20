@@ -183,6 +183,7 @@ export const PG_CARD_IMAGES: Record<string, string> = {
 export const PAGE_MEDIA: Record<string, PageMedia> = {
   // ── Careers ──
   "/careers": { heroImage: IMG.meuLectureHall, heroSubtitleStrong: true },
+  "/admissions/apply": { heroImage: IMG.collegeBuildingFront, heroSubtitleStrong: true },
 
   // ── Academics ──
   ...PG_PROGRAMME_MEDIA,

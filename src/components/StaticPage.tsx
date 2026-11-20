@@ -15,6 +15,7 @@ import CampusVirtualTour from "./CampusVirtualTour";
 import { GovernmentApprovalDocs, UniversityAffiliationDocs, MbbsCurriculumDoc } from "./DocumentList";
 import PageHero from "./PageHero";
 import RecruitmentShowcase from "./RecruitmentShowcase";
+import AdmissionsShowcase from "./AdmissionsShowcase";
 import { groupSections } from "./ContentBlocks";
 
 export interface PageCard {
@@ -414,6 +415,7 @@ const PAGE_WIDGETS: Record<string, React.FC | undefined> = {
   "/admissions/forms": ApplicationForms,
   "/patient-care/feedback": ComplaintsFeedbackForm,
   "/careers": RecruitmentShowcase,
+  "/admissions/apply": AdmissionsShowcase,
 };
 
 /** Purpose-built blocks rendered below main content or cards. */

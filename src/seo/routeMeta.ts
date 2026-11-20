@@ -123,6 +123,12 @@ const APP_PAGES: RouteMeta[] = [
       "Contact AIMS, Dundigal, Hyderabad: admissions enquiries, hospital reception, 24×7 emergency, address and directions.",
   },
   {
+    path: "/admissions/apply/enquire",
+    title: titled("Admissions Enquiry 2026–27"),
+    description:
+      "Send an admissions enquiry to Arundathi Institute of Medical Sciences, Dundigal, Hyderabad, for the MD / MS programmes in 2026–27.",
+  },
+  {
     path: "/careers/teaching/apply",
     title: titled("Apply for a Faculty Position"),
     description:
@@ -160,6 +166,7 @@ const ALIASES: Record<string, string> = {
   "/leadership/management": "/management",
   "/Contact": "/contact",
   "/careers/teaching/apply/thank-you": "/careers/teaching/apply",
+  "/admissions/apply/enquire/thank-you": "/admissions/apply/enquire",
   "/careers/teaching": "/careers",
   "/careers/non-teaching": "/careers",
   "/dean": "/leadership/dr-b-devanand",
