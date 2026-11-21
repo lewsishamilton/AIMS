@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { CheckCircle2, Loader2, Mail, Phone, ShieldCheck } from "lucide-react";
+import { CheckCircle2, GraduationCap, Loader2, ShieldCheck } from "lucide-react";
 import PageHero from "../components/PageHero";
 import { IMG } from "../data/pageImages";
 import { CONTACT, telHref } from "../data/siteInfo";
 import { PG_PROGRAMMES } from "../data/pages/postgraduate";
+import studentPhoto from "../assets/stockImages/medical-student-white-coat.webp";
 
 /**
  * Admissions enquiry form (/admissions/apply/enquire), styled like the faculty application form.
@@ -77,34 +78,28 @@ function Aside() {
     ["Academic year", <b>2026–27</b>],
   ];
   return (
-    <aside className="space-y-6 lg:sticky lg:top-24">
-      <div className={cardClass}>
-        <h2 className="font-['Manrope',sans-serif] text-lg font-semibold text-[#1f3351] dark:text-white">Admissions</h2>
-        <dl className="mt-3 divide-y divide-[#e4ecf2] text-sm text-[#1f3351] dark:divide-white/10 dark:text-slate-200">
+    <aside className="lg:sticky lg:top-24">
+      <div className="overflow-hidden rounded-[24px] border border-[#F8D3B0] bg-gradient-to-b from-[#FFF4EA] to-[#FFFAF5] shadow-[0_12px_35px_rgba(13,35,70,0.08)] dark:border-white/15 dark:from-white/[0.06] dark:to-white/[0.03]">
+        <div className="flex items-center gap-3 bg-gradient-to-r from-[#F47B20] to-[#E0631A] px-6 py-4 text-white">
+          <span className="grid h-9 w-9 place-items-center rounded-full bg-white/15">
+            <GraduationCap className="h-5 w-5" aria-hidden="true" />
+          </span>
+          <h2 className="font-['Manrope',sans-serif] text-lg font-semibold">Admissions</h2>
+        </div>
+        <dl className="divide-y divide-[#F6DCC4] px-6 py-2 text-sm text-[#1f3351] dark:divide-white/10 dark:text-slate-200">
           {rows.map(([k, v]) => (
-            <div key={k} className="flex items-center justify-between gap-4 py-2.5">
+            <div key={k} className="flex items-center justify-between gap-4 py-3">
               <dt className="text-[#1f3351]/60 dark:text-slate-400">{k}</dt>
               <dd className="text-right">{v}</dd>
             </div>
           ))}
         </dl>
-      </div>
-      <div className={cardClass}>
-        <h2 className="font-['Manrope',sans-serif] text-lg font-semibold text-[#1f3351] dark:text-white">What happens next</h2>
-        <ol className="mt-4 space-y-4">
-          {[
-            "Submit your enquiry and receive a confirmation by email.",
-            "The admissions team reviews the details you shared.",
-            "We contact you using your phone number or email address.",
-          ].map((t, i) => (
-            <li key={t} className="flex gap-3 text-sm text-[#1f3351]/85 dark:text-slate-300">
-              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#FFB23D] to-[#F47B20] text-xs font-bold text-white">
-                {i + 1}
-              </span>
-              <span className="pt-1">{t}</span>
-            </li>
-          ))}
-        </ol>
+        <img
+          src={studentPhoto}
+          alt="Woman doctor in a white apron with a stethoscope"
+          loading="lazy"
+          className="block aspect-[3/4] w-full object-cover object-top"
+        />
       </div>
     </aside>
   );
@@ -249,14 +244,6 @@ function EnquiryForm() {
           <p className="max-w-lg text-xs text-[#1f3351]/60 dark:text-slate-400">
             After you click Submit you'll be asked to confirm you're not a robot, then brought back to this site. A confirmation is
             emailed to you.
-          </p>
-          <p className="flex flex-wrap justify-center gap-x-5 gap-y-1 text-sm text-[#1f3351] dark:text-slate-200">
-            <a href={telHref(CONTACT.admissionsPhone)} className="flex items-center gap-1.5 font-semibold hover:underline">
-              <Phone className="h-4 w-4" aria-hidden="true" /> {CONTACT.admissionsPhone}
-            </a>
-            <a href={`mailto:${CONTACT.admissionsEmail}`} className="flex items-center gap-1.5 font-semibold hover:underline">
-              <Mail className="h-4 w-4" aria-hidden="true" /> {CONTACT.admissionsEmail}
-            </a>
           </p>
         </div>
       </form>
