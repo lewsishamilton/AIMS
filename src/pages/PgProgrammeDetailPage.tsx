@@ -234,9 +234,7 @@ function ProgramDetails({ d }: { d: PgProgrammeDetail }) {
                   {title}
                 </h3>
                 <p className="text-sm text-white/85 sm:text-base">{lead}</p>
-              </div>
-              <span className="ml-auto rounded-full bg-white/25 px-3 py-1 text-sm font-bold">{items.length}</span>
-            </div>
+              </div>            </div>
             <ul className="flex flex-1 flex-col divide-y divide-black/5 px-6 py-2 dark:divide-white/10">
               {items.map((x) => (
                 <li key={x} className="group flex flex-1 items-center gap-4 py-4">
