@@ -8,6 +8,22 @@ import microbiologyImg from "../assets/Departments/microbiology.webp";
 import forensicMedicineImg from "../assets/Departments/forensic_medicine.webp";
 import communityMedicineImg from "../assets/Departments/community_medicine.webp";
 import generalMedicineImg from "../assets/Departments/general_medicine.webp";
+
+/**
+ * SAMPLE figures for previewing the General Medicine highlights layout — NOT real AIMS data.
+ * They render only on the local dev server (`npm run dev`) and are left out of every production
+ * build, so they can never reach aims.ac.in by accident. To publish real figures: replace the
+ * numbers with AIMS's own, then move each line into the "Overview of Department" bullets below.
+ */
+const IS_LOCAL_PREVIEW = Boolean((import.meta as { env?: { DEV?: boolean } }).env?.DEV);
+const GM_SAMPLE_HIGHLIGHTS: string[] = IS_LOCAL_PREVIEW
+  ? [
+      "[SAMPLE] Department established in 2019, with the MD General Medicine programme since 2026",
+      "[SAMPLE] 4 clinical units",
+      "[SAMPLE] 30 ICU / CCU beds and 120 ward beds for General Medicine",
+      "[SAMPLE] Regular CMEs, conferences and postgraduate clinical meetings",
+    ]
+  : [];
 import paediatricsImg from "../assets/Departments/paediatrics.webp";
 import dermatologyImg from "../assets/Departments/dermatology.webp";
 import psychiatryImg from "../assets/Departments/psychiatry.webp";
@@ -540,6 +556,20 @@ export const DEPARTMENT_METADATA: Record<
           "content": [
             "Medicine is an essential department in the health care system. The Department of General Medicine provides primary, secondary, and tertiary treatment. This is an integration center for patient management, undergraduate teaching and academic research.",
             "Department provides better care to patients in outpatient and inpatient department daily along with 24 hours casualty and critical care services in the ICUs."
+          ],
+          "bullets": [
+            "Comprehensive adult care, chronic disease management and preventive health",
+            "Tertiary-care support from Neurology, Nephrology, Gastroenterology and Cardiology",
+            "Well-equipped ICU and CCU, a full-fledged cath lab, dialysis unit and high-end endoscopy",
+            "24-hour casualty and critical care services",
+            "Free OPD consultation, investigations, medicines and inpatient care, including bed and diet",
+            "Undergraduate MBBS teaching and the MD General Medicine programme, included in the NMC PG seat matrix for 2026–27",
+            "Community outreach through rural and school health camps and the adoption of 15 villages",
+            // Key figures from AIMS's own records: faculty from the faculty directory, OP from the
+            // hospital statistics dashboard (also used in the home-page analysis).
+            "A team of 16 faculty members",
+            "81,230+ outpatient consultations recorded on the AIMS hospital statistics dashboard",
+            ...GM_SAMPLE_HIGHLIGHTS,
           ],
           "layout": "full"
         },

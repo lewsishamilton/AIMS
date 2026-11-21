@@ -25,6 +25,10 @@ export interface PgProgramme {
   /** Tertiary-care units the department works alongside, when the sheet names any. */
   supportedBy?: string[];
   badges: string[];
+  /** Programme outcomes, written from the NMC competency-based PG curriculum for the speciality. */
+  outcomes?: string[];
+  /** How the residency is delivered and assessed, per NMC postgraduate regulations. */
+  training?: string[];
 }
 
 export const PG_PROGRAMMES: PgProgramme[] = [
@@ -48,6 +52,24 @@ export const PG_PROGRAMMES: PgProgramme[] = [
     ],
     supportedBy: ["Neurology", "Nephrology", "Gastroenterology", "Cardiology"],
     badges: ["Adult Care", "Chronic Disease", "Preventive Health"],
+    outcomes: [
+      "Diagnose and manage common and complex medical illnesses in adults, in outpatient, ward and intensive-care settings",
+      "Recognise and treat medical emergencies, and stabilise critically ill patients",
+      "Choose and interpret investigations sensibly, and apply evidence-based treatment",
+      "Perform the core procedures of internal medicine safely and competently",
+      "Communicate clearly and compassionately with patients and families, and practise ethically",
+      "Work effectively in multidisciplinary teams and refer appropriately to super-speciality services",
+      "Teach undergraduate students and other health professionals",
+      "Plan and carry out clinical research, and keep learning throughout a professional career",
+    ],
+    training: [
+      "Three-year, competency-based residency following the NMC postgraduate curriculum for MD General Medicine",
+      "Graded responsibility in outpatient clinics, wards, emergency and intensive care",
+      "Seminars, journal clubs, case presentations and clinical meetings",
+      "District Residency Programme posting, as required by NMC postgraduate regulations",
+      "Supervised thesis, a maintained logbook and ongoing formative assessment",
+      "University examination at the end of the course: theory, clinical / practical and viva voce",
+    ],
   },
   {
     slug: "ms-general-surgery",
@@ -265,6 +287,25 @@ function programmePage(p: PgProgramme): StaticPageDef {
         ],
         layout: "half",
       },
+      ...(p.outcomes
+        ? [
+            {
+              title: "What Residents Learn",
+              subtitle: "Programme outcomes",
+              bullets: p.outcomes,
+              layout: "half" as const,
+            },
+          ]
+        : []),
+      ...(p.training
+        ? [
+            {
+              title: "Training & Assessment",
+              bullets: p.training,
+              layout: "half" as const,
+            },
+          ]
+        : []),
       ...(p.supportedBy
         ? [
             {

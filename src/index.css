@@ -337,3 +337,43 @@ html.dark [class*="dark:bg-[#070f1e]"] {
 @media (prefers-reduced-motion: reduce) {
   .apply-cta, .apply-cta--alt { animation: none; }
 }
+
+/* Detailed PG programme pages (PgProgrammeDetailPage) are typeset in Open Sans. */
+.font-open-sans,
+.font-open-sans :is(h1, h2, h3, h4, p, li, a, button, dt, dd, span) {
+  font-family: "Open Sans", sans-serif;
+}
+
+/* PG programme page: animated Admissions Path flow line (dots travel step 1 → 5). */
+.admission-flow,
+.admission-flow-v {
+  position: absolute;
+  overflow: hidden;
+}
+.admission-flow { background: linear-gradient(90deg, #f59e0b, #ea580c, #e11d48, #7c3aed, #0284c7); }
+.admission-flow-v { background: linear-gradient(180deg, #f59e0b, #ea580c, #e11d48, #7c3aed, #0284c7); }
+.admission-flow::after,
+.admission-flow-v::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0 2px, transparent 2.5px);
+}
+.admission-flow::after { background-size: 26px 100%; animation: admission-flow-x 1.4s linear infinite; }
+.admission-flow-v::after { background-size: 100% 26px; animation: admission-flow-y 1.4s linear infinite; }
+@keyframes admission-flow-x { from { background-position: 0 0; } to { background-position: 26px 0; } }
+@keyframes admission-flow-y { from { background-position: 0 0; } to { background-position: 0 26px; } }
+@media (prefers-reduced-motion: reduce) {
+  .admission-flow::after,
+  .admission-flow-v::after { animation: none; }
+}
+
+/* PG programme page: dots travelling along the curved Admissions Path arcs (desktop). */
+.admission-arc-dots {
+  stroke-dasharray: 0.1 22;
+  animation: admission-arc-dots 1.3s linear infinite;
+}
+@keyframes admission-arc-dots { to { stroke-dashoffset: -22.1; } }
+@media (prefers-reduced-motion: reduce) {
+  .admission-arc-dots { animation: none; }
+}

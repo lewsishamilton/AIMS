@@ -1,5 +1,4 @@
 import logoWhite from "../assets/logo-white.webp";
-import VisitorCounter from "../components/VisitorCounter";
 import { CONTACT, MAPS_URL, telHref } from "../data/siteInfo";
 
 // Mirrors the navbar's order: Discover → Academics/Admissions → Hospital/Patient Care.
@@ -215,11 +214,6 @@ export default function Footer() {
               </div>
             </div>
 
-          </div>
-
-          {/* ─── Live Visitor Counter ─── */}
-          <div className="mt-4 sm:mt-2 mb-2 w-full flex justify-center">
-            <VisitorCounter />
           </div>
 
           <div className="w-full h-px mt-6 sm:mt-8 mb-4 bg-linear-to-r from-black via-white/25 to-black"></div>

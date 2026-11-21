@@ -25,6 +25,7 @@ const LeadershipProfilePage = lazy(() => import("./pages/LeadershipProfilePage")
 const ContactPage = lazy(() => import("./pages/ContactPage"))
 const FacultyApplicationPage = lazy(() => import("./pages/FacultyApplicationPage"))
 const AdmissionEnquiryPage = lazy(() => import("./pages/AdmissionEnquiryPage"))
+const PgProgrammeDetailPage = lazy(() => import("./pages/PgProgrammeDetailPage"))
 const AimsInNewsPage = lazy(() => import("./pages/AimsInNewsPage"))
 const MachinesPage = lazy(() => import("./pages/MachinesPage"))
 const AccreditationsPage = lazy(() => import("./pages/AccreditationsPage"))
@@ -98,6 +99,7 @@ function App() {
         <Route path="/admissions/apply/enquire" element={<AdmissionEnquiryPage />} />
         <Route path="/admissions/apply/enquire/thank-you" element={<AdmissionEnquiryPage />} />
         <Route path="/careers/teaching/apply/thank-you" element={<FacultyApplicationPage />} />
+        <Route path="/academics/postgraduate/md-general-medicine" element={<PgProgrammeDetailPage slug="md-general-medicine" />} />
         <Route path="/Contact" element={<ContactPage />} />
         <Route path="/about/awards" element={<AwardsPage />} />
         <Route path="/facilities/transport" element={<TransportPage />} />
