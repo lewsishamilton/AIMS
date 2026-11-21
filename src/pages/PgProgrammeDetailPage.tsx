@@ -314,7 +314,18 @@ function StepText({ s, i, plain }: { s: { title: string; detail: string }; i: nu
     <div className={plain ? "" : "w-full rounded-2xl border border-white/15 bg-white/[0.08] p-4 backdrop-blur-sm"}>
       <p className={`text-xs font-extrabold uppercase tracking-[0.2em] ${theme.label}`}>Step {String(i + 1).padStart(2, "0")}</p>
       <h3 className="mt-1.5 text-lg font-bold leading-snug sm:text-xl">{s.title}</h3>
-      <p className="mt-2 text-[15px] leading-relaxed text-white/80">{s.detail}</p>
+      <p className="mt-2 text-[15px] leading-relaxed text-white/80">
+        {/* Words wrapped in **…** are highlighted as a gold chip. */}
+        {s.detail.split("**").map((part, k) =>
+          k % 2 === 0 ? (
+            part
+          ) : (
+            <strong key={k} className="rounded-md bg-[#FBBF24] px-1.5 py-0.5 font-extrabold tracking-wide text-[#0B2A55]">
+              {part}
+            </strong>
+          ),
+        )}
+      </p>
     </div>
   );
 }
@@ -331,7 +342,7 @@ function AdmissionsPath({ d }: { d: PgProgrammeDetail }) {
           {d.admissionSteps.map((s, i) => {
             const above = i % 2 === 0;
             return (
-              <li key={s.title} className="grid grid-rows-[260px_auto_260px] justify-items-center text-center">
+              <li key={s.title} className="grid grid-rows-[260px_auto_300px] justify-items-center text-center">
                 <div className="flex flex-col items-center justify-end">
                   {above && (
                     <>
@@ -508,10 +519,7 @@ function FeeStructure() {
         ))}
       </div>
       <p className="mt-6 text-sm text-[#555] sm:text-base dark:text-slate-300">
-        Fees for each category are as notified for the admission year by the competent authority.{" "}
-        <Link to="/admissions/fee-structure" className="font-semibold text-[#D9581A] underline-offset-4 hover:underline">
-          View the full fee structure
-        </Link>
+        Fees for each category are as notified for the admission year by the competent authority.
       </p>
     </section>
   );

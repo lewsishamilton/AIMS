@@ -103,6 +103,15 @@ export default function Footer() {
                   <span>Admissions (Dr. Achireddy): {CONTACT.admissionsPhone}</span>
                 </a>
                 <a
+                  href={`mailto:${CONTACT.admissionsEmail}`}
+                  className="flex items-center gap-3 text-sm text-white/90 hover:text-white transition-colors font-medium"
+                >
+                  <svg className="w-4 h-4 text-white/80 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M2.5 4A1.5 1.5 0 001 5.5v.32l9 4.5 9-4.5V5.5A1.5 1.5 0 0017.5 4h-15zM19 7.68l-8.55 4.27a1 1 0 01-.9 0L1 7.68V14.5A1.5 1.5 0 002.5 16h15a1.5 1.5 0 001.5-1.5V7.68z" />
+                  </svg>
+                  <span>{CONTACT.admissionsEmail}</span>
+                </a>
+                <a
                   href={telHref(CONTACT.receptionPhone)}
                   className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
                 >

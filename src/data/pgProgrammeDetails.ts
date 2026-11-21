@@ -86,7 +86,7 @@ export const PG_PROGRAMME_DETAILS: Record<string, PgProgrammeDetail> = {
       { title: "Qualify NEET-PG 2026", detail: "Score at or above the qualifying percentile for your category." },
       {
         title: "Register for KNRUHS Counselling",
-        detail: "Register online and choose AIMS and MD General Medicine in your web options.",
+        detail: "Register online and choose college code **AIMD** and MD General Medicine in your web options.",
       },
       { title: "Seat Allotment", detail: "Convener quota seats are allotted by KNRUHS; Management and NRI seats as notified." },
       { title: "Report to AIMS", detail: "Bring your original documents for verification within the reporting window." },
