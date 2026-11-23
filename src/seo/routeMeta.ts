@@ -2,6 +2,7 @@ import { STATIC_PAGES } from "../data/pages";
 import { DEPARTMENT_METADATA } from "../data/departmentsData";
 import { ALL_LEADERSHIP_MEMBERS } from "../data/managementData";
 import { COMMITTEES } from "../data/committees";
+import { pgDetailFor, pgMeta } from "./pgProgrammeSeo";
 
 /**
  * Title, description and canonical address for every page on the site.
@@ -181,7 +182,9 @@ function buildPages(): RouteMeta[] {
   const pages: RouteMeta[] = APP_PAGES.map((p) => ({ ...p, description: snippet(p.description) }));
 
   for (const [path, page] of Object.entries(STATIC_PAGES)) {
-    pages.push({ path, title: titled(page.title), description: snippet(page.subtitle ?? page.title) });
+    // MD / MS programme pages use their detailed content for a richer title and description.
+    const pg = pgDetailFor(path);
+    pages.push(pg ? { path, ...pgMeta(pg), description: snippet(pgMeta(pg).description) } : { path, title: titled(page.title), description: snippet(page.subtitle ?? page.title) });
   }
 
   for (const c of COMMITTEES) {

@@ -1,5 +1,6 @@
 import logoWhite from "../assets/logo-white.webp";
-import { CONTACT, MAPS_URL, telHref } from "../data/siteInfo";
+import { Hospital } from "lucide-react";
+import { CONTACT, MAPS_EMBED_URL, MAPS_URL, telHref } from "../data/siteInfo";
 
 // Mirrors the navbar's order: Discover → Academics/Admissions → Hospital/Patient Care.
 const footerColumns = [
@@ -100,7 +101,7 @@ export default function Footer() {
                   >
                     <path d="M2 3.5A1.5 1.5 0 013.5 2h2.1a1 1 0 01.98.8l.9 4.5a1 1 0 01-.6 1.14l-2.08.83a13.1 13.1 0 005.9 5.9l.83-2.08a1 1 0 011.14-.6l4.5.9a1 1 0 01.8.98v2.1a1.5 1.5 0 01-1.5 1.5h-1C9.2 19 2 11.65 2 5v-1.5z" />
                   </svg>
-                  <span>Admissions (Dr. Achireddy): {CONTACT.admissionsPhone}</span>
+                  <span>Admissions (Dr. Ch. Achireddy): {CONTACT.admissionsPhone}</span>
                 </a>
                 <a
                   href={`mailto:${CONTACT.admissionsEmail}`}
@@ -111,19 +112,18 @@ export default function Footer() {
                   </svg>
                   <span>{CONTACT.admissionsEmail}</span>
                 </a>
-                <a
-                  href={telHref(CONTACT.receptionPhone)}
-                  className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
-                >
-                  <svg
-                    className="w-4 h-4 text-white/70 shrink-0"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+                {/* Hospital lines: cyan hospital icon, bright white number. */}
+                {[CONTACT.receptionPhone, CONTACT.hospitalPhone2].map((phone) => (
+                  <a
+                    key={phone}
+                    href={telHref(phone)}
+                    aria-label={`Call the hospital on ${phone}`}
+                    className="flex items-center gap-3 text-sm font-semibold text-white transition-colors hover:text-[#A5F3FC]"
                   >
-                    <path d="M2 3.5A1.5 1.5 0 013.5 2h2.1a1 1 0 01.98.8l.9 4.5a1 1 0 01-.6 1.14l-2.08.83a13.1 13.1 0 005.9 5.9l.83-2.08a1 1 0 011.14-.6l4.5.9a1 1 0 01.8.98v2.1a1.5 1.5 0 01-1.5 1.5h-1C9.2 19 2 11.65 2 5v-1.5z" />
-                  </svg>
-                  <span>{CONTACT.receptionPhone}</span>
-                </a>
+                    <Hospital className="h-4 w-4 shrink-0 text-[#22D3EE]" aria-hidden="true" />
+                    <span>{phone}</span>
+                  </a>
+                ))}
                 <a
                   href={`mailto:${CONTACT.email}`}
                   className="flex items-center gap-3 text-sm text-white/60 hover:text-white transition-colors"
@@ -213,7 +213,7 @@ export default function Footer() {
               </h3>
               <div className="w-full rounded-[26px] max-md:rounded-2xl overflow-hidden border border-white/10 max-md:shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
                 <iframe
-                  src="https://maps.google.com/maps?q=Arundathi%20Institute%20of%20medical%20acience&t=k&z=16&output=embed&iwloc=near"
+                  src={MAPS_EMBED_URL}
                   title="Arundathi Institute of Medical Sciences"
                   aria-label="Map showing Arundathi Institute of Medical Sciences"
                   loading="lazy"
@@ -221,6 +221,15 @@ export default function Footer() {
                   allowFullScreen
                 />
               </div>
+              <a
+                href={MAPS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[#FBBF24] hover:text-white"
+              >
+                Open in Google Maps for directions
+                <span aria-hidden="true">↗</span>
+              </a>
             </div>
 
           </div>

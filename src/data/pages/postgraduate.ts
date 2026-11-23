@@ -256,7 +256,7 @@ export const PG_PROGRAMMES: PgProgramme[] = [
 export const pgPath = (slug: string) => `/academics/postgraduate/${slug}`;
 
 const ADMISSIONS_OFFICE =
-  "Admissions office (Dr. Achireddy): +91 90009 94842 / +91 80557 78999 · info@aims.ac.in · Beside MLRIT, Dundigal, Gandi Maisamma, Medchal–Malkajgiri District, Telangana 500043.";
+  "Admissions office (Dr. Ch. Achireddy): +91 90009 94842 / +91 80557 78999 · info@aims.ac.in · Beside MLRIT, Dundigal, Gandi Maisamma, Medchal–Malkajgiri District, Telangana 500043.";
 
 const DEGREE_NAME = { MD: "Doctor of Medicine", MS: "Master of Surgery" } as const;
 

@@ -1,0 +1,94 @@
+/* "Programme at a glance" card (PG programme pages): a slowly turning gradient border, rows that
+   fade in one after another, a soft glow and a shine across the button. Calm by design; visitors
+   who prefer reduced motion get the still card. */
+
+@property --glance-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.glance-card {
+  position: relative;
+  border-radius: 22px;
+  padding: 2px;
+  background: conic-gradient(from var(--glance-angle), #f47b20, #ffc94d, #2754a3, #0f766e, #f47b20);
+  animation: glance-turn 8s linear infinite;
+  box-shadow: 0 18px 45px rgba(19, 42, 82, 0.14);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+.glance-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 60px rgba(19, 42, 82, 0.2);
+}
+
+.glance-card__inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #fff;
+}
+
+/* Faint moving glow in the card's top corner. */
+.glance-card__inner::before {
+  content: "";
+  position: absolute;
+  top: -70px;
+  right: -70px;
+  width: 200px;
+  height: 200px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(244, 123, 32, 0.16), transparent 70%);
+  animation: glance-glow 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Rows fade and slide in one after another. */
+.glance-row {
+  opacity: 0;
+  animation: glance-row-in 0.6s ease-out forwards;
+}
+
+.glance-btn {
+  position: relative;
+  overflow: hidden;
+}
+.glance-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-18deg);
+  animation: glance-shine 4.5s ease-in-out 1.5s infinite;
+}
+
+@keyframes glance-turn {
+  to { --glance-angle: 360deg; }
+}
+@keyframes glance-glow {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  50% { transform: translate(-24px, 18px) scale(1.15); opacity: 1; }
+}
+@keyframes glance-row-in {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes glance-shine {
+  0%, 60% { left: -60%; }
+  85%, 100% { left: 130%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glance-card,
+  .glance-card__inner::before,
+  .glance-btn::after {
+    animation: none;
+  }
+  .glance-row {
+    opacity: 1;
+    animation: none;
+  }
+}

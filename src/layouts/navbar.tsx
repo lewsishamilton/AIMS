@@ -281,10 +281,9 @@ const Navbar = () => {
         : "text-white/85 hover:text-white hover:bg-white/15 rounded-lg";
 
     const renderContactCallButton = (isMobile = false) => {
-        // Brand colours: navy with a white handset on light pages, white with a navy handset over the dark hero.
-        const buttonClass = isWhiteTheme
-            ? "bg-[#1f3351] hover:bg-[#0d2346] text-white border border-[#1f3351] shadow-[0_2px_10px_rgba(13,35,70,0.25)]"
-            : "bg-white hover:bg-white/90 text-[#1f3351] border border-white shadow-[0_2px_10px_rgba(0,0,0,0.25)]";
+        // WhatsApp green with a white handset, on light pages and over the dark hero alike.
+        const buttonClass =
+            "bg-[#25D366] hover:bg-[#1EBE5A] text-white border border-[#25D366] shadow-[0_2px_10px_rgba(37,211,102,0.4)]";
 
         // Desktop: glide to the Admissions card on the home page, so visitors stay on (and can scroll back up) the main page.
         const handleClick = (e: React.MouseEvent) => {
@@ -322,8 +321,8 @@ const Navbar = () => {
             <a
                 href="tel:+919000994842"
                 onClick={() => setIsMenuOpen(false)}
-                aria-label="Call Admissions: Dr. Achireddy"
-                title="Call Admissions: Dr. Achireddy (9000994842)"
+                aria-label="Call Admissions: Dr. Ch. Achireddy"
+                title="Call Admissions: Dr. Ch. Achireddy (9000994842)"
                 className={className}
             >
                 {icon}
@@ -332,8 +331,8 @@ const Navbar = () => {
             <Link
                 to={{ pathname: "/", hash: "#admissions-enquiry" }}
                 onClick={handleClick}
-                aria-label="Admissions Enquiry: Dr. Achireddy"
-                title="Admissions Enquiry: Dr. Achireddy (9000994842)"
+                aria-label="Admissions Enquiry: Dr. Ch. Achireddy"
+                title="Admissions Enquiry: Dr. Ch. Achireddy (9000994842)"
                 className={className}
             >
                 {icon}
@@ -720,7 +719,7 @@ const Navbar = () => {
                                 Admissions Enquiry
                             </span>
                             <span className="block mt-0.5 text-base font-semibold">
-                                Dr. Achireddy
+                                Dr. Ch. Achireddy
                             </span>
                         </div>
                         <a

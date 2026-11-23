@@ -41,6 +41,8 @@ registerHooks({
 const root = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 const dist = join(root, "dist");
 const { CANONICAL_PAGES, SERVED_PATHS, SITE_NAME, SITE_URL, urlFor } = await import("../../src/seo/routeMeta.ts");
+const { pgDetailFor, pgJsonLd, pgStaticHtml, pgMeta } = await import("../../src/seo/pgProgrammeSeo.ts");
+const { PG_PROGRAMME_DETAILS } = await import("../../src/data/pgProgrammeDetails.ts");
 type Meta = (typeof CANONICAL_PAGES)[number];
 
 // The tags sit between markers, so running this again (dist/index.html is also the home page it
@@ -78,7 +80,22 @@ function headTags(meta: Meta, robots?: string): string {
   ].join("\n    ");
 }
 
-const page = (meta: Meta, robots?: string) => template.replace(SEO_BLOCK, headTags(meta, robots));
+/**
+ * MD / MS programme pages also get schema.org structured data and their text as plain HTML in #root,
+ * so crawlers that do not run JavaScript (most AI crawlers) can read them. The app replaces #root
+ * as soon as it starts.
+ */
+function page(meta: Meta, robots?: string): string {
+  let html = template.replace(SEO_BLOCK, headTags(meta, robots));
+  const pg = robots ? undefined : pgDetailFor(meta.path);
+  if (pg) {
+    const ld = JSON.stringify(pgJsonLd(pg)).replace(/</g, "\\u003c");
+    html = html
+      .replace("</head>", `  <script type="application/ld+json">${ld}</script>\n  </head>`)
+      .replace('<div id="root"></div>', `<div id="root">${pgStaticHtml(pg)}</div>`);
+  }
+  return html;
+}
 
 // One folder per address. Case-only variants (/Faculty, /faculty) share a folder on Windows and
 // carry the same page, so each is written once.
@@ -108,6 +125,31 @@ ${CANONICAL_PAGES.map((p) => `  <url><loc>${urlFor(p.path)}</loc><lastmod>${toda
 );
 
 writeFileSync(join(dist, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`);
+
+// llms.txt: a plain-text guide to the site for AI assistants (https://llmstxt.org).
+const keyPage = (path: string) => {
+  const m = CANONICAL_PAGES.find((p) => p.path === path);
+  return m ? `- [${m.title.replace(/ \| AIMS Hyderabad$/, "")}](${urlFor(path)}): ${m.description}` : "";
+};
+writeFileSync(
+  join(dist, "llms.txt"),
+  [
+    `# ${SITE_NAME}`,
+    "",
+    "> Arundathi Institute of Medical Sciences (AIMS), Dundigal, Hyderabad, Telangana: an NMC-recognised medical college affiliated to Kaloji Narayana Rao University of Health Sciences (KNRUHS), with its own NABH-accredited teaching hospital offering free treatment and 24x7 emergency care. Counselling college code: AIMD.",
+    "",
+    "## Postgraduate programmes (MD / MS)",
+    ...Object.values(PG_PROGRAMME_DETAILS).map(
+      (d) => `- [${d.programmeName}](${urlFor(`/academics/postgraduate/${d.slug}`)}): ${pgMeta(d).description}`
+    ),
+    "",
+    "## Key pages",
+    ...["/", "/about-institution", "/about-hospital", "/admissions/apply", "/admissions/apply/enquire", "/departments", "/contact"]
+      .map(keyPage)
+      .filter(Boolean),
+    "",
+  ].join("\n")
+);
 
 if (!existsSync(join(dist, "images", "og-aims.jpg"))) console.warn("[seo] public/images/og-aims.jpg is missing; share previews will have no image");
 console.log(`[seo] ${written.size} page files, ${CANONICAL_PAGES.length} sitemap URLs, robots.txt, 404.html`);

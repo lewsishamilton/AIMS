@@ -141,7 +141,7 @@ export interface PageMedia {
  * The MD / MS programme pages: a department photo beside the "About" section and on the
  * overview card, and a masthead that uses a real AIMS photo where one shows the department's work.
  */
-const PG_PHOTOS: Record<string, { department: string; about: string; hero: string }> = {
+export const PG_PHOTOS: Record<string, { department: string; about: string; hero: string }> = {
   "md-general-medicine": { department: "General Medicine", about: IMG.generalMedicine, hero: IMG.cathLabRoom },
   "ms-general-surgery": { department: "General Surgery", about: IMG.generalSurgery, hero: IMG.otTeam },
   "ms-orthopedics": { department: "Orthopaedics", about: IMG.orthopaedics, hero: IMG.orthopaedics },

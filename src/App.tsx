@@ -4,6 +4,10 @@ import ChatAssistant from "./components/ChatAssistant"
 import HomeApplyTabs from "./components/HomeApplyTabs"
 import HeroPage from "./pages/HomePage"
 import { COMMITTEES } from "./data/committees"
+import { PG_PROGRAMMES } from "./data/pages/postgraduate"
+
+/** Every MD / MS programme uses the detailed programme page. */
+const PG_DETAIL_SLUGS = PG_PROGRAMMES.map((p) => p.slug)
 
 import { Navigate, Route, Routes } from "react-router-dom"
 import ScrollToTop from "./ScrollToTop"
@@ -99,7 +103,9 @@ function App() {
         <Route path="/admissions/apply/enquire" element={<AdmissionEnquiryPage />} />
         <Route path="/admissions/apply/enquire/thank-you" element={<AdmissionEnquiryPage />} />
         <Route path="/careers/teaching/apply/thank-you" element={<FacultyApplicationPage />} />
-        <Route path="/academics/postgraduate/md-general-medicine" element={<PgProgrammeDetailPage slug="md-general-medicine" />} />
+        {PG_DETAIL_SLUGS.map((slug) => (
+          <Route key={slug} path={`/academics/postgraduate/${slug}`} element={<PgProgrammeDetailPage slug={slug} />} />
+        ))}
         <Route path="/Contact" element={<ContactPage />} />
         <Route path="/about/awards" element={<AwardsPage />} />
         <Route path="/facilities/transport" element={<TransportPage />} />

@@ -9,23 +9,29 @@ import {
   FolderCheck,
   MonitorCheck,
   FlaskConical,
+  Microscope,
+  Scissors,
   GraduationCap,
   Info,
   Mail,
   MapPin,
   PhoneCall,
   Send,
+  Sparkles,
   Stethoscope,
   Target,
   Users,
 } from "lucide-react";
 import PageHero from "../components/PageHero";
-import { IMG } from "../data/pageImages";
+import PgAdvances from "../components/PgAdvances";
+import GlanceCard from "../components/GlanceCard";
+import { FEE_CATEGORIES, FEE_GROUPS, inr, type FeeGroupTitle } from "../data/pgFees";
+import { PG_PHOTOS } from "../data/pageImages";
 import { PG_PROGRAMME_DETAILS, type PgProgrammeDetail } from "../data/pgProgrammeDetails";
 import { CONTACT, MAPS_URL, telHref } from "../data/siteInfo";
 
 /**
- * Detailed PG programme page (currently MD General Medicine): programme highlights, outcomes and
+ * Detailed PG programme page (every MD / MS programme in PG_PROGRAMME_DETAILS): programme highlights, outcomes and
  * careers tabs, admissions path, eligibility, year-wise curriculum, related courses and FAQs.
  *
  * Typeset in Open Sans with AIMS's own colours from its PG admissions poster — saffron section
@@ -45,7 +51,7 @@ const STEP_THEMES = [
   { circle: "from-[#C4B5FD] to-[#7C3AED] shadow-[0_12px_32px_rgba(124,58,237,0.55)]", label: "text-[#C4B5FD]" },
   { circle: "from-[#7DD3FC] to-[#0284C7] shadow-[0_12px_32px_rgba(2,132,199,0.55)]", label: "text-[#7DD3FC]" },
 ];
-const FEATURE_ICONS = { clinical: Stethoscope, research: FlaskConical, community: Users } as const;
+const FEATURE_ICONS = { clinical: Stethoscope, research: FlaskConical, community: Users, skills: Sparkles, surgical: Scissors, lab: Microscope } as const;
 /** Each feature card gets its own gradient (deep shades, so white text stays readable) and a matching glow. */
 // Orange · white · green, left to right. The white card uses navy text and an orange icon so it stays readable.
 const FEATURE_THEMES = {
@@ -72,8 +78,11 @@ const FEATURE_THEMES = {
   },
 } as const;
 
-const HERO_IMAGES: Record<string, string> = { "md-general-medicine": IMG.cathLabRoom };
-const SIDE_IMAGES: Record<string, string> = { "md-general-medicine": IMG.generalMedicine };
+/** Banner and Highlights photos: the department's own AIMS photos, as used across the site. */
+const HERO_IMAGES: Record<string, string> = Object.fromEntries(Object.entries(PG_PHOTOS).map(([k, v]) => [k, v.hero]));
+const SIDE_IMAGES: Record<string, string> = Object.fromEntries(Object.entries(PG_PHOTOS).map(([k, v]) => [k, v.about]));
+/** Feature cards are coloured by position: orange · white · teal. */
+const FEATURE_ORDER = [FEATURE_THEMES.clinical, FEATURE_THEMES.research, FEATURE_THEMES.community];
 
 /** Two-line section title, as "Program / Highlights". */
 const Title: React.FC<{ a: string; b: string; light?: boolean }> = ({ a, b, light }) => (
@@ -90,9 +99,10 @@ export default function PgProgrammeDetailPage({ slug }: { slug: string }) {
   if (!d) return null;
   return (
     <div className="min-h-screen bg-white font-open-sans text-[#2b2b2b] dark:bg-transparent dark:text-slate-200">
-      <PageHero eyebrow="Postgraduate · MD" title={d.heroTitle} pathname={pathname} image={HERO_IMAGES[slug]} />
+      <PageHero eyebrow={`Postgraduate · ${d.degree}`} title={d.heroTitle} pathname={pathname} image={HERO_IMAGES[slug]} />
       <Intro d={d} />
       <Highlights d={d} sideImage={SIDE_IMAGES[slug]} />
+      <PgAdvances slug={slug} titleClass={H2} />
       <ProgramDetails d={d} />
       <AdmissionsPath d={d} />
       <Eligibility d={d} />
@@ -105,38 +115,22 @@ export default function PgProgrammeDetailPage({ slug }: { slug: string }) {
 
 function Intro({ d }: { d: PgProgrammeDetail }) {
   return (
-    <section className="mx-auto grid max-w-[1200px] gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_360px] lg:py-20">
-      <div>
+    <section className="mx-auto grid max-w-[1200px] items-stretch gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[1fr_420px] lg:py-20">
+      {/* Heading at the top, justified text ending level with the glance card's bottom edge. */}
+      <div className="flex flex-col justify-between gap-5">
         <h2 className={`max-w-xl ${H2}`}>{d.introHeading}</h2>
-        {d.intro.map((p) => (
-          <p key={p.slice(0, 20)} className="mt-5 max-w-2xl text-base leading-relaxed text-[#3d3d3d] dark:text-slate-300">
-            {p}
-          </p>
-        ))}
-      </div>
-      <aside className="h-fit rounded-xl border border-black/10 bg-white p-6 shadow-[0_12px_40px_rgba(0,0,0,0.08)] dark:border-white/10 dark:bg-white/5">
-        <p className="text-lg font-bold text-[#1f3351] dark:text-white">Programme at a glance</p>
-        <dl className="mt-4 divide-y divide-black/10 text-sm dark:divide-white/10">
-          {[
-            ["Duration", "3 years"],
-            ["Degree", "Doctor of Medicine (MD)"],
-            ["Affiliation", "KNRUHS, Warangal"],
-            ["Regulator", "National Medical Commission"],
-            ["Admission", "NEET-PG + KNRUHS counselling"],
-          ].map(([k, v]) => (
-            <div key={k} className="flex justify-between gap-4 py-2.5">
-              <dt className="text-[#666] dark:text-slate-400">{k}</dt>
-              <dd className="text-right font-semibold text-[#2b2b2b] dark:text-white">{v}</dd>
-            </div>
+        <div>
+          {d.intro.map((p, i) => (
+            <p
+              key={p.slice(0, 20)}
+              className={`${i ? "mt-5" : ""} text-justify text-[19px] leading-[1.9] text-[#3d3d3d] [hyphens:auto] dark:text-slate-300`}
+            >
+              {p}
+            </p>
           ))}
-        </dl>
-        <Link
-          to="/admissions/apply/enquire"
-          className="mt-5 flex min-h-11 items-center justify-center gap-2 rounded-md bg-[#D9581A] px-5 text-sm font-semibold text-white hover:bg-[#bf4a12]"
-        >
-          <Send className="h-4 w-4" aria-hidden="true" /> Admissions Enquiry
-        </Link>
-      </aside>
+        </div>
+      </div>
+      <GlanceCard degree={d.degree} />
     </section>
   );
 }
@@ -154,20 +148,26 @@ function Highlights({ d, sideImage }: { d: PgProgrammeDetail; sideImage?: string
                   <span className="inline-block rounded-lg bg-gradient-to-r from-[#FFC94D] via-[#FFA63D] to-[#F47B20] px-3 py-1 text-base font-extrabold tracking-wide text-[#132a52] shadow-[0_6px_18px_rgba(244,123,32,0.45)] sm:text-lg">
                     {h.label}
                   </span>
-                  <p className="mt-2 text-base leading-relaxed text-white/95 sm:text-lg lg:text-[19px]">{h.text}</p>
+                  <p
+                    className="mt-2 text-justify text-base leading-relaxed text-white/95 [hyphens:auto] sm:text-lg lg:text-[19px]"
+                  >
+                    {h.text}
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
           {sideImage && (
-            <img src={sideImage} alt="" className="hidden h-full max-h-[380px] w-full rounded-xl object-cover shadow-2xl lg:block" />
+            <div className="hidden max-h-[380px] overflow-hidden rounded-xl shadow-2xl lg:block">
+              <img src={sideImage} alt="" className="pg-kenburns h-full max-h-[380px] w-full object-cover" />
+            </div>
           )}
         </div>
       </div>
       <div className="mx-auto -mt-24 grid max-w-[1200px] gap-6 px-5 sm:px-8 md:grid-cols-3">
-        {d.features.map((f) => {
+        {d.features.map((f, idx) => {
           const Icon = FEATURE_ICONS[f.icon];
-          const t = FEATURE_THEMES[f.icon];
+          const t = FEATURE_ORDER[idx % FEATURE_ORDER.length];
           return (
             <div
               key={f.title}
@@ -181,7 +181,9 @@ function Highlights({ d, sideImage }: { d: PgProgrammeDetail; sideImage?: string
               </span>
               <h3 className="mt-5 text-xl font-extrabold sm:text-2xl">{f.title}</h3>
               <span aria-hidden="true" className={`mt-2 block h-1 w-12 rounded-full ${t.rule}`} />
-              <p className={`mt-4 text-base leading-relaxed sm:text-[17px] ${t.body}`}>{f.text}</p>
+              <p className={`mt-4 text-base leading-relaxed sm:text-[17px] ${t.body} text-justify [hyphens:auto]`}>
+                {f.text}
+              </p>
             </div>
           );
         })}
@@ -206,7 +208,7 @@ function ProgramDetails({ d }: { d: PgProgrammeDetail }) {
       key: "careers",
       Icon: Briefcase,
       title: "Careers",
-      lead: "Career paths after MD General Medicine:",
+      lead: `Career paths after ${d.programmeName}:`,
       items: d.careers,
       head: "from-[#FFB23D] via-[#F47B20] to-[#D9581A]",
       badge: "from-[#FFB23D] to-[#E4561A]",
@@ -242,7 +244,11 @@ function ProgramDetails({ d }: { d: PgProgrammeDetail }) {
                     aria-hidden="true"
                     className={`h-3 w-3 shrink-0 rounded-full bg-gradient-to-br shadow-[0_0_0_4px_rgba(19,42,82,0.06)] transition-transform duration-300 group-hover:scale-125 ${badge}`}
                   />
-                  <span className="text-base leading-relaxed text-[#2b2b2b] sm:text-lg dark:text-slate-200">{x}</span>
+                  <span
+                    className="flex-1 text-justify text-base leading-relaxed text-[#2b2b2b] [hyphens:auto] sm:text-lg dark:text-slate-200"
+                  >
+                    {x}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -457,7 +463,7 @@ function Eligibility({ d }: { d: PgProgrammeDetail }) {
           <br />
           Eligibility
         </h2>
-        <p className="mt-3 max-w-2xl text-base text-[#555] sm:text-lg dark:text-slate-300">Who can apply for MD General Medicine at AIMS.</p>
+        <p className="mt-3 max-w-2xl text-base text-[#555] sm:text-lg dark:text-slate-300">Who can apply for {d.programmeName} at AIMS.</p>
         <ul className="mt-8 grid gap-4 lg:grid-cols-2">
           {d.eligibility.map((e) => (
             <li
@@ -477,23 +483,21 @@ function Eligibility({ d }: { d: PgProgrammeDetail }) {
 }
 
 /**
- * Annual fee per category, in rupees, for each discipline group. Category-C is three times
- * Category-B in every group, so it is worked out from B.
+ * Fee cards: figures from data/pgFees.ts, one colour per discipline group.
  */
-const feesFrom = (a: number, b: number) => ({ "Category-A": a, "Category-B": b, "Category-C": b * 3 });
-const FEE_GROUPS: { title: string; accent: string; tint: string; text: string; fees?: Record<string, number> }[] = [
-  { title: "Clinical", accent: "bg-[#C2410C]", tint: "bg-[#FFF7ED]", text: "text-[#C2410C]", fees: feesFrom(700000, 2300000) },
-  { title: "Para Clinical", accent: "bg-[#0F766E]", tint: "bg-[#F0FDFA]", text: "text-[#0F766E]", fees: feesFrom(430000, 530000) },
-  { title: "Non Clinical", accent: "bg-[#4F46E5]", tint: "bg-[#EEF2FF]", text: "text-[#4338CA]", fees: feesFrom(170000, 170000) },
-];
-const FEE_CATEGORIES = ["Category-A", "Category-B", "Category-C"];
+const FEE_STYLES: Record<FeeGroupTitle, { accent: string; tint: string; text: string }> = {
+  Clinical: { accent: "bg-[#C2410C]", tint: "bg-[#FFF7ED]", text: "text-[#C2410C]" },
+  "Para Clinical": { accent: "bg-[#0F766E]", tint: "bg-[#F0FDFA]", text: "text-[#0F766E]" },
+  "Non Clinical": { accent: "bg-[#4F46E5]", tint: "bg-[#EEF2FF]", text: "text-[#4338CA]" },
+};
+const FEE_CARDS = FEE_GROUPS.map((g) => ({ ...g, ...FEE_STYLES[g.title] }));
 
 function FeeStructure() {
   return (
     <section className="mx-auto max-w-[1200px] px-5 py-14 sm:px-8 lg:py-20">
       <Title a="Fee" b="Structure" />
       <div className="mt-8 grid gap-6 md:grid-cols-3">
-        {FEE_GROUPS.map((g) => (
+        {FEE_CARDS.map((g) => (
           <div
             key={g.title}
             className={`relative overflow-hidden rounded-2xl border border-black/[0.06] p-6 pt-7 shadow-[0_8px_24px_rgba(19,42,82,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_36px_rgba(19,42,82,0.12)] ${g.tint}`}
@@ -504,9 +508,9 @@ function FeeStructure() {
               {FEE_CATEGORIES.map((c) => (
                 <li key={c} className="flex items-center justify-between gap-4 py-3.5">
                   <span className="text-lg font-semibold text-[#132a52]">{c}</span>
-                  {g.fees?.[c] != null ? (
+                  {g.fees[c] != null ? (
                     <span className="text-right">
-                      <span className={`text-xl font-extrabold ${g.text}`}>₹{g.fees[c].toLocaleString("en-IN")}</span>
+                      <span className={`text-xl font-extrabold ${g.text}`}>{inr(g.fees[c])}</span>
                       <span className="text-sm text-[#64748b]"> / year</span>
                     </span>
                   ) : (

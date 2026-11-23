@@ -17,7 +17,6 @@ import {
   Check,
   Copy,
   PhoneCall,
-  MessageSquare,
   GraduationCap,
 } from "lucide-react";
 
@@ -241,12 +240,16 @@ export const ContactSection: React.FC = () => {
                   <span>Call Now</span>
                 </a>
                 <a
-                  href={`https://wa.me/91${localDigits(CONTACT.admissionsPhone)}?text=Hello%20Dr.%20Achireddy%20Sir,%20I%20am%20inquiring%20about%20admissions%20at%20AIMS.`}
+                  href={`https://wa.me/91${localDigits(CONTACT.admissionsPhone)}?text=Hello%20Dr.%20Ch.%20Achireddy%20Sir,%20I%20am%20inquiring%20about%20admissions%20at%20AIMS.`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 min-h-12 px-3 rounded-2xl bg-white hover:bg-[#1f3351]/[0.04] text-[#1f3351] border border-[#1f3351]/20 dark:bg-transparent dark:hover:bg-white/10 dark:text-white dark:border-white/25 font-bold text-sm transition-all duration-200 active:scale-[0.97]"
                 >
-                  <MessageSquare className="w-4 h-4 shrink-0" aria-hidden="true" />
+                  {/* WhatsApp logo in its own brand green. */}
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" aria-hidden="true">
+                    <path fill="#25D366" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2z" />
+                    <path fill="#fff" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.79-1.47-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.08c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35z" />
+                  </svg>
                   <span>WhatsApp</span>
                 </a>
               </div>

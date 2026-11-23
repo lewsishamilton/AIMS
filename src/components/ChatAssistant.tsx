@@ -81,6 +81,7 @@ export default function ChatAssistant() {
 
   return (
     <>
+      <style>{"@keyframes ask-help-float{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,-4px)}}"}</style>
       {open && (
         <div
           role="dialog"
@@ -183,8 +184,17 @@ export default function ChatAssistant() {
         onClick={() => setOpen((o) => !o)}
         aria-label={open ? "Close assistant" : "Open AIMS assistant"}
         aria-expanded={open}
-        className="group fixed right-4 bottom-4 z-[60] flex h-13 w-13 items-center justify-center rounded-full border border-white/20 bg-[#0d2346] text-white shadow-[0_10px_28px_rgba(13,35,70,0.45)] transition-transform hover:scale-105 active:scale-95 sm:right-6 sm:bottom-6 sm:h-14 sm:w-14 dark:bg-teal-600 dark:text-white"
+        className="group fixed right-4 bottom-4 z-[60] flex h-13 w-13 items-center justify-center rounded-full border border-white/30 bg-gradient-to-br from-[#FF9A3D] to-[#E4561A] text-white shadow-[0_10px_28px_rgba(228,86,26,0.45)] transition-transform hover:scale-105 active:scale-95 sm:right-6 sm:bottom-6 sm:h-14 sm:w-14"
       >
+        {/* Always-on "ASK HELP" bubble above the closed assistant. */}
+        {!open && (
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute bottom-full left-1/2 mb-2.5 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-3 py-1 text-[11px] font-extrabold tracking-[0.08em] text-[#E4561A] shadow-[0_6px_16px_rgba(13,35,70,0.25)] ring-1 ring-[#F47B20]/30 motion-safe:animate-[ask-help-float_2.6s_ease-in-out_infinite] after:absolute after:left-1/2 after:top-full after:-ml-1.5 after:border-[6px] after:border-transparent after:border-t-white after:content-['']"
+          >
+            ASK HELP
+          </span>
+        )}
         {open ? <X className="h-5 w-5" /> : <AssistantAvatar className="h-9 w-9 transition-transform duration-300 group-hover:-rotate-6" />}
       </button>
     </>

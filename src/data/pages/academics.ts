@@ -15,7 +15,7 @@ const linksExcept = (path: string) =>
   ACADEMIC_LINKS.filter((l) => l.path !== path);
 
 const ADMISSIONS_OFFICE =
-  "Admissions office (Dr. Achireddy): +91 90009 94842 / +91 80557 78999 · info@aims.ac.in · Beside MLRIT, Dundigal, Gandi Maisamma, Medchal–Malkajgiri District, Telangana 500043.";
+  "Admissions office (Dr. Ch. Achireddy): +91 90009 94842 / +91 80557 78999 · info@aims.ac.in · Beside MLRIT, Dundigal, Gandi Maisamma, Medchal–Malkajgiri District, Telangana 500043.";
 
 export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
   "/academics/mbbs": {
@@ -237,7 +237,7 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
     ],
     quickLinks: linksExcept("/academics/nursing-allied-health"),
     cta: {
-      text: "Intake, eligibility and fee details for nursing and allied health programmes are confirmed each academic year. Speak to admissions in-charge Dr. Achireddy on +91 90009 94842.",
+      text: "Intake, eligibility and fee details for nursing and allied health programmes are confirmed each academic year. Speak to admissions in-charge Dr. Ch. Achireddy on +91 90009 94842.",
       label: "Admissions Enquiry",
       path: "/contact#admissions-enquiry",
     },
@@ -316,7 +316,7 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
     ],
     quickLinks: linksExcept("/academics/paramedical-diplomas"),
     cta: {
-      text: "Course duration, eligibility and intake for each diploma are confirmed at the start of the academic session. Call admissions in-charge Dr. Achireddy on +91 90009 94842 for the current prospectus.",
+      text: "Course duration, eligibility and intake for each diploma are confirmed at the start of the academic session. Call admissions in-charge Dr. Ch. Achireddy on +91 90009 94842 for the current prospectus.",
       label: "Admissions Enquiry",
       path: "/contact#admissions-enquiry",
     },
