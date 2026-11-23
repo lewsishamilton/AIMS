@@ -1,0 +1,139 @@
+/* Founder page: animated portrait frame, quote and social buttons. CSS only; visitors who prefer
+   reduced motion get the still page. */
+
+@property --fd-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Soft colour blobs drifting behind the page header. */
+.fd-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.35;
+  pointer-events: none;
+  animation: fd-drift 16s ease-in-out infinite alternate;
+}
+
+/* Portrait: a slowly turning gradient frame, a gentle float, a slow zoom and a light sweep. */
+.fd-portrait {
+  position: relative;
+  border-radius: 30px;
+  padding: 3px;
+  background: conic-gradient(from var(--fd-angle), #f47b20, #ffc94d, #2754a3, #0f766e, #f47b20);
+  animation: fd-turn 9s linear infinite, fd-float 7s ease-in-out infinite;
+  box-shadow: 0 30px 70px rgba(19, 42, 82, 0.22);
+}
+.fd-portrait__inner {
+  position: relative;
+  overflow: hidden;
+  border-radius: 27px;
+}
+.fd-portrait__img {
+  animation: fd-zoom 20s ease-in-out infinite alternate;
+  transform-origin: 50% 20%;
+}
+.fd-portrait__inner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+  transform: translateX(-120%);
+  animation: fd-sweep 7s ease-in-out 1.5s infinite;
+  pointer-events: none;
+}
+
+/* Dotted pattern offset behind the portrait. */
+.fd-dots {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background-image: radial-gradient(rgba(244, 123, 32, 0.45) 2px, transparent 2px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+
+/* Small badges floating around the portrait. */
+.fd-badge {
+  animation: fd-bob 4.5s ease-in-out infinite;
+}
+
+/* Quote mark: breathes softly. */
+.fd-quote-mark {
+  animation: fd-breathe 4s ease-in-out infinite;
+}
+
+/* Social buttons: bob in turn, with a pulsing ring; spin the icon on hover. */
+.fd-social {
+  position: relative;
+  animation: fd-bob 3.6s ease-in-out infinite;
+}
+.fd-social::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 var(--fd-glow);
+  animation: fd-pulse 2.8s ease-out infinite;
+  animation-delay: inherit;
+  pointer-events: none;
+}
+.fd-social svg {
+  transition: transform 0.5s cubic-bezier(0.22, 1.4, 0.36, 1);
+}
+.fd-social:hover svg,
+.fd-social:focus-visible svg {
+  transform: rotate(360deg) scale(1.15);
+}
+.fd-social:hover {
+  animation-play-state: paused;
+}
+
+@keyframes fd-turn {
+  to { --fd-angle: 360deg; }
+}
+@keyframes fd-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes fd-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+@keyframes fd-sweep {
+  0%, 55% { transform: translateX(-120%); }
+  85%, 100% { transform: translateX(120%); }
+}
+@keyframes fd-drift {
+  to { transform: translate(-50px, 40px) scale(1.15); }
+}
+@keyframes fd-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes fd-breathe {
+  0%, 100% { transform: scale(1) rotate(0); opacity: 0.9; }
+  50% { transform: scale(1.08) rotate(-4deg); opacity: 1; }
+}
+@keyframes fd-pulse {
+  0% { box-shadow: 0 0 0 0 var(--fd-glow); }
+  70%, 100% { box-shadow: 0 0 0 14px transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fd-blob,
+  .fd-portrait,
+  .fd-portrait__img,
+  .fd-portrait__inner::after,
+  .fd-badge,
+  .fd-quote-mark,
+  .fd-social,
+  .fd-social::before {
+    animation: none;
+  }
+  .fd-social:hover svg {
+    transform: none;
+  }
+}
