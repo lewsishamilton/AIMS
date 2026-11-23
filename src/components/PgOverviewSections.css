@@ -1,0 +1,218 @@
+/* Animated sections on the Postgraduate overview page. CSS only; visitors who prefer reduced motion
+   get the still versions. */
+
+/* Items fade and rise in, one after another. */
+.pgo-rise {
+  animation: pgo-rise 0.7s ease-out both;
+}
+
+/* ── Clinical Learning: an ECG trace drawn across the card, over and over ── */
+.pgo-ecg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 22px;
+  width: 100%;
+  height: 80px;
+  opacity: 0.18;
+  pointer-events: none;
+}
+.pgo-ecg path {
+  fill: none;
+  stroke: #f47b20;
+  stroke-width: 3;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: pgo-ecg 3.2s linear infinite;
+}
+
+/* ── Research: a molecule with three tilted orbits ── */
+.pgo-molecule {
+  position: absolute;
+  right: -40px;
+  top: -40px;
+  width: 260px;
+  height: 260px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.pgo-molecule__core {
+  position: absolute;
+  inset: 108px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #ccfbf1, #14b8a6);
+  box-shadow: 0 0 30px rgba(20, 184, 166, 0.6);
+  animation: pgo-breathe 3s ease-in-out infinite;
+}
+.pgo-molecule__orbit {
+  position: absolute;
+  inset: 20px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(15, 118, 110, 0.25);
+}
+.pgo-molecule__orbit i {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  margin-left: -6px;
+  border-radius: 9999px;
+  background: #fbbf24;
+  box-shadow: 0 0 12px #fbbf24;
+}
+.pgo-molecule__orbit--1 { transform: rotateX(70deg); animation: pgo-orbit-1 6s linear infinite; }
+.pgo-molecule__orbit--2 { transform: rotateY(70deg); animation: pgo-orbit-2 8s linear infinite; }
+.pgo-molecule__orbit--3 { transform: rotate(45deg) rotateX(70deg); animation: pgo-orbit-3 7s linear infinite; }
+.pgo-molecule__orbit--2 i { background: #2754a3; box-shadow: 0 0 12px #2754a3; }
+.pgo-molecule__orbit--3 i { background: #f47b20; box-shadow: 0 0 12px #f47b20; }
+
+/* Research steps: joined by a dashed line, each lighting up in turn. */
+.pgo-path {
+  position: relative;
+}
+@media (min-width: 640px) {
+  .pgo-path::before {
+    content: "";
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    top: 28px;
+    border-top: 2px dashed rgba(15, 118, 110, 0.35);
+    animation: pgo-dash 1.2s linear infinite;
+  }
+}
+.pgo-step {
+  position: relative;
+  animation: pgo-step 3.2s ease-in-out infinite;
+}
+
+/* ── Eligibility: gradient connector line with a light running along it; pulsing rings ── */
+.pgo-elig__line {
+  background: linear-gradient(90deg, #2754a3, #f47b20, #2754a3);
+  background-size: 200% 100%;
+  animation: pgo-flow 4s linear infinite;
+  opacity: 0.35;
+}
+.pgo-ring {
+  animation: pgo-ring 2.8s ease-out infinite;
+}
+.pgo-code {
+  animation: pgo-glow 2.6s ease-in-out infinite;
+}
+
+/* Button shine. */
+.pgo-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+  transform: skewX(-18deg);
+  animation: pgo-shine 4.5s ease-in-out 1s infinite;
+}
+
+/* ── Admissions office: drifting glow, ripple rings around the call button, ringing handset ── */
+.pgo-office__glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -120px;
+  bottom: -180px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.3), transparent 65%);
+  animation: pgo-drift 10s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+.pgo-call__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  border: 2px solid rgba(244, 123, 32, 0.6);
+  animation: pgo-ripple 2.4s ease-out infinite;
+}
+.pgo-call__ring--2 {
+  animation-delay: 1.2s;
+}
+.pgo-call__icon {
+  animation: pgo-ringing 2.4s ease-in-out infinite;
+}
+
+@keyframes pgo-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pgo-ecg {
+  0% { stroke-dashoffset: 900; }
+  70% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes pgo-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+@keyframes pgo-orbit-1 { to { transform: rotateX(70deg) rotate(360deg); } }
+@keyframes pgo-orbit-2 { to { transform: rotateY(70deg) rotate(360deg); } }
+@keyframes pgo-orbit-3 { to { transform: rotate(45deg) rotateX(70deg) rotate(360deg); } }
+@keyframes pgo-dash {
+  to { background-position: 20px 0; transform: translateX(0); }
+}
+@keyframes pgo-step {
+  0%, 70%, 100% { background: #fff; color: #0f766e; box-shadow: none; }
+  20% { background: #14b8a6; color: #fff; box-shadow: 0 0 22px rgba(20, 184, 166, 0.55); }
+}
+@keyframes pgo-flow {
+  to { background-position: -200% 0; }
+}
+@keyframes pgo-ring {
+  0% { box-shadow: 0 10px 26px rgba(19, 42, 82, 0.15), 0 0 0 0 rgba(244, 123, 32, 0.45); }
+  70%, 100% { box-shadow: 0 10px 26px rgba(19, 42, 82, 0.15), 0 0 0 14px rgba(244, 123, 32, 0); }
+}
+@keyframes pgo-glow {
+  0%, 100% { box-shadow: 0 8px 22px rgba(19, 42, 82, 0.25); }
+  50% { box-shadow: 0 8px 30px rgba(251, 191, 36, 0.55); }
+}
+@keyframes pgo-shine {
+  0%, 60% { left: -60%; }
+  85%, 100% { left: 130%; }
+}
+@keyframes pgo-drift {
+  to { transform: translate(-60px, -40px) scale(1.15); }
+}
+@keyframes pgo-ripple {
+  from { transform: scale(1); opacity: 0.9; }
+  to { transform: scale(1.7); opacity: 0; }
+}
+@keyframes pgo-ringing {
+  0%, 50%, 100% { transform: rotate(0); }
+  5%, 15%, 25% { transform: rotate(-14deg); }
+  10%, 20%, 30% { transform: rotate(14deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pgo-rise,
+  .pgo-ecg path,
+  .pgo-molecule__core,
+  .pgo-molecule__orbit,
+  .pgo-path::before,
+  .pgo-step,
+  .pgo-elig__line,
+  .pgo-ring,
+  .pgo-code,
+  .pgo-shine::after,
+  .pgo-office__glow,
+  .pgo-call__ring,
+  .pgo-call__icon {
+    animation: none;
+  }
+  .pgo-ecg path {
+    stroke-dashoffset: 0;
+  }
+  .pgo-call__ring {
+    display: none;
+  }
+}

@@ -17,6 +17,9 @@ import PageHero from "./PageHero";
 import RecruitmentShowcase from "./RecruitmentShowcase";
 import AdmissionsShowcase from "./AdmissionsShowcase";
 import { groupSections } from "./ContentBlocks";
+import PgProgrammesShowcase from "./PgProgrammesShowcase";
+import ResidencyYears from "./ResidencyYears";
+import { ClinicalResearch, PgAdmissionsOffice, PgEligibility } from "./PgOverviewSections";
 
 export interface PageCard {
   name: string;
@@ -49,7 +52,16 @@ export interface StaticPageDef {
   cta?: { text: string; label: string; path: string };
   /** Hero and supporting photography, supplied from the media manifest. */
   media?: PageMedia;
+  /** Larger, black, justified body text (for reading-heavy pages). */
+  readable?: boolean;
 }
+
+/** Body-text style for the page: the default muted grey, or the larger, black, justified "readable" one. */
+const ReadableContext = React.createContext(false);
+const useBodyText = (fallback: string) =>
+  React.useContext(ReadableContext)
+    ? "text-base leading-[1.8] text-[#111] text-justify [hyphens:auto] sm:text-[17px] lg:text-lg dark:text-slate-200"
+    : fallback;
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -105,7 +117,9 @@ const Eyebrow: React.FC<{ children: React.ReactNode }> = ({ children }) => (
 const Bullets: React.FC<{ items: string[]; columns?: boolean }> = ({
   items,
   columns = false,
-}) => (
+}) => {
+  const text = useBodyText("text-sm sm:text-[15px] leading-relaxed text-[#596d86] dark:text-slate-300");
+  return (
   <ul
     className={`mt-5 space-y-3 ${
       columns ? "sm:grid sm:grid-cols-2 sm:gap-x-7 sm:space-y-0 sm:gap-y-3" : ""
@@ -114,16 +128,17 @@ const Bullets: React.FC<{ items: string[]; columns?: boolean }> = ({
     {items.map((b, i) => (
       <li
         key={i}
-        className="flex items-start gap-3 text-sm sm:text-[15px] leading-relaxed text-[#596d86] dark:text-slate-300"
+        className={`flex items-start gap-3 ${text}`}
       >
         <span className="mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[#1f3351]/10 text-[11px] font-bold text-[#1f3351] dark:bg-teal-500/20 dark:text-teal-300">
           ✓
         </span>
-        <span>{b}</span>
+        <span className="min-w-0 flex-1">{b}</span>
       </li>
     ))}
   </ul>
-);
+  );
+};
 
 const Badges: React.FC<{ items: string[] }> = ({ items }) => (
   <div className="mb-4 flex flex-wrap gap-2">
@@ -165,7 +180,9 @@ const SplitSection: React.FC<{
  * heading sits in its own column against the text — an editorial two-column
  * measure that carries the width on its own.
  */
-const ProseSection: React.FC<{ block: ContentBlock }> = ({ block }) => (
+const ProseSection: React.FC<{ block: ContentBlock }> = ({ block }) => {
+  const text = useBodyText("text-sm leading-relaxed text-[#596d86] dark:text-slate-300 sm:text-[15px]");
+  return (
   <Reveal className="grid gap-5 border-t border-[#e4ecf2] pt-9 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-14 dark:border-white/10">
     <div className="lg:sticky lg:top-28 lg:self-start">
       {block.badges && block.badges.length > 0 && <Badges items={block.badges} />}
@@ -182,7 +199,7 @@ const ProseSection: React.FC<{ block: ContentBlock }> = ({ block }) => (
     </div>
     <div>
       {block.content && (
-        <div className="space-y-3.5 text-sm leading-relaxed text-[#596d86] dark:text-slate-300 sm:text-[15px]">
+        <div className={`space-y-3.5 ${text}`}>
           {Array.isArray(block.content) ? (
             block.content.map((para, i) => <p key={i}>{para}</p>)
           ) : (
@@ -195,10 +212,13 @@ const ProseSection: React.FC<{ block: ContentBlock }> = ({ block }) => (
       )}
     </div>
   </Reveal>
-);
+  );
+};
 
 /** Title, prose and bullets — shared by the photo and no-photo layouts. */
-const SectionBody: React.FC<{ block: ContentBlock }> = ({ block }) => (
+const SectionBody: React.FC<{ block: ContentBlock }> = ({ block }) => {
+  const text = useBodyText("text-sm leading-relaxed text-[#596d86] dark:text-slate-300 sm:text-base");
+  return (
   <>
     {block.badges && block.badges.length > 0 && <Badges items={block.badges} />}
     {block.title && (
@@ -212,7 +232,7 @@ const SectionBody: React.FC<{ block: ContentBlock }> = ({ block }) => (
       </p>
     )}
     {block.content && (
-      <div className="mt-4 space-y-3.5 text-sm leading-relaxed text-[#596d86] dark:text-slate-300 sm:text-base">
+      <div className={`mt-4 space-y-3.5 ${text}`}>
         {Array.isArray(block.content) ? (
           block.content.map((para, i) => <p key={i}>{para}</p>)
         ) : (
@@ -222,7 +242,8 @@ const SectionBody: React.FC<{ block: ContentBlock }> = ({ block }) => (
     )}
     {block.bullets && block.bullets.length > 0 && <Bullets items={block.bullets} />}
   </>
-);
+  );
+};
 
 /**
  * Half-width blocks sit side by side as numbered tiles. They take a photograph
@@ -234,6 +255,7 @@ const TileGrid: React.FC<{
   startIndex: number;
 }> = ({ blocks, imageFor, startIndex }) => {
   const cols = blocks[0]?.layout === "third" ? 3 : 2;
+  const text = useBodyText("text-sm leading-relaxed text-[#596d86] dark:text-slate-300");
   return (
   <div className={`grid gap-6 sm:gap-7 ${cols === 3 ? "md:grid-cols-3" : "md:grid-cols-2"}`}>
     {blocks.map((block, i) => {
@@ -279,7 +301,7 @@ const TileGrid: React.FC<{
                 </p>
               )}
               {block.content && (
-                <div className="mt-3 space-y-3 text-sm leading-relaxed text-[#596d86] dark:text-slate-300">
+                <div className={`mt-3 space-y-3 ${text}`}>
                   {Array.isArray(block.content) ? (
                     block.content.map((para, pi) => <p key={pi}>{para}</p>)
                   ) : (
@@ -418,6 +440,22 @@ const PAGE_WIDGETS: Record<string, React.FC | undefined> = {
   "/admissions/apply": AdmissionsShowcase,
 };
 
+/** Purpose-built layouts that replace the standard card grid (placed where the cards would go). */
+const PAGE_CARD_GRIDS: Record<string, React.FC | undefined> = {
+  "/academics/postgraduate": PgProgrammesShowcase,
+};
+
+/** Purpose-built layouts for chosen sections of one page; `titles` names the section(s) each replaces. */
+type SectionLayout = { titles: string[]; Layout: React.FC<{ blocks: ContentBlock[] }> };
+const PAGE_SECTION_LAYOUTS: Record<string, SectionLayout[] | undefined> = {
+  "/academics/postgraduate": [
+    { titles: ["Year 1 — Foundations", "Year 2 — Clinical Responsibility", "Year 3 — Senior Residency"], Layout: ResidencyYears },
+    { titles: ["Clinical Learning", "Research & Dissertation"], Layout: ClinicalResearch },
+    { titles: ["Eligibility & Admission"], Layout: PgEligibility },
+    { titles: ["Talk to the Postgraduate Admissions Office"], Layout: PgAdmissionsOffice },
+  ],
+};
+
 /** Purpose-built blocks rendered below main content or cards. */
 const PAGE_BOTTOM_WIDGETS: Record<string, React.FC | undefined> = {
   "/facilities/campus-life": CampusVirtualTour,
@@ -438,6 +476,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
   cardsAfter,
   cta,
   media = DEFAULT_MEDIA,
+  readable = false,
 }) => {
   const { pathname } = useLocation();
   const normalizedPath = pathname.replace(/\/+$/, "") || "/";
@@ -483,7 +522,13 @@ const StaticPage: React.FC<StaticPageDef> = ({
         )
       : -1;
 
-  const cardsGrid = hasCards ? (
+  const CustomCards = PAGE_CARD_GRIDS[normalizedPath];
+  const sectionLayouts = PAGE_SECTION_LAYOUTS[normalizedPath] ?? [];
+  const layoutFor = (blocks: ContentBlock[]) =>
+    sectionLayouts.find((l) => l.titles.length === blocks.length && blocks.every((b, k) => b.title === l.titles[k]));
+  const cardsGrid = !hasCards ? null : CustomCards ? (
+    <CustomCards />
+  ) : (
     <div>
       {cardsTitle && (
         <SectionHeading eyebrow={eyebrow ?? "AIMS"} title={cardsTitle} subtitle={cardsSubtitle} />
@@ -500,9 +545,10 @@ const StaticPage: React.FC<StaticPageDef> = ({
         ))}
       </div>
     </div>
-  ) : null;
+  );
 
   return (
+    <ReadableContext.Provider value={readable}>
     <div className="atmos-page min-h-screen bg-[#FAF9F5] tracking-[0.015em] transition-colors duration-300 dark:bg-transparent">
       <PageHero
         eyebrow={eyebrow}
@@ -524,7 +570,15 @@ const StaticPage: React.FC<StaticPageDef> = ({
           <div className="space-y-14 pt-12 sm:space-y-16 lg:space-y-20">
             {rows.map((row, i) => {
               let node: React.ReactNode;
-              if (row.kind === "split") {
+              const rowBlocks = row.kind === "tiles" ? row.blocks : [row.block];
+              const custom = layoutFor(rowBlocks);
+              if (custom) {
+                node = (
+                  <Reveal>
+                    <custom.Layout blocks={rowBlocks} />
+                  </Reveal>
+                );
+              } else if (row.kind === "split") {
                 node = (
                   <SplitSection
                     block={row.block}
@@ -582,6 +636,7 @@ const StaticPage: React.FC<StaticPageDef> = ({
         )}
       </div>
     </div>
+    </ReadableContext.Provider>
   );
 };
 

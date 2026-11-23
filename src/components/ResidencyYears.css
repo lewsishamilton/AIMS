@@ -1,0 +1,135 @@
+/* "Three-year residency" panel on the Postgraduate overview page. CSS-only animation; visitors who
+   prefer reduced motion get the still version. */
+
+/* Soft colour blobs drifting behind the panel. */
+.ry-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(60px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.ry-blob--a {
+  width: 320px;
+  height: 320px;
+  top: -120px;
+  right: -60px;
+  background: #f47b20;
+  animation: ry-drift 14s ease-in-out infinite alternate;
+}
+.ry-blob--b {
+  width: 280px;
+  height: 280px;
+  bottom: -120px;
+  left: -80px;
+  background: #14b8a6;
+  animation: ry-drift 16s ease-in-out infinite alternate-reverse;
+}
+
+/* Timeline: the line fills left to right, then a light keeps travelling along it. */
+.ry-track__fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #60a5fa, #f47b20, #14b8a6);
+  transform-origin: left;
+  animation: ry-fill 1.8s ease-out both;
+}
+.ry-track__spark {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 9999px;
+  background: #fff;
+  box-shadow: 0 0 14px 4px rgba(255, 255, 255, 0.8);
+  animation: ry-spark 4.5s ease-in-out 1.8s infinite;
+}
+
+/* Year nodes pulse in turn. */
+.ry-node {
+  box-shadow: 0 0 0 0 var(--ry-glow);
+  animation: ry-pulse 2.7s ease-out infinite;
+}
+
+/* Cards rise in one after another. */
+.ry-card {
+  animation: ry-rise 0.8s ease-out both;
+}
+
+/* Photo: slow zoom and drift. */
+.ry-photo {
+  transform-origin: 55% 45%;
+  animation: ry-kenburns 18s ease-in-out infinite alternate;
+}
+
+/* Light sweeping across the photo. */
+.ry-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.22) 50%, transparent 65%);
+  transform: translateX(-100%);
+  animation: ry-sweep 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Emblem: gently floats and glows. */
+.ry-emblem {
+  box-shadow: 0 10px 24px var(--ry-glow);
+  animation: ry-float 3.6s ease-in-out infinite;
+}
+.ry-card:hover .ry-emblem {
+  animation-duration: 1.4s;
+}
+
+@keyframes ry-drift {
+  to { transform: translate(-40px, 30px) scale(1.15); }
+}
+@keyframes ry-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes ry-spark {
+  0% { left: 0; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}
+@keyframes ry-pulse {
+  0% { box-shadow: 0 0 0 0 var(--ry-glow); }
+  70%, 100% { box-shadow: 0 0 0 16px transparent; }
+}
+@keyframes ry-rise {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ry-kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.14) translate(-2%, -1%); }
+}
+@keyframes ry-sweep {
+  0%, 55% { transform: translateX(-100%); }
+  85%, 100% { transform: translateX(100%); }
+}
+@keyframes ry-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(-4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ry-blob,
+  .ry-track__fill,
+  .ry-track__spark,
+  .ry-node,
+  .ry-card,
+  .ry-photo,
+  .ry-shine,
+  .ry-emblem {
+    animation: none;
+  }
+  .ry-track__spark {
+    display: none;
+  }
+}

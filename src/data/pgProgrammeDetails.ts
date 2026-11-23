@@ -34,7 +34,7 @@ export interface PgProgrammeDetail {
 
 // ── Shared by every detailed programme page ──
 
-const admissionSteps = (programme: string) => [
+export const admissionSteps = (programme: string) => [
   { title: "Qualify NEET-PG 2026", detail: "Score at or above the qualifying percentile for your category." },
   {
     title: "Register for KNRUHS Counselling",
@@ -45,7 +45,7 @@ const admissionSteps = (programme: string) => [
   { title: "Admission Confirmed", detail: "Complete the admission formalities and begin your residency." },
 ];
 
-const ADMISSION_NOTES = [
+export const ADMISSION_NOTES = [
   {
     title: "Note",
     text: "Counselling and seat allotment are conducted by KNRUHS for Convener quota seats; Management and NRI seats are filled as notified.",

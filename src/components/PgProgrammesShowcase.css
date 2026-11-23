@@ -1,0 +1,48 @@
+/* Programme cards on the Postgraduate overview page. The emblem itself (.tech-orb) and the photo
+   zoom (.pg-kenburns) come from PgAdvances.css. Reduced-motion visitors get still cards. */
+
+/* A faint moving "scan grid" over the photo, suggesting imaging and instruments. */
+.pgx-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  mask-image: linear-gradient(to top, #000 10%, transparent 85%);
+  animation: pgx-grid 12s linear infinite;
+}
+
+/* A soft light sweeping across the photo now and then. */
+.pgx-card > div:first-child::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.16) 50%, transparent 65%);
+  transform: translateX(-100%);
+  animation: pgx-sweep 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* New technology fades and rises into place. */
+.pgx-swap {
+  animation: pgx-swap 0.6s ease-out;
+}
+
+@keyframes pgx-grid {
+  to { background-position: 0 -280px, -280px 0; }
+}
+@keyframes pgx-sweep {
+  0%, 55% { transform: translateX(-100%); }
+  85%, 100% { transform: translateX(100%); }
+}
+@keyframes pgx-swap {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pgx-grid,
+  .pgx-card > div:first-child::after,
+  .pgx-swap {
+    animation: none;
+  }
+}

@@ -177,12 +177,8 @@ export const ACADEMIC_PAGES: Record<string, StaticPageDef> = {
     })),
     cardColumns: 2,
     cardsAfter: "Postgraduate Training at AIMS",
+    readable: true,
     quickLinks: linksExcept("/academics/postgraduate"),
-    cta: {
-      text: "Postgraduate admission follows NEET-PG and the counselling notifications issued by KNRUHS. Review the general admission process and the documents required at verification before you apply.",
-      label: "View Admission Criteria",
-      path: "/admissions/criteria",
-    },
   },
 
   "/academics/nursing-allied-health": {

@@ -55,14 +55,14 @@ const ICONS: Record<AdvanceIcon, LucideIcon> = {
 };
 
 /** One emblem colour per card, in the page's palette: saffron, blue, teal, violet. */
-const ORB_THEMES = [
+export const ORB_THEMES = [
   { core: "linear-gradient(135deg,#FFC94D,#F47B20 55%,#C2410C)", glow: "rgba(244,123,32,0.45)", dot: "#F59E0B", ring: "#F47B20" },
   { core: "linear-gradient(135deg,#60A5FA,#1D4ED8 55%,#132a52)", glow: "rgba(29,78,216,0.4)", dot: "#3B82F6", ring: "#1D4ED8" },
   { core: "linear-gradient(135deg,#5EEAD4,#0F766E 60%,#134E4A)", glow: "rgba(15,118,110,0.4)", dot: "#14B8A6", ring: "#0F766E" },
   { core: "linear-gradient(135deg,#C4B5FD,#7C3AED 55%,#4C1D95)", glow: "rgba(124,58,237,0.4)", dot: "#8B5CF6", ring: "#7C3AED" },
 ];
 
-function TechOrb({ icon, theme }: { icon: AdvanceIcon; theme: (typeof ORB_THEMES)[number] }) {
+export function TechOrb({ icon, theme }: { icon: AdvanceIcon; theme: (typeof ORB_THEMES)[number] }) {
   const Icon = ICONS[icon];
   const style = { "--orb-core": theme.core, "--orb-glow": theme.glow, "--orb-dot": theme.dot } as CSSProperties;
   return (

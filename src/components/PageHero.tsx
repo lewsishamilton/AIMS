@@ -130,31 +130,49 @@ const PageHero: React.FC<{
         />
       )}
 
-      {/* Dark blue tint over the whole photo */}
-      <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[#0d2346]/45 mix-blend-multiply dark:bg-[#040a16]/60" />
-      {/* Gradient. Desktop: deep behind the text, then lighter where there is no text so the photo shows.
-          Phones: the text spans the full width, so it stays deep across. */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 hidden md:block"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(9,25,52,0.94) 0%, rgba(11,31,61,0.82) 38%, rgba(12,33,66,0.72) 55%, rgba(13,35,70,0.35) 75%, rgba(13,35,70,0.15) 100%)",
-        }}
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 md:hidden"
-        style={{
-          background: "linear-gradient(90deg, rgba(9,25,52,0.94) 0%, rgba(11,31,61,0.82) 50%, rgba(13,35,70,0.62) 100%)",
-        }}
-      />
-      {/* Shade along the bottom so the band sits on the page */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-x-0 bottom-0 -z-10 h-1/2"
-        style={{ background: "linear-gradient(to top, rgba(6,16,34,0.4), transparent)" }}
-      />
+      {video ? (
+        /* Video: no tint, only a soft shade behind the words so the clip shows clearly. */
+        <>
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 hidden md:block"
+            style={{ background: "linear-gradient(90deg, rgba(9,25,52,0.55) 0%, rgba(11,31,61,0.3) 38%, rgba(13,35,70,0) 62%)" }}
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 -z-10 md:hidden"
+            style={{ background: "linear-gradient(180deg, rgba(9,25,52,0.25) 0%, rgba(9,25,52,0.5) 100%)" }}
+          />
+        </>
+      ) : (
+        <>
+        {/* Dark blue tint over the whole photo */}
+        <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[#0d2346]/45 mix-blend-multiply dark:bg-[#040a16]/60" />
+        {/* Gradient. Desktop: deep behind the text, then lighter where there is no text so the photo shows.
+            Phones: the text spans the full width, so it stays deep across. */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 hidden md:block"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(9,25,52,0.94) 0%, rgba(11,31,61,0.82) 38%, rgba(12,33,66,0.72) 55%, rgba(13,35,70,0.35) 75%, rgba(13,35,70,0.15) 100%)",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 md:hidden"
+          style={{
+            background: "linear-gradient(90deg, rgba(9,25,52,0.94) 0%, rgba(11,31,61,0.82) 50%, rgba(13,35,70,0.62) 100%)",
+          }}
+        />
+        {/* Shade along the bottom so the band sits on the page */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 -z-10 h-1/2"
+          style={{ background: "linear-gradient(to top, rgba(6,16,34,0.4), transparent)" }}
+        />
+        </>
+      )}
 
       {/* Content */}
       <div className="relative mx-auto w-full max-w-[1280px] px-4 sm:px-8 lg:px-12">
@@ -185,7 +203,7 @@ const PageHero: React.FC<{
             <span className="h-px w-10 flex-shrink-0 bg-white/50" />
           </div>
 
-          <h1 className="font-['Manrope',sans-serif] text-3xl font-bold leading-[1.1] tracking-tight text-white drop-shadow-[0_2px_16px_rgba(0,0,0,0.3)] sm:text-4xl lg:text-[52px]">
+          <h1 className={`font-['Manrope',sans-serif] text-3xl font-bold leading-[1.1] tracking-tight text-white sm:text-4xl lg:text-[52px] ${video ? "drop-shadow-[0_2px_14px_rgba(0,0,0,0.65)]" : "drop-shadow-[0_2px_16px_rgba(0,0,0,0.3)]"}`}>
             {title}
           </h1>
 
@@ -194,7 +212,7 @@ const PageHero: React.FC<{
               className={
                 strongSubtitle
                   ? "mt-5 max-w-3xl text-lg font-normal leading-snug text-white sm:text-xl lg:text-2xl"
-                  : "mt-5 text-sm leading-relaxed text-[#e2e8f0]/90 sm:text-base lg:text-[17px]"
+                  : `mt-5 text-sm leading-relaxed sm:text-base lg:text-[17px] ${video ? "text-white drop-shadow-[0_1px_8px_rgba(0,0,0,0.75)]" : "text-[#e2e8f0]/90"}`
               }
             >
               {subtitle}
