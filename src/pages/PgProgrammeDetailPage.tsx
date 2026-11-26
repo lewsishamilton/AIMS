@@ -108,7 +108,7 @@ function Intro({ d }: { d: PgProgrammeDetail }) {
           {d.intro.map((p, i) => (
             <p
               key={p.slice(0, 20)}
-              className={`${i ? "mt-5" : ""} text-justify text-[19px] leading-[1.9] text-[#3d3d3d] [hyphens:auto] dark:text-slate-300`}
+              className={`${i ? "mt-5" : ""} text-left sm:text-justify text-[19px] leading-[1.9] text-[#3d3d3d] [hyphens:auto] dark:text-slate-300`}
             >
               {p}
             </p>
@@ -134,7 +134,7 @@ function Highlights({ d, sideImage }: { d: PgProgrammeDetail; sideImage?: string
                     {h.label}
                   </span>
                   <p
-                    className="mt-2 text-justify text-base leading-relaxed text-white/95 [hyphens:auto] sm:text-lg lg:text-[19px]"
+                    className="mt-2 text-left sm:text-justify text-base leading-relaxed text-white/95 [hyphens:auto] sm:text-lg lg:text-[19px]"
                   >
                     {h.text}
                   </p>
@@ -166,7 +166,7 @@ function Highlights({ d, sideImage }: { d: PgProgrammeDetail; sideImage?: string
               </span>
               <h3 className="mt-5 text-xl font-extrabold sm:text-2xl">{f.title}</h3>
               <span aria-hidden="true" className={`mt-2 block h-1 w-12 rounded-full ${t.rule}`} />
-              <p className={`mt-4 text-base leading-relaxed sm:text-[17px] ${t.body} text-justify [hyphens:auto]`}>
+              <p className={`mt-4 text-base leading-relaxed sm:text-[17px] ${t.body} text-left sm:text-justify [hyphens:auto]`}>
                 {f.text}
               </p>
             </div>
@@ -230,7 +230,7 @@ function ProgramDetails({ d }: { d: PgProgrammeDetail }) {
                     className={`h-3 w-3 shrink-0 rounded-full bg-gradient-to-br shadow-[0_0_0_4px_rgba(19,42,82,0.06)] transition-transform duration-300 group-hover:scale-125 ${badge}`}
                   />
                   <span
-                    className="flex-1 text-justify text-base leading-relaxed text-[#2b2b2b] [hyphens:auto] sm:text-lg dark:text-slate-200"
+                    className="flex-1 text-left sm:text-justify text-base leading-relaxed text-[#2b2b2b] [hyphens:auto] sm:text-lg dark:text-slate-200"
                   >
                     {x}
                   </span>

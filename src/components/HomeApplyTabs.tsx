@@ -10,6 +10,7 @@ import "./HomeApplyTabs.css";
 const TABS = [
   {
     label: "Apply – Admissions",
+    short: "Admissions",
     to: "/admissions/apply",
     external: false,
     Icon: GraduationCap,
@@ -19,6 +20,7 @@ const TABS = [
   },
   {
     label: "Apply – Job",
+    short: "Jobs",
     to: "/careers",
     external: false,
     Icon: Briefcase,
@@ -29,17 +31,19 @@ const TABS = [
 ];
 
 const tabClass =
-  "apply-tab group flex items-center gap-2 rounded-l-xl border border-r-0 border-white/25 px-2 py-3 text-white transition-[padding,box-shadow] duration-300 hover:pr-3 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFB23D]/60 sm:px-2.5 sm:py-4";
+  "apply-tab group flex items-center gap-2 rounded-l-xl border border-r-0 border-white/25 px-1.5 py-2.5 text-white transition-[padding,box-shadow] duration-300 hover:pr-2.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FFB23D]/60 sm:px-2.5 sm:py-4";
 
 export default function HomeApplyTabs() {
   return (
-    <nav aria-label="Apply" className="fixed right-0 top-1/2 z-[55] flex -translate-y-1/2 flex-col gap-2 print:hidden">
-      {TABS.map(({ label, to, external, Icon, glow, className }) => {
+    <nav aria-label="Apply" className="fixed right-0 top-1/2 z-[55] flex -translate-y-1/2 flex-col gap-1.5 sm:gap-2 print:hidden">
+      {TABS.map(({ label, short, to, external, Icon, glow, className }) => {
         const content = (
           <>
             <span className="apply-tab__shine" aria-hidden="true" />
-            <Icon className="relative h-4 w-4 sm:h-5 sm:w-5" aria-hidden="true" />
-            <span className="relative rotate-180 whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] sm:text-sm">{label}</span>
+            <Icon className="relative h-3.5 w-3.5 sm:h-5 sm:w-5" aria-hidden="true" />
+            {/* Phones get a short label so the tabs cover less of the page; the full label is still read out. */}
+            <span className="relative rotate-180 whitespace-nowrap text-[10px] font-bold uppercase tracking-[0.12em] sm:hidden" aria-hidden="true">{short}</span>
+            <span className="relative rotate-180 whitespace-nowrap text-xs font-bold uppercase tracking-[0.12em] max-sm:sr-only sm:text-sm">{label}</span>
           </>
         );
         return external ? (

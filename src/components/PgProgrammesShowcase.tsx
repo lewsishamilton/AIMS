@@ -91,7 +91,7 @@ function ProgrammeCard({ p, index }: { p: PgProgramme; index: number }) {
       {/* Words */}
       <div className="flex grow flex-col p-6 sm:p-7">
         <h3 className="font-['Manrope',sans-serif] text-2xl font-extrabold leading-tight text-[#132a52] dark:text-white">{p.name}</h3>
-        <p className="mt-3 text-justify text-base leading-[1.75] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">{p.summary}</p>
+        <p className="mt-3 text-left sm:text-justify text-base leading-[1.75] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">{p.summary}</p>
         {tech.length > 0 && (
           <ul className="mt-4 flex flex-wrap gap-2" aria-label={`Technology in ${PG_ADVANCES[p.slug].speciality}`}>
             {tech.map((x, n) => (
@@ -137,7 +137,7 @@ export default function PgProgrammesShowcase() {
           <h2 id="pg-programmes" className="mt-2 font-['Manrope',sans-serif] text-3xl font-bold leading-tight tracking-tight text-[#162740] sm:text-4xl lg:text-[40px] dark:text-white">
             MD &amp; MS Programmes
           </h2>
-          <p className="mt-3 text-justify text-base leading-[1.75] text-[#111] [hyphens:auto] sm:text-lg dark:text-slate-200">
+          <p className="mt-3 text-left sm:text-justify text-base leading-[1.75] text-[#111] [hyphens:auto] sm:text-lg dark:text-slate-200">
             Ten postgraduate specialities, each shown with the technology its residents train with at AIMS and where
             the speciality is heading. Open a programme for its curriculum, fees, eligibility and admission path.
           </p>

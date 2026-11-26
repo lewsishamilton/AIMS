@@ -40,7 +40,7 @@ export default function AboutHospitalPage() {
             </h1>
 
             {/* Paragraph 1 with Drop Cap */}
-            <div className="space-y-4 text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">
+            <div className="space-y-4 text-left sm:text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">
               <p className="overflow-hidden">
                 <span className="float-left text-5xl sm:text-[54px] font-bold text-[#1f3351] dark:text-teal-400 leading-none pr-3 pt-1 font-['Manrope',sans-serif]">
                   A
@@ -123,7 +123,7 @@ export default function AboutHospitalPage() {
                   <h2 className="font-['Manrope',sans-serif] text-2xl font-bold text-[#1f3351] sm:text-[28px] dark:text-white">{title}</h2>
                 </div>
               </div>
-              <p className="relative mt-5 text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">{text}</p>
+              <p className="relative mt-5 text-left sm:text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">{text}</p>
             </motion.div>
           ))}
         </div>

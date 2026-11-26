@@ -85,7 +85,7 @@ export default function ResidencyYears({ blocks }: { blocks: ContentBlock[] }) {
                 </h3>
                 <span aria-hidden="true" className={`mt-2 block h-1 w-12 rounded-full bg-gradient-to-r ${y.accent}`} />
                 {paragraphs(b.content).map((p) => (
-                  <p key={p.slice(0, 24)} className="mt-3 text-justify text-base leading-[1.8] [hyphens:auto] sm:text-[17px]">
+                  <p key={p.slice(0, 24)} className="mt-3 text-left sm:text-justify text-base leading-[1.8] [hyphens:auto] sm:text-[17px]">
                     {p}
                   </p>
                 ))}

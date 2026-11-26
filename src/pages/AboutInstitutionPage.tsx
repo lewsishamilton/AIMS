@@ -40,7 +40,7 @@ export default function AboutInstitutionPage() {
             </h1>
 
             {/* Paragraphs with Drop Cap */}
-            <div className="space-y-4 text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">
+            <div className="space-y-4 text-left sm:text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">
               <p className="overflow-hidden">
                 <span className="float-left text-5xl sm:text-[54px] font-bold text-[#1f3351] dark:text-teal-400 leading-none pr-3 pt-1 font-['Manrope',sans-serif]">
                   A
@@ -134,13 +134,13 @@ export default function AboutInstitutionPage() {
                 </div>
               </div>
               {text.length === 1 ? (
-                <p className="relative mt-5 text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">{text[0]}</p>
+                <p className="relative mt-5 text-left sm:text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">{text[0]}</p>
               ) : (
                 <ul className="relative mt-5 space-y-4">
                   {text.map((t) => (
                     <li key={t.slice(0, 20)} className="flex items-start gap-3">
                       <span aria-hidden="true" className={`mt-[11px] h-2 w-2 shrink-0 rounded-full ${dot}`} />
-                      <span className="text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">{t}</span>
+                      <span className="text-left sm:text-justify text-base leading-[1.85] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200">{t}</span>
                     </li>
                   ))}
                 </ul>

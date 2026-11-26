@@ -74,7 +74,9 @@ export default function Footer() {
               <h3 className="text-sm text-white font-medium mt-5">
                 Contact Us
               </h3>
-              <div className="flex flex-col gap-3 mt-4 max-w-sm items-center md:items-start text-center md:text-left">
+              {/* Left-aligned on every width so each icon lines up with its text; on phones it sits centred as a block,
+                  with room on the right for the Apply tabs. */}
+              <div className="mt-4 flex w-full max-w-sm flex-col items-start gap-3 text-left max-md:w-fit max-md:pr-6">
                 <a
                   href={MAPS_URL}
                   target="_blank"
@@ -92,16 +94,16 @@ export default function Footer() {
                 </a>
                 <a
                   href={telHref(CONTACT.admissionsPhone)}
-                  className="flex items-center gap-3 text-sm text-white/90 hover:text-white transition-colors font-medium"
+                  className="flex items-start gap-3 text-sm text-white/90 hover:text-white transition-colors font-medium"
                 >
                   <svg
-                    className="w-4 h-4 text-white/80 shrink-0"
+                    className="w-4 h-4 mt-0.5 text-white/80 shrink-0"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
                     <path d="M2 3.5A1.5 1.5 0 013.5 2h2.1a1 1 0 01.98.8l.9 4.5a1 1 0 01-.6 1.14l-2.08.83a13.1 13.1 0 005.9 5.9l.83-2.08a1 1 0 011.14-.6l4.5.9a1 1 0 01.8.98v2.1a1.5 1.5 0 01-1.5 1.5h-1C9.2 19 2 11.65 2 5v-1.5z" />
                   </svg>
-                  <span>Admissions (Dr. Ch. Achireddy): {CONTACT.admissionsPhone}</span>
+                  <span>Admissions (Dr. Ch. Achireddy): <span className="whitespace-nowrap">{CONTACT.admissionsPhone}</span></span>
                 </a>
                 <a
                   href={`mailto:${CONTACT.admissionsEmail}`}

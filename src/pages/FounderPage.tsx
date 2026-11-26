@@ -136,7 +136,7 @@ export default function FounderPage() {
               <span className="fd-quote-mark grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-[#FFC94D] to-[#F47B20] shadow-[0_10px_24px_rgba(244,123,32,0.45)]">
                 <Quote className="h-7 w-7 fill-white text-white" aria-hidden="true" />
               </span>
-              <blockquote className="relative mt-5 text-justify font-['Manrope',sans-serif] text-lg font-medium leading-[1.7] [hyphens:auto] sm:text-xl lg:text-[21px]">
+              <blockquote className="relative mt-5 text-left sm:text-justify font-['Manrope',sans-serif] text-lg font-medium leading-[1.7] [hyphens:auto] sm:text-xl lg:text-[21px]">
                 “It’s the promise that I made to my mother, that drives me to resolutely work for turning the hospital into an
                 effective tool for ultimately transforming the lives of people who otherwise are reeling under the burden of
                 unaffordable healthcare.”
@@ -155,7 +155,7 @@ export default function FounderPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-60px" }}
                   transition={{ duration: 0.6, ease: EASE, delay: i * 0.08 }}
-                  className={`text-justify text-[17px] leading-[1.9] text-[#111] [hyphens:auto] sm:text-lg dark:text-slate-200 ${
+                  className={`text-left sm:text-justify text-[17px] leading-[1.9] text-[#111] [hyphens:auto] sm:text-lg dark:text-slate-200 ${
                     i === 0
                       ? "first-letter:float-left first-letter:mr-3 first-letter:mt-1 first-letter:font-['Manrope',sans-serif] first-letter:text-6xl first-letter:font-extrabold first-letter:leading-[0.85] first-letter:text-[#D9581A]"
                       : ""

@@ -60,7 +60,7 @@ export interface StaticPageDef {
 const ReadableContext = React.createContext(false);
 const useBodyText = (fallback: string) =>
   React.useContext(ReadableContext)
-    ? "text-base leading-[1.8] text-[#111] text-justify [hyphens:auto] sm:text-[17px] lg:text-lg dark:text-slate-200"
+    ? "text-base leading-[1.8] text-[#111] text-left sm:text-justify [hyphens:auto] sm:text-[17px] lg:text-lg dark:text-slate-200"
     : fallback;
 
 const EASE = [0.22, 1, 0.36, 1] as const;

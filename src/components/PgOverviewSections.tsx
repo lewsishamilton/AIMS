@@ -30,7 +30,7 @@ import "./PgOverviewSections.css";
  */
 
 const paragraphs = (c: ContentBlock["content"]) => (Array.isArray(c) ? c : c ? [c] : []);
-const BODY = "text-justify text-base leading-[1.8] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200";
+const BODY = "text-left sm:text-justify text-base leading-[1.8] text-[#111] [hyphens:auto] sm:text-[17px] dark:text-slate-200";
 const KICKER = "text-xs font-bold uppercase tracking-[0.2em] sm:text-[13px]";
 const H2 = "font-['Manrope',sans-serif] text-3xl font-bold leading-tight tracking-tight sm:text-4xl";
 
