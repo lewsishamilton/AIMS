@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11T09:18:27.374Z",
+  "updatedAt": "2026-11-26T06:18:04.555Z",
   "entries": [
     {
       "date": "2026-11-05",
@@ -41,6 +41,28 @@
         "surgeries": 28,
         "dental": 2,
         "dialysis": 7,
+        "endoscopy": 1,
+        "cathLab": 4,
+        "ercp": 1
+      }
+    },
+    {
+      "date": "2026-11-25",
+      "updatedAt": "2026-11-26T06:18:04.555Z",
+      "stats": {
+        "opd": 1266,
+        "admitted": 105,
+        "discharges": 32,
+        "biochemistry": 428,
+        "pathology": 229,
+        "microbiology": 99,
+        "xray": 121,
+        "ultrasound": 55,
+        "mri": 9,
+        "ct": 14,
+        "surgeries": 24,
+        "dental": 4,
+        "dialysis": 6,
         "endoscopy": 1,
         "cathLab": 4,
         "ercp": 1
